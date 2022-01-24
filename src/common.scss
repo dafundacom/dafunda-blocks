@@ -1,0 +1,49 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+
+.dbe-hide {
+	display: none;
+}
+
+.dbe-hiding {
+	height: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.dbe-toggle-transition {
+	transition: all 0.5s ease-in-out;
+}
+
+.dbe-icon-holder {
+	position: relative;
+	transform: translate(-25%, 25%);
+}
+
+.dbe-custom-id-input {
+	font-size: 0.9em;
+}
+
+@media (max-width: 699px) {
+	.dbe-mobile-hide {
+		display: none;
+	}
+	.dbe-mobile-display {
+		display: block;
+	}
+}
+
+@media (min-width: 700px) and (max-width: 899px) {
+	.dbe-tablet-hide {
+		display: none;
+	}
+	.dbe-tablet-display {
+		display: block;
+	}
+}

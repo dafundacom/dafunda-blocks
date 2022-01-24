@@ -1,0 +1,101 @@
+.dbe_howto {
+	figure,
+	li > .components-button,
+	> .components-button {
+		margin-bottom: 10px;
+	}
+	figure {
+		position: relative;
+		> .dashicons-dismiss {
+			position: absolute;
+			right: 3px;
+		}
+	}
+	> ul,
+	> ul > li > ul {
+		margin-left: 1em;
+		padding-left: 0;
+	}
+	> ol,
+	> ol > li > ol {
+		padding-left: 0;
+	}
+}
+.dbe_howto-tools-list,
+.dbe_howto-supplies-list {
+	figure {
+		max-width: 200px;
+	}
+}
+
+.dbe_howto-step,
+.dbe_howto-section {
+	> div:first-child {
+		display: flex;
+	}
+}
+
+.dbe_howto_cost_container {
+	display: flex;
+	margin: 20px auto;
+}
+
+.dbe_howto_cost_display {
+	display: flex;
+	margin-left: auto;
+}
+
+.dbe_howto-delete {
+	margin-left: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	min-width: 24px;
+}
+
+.dbe_howto-arrow {
+	min-width: 24px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.dbe_howto-button-default {
+	margin-top: 20px;
+	margin-left: auto;
+	color: #0071a1;
+	border: 1px solid #0071a1;
+	border-radius: 3px;
+	background: #f3f5f6;
+	height: 33px;
+	font-size: 13px;
+	padding: 0 12px 2px;
+}
+
+.dbe_howto-time-value {
+	text-align: right;
+}
+
+.dbe_howto-duration-input {
+	display: grid;
+	grid-template-columns: 35% 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	P {
+		text-align: center;
+		font-size: 15px;
+	}
+}
+
+.dbe_howto-video-input {
+	display: flex;
+	> input {
+		flex-grow: 1;
+	}
+}
+
+.dbe_howto-supplies-list,
+.dbe_howto-tools-list {
+	li > div {
+		display: flex;
+	}
+	.components-button {
+		margin-left: auto;
+	}
+}
