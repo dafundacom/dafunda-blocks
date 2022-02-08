@@ -110,7 +110,7 @@ function dbe_render_table_of_contents_block($attributes){
                 . ($scrollOption === 'namedelement' ? ' data-scrolltarget="' . $targetType . $scrollTarget . '"' : '')
                 . ($blockID === '' ? '' : ' id="dbe_table-of-contents-' . $blockID . '"') . ' data-initiallyhideonmobile="' . json_encode($hideOnMobile) . '"
                     data-initiallyshow="' . json_encode($showList) . '">'.
-                (strlen($title) > 0 ? ('<div class="dbe_table-of-contents-header-container"><div class="dbe_table-of-contents-header">
+                (strlen($title) > 0 ? ('<div class="dbe_table-of-contents-header-container flex"><div class="dbe_table-of-contents-header">
                     <div class="dbe_table-of-contents-title">'. $title . '</div>' . 
                     ($allowToCHiding ?
                     '<div class="dbe_table-of-contents-header-toggle">

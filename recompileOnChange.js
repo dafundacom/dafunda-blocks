@@ -2,39 +2,39 @@ const chokidar = require("chokidar");
 const { renderSync } = require("sass");
 const {
 	readFileSync,
-	promises: { readdir, writeFile, readFile }
+	promises: { readdir, writeFile, readFile },
 } = require("fs");
 const { transformFileAsync } = require("@babel/core");
 const { resolve, basename } = require("path");
 
 function convertToEs5(file) {
 	transformFileAsync(file)
-		.then(result => {
+		.then((result) => {
 			const target = `${file.replace(/front\.js$/, "front.build.js")}`;
 
 			readFile(target, "utf-8")
-				.then(data => {
+				.then((data) => {
 					if (data !== result.code) {
-						writeFile(target, result.code).catch(err => {
+						writeFile(target, result.code).catch((err) => {
 							throw err;
 						});
 					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					if (err.code === "ENOENT") {
-						writeFile(target, result.code).catch(err => {
+						writeFile(target, result.code).catch((err) => {
 							throw err;
 						});
 					} else throw err;
 				});
 		})
-		.catch(err => console.log(err));
+		.catch((err) => console.log(err));
 }
 
 chokidar
 	.watch("./src/blocks/*/front.js")
-	.on("add", file => convertToEs5(file))
-	.on("change", file => convertToEs5(file));
+	.on("add", (file) => convertToEs5(file))
+	.on("change", (file) => convertToEs5(file));
 
 function generateWholeCSS() {
 	const compileAll = new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ function generateWholeCSS() {
 					try {
 						const result = renderSync({
 							file: f,
-							outputStyle: "compressed"
+							outputStyle: "compressed",
 						}).css.toString();
 						const target = f.replace(/\.scss$/, ".css");
 
@@ -55,14 +55,14 @@ function generateWholeCSS() {
 						} else newFrontendStyle += result;
 
 						readFile(target, "utf-8")
-							.then(data => {
+							.then((data) => {
 								if (data !== result.code) {
-									writeFile(target, result).catch(err => reject(err));
+									writeFile(target, result).catch((err) => reject(err));
 								}
 							})
-							.catch(err => {
+							.catch((err) => {
 								if (err.code === "ENOENT") {
-									writeFile(target, result).catch(err => reject(err));
+									writeFile(target, result).catch((err) => reject(err));
 								} else reject(err);
 							});
 					} catch (err) {
@@ -77,31 +77,31 @@ function generateWholeCSS() {
 		.then(({ newEditorStyle, newFrontendStyle }) => {
 			const editorCSSLoc = `${__dirname}/dist/blocks.editor.build.css`;
 			readFile(editorCSSLoc, "utf-8")
-				.then(data => {
+				.then((data) => {
 					if (data !== newEditorStyle) {
-						writeFile(editorCSSLoc, newEditorStyle).catch(err => {
+						writeFile(editorCSSLoc, newEditorStyle).catch((err) => {
 							throw err;
 						});
 					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					throw err;
 				});
 
 			const frontendCSSLoc = `${__dirname}/dist/blocks.style.build.css`;
 			readFile(frontendCSSLoc, "utf-8")
-				.then(data => {
+				.then((data) => {
 					if (data !== newFrontendStyle) {
-						writeFile(frontendCSSLoc, newFrontendStyle).catch(err => {
+						writeFile(frontendCSSLoc, newFrontendStyle).catch((err) => {
 							throw err;
 						});
 					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					throw err;
 				});
 		})
-		.catch(err => console.log(err));
+		.catch((err) => console.log(err));
 }
 
 function checkFile(path) {
@@ -109,19 +109,19 @@ function checkFile(path) {
 		const receiveNewVersion = new Promise((resolve, reject) => {
 			const result = renderSync({
 				file: path,
-				outputStyle: "compressed"
+				outputStyle: "compressed",
 			}).css.toString();
 			const target = path.replace(/\.scss$/, ".css");
 
 			readFile(target, "utf-8")
-				.then(data => {
+				.then((data) => {
 					if (data !== result) {
-						writeFile(target, result).catch(err => reject(err));
+						writeFile(target, result).catch((err) => reject(err));
 					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					if (err.code === "ENOENT") {
-						writeFile(target, result).catch(err => reject(err));
+						writeFile(target, result).catch((err) => reject(err));
 					} else reject(err);
 				});
 			resolve({ path: target, result });
@@ -148,20 +148,20 @@ function checkFile(path) {
 						".css"
 					)}.build.css`;
 					readFile(compiledFileLoc, "utf-8")
-						.then(data => {
+						.then((data) => {
 							if (data !== revisedFile) {
-								writeFile(compiledFileLoc, revisedFile).catch(err => {
+								writeFile(compiledFileLoc, revisedFile).catch((err) => {
 									throw err;
 								});
 							}
 						})
-						.catch(err => {
+						.catch((err) => {
 							throw err;
 						});
 				})();
 			})
 
-			.catch(err => {
+			.catch((err) => {
 				throw err;
 			});
 	} else generateWholeCSS();
@@ -169,12 +169,12 @@ function checkFile(path) {
 
 chokidar
 	.watch(["./src/*.scss", "./src/blocks/**/*.scss"], {
-		ignoreInitial: true
+		ignoreInitial: true,
 	})
-	.on("change", path => checkFile(path))
-	.on("add", path => checkFile(path))
-	.on("unlink", _ => generateWholeCSS())
-	.on("ready", _ => generateWholeCSS());
+	.on("change", (path) => checkFile(path))
+	.on("add", (path) => checkFile(path))
+	.on("unlink", (_) => generateWholeCSS())
+	.on("ready", (_) => generateWholeCSS());
 
 //taken from qwtel at https://stackoverflow.com/a/45130990
 async function* getFiles(dir) {

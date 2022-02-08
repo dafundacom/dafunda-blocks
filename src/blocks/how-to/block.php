@@ -135,7 +135,7 @@ function dbe_render_how_to_block($attributes){
 
                 $stepsDisplay .= '<li class="dbe_howto-step"><' . $thirdLevelTag . ' id="' . $step['anchor'] . '">' 
                     . $step['title'] . '</' . $thirdLevelTag . '>' . ($step['stepPic']['url'] !== '' ? 
-                    ($step['stepPic']['caption'] === '' ? '' : '<figure>') .
+                    ($step['stepPic']['caption'] === '' ? '' : '<figure class="w-full">') .
                         '<img class="dbe_howto-step-image" src="' . $step['stepPic']['url'] . '">' 
                     . ($step['stepPic']['caption'] === '' ? '' : '<figcaption>' . $step['stepPic']['caption'] . '</figcaption></figure>')
                         : '')
@@ -171,10 +171,10 @@ function dbe_render_how_to_block($attributes){
                             ' class="dbe_howto-step-display">';
         if(isset($section) && count($section) > 0){
             foreach($section[0]['steps'] as $j => $step){
-                $stepsDisplay .= '<li class="dbe_howto-step"><' . $thirdLevelTag . ' id="' . $step['anchor'] . '">'
+                $stepsDisplay .= '<li class="dbe_howto-step"><' . $thirdLevelTag . ' id="' . $step['anchor'] . '" class="py-1 my-2 flex border-b border-b-gray-900 border-solid">'
                         . $step['title'] . '</' . $thirdLevelTag . '>' . ($step['stepPic']['url'] !== '' ? 
-                            ($step['stepPic']['caption'] === '' ? '' : '<figure>') . 
-                                '<img class="dbe_howto-step-image" src="' . $step['stepPic']['url'] . '">' . 
+                            ($step['stepPic']['caption'] === '' ? '' : '<figure class="w-full">') . 
+                                '<img class="dbe_howto-step-image rounded" src="' . $step['stepPic']['url'] . '">' . 
                             ($step['stepPic']['caption'] === '' ? '' : '<figcaption>' . $step['stepPic']['caption'] . '</figcaption></figure>') : '') .
                         dbe_convert_to_paragraphs($step['direction']);
 
@@ -275,8 +275,8 @@ function dbe_render_how_to_block($attributes){
                 . '<p>' . $costDisplayText . $costDisplay . '</p>'
                 . $timeDisplay : '') . $stepsDisplay .   
                 '<div class="dbe_howto-yield"><' . $secondLevelTag . '>' . $resultIntro . '</' . $secondLevelTag . '>' . 
-                ($finalImageURL === '' ? '' : (!isset($finalImageCaption) || $finalImageCaption === '' ? '' : '<figure class="dbe_howto-yield-image-container">') .
-                    '<img class="dbe_howto-yield-image" src="' . $finalImageURL . '">' . 
+                ($finalImageURL === '' ? '' : (!isset($finalImageCaption) || $finalImageCaption === '' ? '' : '<figure class="dbe_howto-yield-image-container mt-2">') .
+                    '<img class="dbe_howto-yield-image rounded" src="' . $finalImageURL . '">' . 
                     (!isset($finalImageCaption) || $finalImageCaption === '' ? '' : '<figcaption>' . $finalImageCaption . '</figcaption></figure>')) .
                 dbe_convert_to_paragraphs($howToYield) . '</div>
             </div>' . $JSONLD;

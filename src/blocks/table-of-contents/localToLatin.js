@@ -1,6 +1,6 @@
-import cyrillic from './languageTables/cyrillic';
+import cyrillic from "./languageTables/cyrillic";
 
-const conversionTables = {cyrillic};
+const conversionTables = { cyrillic };
 
 /**
  * Convert the local alphabets to their latin counterparts
@@ -14,22 +14,22 @@ function toLatin(local, target) {
 	function convertAndReplace(l, t) {
 		if (conversionTables[l]) {
 			const currentTable = conversionTables[l];
-			Object.keys(currentTable).map(key => {
+			Object.keys(currentTable).map((key) => {
 				if (Object.prototype.hasOwnProperty.call(currentTable, key)) {
-					t = t.replace(new RegExp(key ,'g'), currentTable[key]);
+					t = t.replace(new RegExp(key, "g"), currentTable[key]);
 				}
-			})
+			});
 		}
 		return t;
 	}
 
 	let rawTarget = target;
-	if (local === 'all') {
-		Object.keys(conversionTables).map(locale => {
-			if(Object.prototype.hasOwnProperty.call(conversionTables, locale)){
+	if (local === "all") {
+		Object.keys(conversionTables).map((locale) => {
+			if (Object.prototype.hasOwnProperty.call(conversionTables, locale)) {
 				rawTarget = convertAndReplace(locale, rawTarget);
 			}
-		})
+		});
 	} else {
 		rawTarget = convertAndReplace(local, rawTarget);
 	}
@@ -37,5 +37,3 @@ function toLatin(local, target) {
 }
 
 export default toLatin;
-
-

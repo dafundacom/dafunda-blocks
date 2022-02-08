@@ -1,1 +1,136 @@
-.wp-block-dbe-social-share .social-share-icons{display:flex;flex-wrap:wrap}.wp-block-dbe-social-share .social-share-icons .social-share-icon{display:flex;align-items:center;justify-content:center;margin:7px}.wp-block-dbe-social-share .social-share-icons .social-share-icon.circle{box-shadow:0px 3px 2px gray;border-radius:50%}.wp-block-dbe-social-share .social-share-icons .social-share-icon.square{box-shadow:0px 3px 2px gray;border-radius:0%}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-standalone-icon{margin:12px;padding-right:5px}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-facebook-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-twitter-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-linkedin-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-pinterest-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-reddit-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons .dbe-social-share-tumblr-container{border-width:1px;border-style:solid;white-space:nowrap;display:flex}.wp-block-dbe-social-share .social-share-icons>div{display:flex;align-items:center}.wp-block-dbe-social-share .social-share-icons a{text-decoration:none}.align-icons-center{justify-content:center}.align-icons-left{justify-content:flex-start}.align-icons-right{justify-content:flex-end}.dbe-social-share-facebook.square,.dbe-social-share-facebook.circle{background-color:#1877f2}.dbe-social-share-facebook+span,.dbe-social-share-facebook+span>a{color:#1877f2}.dbe-social-share-twitter.square,.dbe-social-share-twitter.circle{background-color:#1d9bf0}.dbe-social-share-twitter+span,.dbe-social-share-twitter+span>a{color:#1d9bf0}.dbe-social-share-linkedin.square,.dbe-social-share-linkedin.circle{background-color:#2867b2}.dbe-social-share-linkedin+span,.dbe-social-share-linkedin+span>a{color:#2867b2}.dbe-social-share-pinterest.square,.dbe-social-share-pinterest.circle{background-color:#e60023}.dbe-social-share-pinterest+span,.dbe-social-share-pinterest+span>a{color:#e60023}.dbe-social-share-reddit.square,.dbe-social-share-reddit.circle{background-color:#ff4500}.dbe-social-share-reddit+span,.dbe-social-share-reddit+span>a{color:#ff4500}.dbe-social-share-tumblr.square,.dbe-social-share-tumblr.circle{background-color:#001935}.dbe-social-share-tumblr+span,.dbe-social-share-tumblr+span>a{color:#001935}
+.wp-block-dbe-social-share .social-share-icons {
+	display: flex;
+	flex-wrap: wrap;
+}
+.wp-block-dbe-social-share .social-share-icons .social-share-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 7px;
+}
+.wp-block-dbe-social-share .social-share-icons .social-share-icon.circle {
+	box-shadow: 0px 3px 2px gray;
+	border-radius: 50%;
+}
+.wp-block-dbe-social-share .social-share-icons .social-share-icon.square {
+	box-shadow: 0px 3px 2px gray;
+	border-radius: 0%;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-standalone-icon {
+	margin: 12px;
+	padding-right: 5px;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-facebook-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-twitter-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-linkedin-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-pinterest-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-reddit-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share
+	.social-share-icons
+	.dbe-social-share-tumblr-container {
+	border-width: 1px;
+	border-style: solid;
+	white-space: nowrap;
+	display: flex;
+}
+.wp-block-dbe-social-share .social-share-icons > div {
+	display: flex;
+	align-items: center;
+}
+.wp-block-dbe-social-share .social-share-icons a {
+	text-decoration: none;
+}
+.align-icons-center {
+	justify-content: center;
+}
+.align-icons-left {
+	justify-content: flex-start;
+}
+.align-icons-right {
+	justify-content: flex-end;
+}
+.dbe-social-share-facebook.square,
+.dbe-social-share-facebook.circle {
+	background-color: #1877f2;
+}
+.dbe-social-share-facebook + span,
+.dbe-social-share-facebook + span > a {
+	color: #1877f2;
+}
+.dbe-social-share-twitter.square,
+.dbe-social-share-twitter.circle {
+	background-color: #1d9bf0;
+}
+.dbe-social-share-twitter + span,
+.dbe-social-share-twitter + span > a {
+	color: #1d9bf0;
+}
+.dbe-social-share-linkedin.square,
+.dbe-social-share-linkedin.circle {
+	background-color: #2867b2;
+}
+.dbe-social-share-linkedin + span,
+.dbe-social-share-linkedin + span > a {
+	color: #2867b2;
+}
+.dbe-social-share-pinterest.square,
+.dbe-social-share-pinterest.circle {
+	background-color: #e60023;
+}
+.dbe-social-share-pinterest + span,
+.dbe-social-share-pinterest + span > a {
+	color: #e60023;
+}
+.dbe-social-share-reddit.square,
+.dbe-social-share-reddit.circle {
+	background-color: #ff4500;
+}
+.dbe-social-share-reddit + span,
+.dbe-social-share-reddit + span > a {
+	color: #ff4500;
+}
+.dbe-social-share-tumblr.square,
+.dbe-social-share-tumblr.circle {
+	background-color: #001935;
+}
+.dbe-social-share-tumblr + span,
+.dbe-social-share-tumblr + span > a {
+	color: #001935;
+}

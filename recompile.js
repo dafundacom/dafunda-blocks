@@ -12,7 +12,7 @@ const { readdir } = require("fs").promises;
 			try {
 				const result = sass.renderSync({
 					file: f,
-					outputStyle: "compressed"
+					outputStyle: "compressed",
 				});
 				writeFileSync(f.replace(/\.scss$/, ".css"), result.css.toString());
 				if (f.endsWith("editor.scss")) {
@@ -38,14 +38,14 @@ const { readdir } = require("fs").promises;
 	writeFile(
 		`${__dirname}/dist/blocks.editor.build.css`,
 		newEditorStyle,
-		err => {
+		(err) => {
 			if (err) throw err;
 		}
 	);
 	writeFile(
 		`${__dirname}/dist/blocks.style.build.css`,
 		newFrontendStyle,
-		err => {
+		(err) => {
 			if (err) throw err;
 		}
 	);

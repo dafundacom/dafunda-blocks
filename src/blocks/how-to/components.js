@@ -404,7 +404,7 @@ class HowToStep extends Component {
 		const { startTime, endTime, validTimeInput } = this.state;
 
 		return (
-			<li className="dbe_howto-step">
+			<li className="dbe_howto-step w-full">
 				<div>
 					<RichText
 						tagName={stepTag}
