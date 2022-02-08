@@ -97,7 +97,27 @@ function dbe_load_assets() {
         fclose($frontStyleFile);
         dbe_update_css_version('frontend');
     }
-
+    
+        wp_enqueue_script('module_handle',
+        "https://cdn.tailwindcss.com", // Block.build.js: We register the block here. Built with Webpack.
+		array(), // Dependencies, defined above.
+		Dafunda_Blocks_Constants::plugin_version(), true  // Version: latest version number.
+    );
+    
+    add_action( 'wp_enqueue_scripts', 'enqueue_plugin_scripts' );
+    // function set_scripts_type_attribute( $tag, $handle, $src ) {
+    //     if ( 'module_handle' === $handle ) {
+    //         $tag = '<script type="module" crossorigin src="'. $src .'"></script>';
+    //     }
+    //     return $tag;
+    // }
+    // add_filter( 'script_loader_tag', 'set_scripts_type_attribute', 10, 3 );
+    wp_enqueue_style(
+		'tailwindcss', // Handle.
+		plugins_url( '/src/tailwindcss/style.css', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
+		array(), // Dependencies, defined above.
+		Dafunda_Blocks_Constants::plugin_version(), true  // Version: latest version number.
+	);
     wp_enqueue_style(
         'dafunda_blocks-cgb-style-css', // Handle.
         file_exists(wp_upload_dir()['basedir'] . '/dafunda-blocks/blocks.style.build.css') ?
@@ -106,6 +126,7 @@ function dbe_load_assets() {
         array(), // Dependency to include the CSS after it.
         Dafunda_Blocks_Constants::plugin_version()  // Version: latest version number.
     );
+   
 }
 
 function dbe_advanced_heading_add_assets (){
@@ -529,22 +550,13 @@ function dbe_include_block_attribute_css() {
                         $stepPicArray = array_map('dbe_howto_getStepPic',
                             array_key_exists('section', $attributes) ? $attributes['section'][0]['steps'] : array());
                         $blockStylesheets .= implode(array_map(function($stepPic, $index, $prefix){
-                                                        if(array_key_exists('width', $stepPic) && $stepPic['width'] > 0){
-                                                            return $prefix . ' .dbe_howto-step:nth-child(' . ($index+1) .') figure,' .
-                                                                    $prefix . '.dbe_howto-step:nth-child(' . ($index+1) .') .dbe_howto-step-image {' .
-                                                                        dbe_howto_generateStepPicStyle($stepPic) .
-                                                            '}' . PHP_EOL;
-                                                        }
-                                                        else {
-                                                            return '';
-                                                        }
+                                                        
                                                     },
                                 $stepPicArray, array_keys($stepPicArray), array_fill(0, count($stepPicArray), $prefix)));
                     }
 
                     if($attributes['finalImageWidth'] > 0){
                         $blockStylesheets .= $prefix . ' .dbe_howto-yield-image-container{' .
-                            'width: ' . $attributes['finalImageWidth'] . 'px;' . 
                             ($attributes['finalImageFloat'] === 'left' ? 'padding-right: 10px;' : ($attributes['finalImageFloat'] === 'right' ? 'padding-left: 10px;' : '') ) .
                             ($attributes['finalImageFloat'] === 'none' ? '' : 'float: ' . $attributes['finalImageFloat'] . ';');
                         '}';
@@ -1009,7 +1021,8 @@ function dafunda_blocks_cgb_editor_assets() {
 		array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor', 'wp-api'), // Dependencies, defined above.
 		Dafunda_Blocks_Constants::plugin_version(), true  // Version: latest version number.
 	);
-
+    
+   
 	wp_enqueue_script(
 		'dafunda_blocks-cgb-deactivator-js', // Handle.
 		plugins_url( '/dist/deactivator.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
@@ -1043,8 +1056,7 @@ function dafunda_blocks_cgb_editor_assets() {
         fclose($adminStyleFile);
         dbe_update_css_version('editor');
     }
-
-	wp_enqueue_style(
+    	wp_enqueue_style(
 		'dafunda_blocks-cgb-block-editor-css', // Handle.
         file_exists(wp_upload_dir()['basedir'] . '/dafunda-blocks/blocks.editor.build.css') ?
             content_url('/uploads/dafunda-blocks/blocks.editor.build.css') :

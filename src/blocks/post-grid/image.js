@@ -53,11 +53,8 @@ export default class FeaturedImage extends Component {
 
 	render() {
 		const { imageUrl } = this.state;
-		const {
-			postImageWidth,
-			preservePostImageAspectRatio,
-			postImageHeight,
-		} = this.props.attributes;
+		const { postImageWidth, preservePostImageAspectRatio, postImageHeight } =
+			this.props.attributes;
 
 		return (
 			<img

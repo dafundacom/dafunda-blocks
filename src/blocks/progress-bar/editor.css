@@ -1,1 +1,15 @@
-.dbe_progress_bar_value{padding-left:5px;transform:translateY(5px)}.dbe_progress_bar_value button{display:none}.dbe_progress_bar_value .components-range-control__wrapper{width:100px}[data-type="dbe/progress-bar"] .components-dropdown-menu{background-color:#fff;border-top:1px solid #b5bcc2;border-bottom:1px solid #b5bcc2}
+.dbe_progress_bar_value {
+	padding-left: 5px;
+	transform: translateY(5px);
+}
+.dbe_progress_bar_value button {
+	display: none;
+}
+.dbe_progress_bar_value .components-range-control__wrapper {
+	width: 100px;
+}
+[data-type="dbe/progress-bar"] .components-dropdown-menu {
+	background-color: #fff;
+	border-top: 1px solid #b5bcc2;
+	border-bottom: 1px solid #b5bcc2;
+}
