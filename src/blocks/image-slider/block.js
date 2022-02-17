@@ -242,10 +242,10 @@ registerBlockType("dbe/image-slider", {
 										captionArray.find((c) => c.id === img.id)
 											? captionArray.find((c) => c.id === img.id)
 											: {
-													text: img.caption,
-													link: "",
-													id: img.id,
-											  }
+												text: img.caption,
+												link: "",
+												id: img.id,
+											}
 									);
 
 									setAttributes({
@@ -500,10 +500,16 @@ registerBlockType("dbe/image-slider", {
 							transition={transition}
 							slides={[
 								...imageArray.map((c, i) => (
-									<figure>
+									<figure
+									// style={{
+									// 	height: `${sliderHeight}px`,
+									// }}
+									// className="flex flex-wrap align-center justify-center"
+									>
 										<img
 											key={i}
 											src={c.url}
+											// className="w-full"
 											style={{
 												height: `${sliderHeight}px`,
 											}}

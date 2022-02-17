@@ -1,12 +1,1 @@
-.dbe-star-outer-container {
-	display: flex;
-}
-.dbe-star-inner-container,
-.dbe-star-container {
-	display: flex;
-	flex-direction: row;
-	margin: 20px 0;
-}
-.dbe-star-inner-container svg {
-	margin-top: initial;
-}
+.dbe-star-outer-container{display:flex}.dbe-star-inner-container,.dbe-star-container{display:flex;flex-direction:row;margin:20px 0}.dbe-star-inner-container svg{margin-top:initial}
