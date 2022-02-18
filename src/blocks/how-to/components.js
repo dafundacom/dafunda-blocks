@@ -399,21 +399,14 @@ class HowToStep extends Component {
 			advancedMode,
 			blockIsSelected,
 			selectStep,
+			stepNum
 		} = this.props;
 
 		const { startTime, endTime, validTimeInput } = this.state;
 
 		return (
-			<li className="dbe_howto-step w-full">
-				<div>
-					<RichText
-						tagName={stepTag}
-						keepPlaceholderOnFocus
-						placeholder={__("Title goes here")}
-						value={title}
-						onChange={(newVal) => editStep({ title: newVal })}
-						onFocus={selectStep}
-					/>
+			<>
+				<div className="dbe_howto-step__control-button">
 					<Button
 						className="dbe_howto-delete"
 						icon="trash"
@@ -433,327 +426,350 @@ class HowToStep extends Component {
 						label={__("Move step down")}
 					/>
 				</div>
-				{stepPic.url !== "" ? (
-					<figure>
-						<img
-							className="dbe_howto-step-image"
-							src={stepPic.url}
-							onClick={selectStep}
-						/>
-						{blockIsSelected && (
-							<span
-								title={__("Delete image")}
-								className="dashicons dashicons-dismiss"
-								onClick={() =>
-									editStep({
-										stepPic: {
-											id: -1,
-											alt: "",
-											url: "",
-											caption: "",
-											width: 0,
-											float: "none",
-										},
-									})
-								}
+				<li className="dbe_howto-step w-full">
+					<div className="grid grid-cols-12 grid-flow-row gap-0">
+						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none dbe_howto-step__stepnum">
+							<h1>{stepNum + 1}</h1>
+						</div>
+						<div className="order-2 md:order-2 col-span-10 md:col-span-11 dbe_howto-step__desc" >
+							<RichText
+								tagName={stepTag}
+								keepPlaceholderOnFocus
+								placeholder={__("Title goes here")}
+								className="dbe_howto-step__title"
+								value={title}
+								onChange={(newVal) => editStep({ title: newVal })}
+								onFocus={selectStep}
 							/>
-						)}
-						<RichText
-							tagName="figcaption"
-							keepPlaceholderOnFocus
-							placeholder={__("Step image caption")}
-							value={stepPic.caption}
-							onFocus={selectStep}
-							onChange={(newCaption) =>
-								editStep({
-									stepPic: Object.assign(stepPic, { caption: newCaption }),
-								})
-							}
-						/>
-					</figure>
-				) : (
-					<MediaUpload
-						onSelect={(img) => {
-							editStep({
-								stepPic: {
-									id: img.id,
-									alt: img.alt,
-									url: img.url,
-									caption: img.caption,
-									width: Math.min(Math.max(img.width, 200), 800),
-									float: "none",
-								},
-							});
-							selectStep();
-						}}
-						allowedTypes={["image"]}
-						value={stepPic.id}
-						render={({ open }) => (
-							<Button
-								className="button is-default is-large dbe_howto-button-default"
-								onClick={open}
-							>
-								{__("Upload Image")}
-							</Button>
-						)}
-					/>
-				)}
-				<div>
-					<RichText
-						keepPlaceholderOnFocus
-						placeholder={__("Direction goes here")}
-						value={direction}
-						onFocus={selectStep}
-						onChange={(newVal) => editStep({ direction: newVal })}
-					/>
-					<RichText
-						keepPlaceholderOnFocus
-						placeholder={__("Add a tip (optional)")}
-						value={tip}
-						onFocus={selectStep}
-						onChange={(newVal) => editStep({ tip: newVal })}
-					/>
-					{advancedMode && (
-						<>
-							{videoDuration > 0 && (
-								<ToggleControl
-									checked={hasVideoClip}
-									label={__("Use part of the video in this step")}
-									onChange={(hasVideoClip) => {
-										editStep({ hasVideoClip });
-										if (!hasVideoClip) {
-											editStep({ videoClipEnd: 0, videoClipStart: 0 });
-											this.setState({
-												startTime: Object.assign({}, defaultTimeDisplay),
-												endTime: Object.assign({}, defaultTimeDisplay),
-											});
-										}
-									}}
-								/>
-							)}
-							{videoDuration > 0 && hasVideoClip && (
+						</div>
+						<div className="order-4 md:order-3 col-span-12 md:col-span-11 dbe_howto-step__desc" >
+							<RichText
+								keepPlaceholderOnFocus
+								placeholder={__("Direction goes here")}
+								value={direction}
+								onFocus={selectStep}
+								onChange={(newVal) => editStep({ direction: newVal })}
+							/>
+							<RichText
+								keepPlaceholderOnFocus
+								placeholder={__("Add a tip (optional)")}
+								value={tip}
+								onFocus={selectStep}
+								onChange={(newVal) => editStep({ tip: newVal })}
+							/>
+							{advancedMode && (
 								<>
-									<span style={{ color: validTimeInput ? "black" : "red" }}>
-										{__("Start time")}
-									</span>
-									{videoDuration >= 86400 && (
-										<input
-											type="number"
-											value={startTime.d}
-											min={0}
-											step={1}
-											title={__("Days")}
-											onChange={(e) => {
-												const { h, m, s } = this.state.startTime;
-												const d = Number(e.target.value);
-												const startPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-												if (
-													startPoint < videoDuration &&
-													d % 1 === 0 &&
-													d > -1
-												) {
+									{videoDuration > 0 && (
+										<ToggleControl
+											checked={hasVideoClip}
+											label={__("Use part of the video in this step")}
+											onChange={(hasVideoClip) => {
+												editStep({ hasVideoClip });
+												if (!hasVideoClip) {
+													editStep({ videoClipEnd: 0, videoClipStart: 0 });
 													this.setState({
-														startTime: Object.assign(startTime, { d }),
+														startTime: Object.assign({}, defaultTimeDisplay),
+														endTime: Object.assign({}, defaultTimeDisplay),
 													});
-													editStep({ videoClipStart: startPoint });
 												}
 											}}
 										/>
 									)}
-									{videoDuration >= 3600 && (
-										<input
-											type="number"
-											value={startTime.h}
-											min={0}
-											max={23}
-											step={1}
-											title={__("Hours")}
-											onChange={(e) => {
-												const { d, m, s } = this.state.startTime;
-												const h = Number(e.target.value);
-												const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+									{videoDuration > 0 && hasVideoClip && (
+										<>
+											<span style={{ color: validTimeInput ? "black" : "red" }}>
+												{__("Start time")}
+											</span>
+											{videoDuration >= 86400 && (
+												<input
+													type="number"
+													value={startTime.d}
+													min={0}
+													step={1}
+													title={__("Days")}
+													onChange={(e) => {
+														const { h, m, s } = this.state.startTime;
+														const d = Number(e.target.value);
+														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
 
-												if (
-													startPoint < videoDuration &&
-													h % 1 === 0 &&
-													h > -1 &&
-													h < 24
-												) {
-													this.setState({
-														startTime: Object.assign(startTime, { h }),
-													});
-													editStep({ videoClipStart: startPoint });
-												}
-											}}
-										/>
+														if (
+															startPoint < videoDuration &&
+															d % 1 === 0 &&
+															d > -1
+														) {
+															this.setState({
+																startTime: Object.assign(startTime, { d }),
+															});
+															editStep({ videoClipStart: startPoint });
+														}
+													}}
+												/>
+											)}
+											{videoDuration >= 3600 && (
+												<input
+													type="number"
+													value={startTime.h}
+													min={0}
+													max={23}
+													step={1}
+													title={__("Hours")}
+													onChange={(e) => {
+														const { d, m, s } = this.state.startTime;
+														const h = Number(e.target.value);
+														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+														if (
+															startPoint < videoDuration &&
+															h % 1 === 0 &&
+															h > -1 &&
+															h < 24
+														) {
+															this.setState({
+																startTime: Object.assign(startTime, { h }),
+															});
+															editStep({ videoClipStart: startPoint });
+														}
+													}}
+												/>
+											)}
+											{videoDuration >= 60 && (
+												<input
+													type="number"
+													value={startTime.m}
+													min={0}
+													max={59}
+													step={1}
+													title={__("Minutes")}
+													onChange={(e) => {
+														const { d, h, s } = this.state.startTime;
+														const m = Number(e.target.value);
+														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+														if (
+															startPoint < videoDuration &&
+															m % 1 === 0 &&
+															m > -1 &&
+															m < 60
+														) {
+															this.setState({
+																startTime: Object.assign(startTime, { m }),
+															});
+															editStep({ videoClipStart: startPoint });
+														}
+													}}
+												/>
+											)}
+											<input
+												type="number"
+												value={startTime.s}
+												min={0}
+												max={59}
+												step={1}
+												title={__("Seconds")}
+												onChange={(e) => {
+													const { d, h, m } = this.state.startTime;
+													const s = Number(e.target.value);
+													const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+													if (
+														startPoint < videoDuration &&
+														s % 1 === 0 &&
+														s > -1 &&
+														s < 60
+													) {
+														this.setState({
+															startTime: Object.assign(startTime, { s }),
+														});
+														editStep({ videoClipStart: startPoint });
+													}
+												}}
+											/>
+											<br />
+											<span style={{ color: validTimeInput ? "black" : "red" }}>
+												{__("End time")}
+											</span>
+											{videoDuration >= 86400 && (
+												<input
+													type="number"
+													value={endTime.d}
+													min={0}
+													step={1}
+													title={__("Days")}
+													onChange={(e) => {
+														const { h, m, s } = this.state.endTime;
+														const d = Number(e.target.value);
+														const endPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+														if (
+															endPoint <= videoDuration &&
+															d % 1 === 0 &&
+															d > -1
+														) {
+															this.setState({
+																endTime: Object.assign(endTime, { d }),
+															});
+															editStep({ videoClipEnd: endPoint });
+														}
+													}}
+												/>
+											)}
+											{videoDuration >= 3600 && (
+												<input
+													type="number"
+													value={endTime.h}
+													min={0}
+													max={23}
+													step={1}
+													title={__("Hours")}
+													onChange={(e) => {
+														const { d, m, s } = this.state.endTime;
+														const h = Number(e.target.value);
+														const endPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+														if (
+															endPoint <= videoDuration &&
+															h % 1 === 0 &&
+															h > -1 &&
+															h < 24
+														) {
+															this.setState({
+																endTime: Object.assign(endTime, { h }),
+															});
+															editStep({ videoClipEnd: endPoint });
+														}
+													}}
+												/>
+											)}
+											{videoDuration >= 60 && (
+												<input
+													type="number"
+													value={endTime.m}
+													min={0}
+													max={59}
+													step={1}
+													title={__("Minutes")}
+													onChange={(e) => {
+														const { d, h, s } = this.state.endTime;
+														const m = Number(e.target.value);
+														const endPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+														if (
+															endPoint <= videoDuration &&
+															m % 1 === 0 &&
+															m > -1 &&
+															m < 60
+														) {
+															this.setState({
+																endTime: Object.assign(endTime, { m }),
+															});
+															editStep({ videoClipEnd: endPoint });
+														}
+													}}
+												/>
+											)}
+											<input
+												type="number"
+												value={endTime.s}
+												min={0}
+												max={59}
+												step={1}
+												title={__("Seconds")}
+												onChange={(e) => {
+													const { d, h, m } = this.state.endTime;
+													const s = Number(e.target.value);
+													const endPoint = d * 86400 + h * 3600 + m * 60 + s;
+
+													if (
+														endPoint <= videoDuration &&
+														s % 1 === 0 &&
+														s > -1 &&
+														s < 60
+													) {
+														this.setState({
+															endTime: Object.assign(endTime, { s }),
+														});
+														editStep({ videoClipEnd: endPoint });
+													}
+												}}
+											/>
+										</>
 									)}
-									{videoDuration >= 60 && (
-										<input
-											type="number"
-											value={startTime.m}
-											min={0}
-											max={59}
-											step={1}
-											title={__("Minutes")}
-											onChange={(e) => {
-												const { d, h, s } = this.state.startTime;
-												const m = Number(e.target.value);
-												const startPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-												if (
-													startPoint < videoDuration &&
-													m % 1 === 0 &&
-													m > -1 &&
-													m < 60
-												) {
-													this.setState({
-														startTime: Object.assign(startTime, { m }),
-													});
-													editStep({ videoClipStart: startPoint });
-												}
-											}}
-										/>
-									)}
-									<input
-										type="number"
-										value={startTime.s}
-										min={0}
-										max={59}
-										step={1}
-										title={__("Seconds")}
-										onChange={(e) => {
-											const { d, h, m } = this.state.startTime;
-											const s = Number(e.target.value);
-											const startPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-											if (
-												startPoint < videoDuration &&
-												s % 1 === 0 &&
-												s > -1 &&
-												s < 60
-											) {
-												this.setState({
-													startTime: Object.assign(startTime, { s }),
-												});
-												editStep({ videoClipStart: startPoint });
-											}
-										}}
-									/>
-									<br />
-									<span style={{ color: validTimeInput ? "black" : "red" }}>
-										{__("End time")}
-									</span>
-									{videoDuration >= 86400 && (
-										<input
-											type="number"
-											value={endTime.d}
-											min={0}
-											step={1}
-											title={__("Days")}
-											onChange={(e) => {
-												const { h, m, s } = this.state.endTime;
-												const d = Number(e.target.value);
-												const endPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-												if (
-													endPoint <= videoDuration &&
-													d % 1 === 0 &&
-													d > -1
-												) {
-													this.setState({
-														endTime: Object.assign(endTime, { d }),
-													});
-													editStep({ videoClipEnd: endPoint });
-												}
-											}}
-										/>
-									)}
-									{videoDuration >= 3600 && (
-										<input
-											type="number"
-											value={endTime.h}
-											min={0}
-											max={23}
-											step={1}
-											title={__("Hours")}
-											onChange={(e) => {
-												const { d, m, s } = this.state.endTime;
-												const h = Number(e.target.value);
-												const endPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-												if (
-													endPoint <= videoDuration &&
-													h % 1 === 0 &&
-													h > -1 &&
-													h < 24
-												) {
-													this.setState({
-														endTime: Object.assign(endTime, { h }),
-													});
-													editStep({ videoClipEnd: endPoint });
-												}
-											}}
-										/>
-									)}
-									{videoDuration >= 60 && (
-										<input
-											type="number"
-											value={endTime.m}
-											min={0}
-											max={59}
-											step={1}
-											title={__("Minutes")}
-											onChange={(e) => {
-												const { d, h, s } = this.state.endTime;
-												const m = Number(e.target.value);
-												const endPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-												if (
-													endPoint <= videoDuration &&
-													m % 1 === 0 &&
-													m > -1 &&
-													m < 60
-												) {
-													this.setState({
-														endTime: Object.assign(endTime, { m }),
-													});
-													editStep({ videoClipEnd: endPoint });
-												}
-											}}
-										/>
-									)}
-									<input
-										type="number"
-										value={endTime.s}
-										min={0}
-										max={59}
-										step={1}
-										title={__("Seconds")}
-										onChange={(e) => {
-											const { d, h, m } = this.state.endTime;
-											const s = Number(e.target.value);
-											const endPoint = d * 86400 + h * 3600 + m * 60 + s;
-
-											if (
-												endPoint <= videoDuration &&
-												s % 1 === 0 &&
-												s > -1 &&
-												s < 60
-											) {
-												this.setState({
-													endTime: Object.assign(endTime, { s }),
-												});
-												editStep({ videoClipEnd: endPoint });
-											}
-										}}
-									/>
 								</>
 							)}
-						</>
-					)}
-				</div>
-			</li>
+						</div>
+						<div className="order-3 md:order-4 col-span-12 dbe_howto-step__image">
+							{stepPic.url !== "" ? (
+								<figure>
+									<img
+										className="dbe_howto-step-image"
+										src={stepPic.url}
+										onClick={selectStep}
+									/>
+									{blockIsSelected && (
+										<span
+											title={__("Delete image")}
+											className="dashicons dashicons-dismiss"
+											onClick={() =>
+												editStep({
+													stepPic: {
+														id: -1,
+														alt: "",
+														url: "",
+														caption: "",
+														width: 0,
+														float: "none",
+													},
+												})
+											}
+										/>
+									)}
+									<RichText
+										tagName="figcaption"
+										keepPlaceholderOnFocus
+										placeholder={__("Step image caption")}
+										value={stepPic.caption}
+										onFocus={selectStep}
+										onChange={(newCaption) =>
+											editStep({
+												stepPic: Object.assign(stepPic, { caption: newCaption }),
+											})
+										}
+									/>
+								</figure>
+							) : (
+								<div className="flex flex-wrap justify-center align-center py-5">
+									<MediaUpload
+										onSelect={(img) => {
+											editStep({
+												stepPic: {
+													id: img.id,
+													alt: img.alt,
+													url: img.url,
+													caption: img.caption,
+													width: Math.min(Math.max(img.width, 200), 800),
+													float: "none",
+												},
+											});
+											selectStep();
+										}}
+										allowedTypes={["image"]}
+										value={stepPic.id}
+										render={({ open }) => (
+											<Button
+												className="button is-default is-large dbe_howto-button-default !leading-[inherit]"
+												onClick={open}
+											>
+												{__("Upload Image")}
+											</Button>
+										)}
+									/>
+								</div>
+							)}
+						</div>
+					</div>
+
+				</li>
+			</>
 		);
 	}
 }
@@ -1240,6 +1256,7 @@ export class EditorComponent extends Component {
 						placeholder={__("How to title")}
 						keepPlaceholderOnFocus={true}
 						value={title}
+						className="howto__title"
 						onChange={(title) => setAttributes({ title })}
 					/>
 					<RichText
@@ -1874,51 +1891,44 @@ export class EditorComponent extends Component {
 				</div>
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `@media (min-width:768px) {${
-							useSections
-								? section
-										.map((s, i) =>
-											s.steps
-												.map((st) =>
-													(({ width, float }) => ({ width, float }))(st.stepPic)
-												)
-												.map((img, j) =>
-													img.width > 0
-														? `#dbe_howto-${blockID} .dbe_howto-section:nth-child(${
-																i + 1
-														  }) .dbe_howto-step:nth-child(${
-																j + 1
-														  }) figure { width: ${img.width}px; float: ${
-																img.float
-														  };}`
-														: ""
-												)
-												.join("")
+						__html: `@media (min-width:768px) {${useSections
+							? section
+								.map((s, i) =>
+									s.steps
+										.map((st) =>
+											(({ width, float }) => ({ width, float }))(st.stepPic)
 										)
-										.join("")
-								: section[0].steps
-										.map((s) =>
-											(({ width, float }) => ({ width, float }))(s.stepPic)
-										)
-										.map((img, i) =>
+										.map((img, j) =>
 											img.width > 0
-												? `#dbe_howto-${blockID} .dbe_howto-step:nth-child(${
-														i + 1
-												  }) figure { width: ${img.width}px; float: ${
-														img.float
-												  };}`
+												? `#dbe_howto-${blockID} .dbe_howto-section:nth-child(${i + 1
+												}) .dbe_howto-step:nth-child(${j + 1
+												}) figure { width: ${img.width}px; float: ${img.float
+												};}`
 												: ""
 										)
 										.join("")
-						}
-						${
-							finalImageWidth > 0
+								)
+								.join("")
+							: section[0].steps
+								.map((s) =>
+									(({ width, float }) => ({ width, float }))(s.stepPic)
+								)
+								.map((img, i) =>
+									img.width > 0
+										? `#dbe_howto-${blockID} .dbe_howto-step:nth-child(${i + 1
+										}) figure { width: ${img.width}px; float: ${img.float
+										};}`
+										: ""
+								)
+								.join("")
+							}
+						${finalImageWidth > 0
 								? `#dbe_howto-${blockID} .dbe_howto-yield-image-container{
 							width: ${finalImageWidth}px;
 							float: ${finalImageFloat};
 						}`
 								: ""
-						}
+							}
 					}`,
 					}}
 				/>

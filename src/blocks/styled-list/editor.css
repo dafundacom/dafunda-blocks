@@ -1,11 +1,1 @@
-.dbe-styled-list-available-icon {
-	display: inline;
-}
-.editor-styles-wrapper .dbe_styled_list ul {
-	margin-left: 0;
-}
-.editor-styles-wrapper .dbe_styled_list .fa-ul > li {
-	list-style: none;
-	display: inline-block;
-	width: 100%;
-}
+.dbe-styled-list-available-icon{display:inline}.editor-styles-wrapper .dbe_styled_list ul{margin-left:0}.editor-styles-wrapper .dbe_styled_list .fa-ul>li{list-style:none;display:inline-block;width:100%}
