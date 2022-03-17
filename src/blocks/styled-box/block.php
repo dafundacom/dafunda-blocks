@@ -17,12 +17,12 @@ add_action('init', 'dbe_register_styled_box_bordered_box_block');
 
 function dbe_render_styled_box_numbered_box_column($attributes, $content){
     extract($attributes);
-    return '<div class="dbe-number-panel">
-        <div class="dbe-number-container">
-            <p class="dbe-number-display">' . $number . '</p>
+    return '<div class="number-panel">
+        <div class="number-container">
+            <p class="number-display">' . $number . '</p>
         </div>
-        <p class="dbe-number-box-title">' . $title . '</p>
-        <div class="dbe-number-box-body">' . $content . '</div>
+        <p class="number-box-title">' . $title . '</p>
+        <div class="number-box-body">' . $content . '</div>
     </div>';
 }
 
@@ -66,15 +66,15 @@ function dbe_render_styled_box_block($attributes, $content){
     extract($attributes);
     $renderedBlock = '';
     if($mode === 'notification' && $text[0] != ''){
-        $renderedBlock = '<div class="dbe-notification-text">'.$text[0].'</div>';
+        $renderedBlock = '<div class="notification-text">'.$text[0].'</div>';
     }
     else if($mode === 'feature'){
         foreach(range(0, count($text)-1) as $i){
-            $renderedBlock .= '<div class="dbe-feature">'.
+            $renderedBlock .= '<div class="feature">'.
                 ($image[$i]['url'] === '' ? '' :
-                    '<img class="dbe-feature-img" src="'.$image[$i]['url'].'"/>').
-                    '<p class="dbe-feature-title">'.$title[$i].'</p>
-                    <p class="dbe-feature-body">'.$text[$i].'</p>
+                    '<img class="feature-img" src="'.$image[$i]['url'].'"/>').
+                    '<p class="feature-title">'.$title[$i].'</p>
+                    <p class="feature-body">'.$text[$i].'</p>
             </div>';
         }
     }
@@ -82,12 +82,12 @@ function dbe_render_styled_box_block($attributes, $content){
         if(count( array_filter($text, function($item){return $item !== '';}) ) > 0 ||
                 count( array_filter($title, function($item){return $item !== '';}) ) > 0){
             foreach(range(0, count($text)-1) as $i){
-                $renderedBlock .= '<div class="dbe-number-panel">
-                    <div class="dbe-number-container">
-                        <p class="dbe-number-display">'.$number[$i].'</p>
+                $renderedBlock .= '<div class="number-panel">
+                    <div class="number-container">
+                        <p class="number-display">'.$number[$i].'</p>
                     </div>
-                    <p class="dbe-number-box-title">'.$title[$i].'</p>
-                    <p class="dbe-number-box-body">'.$text[$i].'</p>
+                    <p class="number-box-title">'.$title[$i].'</p>
+                    <p class="number-box-body">'.$text[$i].'</p>
                 </div>';
             }
         }
@@ -99,8 +99,8 @@ function dbe_render_styled_box_block($attributes, $content){
         $renderedBlock = $content;
     }
 
-    return '<div class="dbe-styled-box dbe-'.$mode.'-box'.(isset($className) ? ' ' . esc_attr($className) : '')
-            .'" id="dbe-styled-box-'.$blockID.'">'.
+    return '<div class="styled-box '.$mode.'-box'.(isset($className) ? ' ' . esc_attr($className) : '')
+            .'" id="styled-box-'.$blockID.'">'.
                 $renderedBlock.'</div>';
 }
 

@@ -1,7 +1,6 @@
 module.exports = {
-	darkMode: false,
-	purge: [
-		// Paths to your templates...
+	darkMode: "class",
+	content: [
 		"../**.php",
 		"../**/**.php",
 		"./src/js/**.js",
@@ -13,5 +12,5 @@ module.exports = {
 		extend: {},
 	},
 	variants: {},
-	plugins: [],
+	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };

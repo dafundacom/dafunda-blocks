@@ -103,25 +103,25 @@ function dbe_render_table_of_contents_block($attributes){
         $targetType = '.';
     }
     
-    return '<div class="dbe_table-of-contents' . (isset($className) ? ' ' . esc_attr($className) : '')
-                . (!$showList && strlen($title) > 0 ? ' dbe_table-of-contents-collapsed' : '' ) .
+    return '<div class="table-of-contents' . (isset($className) ? ' ' . esc_attr($className) : '')
+                . (!$showList && strlen($title) > 0 ? ' table-of-contents-collapsed' : '' ) .
                 '" data-showtext="' . __('show', 'dafunda-blocks') . '" data-hidetext="' . __('hide', 'dafunda-blocks')
                 . '" data-scrolltype="' . $scrollOption . '"' . ($scrollOption === 'fixedamount' ? ' data-scrollamount="' . $scrollOffset . '"' : '')
                 . ($scrollOption === 'namedelement' ? ' data-scrolltarget="' . $targetType . $scrollTarget . '"' : '')
-                . ($blockID === '' ? '' : ' id="dbe_table-of-contents-' . $blockID . '"') . ' data-initiallyhideonmobile="' . json_encode($hideOnMobile) . '"
+                . ($blockID === '' ? '' : ' id="table-of-contents-' . $blockID . '"') . ' data-initiallyhideonmobile="' . json_encode($hideOnMobile) . '"
                     data-initiallyshow="' . json_encode($showList) . '">'.
-                (strlen($title) > 0 ? ('<div class="dbe_table-of-contents-header-container flex"><div class="dbe_table-of-contents-header">
-                    <div class="dbe_table-of-contents-title">'. $title . '</div>' . 
+                (strlen($title) > 0 ? ('<div class="table-of-contents-header-container flex"><div class="table-of-contents-header">
+                    <div class="table-of-contents-title">'. $title . '</div>' . 
                     ($allowToCHiding ?
-                    '<div class="dbe_table-of-contents-header-toggle">
-                        <div class="dbe_table-of-contents-toggle">
-                        &nbsp;[<a class="dbe_table-of-contents-toggle-link" href="#">'.
+                    '<div class="table-of-contents-header-toggle">
+                        <div class="table-of-contents-toggle">
+                        &nbsp;[<a class="table-of-contents-toggle-link" href="#">'.
                             __($showList ? 'hide' : 'show', 'dafunda-blocks')
                             .'</a>]</div></div>' : '')
                 . '</div></div>') : '')
-                . '<div class="dbe_table-of-contents-extra-container"><div class="dbe_table-of-contents-container dbe_table-of-contents-' .
+                . '<div class="table-of-contents-extra-container"><div class="table-of-contents-container table-of-contents-' .
                     $numColumns . '-column ' . ($showList || strlen($title) === 0 ||
-                    (strlen($title) === 1 && $title[0] === '') ? '' : 'dbe-hide') . '">' .
+                    (strlen($title) === 1 && $title[0] === '') ? '' : 'hide') . '">' .
                 ($listStyle === 'numbered' ? '<ol>' :  '<ul'. ($listStyle === 'plain' && $blockID === '' ? ' style="list-style: none;"' : '') . '>')
                 . $listItems .
                 ($listStyle === 'numbered' ? '</ol>' : '</ul>')

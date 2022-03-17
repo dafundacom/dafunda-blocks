@@ -2,17 +2,17 @@ export const oldAttributes = {
 	dbe_call_to_action_headline_text: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_call_to_action_headline_text",
+		selector: ".call_to_action_headline_text",
 	},
 	dbe_cta_content_text: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_cta_content_text",
+		selector: ".cta_content_text",
 	},
 	dbe_cta_button_text: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_cta_button_text",
+		selector: ".cta_button_text",
 	},
 	headFontSize: {
 		type: "number",
@@ -104,16 +104,16 @@ export const version_1_1_2 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_call_to_action"
+				className="call_to_action"
 				style={{
 					backgroundColor: ctaBackgroundColor,
 					border: ctaBorderSize + "px solid",
 					borderColor: ctaBorderColor,
 				}}
 			>
-				<div className="dbe_call_to_action_headline">
+				<div className="call_to_action_headline">
 					<p
-						className="dbe_call_to_action_headline_text"
+						className="call_to_action_headline_text"
 						style={{
 							fontSize: headFontSize + "px",
 							color: headColor,
@@ -122,9 +122,9 @@ export const version_1_1_2 = (props) => {
 						{dbe_call_to_action_headline_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_content">
+				<div className="call_to_action_content">
 					<p
-						className="dbe_cta_content_text"
+						className="cta_content_text"
 						style={{
 							fontSize: contentFontSize + "px",
 							color: contentColor,
@@ -134,9 +134,9 @@ export const version_1_1_2 = (props) => {
 						{dbe_cta_content_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_button">
+				<div className="call_to_action_button">
 					<span
-						className={`wp-block-button dbe_cta_button`}
+						className={`wp-block-button cta_button`}
 						style={{
 							backgroundColor: buttonColor,
 							width: buttonWidth + "px",
@@ -144,7 +144,7 @@ export const version_1_1_2 = (props) => {
 					>
 						<a href={url} target="_blank">
 							<p
-								className="dbe_cta_button_text"
+								className="cta_button_text"
 								style={{
 									color: buttonTextColor,
 									fontSize: buttonFontSize + "px",
@@ -182,16 +182,16 @@ export const version_1_1_4 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_call_to_action"
+				className="call_to_action"
 				style={{
 					backgroundColor: ctaBackgroundColor,
 					border: ctaBorderSize + "px solid",
 					borderColor: ctaBorderColor,
 				}}
 			>
-				<div className="dbe_call_to_action_headline">
+				<div className="call_to_action_headline">
 					<p
-						className="dbe_call_to_action_headline_text"
+						className="call_to_action_headline_text"
 						style={{
 							fontSize: headFontSize + "px",
 							color: headColor,
@@ -200,9 +200,9 @@ export const version_1_1_4 = (props) => {
 						{dbe_call_to_action_headline_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_content">
+				<div className="call_to_action_content">
 					<p
-						className="dbe_cta_content_text"
+						className="cta_content_text"
 						style={{
 							fontSize: contentFontSize + "px",
 							color: contentColor,
@@ -212,9 +212,9 @@ export const version_1_1_4 = (props) => {
 						{dbe_cta_content_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_button">
+				<div className="call_to_action_button">
 					<span
-						className={`wp-block-button dbe_cta_button`}
+						className={`wp-block-button cta_button`}
 						style={{
 							backgroundColor: buttonColor,
 							width: buttonWidth + "px",
@@ -222,7 +222,7 @@ export const version_1_1_4 = (props) => {
 					>
 						<a href={url} target="_blank" rel="noopener noreferrer">
 							<p
-								className="dbe_cta_button_text"
+								className="cta_button_text"
 								style={{
 									color: buttonTextColor,
 									fontSize: buttonFontSize + "px",
@@ -261,16 +261,16 @@ export const version_1_1_5 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_call_to_action"
+				className="call_to_action"
 				style={{
 					backgroundColor: ctaBackgroundColor,
 					border: ctaBorderSize + "px solid",
 					borderColor: ctaBorderColor,
 				}}
 			>
-				<div className="dbe_call_to_action_headline">
+				<div className="call_to_action_headline">
 					<p
-						className="dbe_call_to_action_headline_text"
+						className="call_to_action_headline_text"
 						style={{
 							fontSize: headFontSize + "px",
 							color: headColor,
@@ -280,9 +280,9 @@ export const version_1_1_5 = (props) => {
 						{dbe_call_to_action_headline_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_content">
+				<div className="call_to_action_content">
 					<p
-						className="dbe_cta_content_text"
+						className="cta_content_text"
 						style={{
 							fontSize: contentFontSize + "px",
 							color: contentColor,
@@ -292,9 +292,9 @@ export const version_1_1_5 = (props) => {
 						{dbe_cta_content_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_button">
+				<div className="call_to_action_button">
 					<span
-						className={`wp-block-button dbe_cta_button`}
+						className={`wp-block-button cta_button`}
 						style={{
 							backgroundColor: buttonColor,
 							width: buttonWidth + "px",
@@ -302,7 +302,7 @@ export const version_1_1_5 = (props) => {
 					>
 						<a href={url} target="_blank" rel="noopener noreferrer">
 							<p
-								className="dbe_cta_button_text"
+								className="cta_button_text"
 								style={{
 									color: buttonTextColor,
 									fontSize: buttonFontSize + "px",
@@ -343,16 +343,16 @@ export const version_2_0_0 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_call_to_action"
+				className="call_to_action"
 				style={{
 					backgroundColor: ctaBackgroundColor,
 					border: ctaBorderSize + "px solid",
 					borderColor: ctaBorderColor,
 				}}
 			>
-				<div className="dbe_call_to_action_headline">
+				<div className="call_to_action_headline">
 					<p
-						className="dbe_call_to_action_headline_text"
+						className="call_to_action_headline_text"
 						style={{
 							fontSize: headFontSize + "px",
 							color: headColor,
@@ -362,9 +362,9 @@ export const version_2_0_0 = (props) => {
 						{dbe_call_to_action_headline_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_content">
+				<div className="call_to_action_content">
 					<p
-						className="dbe_cta_content_text"
+						className="cta_content_text"
 						style={{
 							fontSize: contentFontSize + "px",
 							color: contentColor,
@@ -374,19 +374,19 @@ export const version_2_0_0 = (props) => {
 						{dbe_cta_content_text}
 					</p>
 				</div>
-				<div className="dbe_call_to_action_button">
+				<div className="call_to_action_button">
 					<a
 						href={url}
 						target={openInNewTab ? "_blank" : "_self"}
 						rel={`${addNofollow ? "nofollow " : ""}noopener noreferrer`}
-						className={`wp-block-button dbe_cta_button`}
+						className={`wp-block-button cta_button`}
 						style={{
 							backgroundColor: buttonColor,
 							width: buttonWidth + "px",
 						}}
 					>
 						<p
-							className="dbe_cta_button_text"
+							className="cta_button_text"
 							style={{
 								color: buttonTextColor,
 								fontSize: buttonFontSize + "px",

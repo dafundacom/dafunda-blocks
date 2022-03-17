@@ -65,7 +65,7 @@ class Circle extends Component {
 			>
 				<svg height={size} width={size} viewBox="0 0 100 100">
 					<path
-						className="dbe_countdown_circle_trail"
+						className="countdown_circle_trail"
 						d={progressBarPath}
 						strokeWidth={3}
 						style={{
@@ -73,7 +73,7 @@ class Circle extends Component {
 						}}
 					/>
 					<path
-						className="dbe_countdown_circle_path"
+						className="countdown_circle_path"
 						d={progressBarPath}
 						stroke={color}
 						strokeWidth={3}
@@ -84,7 +84,7 @@ class Circle extends Component {
 					/>
 				</svg>
 				<div
-					className="dbe_countdown_circle_label"
+					className="countdown_circle_label"
 					style={{ visibility: isActive ? "visible" : "hidden" }}
 				>
 					{amount}

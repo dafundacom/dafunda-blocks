@@ -34,7 +34,7 @@ export class OldTabHolder extends Component {
 			replaceBlock,
 		} = this.props;
 
-		const className = "wp-block-dbe-tabbed-content";
+		const className = "wp-block-tabbed-content";
 
 		window.ubTabbedContentBlocks = window.ubTabbedContentBlocks || [];
 
@@ -121,12 +121,12 @@ export class OldTabHolder extends Component {
 							onChange={(content) => onChangeTitle(content, i)}
 							placeholder="Tab Title"
 						/>
-						<div className="dbe-tab-actions">
+						<div className="tab-actions">
 							<DragHandle />
 							<span
 								className={
 									"dashicons dashicons-minus remove-tab-icon" +
-									(propz.attributes.tabsTitle.length === 1 ? " dbe-hide" : "")
+									(propz.attributes.tabsTitle.length === 1 ? " hide" : "")
 								}
 								onClick={() => onRemoveTitle(i)}
 							/>
@@ -340,7 +340,7 @@ export class TabHolder extends Component {
 			getClientIdsWithDescendants,
 		} = this.props;
 
-		let className = "wp-block-dbe-tabbed-content";
+		let className = "wp-block-tabbed-content";
 
 		window.ubTabbedContentBlocks = window.ubTabbedContentBlocks || [];
 
@@ -457,8 +457,8 @@ export class TabHolder extends Component {
 							placeholder="Tab Title"
 						/>
 						<div
-							className={`dbe-tab-actions${
-								propz.attributes.tabsTitle.length === 1 ? " dbe-hide" : ""
+							className={`dtab-actions${
+								propz.attributes.tabsTitle.length === 1 ? " hide" : ""
 							}`}
 						>
 							<DragHandle />
@@ -674,8 +674,6 @@ export class TabHolder extends Component {
 									],
 								});
 							}}
-							toggleTitle={showControls}
-							onAddTab={addTab}
 						/>
 					</div>
 					<div

@@ -186,7 +186,7 @@ class Timer extends Component {
 
 		const circularFormat = (
 			<div
-				className="dbe_countdown_circular_container"
+				className="countdown_circular_container"
 				style={{ gridTemplateColumns: Array(diff).fill("1fr").join(" ") }}
 			>
 				{circularFormatValues}
@@ -194,7 +194,7 @@ class Timer extends Component {
 			</div>
 		);
 
-		const separator = <span className="dbe-countdown-separator">:</span>;
+		const separator = <span className="countdown-separator">:</span>;
 
 		const odometerLabels = [
 			<span>{__("Weeks", "dafunda-blocks")}</span>,
@@ -314,7 +314,7 @@ class Timer extends Component {
 		const odometerFormat = (
 			<div>
 				<div
-					className="dbe-countdown-odometer-container"
+					className="countdown-odometer-container"
 					style={{
 						gridTemplateColumns: Array(diff).fill("1fr").join(" auto "),
 					}}

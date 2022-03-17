@@ -248,21 +248,21 @@ registerBlockType("dbe/number-box", {
 
 		return (
 			<div className={props.className}>
-				<div className={`dbe_number_box column_${column}`}>
+				<div className={`number_box column_${column}`}>
 					<div
-						className="dbe_number_1"
+						className="number_1"
 						style={{
 							borderColor: borderColor,
 						}}
 					>
 						<div
-							className="dbe_number_box_number"
+							className="number_box_number"
 							style={{
 								backgroundColor: numberBackground,
 							}}
 						>
 							<p
-								className="dbe_number_one_number"
+								className="number_one_number"
 								style={{
 									color: numberColor,
 								}}
@@ -270,33 +270,27 @@ registerBlockType("dbe/number-box", {
 								{columnOneNumber}
 							</p>
 						</div>
-						<p
-							className="dbe_number_one_title"
-							style={{ textAlign: title1Align }}
-						>
+						<p className="number_one_title" style={{ textAlign: title1Align }}>
 							{columnOneTitle}
 						</p>
-						<p
-							className="dbe_number_one_body"
-							style={{ textAlign: body1Align }}
-						>
+						<p className="number_one_body" style={{ textAlign: body1Align }}>
 							{columnOneBody}
 						</p>
 					</div>
 					<div
-						className="dbe_number_2"
+						className="number_2"
 						style={{
 							borderColor: borderColor,
 						}}
 					>
 						<div
-							className="dbe_number_box_number"
+							className="number_box_number"
 							style={{
 								backgroundColor: numberBackground,
 							}}
 						>
 							<p
-								className="dbe_number_two_number"
+								className="number_two_number"
 								style={{
 									color: numberColor,
 								}}
@@ -304,33 +298,27 @@ registerBlockType("dbe/number-box", {
 								{columnTwoNumber}
 							</p>
 						</div>
-						<p
-							className="dbe_number_two_title"
-							style={{ textAlign: title2Align }}
-						>
+						<p className="number_two_title" style={{ textAlign: title2Align }}>
 							{columnTwoTitle}
 						</p>
-						<p
-							className="dbe_number_two_body"
-							style={{ textAlign: body2Align }}
-						>
+						<p className="number_two_body" style={{ textAlign: body2Align }}>
 							{columnTwoBody}
 						</p>
 					</div>
 					<div
-						className="dbe_number_3"
+						className="number_3"
 						style={{
 							borderColor: borderColor,
 						}}
 					>
 						<div
-							className="dbe_number_box_number"
+							className="number_box_number"
 							style={{
 								backgroundColor: numberBackground,
 							}}
 						>
 							<p
-								className="dbe_number_three_number"
+								className="number_three_number"
 								style={{
 									color: numberColor,
 								}}
@@ -339,15 +327,12 @@ registerBlockType("dbe/number-box", {
 							</p>
 						</div>
 						<p
-							className="dbe_number_three_title"
+							className="number_three_title"
 							style={{ textAlign: title3Align }}
 						>
 							{columnThreeTitle}
 						</p>
-						<p
-							className="dbe_number_three_body"
-							style={{ textAlign: body3Align }}
-						>
+						<p className="number_three_body" style={{ textAlign: body3Align }}>
 							{columnThreeBody}
 						</p>
 					</div>

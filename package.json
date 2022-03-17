@@ -3,44 +3,67 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "concurrently -k \"wp-scripts start\" \"node recompileOnChange.js\"",
+		"unlock-limit": "echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
+		"start": "concurrently -k \"wp-scripts start\" \"node recompileOnChange.js\" \"npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css --watch\" \"npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css --watch\"",
+		"prebuild": "npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css && npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css",
 		"build": "wp-scripts build & node recompile.js",
-		"format": "prettier -w ."
+		"format": "prettier -w .",
+		"check": "prettier -C",
+		"clean": "rimraf node_modules",
+		"prepare": "husky install",
+		"commit": "git-cz"
 	},
 	"dependencies": {
-		"@babel/core": "^7.16.12",
+		"@babel/core": "^7.17.7",
 		"@babel/plugin-proposal-class-properties": "^7.16.7",
 		"@babel/preset-env": "^7.16.11",
 		"@babel/preset-react": "^7.16.7",
-		"@fortawesome/fontawesome-svg-core": "^1.2.36",
-		"@fortawesome/free-brands-svg-icons": "^5.15.4",
-		"@fortawesome/free-solid-svg-icons": "^5.15.4",
-		"@fortawesome/react-fontawesome": "^0.1.16",
+		"@fortawesome/fontawesome-svg-core": "^6.1.0",
+		"@fortawesome/free-brands-svg-icons": "^6.1.0",
+		"@fortawesome/free-solid-svg-icons": "^6.1.0",
+		"@fortawesome/react-fontawesome": "^0.1.18",
 		"moment": "^2.29.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-sortable-hoc": "^2.0.0",
 		"react-structured-data": "0.0.14",
-		"swiper": "^7.4.1"
+		"swiper": "^8.0.7"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^19.2.3",
-		"autoprefixer": "^10.4.2",
+		"@commitlint/cli": "^16.2.3",
+		"@commitlint/config-conventional": "^16.2.1",
+		"@commitlint/cz-commitlint": "^16.2.3",
+		"@prettier/plugin-php": "^0.18.3",
+		"@tailwindcss/forms": "^0.5.0",
+		"@tailwindcss/line-clamp": "^0.3.1",
+		"@wordpress/scripts": "^22.2.1",
+		"autoprefixer": "^10.4.4",
+		"commitizen": "^4.2.4",
 		"concurrently": "^7.0.0",
-		"css-loader": "^6.5.1",
+		"css-loader": "^6.7.1",
 		"gulp": "^4.0.2",
 		"gulp-notify": "^4.0.0",
 		"gulp-sort": "^2.0.0",
 		"gulp-wp-pot": "^2.5.0",
+		"husky": "^7.0.4",
 		"ignore-emit-webpack-plugin": "^2.0.6",
-		"mini-css-extract-plugin": "^2.5.2",
+		"mini-css-extract-plugin": "^2.6.0",
 		"path": "^0.12.7",
-		"postcss": "^8.4.6",
+		"postcss": "^8.4.12",
 		"postcss-loader": "^6.2.1",
-		"postcss-preset-env": "^7.2.3",
-		"prettier": "^2.5.1",
-		"sass": "^1.49.0",
-		"sass-loader": "^12.4.0",
-		"tailwindcss": "^3.0.18"
+		"postcss-preset-env": "^7.4.2",
+		"prettier": "^2.6.0",
+		"rimraf": "^3.0.2",
+		"tailwindcss": "^3.0.23"
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,ts,tsx,html,css,json,php}": [
+			"yarn prettier --write"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "@commitlint/cz-commitlint"
+		}
 	}
 }

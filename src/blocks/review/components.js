@@ -33,7 +33,7 @@ export class OldStars extends Component {
 				{[...Array(limit).keys()].map((i) => (
 					<svg key={i} height="20" width="20" viewBox="0 0 150 150">
 						<defs>
-							<mask id={`dbe_review_star_filter-${id}-${i}`}>
+							<mask id={`review_star_filter-${id}-${i}`}>
 								<rect
 									height="150"
 									width={
@@ -55,7 +55,7 @@ export class OldStars extends Component {
 						<path
 							className="star"
 							id={`star${i}`}
-							mask={`url(#dbe_review_star_filter-${id}-${i})`}
+							mask={`url(#review_star_filter-${id}-${i})`}
 							fill={activeStarColor}
 							strokeWidth="1.5"
 							d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
@@ -144,7 +144,7 @@ export class Stars extends Component {
 						onClick={() => onClick || this.mouseClick(i)}
 					>
 						<defs>
-							<mask id={`dbe_review_star_filter-${id}-${i}`}>
+							<mask id={`review_star_filter-${id}-${i}`}>
 								<rect
 									height="150"
 									width={
@@ -170,7 +170,7 @@ export class Stars extends Component {
 						<path
 							className="star"
 							id={`star${i}`}
-							mask={`url(#dbe_review_star_filter-${id}-${i})`}
+							mask={`url(#review_star_filter-${id}-${i})`}
 							fill={this.state.displayColor}
 							strokeWidth="2.5"
 							d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
@@ -288,9 +288,9 @@ export class ReviewBody extends Component {
 		};
 
 		return (
-			<div className="dbe_review_block">
+			<div className="review_block">
 				<RichText
-					className="dbe_review_item_name"
+					className="review_item_name"
 					placeholder={__("Title of the review")}
 					value={itemName}
 					style={{ textAlign: titleAlign }}
@@ -306,13 +306,13 @@ export class ReviewBody extends Component {
 				/>
 				{(imageEnabled || descriptionEnabled) && (
 					<div
-						className={`dbe_review_description_container dbe_review_${imgPosition}_image`}
+						className={`review_description_container review_${imgPosition}_image`}
 					>
 						{imageEnabled &&
 							(imgID ? (
-								<div className="dbe_review_image_container">
+								<div className="review_image_container">
 									<img
-										className="dbe_review_image"
+										className="review_image"
 										src={imgURL}
 										alt={imgAlt}
 										style={{
@@ -322,7 +322,7 @@ export class ReviewBody extends Component {
 									/>
 									{isSelected && (
 										<Button
-											className="dbe-remove-image"
+											className="remove-image"
 											onClick={() =>
 												setImage({
 													id: 0,
@@ -336,7 +336,7 @@ export class ReviewBody extends Component {
 									)}
 								</div>
 							) : (
-								<div className="dbe_review_upload_button">
+								<div className="review_upload_button">
 									<MediaUpload
 										onSelect={(img) => setImage(img)}
 										type="image"
@@ -354,7 +354,7 @@ export class ReviewBody extends Component {
 							))}
 						{descriptionEnabled && (
 							<RichText
-								className="dbe_review_description"
+								className="review_description"
 								placeholder={__("Item description")}
 								value={description}
 								onChange={(text) => setDescription(text)}
@@ -366,7 +366,7 @@ export class ReviewBody extends Component {
 				)}
 				{items.map((j, i) => (
 					<div
-						className={`dbe_review_${
+						className={`review_${
 							valueType === "percent" ? "percentage_" : ""
 						}entry`}
 					>
@@ -425,7 +425,7 @@ export class ReviewBody extends Component {
 						/>
 						<div
 							key={i}
-							className={"dbe_review_value"}
+							className={"review_value"}
 							style={{
 								marginLeft: "auto",
 								minWidth: items.length > 1 ? 120 : 100,
@@ -479,9 +479,9 @@ export class ReviewBody extends Component {
 									starOutlineColor={starOutlineColor}
 								/>
 							) : (
-								<div className="dbe_review_percentage">
+								<div className="review_percentage">
 									<svg
-										className="dbe_review_percentage_bar"
+										className="review_percentage_bar"
 										viewBox="0 0 100 1"
 										preserveAspectRatio="none"
 										height="10"
@@ -508,13 +508,13 @@ export class ReviewBody extends Component {
 										}}
 									>
 										<path
-											className="dbe_review_percentage_bar_trail"
+											className="review_percentage_bar_trail"
 											d="M 0.5,0.5 L 99.5,0.5"
 											stroke={percentBarColor || "#d9d9d9"}
 											stroke-width="1"
 										/>
 										<path
-											className="dbe_review_percentage_bar_path"
+											className="review_percentage_bar_path"
 											d="M 0.5,0.5 L 99.5,0.5"
 											stroke={activePercentBarColor}
 											stroke-width="1"
@@ -533,19 +533,19 @@ export class ReviewBody extends Component {
 						setItems([...items, { label: "", value: 0 }]);
 						this.setState({ average: average / (items.length + 1) });
 					}}
-					className="dbe_review_add_entry dashicons dashicons-plus-alt"
+					className="review_add_entry dashicons dashicons-plus-alt"
 				/>
-				<div className="dbe_review_summary">
+				<div className="review_summary">
 					{enableSummary && (
 						<RichText
-							className="dbe_review_summary_title"
+							className="review_summary_title"
 							placeholder={__("Title of the summary goes here")}
 							onChange={(text) => setSummaryTitle(text)}
 							value={summaryTitle}
 							unstableOnFocus={() => setEditable("")}
 						/>
 					)}
-					<div className="dbe_review_overall_value">
+					<div className="review_overall_value">
 						{enableSummary && (
 							<RichText
 								placeholder={__("Summary of the review goes here")}
@@ -554,15 +554,15 @@ export class ReviewBody extends Component {
 								unstableOnFocus={() => setEditable("")}
 							/>
 						)}
-						<div className="dbe_review_average">
-							<span className="dbe_review_rating">
+						<div className="review_average">
+							<span className="review_rating">
 								{Math.round(average * 10) / 10}
 								{valueType === "percent" ? "%" : ""}
 							</span>
 							{valueType === "star" && (
 								<Stars
 									id={`${ID}-average`}
-									className="dbe_review_average_stars"
+									className="review_average_stars"
 									onHover={() => null}
 									onClick={() => null}
 									value={average}
@@ -575,14 +575,14 @@ export class ReviewBody extends Component {
 							)}
 						</div>
 					</div>
-					<div className="dbe_review_cta_panel">
+					<div className="review_cta_panel">
 						<div
-							className="dbe_review_cta_main"
+							className="review_cta_main"
 							style={{ justifyContent: callToActionAlignment }}
 						>
 							{enableCTA && (
 								<div //do not merge into RichText child
-									className="dbe_review_cta_btn"
+									className="review_cta_btn"
 									style={{
 										backgroundColor: callToActionBackColor,
 										borderColor: callToActionBorderColor,
@@ -602,8 +602,8 @@ export class ReviewBody extends Component {
 						</div>
 					</div>
 					{hasFocus && enableCTA && (
-						<div className="dbe_review_link_input">
-							<div className="dbe-icon-holder">
+						<div className="review_link_input">
+							<div className="icon-holder">
 								<Dashicon icon={"admin-links"} />
 							</div>
 							<URLInput

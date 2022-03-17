@@ -789,7 +789,7 @@ registerBlockType("dbe/review", {
 		const cuisineInput = (
 			<>
 				<p>{__("Serves cuisine")}</p>
-				<ul className="dbe_review_cuisine_list">
+				<ul className="review_cuisine_list">
 					{cuisines.length > 0 ? (
 						cuisines.map((c, i) => (
 							<li>
@@ -860,7 +860,7 @@ registerBlockType("dbe/review", {
 		);
 
 		const itemURLInput = (
-			<div id="dbe_review_item_page_input">
+			<div id="review_item_page_input">
 				<URLInput
 					label={__(`${itemType} Page`)}
 					autoFocus={false}
@@ -958,11 +958,11 @@ registerBlockType("dbe/review", {
 								}
 							}}
 						/>
-						<label htmlFor="dbe-review-event-date-toggle">
+						<label htmlFor="review-event-date-toggle">
 							{__("Use event end date")}
 						</label>
 						<FormToggle
-							id="dbe-review-event-date-toggle"
+							id="review-event-date-toggle"
 							label={__("Set event end date")}
 							checked={setEventEndDate}
 							onChange={() => {
@@ -1008,7 +1008,7 @@ registerBlockType("dbe/review", {
 									{addressInput}
 								</>
 							) : (
-								<div id="dbe_review_event_page_input">
+								<div id="review_event_page_input">
 									<URLInput
 										label={__("Event Page")}
 										autoFocus={false}
@@ -1188,7 +1188,7 @@ registerBlockType("dbe/review", {
 									})
 								}
 							/>
-							<div id="dbe_review_video_url_input">
+							<div id="review_video_url_input">
 								<URLInput
 									label={__("Video URL")}
 									autoFocus={false}
@@ -1366,9 +1366,9 @@ registerBlockType("dbe/review", {
 					/>
 					<PanelBody title={__("Call to Action button")} initialOpen={true}>
 						<PanelRow>
-							<label htmlFor="dbe-review-cta-enable">{__("Enable")}</label>
+							<label htmlFor="review-cta-enable">{__("Enable")}</label>
 							<FormToggle
-								id="dbe-review-cta-enable"
+								id="review-cta-enable"
 								label={__("Enable")}
 								checked={enableCTA}
 								onChange={() => setAttributes({ enableCTA: !enableCTA })}
@@ -1377,11 +1377,11 @@ registerBlockType("dbe/review", {
 						{enableCTA && (
 							<>
 								<PanelRow>
-									<label htmlFor="dbe-review-cta-nofollow">
+									<label htmlFor="review-cta-nofollow">
 										{__("Add nofollow")}
 									</label>
 									<FormToggle
-										id="dbe-review-cta-nofollow"
+										id="review-cta-nofollow"
 										label={__("Add nofollow")}
 										checked={ctaNoFollow}
 										onChange={() =>
@@ -1390,11 +1390,11 @@ registerBlockType("dbe/review", {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="dbe-review-cta-openinnewtab">
+									<label htmlFor="review-cta-openinnewtab">
 										{__("Open link in new tab")}
 									</label>
 									<FormToggle
-										id="dbe-review-cta-openinnewtab"
+										id="review-cta-openinnewtab"
 										label={__("Open link in new tab")}
 										checked={ctaOpenInNewTab}
 										onChange={() =>
@@ -1403,11 +1403,11 @@ registerBlockType("dbe/review", {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="dbe-review-cta-issponsored">
+									<label htmlFor="review-cta-issponsored">
 										{__("Mark link as sponsored")}
 									</label>
 									<FormToggle
-										id="dbe-review-cta-issponsored"
+										id="review-cta-issponsored"
 										label={__("Mark link as sponsored")}
 										checked={ctaIsSponsored}
 										onChange={() =>
@@ -1428,11 +1428,11 @@ registerBlockType("dbe/review", {
 									</ButtonGroup>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="dbe-review-cta-changefontsize">
+									<label htmlFor="review-cta-changefontsize">
 										{__("Change font size")}
 									</label>
 									<FormToggle
-										id="dbe-review-cta-changefontsize"
+										id="review-cta-changefontsize"
 										label={__("Change font size")}
 										checked={setCTAFontSize}
 										onChange={() => {
@@ -1459,11 +1459,11 @@ registerBlockType("dbe/review", {
 					</PanelBody>
 					<PanelBody title={__("Review schema")} initialOpen={true}>
 						<PanelRow>
-							<label htmlFor="dbe-review-schema-toggle">
+							<label htmlFor="review-schema-toggle">
 								{__("Enable review schema")}
 							</label>
 							<FormToggle
-								id="dbe-review-schema-toggle"
+								id="review-schema-toggle"
 								label={__("Enable review schema")}
 								checked={enableReviewSchema}
 								onChange={() => {
@@ -1481,11 +1481,11 @@ registerBlockType("dbe/review", {
 							/>
 						</PanelRow>
 						<PanelRow>
-							<label htmlFor="dbe-review-summary-toggle">
+							<label htmlFor="review-summary-toggle">
 								{__("Use review summary")}
 							</label>
 							<FormToggle
-								id="dbe-review-summary-toggle"
+								id="review-summary-toggle"
 								label={__("Use review summary")}
 								checked={useSummary}
 								onChange={() => setAttributes({ useSummary: !useSummary })}
@@ -1573,11 +1573,11 @@ registerBlockType("dbe/review", {
 							) && (
 								//images are required for these item types and optional for the rest
 								<PanelRow>
-									<label htmlFor="dbe-review-image-toggle">
+									<label htmlFor="review-image-toggle">
 										{__("Enable review image")}
 									</label>
 									<FormToggle
-										id="dbe-review-image-toggle"
+										id="review-image-toggle"
 										label={__("Enable review image")}
 										checked={enableImage}
 										onChange={() =>
@@ -1617,11 +1617,11 @@ registerBlockType("dbe/review", {
 							)}
 							{(!enableReviewSchema || itemType !== "Course") && (
 								<PanelRow>
-									<label htmlFor="dbe-review-description-toggle">
+									<label htmlFor="review-description-toggle">
 										{__("Enable review description")}
 									</label>
 									<FormToggle
-										id="dbe-review-description-toggle"
+										id="review-description-toggle"
 										label={__("Enable review description")}
 										checked={enableDescription}
 										onChange={() => {

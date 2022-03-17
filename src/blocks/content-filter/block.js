@@ -96,12 +96,12 @@ registerBlockType("dbe/content-filter", {
 				{filterArray.length > 0 &&
 					filterArray.map((f, i) => (
 						<div
-							className="dbe-content-filter-category"
+							className="content-filter-category"
 							data-canUseMultiple={f.canUseMultiple}
 						>
 							<RichText.Content
 								tagName="div"
-								className="dbe-content-filter-category-name"
+								className="content-filter-category-name"
 								value={f.category}
 							/>
 							{f.filters.map((filter, j) => (
@@ -113,7 +113,7 @@ registerBlockType("dbe/content-filter", {
 									data-normalTextColor={buttonTextColor}
 									data-activeColor={activeButtonColor}
 									data-activeTextColor={activeButtonTextColor}
-									className="dbe-content-filter-tag"
+									className="content-filter-tag"
 									style={{
 										backgroundColor: buttonColor,
 										color: buttonTextColor,
@@ -125,7 +125,7 @@ registerBlockType("dbe/content-filter", {
 						</div>
 					))}
 				{/*allowReset && (
-					<button className="dbe-content-filter-reset">
+					<button className="content-filter-reset">
 						{resetButtonLabel}
 					</button>
                 )*/}

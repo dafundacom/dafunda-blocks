@@ -2,15 +2,15 @@
 
 function dbe_generatePercentageBar($value, $id, $activeColor, $inactiveColor ){
     $percentBar = "M 0.5,0.5 L 99.5,0.5";
-    return '<div class="dbe_review_percentage">
-            <svg class="dbe_review_percentage_bar" viewBox="0 0 100 1" preserveAspectRatio="none" height="10">
+    return '<div class="review_percentage">
+            <svg class="review_percentage_bar" viewBox="0 0 100 1" preserveAspectRatio="none" height="10">
                 <path
-                    class="dbe_review_percentage_bar_trail"
+                    class="review_percentage_bar_trail"
                     d="' . $percentBar . '" stroke="' . $inactiveColor . '"
                     stroke-width="1"
                 ></path>
                 <path
-                    class="dbe_review_percentage_bar_path"
+                    class="review_percentage_bar_path"
                     d="' . $percentBar . '" stroke="' . $activeColor . '"
                     stroke-width="1" stroke-dashoffset="' . (100 - $value) . 'px"
                 ></path>
@@ -42,9 +42,9 @@ function dbe_render_review_block($attributes){
     $ratings = '';
 
     foreach($parsedItems as $key => $item){
-        $ratings .= '<div class="dbe_review_' . ($valueType === 'percent' ? 'percentage_' : '') . 'entry"><span>' . $item['label'] . '</span>' .
+        $ratings .= '<div class="review_' . ($valueType === 'percent' ? 'percentage_' : '') . 'entry"><span>' . $item['label'] . '</span>' .
         ($valueType === 'star' ? dbe_generateStarDisplay($item['value'], $starCount, $blockID . '-' . $key,
-                                $inactiveStarColor, $activeStarColor, $starOutlineColor, "dbe_review_stars", "dbe_review_star_filter-")
+                                $inactiveStarColor, $activeStarColor, $starOutlineColor, "review_stars", "review_star_filter-")
                                 : dbe_generatePercentageBar($item['value'], $blockID . '-' . $key, $activePercentBarColor, $percentBarColor ?: '#d9d9d9')  ) . '</div>';
     }
 
@@ -123,32 +123,32 @@ function dbe_render_review_block($attributes){
         break;
     }
 
-    return '<div class="dbe_review_block' . (isset($className) ? ' ' . esc_attr($className) : '') .
-                '" id="dbe_review_' . $blockID . '">
-        <p class="dbe_review_item_name"' . ($blockID === '' ? ' style="text-align: ' . $titleAlign . ';"' : '') . '>' .
-            $itemName . '</p><p class="dbe_review_author_name"' .
+    return '<div class="review_block' . (isset($className) ? ' ' . esc_attr($className) : '') .
+                '" id="review_' . $blockID . '">
+        <p class="review_item_name"' . ($blockID === '' ? ' style="text-align: ' . $titleAlign . ';"' : '') . '>' .
+            $itemName . '</p><p class="review_author_name"' .
             ($blockID === '' ? ' style="text-align: ' . $authorAlign . ';"' : '') . '>' . $authorName . '</p>' .
         (($enableImage || $enableDescription) && ($imgURL !== '' || $description !== '') ?
-        '<div class="dbe_review_description_container dbe_review_' . $imgPosition . '_image">' .
-            (!$enableImage || $imgURL === '' ? '' : '<img class="dbe_review_image" src="' . $imgURL . '" alt = "' . $imgAlt . '">') .
-            (!$enableDescription || $description === '' ? '' : '<div class="dbe_review_description">' . $description . '</div>') .
+        '<div class="review_description_container review_' . $imgPosition . '_image">' .
+            (!$enableImage || $imgURL === '' ? '' : '<img class="review_image" src="' . $imgURL . '" alt = "' . $imgAlt . '">') .
+            (!$enableDescription || $description === '' ? '' : '<div class="review_description">' . $description . '</div>') .
         '</div>' : '').
             $ratings
-    .'<div class="dbe_review_summary">' .
-        ($useSummary ? '<p class="dbe_review_summary_title">' . $summaryTitle . '</p>' : '') .
-        '<div class="dbe_review_overall_value">' .
+    .'<div class="review_summary">' .
+        ($useSummary ? '<p class="review_summary_title">' . $summaryTitle . '</p>' : '') .
+        '<div class="review_overall_value">' .
             ($useSummary ? '<p>' . $summaryDescription . '</p>' : '') .
-            '<div class="dbe_review_average"><span class="dbe_review_rating">' . $average . ($valueType === 'percent' ? '%':'') . '</span>' .
+            '<div class="review_average"><span class="review_rating">' . $average . ($valueType === 'percent' ? '%':'') . '</span>' .
             ($valueType === 'star' ? dbe_generateStarDisplay($average, $starCount, $blockID . '-average',
-            $inactiveStarColor, $activeStarColor, $starOutlineColor, "dbe_review_average_stars", "dbe_review_star_filter-") : '' ).
+            $inactiveStarColor, $activeStarColor, $starOutlineColor, "review_average_stars", "review_star_filter-") : '' ).
             '</div>
         </div>
-        <div class="dbe_review_cta_panel">' .
-        ($enableCTA && $callToActionURL !== '' ? '<div class="dbe_review_cta_main">
+        <div class="review_cta_panel">' .
+        ($enableCTA && $callToActionURL !== '' ? '<div class="review_cta_main">
             <a href="' . esc_url($callToActionURL) .
                 '" ' . ($ctaOpenInNewTab ? 'target="_blank" ' : '') . 'rel="' . ($ctaNoFollow ? 'nofollow ' : '') . ($ctaIsSponsored ? 'sponsored ': '') . 'noopener noreferrer"' .
                     ($blockID === '' ? '  style="color: ' . $callToActionForeColor . ';"' : '') . '>
-                <button class="dbe_review_cta_btn"' . ($blockID === '' ? ' style="background-color: ' . $callToActionBackColor
+                <button class="review_cta_btn"' . ($blockID === '' ? ' style="background-color: ' . $callToActionBackColor
                 . '; border-color: ' . $callToActionForeColor . '; color: ' . $callToActionForeColor . ';"' : '') . '>' .
                     ($callToActionText === '' ? 'Click here' : $callToActionText) . '</button></a></div>' : '') .
                 '</div></div>' . ($enableReviewSchema ? preg_replace( '/\s+/', ' ', ('<script type="application/ld+json">{

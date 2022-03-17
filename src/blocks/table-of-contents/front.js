@@ -75,25 +75,21 @@ function dbe_hashHeaderScroll(scrollType = "auto", target = "", offset = 0) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	let instances = [];
-	if (document.getElementById("dbe_table-of-contents-toggle-link")) {
-		instances.push(
-			document.getElementById("dbe_table-of-contents-toggle-link")
-		);
+	if (document.getElementById("table-of-contents-toggle-link")) {
+		instances.push(document.getElementById("table-of-contents-toggle-link"));
 	} else {
 		instances = Array.prototype.slice.call(
-			document.getElementsByClassName("dbe_table-of-contents-toggle-link")
+			document.getElementsByClassName("table-of-contents-toggle-link")
 		);
 	}
 	instances.forEach((instance) => {
-		const block = instance.closest(".dbe_table-of-contents");
+		const block = instance.closest(".table-of-contents");
 
-		const tocContainer = block.querySelector(
-			".dbe_table-of-contents-container"
-		);
+		const tocContainer = block.querySelector(".table-of-contents-container");
 		const containerStyle = tocContainer.style;
 
 		const tocExtraContainer = block.querySelector(
-			".dbe_table-of-contents-extra-container"
+			".table-of-contents-extra-container"
 		);
 		const extraContainerStyle = tocExtraContainer.style;
 
@@ -109,16 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function mobileEvent(mql) {
 			if (mql.matches) {
-				if (!tocMain.classList.contains("dbe_table-of-contents-collapsed")) {
-					tocMain.classList.add("dbe_table-of-contents-collapsed");
+				if (!tocMain.classList.contains("table-of-contents-collapsed")) {
+					tocMain.classList.add("table-of-contents-collapsed");
 					instance.innerHTML = showButton;
-					tocContainer.classList.add("dbe-hide");
+					tocContainer.classList.add("hide");
 				}
 			} else {
 				if (JSON.parse(tocMain.dataset.initiallyshow)) {
-					tocMain.classList.remove("dbe_table-of-contents-collapsed");
+					tocMain.classList.remove("table-of-contents-collapsed");
 					instance.innerHTML = hideButton;
-					tocContainer.classList.remove("dbe-hide");
+					tocContainer.classList.remove("hide");
 				}
 			}
 		}
@@ -133,18 +129,18 @@ document.addEventListener("DOMContentLoaded", function () {
 			event.preventDefault();
 			const curWidth = block.offsetWidth;
 
-			if (block.classList.contains("dbe_table-of-contents-collapsed")) {
+			if (block.classList.contains("table-of-contents-collapsed")) {
 				//begin showing
-				tocExtraContainer.classList.remove("dbe-hide");
-				tocContainer.classList.remove("dbe-hide");
+				tocExtraContainer.classList.remove("hide");
+				tocContainer.classList.remove("hide");
 				const targetHeight = tocExtraContainer.offsetHeight + padding / 2; //doesn't include padding
-				tocContainer.classList.add("dbe-hiding");
-				tocExtraContainer.classList.add("dbe-hiding");
+				tocContainer.classList.add("hiding");
+				tocExtraContainer.classList.add("hiding");
 				mainStyle.width = `${curWidth}px`; //also take into account number of columns
 
 				setTimeout(() => {
 					mainStyle.width = "auto";
-					block.classList.remove("dbe_table-of-contents-collapsed");
+					block.classList.remove("table-of-contents-collapsed");
 					const fullWidth = getComputedStyle(block).width.slice(0, -2);
 					mainStyle.width = `${curWidth}px`;
 
@@ -157,8 +153,8 @@ document.addEventListener("DOMContentLoaded", function () {
 							height: `${targetHeight}px`,
 							width: "100px",
 						});
-						tocContainer.classList.remove("dbe-hiding");
-						tocExtraContainer.classList.remove("dbe-hiding");
+						tocContainer.classList.remove("hiding");
+						tocExtraContainer.classList.remove("hiding");
 
 						mainStyle.width = `${fullWidth}px`;
 
@@ -181,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 
 				setTimeout(() => {
-					tocContainer.classList.add("dbe-hiding");
+					tocContainer.classList.add("hiding");
 					Object.assign(containerStyle, {
 						height: "0",
 						width: "0",
@@ -190,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						height: "0",
 						width: "0",
 					});
-					block.classList.add("dbe_table-of-contents-collapsed");
+					block.classList.add("table-of-contents-collapsed");
 
 					padding =
 						parseInt(
@@ -205,13 +201,12 @@ document.addEventListener("DOMContentLoaded", function () {
 					mainStyle.width = `${
 						5 +
 						padding +
-						instance.closest(".dbe_table-of-contents-header-container")
-							.scrollWidth
+						instance.closest(".table-of-contents-header-container").scrollWidth
 					}px`;
 				}, 50);
 			}
 
-			instance.innerHTML = tocContainer.classList.contains("dbe-hiding")
+			instance.innerHTML = tocContainer.classList.contains("hiding")
 				? hideButton
 				: showButton;
 
@@ -221,10 +216,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		tocContainer.addEventListener("transitionend", function () {
 			if (tocContainer.offsetHeight === 0) {
 				//hiding is done
-				tocContainer.classList.remove("dbe-hiding");
-				tocContainer.classList.add("dbe-hide");
-				tocExtraContainer.classList.remove("dbe-hiding");
-				tocExtraContainer.classList.add("dbe-hide");
+				tocContainer.classList.remove("hiding");
+				tocContainer.classList.add("hide");
+				tocExtraContainer.classList.remove("hiding");
+				tocExtraContainer.classList.add("hide");
 				if (containerStyle.display === "block") {
 					containerStyle.display = "";
 				}
@@ -245,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	});
 	if (window.location.hash) {
-		const sourceToC = document.querySelector(".dbe_table-of-contents");
+		const sourceToC = document.querySelector(".table-of-contents");
 		const type = sourceToC.dataset.scrolltype;
 		const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
 		const target =
@@ -255,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 window.onhashchange = function () {
-	const sourceToC = document.querySelector(".dbe_table-of-contents");
+	const sourceToC = document.querySelector(".table-of-contents");
 	const type = sourceToC.dataset.scrolltype;
 	const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
 	const target = type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
@@ -263,7 +258,7 @@ window.onhashchange = function () {
 };
 
 Array.prototype.slice
-	.call(document.querySelectorAll(".dbe_table-of-contents-container li > a"))
+	.call(document.querySelectorAll(".table-of-contents-container li > a"))
 	.forEach((link) => {
 		link.addEventListener("click", (e) => {
 			const hashlessLink = link.href.replace(link.hash, "");
@@ -274,7 +269,7 @@ Array.prototype.slice
 				(currentPageNumber === null ||
 					(targetPageNumber && currentPageNumber[0] === targetPageNumber[0]))
 			) {
-				const tocData = link.closest(".dbe_table-of-contents").dataset;
+				const tocData = link.closest(".table-of-contents").dataset;
 				const type = tocData.scrolltype;
 				const offset = type === "fixedamount" ? tocData.scrollamount : 0;
 				const target = type === "namedelement" ? tocData.scrolltarget : "";

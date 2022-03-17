@@ -71,10 +71,10 @@ class Dropdown extends Component {
 		return (
 			<div
 				ref={this.setWrapperRef}
-				className="dbe-content-filter-dropdown-container"
+				className="content-filter-dropdown-container"
 			>
 				<button
-					className="dbe-content-assigned-filter-tag"
+					className="content-assigned-filter-tag"
 					onClick={() => {
 						if (dropdownContent.length > 0) {
 							this.setState({
@@ -86,7 +86,7 @@ class Dropdown extends Component {
 					+
 				</button>
 				{showDropdown && (
-					<ul className="dbe-content-filter-dropdown-content">
+					<ul className="content-filter-dropdown-content">
 						{dropdownContent.map((item) => (
 							<li
 								onClick={() => {
@@ -194,14 +194,14 @@ registerBlockType("dbe/content-filter-entry", {
 		});
 
 		return (
-			<div className="dbe-content-filter-panel">
+			<div className="content-filter-panel">
 				<InnerBlocks templateLock={false} />
-				<div className="dbe-content-assigned-filter-tag-area">
+				<div className="content-assigned-filter-tag-area">
 					{tagList
 						.filter((tag) => tag != null && tag.hasOwnProperty("name"))
 						.map((tag) => (
-							<div className="dbe-content-assigned-filter-tag">
-								<div className="dbe-content-filter-tag-deselect">
+							<div className="content-assigned-filter-tag">
+								<div className="content-filter-tag-deselect">
 									<span
 										title={__("Deselect This Filter")}
 										onClick={() => {
@@ -262,7 +262,7 @@ registerBlockType("dbe/content-filter-entry", {
 
 		return (
 			<div
-				className="dbe-content-filter-panel"
+				className="content-filter-panel"
 				data-selectedFilters={JSON.stringify(selectedFilters)}
 				style={{ display: "block" }} //to be turned into none when frontend script doesn't see any of the main block's selected filters on the child block's tags
 			>
@@ -357,14 +357,14 @@ registerBlockType("dbe/content-filter-entry-block", {
 		});
 
 		return (
-			<div className="dbe-content-filter-panel">
+			<div className="content-filter-panel">
 				<InnerBlocks templateLock={false} />
-				<div className="dbe-content-assigned-filter-tag-area">
+				<div className="content-assigned-filter-tag-area">
 					{tagList
 						.filter((tag) => tag != null && tag.hasOwnProperty("name"))
 						.map((tag) => (
-							<div className="dbe-content-assigned-filter-tag">
-								<div className="dbe-content-filter-tag-deselect">
+							<div className="content-assigned-filter-tag">
+								<div className="content-filter-tag-deselect">
 									<span
 										title={__("Deselect This Filter")}
 										onClick={() => {

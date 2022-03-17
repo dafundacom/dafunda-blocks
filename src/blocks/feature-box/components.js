@@ -143,10 +143,10 @@ export const editorDisplay = (props) => {
 	} = props.attributes;
 
 	return (
-		<div className={`dbe_feature_box column_${column}`}>
-			<div className="dbe_feature_1">
+		<div className={`feature_box column_${column}`}>
+			<div className="feature_1">
 				{!imgOneID ? (
-					<div className="dbe_feature_upload_button">
+					<div className="feature_upload_button">
 						<MediaUpload
 							onSelect={(img) =>
 								setAttributes({
@@ -183,16 +183,12 @@ export const editorDisplay = (props) => {
 								{remove_icon}
 							</Button>
 						)}
-						<img
-							className="dbe_feature_one_img"
-							src={imgOneURL}
-							alt={imgOneAlt}
-						/>
+						<img className="feature_one_img" src={imgOneURL} alt={imgOneAlt} />
 					</>
 				)}
 				<RichText
 					tagName="p"
-					className="dbe_feature_one_title"
+					className="feature_one_title"
 					style={{ textAlign: title1Align }}
 					value={columnOneTitle}
 					onChange={(value) => setAttributes({ columnOneTitle: value })}
@@ -201,7 +197,7 @@ export const editorDisplay = (props) => {
 				/>
 				<RichText
 					tagName="p"
-					className="dbe_feature_one_body"
+					className="feature_one_body"
 					style={{ textAlign: body1Align }}
 					value={columnOneBody}
 					onChange={(value) => setAttributes({ columnOneBody: value })}
@@ -209,9 +205,9 @@ export const editorDisplay = (props) => {
 					unstableOnFocus={() => setState({ editable: "body1" })}
 				/>
 			</div>
-			<div className="dbe_feature_2">
+			<div className="feature_2">
 				{!imgTwoID ? (
-					<div className="dbe_feature_upload_button">
+					<div className="feature_upload_button">
 						<MediaUpload
 							onSelect={(img) =>
 								setAttributes({
@@ -248,16 +244,12 @@ export const editorDisplay = (props) => {
 								{remove_icon}
 							</Button>
 						)}
-						<img
-							className="dbe_feature_two_img"
-							src={imgTwoURL}
-							alt={imgTwoAlt}
-						/>
+						<img className="feature_two_img" src={imgTwoURL} alt={imgTwoAlt} />
 					</>
 				)}
 				<RichText
 					tagName="p"
-					className="dbe_feature_two_title"
+					className="feature_two_title"
 					style={{ textAlign: title2Align }}
 					value={columnTwoTitle}
 					onChange={(value) => setAttributes({ columnTwoTitle: value })}
@@ -266,7 +258,7 @@ export const editorDisplay = (props) => {
 				/>
 				<RichText
 					tagName="p"
-					className="dbe_feature_two_body"
+					className="feature_two_body"
 					style={{ textAlign: body2Align }}
 					value={columnTwoBody}
 					onChange={(value) => setAttributes({ columnTwoBody: value })}
@@ -274,9 +266,9 @@ export const editorDisplay = (props) => {
 					unstableOnFocus={() => setState({ editable: "body2" })}
 				/>
 			</div>
-			<div className="dbe_feature_3">
+			<div className="feature_3">
 				{!imgThreeID ? (
-					<div className="dbe_feature_upload_button">
+					<div className="feature_upload_button">
 						<MediaUpload
 							onSelect={(img) =>
 								setAttributes({
@@ -314,7 +306,7 @@ export const editorDisplay = (props) => {
 							</Button>
 						)}
 						<img
-							className="dbe_feature_three_img"
+							className="feature_three_img"
 							src={imgThreeURL}
 							alt={imgThreeAlt}
 						/>
@@ -322,7 +314,7 @@ export const editorDisplay = (props) => {
 				)}
 				<RichText
 					tagName="p"
-					className="dbe_feature_three_title"
+					className="feature_three_title"
 					style={{ textAlign: title3Align }}
 					value={columnThreeTitle}
 					onChange={(value) => setAttributes({ columnThreeTitle: value })}
@@ -331,7 +323,7 @@ export const editorDisplay = (props) => {
 				/>
 				<RichText
 					tagName="p"
-					className="dbe_feature_three_body"
+					className="feature_three_body"
 					style={{ textAlign: body3Align }}
 					value={columnThreeBody}
 					onChange={(value) => setAttributes({ columnThreeBody: value })}

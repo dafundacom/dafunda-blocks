@@ -8,7 +8,7 @@ export const oldAttributes = {
 	title: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_table-of-contents-title",
+		selector: ".table-of-contents-title",
 	},
 	allowedHeaders: {
 		type: "array",
@@ -159,7 +159,7 @@ class TableOfContents_1_0_8 extends Component {
 		if (this.state.headers) {
 			return (
 				<div
-					className="dbe_table-of-contents-container"
+					className="table-of-contents-container"
 					style={{
 						display: this.props.isHidden ? "none" : "initial",
 					}}
@@ -169,7 +169,7 @@ class TableOfContents_1_0_8 extends Component {
 			);
 		} else {
 			return (
-				<p className="dbe_table-of-contents-placeholder">
+				<p className="table-of-contents-placeholder">
 					Add a header to begin generating the table of contents
 				</p>
 			);
@@ -180,14 +180,14 @@ class TableOfContents_1_0_8 extends Component {
 export const version_1_0_8 = (props) => {
 	const { showList, links, title } = props.attributes;
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div className="dbe_table-of-contents-title">{title}</div>
-					<div className="dbe_table-of-contents-header-toggle">
-						<div className="dbe_table-of-contents-toggle">
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title">{title}</div>
+					<div className="table-of-contents-header-toggle">
+						<div className="table-of-contents-toggle">
 							[
-							<a className="dbe_table-of-contents-toggle-link" href="#">
+							<a className="table-of-contents-toggle-link" href="#">
 								{showList ? __("hide") : __("show")}
 							</a>
 							]
@@ -204,7 +204,7 @@ export const version_1_0_8 = (props) => {
 };
 
 const ToCPlaceholder = (
-	<p className="dbe_table-of-contents-placeholder">
+	<p className="table-of-contents-placeholder">
 		{__("Add a header to begin generating the table of contents")}
 	</p>
 );
@@ -291,7 +291,7 @@ class TableOfContents_1_0_9 extends Component {
 
 		if (this.state.headers) {
 			return (
-				<div className="dbe_table-of-contents-container">
+				<div className="table-of-contents-container">
 					{parseList_1_0_9(this.state.headers)}
 				</div>
 			);
@@ -304,10 +304,10 @@ class TableOfContents_1_0_9 extends Component {
 export const version_1_0_9 = (props) => {
 	const { links, title } = props.attributes;
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div className="dbe_table-of-contents-title">{title}</div>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title">{title}</div>
 				</div>
 			)}
 			<TableOfContents_1_0_9 headers={links && JSON.parse(links)} />
@@ -400,7 +400,7 @@ class TableOfContents_1_1_3 extends Component {
 	render() {
 		if (this.state.headers) {
 			return (
-				<div className="dbe_table-of-contents-container">
+				<div className="table-of-contents-container">
 					{parseList_1_1_3(this.state.headers)}
 				</div>
 			);
@@ -413,10 +413,10 @@ class TableOfContents_1_1_3 extends Component {
 export const version_1_1_3 = (props) => {
 	const { links, title } = props.attributes;
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div className="dbe_table-of-contents-title">{title}</div>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title">{title}</div>
 				</div>
 			)}
 			<TableOfContents_1_1_3 headers={links && JSON.parse(links)} />
@@ -501,7 +501,7 @@ class TableOfContents_1_1_5 extends Component {
 			headers.filter((header) => allowedHeaders[header.level - 1]).length > 0
 		) {
 			return (
-				<div style={style} className="dbe_table-of-contents-container">
+				<div style={style} className="table-of-contents-container">
 					{parseList_1_1_3(makeHeaderArray_1_1_5(headers, allowedHeaders))}
 				</div>
 			);
@@ -515,15 +515,15 @@ export const version_1_1_5 = (props) => {
 	const { links, title, allowedHeaders, showList, numColumns, allowToCHiding } =
 		props.attributes;
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div className="dbe_table-of-contents-title">{title}</div>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title">{title}</div>
 					{allowToCHiding && (
-						<div id="dbe_table-of-contents-header-toggle">
-							<div id="dbe_table-of-contents-toggle">
+						<div id="table-of-contents-header-toggle">
+							<div id="table-of-contents-toggle">
 								[
-								<a id="dbe_table-of-contents-toggle-link" href="#">
+								<a id="table-of-contents-toggle-link" href="#">
 									{showList ? __("hide") : __("show")}
 								</a>
 								]
@@ -556,13 +556,10 @@ class ToggleButton_1_1_6 extends Component {
 	}
 	render() {
 		return (
-			<div id="dbe_table-of-contents-header-toggle">
-				<div id="dbe_table-of-contents-toggle">
+			<div id="table-of-contents-header-toggle">
+				<div id="table-of-contents-toggle">
 					[
-					<a
-						id="dbe_table-of-contents-toggle-link"
-						href="#dbe_table-of-contents-title"
-					>
+					<a id="table-of-contents-toggle-link" href="#table-of-contents-title">
 						{this.props.showList ? __("hide") : __("show")}
 					</a>
 					]
@@ -615,7 +612,7 @@ class TableOfContents_1_1_6 extends Component {
 			return (
 				<div
 					style={style}
-					className={`dbe_table-of-contents-container dbe_table-of-contents-${numColumns}-column`}
+					className={`table-of-contents-container table-of-contents-${numColumns}-column`}
 				>
 					{parseList_1_1_3(makeHeaderArray_1_1_5(headers, allowedHeaders))}
 				</div>
@@ -630,13 +627,10 @@ export const version_1_1_6 = (props) => {
 	const { links, title, allowedHeaders, showList, numColumns, allowToCHiding } =
 		props.attributes;
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div
-						className="dbe_table-of-contents-title"
-						id="dbe_table-of-contents-title"
-					>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title" id="table-of-contents-title">
 						{title}
 					</div>
 					{allowToCHiding && <ToggleButton_1_1_6 showList={showList} />}
@@ -751,7 +745,7 @@ class TableOfContents_1_1_8 extends Component {
 			return (
 				<div
 					style={style}
-					className={`dbe_table-of-contents-container dbe_table-of-contents-${numColumns}-column`}
+					className={`table-of-contents-container table-of-contents-${numColumns}-column`}
 				>
 					{listStyle === "numbered" ? (
 						<ol>
@@ -792,13 +786,10 @@ export const version_1_1_8 = (props) => {
 	} = props.attributes;
 
 	return (
-		<div className="dbe_table-of-contents">
+		<div className="table-of-contents">
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div
-						className="dbe_table-of-contents-title"
-						id="dbe_table-of-contents-title"
-					>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title" id="table-of-contents-title">
 						{title}
 					</div>
 					{allowToCHiding && <ToggleButton_1_1_6 showList={showList} />}
@@ -829,10 +820,10 @@ class ToggleButton_2_0_0 extends Component {
 	}
 	render() {
 		return (
-			<div id="dbe_table-of-contents-header-toggle">
-				<div id="dbe_table-of-contents-toggle">
+			<div id="table-of-contents-header-toggle">
+				<div id="table-of-contents-toggle">
 					[
-					<a className="dbe_table-of-contents-toggle-link" href="#">
+					<a className="table-of-contents-toggle-link" href="#">
 						{this.props.showList ? __("hide") : __("show")}
 					</a>
 					]
@@ -855,13 +846,13 @@ export const version_2_0_0 = (props) => {
 
 	return (
 		<div
-			className="dbe_table-of-contents"
+			className="table-of-contents"
 			data-showText={__("show")}
 			data-hideText={__("hide")}
 		>
 			{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-				<div className="dbe_table-of-contents-header">
-					<div className="dbe_table-of-contents-title">{title}</div>
+				<div className="table-of-contents-header">
+					<div className="table-of-contents-title">{title}</div>
 					{allowToCHiding && <ToggleButton_2_0_0 showList={showList} />}
 				</div>
 			)}

@@ -6,7 +6,7 @@ function dbe_render_star_rating_block($attributes){
     extract($attributes);
     
     $stars = dbe_generateStarDisplay($selectedStars, $starCount, $blockID,
-    'none', $starColor, $starColor, "", "dbe_star_rating_filter-", $starSize);
+    'none', $starColor, $starColor, "", "star_rating_filter-", $starSize);
 
     if($blockID === ''){
         $stars = preg_replace_callback('/<svg ([^>]+)>/', function($svgAttributes){
@@ -17,14 +17,14 @@ function dbe_render_star_rating_block($attributes){
         }, $stars);
     }
 
-    return '<div class="dbe-star-rating' . (isset($className) ? ' ' . esc_attr($className) : '') .
-            '"' . ($blockID === '' ? '' : ' id="dbe-star-rating-' . $blockID . '"') . '>
-                <div class="dbe-star-outer-container"' .
+    return '<div class="star-rating' . (isset($className) ? ' ' . esc_attr($className) : '') .
+            '"' . ($blockID === '' ? '' : ' id="star-rating-' . $blockID . '"') . '>
+                <div class="star-outer-container"' .
                     ($blockID === '' ? '  style="justify-content:' . ($starAlign === 'center' ? 'center' :
                     ('flex-' . $starAlign === 'left' ? 'start' : 'end')) . ';"' : '').'>
-                    <div class="dbe-star-inner-container">'.$stars.'</div>
+                    <div class="star-inner-container">'.$stars.'</div>
                 </div>'.
-                ($reviewText === '' ? '' : '<div class="dbe-review-text"' . ($blockID === '' ? ' style="text-align:' . $reviewTextAlign . ';"' : '') . '>' . 
+                ($reviewText === '' ? '' : '<div class="review-text"' . ($blockID === '' ? ' style="text-align:' . $reviewTextAlign . ';"' : '') . '>' . 
                     $reviewText
                 . '</div>') .
             '</div>';

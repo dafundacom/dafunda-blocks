@@ -9,11 +9,11 @@ function togglePanel(target) {
   var topPaddingUnit = "";
   var bottomPadding = 0;
   var bottomPaddingUnit = "";
-  var indicator = target.querySelector(".wp-block-dbe-content-toggle-accordion-state-indicator");
+  var indicator = target.querySelector(".wp-block-content-toggle-accordion-state-indicator");
   var panelContent = target.nextElementSibling;
   var toggleContainer = target.parentElement.parentElement;
 
-  if (panelContent.classList.contains("dbe-hide")) {
+  if (panelContent.classList.contains("hide")) {
     var panelStyle = getComputedStyle(panelContent);
     var topUnitMatch = /[^\d.]/g.exec(panelStyle.paddingTop);
     var bottomUnitMatch = /[^\d.]/g.exec(panelStyle.paddingBottom);
@@ -21,8 +21,8 @@ function togglePanel(target) {
     topPaddingUnit = panelStyle.paddingTop.slice(topUnitMatch.index);
     bottomPadding = Number(panelStyle.paddingBottom.slice(0, bottomUnitMatch.index));
     bottomPaddingUnit = panelStyle.paddingBottom.slice(bottomUnitMatch.index);
-    panelContent.classList.remove("dbe-hide");
-    panelContent.classList.add("dbe-hiding");
+    panelContent.classList.remove("hide");
+    panelContent.classList.add("hiding");
 
     if ("showonlyone" in toggleContainer.dataset && toggleContainer.dataset.showonlyone) {
       var siblingToggles = Array.prototype.slice.call(toggleContainer.children).map(function (p) {
@@ -32,14 +32,14 @@ function togglePanel(target) {
       });
       siblingToggles.forEach(function (siblingToggle) {
         var siblingContent = siblingToggle.nextElementSibling;
-        var siblingIndicator = siblingToggle.querySelector(".wp-block-dbe-content-toggle-accordion-state-indicator");
+        var siblingIndicator = siblingToggle.querySelector(".wp-block-content-toggle-accordion-state-indicator");
 
-        if (!siblingContent.classList.contains("dbe-hide")) {
+        if (!siblingContent.classList.contains("hide")) {
           if (siblingIndicator) siblingIndicator.classList.remove("open");
-          siblingContent.classList.add("dbe-toggle-transition");
+          siblingContent.classList.add("toggle-transition");
           siblingContent.style.height = "".concat(siblingContent.scrollHeight, "px");
           setTimeout(function () {
-            siblingContent.classList.add("dbe-hiding");
+            siblingContent.classList.add("hiding");
             siblingContent.style.height = "";
           }, 20);
         }
@@ -49,11 +49,11 @@ function togglePanel(target) {
     panelContent.style.height = getComputedStyle(panelContent).height;
   }
 
-  panelContent.classList.add("dbe-toggle-transition");
+  panelContent.classList.add("toggle-transition");
   if (indicator) indicator.classList.toggle("open");
   setTimeout(function () {
     //delay is needed for the animation to run properly
-    if (panelContent.classList.contains("dbe-hiding")) {
+    if (panelContent.classList.contains("hiding")) {
       var convertedTop = convertToPixels(topPadding, topPaddingUnit);
       var convertedBottom = convertToPixels(bottomPadding, bottomPaddingUnit);
       Object.assign(panelContent.style, {
@@ -61,11 +61,11 @@ function togglePanel(target) {
         paddingTop: "".concat(convertedTop, "px"),
         paddingBottom: "".concat(convertedBottom, "px")
       });
-      Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (slider) {
+      Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (slider) {
         var swiper = new Swiper("#".concat(slider.id), JSON.parse(slider.dataset.swiperData));
       });
     } else {
-      panelContent.classList.add("dbe-hiding");
+      panelContent.classList.add("hiding");
       panelContent.style.height = "";
     }
   }, 20);
@@ -75,11 +75,11 @@ function togglePanel(target) {
   });
 }
 
-Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content-toggle")).forEach(function (toggleContainer) {
+Array.prototype.slice.call(document.getElementsByClassName("wp-block-content-toggle")).forEach(function (toggleContainer) {
   var toggleHeads = Array.prototype.slice.call(toggleContainer.children).map(function (toggle) {
     return toggle.children[0];
   }).filter(function (toggle) {
-    return toggle && toggle.classList.contains("wp-block-dbe-content-toggle-accordion-title-wrap");
+    return toggle && toggle.classList.contains("wp-block-content-toggle-accordion-title-wrap");
   });
   toggleHeads.forEach(function (toggleHead, i) {
     toggleHead.addEventListener("keydown", function (e) {
@@ -136,7 +136,7 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content
     Array.prototype.slice.call(toggleContainer.children).map(function (p) {
       return p.children[0];
     }).filter(function (toggle) {
-      return toggle && toggle.classList.contains("wp-block-dbe-content-toggle-accordion-title-wrap");
+      return toggle && toggle.classList.contains("wp-block-content-toggle-accordion-title-wrap");
     }).forEach(function (instance) {
       var panelContent = instance.nextElementSibling;
       instance.addEventListener("click", function (e) {
@@ -144,11 +144,11 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content
         togglePanel(instance);
       });
       panelContent.addEventListener("transitionend", function () {
-        panelContent.classList.remove("dbe-toggle-transition");
+        panelContent.classList.remove("toggle-transition");
         panelContent.previousElementSibling.setAttribute("aria-expanded", panelContent.offsetHeight !== 0);
 
         if (panelContent.offsetHeight === 0) {
-          panelContent.classList.add("dbe-hide");
+          panelContent.classList.add("hide");
         } else {
           Object.assign(panelContent.style, {
             height: "",
@@ -157,7 +157,7 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content
           });
         }
 
-        panelContent.classList.remove("dbe-hiding");
+        panelContent.classList.remove("hiding");
       });
       panelContent.removeAttribute("style");
     }); //hide the parent element again;
@@ -172,7 +172,7 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content
   }
 });
 document.addEventListener("DOMContentLoaded", function () {
-  Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-content-toggle")).forEach(function (toggleContainer) {
+  Array.prototype.slice.call(document.getElementsByClassName("wp-block-content-toggle")).forEach(function (toggleContainer) {
     if (window.innerWidth < 700 && JSON.parse(toggleContainer.dataset.mobilecollapse) !== JSON.parse(toggleContainer.dataset.desktopcollapse)) {
       Array.prototype.slice.call(toggleContainer.children).forEach(function (child) {
         togglePanel(child.children[0]);

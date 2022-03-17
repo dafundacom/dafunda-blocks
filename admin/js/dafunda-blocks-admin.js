@@ -43,7 +43,7 @@
 			active: true,
 		},
 		{
-			label: "Button (Improved)",
+			label: "Button",
 			name: "dbe/button-block",
 			active: true,
 		},
@@ -161,13 +161,13 @@
 			var filter_status = $(this).data("filter-status");
 
 			if (filter_status === "all") {
-				$(".dbe__collection__item").removeClass("dbe-hide");
+				$(".dbe__collection__item").removeClass("hide");
 			} else if (filter_status == "enabled") {
-				$(".dbe__collection__item").addClass("dbe-hide");
-				$(".dbe__collection__item.active").removeClass("dbe-hide");
+				$(".dbe__collection__item").addClass("hide");
+				$(".dbe__collection__item.active").removeClass("hide");
 			} else if (filter_status == "disabled") {
-				$(".dbe__collection__item").removeClass("dbe-hide");
-				$(".dbe__collection__item.active").addClass("dbe-hide");
+				$(".dbe__collection__item").removeClass("hide");
+				$(".dbe__collection__item.active").addClass("hide");
 			}
 		});
 

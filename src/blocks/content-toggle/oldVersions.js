@@ -2,7 +2,7 @@ const { RichText, InnerBlocks } = wp.editor;
 
 export const version_1_1_2 = (props) => {
 	const { accordions, collapsed, theme, titleColor } = props.attributes;
-	const classNamePrefix = "wp-block-dbe-content-toggle";
+	const classNamePrefix = "wp-block-content-toggle";
 	return (
 		<div>
 			{accordions.map((accordion, i) => {
@@ -52,7 +52,7 @@ export const version_1_1_2 = (props) => {
 
 export const panel_version_1_1_9 = (props) => {
 	const { theme, collapsed, titleColor, panelTitle } = props.attributes;
-	const classNamePrefix = "wp-block-dbe-content-toggle";
+	const classNamePrefix = "wp-block-content-toggle";
 	return (
 		<div
 			style={{ borderColor: theme }}

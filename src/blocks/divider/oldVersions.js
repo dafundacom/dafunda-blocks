@@ -5,7 +5,7 @@ export const version_1_1_2 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_divider"
+				className="divider"
 				style={{
 					borderTop: `${borderSize}px ${borderStyle} ${borderColor}`,
 					marginTop: borderHeight + "px",

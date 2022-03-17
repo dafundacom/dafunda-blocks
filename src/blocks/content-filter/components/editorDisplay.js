@@ -205,7 +205,7 @@ export class OldPanelContent extends Component {
 					</PanelBody>*/}
 				</InspectorControls>
 			),
-			<div className="dbe-content-filter-main">
+			<div className="content-filter-main">
 				<button
 					onClick={() => {
 						replaceBlock(
@@ -239,8 +239,8 @@ export class OldPanelContent extends Component {
 				</button>
 				{filterArray.length > 0 &&
 					filterArray.map((f, i) => (
-						<div className="dbe-content-filter-category">
-							<div className="dbe-content-filter-category-top">
+						<div className="content-filter-category">
+							<div className="content-filter-category-top">
 								<span
 									title={__("Delete This Filter Category")}
 									onClick={() => {
@@ -259,7 +259,7 @@ export class OldPanelContent extends Component {
 							</div>
 							<div>
 								<RichText
-									className="dbe-content-filter-category-name"
+									className="content-filter-category-name"
 									placeholder="Category name"
 									value={f.category}
 									onChange={(newVal) => {
@@ -272,13 +272,13 @@ export class OldPanelContent extends Component {
 							</div>
 							{f.filters.map((filter, j) => (
 								<div
-									className="dbe-content-filter-tag"
+									className="content-filter-tag"
 									style={{
 										backgroundColor: buttonColor,
 										color: buttonTextColor,
 									}}
 								>
-									<div className="dbe-content-filter-tag-top">
+									<div className="content-filter-tag-top">
 										<span
 											title={__("Delete This Filter")}
 											onClick={() => {
@@ -349,7 +349,7 @@ export class OldPanelContent extends Component {
 								+
 							</button>
 							<br />
-							<label className="dbe-content-filter-checkbox">
+							<label className="content-filter-checkbox">
 								<input
 									type="checkbox"
 									checked={f.canUseMultiple}
@@ -648,11 +648,11 @@ export class PanelContent extends Component {
 					</PanelBody>*/}
 				</InspectorControls>
 			),
-			<div className="dbe-content-filter-main">
+			<div className="content-filter-main">
 				{filterArray.length > 0 &&
 					filterArray.map((f, i) => (
-						<div className="dbe-content-filter-category">
-							<div className="dbe-content-filter-category-top">
+						<div className="content-filter-category">
+							<div className="content-filter-category-top">
 								<span
 									title={__("Delete This Filter Category")}
 									onClick={() => {
@@ -671,7 +671,7 @@ export class PanelContent extends Component {
 							</div>
 							<div>
 								<RichText
-									className="dbe-content-filter-category-name"
+									className="content-filter-category-name"
 									placeholder="Category name"
 									value={f.category}
 									onChange={(newVal) => {
@@ -684,13 +684,13 @@ export class PanelContent extends Component {
 							</div>
 							{f.filters.map((filter, j) => (
 								<div
-									className="dbe-content-filter-tag"
+									className="content-filter-tag"
 									style={{
 										backgroundColor: buttonColor,
 										color: buttonTextColor || "inherit",
 									}}
 								>
-									<div className="dbe-content-filter-tag-top">
+									<div className="content-filter-tag-top">
 										<span
 											title={__("Delete This Filter")}
 											onClick={() => {
@@ -761,7 +761,7 @@ export class PanelContent extends Component {
 								+
 							</button>
 							<br />
-							<label className="dbe-content-filter-checkbox">
+							<label className="content-filter-checkbox">
 								<input
 									type="checkbox"
 									checked={f.canUseMultiple}

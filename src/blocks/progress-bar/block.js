@@ -122,7 +122,7 @@ registerBlockType("dbe/progress-bar", {
 					<ToolbarGroup>
 						<ToolbarItem
 							as={RangeControl}
-							className="dbe_progress_bar_value"
+							className="progress_bar_value"
 							value={percentage}
 							onChange={(value) => setAttributes({ percentage: value })}
 							min={0}
@@ -172,8 +172,8 @@ registerBlockType("dbe/progress-bar", {
 					</PanelBody>
 				</InspectorControls>
 			),
-			<div className="dbe_progress-bar">
-				<div className="dbe_progress-bar-text">
+			<div className="progress-bar">
+				<div className="progress-bar-text">
 					<RichText
 						tagName="p"
 						style={{ textAlign: detailAlign }}

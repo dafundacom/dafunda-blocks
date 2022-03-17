@@ -1,6 +1,6 @@
 "use strict";
 
-Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (instance) {
+Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (instance) {
   var swiper = new Swiper("#".concat(instance.id), JSON.parse(instance.dataset.swiperData));
   instance.getElementsByClassName("swiper-button-next")[0].addEventListener("keydown", function (e) {
     if (e.key === " ") {

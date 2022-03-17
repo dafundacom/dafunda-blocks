@@ -59,7 +59,7 @@ function dbe_render_post_grid_block( $attributes ){
             $post_thumb_id = get_post_thumbnail_id( $post_id );
 
             /* Setup the post classes */
-            $post_classes = 'dbe-post-grid-item';
+            $post_classes = 'post-grid-item';
 
             /* Join classes together */
             $post_classes = join( ' ', get_post_class( $post_classes, $post_id ) );
@@ -76,7 +76,7 @@ function dbe_render_post_grid_block( $attributes ){
 
                 /* Output the featured image */
                 $post_grid .= sprintf(
-                    '<div class="dbe-block-post-grid-image"><a href="%1$s" rel="bookmark" aria-hidden="true" tabindex="-1">%2$s</a></div>',
+                    '<div class="block-post-grid-image"><a href="%1$s" rel="bookmark" aria-hidden="true" tabindex="-1">%2$s</a></div>',
                     esc_url( get_permalink( $post_id ) ),
                     wp_get_attachment_image( $post_thumb_id, array($attributes['postImageWidth'], $attributes['preservePostImageAspectRatio'] ? 0 : $attributes['postImageHeight']) )//use array 
                 );
@@ -84,11 +84,11 @@ function dbe_render_post_grid_block( $attributes ){
 
             /* Wrap the text content */
             $post_grid .= sprintf(
-                '<div class="dbe-block-post-grid-text">'
+                '<div class="block-post-grid-text">'
             );
 
             $post_grid .= sprintf(
-                '<header class="dbe-block-post-grid-header">'
+                '<header class="block-post-grid-header">'
             );
 
             /* Get the post title */
@@ -107,7 +107,7 @@ function dbe_render_post_grid_block( $attributes ){
                 }
 
                 $post_grid .= sprintf(
-                    '<%3$s class="dbe-block-post-grid-title"><a href="%1$s" rel="bookmark">%2$s</a></%3$s>',
+                    '<%3$s class="block-post-grid-title"><a href="%1$s" rel="bookmark">%2$s</a></%3$s>',
                     esc_url( get_permalink( $post_id ) ),
                     esc_html( $title ),
                     esc_attr( $post_title_tag )
@@ -117,7 +117,7 @@ function dbe_render_post_grid_block( $attributes ){
             /* Get the post author */
             if ( isset( $attributes['checkPostAuthor'] ) && $attributes['checkPostAuthor'] ) {
                 $post_grid .= sprintf(
-                    '<div class="dbe-block-post-grid-author" itemprop="author"><a class="dbe-text-link" href="%2$s" itemprop="url" rel="author"><span itemprop="name">%1$s</span></a></div>',
+                    '<div class="block-post-grid-author" itemprop="author"><a class="text-link" href="%2$s" itemprop="url" rel="author"><span itemprop="name">%1$s</span></a></div>',
                     esc_html( get_the_author_meta( 'display_name', get_the_author_meta( 'ID' ) ) ),
                     esc_html( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
                 );
@@ -126,7 +126,7 @@ function dbe_render_post_grid_block( $attributes ){
             /* Get the post date */
             if ( isset( $attributes['checkPostDate'] ) && $attributes['checkPostDate'] ) {
                 $post_grid .= sprintf(
-                    '<time datetime="%1$s" class="dbe-block-post-grid-date" itemprop="datePublished">%2$s</time>',
+                    '<time datetime="%1$s" class="block-post-grid-date" itemprop="datePublished">%2$s</time>',
                     esc_attr( get_the_date( 'c', $post_id ) ),
                     esc_html( get_the_date( '', $post_id ) )
                 );
@@ -139,7 +139,7 @@ function dbe_render_post_grid_block( $attributes ){
 
             /* Wrap the excerpt content */
             $post_grid .= sprintf(
-                '<div class="dbe-block-post-grid-excerpt">'
+                '<div class="block-post-grid-excerpt">'
             );
 
             /* Get the excerpt */
@@ -179,7 +179,7 @@ function dbe_render_post_grid_block( $attributes ){
             /* Get the read more link */
             if ( isset( $attributes['checkPostLink'] ) && $attributes['checkPostLink'] ) {
                 $post_grid .= sprintf(
-                    '<p><a class="dbe-block-post-grid-more-link dbe-text-link" href="%1$s" rel="bookmark">%2$s <span class="screen-reader-text">%3$s</span></a></p>',
+                    '<p><a class="block-post-grid-more-link text-link" href="%1$s" rel="bookmark">%2$s <span class="screen-reader-text">%3$s</span></a></p>',
                     esc_url( get_permalink( $post_id ) ),
                     esc_html( $attributes['readMoreText'] ),
                     esc_html( $title )
@@ -204,14 +204,14 @@ function dbe_render_post_grid_block( $attributes ){
         wp_reset_postdata();
 
         /* Build the block classes */
-        $class = "dbe-block-post-grid align". $attributes['wrapAlignment'];
+        $class = "block-post-grid align". $attributes['wrapAlignment'];
 
         if ( isset( $attributes['className'] ) ) {
             $class .= ' ' . $attributes['className'];
         }
 
         /* Layout orientation class */
-        $grid_class = 'dbe-post-grid-items';
+        $grid_class = 'post-grid-items';
 
         if ( isset( $attributes['postLayout'] ) && 'list' === $attributes['postLayout'] ) {
             $grid_class .= ' is-list';

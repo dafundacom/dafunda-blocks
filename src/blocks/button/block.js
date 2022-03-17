@@ -124,7 +124,7 @@ const attributes = {
 };
 
 registerBlockType("dbe/button-block", {
-	title: __("Button (Improved)", "dafunda-blocks"),
+	title: __("Button", "dafunda-blocks"),
 	icon: icon,
 	category: "dafundablocks",
 	keywords: [
@@ -229,13 +229,13 @@ registerBlockType("dbe/button-block", {
 
 		return (
 			<div
-				className={`${props.className} dbe-button-container align-button-${align}`}
+				className={`${props.className} button-container align-button-${align}`}
 			>
 				<a
 					href={url}
 					target={openInNewTab ? "_blank" : "_self"}
 					rel={`noopener noreferrer${addNofollow ? " nofollow" : ""}`}
-					className={`dbe-button-block-main dbe-button-${size}`}
+					className={`button-block-main button-${size}`}
 					data-defaultColor={buttonColor}
 					data-defaultTextColor={buttonTextColor}
 					data-hoverColor={buttonHoverColor}
@@ -249,21 +249,21 @@ registerBlockType("dbe/button-block", {
 					}}
 				>
 					<div
-						className="dbe-button-content-holder"
+						className="button-content-holder"
 						style={{
 							flexDirection: iconPosition === "left" ? "row" : "row-reverse",
 						}}
 					>
 						{chosenIcon !== "" &&
 							allIcons.hasOwnProperty(`fa${dashesToCamelcase(chosenIcon)}`) && (
-								<span className="dbe-button-icon-holder">
+								<span className="button-icon-holder">
 									{generateIcon(
 										allIcons[`fa${dashesToCamelcase(chosenIcon)}`],
 										iconSize[size]
 									)}
 								</span>
 							)}
-						<span className={"dbe-button-block-btn"}>{buttonText}</span>
+						<span className={"button-block-btn"}>{buttonText}</span>
 					</div>
 				</a>
 			</div>
@@ -278,7 +278,7 @@ registerBlockType("dbe/button-block", {
 });
 
 registerBlockType("dbe/button", {
-	title: __("Button (Improved)", "dafunda-blocks"),
+	title: __("Button", "dafunda-blocks"),
 	icon: icon,
 	category: "dafundablocks",
 	attributes,

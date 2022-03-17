@@ -38,23 +38,23 @@ const oldAttributes = {
 	},
 	tabsContent: {
 		source: "query",
-		selector: ".wp-block-dbe-tabbed-content-tab-content-wrap",
+		selector: ".wp-block-tabbed-content-tab-content-wrap",
 		query: {
 			content: {
 				type: "array",
 				source: "children",
-				selector: ".wp-block-dbe-tabbed-content-tab-content",
+				selector: ".wp-block-tabbed-content-tab-content",
 			},
 		},
 	},
 	tabsTitle: {
 		source: "query",
-		selector: ".wp-block-dbe-tabbed-content-tab-title-wrap",
+		selector: ".wp-block-tabbed-content-tab-title-wrap",
 		query: {
 			content: {
 				type: "array",
 				source: "children",
-				selector: ".wp-block-dbe-tabbed-content-tab-title",
+				selector: ".wp-block-tabbed-content-tab-title",
 			},
 		},
 	},
@@ -187,7 +187,7 @@ registerBlockType("dbe/tabbed-content", {
 	])(OldTabHolder),
 
 	save: function (props) {
-		const className = "wp-block-dbe-tabbed-content";
+		const className = "wp-block-tabbed-content";
 
 		const { activeTab, theme, titleColor, tabsTitle, id } = props.attributes;
 

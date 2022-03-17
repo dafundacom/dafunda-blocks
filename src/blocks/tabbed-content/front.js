@@ -30,20 +30,20 @@ function dbe_getNodeindex(elem) {
 }
 
 function dbe_handleTabEvent(tab) {
-	const parent = tab.closest(".wp-block-dbe-tabbed-content-holder");
+	const parent = tab.closest(".wp-block-tabbed-content-holder");
 
 	const isVertical = parent.classList.contains("vertical-holder");
 
 	const activeStyle = parent
 		.querySelector(
-			`.wp-block-dbe-tabbed-content-tab-title-${
+			`.wp-block-tabbed-content-tab-title-${
 				isVertical ? "vertical-" : ""
 			}wrap.active`
 		)
 		.getAttribute("style");
 	const defaultStyle = parent
 		.querySelector(
-			`.wp-block-dbe-tabbed-content-tab-title-${
+			`.wp-block-tabbed-content-tab-title-${
 				isVertical ? "vertical-" : ""
 			}wrap:not(.active)`
 		)
@@ -51,9 +51,7 @@ function dbe_handleTabEvent(tab) {
 
 	dbe_getSiblings(tab, (elem) =>
 		elem.classList.contains(
-			`wp-block-dbe-tabbed-content-tab-title-${
-				isVertical ? "vertical-" : ""
-			}wrap`
+			`wp-block-tabbed-content-tab-title-${isVertical ? "vertical-" : ""}wrap`
 		)
 	).forEach((sibling) => {
 		if (sibling.tabIndex === 0) {
@@ -102,21 +100,21 @@ function dbe_handleTabEvent(tab) {
 	const tabContentContainer = Array.prototype.slice
 		.call(parent.children)
 		.filter((elem) =>
-			elem.classList.contains("wp-block-dbe-tabbed-content-tabs-content")
+			elem.classList.contains("wp-block-tabbed-content-tabs-content")
 		)[0];
 
 	Array.prototype.slice
 		.call(tabContentContainer.children)
 		.filter((child) =>
-			child.classList.contains("wp-block-dbe-tabbed-content-tab-content-wrap")
+			child.classList.contains("wp-block-tabbed-content-tab-content-wrap")
 		)
 		.forEach((tabContent, i) => {
 			if (dbe_getNodeindex(tab) === i) {
 				tabContent.classList.add("active");
-				tabContent.classList.remove("dbe-hide");
+				tabContent.classList.remove("hide");
 
 				Array.prototype.slice
-					.call(document.getElementsByClassName("dbe_image_slider"))
+					.call(document.getElementsByClassName("image_slider"))
 					.forEach((slider) => {
 						const swiper = new Swiper(
 							`#${slider.id}`,
@@ -132,14 +130,14 @@ function dbe_handleTabEvent(tab) {
 					});
 			} else {
 				tabContent.classList.remove("active");
-				tabContent.classList.add("dbe-hide");
+				tabContent.classList.add("hide");
 			}
 		});
 
 	Array.prototype.slice
 		.call(tabContentContainer.children)
 		.filter((child) =>
-			child.classList.contains("wp-block-dbe-tabbed-content-accordion-toggle")
+			child.classList.contains("wp-block-tabbed-content-accordion-toggle")
 		)
 		.forEach((accordionToggle) => {
 			if (dbe_getNodeindex(accordionToggle) / 2 === dbe_getNodeindex(tab)) {
@@ -213,9 +211,7 @@ function dbe_leftRightPress(event) {
 
 Array.prototype.slice
 	.call(
-		document.getElementsByClassName(
-			"wp-block-dbe-tabbed-content-tab-title-wrap"
-		)
+		document.getElementsByClassName("wp-block-tabbed-content-tab-title-wrap")
 	)
 	.forEach((instance) => {
 		instance.addEventListener("focus", function () {
@@ -253,7 +249,7 @@ Array.prototype.slice
 Array.prototype.slice
 	.call(
 		document.getElementsByClassName(
-			"wp-block-dbe-tabbed-content-tab-title-vertical-wrap"
+			"wp-block-tabbed-content-tab-title-vertical-wrap"
 		)
 	)
 	.forEach((instance) => {
@@ -286,7 +282,7 @@ function dbe_switchFocusToTab(index, tabBar) {
 
 function dbe_getTabbedContentDisplayModes(block) {
 	let dm = [];
-	const classNamePrefix = "wp-block-dbe-tabbed-content";
+	const classNamePrefix = "wp-block-tabbed-content";
 
 	if (block.classList.contains(`${classNamePrefix}-vertical-holder-mobile`)) {
 		dm.push("verticaltab");
@@ -319,7 +315,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 
 (function () {
 	const displayModes = Array.prototype.slice
-		.call(document.getElementsByClassName("wp-block-dbe-tabbed-content"))
+		.call(document.getElementsByClassName("wp-block-tabbed-content"))
 		.map((block) => dbe_getTabbedContentDisplayModes(block));
 
 	let transitionTo = 0;
@@ -328,7 +324,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 	function processTransition() {
 		if (transitionTo && transitionFrom) {
 			Array.prototype.slice
-				.call(document.getElementsByClassName("wp-block-dbe-tabbed-content"))
+				.call(document.getElementsByClassName("wp-block-tabbed-content"))
 				.forEach((instance, i) => {
 					if (
 						displayModes[i][transitionFrom - 1] !==
@@ -356,11 +352,11 @@ function dbe_getTabbedContentDisplayModes(block) {
 												Math.floor(j / 2) === activeTabs[activeTabs.length - 1]
 											) {
 												child.classList.add("active");
-												child.classList.remove("dbe-hide");
+												child.classList.remove("hide");
 											} else {
 												child.classList.remove("active");
 												if (j % 2 === 1) {
-													child.classList.add("dbe-hide");
+													child.classList.add("hide");
 												}
 											}
 										});
@@ -411,7 +407,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 										} else {
 											child.setAttribute(
 												"aria-expanded",
-												!child.nextElementSibling.classList.contains("dbe-hide")
+												!child.nextElementSibling.classList.contains("hide")
 											);
 											if (!child.hasAttribute("aria-controls")) {
 												child.setAttribute(
@@ -485,7 +481,7 @@ function dbe_hashTabSwitch() {
 		`[data-tab-anchor='${window.location.hash.slice(1)}']`
 	);
 
-	const classNamePrefix = "wp-block-dbe-tabbed-content";
+	const classNamePrefix = "wp-block-tabbed-content";
 
 	if (targetElement) {
 		if (
@@ -526,7 +522,7 @@ function dbe_hashTabSwitch() {
 
 			const findTabContentRoot = (currentBlock) => {
 				const parentTabbedContent = currentBlock.closest(
-					".wp-block-dbe-tabbed-content-tabs-content"
+					".wp-block-tabbed-content-tabs-content"
 				);
 
 				if (parentTabbedContent) {
@@ -534,13 +530,11 @@ function dbe_hashTabSwitch() {
 						Array.prototype.slice
 							.call(parentTabbedContent.children)
 							.filter((t) =>
-								t.classList.contains(
-									"wp-block-dbe-tabbed-content-tab-content-wrap"
-								)
+								t.classList.contains("wp-block-tabbed-content-tab-content-wrap")
 							)
 							.indexOf(
 								currentBlock.closest(
-									".wp-block-dbe-tabbed-content-tab-content-wrap"
+									".wp-block-tabbed-content-tab-content-wrap"
 								)
 							)
 					);
@@ -583,11 +577,11 @@ function dbe_hashTabSwitch() {
 					tabContents.forEach((tabContent, j) => {
 						if (j === ancestorTabIndexes[i]) {
 							tabContent.classList.add("active");
-							tabContent.classList.remove("dbe-hide");
+							tabContent.classList.remove("hide");
 							tabContent.previousElementSibling.classList.add("active");
 						} else {
 							tabContent.classList.remove("active");
-							tabContent.classList.add("dbe-hide");
+							tabContent.classList.add("hide");
 							tabContent.previousElementSibling.classList.remove("active");
 						}
 					});
@@ -604,7 +598,7 @@ function dbe_hashTabSwitch() {
 						if (j === ancestorTabIndexes[i]) {
 							tab.classList.add("active");
 							tabContents[j].classList.add("active");
-							tabContents[j].classList.remove("dbe-hide");
+							tabContents[j].classList.remove("hide");
 
 							if (
 								probableAccordionToggle &&
@@ -624,7 +618,7 @@ function dbe_hashTabSwitch() {
 						} else {
 							tab.classList.remove("active");
 							tabContents[j].classList.remove("active");
-							tabContents[j].classList.add("dbe-hide");
+							tabContents[j].classList.add("hide");
 							if (
 								probableAccordionToggle &&
 								probableAccordionToggle.classList.contains(
@@ -666,15 +660,13 @@ function dbe_hashTabSwitch() {
 
 document.addEventListener("DOMContentLoaded", () => {
 	Array.prototype.slice
-		.call(document.getElementsByClassName("wp-block-dbe-tabbed-content"))
+		.call(document.getElementsByClassName("wp-block-tabbed-content"))
 		.forEach((instance) => dbe_initializeTabBlock(instance));
 	Array.prototype.slice
-		.call(
-			document.getElementsByClassName("wp-block-dbe-tabbed-content-underline")
-		)
+		.call(document.getElementsByClassName("wp-block-tabbed-content-underline"))
 		.forEach((instance) => dbe_initializeTabBlock(instance));
 	Array.prototype.slice
-		.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-pills"))
+		.call(document.getElementsByClassName("wp-block-tabbed-content-pills"))
 		.forEach((instance) => dbe_initializeTabBlock(instance));
 	dbe_hashTabSwitch();
 });
@@ -721,7 +713,7 @@ function dbe_initializeTabBlock(instance) {
 			} else {
 				child.setAttribute(
 					"aria-expanded",
-					!child.nextElementSibling.classList.contains("dbe-hide")
+					!child.nextElementSibling.classList.contains("hide")
 				);
 				child.setAttribute("aria-controls", child.nextElementSibling.id);
 				if (child.nextElementSibling.classList.contains("active")) {
@@ -749,14 +741,12 @@ function dbe_initializeTabBlock(instance) {
 window.onhashchange = dbe_hashTabSwitch;
 
 Array.prototype.slice
-	.call(
-		document.getElementsByClassName("wp-block-dbe-tabbed-content-tabs-content")
-	)
+	.call(document.getElementsByClassName("wp-block-tabbed-content-tabs-content"))
 	.forEach((container) => {
 		Array.prototype.slice
 			.call(container.children)
 			.filter((child) =>
-				child.classList.contains("wp-block-dbe-tabbed-content-accordion-toggle")
+				child.classList.contains("wp-block-tabbed-content-accordion-toggle")
 			)
 			.forEach((accordionToggle, i) => {
 				accordionToggle.addEventListener("click", () => {
@@ -774,7 +764,7 @@ Array.prototype.slice
 						}
 					} else {
 						Array.prototype.slice
-							.call(document.getElementsByClassName("dbe_image_slider"))
+							.call(document.getElementsByClassName("image_slider"))
 							.forEach((slider) => {
 								const swiper = new Swiper(
 									`#${slider.id}`,
@@ -792,15 +782,13 @@ Array.prototype.slice
 					}
 					accordionToggle.classList.toggle("active");
 					accordionToggle.nextElementSibling.classList.toggle("active");
-					accordionToggle.nextElementSibling.classList.toggle("dbe-hide");
+					accordionToggle.nextElementSibling.classList.toggle("hide");
 				});
 			});
 	});
 
 Array.prototype.slice
-	.call(
-		document.getElementsByClassName("wp-block-dbe-tabbed-content-tab-holder")
-	)
+	.call(document.getElementsByClassName("wp-block-tabbed-content-tab-holder"))
 	.forEach((tabBar) => {
 		let tabBarIsBeingDragged = false;
 		let oldScrollPosition = -1;

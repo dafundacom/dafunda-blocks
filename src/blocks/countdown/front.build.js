@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var timer = [];
   var initialValue = [];
   var timeUnits = ["week", "day", "hour", "minute", "second"];
-  Array.prototype.slice.call(document.getElementsByClassName("dbe-countdown")).forEach(function (instance, i) {
+  Array.prototype.slice.call(document.getElementsByClassName("countdown")).forEach(function (instance, i) {
     timer[i] = setInterval(function () {
       var timeLeft = parseInt(instance.getAttribute("data-enddate")) - Math.floor(Date.now() / 1000);
       var largestUnit = instance.getAttribute("data-largestunit");
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!initialValue[i]) {
         //use queryselector only once, then use saved value in future iterations of the loop
-        initialValue[i] = Array.prototype.slice.call(instance.querySelectorAll(".dbe-countdown-odometer")).map(function (unit) {
+        initialValue[i] = Array.prototype.slice.call(instance.querySelectorAll(".countdown-odometer")).map(function (unit) {
           return Array.prototype.slice.call(unit.children).map(function (c) {
             return parseInt(c.innerHTML);
           });
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (timeLeft >= 0) {
-        if (instance.querySelector(".dbe-countdown-odometer-container")) {
+        if (instance.querySelector(".countdown-odometer-container")) {
           var breakIntoDigits = function breakIntoDigits(num, minDigits) {
             //adapted from from https://stackoverflow.com/a/7784664
             var digits = [];
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
           });
-          var odometerSlot = Array.prototype.slice.call(instance.querySelectorAll(".dbe-countdown-odometer")).map(function (a) {
+          var odometerSlot = Array.prototype.slice.call(instance.querySelectorAll(".countdown-odometer")).map(function (a) {
             return Array.prototype.slice.call(a.children);
           });
           var finishedTransitions = 0;
@@ -238,8 +238,8 @@ document.addEventListener("DOMContentLoaded", function () {
           incomingDigits.forEach(function (arr, j) {
             arr.forEach(function (d, k) {
               if (Array.isArray(d)) {
-                odometerSlot[j][k].classList.add("dbe-countdown-odometer-digits");
-                odometerSlot[j][k].classList.remove("dbe-countdown-odometer-digit");
+                odometerSlot[j][k].classList.add("countdown-odometer-digits");
+                odometerSlot[j][k].classList.remove("countdown-odometer-digit");
                 odometerSlot[j][k].innerHTML = d.map(function (dd) {
                   return "<div class=\"odometer-moving-digit\">".concat(dd, "</div>");
                 }).join(""); //do pre-animation prep
@@ -261,8 +261,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                   odometerSlot[j][k].addEventListener("transitionend", function () {
                     //switch to pre-animation style
-                    odometerSlot[j][k].classList.add("dbe-countdown-odometer-digit");
-                    odometerSlot[j][k].classList.remove("dbe-countdown-odometer-digits");
+                    odometerSlot[j][k].classList.add("countdown-odometer-digit");
+                    odometerSlot[j][k].classList.remove("countdown-odometer-digits");
                     odometerSlot[j][k].removeAttribute("style"); //check if there are leading zeroes to be removed
 
                     odometerSlot[j][k].innerHTML = replacements[j][k];
@@ -281,36 +281,36 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           animationDirection = "decrease";
         } else {
-          if (instance.querySelector(".dbe_countdown_week")) instance.querySelector(".dbe_countdown_week").innerHTML = weeks;
-          if (instance.querySelector(".dbe_countdown_day")) instance.querySelector(".dbe_countdown_day").innerHTML = days;
-          if (instance.querySelector(".dbe_countdown_hour")) instance.querySelector(".dbe_countdown_hour").innerHTML = hours;
-          if (instance.querySelector(".dbe_countdown_minute")) instance.querySelector(".dbe_countdown_minute").innerHTML = minutes;
-          if (instance.querySelector(".dbe_countdown_second")) instance.querySelector(".dbe_countdown_second").innerHTML = seconds;
+          if (instance.querySelector(".countdown_week")) instance.querySelector(".countdown_week").innerHTML = weeks;
+          if (instance.querySelector(".countdown_day")) instance.querySelector(".countdown_day").innerHTML = days;
+          if (instance.querySelector(".countdown_hour")) instance.querySelector(".countdown_hour").innerHTML = hours;
+          if (instance.querySelector(".countdown_minute")) instance.querySelector(".countdown_minute").innerHTML = minutes;
+          if (instance.querySelector(".countdown_second")) instance.querySelector(".countdown_second").innerHTML = seconds;
 
-          if (instance.querySelector(".dbe_countdown_circular_container")) {
-            if (instance.querySelector(".dbe_countdown_circle_week")) {
-              instance.querySelector(".dbe_countdown_circle_week .dbe_countdown_circle_path").style.strokeDasharray = "".concat(weeks * 219.911 / 52, "px, 219.911px");
-              instance.querySelector(".dbe_countdown_circle_week .dbe_countdown_circle_trail").style.strokeLinecap = weeks > 0 ? "round" : "butt";
+          if (instance.querySelector(".countdown_circular_container")) {
+            if (instance.querySelector(".countdown_circle_week")) {
+              instance.querySelector(".countdown_circle_week .countdown_circle_path").style.strokeDasharray = "".concat(weeks * 219.911 / 52, "px, 219.911px");
+              instance.querySelector(".countdown_circle_week .countdown_circle_trail").style.strokeLinecap = weeks > 0 ? "round" : "butt";
             }
 
-            if (instance.querySelector(".dbe_countdown_circle_day")) {
-              instance.querySelector(".dbe_countdown_circle_day .dbe_countdown_circle_path").style.strokeDasharray = "".concat(days * 219.911 / 7, "px, 219.911px");
-              instance.querySelector(".dbe_countdown_circle_day .dbe_countdown_circle_trail").style.strokeLinecap = days > 0 ? "round" : "butt";
+            if (instance.querySelector(".countdown_circle_day")) {
+              instance.querySelector(".countdown_circle_day .countdown_circle_path").style.strokeDasharray = "".concat(days * 219.911 / 7, "px, 219.911px");
+              instance.querySelector(".countdown_circle_day .countdown_circle_trail").style.strokeLinecap = days > 0 ? "round" : "butt";
             }
 
-            if (instance.querySelector(".dbe_countdown_circle_hour")) {
-              instance.querySelector(".dbe_countdown_circle_hour .dbe_countdown_circle_path").style.strokeDasharray = "".concat(hours * 219.911 / 24, "px, 219.911px");
-              instance.querySelector(".dbe_countdown_circle_hour .dbe_countdown_circle_trail").style.strokeLinecap = hours > 0 ? "round" : "butt";
+            if (instance.querySelector(".countdown_circle_hour")) {
+              instance.querySelector(".countdown_circle_hour .countdown_circle_path").style.strokeDasharray = "".concat(hours * 219.911 / 24, "px, 219.911px");
+              instance.querySelector(".countdown_circle_hour .countdown_circle_trail").style.strokeLinecap = hours > 0 ? "round" : "butt";
             }
 
-            if (instance.querySelector(".dbe_countdown_circle_minute")) {
-              instance.querySelector(".dbe_countdown_circle_minute .dbe_countdown_circle_path").style.strokeDasharray = "".concat(minutes * 219.911 / 60, "px, 219.911px");
-              instance.querySelector(".dbe_countdown_circle_minute .dbe_countdown_circle_trail").style.strokeLinecap = minutes > 0 ? "round" : "butt";
+            if (instance.querySelector(".countdown_circle_minute")) {
+              instance.querySelector(".countdown_circle_minute .countdown_circle_path").style.strokeDasharray = "".concat(minutes * 219.911 / 60, "px, 219.911px");
+              instance.querySelector(".countdown_circle_minute .countdown_circle_trail").style.strokeLinecap = minutes > 0 ? "round" : "butt";
             }
 
-            if (instance.querySelector(".dbe_countdown_circle_second")) {
-              instance.querySelector(".dbe_countdown_circle_second .dbe_countdown_circle_path").style.strokeDasharray = "".concat(seconds * 219.911 / 60, "px, 219.911px");
-              instance.querySelector(".dbe_countdown_circle_second .dbe_countdown_circle_trail").style.strokeLinecap = seconds > 0 ? "round" : "butt";
+            if (instance.querySelector(".countdown_circle_second")) {
+              instance.querySelector(".countdown_circle_second .countdown_circle_path").style.strokeDasharray = "".concat(seconds * 219.911 / 60, "px, 219.911px");
+              instance.querySelector(".countdown_circle_second .countdown_circle_trail").style.strokeLinecap = seconds > 0 ? "round" : "butt";
             }
           }
         }
