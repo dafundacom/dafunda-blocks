@@ -17,7 +17,7 @@ export const version_1_1_4 = (props) => {
 
 	return (
 		<div
-			className="dbe_image_slider"
+			className="image_slider"
 			style={{
 				minHeight: `${25 + (imageArray.length ? sliderHeight : 200)}px`,
 				display: "block",
@@ -46,7 +46,7 @@ export const version_1_1_4 = (props) => {
 						/>
 						{captionArray[i].link !== "" ? (
 							<a
-								className="dbe_image_silder_image_caption"
+								className="image_silder_image_caption"
 								href={captionArray[i].link}
 							>
 								<RichText.Content value={captionArray[i].text} />
@@ -54,7 +54,7 @@ export const version_1_1_4 = (props) => {
 						) : (
 							<RichText.Content
 								tagName="span"
-								className="dbe_image_silder_image_caption"
+								className="image_silder_image_caption"
 								value={captionArray[i].text}
 							/>
 						)}

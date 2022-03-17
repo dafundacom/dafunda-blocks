@@ -24,8 +24,8 @@ function dbe_getSiblings(element, criteria) {
   return criteria ? children.filter(criteria) : children;
 }
 
-Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-tag")).forEach(function (instance) {
-  var blockProper = instance.closest(".wp-block-dbe-content-filter");
+Array.prototype.slice.call(document.getElementsByClassName("content-filter-tag")).forEach(function (instance) {
+  var blockProper = instance.closest(".wp-block-content-filter");
   var initialSelection = blockProper.getAttribute("data-currentselection");
   instance.addEventListener("click", function () {
     var _this = this;
@@ -37,7 +37,7 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
       this.style.backgroundColor = this.getAttribute("data-activecolor");
       this.style.color = this.getAttribute("data-activetextcolor");
     } else {
-      this.classList.toggle("dbe-selected");
+      this.classList.toggle("selected");
     }
 
     var categoryIndex = JSON.parse(this.getAttribute("data-categorynumber"));
@@ -46,7 +46,7 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
     if (JSON.parse(this.getAttribute("data-tagisselected"))) {
       if (!JSON.parse(this.parentElement.getAttribute("data-canusemultiple"))) {
         dbe_getSiblings(this, function (elem) {
-          return elem.classList.contains("dbe-content-filter-tag");
+          return elem.classList.contains("content-filter-tag");
         }).forEach(function (sibling) {
           sibling.setAttribute("data-tagisselected", "false");
 
@@ -54,7 +54,7 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
             sibling.style.backgroundColor = _this.getAttribute("data-normalcolor");
             sibling.style.color = _this.getAttribute("data-normaltextcolor");
           } else {
-            sibling.classList.remove("dbe-selected");
+            sibling.classList.remove("selected");
           }
         });
       }
@@ -63,7 +63,7 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
         this.style.backgroundColor = this.getAttribute("data-normalcolor");
         this.style.color = this.getAttribute("data-normaltextcolor");
       } else {
-        this.classList.remove("dbe-selected");
+        this.classList.remove("selected");
       }
     }
 
@@ -77,7 +77,7 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
 
     blockProper.setAttribute("data-currentselection", JSON.stringify(newSelection));
     var matchingOption = blockProper.getAttribute("data-matchingoption");
-    Array.prototype.slice.call(blockProper.querySelectorAll(":scope > .dbe-content-filter-panel")).forEach(function (instance) {
+    Array.prototype.slice.call(blockProper.querySelectorAll(":scope > .content-filter-panel")).forEach(function (instance) {
       var panelData = JSON.parse(instance.getAttribute("data-selectedfilters"));
       var mainData = JSON.parse(blockProper.getAttribute("data-currentselection"));
       var hasMatchedAll = true;
@@ -131,12 +131,12 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
       if (isOldVersion) {
         instance.style.display = isVisible ? "block" : "none";
       } else if (isVisible) {
-        instance.classList.remove("dbe-hide");
-        Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (slider) {
+        instance.classList.remove("hide");
+        Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (slider) {
           var swiper = new Swiper("#".concat(slider.id), JSON.parse(slider.dataset.swiperData));
         });
       } else {
-        instance.classList.add("dbe-hide");
+        instance.classList.add("hide");
       }
 
       Array.prototype.slice.call(instance.querySelectorAll(".wp-block-embed iframe")).forEach(function (embeddedContent) {
@@ -146,10 +146,10 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
     });
   });
 });
-/*Array.from(document.getElementsByClassName('dbe-content-filter-reset')).forEach(
+/*Array.from(document.getElementsByClassName('content-filter-reset')).forEach(
 	instance => {
 		instance.addEventListener('click', function() {
-			const blockProper = this.closest('.wp-block-dbe-content-filter');
+			const blockProper = this.closest('.wp-block-content-filter');
 
 			let blockSelection = JSON.parse(
 				blockProper.getAttribute('data-currentselection')
@@ -165,13 +165,13 @@ Array.prototype.slice.call(document.getElementsByClassName("dbe-content-filter-t
 			);
 
 			Array.from(
-				blockProper.getElementsByClassName('dbe-content-filter-panel')
+				blockProper.getElementsByClassName('content-filter-panel')
 			).forEach(instance => {
 				instance.style.display = 'block';
 			});
 
 			Array.from(
-				blockProper.getElementsByClassName('dbe-content-filter-tag')
+				blockProper.getElementsByClassName('content-filter-tag')
 			).forEach(instance => {
 				instance.setAttribute('data-tagisselected', 'false');
 				instance.style.backgroundColor = instance.getAttribute(

@@ -35,9 +35,9 @@ function dbe_render_progress_bar_block($attributes){
         <div class="' . $blockName . '-label">' . $percentage . '%</div></div>';
     }
 
-    return '<div class="dbe_progress-bar' . (isset($className) ? ' ' . esc_attr($className) : '').
-            '"' . ($blockID === '' ? '' : ' id="dbe-progress-bar-' . $blockID . '"') . '>
-                <div class="dbe_progress-bar-text">
+    return '<div class="progress-bar' . (isset($className) ? ' ' . esc_attr($className) : '').
+            '"' . ($blockID === '' ? '' : ' id="progress-bar-' . $blockID . '"') . '>
+                <div class="progress-bar-text">
                 <p' . ($blockID === '' ? ' style="text-align: ' . $detailAlign . ';"' : '') . '>' . $detail . '</p></div>'
             . $chosenProgressBar
         . '</div>';

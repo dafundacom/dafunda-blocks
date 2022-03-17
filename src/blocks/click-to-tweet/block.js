@@ -39,7 +39,7 @@ registerBlockType("dbe/click-to-tweet", {
 		},
 		ubVia: {
 			source: "meta",
-			meta: "dbe_ctt_via",
+			meta: "ctt_via",
 		},
 		tweetFontSize: {
 			type: "number",
@@ -135,22 +135,19 @@ registerBlockType("dbe/click-to-tweet", {
 				</InspectorControls>
 			),
 			<div className={props.className}>
-				<div
-					className="dbe_click_to_tweet"
-					style={{ borderColor: borderColor }}
-				>
+				<div className="click_to_tweet" style={{ borderColor: borderColor }}>
 					<RichText
 						style={{
 							fontSize: tweetFontSize + "px",
 							color: tweetColor || "inherit",
 						}}
 						placeholder={__("Add Tweetable Content Here")}
-						className="dbe_tweet"
+						className="tweet"
 						value={ubTweet}
 						onChange={(value) => setAttributes({ ubTweet: value })}
 					/>
 
-					<div className="dbe_click_tweet">
+					<div className="click_tweet">
 						<span>
 							<i />
 							{__("Click to Tweet")}

@@ -61,7 +61,7 @@ class Autocomplete extends Component {
 					<div className={this.props.className} style={{ width: "200px" }}>
 						{filteredList.map((item, i) => (
 							<div
-								className={"dbe-autocomplete-list-item"}
+								className={"autocomplete-list-item"}
 								ref={(elem) => (this.listItem[i] = elem)}
 								onClick={() => {
 									this.props.addToSelection(item);
@@ -284,11 +284,11 @@ export default class Inspector extends Component {
 					)}
 					<p>{__("Authors")}</p>
 					{authorArray && (
-						<div className="dbe-autocomplete-container">
+						<div className="autocomplete-container">
 							{authorsList
 								.filter((t) => authorArray.includes(t.id))
 								.map((t) => (
-									<span className="dbe-autocomplete-selection">
+									<span className="autocomplete-selection">
 										{t.name}
 										<span
 											className="dashicons dashicons-dismiss"
@@ -305,7 +305,7 @@ export default class Inspector extends Component {
 						</div>
 					)}
 					<Autocomplete
-						className="dbe-autocomplete-list"
+						className="autocomplete-list"
 						list={authorsList
 							.filter((t) => !authorArray.includes(t.id))
 							.map((t) => ({ label: t.name, value: t.id }))}
@@ -319,11 +319,11 @@ export default class Inspector extends Component {
 					{queryControlPanel}
 					<p>{__("Tags")}</p>
 					{tagArray && (
-						<div className="dbe-autocomplete-container">
+						<div className="autocomplete-container">
 							{tagsList
 								.filter((t) => tagArray.includes(t.id))
 								.map((t) => (
-									<span className="dbe-autocomplete-selection">
+									<span className="autocomplete-selection">
 										{t.name}
 										<span
 											className="dashicons dashicons-dismiss"
@@ -338,7 +338,7 @@ export default class Inspector extends Component {
 						</div>
 					)}
 					<Autocomplete
-						className="dbe-autocomplete-list"
+						className="autocomplete-list"
 						list={tagsList
 							.filter((t) => !tagArray.includes(t.id))
 							.map((t) => ({ label: t.name, value: t.id }))}

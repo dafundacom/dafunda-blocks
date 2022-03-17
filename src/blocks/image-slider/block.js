@@ -242,10 +242,10 @@ registerBlockType("dbe/image-slider", {
 										captionArray.find((c) => c.id === img.id)
 											? captionArray.find((c) => c.id === img.id)
 											: {
-												text: img.caption,
-												link: "",
-												id: img.id,
-											}
+													text: img.caption,
+													link: "",
+													id: img.id,
+											  }
 									);
 
 									setAttributes({
@@ -460,8 +460,8 @@ registerBlockType("dbe/image-slider", {
 			),
 
 			<div
-				id={`dbe_image_slider_${blockID}`}
-				className="dbe_image_slider"
+				id={`image_slider_${blockID}`}
+				className="image_slider"
 				style={{
 					minHeight: `${20 + (imageArray.length ? sliderHeight : 200)}px`,
 				}}
@@ -519,7 +519,7 @@ registerBlockType("dbe/image-slider", {
 								)),
 								isSelected && (
 									<div
-										className="dbe_image_slider_extra"
+										className="image_slider_extra"
 										style={{ height: `${sliderHeight + 30}px` }}
 									>
 										<FormFileUpload
@@ -542,7 +542,7 @@ registerBlockType("dbe/image-slider", {
 														}),
 												})
 											}
-											className="dbe_image_slider_add_images"
+											className="image_slider_add_images"
 											accept="image/*"
 											icon="insert"
 										>
@@ -557,7 +557,7 @@ registerBlockType("dbe/image-slider", {
 								<RichText
 									tagName="figcaption"
 									allowedFormats={[]}
-									className="dbe_image_slider_image_caption"
+									className="image_slider_image_caption"
 									value={descriptions[activeSlide].text}
 									placeholder={__("Caption goes here")}
 									onChange={(text) => {
@@ -577,7 +577,7 @@ registerBlockType("dbe/image-slider", {
 								/>
 								<RichText
 									allowedFormats={[]}
-									className="dbe_image_slider_image_caption dbe_image_slider_image_alt"
+									className="image_slider_image_caption image_slider_image_alt"
 									value={pics[activeSlide].alt}
 									placeholder={__("Image alt text")}
 									onChange={(alt) =>
@@ -595,9 +595,9 @@ registerBlockType("dbe/image-slider", {
 						{isSelected && activeSlide < captionArray.length && (
 							<form
 								onSubmit={(event) => event.preventDefault()}
-								className={`editor-format-toolbar__link-modal-line dbe_image_slider_url_input flex-container`}
+								className={`editor-format-toolbar__link-modal-line image_slider_url_input flex-container`}
 							>
-								<div className="dbe-icon-holder">
+								<div className="icon-holder">
 									<Icon icon="admin-links" />
 								</div>
 								<URLInput

@@ -1,5 +1,5 @@
 Array.prototype.slice
-	.call(document.getElementsByClassName("dbe_image_slider"))
+	.call(document.getElementsByClassName("image_slider"))
 	.forEach((instance) => {
 		const swiper = new Swiper(
 			`#${instance.id}`,

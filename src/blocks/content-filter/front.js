@@ -24,9 +24,9 @@ function dbe_getSiblings(element, criteria) {
 }
 
 Array.prototype.slice
-	.call(document.getElementsByClassName("dbe-content-filter-tag"))
+	.call(document.getElementsByClassName("content-filter-tag"))
 	.forEach((instance) => {
-		const blockProper = instance.closest(".wp-block-dbe-content-filter");
+		const blockProper = instance.closest(".wp-block-content-filter");
 		const initialSelection = blockProper.getAttribute("data-currentselection");
 
 		instance.addEventListener("click", function () {
@@ -39,7 +39,7 @@ Array.prototype.slice
 				this.style.backgroundColor = this.getAttribute("data-activecolor");
 				this.style.color = this.getAttribute("data-activetextcolor");
 			} else {
-				this.classList.toggle("dbe-selected");
+				this.classList.toggle("selected");
 			}
 			const categoryIndex = JSON.parse(
 				this.getAttribute("data-categorynumber")
@@ -51,7 +51,7 @@ Array.prototype.slice
 					!JSON.parse(this.parentElement.getAttribute("data-canusemultiple"))
 				) {
 					dbe_getSiblings(this, (elem) =>
-						elem.classList.contains("dbe-content-filter-tag")
+						elem.classList.contains("content-filter-tag")
 					).forEach((sibling) => {
 						sibling.setAttribute("data-tagisselected", "false");
 						if (isOldVersion) {
@@ -59,7 +59,7 @@ Array.prototype.slice
 								this.getAttribute("data-normalcolor");
 							sibling.style.color = this.getAttribute("data-normaltextcolor");
 						} else {
-							sibling.classList.remove("dbe-selected");
+							sibling.classList.remove("selected");
 						}
 					});
 				}
@@ -68,7 +68,7 @@ Array.prototype.slice
 					this.style.backgroundColor = this.getAttribute("data-normalcolor");
 					this.style.color = this.getAttribute("data-normaltextcolor");
 				} else {
-					this.classList.remove("dbe-selected");
+					this.classList.remove("selected");
 				}
 			}
 			let newSelection = JSON.parse(
@@ -93,9 +93,7 @@ Array.prototype.slice
 			const matchingOption = blockProper.getAttribute("data-matchingoption");
 
 			Array.prototype.slice
-				.call(
-					blockProper.querySelectorAll(":scope > .dbe-content-filter-panel")
-				)
+				.call(blockProper.querySelectorAll(":scope > .content-filter-panel"))
 				.forEach((instance) => {
 					const panelData = JSON.parse(
 						instance.getAttribute("data-selectedfilters")
@@ -161,9 +159,9 @@ Array.prototype.slice
 					if (isOldVersion) {
 						instance.style.display = isVisible ? "block" : "none";
 					} else if (isVisible) {
-						instance.classList.remove("dbe-hide");
+						instance.classList.remove("hide");
 						Array.prototype.slice
-							.call(document.getElementsByClassName("dbe_image_slider"))
+							.call(document.getElementsByClassName("image_slider"))
 							.forEach((slider) => {
 								const swiper = new Swiper(
 									`#${slider.id}`,
@@ -171,7 +169,7 @@ Array.prototype.slice
 								);
 							});
 					} else {
-						instance.classList.add("dbe-hide");
+						instance.classList.add("hide");
 					}
 
 					Array.prototype.slice
@@ -184,10 +182,10 @@ Array.prototype.slice
 		});
 	});
 
-/*Array.from(document.getElementsByClassName('dbe-content-filter-reset')).forEach(
+/*Array.from(document.getElementsByClassName('content-filter-reset')).forEach(
 	instance => {
 		instance.addEventListener('click', function() {
-			const blockProper = this.closest('.wp-block-dbe-content-filter');
+			const blockProper = this.closest('.wp-block-content-filter');
 
 			let blockSelection = JSON.parse(
 				blockProper.getAttribute('data-currentselection')
@@ -203,13 +201,13 @@ Array.prototype.slice
 			);
 
 			Array.from(
-				blockProper.getElementsByClassName('dbe-content-filter-panel')
+				blockProper.getElementsByClassName('content-filter-panel')
 			).forEach(instance => {
 				instance.style.display = 'block';
 			});
 
 			Array.from(
-				blockProper.getElementsByClassName('dbe-content-filter-tag')
+				blockProper.getElementsByClassName('content-filter-tag')
 			).forEach(instance => {
 				instance.setAttribute('data-tagisselected', 'false');
 				instance.style.backgroundColor = instance.getAttribute(

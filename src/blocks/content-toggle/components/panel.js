@@ -193,9 +193,9 @@ class ContentTogglePanel extends Component {
 						]}
 					/>
 					<PanelRow>
-						<label htmlFor="dbe-content-toggle-border">{__("Border")}</label>
+						<label htmlFor="content-toggle-border">{__("Border")}</label>
 						<FormToggle
-							id="dbe-content-toggle-border"
+							id="content-toggle-border"
 							label={__("Enable border")}
 							checked={border}
 							onChange={() => setAttributes({ border: !border })}
@@ -205,11 +205,11 @@ class ContentTogglePanel extends Component {
 				<PanelBody title={__("Initial State")} initialOpen={true}>
 					{!blockParent.attributes.individualCollapse && (
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-amount">
+							<label htmlFor="content-toggle-amount">
 								{__("Show only one panel at a time")}
 							</label>
 							<FormToggle
-								id="dbe-content-toggle-amount"
+								id="content-toggle-amount"
 								label={__("Show only one panel at a time")}
 								checked={showOnlyOne}
 								onChange={() => {
@@ -227,11 +227,9 @@ class ContentTogglePanel extends Component {
 					{!preventCollapse && (
 						<>
 							<PanelRow>
-								<label htmlFor="dbe-content-toggle-state">
-									{__("Collapsed")}
-								</label>
+								<label htmlFor="content-toggle-state">{__("Collapsed")}</label>
 								<FormToggle
-									id="dbe-content-toggle-state"
+									id="content-toggle-state"
 									label={__("Collapsed")}
 									checked={collapsed}
 									onChange={() => {
@@ -246,11 +244,11 @@ class ContentTogglePanel extends Component {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="dbe-content-toggle-mobile-state">
+								<label htmlFor="content-toggle-mobile-state">
 									{__("Collapsed on mobile")}
 								</label>
 								<FormToggle
-									id="dbe-content-toggle-mobile-state"
+									id="content-toggle-mobile-state"
 									label={__("Collapsed on mobile")}
 									checked={collapsedOnMobile}
 									onChange={() =>
@@ -265,11 +263,11 @@ class ContentTogglePanel extends Component {
 						!collapsedOnMobile &&
 						!showOnlyOne && (
 							<PanelRow>
-								<label htmlFor="dbe-content-toggle-state">
+								<label htmlFor="content-toggle-state">
 									{__("Prevent collapse")}
 								</label>
 								<FormToggle
-									id="dbe-content-toggle-state"
+									id="content-toggle-state"
 									label={__("Prevent collapse")}
 									checked={preventCollapse}
 									onChange={() =>
@@ -281,11 +279,11 @@ class ContentTogglePanel extends Component {
 				</PanelBody>
 				<PanelBody title={__("FAQ Schema")} initialOpen={true}>
 					<PanelRow>
-						<label htmlFor="dbe-content-toggle-faq-schema">
+						<label htmlFor="content-toggle-faq-schema">
 							{__("Enable FAQ Schema")}
 						</label>
 						<FormToggle
-							id="dbe-content-toggle-faq-schema"
+							id="content-toggle-faq-schema"
 							label={__("Enable FAQ Schema")}
 							checked={hasFAQSchema}
 							onChange={() => setAttributes({ hasFAQSchema: !hasFAQSchema })}
@@ -317,11 +315,11 @@ class ContentTogglePanel extends Component {
 				<PanelBody title={__("Toggle status icon", "dafunda-blocks")}>
 					{toggleIcon !== "none" && (
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-status-location">
+							<label htmlFor="content-toggle-status-location">
 								{__("Location", "dafunda-blocks")}
 							</label>
 							<ButtonGroup
-								id="dbe-content-toggle-status-location"
+								id="content-toggle-status-location"
 								aria-label={__("toggle icon position", "dafunda-blocks")}
 							>
 								{Object.keys(toggleIconPositions).map((p) => {
@@ -344,7 +342,7 @@ class ContentTogglePanel extends Component {
 						</PanelRow>
 					)}
 					<PanelRow>
-						<label htmlFor="dbe-content-toggle-status-icon">
+						<label htmlFor="content-toggle-status-icon">
 							{__("Icon", "dafunda-blocks")}
 						</label>
 						<Dropdown
@@ -359,7 +357,7 @@ class ContentTogglePanel extends Component {
 								</Button>
 							)}
 							renderContent={() => (
-								<div className="wp-block-dbe-content-toggle-customize-icons-wrap">
+								<div className="wp-block-content-toggle-customize-icons-wrap">
 									{Object.keys(icons).map((i) => {
 										if (Object.prototype.hasOwnProperty.call(icons, i)) {
 											return (
@@ -390,7 +388,7 @@ class ContentTogglePanel extends Component {
 					value={toggleID}
 					onChange={(e) => setAttributes({ toggleID: e.target.value })}
 				/>
-				<p class="dbe-custom-id-input">
+				<p class="custom-id-input">
 					{__(
 						"Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page."
 					)}{" "}
@@ -408,19 +406,19 @@ class ContentTogglePanel extends Component {
 				</p>
 			</InspectorAdvancedControls>,
 			<div
-				className={`wp-block-dbe-content-toggle-accordion ${
+				className={`wp-block-content-toggle-accordion ${
 					border ? "" : "no-border"
 				}`}
 				style={{ borderColor: theme }}
 			>
 				<div
-					className="wp-block-dbe-content-toggle-accordion-title-wrap"
+					className="wp-block-content-toggle-accordion-title-wrap"
 					style={{ backgroundColor: theme }}
 				>
 					<RichText
 						tagName={titleTag}
 						style={{ color: titleColor }}
-						className={`wp-block-dbe-content-toggle-accordion-title dbe-accordion-title-${parentID}`}
+						className={`wp-block-content-toggle-accordion-title accordion-title-${parentID}`}
 						value={panelTitle}
 						allowedFormats={["core/bold", "core/italic", "core/link"]}
 						onChange={(value) => setAttributes({ panelTitle: value })}
@@ -434,18 +432,18 @@ class ContentTogglePanel extends Component {
 					{toggleIcon !== "none" && (
 						<div
 							className={
-								"wp-block-dbe-content-toggle-accordion-toggle-wrap " +
+								"wp-block-content-toggle-accordion-toggle-wrap " +
 								toggleLocation
 							}
 							style={{ color: toggleColor }}
 						>
 							<span
 								onClick={() => this.setState({ showPanel: !showPanel })}
-								className={`wp-block-dbe-content-toggle-accordion-state-indicator ${
+								className={`wp-block-content-toggle-accordion-state-indicator ${
 									icons[toggleIcon] ? icons[toggleIcon] : ""
 								} ${showPanel ? "open" : ""}`}
 							/>
-							<div className="wp-block-dbe-content-toggle-accordion-toggle-location">
+							<div className="wp-block-content-toggle-accordion-toggle-location">
 								<span
 									title={__("Switch toggle location", "dafunda-blocks")}
 									onClick={() =>
@@ -461,11 +459,11 @@ class ContentTogglePanel extends Component {
 					)}
 				</div>
 				{showPanel && (
-					<div className="wp-block-dbe-content-toggle-accordion-content-wrap">
+					<div className="wp-block-content-toggle-accordion-content-wrap">
 						<InnerBlocks templateLock={false} />
 					</div>
 				)}
-				<div className="wp-block-dbe-content-toggle-accordion-controls-top">
+				<div className="wp-block-content-toggle-accordion-controls-top">
 					<span
 						title={__("Insert New Toggle Above")}
 						onClick={() => setAttributes({ newBlockPosition: "above" })}
@@ -477,7 +475,7 @@ class ContentTogglePanel extends Component {
 						class="dashicons dashicons-dismiss"
 					/>
 				</div>
-				<div className="wp-block-dbe-content-toggle-accordion-controls-bottom">
+				<div className="wp-block-content-toggle-accordion-controls-bottom">
 					<span
 						title={__("Insert New Toggle Below")}
 						onClick={() => setAttributes({ newBlockPosition: "below" })}
@@ -520,7 +518,7 @@ registerBlockType("dbe/content-toggle-panel", {
 	])(ContentTogglePanel),
 	save(props) {
 		const { theme, collapsed, titleColor, panelTitle } = props.attributes;
-		const classNamePrefix = "wp-block-dbe-content-toggle";
+		const classNamePrefix = "wp-block-content-toggle";
 		return (
 			<div
 				style={{ borderColor: theme }}

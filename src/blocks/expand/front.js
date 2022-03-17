@@ -24,32 +24,32 @@ function dbe_getSiblings(element, criteria) {
 }
 
 Array.prototype.slice
-	.call(document.getElementsByClassName("dbe-expand-toggle-button"))
+	.call(document.getElementsByClassName("expand-toggle-button"))
 	.forEach((instance) => {
 		if (instance.getAttribute("aria-controls") === "") {
 			const blockID = instance.parentElement.parentElement.id.slice(10);
 
-			instance.setAttribute("aria-controls", `dbe-expand-full-${blockID}`);
-			if (instance.parentElement.classList.contains("dbe-expand-full")) {
-				instance.parentElement.setAttribute("id", `dbe-expand-full-${blockID}`);
+			instance.setAttribute("aria-controls", `expand-full-${blockID}`);
+			if (instance.parentElement.classList.contains("expand-full")) {
+				instance.parentElement.setAttribute("id", `expand-full-${blockID}`);
 			}
 		}
 
 		const togglePanel = () => {
-			const blockRoot = instance.closest(".dbe-expand");
+			const blockRoot = instance.closest(".expand");
 			blockRoot
-				.querySelector(".dbe-expand-partial .dbe-expand-toggle-button")
-				.classList.toggle("dbe-hide");
+				.querySelector(".expand-partial .expand-toggle-button")
+				.classList.toggle("hide");
 
 			const expandingPart = Array.prototype.slice
 				.call(blockRoot.children)
-				.filter((child) => child.classList.contains("dbe-expand-full"))[0];
+				.filter((child) => child.classList.contains("expand-full"))[0];
 
-			expandingPart.classList.toggle("dbe-hide");
+			expandingPart.classList.toggle("hide");
 
-			if (!expandingPart.classList.contains("dbe-hide")) {
+			if (!expandingPart.classList.contains("hide")) {
 				Array.prototype.slice
-					.call(document.getElementsByClassName("dbe_image_slider"))
+					.call(document.getElementsByClassName("image_slider"))
 					.forEach((slider) => {
 						const swiper = new Swiper(
 							`#${slider.id}`,

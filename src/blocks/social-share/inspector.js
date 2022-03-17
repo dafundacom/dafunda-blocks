@@ -261,11 +261,11 @@ export default class Inspector extends Component {
 				</PanelBody>
 				<PanelBody title={__("Color")} initialOpen={false}>
 					<PanelRow>
-						<label htmlFor="dbe_social_share_custom_color">
+						<label htmlFor="social_share_custom_color">
 							<b>{__("Customize color")}</b>
 						</label>
 						<FormToggle
-							id="dbe_social_share_custom_color"
+							id="social_share_custom_color"
 							label={__("Customize color")}
 							checked={buttonColor}
 							onChange={() =>

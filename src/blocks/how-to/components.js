@@ -399,50 +399,50 @@ class HowToStep extends Component {
 			advancedMode,
 			blockIsSelected,
 			selectStep,
-			stepNum
+			stepNum,
 		} = this.props;
 
 		const { startTime, endTime, validTimeInput } = this.state;
 
 		return (
 			<>
-				<div className="dbe_howto-step__control-button">
+				<div className="howto-step__control-button">
 					<Button
-						className="dbe_howto-delete"
+						className="howto-delete"
 						icon="trash"
 						label={__("Delete step")}
 						onClick={() => deleteStep()}
 					/>
 					<Button
-						className="dbe_howto-arrow"
+						className="howto-arrow"
 						icon="arrow-up-alt"
 						onClick={() => moveUp()}
 						label={__("Move step up")}
 					/>
 					<Button
-						className="dbe_howto-arrow"
+						className="howto-arrow"
 						icon="arrow-down-alt"
 						onClick={() => moveDown()}
 						label={__("Move step down")}
 					/>
 				</div>
-				<li className="dbe_howto-step w-full">
+				<li className="howto-step w-full">
 					<div className="grid grid-cols-12 grid-flow-row gap-0">
-						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none dbe_howto-step__stepnum">
+						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none howto-step__stepnum">
 							<h1>{stepNum + 1}</h1>
 						</div>
-						<div className="order-2 md:order-2 col-span-10 md:col-span-11 dbe_howto-step__desc" >
+						<div className="order-2 md:order-2 col-span-10 md:col-span-11 howto-step__desc">
 							<RichText
 								tagName={stepTag}
 								keepPlaceholderOnFocus
 								placeholder={__("Title goes here")}
-								className="dbe_howto-step__title"
+								className="howto-step__title"
 								value={title}
 								onChange={(newVal) => editStep({ title: newVal })}
 								onFocus={selectStep}
 							/>
 						</div>
-						<div className="order-4 md:order-3 col-span-12 md:col-span-11 dbe_howto-step__desc" >
+						<div className="order-4 md:order-3 col-span-12 md:col-span-11 howto-step__desc">
 							<RichText
 								keepPlaceholderOnFocus
 								placeholder={__("Direction goes here")}
@@ -490,7 +490,8 @@ class HowToStep extends Component {
 													onChange={(e) => {
 														const { h, m, s } = this.state.startTime;
 														const d = Number(e.target.value);
-														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+														const startPoint =
+															d * 86400 + h * 3600 + m * 60 + s;
 
 														if (
 															startPoint < videoDuration &&
@@ -516,7 +517,8 @@ class HowToStep extends Component {
 													onChange={(e) => {
 														const { d, m, s } = this.state.startTime;
 														const h = Number(e.target.value);
-														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+														const startPoint =
+															d * 86400 + h * 3600 + m * 60 + s;
 
 														if (
 															startPoint < videoDuration &&
@@ -543,7 +545,8 @@ class HowToStep extends Component {
 													onChange={(e) => {
 														const { d, h, s } = this.state.startTime;
 														const m = Number(e.target.value);
-														const startPoint = d * 86400 + h * 3600 + m * 60 + s;
+														const startPoint =
+															d * 86400 + h * 3600 + m * 60 + s;
 
 														if (
 															startPoint < videoDuration &&
@@ -697,11 +700,11 @@ class HowToStep extends Component {
 								</>
 							)}
 						</div>
-						<div className="order-3 md:order-4 col-span-12 dbe_howto-step__image">
+						<div className="order-3 md:order-4 col-span-12 howto-step__image">
 							{stepPic.url !== "" ? (
 								<figure>
 									<img
-										className="dbe_howto-step-image"
+										className="howto-step-image"
 										src={stepPic.url}
 										onClick={selectStep}
 									/>
@@ -731,7 +734,9 @@ class HowToStep extends Component {
 										onFocus={selectStep}
 										onChange={(newCaption) =>
 											editStep({
-												stepPic: Object.assign(stepPic, { caption: newCaption }),
+												stepPic: Object.assign(stepPic, {
+													caption: newCaption,
+												}),
 											})
 										}
 									/>
@@ -756,7 +761,7 @@ class HowToStep extends Component {
 										value={stepPic.id}
 										render={({ open }) => (
 											<Button
-												className="button is-default is-large dbe_howto-button-default !leading-[inherit]"
+												className="button is-default is-large howto-button-default !leading-[inherit]"
 												onClick={open}
 											>
 												{__("Upload Image")}
@@ -767,7 +772,6 @@ class HowToStep extends Component {
 							)}
 						</div>
 					</div>
-
 				</li>
 			</>
 		);
@@ -798,7 +802,7 @@ class HowToSection extends Component {
 		} = this.props;
 
 		return (
-			<li className="dbe_howto-section">
+			<li className="howto-section">
 				<div>
 					<RichText
 						keepPlaceholderOnFocus
@@ -808,16 +812,13 @@ class HowToSection extends Component {
 						onChange={(sectionName) => editSection({ sectionName, steps })}
 					/>
 					<Button
-						className="dbe_howto-delete"
+						className="howto-delete"
 						icon="trash"
 						label={__("Delete section")}
 						onClick={() => deleteSection()}
 					/>
 				</div>
-				<ListWrapper
-					className="dbe_howto-steps-list"
-					listStyle={sectionListStyle}
-				>
+				<ListWrapper className="howto-steps-list" listStyle={sectionListStyle}>
 					{steps.map((step, i) => (
 						<HowToStep
 							{...step}
@@ -894,7 +895,7 @@ class HowToSection extends Component {
 					))}
 				</ListWrapper>
 				<Button
-					className="dbe_howto-button-default"
+					className="howto-button-default"
 					onClick={() => {
 						editSection({
 							sectionName,
@@ -1250,7 +1251,7 @@ export class EditorComponent extends Component {
 					{...this.state}
 					updateState={(newState) => this.setState(newState)}
 				/>
-				<div className="dbe_howto" id={`dbe_howto-${blockID}`}>
+				<div className="howto" id={`howto-${blockID}`}>
 					<RichText
 						tagName={firstLevelTag}
 						placeholder={__("How to title")}
@@ -1267,7 +1268,7 @@ export class EditorComponent extends Component {
 					/>
 					{advancedMode && (
 						<>
-							<div className="dbe_howto-video-input">
+							<div className="howto-video-input">
 								<input
 									type="url"
 									placeholder={__("Insert video URL")}
@@ -1314,7 +1315,7 @@ export class EditorComponent extends Component {
 										}
 									/>
 									<ListWrapper
-										className={"dbe_howto-supplies-list"}
+										className={"howto-supplies-list"}
 										listStyle={suppliesListStyle}
 									>
 										{supplies.map((supply, i) => (
@@ -1351,7 +1352,7 @@ export class EditorComponent extends Component {
 													(supply.imageURL !== "" ? (
 														<figure>
 															<img
-																className="dbe_howto-supply-image"
+																className="howto-supply-image"
 																src={supply.imageURL}
 															/>
 															{isSelected && (
@@ -1393,7 +1394,7 @@ export class EditorComponent extends Component {
 															value={supply.imageID}
 															render={({ open }) => (
 																<Button
-																	className="button is-default is-large dbe_howto-button-default"
+																	className="button is-default is-large howto-button-default"
 																	onClick={open}
 																>
 																	{__("Upload Image")}
@@ -1405,7 +1406,7 @@ export class EditorComponent extends Component {
 										))}
 									</ListWrapper>
 									<Button
-										className="dbe_howto-button-default"
+										className="howto-button-default"
 										onClick={() =>
 											setAttributes({
 												supplies: [
@@ -1429,7 +1430,7 @@ export class EditorComponent extends Component {
 										onChange={(toolsIntro) => setAttributes({ toolsIntro })}
 									/>
 									<ListWrapper
-										className={"dbe_howto-tools-list"}
+										className={"howto-tools-list"}
 										listStyle={toolsListStyle}
 									>
 										{tools.map((tool, i) => (
@@ -1505,7 +1506,7 @@ export class EditorComponent extends Component {
 															value={tool.imageID}
 															render={({ open }) => (
 																<Button
-																	className="button is-default is-large dbe_howto-button-default"
+																	className="button is-default is-large howto-button-default"
 																	onClick={open}
 																>
 																	{__("Upload Image")}
@@ -1517,7 +1518,7 @@ export class EditorComponent extends Component {
 										))}
 									</ListWrapper>
 									<Button
-										className="dbe_howto-button-default"
+										className="howto-button-default"
 										onClick={() =>
 											setAttributes({
 												tools: [
@@ -1531,7 +1532,7 @@ export class EditorComponent extends Component {
 									</Button>
 								</>
 							)}
-							<div className="dbe_howto_cost_container">
+							<div className="howto_cost_container">
 								<RichText
 									value={costDisplayText}
 									onChange={(costDisplayText) =>
@@ -1539,7 +1540,7 @@ export class EditorComponent extends Component {
 									}
 								/>
 								<div
-									className="dbe_howto_cost_display"
+									className="howto_cost_display"
 									style={{
 										flexDirection: showUnitFirst ? "row" : "row-reverse",
 									}}
@@ -1577,7 +1578,7 @@ export class EditorComponent extends Component {
 								value={timeIntro}
 								onChange={(timeIntro) => setAttributes({ timeIntro })}
 							/>
-							<div className="dbe_howto-duration-input">
+							<div className="howto-duration-input">
 								<span />
 								{units.map((u) => (
 									<p>{__(u)}</p>
@@ -1589,7 +1590,7 @@ export class EditorComponent extends Component {
 								/>
 								{totalTime.map((t, i) => (
 									<RichText
-										className="dbe_howto-time-value"
+										className="howto-time-value"
 										keepPlaceholderOnFocus
 										placeholder={__("0")}
 										value={String(t)}
@@ -1651,7 +1652,7 @@ export class EditorComponent extends Component {
 					) : (
 						<>
 							<ListWrapper
-								className={"dbe_howto-steps-list"}
+								className={"howto-steps-list"}
 								listStyle={sectionListStyle}
 							>
 								{section[0].steps.map((step, i) => (
@@ -1745,7 +1746,7 @@ export class EditorComponent extends Component {
 								))}
 							</ListWrapper>
 							<Button
-								className="dbe_howto-button-default"
+								className="howto-button-default"
 								onClick={() => {
 									setAttributes({
 										section: [
@@ -1780,7 +1781,7 @@ export class EditorComponent extends Component {
 					)}
 					{useSections && (
 						<Button
-							className="dbe_howto-button-default"
+							className="howto-button-default"
 							onClick={() =>
 								setAttributes({
 									section: [
@@ -1813,7 +1814,7 @@ export class EditorComponent extends Component {
 							{__("Add Section")}
 						</Button>
 					)}
-					<div className="dbe_howto-yield">
+					<div className="howto-yield">
 						<RichText
 							tagName={secondLevelTag}
 							placeholder={__("Result")}
@@ -1823,7 +1824,7 @@ export class EditorComponent extends Component {
 							onFocus={() => this.setState({ currentStep: "final" })}
 						/>
 						{finalImageURL !== "" ? (
-							<figure className="dbe_howto-yield-image-container">
+							<figure className="howto-yield-image-container">
 								<img
 									src={finalImageURL}
 									onClick={() => this.setState({ currentStep: "final" })}
@@ -1872,7 +1873,7 @@ export class EditorComponent extends Component {
 								value={finalImageID}
 								render={({ open }) => (
 									<Button
-										className="button is-default is-large dbe_howto-button-default"
+										className="button is-default is-large howto-button-default"
 										onClick={open}
 									>
 										{__("Upload Image")}
@@ -1891,44 +1892,51 @@ export class EditorComponent extends Component {
 				</div>
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `@media (min-width:768px) {${useSections
-							? section
-								.map((s, i) =>
-									s.steps
-										.map((st) =>
-											(({ width, float }) => ({ width, float }))(st.stepPic)
+						__html: `@media (min-width:768px) {${
+							useSections
+								? section
+										.map((s, i) =>
+											s.steps
+												.map((st) =>
+													(({ width, float }) => ({ width, float }))(st.stepPic)
+												)
+												.map((img, j) =>
+													img.width > 0
+														? `#howto-${blockID} .howto-section:nth-child(${
+																i + 1
+														  }) .howto-step:nth-child(${
+																j + 1
+														  }) figure { width: ${img.width}px; float: ${
+																img.float
+														  };}`
+														: ""
+												)
+												.join("")
 										)
-										.map((img, j) =>
+										.join("")
+								: section[0].steps
+										.map((s) =>
+											(({ width, float }) => ({ width, float }))(s.stepPic)
+										)
+										.map((img, i) =>
 											img.width > 0
-												? `#dbe_howto-${blockID} .dbe_howto-section:nth-child(${i + 1
-												}) .dbe_howto-step:nth-child(${j + 1
-												}) figure { width: ${img.width}px; float: ${img.float
-												};}`
+												? `#howto-${blockID} .howto-step:nth-child(${
+														i + 1
+												  }) figure { width: ${img.width}px; float: ${
+														img.float
+												  };}`
 												: ""
 										)
 										.join("")
-								)
-								.join("")
-							: section[0].steps
-								.map((s) =>
-									(({ width, float }) => ({ width, float }))(s.stepPic)
-								)
-								.map((img, i) =>
-									img.width > 0
-										? `#dbe_howto-${blockID} .dbe_howto-step:nth-child(${i + 1
-										}) figure { width: ${img.width}px; float: ${img.float
-										};}`
-										: ""
-								)
-								.join("")
-							}
-						${finalImageWidth > 0
-								? `#dbe_howto-${blockID} .dbe_howto-yield-image-container{
+						}
+						${
+							finalImageWidth > 0
+								? `#howto-${blockID} .howto-yield-image-container{
 							width: ${finalImageWidth}px;
 							float: ${finalImageFloat};
 						}`
 								: ""
-							}
+						}
 					}`,
 					}}
 				/>

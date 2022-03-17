@@ -45,8 +45,8 @@ function dbe_render_social_share_block( $attributes ) {
 		$icons = str_replace('"><svg', '"' . $additionalStyle . '><svg', $icons);
 	}
 
-    return '<div class="wp-block-dbe-social-share'.(isset($className) ? ' ' . esc_attr($className) : '').
-                '"' . ($blockID === '' ? '' : ' id="dbe-social-share-' . $blockID . '"') . '>
+    return '<div class="wp-block-social-share'.(isset($className) ? ' ' . esc_attr($className) : '').
+                '"' . ($blockID === '' ? '' : ' id="social-share-' . $blockID . '"') . '>
 		<div class="social-share-icons align-icons-' . $align . ($useCaptions && !$addOutline ? ' no-outline' : '') . '">' . $icons .
         '</div>
 	</div>';
@@ -63,15 +63,15 @@ function dbe_render_social_share_block( $attributes ) {
 
 function dbe_prepare_social_share_icon($icon, $iconShape, $siteName, $link, $caption, $hasOutline){
 	if($hasOutline){
-		return '<a target="_blank" href="' . esc_url($link) . '" class="dbe-social-share-' . $siteName . '-container">
-		<span class="social-share-icon dbe-social-share-' . $siteName . ' ' . $iconShape . '">' .
+		return '<a target="_blank" href="' . esc_url($link) . '" class="social-share-' . $siteName . '-container">
+		<span class="social-share-icon social-share-' . $siteName . ' ' . $iconShape . '">' .
 		   $icon .
 		'</span>' .
 		( $caption ? ('<span>' . $caption . '</span>') : '' ) . '</a>';
 	}
 	else{
-		return ($caption ? ('<div class="dbe-social-share-' . $siteName . '-container">') : '') .
-		'<a target="_blank" href="' . esc_url($link) . '" class="social-share-icon dbe-social-share-' . $siteName . ' ' . ($caption ? ' ' : 'dbe-social-share-standalone-icon ') . $iconShape . '">'
+		return ($caption ? ('<div class="social-share-' . $siteName . '-container">') : '') .
+		'<a target="_blank" href="' . esc_url($link) . '" class="social-share-icon social-share-' . $siteName . ' ' . ($caption ? ' ' : 'social-share-standalone-icon ') . $iconShape . '">'
         	. $icon . '</a>' . 
 		( $caption ? '<span><a target="_blank" href="' . esc_url($link) . '">' . $caption . '</a></span></div>' : '' );
 	}

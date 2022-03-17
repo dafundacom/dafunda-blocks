@@ -7,7 +7,7 @@ export const oldAttributes = {
 	buttonText: {
 		type: "array",
 		source: "children",
-		selector: ".dbe-button-block-btn",
+		selector: ".button-block-btn",
 		default: "Button Text",
 	},
 	align: {
@@ -79,11 +79,11 @@ export const version_1_1_2 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={"dbe-button-container align-button-" + align}>
+			<div className={"button-container align-button-" + align}>
 				<a
 					href={url}
 					target="_blank"
-					className={"dbe-button-block-btn dbe-button-" + size}
+					className={"button-block-btn button-" + size}
 					style={{
 						backgroundColor: buttonColor,
 						color: buttonTextColor,
@@ -110,11 +110,11 @@ export const version_1_1_4 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={"dbe-button-container align-button-" + align}>
+			<div className={"button-container align-button-" + align}>
 				<a
 					href={url}
 					target="_blank"
-					className={"dbe-button-block-btn dbe-button-" + size}
+					className={"button-block-btn button-" + size}
 					style={{
 						backgroundColor: buttonColor,
 						color: buttonTextColor,
@@ -142,11 +142,11 @@ export const version_1_1_5 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={"dbe-button-container align-button-" + align}>
+			<div className={"button-container align-button-" + align}>
 				<a
 					href={url}
 					target="_blank"
-					className={"dbe-button-block-btn dbe-button-" + size}
+					className={"button-block-btn button-" + size}
 					style={{
 						backgroundColor: buttonColor,
 						color: buttonTextColor,
@@ -183,13 +183,13 @@ export const version_2_0_0 = (props) => {
 
 	return (
 		<div
-			className={`${props.className} dbe-button-container align-button-${align}`}
+			className={`${props.className} button-container align-button-${align}`}
 		>
 			<a
 				href={url}
 				target={openInNewTab ? "_blank" : "_self"}
 				rel={`noopener noreferrer${addNofollow ? " nofollow" : ""}`}
-				className={`dbe-button-block-main dbe-button-${size}`}
+				className={`button-block-main button-${size}`}
 				data-defaultColor={buttonColor}
 				data-defaultTextColor={buttonTextColor}
 				data-hoverColor={buttonHoverColor}
@@ -203,7 +203,7 @@ export const version_2_0_0 = (props) => {
 				}}
 			>
 				<div
-					className="dbe-button-content-holder"
+					className="button-content-holder"
 					style={{
 						flexDirection: iconPosition === "left" ? "row" : "row-reverse",
 					}}
@@ -211,14 +211,14 @@ export const version_2_0_0 = (props) => {
 					{chosenIcon &&
 						chosenIcon !== "" &&
 						allIcons.hasOwnProperty(`fa${dashesToCamelcase(chosenIcon)}`) && (
-							<span className="dbe-button-icon-holder">
+							<span className="button-icon-holder">
 								{generateIcon(
 									allIcons[`fa${dashesToCamelcase(chosenIcon)}`],
 									iconSize[size]
 								)}
 							</span>
 						)}
-					<span className={"dbe-button-block-btn"}>{buttonText}</span>
+					<span className={"button-block-btn"}>{buttonText}</span>
 				</div>
 			</a>
 		</div>

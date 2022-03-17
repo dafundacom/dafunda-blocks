@@ -82,7 +82,7 @@ registerBlockType("dbe/star-rating", {
 		return [
 			isSelected && blockControls(props),
 			isSelected && inspectorControls(props),
-			<div className="dbe-star-rating">
+			<div className="star-rating">
 				<button
 					onClick={() => {
 						const { reviewText, ...otherAttributes } = attributes;
@@ -115,9 +115,9 @@ registerBlockType("dbe/star-rating", {
 			starAlign,
 		} = props.attributes;
 		return (
-			<div className="dbe-star-rating">
+			<div className="star-rating">
 				<div
-					className="dbe-star-outer-container"
+					className="star-outer-container"
 					style={{
 						justifyContent:
 							starAlign === "center"
@@ -125,7 +125,7 @@ registerBlockType("dbe/star-rating", {
 								: `flex-${starAlign === "left" ? "start" : "end"}`,
 					}}
 				>
-					<div className="dbe-star-inner-container">
+					<div className="star-inner-container">
 						{[...Array(starCount)].map((e, i) => (
 							<div key={i}>
 								{i < selectedStars ? (
@@ -137,7 +137,7 @@ registerBlockType("dbe/star-rating", {
 						))}
 					</div>
 				</div>
-				<div className="dbe-review-text" style={{ textAlign: reviewTextAlign }}>
+				<div className="review-text" style={{ textAlign: reviewTextAlign }}>
 					{reviewText}
 				</div>
 			</div>
@@ -198,7 +198,7 @@ registerBlockType("dbe/star-rating-block", {
 		return [
 			isSelected && blockControls(props),
 			isSelected && inspectorControls(props),
-			<div className="dbe-star-rating">{editorDisplay(props)}</div>,
+			<div className="star-rating">{editorDisplay(props)}</div>,
 		];
 	}),
 	save: () => null,

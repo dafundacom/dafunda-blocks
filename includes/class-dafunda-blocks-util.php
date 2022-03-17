@@ -42,7 +42,7 @@ class Dafunda_Blocks_Util {
 				'active' => true,
 			),
 			array(
-				'label'  => 'Button (Improved)',
+				'label'  => 'Button',
 				'name'   => 'dbe/button',
 				'active' => true,
 			),

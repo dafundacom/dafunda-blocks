@@ -95,15 +95,15 @@ export const version_1_1_2 = (props) => {
 	const average = calculateAverage(items);
 
 	return (
-		<div className="dbe_review_block">
+		<div className="review_block">
 			<RichText.Content
-				className="dbe_review_item_name"
+				className="review_item_name"
 				tagName="p"
 				value={itemName}
 			/>
 			<RichText.Content tagName="p" value={authorName} />
 			{JSON.parse(items).map((j, i) => (
-				<div className="dbe_review_entry">
+				<div className="review_entry">
 					<RichText.Content key={i} value={j.label} />
 					<OldStars
 						style={{ marginLeft: "auto" }}
@@ -116,18 +116,18 @@ export const version_1_1_2 = (props) => {
 					/>
 				</div>
 			))}
-			<div className="dbe_review_summary">
+			<div className="review_summary">
 				<RichText.Content
-					className="dbe_review_summary_title"
+					className="review_summary_title"
 					tagName="p"
 					value={summaryTitle}
 				/>
-				<div className="dbe_review_overall_value">
+				<div className="review_overall_value">
 					<RichText.Content tagName="p" value={summaryDescription} />
-					<span className="dbe_review_rating">{average}</span>
+					<span className="review_rating">{average}</span>
 				</div>
-				<div className="dbe_review_cta_panel">
-					<div className="dbe_review_cta_main">
+				<div className="review_cta_panel">
+					<div className="review_cta_main">
 						<a
 							style={{ color: callToActionForeColor }}
 							href={callToActionURL ? callToActionURL : "#"}
@@ -135,7 +135,7 @@ export const version_1_1_2 = (props) => {
 							rel="nofollow"
 						>
 							<button
-								className="dbe_review_cta_btn"
+								className="review_cta_btn"
 								style={{
 									backgroundColor: callToActionBackColor,
 									border: `1px solid ${callToActionForeColor}`,
@@ -150,7 +150,7 @@ export const version_1_1_2 = (props) => {
 					</div>
 					<OldStars
 						id={`${ID}-average`}
-						className="dbe_review_average_stars"
+						className="review_average_stars"
 						value={average}
 						limit={starCount}
 						inactiveStarColor={inactiveStarColor}
@@ -205,15 +205,15 @@ export const version_1_1_4 = (props) => {
 	const average = calculateAverage(items);
 
 	return (
-		<div className="dbe_review_block">
+		<div className="review_block">
 			<RichText.Content
 				tagName="p"
-				className="dbe_review_item_name"
+				className="review_item_name"
 				value={itemName}
 			/>
 			<RichText.Content tagName="p" value={authorName} />
 			{JSON.parse(items).map((j, i) => (
-				<div className="dbe_review_entry">
+				<div className="review_entry">
 					<RichText.Content key={i} value={j.label} />
 					<OldStars
 						style={{ marginLeft: "auto" }}
@@ -226,18 +226,18 @@ export const version_1_1_4 = (props) => {
 					/>
 				</div>
 			))}
-			<div className="dbe_review_summary">
+			<div className="review_summary">
 				<RichText.Content
-					className="dbe_review_summary_title"
+					className="review_summary_title"
 					tagName="p"
 					value={summaryTitle}
 				/>
-				<div className="dbe_review_overall_value">
+				<div className="review_overall_value">
 					<RichText.Content tagName="p" value={summaryDescription} />
-					<span className="dbe_review_rating">{average}</span>
+					<span className="review_rating">{average}</span>
 				</div>
-				<div className="dbe_review_cta_panel">
-					<div className="dbe_review_cta_main">
+				<div className="review_cta_panel">
+					<div className="review_cta_main">
 						<a
 							style={{ color: callToActionForeColor }}
 							href={callToActionURL ? callToActionURL : "#"}
@@ -245,7 +245,7 @@ export const version_1_1_4 = (props) => {
 							rel="nofollow noopener noreferrer"
 						>
 							<button
-								className="dbe_review_cta_btn"
+								className="review_cta_btn"
 								style={{
 									backgroundColor: callToActionBackColor,
 									border: `1px solid ${callToActionForeColor}`,
@@ -260,7 +260,7 @@ export const version_1_1_4 = (props) => {
 					</div>
 					<OldStars
 						id={`${ID}-average`}
-						className="dbe_review_average_stars"
+						className="review_average_stars"
 						value={average}
 						limit={starCount}
 						inactiveStarColor={inactiveStarColor}
@@ -317,10 +317,10 @@ export const version_1_1_5 = (props) => {
 	const average = calculateAverage(items);
 
 	return (
-		<div className="dbe_review_block">
+		<div className="review_block">
 			<RichText.Content
 				tagName="p"
-				className="dbe_review_item_name"
+				className="review_item_name"
 				style={{ textAlign: titleAlign }}
 				value={itemName}
 			/>
@@ -330,7 +330,7 @@ export const version_1_1_5 = (props) => {
 				value={authorName}
 			/>
 			{JSON.parse(items).map((j, i) => (
-				<div className="dbe_review_entry">
+				<div className="review_entry">
 					<RichText.Content key={i} value={j.label} />
 					<OldStars
 						style={{ marginLeft: "auto" }}
@@ -343,18 +343,18 @@ export const version_1_1_5 = (props) => {
 					/>
 				</div>
 			))}
-			<div className="dbe_review_summary">
+			<div className="review_summary">
 				<RichText.Content
-					className="dbe_review_summary_title"
+					className="review_summary_title"
 					tagName="p"
 					value={summaryTitle}
 				/>
-				<div className="dbe_review_overall_value">
+				<div className="review_overall_value">
 					<RichText.Content tagName="p" value={summaryDescription} />
-					<span className="dbe_review_rating">{average}</span>
+					<span className="review_rating">{average}</span>
 				</div>
-				<div className="dbe_review_cta_panel">
-					<div className="dbe_review_cta_main">
+				<div className="review_cta_panel">
+					<div className="review_cta_main">
 						<a
 							style={{ color: callToActionForeColor }}
 							href={callToActionURL ? callToActionURL : "#"}
@@ -362,7 +362,7 @@ export const version_1_1_5 = (props) => {
 							rel="nofollow noopener noreferrer"
 						>
 							<button
-								className="dbe_review_cta_btn"
+								className="review_cta_btn"
 								style={{
 									backgroundColor: callToActionBackColor,
 									border: `1px solid ${callToActionForeColor}`,
@@ -377,7 +377,7 @@ export const version_1_1_5 = (props) => {
 					</div>
 					<OldStars
 						id={`${ID}-average`}
-						className="dbe_review_average_stars"
+						className="review_average_stars"
 						value={average}
 						limit={starCount}
 						inactiveStarColor={inactiveStarColor}

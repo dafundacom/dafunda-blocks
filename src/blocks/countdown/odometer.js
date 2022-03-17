@@ -301,7 +301,7 @@ export class DigitDisplay extends Component {
 		const { value, maxDisplay, numberChange } = this.props;
 
 		return (
-			<div className="dbe-countdown-digit-container">
+			<div className="countdown-digit-container">
 				{incomingDigits.length === 0 &&
 					digits.map((d, i) => (
 						<div key={i} className="digit">

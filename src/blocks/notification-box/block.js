@@ -30,13 +30,13 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	dbe_notify_info: {
+	notify_info: {
 		type: "string",
 		default: "",
 	},
-	dbe_selected_notify: {
+	selected_notify: {
 		type: "string",
-		default: "dbe_notify_info",
+		default: "notify_info",
 	},
 	align: {
 		type: "string",
@@ -92,17 +92,17 @@ registerBlockType("dbe/notification-box", {
 			<div className={className}>
 				<button
 					onClick={() => {
-						const { dbe_notify_info } = attributes;
+						const { notify_info } = attributes;
 						let firstColor;
 						let secondColor;
-						switch (attributes.dbe_selected_notify) {
-							case "dbe_notify_success":
+						switch (attributes.selected_notify) {
+							case "notify_success":
 								[firstColor, secondColor] = ["#3c763d", "#dff0d8"];
 								break;
-							case "dbe_notify_warning":
+							case "notify_warning":
 								[firstColor, secondColor] = ["#d8000c", "#ffd2d2"];
 								break;
-							case "dbe_notify_info":
+							case "notify_info":
 							default:
 								[firstColor, secondColor] = ["#31708f", "#d9edf7"];
 								break;
@@ -111,7 +111,7 @@ registerBlockType("dbe/notification-box", {
 							block.clientId,
 							createBlock("dbe/styled-box", {
 								mode: "notification",
-								text: [mergeRichTextArray(dbe_notify_info)],
+								text: [mergeRichTextArray(notify_info)],
 								textAlign: [attributes.align],
 								backColor: secondColor,
 								foreColor: firstColor,
@@ -136,15 +136,15 @@ registerBlockType("dbe/notification-box", {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function (props) {
-		const { align, dbe_notify_info, dbe_selected_notify } = props.attributes;
+		const { align, notify_info, selected_notify } = props.attributes;
 		return (
 			<div className={props.className}>
-				<div className={dbe_selected_notify}>
+				<div className={selected_notify}>
 					<RichText.Content
 						tagName="p"
-						className={"dbe_notify_text"}
+						className={"notify_text"}
 						style={{ textAlign: align }}
-						value={dbe_notify_info}
+						value={notify_info}
 					/>
 				</div>
 			</div>
@@ -154,14 +154,14 @@ registerBlockType("dbe/notification-box", {
 		updateFrom(version_1_1_2),
 		{
 			attributes: {
-				dbe_notify_info: {
+				notify_info: {
 					type: "array",
 					source: "children",
 					selector: "p",
 				},
-				dbe_selected_notify: {
+				selected_notify: {
 					type: "string",
-					default: "dbe_notify_info",
+					default: "notify_info",
 				},
 				align: {
 					type: "string",

@@ -190,7 +190,7 @@ export const inspectorControls = (props) => {
 		buttons.length > 0 && (
 			<InspectorControls>
 				<PanelBody title={__("Button Size", "dafunda-blocks")}>
-					<div className="dbe-button-group">
+					<div className="button-group">
 						<ButtonGroup aria-label={__("Button Size", "dafunda-blocks")}>
 							{Object.keys(BUTTON_SIZES).map((b) => (
 								<Button
@@ -216,7 +216,7 @@ export const inspectorControls = (props) => {
 					</div>
 				</PanelBody>
 				<PanelBody title={__("Button Width", "dafunda-blocks")}>
-					<div className="dbe-button-group">
+					<div className="button-group">
 						<ButtonGroup aria-label={__("Button Width", "dafunda-blocks")}>
 							{Object.keys(BUTTON_WIDTHS).map((b) => (
 								<Button
@@ -258,7 +258,7 @@ export const inspectorControls = (props) => {
 						}
 					/>
 					{buttons[activeButtonIndex].buttonRounded && (
-						<div id="dbe-button-radius-panel">
+						<div id="button-radius-panel">
 							<RangeControl
 								label={__("Button Radius")}
 								value={buttons[activeButtonIndex].buttonRadius}
@@ -324,14 +324,14 @@ export const inspectorControls = (props) => {
 					/>
 				</PanelBody>
 				<PanelBody title={__("Button Icon", "dafunda-blocks")}>
-					<div className="dbe-button-grid">
+					<div className="button-grid">
 						<p>{__("Selected icon", "dafunda-blocks")}</p>
-						<div className="dbe-button-grid-selector">
+						<div className="button-grid-selector">
 							<Dropdown
 								position="bottom right"
 								renderToggle={({ isOpen, onToggle }) => (
 									<Button
-										className="dbe-button-icon-select"
+										className="button-icon-select"
 										icon={
 											buttons[activeButtonIndex].chosenIcon !== "" &&
 											generateIcon(
@@ -362,7 +362,7 @@ export const inspectorControls = (props) => {
 										/>
 										{iconSearchTerm === "" && (
 											<Button
-												className="dbe-button-available-icon"
+												className="button-available-icon"
 												onClick={() =>
 													setAttributes({
 														buttons: [
@@ -416,7 +416,7 @@ export const inspectorControls = (props) => {
 										{iconListPage.length > 0 &&
 											iconListPage[iconSearchResultsPage].map((i) => (
 												<Button
-													className="dbe-button-available-icon"
+													className="button-available-icon"
 													icon={generateIcon(i, 35)}
 													label={i.iconName}
 													onClick={() =>
@@ -438,7 +438,7 @@ export const inspectorControls = (props) => {
 						</div>
 						<p>{__("Icon position", "dafunda-blocks")}</p>
 						<SelectControl
-							className="dbe-button-grid-selector"
+							className="button-grid-selector"
 							value={buttons[activeButtonIndex].iconPosition}
 							options={[
 								{
@@ -530,15 +530,15 @@ class URLInputBox extends Component {
 
 		return (
 			<div>
-				<Popover className="dbe_popover" position="bottom">
+				<Popover className="popover" position="bottom">
 					<div
-						className="dbe_button_popover"
+						className="button_popover"
 						ref={(node) => (this.wrapperRef = node)}
 					>
-						<div className="dbe_button_url_input">
+						<div className="button_url_input">
 							<form
 								onSubmit={(event) => event.preventDefault()}
-								className={`editor-format-toolbar__link-modal-line dbe_button_input_box flex-container`}
+								className={`editor-format-toolbar__link-modal-line button_input_box flex-container`}
 							>
 								<URLInput
 									autoFocus={false}
@@ -627,15 +627,15 @@ export const editorDisplay = (props) => {
 	} = props;
 
 	return (
-		<div className={`dbe-buttons align-button-${align}`}>
+		<div className={`buttons align-button-${align}`}>
 			{buttons.map((b, i) => (
 				<div
-					className={`dbe-button-container${
-						b.buttonWidth === "full" ? " dbe-button-full-container" : ""
+					className={`button-container${
+						b.buttonWidth === "full" ? " button-full-container" : ""
 					}`}
 				>
 					{buttons.length > 1 && (
-						<div className="dbe-button-delete">
+						<div className="button-delete">
 							<span
 								title={__("Delete This Button")}
 								onClick={() => {
@@ -654,11 +654,11 @@ export const editorDisplay = (props) => {
 						</div>
 					)}
 					<div
-						className={`dbe-button-block-main dbe-button-${b.size} ${
+						className={`button-block-main button-${b.size} ${
 							b.buttonWidth === "full"
-								? "dbe-button-full-width"
+								? "button-full-width"
 								: b.buttonWidth === "flex"
-								? `dbe-button-flex-${b.size}`
+								? `button-flex-${b.size}`
 								: ""
 						}`}
 						onMouseEnter={() => setState({ hoveredButton: i })}
@@ -694,7 +694,7 @@ export const editorDisplay = (props) => {
 						}}
 					>
 						<div
-							className="dbe-button-content-holder"
+							className="button-content-holder"
 							style={{
 								flexDirection:
 									b.iconPosition === "left" ? "row" : "row-reverse",
@@ -704,7 +704,7 @@ export const editorDisplay = (props) => {
 								allIcons.hasOwnProperty(
 									`fa${dashesToCamelcase(b.chosenIcon)}`
 								) && (
-									<div className="dbe-button-icon-holder">
+									<div className="button-icon-holder">
 										{generateIcon(
 											allIcons[`fa${dashesToCamelcase(b.chosenIcon)}`],
 											iconSize[b.size]
@@ -712,7 +712,7 @@ export const editorDisplay = (props) => {
 									</div>
 								)}
 							<RichText
-								className="dbe-button-block-btn"
+								className="button-block-btn"
 								placeholder={__("Button Text", "dafunda-blocks")}
 								onChange={(value) =>
 									setAttributes({
@@ -1107,7 +1107,7 @@ export class EditorComponent extends Component {
 			isSelected && buttons.length > 0 && (
 				<InspectorControls>
 					<PanelBody title={__("Button Size", "dafunda-blocks")}>
-						<div className="dbe-button-group">
+						<div className="button-group">
 							<ButtonGroup aria-label={__("Button Size", "dafunda-blocks")}>
 								{Object.keys(BUTTON_SIZES).map((b) => (
 									<Button
@@ -1133,7 +1133,7 @@ export class EditorComponent extends Component {
 						</div>
 					</PanelBody>
 					<PanelBody title={__("Button Width", "dafunda-blocks")}>
-						<div className="dbe-button-group">
+						<div className="button-group">
 							<ButtonGroup aria-label={__("Button Width", "dafunda-blocks")}>
 								{Object.keys(BUTTON_WIDTHS).map((b) => (
 									<Button
@@ -1175,7 +1175,7 @@ export class EditorComponent extends Component {
 							}
 						/>
 						{buttons[activeButtonIndex].buttonRounded && (
-							<div id="dbe-button-radius-panel">
+							<div id="button-radius-panel">
 								<RangeControl
 									label={__("Button Radius")}
 									value={buttons[activeButtonIndex].buttonRadius}
@@ -1241,14 +1241,14 @@ export class EditorComponent extends Component {
 						/>
 					</PanelBody>
 					<PanelBody title={__("Button Icon", "dafunda-blocks")}>
-						<div className="dbe-button-grid">
+						<div className="button-grid">
 							<p>{__("Selected icon", "dafunda-blocks")}</p>
-							<div className="dbe-button-grid-selector">
+							<div className="button-grid-selector">
 								<Dropdown
 									position="bottom right"
 									renderToggle={({ isOpen, onToggle }) => (
 										<Button
-											className="dbe-button-icon-select"
+											className="button-icon-select"
 											icon={
 												buttons[activeButtonIndex].chosenIcon !== "" &&
 												generateIcon(
@@ -1279,7 +1279,7 @@ export class EditorComponent extends Component {
 											/>
 											{iconSearchTerm === "" && (
 												<Button
-													className="dbe-button-available-icon"
+													className="button-available-icon"
 													onClick={() => {
 														setAttributes({
 															buttons: [
@@ -1334,7 +1334,7 @@ export class EditorComponent extends Component {
 											{iconListPage.length > 0 &&
 												iconListPage[iconSearchResultsPage].map((i) => (
 													<Button
-														className="dbe-button-available-icon"
+														className="button-available-icon"
 														icon={generateIcon(i, 35)}
 														label={i.iconName}
 														onClick={() => {
@@ -1369,7 +1369,7 @@ export class EditorComponent extends Component {
 							</div>
 							<p>{__("Icon position", "dafunda-blocks")}</p>
 							<SelectControl
-								className="dbe-button-grid-selector"
+								className="button-grid-selector"
 								value={buttons[activeButtonIndex].iconPosition}
 								options={[
 									{
@@ -1421,15 +1421,15 @@ export class EditorComponent extends Component {
 					</TabPanel>
 				</InspectorControls>
 			),
-			<div className={`dbe-buttons align-button-${align}`}>
+			<div className={`buttons align-button-${align}`}>
 				{buttons.map((b, i) => (
 					<div
-						className={`dbe-button-container${
-							b.buttonWidth === "full" ? " dbe-button-full-container" : ""
+						className={`button-container${
+							b.buttonWidth === "full" ? " button-full-container" : ""
 						}`}
 					>
 						{buttons.length > 1 && (
-							<div className="dbe-button-delete">
+							<div className="button-delete">
 								<span
 									title={__("Delete This Button")}
 									onClick={() => {
@@ -1451,11 +1451,11 @@ export class EditorComponent extends Component {
 							</div>
 						)}
 						<div
-							className={`dbe-button-block-main dbe-button-${b.size} ${
+							className={`button-block-main button-${b.size} ${
 								b.buttonWidth === "full"
-									? "dbe-button-full-width"
+									? "button-full-width"
 									: b.buttonWidth === "flex"
-									? `dbe-button-flex-${b.size}`
+									? `button-flex-${b.size}`
 									: ""
 							}`}
 							onMouseEnter={() => this.setState({ hoveredButton: i })}
@@ -1491,7 +1491,7 @@ export class EditorComponent extends Component {
 							}}
 						>
 							<div
-								className="dbe-button-content-holder"
+								className="button-content-holder"
 								style={{
 									flexDirection:
 										b.iconPosition === "left" ? "row" : "row-reverse",
@@ -1501,7 +1501,7 @@ export class EditorComponent extends Component {
 									allIcons.hasOwnProperty(
 										`fa${dashesToCamelcase(b.chosenIcon)}`
 									) && (
-										<div className="dbe-button-icon-holder">
+										<div className="button-icon-holder">
 											{generateIcon(
 												allIcons[`fa${dashesToCamelcase(b.chosenIcon)}`],
 												iconSize[b.size]
@@ -1509,7 +1509,7 @@ export class EditorComponent extends Component {
 										</div>
 									)}
 								<RichText
-									className="dbe-button-block-btn"
+									className="button-block-btn"
 									placeholder={__("Button Text", "dafunda-blocks")}
 									onChange={(value) =>
 										setAttributes({

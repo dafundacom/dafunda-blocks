@@ -132,9 +132,9 @@ const SortableItem = SortableElement(
 				}
 			>
 				<div
-					href="#dbe-social-share-block-editor"
+					href="#social-share-block-editor"
 					className={
-						"dbe-social-share-icon social-share-icon " + iconShape + " " + icon
+						"social-share-icon social-share-icon " + iconShape + " " + icon
 					}
 					style={{
 						width: iconSize * 1.5,
@@ -363,7 +363,7 @@ registerBlockType("dbe/social-share", {
 				</BlockControls>
 			),
 			isSelected && <Inspector {...props} />,
-			<div id="dbe-social-share-block-editor" className={className}>
+			<div id="social-share-block-editor" className={className}>
 				<SortableList
 					axis="x"
 					items={iconOrder}

@@ -3,28 +3,28 @@
 function dbe_render_number_box_block($attributes){
     extract($attributes);
 
-    $column1 = '<div class="dbe_number_1"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
-        <div class="dbe_number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
-            <p class="dbe_number_one_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnOneNumber.'</p>
+    $column1 = '<div class="number_1"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
+        <div class="number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
+            <p class="number_one_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnOneNumber.'</p>
         </div>
-        <p class="dbe_number_one_title"'.($blockID===''?' style="text-align: '.$title1Align.';"':'').'>'.$columnOneTitle.'</p>
-        <p class="dbe_number_one_body"'.($blockID===''?' style="text-align: '.$body1Align.';"':'').'>'.$columnOneBody.'</p>
+        <p class="number_one_title"'.($blockID===''?' style="text-align: '.$title1Align.';"':'').'>'.$columnOneTitle.'</p>
+        <p class="number_one_body"'.($blockID===''?' style="text-align: '.$body1Align.';"':'').'>'.$columnOneBody.'</p>
     </div>';
 
-    $column2 = '<div class="dbe_number_2"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
-        <div class="dbe_number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
-            <p class="dbe_number_two_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnTwoNumber.'</p>
+    $column2 = '<div class="number_2"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
+        <div class="number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
+            <p class="number_two_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnTwoNumber.'</p>
         </div>
-        <p class="dbe_number_two_title"'.($blockID===''?' style="text-align: '.$title2Align.';"':'').'>'.$columnTwoTitle.'</p>
-        <p class="dbe_number_two_body"'.($blockID===''?' style="text-align: '.$body2Align.';"':'').'>'.$columnTwoBody.'</p>
+        <p class="number_two_title"'.($blockID===''?' style="text-align: '.$title2Align.';"':'').'>'.$columnTwoTitle.'</p>
+        <p class="number_two_body"'.($blockID===''?' style="text-align: '.$body2Align.';"':'').'>'.$columnTwoBody.'</p>
     </div>';
 
-    $column3 = '<div class="dbe_number_3"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
-        <div class="dbe_number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
-            <p class="dbe_number_three_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnThreeNumber.'</p>
+    $column3 = '<div class="number_3"'.($blockID===''?' style="border-color: '.$borderColor.';"':'').'>
+        <div class="number_box_number"'.($blockID===''?' style="background-color: '.$numberBackground.';"':'').'>
+            <p class="number_three_number"'.($blockID===''?' style="color: '.$numberColor.';"':'').'>'.$columnThreeNumber.'</p>
         </div>
-        <p class="dbe_number_three_title"'.($blockID===''?' style="text-align: '.$title3Align.';"':'').'>'.$columnThreeTitle.'</p>
-        <p class="dbe_number_three_body"'.($blockID===''?' style="text-align: '.$body3Align.';"':'').'>'.$columnThreeBody.'</p>
+        <p class="number_three_title"'.($blockID===''?' style="text-align: '.$title3Align.';"':'').'>'.$columnThreeTitle.'</p>
+        <p class="number_three_body"'.($blockID===''?' style="text-align: '.$body3Align.';"':'').'>'.$columnThreeBody.'</p>
     </div>';
 
     $columns = $column1;
@@ -36,8 +36,8 @@ function dbe_render_number_box_block($attributes){
         $columns .= $column3;
     }
 
-    return '<div class="dbe_number_box column_'.$column.(isset($className) ? ' ' . esc_attr($className) : '').
-            '"'.($blockID===''?'':' id="dbe-number-box-'.$blockID.'"').'>'.$columns.'</div>';
+    return '<div class="number_box column_'.$column.(isset($className) ? ' ' . esc_attr($className) : '').
+            '"'.($blockID===''?'':' id="number-box-'.$blockID.'"').'>'.$columns.'</div>';
 }
 
 function dbe_register_number_box_block() {

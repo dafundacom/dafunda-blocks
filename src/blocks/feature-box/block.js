@@ -262,58 +262,35 @@ registerBlockType("dbe/feature-box", {
 
 		return (
 			<div className={props.className}>
-				<div className={`dbe_feature_box column_${column}`}>
-					<div class="dbe_feature_1">
-						<img
-							className="dbe_feature_one_img"
-							src={imgOneURL}
-							alt={imgOneAlt}
-						/>
-						<p
-							className="dbe_feature_one_title"
-							style={{ textAlign: title1Align }}
-						>
+				<div className={`feature_box column_${column}`}>
+					<div class="feature_1">
+						<img className="feature_one_img" src={imgOneURL} alt={imgOneAlt} />
+						<p className="feature_one_title" style={{ textAlign: title1Align }}>
 							{columnOneTitle}
 						</p>
-						<p
-							className="dbe_feature_one_body"
-							style={{ textAlign: body1Align }}
-						>
+						<p className="feature_one_body" style={{ textAlign: body1Align }}>
 							{columnOneBody}
 						</p>
 					</div>
-					<div class="dbe_feature_2">
-						<img
-							className="dbe_feature_two_img"
-							src={imgTwoURL}
-							alt={imgTwoAlt}
-						/>
-						<p
-							className="dbe_feature_two_title"
-							style={{ textAlign: title2Align }}
-						>
+					<div class="feature_2">
+						<img className="feature_two_img" src={imgTwoURL} alt={imgTwoAlt} />
+						<p className="feature_two_title" style={{ textAlign: title2Align }}>
 							{columnTwoTitle}
 						</p>
-						<p
-							className="dbe_feature_two_body"
-							style={{ textAlign: body2Align }}
-						>
+						<p className="feature_two_body" style={{ textAlign: body2Align }}>
 							{columnTwoBody}
 						</p>
 					</div>
-					<div class="dbe_feature_3">
+					<div class="feature_3">
 						<img
-							className="dbe_feature_three_img"
+							className="feature_three_img"
 							src={imgThreeURL}
 							alt={imgThreeAlt}
 						/>
-						<p
-							className="dbe_feature_three_title"
-							style={{ align: title3Align }}
-						>
+						<p className="feature_three_title" style={{ align: title3Align }}>
 							{columnThreeTitle}
 						</p>
-						<p className="dbe_feature_three_body" style={{ align: body3Align }}>
+						<p className="feature_three_body" style={{ align: body3Align }}>
 							{columnThreeBody}
 						</p>
 					</div>

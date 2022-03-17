@@ -419,16 +419,16 @@ function dbe_include_block_attribute_css() {
                         }, $defaultValues['dbe/content-toggle-panel-block']['attributes']),
                         $block['innerBlocks'][0]['attrs']);
                     $prefix = '#dbe-content-toggle-' . $attributes['blockID'];
-                    $blockStylesheets .= $prefix . ' .wp-block-dbe-content-toggle-accordion{' . PHP_EOL .
+                    $blockStylesheets .= $prefix . ' .wp-blockcontent-toggle-accordion{' . PHP_EOL .
                         'border-color: ' . $attributes['theme'] . ';' . PHP_EOL .
                     '}' . PHP_EOL . 
-                    $prefix . ' .wp-block-dbe-content-toggle-accordion-title-wrap{' . PHP_EOL .
+                    $prefix . ' .wp-blockcontent-toggle-accordion-title-wrap{' . PHP_EOL .
                         'background-color: ' . $attributes['theme'] . ';' . PHP_EOL .
                     '}' . PHP_EOL . 
-                    $prefix . ' .wp-block-dbe-content-toggle-accordion-title{' . PHP_EOL .
+                    $prefix . ' .wp-blockcontent-toggle-accordion-title{' . PHP_EOL .
                         'color: ' . ($attributes['titleColor'] ?: 'inherit') . ';' . PHP_EOL .
                     '}' . PHP_EOL .
-                    $prefix . ' .wp-block-dbe-content-toggle-accordion-toggle-wrap{' . PHP_EOL .
+                    $prefix . ' .wp-blockcontent-toggle-accordion-toggle-wrap{' . PHP_EOL .
                         'color: ' . $attributes['toggleColor'] . ';' . PHP_EOL .
                     '}' . PHP_EOL .
                     '.dbe-content-toggle-title-'. $attributes['blockID'] . ' > a{' . PHP_EOL .
@@ -890,38 +890,38 @@ function dbe_include_block_attribute_css() {
                     break;
                 case 'dbe/tabbed-content-block':
                     $prefix = '#dbe-tabbed-content-' . $attributes['blockID'];
-                    $blockStylesheets .= $prefix . ' .wp-block-dbe-tabbed-content-tab-title-wrap, ' .
-                                $prefix . ' .wp-block-dbe-tabbed-content-tab-title-vertical-wrap{' . PHP_EOL .
+                    $blockStylesheets .= $prefix . ' .wp-block-tabbed-content-tab-title-wrap, ' .
+                                $prefix . ' .wp-block-tabbed-content-tab-title-vertical-wrap{' . PHP_EOL .
                         ($attributes['tabStyle'] === 'underline' ? '' : 'background-color: ' . ($attributes['normalColor'] ? : 'inherit') . ';' . PHP_EOL) .
                         'border-color: lightgrey;' . PHP_EOL .
                         'color: ' . ($attributes['normalTitleColor'] ?: 'inherit') . ';' . PHP_EOL .
                     '}' . PHP_EOL . 
-                    $prefix . ' .wp-block-dbe-tabbed-content-tab-title-wrap.active, ' .
-                    $prefix . ' .wp-block-dbe-tabbed-content-tab-title-vertical-wrap.active,' .
-                    $prefix . ' .wp-block-dbe-tabbed-content-accordion-toggle.active{' . PHP_EOL .
+                    $prefix . ' .wp-block-tabbed-content-tab-title-wrap.active, ' .
+                    $prefix . ' .wp-block-tabbed-content-tab-title-vertical-wrap.active,' .
+                    $prefix . ' .wp-block-tabbed-content-accordion-toggle.active{' . PHP_EOL .
                         ($attributes['tabStyle'] === 'underline' ? 'border-bottom: 5px solid ' . $attributes['titleColor'] . ';' . PHP_EOL :
                             'background-color: ' . $attributes['theme'] . ';' . PHP_EOL) .
                         'color: ' . ($attributes['titleColor'] ?: 'inherit') . ';' . PHP_EOL .
                     '}' .
-                    $prefix . ' .wp-block-dbe-tabbed-content-accordion-toggle.active{' . PHP_EOL .
+                    $prefix . ' .wp-block-tabbed-content-accordion-toggle.active{' . PHP_EOL .
                         'background-color: ' . $attributes['theme'] . ';' . PHP_EOL .
                     '}' .
-                    $prefix . ' .wp-block-dbe-tabbed-content-tabs-title{' . PHP_EOL .
+                    $prefix . ' .wp-block-tabbed-content-tabs-title{' . PHP_EOL .
                         'justify-content: ' . ($attributes['tabsAlignment'] === 'center' ? 'center' :
                             'flex-' . ($attributes['tabsAlignment'] === 'left' ? 'start' : 'end' )) . ';' . PHP_EOL .
                     '}' . PHP_EOL . 
-                    $prefix . ' .wp-block-dbe-tabbed-content-accordion-toggle{' . PHP_EOL .
+                    $prefix . ' .wp-block-tabbed-content-accordion-toggle{' . PHP_EOL .
                         'background-color: ' . ($attributes['normalColor'] ?: 'transparent') . ';' . PHP_EOL .
                         'color: ' . ($attributes['normalTitleColor'] ?: 'inherit') . ';' . PHP_EOL .
                     '}' . PHP_EOL;
                     foreach($attributes['tabsTitleAlignment'] as $key => $titleAlign){
-                        $blockStylesheets .= $prefix . ' .wp-block-dbe-tabbed-content-tab-title-wrap:nth-child('.($key+1).'){' . PHP_EOL .
+                        $blockStylesheets .= $prefix . ' .wp-block-tabbed-content-tab-title-wrap:nth-child('.($key+1).'){' . PHP_EOL .
                             'text-align: ' . $titleAlign . ';' . PHP_EOL .
                         '}' . PHP_EOL;
                     }
                     break;
                 case 'dbe/table-of-contents-block':
-                    $prefix = '#dbe_table-of-contents-' . $attributes['blockID'];
+                    $prefix = '#table-of-contents-' . $attributes['blockID'];
                     if($attributes['listStyle'] === 'plain'){
                         $blockStylesheets .= $prefix . ' ul{' . PHP_EOL .
                             'list-style: none;' . PHP_EOL .
@@ -934,35 +934,35 @@ function dbe_include_block_attribute_css() {
                         $hasNoSmoothScroll = false;
                     }
                     if($attributes['allowToCHiding']){
-                        $blockStylesheets .= $prefix . '.dbe_table-of-contents-collapsed {' . PHP_EOL .
+                        $blockStylesheets .= $prefix . '.table-of-contents-collapsed {' . PHP_EOL .
                             'max-width: fit-content;' . PHP_EOL .
                             'max-width: -moz-fit-content;' . PHP_EOL .
                         '}' . PHP_EOL .
-                        $prefix . '.dbe_table-of-contents-collapsed .dbe_table-of-contents-header {' . PHP_EOL .
+                        $prefix . '.table-of-contents-collapsed .table-of-contents-header {' . PHP_EOL .
                             'margin-bottom: 0;' . PHP_EOL . 
                         '}' . PHP_EOL;
                     }
-                    $blockStylesheets .= $prefix . ' .dbe_table-of-contents-header{' . PHP_EOL .
+                    $blockStylesheets .= $prefix . ' .table-of-contents-header{' . PHP_EOL .
                         'text-align: ' . $attributes['titleAlignment'] . ';' . PHP_EOL .
                     '}' . PHP_EOL;
 
                     if($attributes['titleBackgroundColor']){
-                        $blockStylesheets .= $prefix . ' .dbe_table-of-contents-header-container,' . $prefix . ' .dbe_table-of-contents-toggle-link {' . PHP_EOL .
+                        $blockStylesheets .= $prefix . ' .table-of-contents-header-container,' . $prefix . ' .table-of-contents-toggle-link {' . PHP_EOL .
                             'background-color: ' . $attributes['titleBackgroundColor'] . ';' . PHP_EOL .
                         '}' . PHP_EOL;
                     }
                     if($attributes['titleColor']){
-                        $blockStylesheets .= $prefix . ' .dbe_table-of-contents-title{' . PHP_EOL .
+                        $blockStylesheets .= $prefix . ' .table-of-contents-title{' . PHP_EOL .
                             'color: ' . $attributes['titleColor'] . ';' . PHP_EOL .
                         '}' . PHP_EOL;
                     }
                     if($attributes['listColor']){
-                        $blockStylesheets .= $prefix . ' .dbe_table-of-contents-container a{' . PHP_EOL .
+                        $blockStylesheets .= $prefix . ' .table-of-contents-container a{' . PHP_EOL .
                             'color: ' . $attributes['listColor'] . ';' . PHP_EOL .
                         '}' . PHP_EOL;
                     }
                     if($attributes['listBackgroundColor']){
-                        $blockStylesheets .= $prefix . ' .dbe_table-of-contents-extra-container{' . PHP_EOL .
+                        $blockStylesheets .= $prefix . ' .table-of-contents-extra-container{' . PHP_EOL .
                             'background-color: ' . $attributes['listBackgroundColor'] . ';' . PHP_EOL .
                         '}' . PHP_EOL;
                     }

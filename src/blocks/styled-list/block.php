@@ -64,8 +64,8 @@ function dbe_render_styled_list_block($attributes){
         }
     }
 
-    return '<div class="dbe_styled_list ' . (isset($className) ? ' ' . esc_attr($className) : '') .'"'
-            . ($blockID === '' ? '' : ' id="dbe_styled_list-' . $blockID . '"').
+    return '<div class="styled_list ' . (isset($className) ? ' ' . esc_attr($className) : '') .'"'
+            . ($blockID === '' ? '' : ' id="styled_list-' . $blockID . '"').
             '><ul class="fa-ul">' . $listItems . '</ul></div>';
 }
 

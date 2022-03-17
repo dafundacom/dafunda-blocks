@@ -547,9 +547,9 @@ export class PanelContent extends Component {
 							]}
 						/>
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-border">{__("Border")}</label>
+							<label htmlFor="content-toggle-border">{__("Border")}</label>
 							<FormToggle
-								id="dbe-content-toggle-border"
+								id="content-toggle-border"
 								label={__("Enable border")}
 								checked={
 									typeof panels === "undefined" ||
@@ -567,11 +567,11 @@ export class PanelContent extends Component {
 					</PanelBody>
 					<PanelBody title={__("Initial State")} initialOpen={true}>
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-set-individually">
+							<label htmlFor="content-toggle-set-individually">
 								{__("Set toggle status for each panel individually")}
 							</label>
 							<FormToggle
-								id="dbe-content-toggle-set-individually"
+								id="content-toggle-set-individually"
 								label={__("Set toggle status for each panel individually")}
 								checked={individualCollapse}
 								onChange={() => {
@@ -598,11 +598,11 @@ export class PanelContent extends Component {
 						</PanelRow>
 						{!individualCollapse && (
 							<PanelRow>
-								<label htmlFor="dbe-content-toggle-amount">
+								<label htmlFor="content-toggle-amount">
 									{__("Show only one panel at a time")}
 								</label>
 								<FormToggle
-									id="dbe-content-toggle-amount"
+									id="content-toggle-amount"
 									label={__("Show only one panel at a time")}
 									checked={showOnlyOne}
 									onChange={() => {
@@ -638,22 +638,22 @@ export class PanelContent extends Component {
 						{!showOnlyOne && !individualCollapse && !preventCollapse && (
 							<>
 								<PanelRow>
-									<label htmlFor="dbe-content-toggle-state">
+									<label htmlFor="content-toggle-state">
 										{__("Collapsed")}
 									</label>
 									<FormToggle
-										id="dbe-content-toggle-state"
+										id="content-toggle-state"
 										label={__("Collapsed")}
 										checked={collapsed}
 										onChange={onCollapseChange}
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label htmlFor="dbe-content-toggle-mobile-state">
+									<label htmlFor="content-toggle-mobile-state">
 										{__("Collapsed on mobile")}
 									</label>
 									<FormToggle
-										id="dbe-content-toggle-mobile-state"
+										id="content-toggle-mobile-state"
 										label={__("Collapsed on mobile")}
 										checked={collapsedOnMobile}
 										onChange={() => {
@@ -673,11 +673,11 @@ export class PanelContent extends Component {
 							!showOnlyOne &&
 							!individualCollapse && (
 								<PanelRow>
-									<label htmlFor="dbe-content-toggle-state">
+									<label htmlFor="content-toggle-state">
 										{__("Prevent collapse")}
 									</label>
 									<FormToggle
-										id="dbe-content-toggle-state"
+										id="content-toggle-state"
 										label={__("Prevent collapse")}
 										checked={preventCollapse}
 										onChange={onPreventCollapseChange}
@@ -687,11 +687,11 @@ export class PanelContent extends Component {
 					</PanelBody>
 					<PanelBody title={__("FAQ Schema")} initialOpen={true}>
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-faq-schema">
+							<label htmlFor="content-toggle-faq-schema">
 								{__("Enable FAQ Schema")}
 							</label>
 							<FormToggle
-								id="dbe-content-toggle-faq-schema"
+								id="content-toggle-faq-schema"
 								label={__("Enable FAQ Schema")}
 								checked={hasFAQSchema}
 								onChange={() => {
@@ -735,11 +735,11 @@ export class PanelContent extends Component {
 					<PanelBody title={__("Toggle status icon", "dafunda-blocks")}>
 						{toggleIcon !== "none" && (
 							<PanelRow>
-								<label htmlFor="dbe-content-toggle-status-location">
+								<label htmlFor="content-toggle-status-location">
 									{__("Location", "dafunda-blocks")}
 								</label>
 								<ButtonGroup
-									id="dbe-content-toggle-status-location"
+									id="content-toggle-status-location"
 									aria-label={__("toggle icon position", "dafunda-blocks")}
 								>
 									{Object.keys(toggleIconPositions).map((p) => {
@@ -772,7 +772,7 @@ export class PanelContent extends Component {
 							</PanelRow>
 						)}
 						<PanelRow>
-							<label htmlFor="dbe-content-toggle-status-icon">
+							<label htmlFor="content-toggle-status-icon">
 								{__("Icon", "dafunda-blocks")}
 							</label>
 							<Dropdown
@@ -787,7 +787,7 @@ export class PanelContent extends Component {
 									</Button>
 								)}
 								renderContent={() => (
-									<div className="wp-block-dbe-content-toggle-customize-icons-wrap">
+									<div className="wp-block-content-toggle-customize-icons-wrap">
 										{Object.keys(icons).map((i) => {
 											if (Object.prototype.hasOwnProperty.call(icons, i)) {
 												return (
@@ -826,7 +826,7 @@ export class PanelContent extends Component {
 				/>
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `.dbe-accordion-title-${blockID} a{
+						__html: `.accordion-title-${blockID} a{
 					color: ${titleLinkColor || "inherit"}
 				}`,
 					}}

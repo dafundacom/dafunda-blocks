@@ -2,7 +2,7 @@
 
 function dbe_render_advanced_heading_block($attributes){
     extract($attributes);
-	return '<' . $level . ' class="dbe_advanced_heading" id="' . ($anchor ?: 'dbe-advanced-heading-'. $blockID) . '" data-blockid="' . $blockID . '">' . $content . '</' . $level . '>';
+	return '<' . $level . '  id="' . ($anchor ?: 'advanced-heading-'. $blockID) . '" data-blockid="' . $blockID . '">' . $content . '</' . $level . '>';
 }
 
 function dbe_register_advanced_heading_block() {

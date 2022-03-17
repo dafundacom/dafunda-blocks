@@ -127,7 +127,7 @@ export const editorDisplay = (props) => {
 	return (
 		<>
 			<div
-				className="dbe-star-outer-container"
+				className="star-outer-container"
 				style={{
 					justifyContent:
 						starAlign === "center"
@@ -136,7 +136,7 @@ export const editorDisplay = (props) => {
 				}}
 			>
 				<div
-					className="dbe-star-inner-container"
+					className="star-inner-container"
 					onMouseLeave={() => setState({ highlightedStars: 0 })}
 				>
 					{[...Array(starCount)].map((e, i) => (
@@ -172,7 +172,7 @@ export const editorDisplay = (props) => {
 			</div>
 			<RichText
 				tagName="div"
-				className="dbe-review-text"
+				className="review-text"
 				placeholder={__("The text of the review goes here")}
 				value={reviewText}
 				style={{

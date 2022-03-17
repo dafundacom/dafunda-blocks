@@ -40,17 +40,17 @@ function dbe_render_click_to_tweet_block( $attributes ) {
 
     $output = '';
     if($blockID === ''){
-        $output .= sprintf('<div class="dbe_click_to_tweet%1$s" style="border-color: %2$s;">', (isset($className) ? ' ' . esc_attr($className) : ''), $borderColor );
-        $output .= sprintf( '<div class="dbe_tweet" style="font-size: %1$spx; color: %2$s">', $tweetFontSize, $tweetColor );
+        $output .= sprintf('<div class="click_to_tweet%1$s" style="border-color: %2$s;">', (isset($className) ? ' ' . esc_attr($className) : ''), $borderColor );
+        $output .= sprintf( '<div class="tweet" style="font-size: %1$spx; color: %2$s">', $tweetFontSize, $tweetColor );
     }
     else{
-        $output .= sprintf('<div class="dbe_click_to_tweet%1$s" id="%2$s">', (isset($className) ? ' ' . esc_attr($className) : ''), esc_attr('dbe_click_to_tweet_' . $blockID ));
-        $output .= sprintf( '<div class="dbe_tweet">');
+        $output .= sprintf('<div class="click_to_tweet%1$s" id="%2$s">', (isset($className) ? ' ' . esc_attr($className) : ''), esc_attr('dbe_click_to_tweet_' . $blockID ));
+        $output .= sprintf( '<div class="tweet">');
     }
 
     $output .= $tweet;
 	$output .= sprintf('</div>');
-	$output .= sprintf( '<div class="dbe_click_tweet">' );
+	$output .= sprintf( '<div class="click_tweet">' );
 	$output .= sprintf( '<span>');
 	$output .= sprintf( '<i></i>');
 	$output .= sprintf( '<a target="_blank" href="%1$s">' . __( 'Click to Tweet', 'dafunda-blocks' ) . '</a>',  $url  );

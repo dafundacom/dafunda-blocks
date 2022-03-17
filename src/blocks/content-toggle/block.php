@@ -41,15 +41,15 @@ if ( !class_exists( 'simple_html_dom_node' ) ) {
 function dbe_render_content_toggle_block($attributes, $content){
     extract($attributes);
 
-    return '<div class="wp-block-dbe-content-toggle' . (isset($className) ? ' ' . esc_attr($className) : '')
-                . '" ' . ($blockID === '' ? '' : 'id="dbe-content-toggle-' . $blockID . '"') .
+    return '<div class="wp-block-content-toggle' . (isset($className) ? ' ' . esc_attr($className) : '')
+                . '" ' . ($blockID === '' ? '' : 'id="content-toggle-' . $blockID . '"') .
                 ($preventCollapse ? ' data-preventcollapse="true"' : '') .
                 ($showOnlyOne ? ' data-showonlyone="true"': '') . 'data-mobilecollapse="' . json_encode($collapsedOnMobile) . '" data-desktopcollapse="' . json_encode($collapsed) . '">'
                     . $content . '</div>';
 }
 
 function dbe_render_content_toggle_panel_block($attributes, $content){
-    $classNamePrefix = 'wp-block-dbe-content-toggle';
+    $classNamePrefix = 'wp-block-content-toggle';
     extract($attributes);
     $border_class = $border ? "" : "no-border ";
     $icons = json_decode(file_get_contents(__DIR__ . '/icons/icons.json'));
@@ -59,15 +59,15 @@ function dbe_render_content_toggle_panel_block($attributes, $content){
                 . ($parentID === '' ? ' style="border-color: ' . $theme . ';"' : '') . '">
                 <div class="' . $classNamePrefix . '-accordion-title-wrap"'
                     . ($parentID === '' ? ' style="background-color: ' . $theme . ';"' : '') . ($preventCollapse ? ' aria-disabled="true"' : '')
-                    .' aria-expanded="' . (json_encode(!$collapsed)) . '" aria-controls="dbe-content-toggle-panel-' . $index . '-' . $parentID . '" tabindex="0">
-                    <' . $titleTag . ' class="' . $classNamePrefix . '-accordion-title dbe-content-toggle-title-' . $parentID . '"'
+                    .' aria-expanded="' . (json_encode(!$collapsed)) . '" aria-controls="content-toggle-panel-' . $index . '-' . $parentID . '" tabindex="0">
+                    <' . $titleTag . ' class="' . $classNamePrefix . '-accordion-title content-toggle-title-' . $parentID . '"'
                     . ($parentID === '' ? ' style="color:' . $titleColor . ';"' : '') . '>' . $panelTitle . '</' . $titleTag . '>' .
                     ($toggleIcon === 'none' ? '' : '<div class="' . $classNamePrefix . '-accordion-toggle-wrap ' . esc_attr($toggleLocation) .
                     '"><span class="' . $classNamePrefix . '-accordion-state-indicator ' . $icon_class  .
                     ( $collapsed ? '' : ' open' ) . '"></span>
                     </div>').
                 '</div><div role="region" class="' . $classNamePrefix . '-accordion-content-wrap'.
-                        ($collapsed ? ' dbe-hide' : '') . '" id="dbe-content-toggle-panel-' . $index. '-' . $parentID . '">' . $content
+                        ($collapsed ? ' hide' : '') . '" id="content-toggle-panel-' . $index. '-' . $parentID . '">' . $content
                 . '</div></div>' ;
 }
 
@@ -132,14 +132,14 @@ function dbe_content_toggle_filter( $block_content, $block ) {
     $output = $block_content;
 
     if(isset($block['attrs']['hasFAQSchema'])){
-        $parsedBlockContent = str_get_html(preg_replace('/^<div class="wp-block-dbe-content-toggle(?: [^>]*)?" id="dbe-content-toggle-.*?">/',
+        $parsedBlockContent = str_get_html(preg_replace('/^<div class="wp-block-content-toggle(?: [^>]*)?" id="content-toggle-.*?">/',
         '<div class="toggleroot">', $block_content));
 
-        $panel = $parsedBlockContent->find('.toggleroot>.wp-block-dbe-content-toggle-accordion>.wp-block-dbe-content-toggle-accordion-content-wrap');
+        $panel = $parsedBlockContent->find('.toggleroot>.wp-block-content-toggle-accordion>.wp-block-content-toggle-accordion-content-wrap');
 
         foreach($panel as $elem){
             //look for possible nested content toggles and remove existing ones
-            foreach($elem->find('.wp-block-dbe-content-toggle') as $nestedToggle){
+            foreach($elem->find('.wp-block-content-toggle') as $nestedToggle){
                 $nestedToggle->outertext='';
             }
             foreach($elem->find('script[type="application/ld+json"]') as $nestedToggle){

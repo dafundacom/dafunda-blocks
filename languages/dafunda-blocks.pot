@@ -136,7 +136,7 @@ msgid ""
 msgstr ""
 
 #: src/blocks/button/block.js:122 src/blocks/button/block.js:276
-msgid "Button (Improved)"
+msgid "Button"
 msgstr ""
 
 #: src/blocks/button/block.js:126 src/blocks/button/block.js:281

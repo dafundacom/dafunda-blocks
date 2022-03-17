@@ -554,7 +554,7 @@ class TableOfContents extends Component {
 							/>
 						)}
 						{isSelected && (
-							<div className="dbe_toc_button_container">
+							<div className="toc_button_container">
 								{!item.disabled && (
 									<button
 										onClick={() => {
@@ -619,7 +619,7 @@ class TableOfContents extends Component {
 			return (
 				<div
 					style={style}
-					className={`dbe_table-of-contents-container dbe_table-of-contents-${numColumns}-column`}
+					className={`table-of-contents-container table-of-contents-${numColumns}-column`}
 				>
 					{listStyle === "numbered" ? (
 						<ol>{parseList(makeHeaderArray(headers))}</ol>
@@ -637,7 +637,7 @@ class TableOfContents extends Component {
 		} else {
 			return (
 				blockProp && (
-					<p className="dbe_table-of-contents-placeholder">
+					<p className="table-of-contents-placeholder">
 						{__("Add a heading to begin generating the table of contents")}
 					</p>
 				)
@@ -677,9 +677,9 @@ export const inspectorControls = (props) => {
 			<PanelBody title={__("Allowed Headings")} initialOpen={false}>
 				{allowedHeaders.map((a, i) => (
 					<PanelRow>
-						<label htmlFor={`dbe_toggle_h${i + 1}`}>{`H${i + 1}`}</label>
+						<label htmlFor={`toggle_h${i + 1}`}>{`H${i + 1}`}</label>
 						<ToggleControl
-							id={`dbe_toggle_h${i + 1}`}
+							id={`toggle_h${i + 1}`}
 							checked={a}
 							onChange={() =>
 								setAttributes({
@@ -736,9 +736,9 @@ export const inspectorControls = (props) => {
 			/>
 			<PanelBody title={__("Additional Settings")} initialOpen={false}>
 				<PanelRow>
-					<label htmlFor="dbe_toc_toggle_display">{__("Collapsible")}</label>
+					<label htmlFor="toc_toggle_display">{__("Collapsible")}</label>
 					<ToggleControl
-						id="dbe_toc_toggle_display"
+						id="toc_toggle_display"
 						checked={allowToCHiding}
 						onChange={(allowToCHiding) =>
 							setAttributes({
@@ -752,19 +752,19 @@ export const inspectorControls = (props) => {
 				{allowToCHiding && (
 					<>
 						<PanelRow>
-							<label htmlFor="dbe_show_toc">{__("Initial Show")}</label>
+							<label htmlFor="show_toc">{__("Initial Show")}</label>
 							<ToggleControl
-								id="dbe_show_toc"
+								id="show_toc"
 								checked={showList}
 								onChange={() => setAttributes({ showList: !showList })}
 							/>
 						</PanelRow>
 						<PanelRow>
-							<label htmlFor="dbe_hide_on_mobile">
+							<label htmlFor="hide_on_mobile">
 								{__("Initial Hide on Mobile")}
 							</label>
 							<ToggleControl
-								id="dbe_hide_on_mobile"
+								id="hide_on_mobile"
 								checked={hideOnMobile}
 								onChange={() => setAttributes({ hideOnMobile: !hideOnMobile })}
 							/>
@@ -772,21 +772,21 @@ export const inspectorControls = (props) => {
 					</>
 				)}
 				<PanelRow>
-					<label htmlFor="dbe_toc_enable_latin_conversion">
+					<label htmlFor="toc_enable_latin_conversion">
 						{__("Romanize anchor links")}
 					</label>
 					<ToggleControl
-						id="dbe_toc_enable_latin_conversion"
+						id="toc_enable_latin_conversion"
 						checked={allowToLatin}
 						onChange={(e) => setAttributes({ allowToLatin: e })}
 					/>
 				</PanelRow>
 				<PanelRow>
-					<label htmlFor="dbe_toc_toggle_diacritics">
+					<label htmlFor="toc_toggle_diacritics">
 						{__("Remove diacritics from anchor links")}
 					</label>
 					<ToggleControl
-						id="dbe_toc_toggle_diacritics"
+						id="toc_toggle_diacritics"
 						checked={removeDiacritics}
 						onChange={(removeDiacritics) => setAttributes({ removeDiacritics })}
 					/>
@@ -841,11 +841,9 @@ export const inspectorControls = (props) => {
 					/>
 				)}
 				<PanelRow>
-					<label htmlFor="dbe_toc_scroll">
-						{__("Enable smooth scrolling")}
-					</label>
+					<label htmlFor="toc_scroll">{__("Enable smooth scrolling")}</label>
 					<ToggleControl
-						id="dbe_toc_scroll"
+						id="toc_scroll"
 						checked={enableSmoothScroll}
 						onChange={() => {
 							const tocInstances = getBlocks().filter(
@@ -871,21 +869,21 @@ export const blockControls = (props) => {
 		<BlockControls>
 			<ToolbarGroup>
 				<ToolbarButton
-					className={"dbe_toc_column_selector"}
+					className={"toc_column_selector"}
 					icon={oneColumnIcon}
 					label={__("One column")}
 					isPrimary={numColumns === 1}
 					onClick={() => setAttributes({ numColumns: 1 })}
 				/>
 				<ToolbarButton
-					className={"dbe_toc_column_selector"}
+					className={"toc_column_selector"}
 					icon={twoColumnsIcon}
 					label={__("Two columns")}
 					isPrimary={numColumns === 2}
 					onClick={() => setAttributes({ numColumns: 2 })}
 				/>
 				<ToolbarButton
-					className={"dbe_toc_column_selector"}
+					className={"toc_column_selector"}
 					icon={threeColumnsIcon}
 					label={__("Three columns")}
 					isPrimary={numColumns === 3}
@@ -944,19 +942,16 @@ export const editorDisplay = (props) => {
 	return (
 		<>
 			<div
-				className="dbe_table-of-contents-header"
+				className="table-of-contents-header"
 				style={{
 					textAlign: titleAlignment,
 					backgroundColor: titleBackgroundColor,
 				}}
 			>
-				<div
-					className="dbe_table-of-contents-title"
-					style={{ color: titleColor }}
-				>
+				<div className="table-of-contents-title" style={{ color: titleColor }}>
 					<RichText
 						placeholder={__("Optional title")}
-						className="dbe_table-of-contents-title"
+						className="table-of-contents-title"
 						onFocus={() => setState({ canRemoveItemFocus: true })}
 						onChange={(text) => setAttributes({ title: text })}
 						value={title}
@@ -964,11 +959,11 @@ export const editorDisplay = (props) => {
 					/>
 				</div>
 				{allowToCHiding && (
-					<div id="dbe_table-of-contents-header-toggle">
-						<div id="dbe_table-of-contents-toggle">
+					<div id="table-of-contents-header-toggle">
+						<div id="table-of-contents-toggle">
 							[
 							<a
-								className="dbe_table-of-contents-toggle-link"
+								className="table-of-contents-toggle-link"
 								href="#"
 								onClick={() => setAttributes({ showList: !showList })}
 							>
@@ -996,10 +991,10 @@ export const editorDisplay = (props) => {
 			{
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `#dbe_table-of-contents-${blockID} .dbe_table-of-contents-container li{
+						__html: `#table-of-contents-${blockID} .table-of-contents-container li{
 							color: ${listIconColor};
 						}
-						#dbe_table-of-contents-${blockID} .dbe_table-of-contents-container a{
+						#table-of-contents-${blockID} .table-of-contents-container a{
 							color: ${listColor};
 						}`,
 					}}

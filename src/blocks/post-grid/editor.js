@@ -32,10 +32,10 @@ export default class PostGridBlock extends Component {
 		return [
 			<>
 				<SectionTag
-					className={`${className ? `${className} ` : ""}dbe-block-post-grid`}
+					className={`${className ? `${className} ` : ""}block-post-grid`}
 				>
 					<div
-						className={`dbe-post-grid-items ${
+						className={`post-grid-items ${
 							postLayout === "list" ? "is-list" : `is-grid columns-${columns}`
 						}`}
 					>
@@ -52,7 +52,7 @@ export default class PostGridBlock extends Component {
 							>
 								<>
 									{checkPostImage && post.featured_media ? (
-										<div className="dbe-block-post-grid-image">
+										<div className="block-post-grid-image">
 											<FeaturedImage
 												{...this.props}
 												imgID={post.featured_media}
@@ -60,10 +60,10 @@ export default class PostGridBlock extends Component {
 											/>
 										</div>
 									) : null}
-									<div className="dbe_block-post-grid-text">
-										<header className="dbe_block-post-grid-header">
+									<div className="block-post-grid-text">
+										<header className="block-post-grid-header">
 											{checkPostTitle && (
-												<PostTag className="dbe-block-post-grid-title">
+												<PostTag className="block-post-grid-title">
 													<a href={post.link} target="_blank" rel="bookmark">
 														{decodeEntities(post.title.rendered.trim()) ||
 															__("(Untitled)", "dafunda-blocks")}
@@ -71,9 +71,9 @@ export default class PostGridBlock extends Component {
 												</PostTag>
 											)}
 											{checkPostAuthor && (
-												<div className="dbe-block-post-grid-author">
+												<div className="block-post-grid-author">
 													<a
-														className="dbe-text-link"
+														className="text-link"
 														target="_blank"
 														href={post.author_info.author_link}
 													>
@@ -84,7 +84,7 @@ export default class PostGridBlock extends Component {
 											{checkPostDate && (
 												<time
 													dateTime={moment(post.date_gmt).utc().format()}
-													className={"dbe-block-post-grid-date"}
+													className={"block-post-grid-date"}
 												>
 													{moment(post.date_gmt)
 														.local()
@@ -92,7 +92,7 @@ export default class PostGridBlock extends Component {
 												</time>
 											)}
 										</header>
-										<div className="dbe-block-post-grid-excerpt">
+										<div className="block-post-grid-excerpt">
 											{checkPostExcerpt && (
 												<div
 													dangerouslySetInnerHTML={{
@@ -106,7 +106,7 @@ export default class PostGridBlock extends Component {
 											{checkPostLink && (
 												<p>
 													<a
-														className="dbe-block-post-grid-more-link dbe-text-link"
+														className="block-post-grid-more-link text-link"
 														href={post.link}
 														target="_blank"
 														rel="bookmark"

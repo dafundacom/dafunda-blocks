@@ -124,15 +124,15 @@ export const editorDisplay = (props) => {
 
 	return (
 		<div
-			className="dbe_testimonial"
+			className="testimonial"
 			style={{
 				backgroundColor: backgroundColor,
 				color: textColor || "inherit",
 			}}
 		>
-			<div className="dbe_testimonial_img">
+			<div className="testimonial_img">
 				{!imgID ? (
-					<div className="dbe_testimonial_upload_button">
+					<div className="testimonial_upload_button">
 						<MediaUpload
 							onSelect={(img) =>
 								setAttributes({
@@ -159,7 +159,7 @@ export const editorDisplay = (props) => {
 						<img src={imgURL} alt={imgAlt} height={100} width={100} />
 						{isSelected ? (
 							<Button
-								className="dbe-remove-image"
+								className="remove-image"
 								onClick={() =>
 									setAttributes({
 										imgID: null,
@@ -174,12 +174,12 @@ export const editorDisplay = (props) => {
 					</div>
 				)}
 			</div>
-			<div className="dbe_testimonial_content">
+			<div className="testimonial_content">
 				<RichText
 					placeholder={__(
 						"This is the testimonial body. Add the testimonial text you want to add here."
 					)}
-					className="dbe_testimonial_text"
+					className="testimonial_text"
 					style={{ fontSize: textSize, textAlign: textAlign }}
 					onChange={(value) => setAttributes({ dbe_testimonial_text: value })}
 					value={dbe_testimonial_text}
@@ -193,11 +193,11 @@ export const editorDisplay = (props) => {
 					}
 				/>
 			</div>
-			<div className="dbe_testimonial_sign">
+			<div className="testimonial_sign">
 				<RichText
 					placeholder={__("John Doe")}
 					style={{ textAlign: authorAlign }}
-					className="dbe_testimonial_author"
+					className="testimonial_author"
 					onChange={(value) => setAttributes({ dbe_testimonial_author: value })}
 					value={dbe_testimonial_author}
 					keepPlaceholderOnFocus={true}
@@ -208,7 +208,7 @@ export const editorDisplay = (props) => {
 				<RichText
 					placeholder={__("Founder, Company X")}
 					style={{ textAlign: authorRoleAlign }}
-					className="dbe_testimonial_author_role"
+					className="testimonial_author_role"
 					onChange={(value) =>
 						setAttributes({ dbe_testimonial_author_role: value })
 					}

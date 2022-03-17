@@ -2,7 +2,7 @@ export const oldAttributes = {
 	dbe_testimonial_text: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_testimonial_text",
+		selector: ".testimonial_text",
 	},
 	textAlign: {
 		type: "string",
@@ -11,7 +11,7 @@ export const oldAttributes = {
 	dbe_testimonial_author: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_testimonial_author",
+		selector: ".testimonial_author",
 	},
 	authorAlign: {
 		type: "string",
@@ -20,7 +20,7 @@ export const oldAttributes = {
 	dbe_testimonial_author_role: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_testimonial_author_role",
+		selector: ".testimonial_author_role",
 	},
 	authorRoleAlign: {
 		type: "string",
@@ -69,18 +69,18 @@ export const version_1_1_2 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_testimonial"
+				className="testimonial"
 				style={{
 					backgroundColor: backgroundColor,
 					color: textColor,
 				}}
 			>
-				<div className="dbe_testimonial_img">
+				<div className="testimonial_img">
 					<img src={imgURL} alt={imgAlt} height={100} width={100} />
 				</div>
-				<div className="dbe_testimonial_content">
+				<div className="testimonial_content">
 					<p
-						className="dbe_testimonial_text"
+						className="testimonial_text"
 						style={{
 							fontSize: textSize,
 						}}
@@ -88,9 +88,9 @@ export const version_1_1_2 = (props) => {
 						{dbe_testimonial_text}
 					</p>
 				</div>
-				<div className="dbe_testimonial_sign">
-					<p className="dbe_testimonial_author">{dbe_testimonial_author}</p>
-					<i className="dbe_testimonial_author_role">
+				<div className="testimonial_sign">
+					<p className="testimonial_author">{dbe_testimonial_author}</p>
+					<i className="testimonial_author_role">
 						{dbe_testimonial_author_role}
 					</i>
 				</div>
@@ -116,18 +116,18 @@ export const version_1_1_5 = (props) => {
 	return (
 		<div className={props.className}>
 			<div
-				className="dbe_testimonial"
+				className="testimonial"
 				style={{
 					backgroundColor: backgroundColor,
 					color: textColor,
 				}}
 			>
-				<div className="dbe_testimonial_img">
+				<div className="testimonial_img">
 					<img src={imgURL} alt={imgAlt} height={100} width={100} />
 				</div>
-				<div className="dbe_testimonial_content">
+				<div className="testimonial_content">
 					<p
-						className="dbe_testimonial_text"
+						className="testimonial_text"
 						style={{
 							fontSize: textSize,
 							textAlign: textAlign,
@@ -136,15 +136,12 @@ export const version_1_1_5 = (props) => {
 						{dbe_testimonial_text}
 					</p>
 				</div>
-				<div className="dbe_testimonial_sign">
-					<p
-						className="dbe_testimonial_author"
-						style={{ textAlign: authorAlign }}
-					>
+				<div className="testimonial_sign">
+					<p className="testimonial_author" style={{ textAlign: authorAlign }}>
 						{dbe_testimonial_author}
 					</p>
 					<p
-						className="dbe_testimonial_author_role"
+						className="testimonial_author_role"
 						style={{ textAlign: authorRoleAlign }}
 					>
 						{dbe_testimonial_author_role}

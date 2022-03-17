@@ -368,7 +368,7 @@ class EditorComponent extends Component {
 											{iconListPage.length > 0 &&
 												iconListPage[iconSearchResultsPage].map((i) => (
 													<Button
-														className="dbe-styled-list-available-icon"
+														className="styled-list-available-icon"
 														icon={<FontAwesomeIcon icon={i} size="lg" />}
 														label={i.iconName}
 														onClick={() => {
@@ -488,8 +488,8 @@ class EditorComponent extends Component {
 			),
 
 			<div
-				className="dbe_styled_list"
-				id={`dbe-styled-list-${blockID}`}
+				className="styled_list"
+				id={`styled-list-${blockID}`}
 				style={{ textAlign: alignment }}
 				ref={this.blockContainer}
 			>
@@ -518,7 +518,7 @@ class EditorComponent extends Component {
 
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `#dbe-styled-list-${blockID} li:before{
+						__html: `#styled-list-${blockID} li:before{
                     top: ${iconSize >= 5 ? 3 : iconSize < 3 ? 2 : 0}px;
                     height:${(4 + iconSize) / 10}em; 
                     width:${(4 + iconSize) / 10}em; 
@@ -532,12 +532,12 @@ class EditorComponent extends Component {
 							allIcons[`fa${dashesToCamelcase(selectedIcon)}`].icon[4]
 						}'></path></svg>");}
                     
-                    #dbe-styled-list-${blockID} li{
+                    #styled-list-${blockID} li{
                         margin-bottom: ${itemSpacing}px;
                         text-indent: -${(4 + iconSize) / 10}em;
                         ${setFontSize ? `font-size: ${fontSize}px;` : ""}
                     }
-                    #dbe-styled-list-${blockID} li>ul{
+                    #styled-list-${blockID} li>ul{
                         margin-top: ${itemSpacing}px;
                     }`,
 					}}

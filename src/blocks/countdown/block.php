@@ -30,25 +30,25 @@ function dbe_render_countdown_block($attributes){
 
     $weeks = ($timeLeft - $days * 86400 - $hours * 3600 - $minutes * 60 - $seconds) / 604800;
 
-    $defaultFormatValues = ['<span class="dbe_countdown_week">' . $weeks . '</span> ' . __( 'weeks', 'dafunda-blocks' ),
-    '<span class="dbe_countdown_day">' . $days . '</span> ' . __('days', 'dafunda-blocks'),
-    '<span class="dbe_countdown_hour">' . $hours . '</span> ' . __( 'hours', 'dafunda-blocks' ),
-    '<span class="dbe_countdown_minute">' . $minutes . '</span> ' . __( 'minutes', 'dafunda-blocks' ),
-    '<span class="dbe_countdown_second">' . $seconds . '</span> ' . __( 'seconds', 'dafunda-blocks' )];
+    $defaultFormatValues = ['<span class="countdown_week">' . $weeks . '</span> ' . __( 'weeks', 'dafunda-blocks' ),
+    '<span class="countdown_day">' . $days . '</span> ' . __('days', 'dafunda-blocks'),
+    '<span class="countdown_hour">' . $hours . '</span> ' . __( 'hours', 'dafunda-blocks' ),
+    '<span class="countdown_minute">' . $minutes . '</span> ' . __( 'minutes', 'dafunda-blocks' ),
+    '<span class="countdown_second">' . $seconds . '</span> ' . __( 'seconds', 'dafunda-blocks' )];
 
     $defaultFormat = implode(' ', dbe_filter_time_display($defaultFormatValues, $largestUnit, $smallestUnit) );
 
     if(!function_exists('dbe_generateCircle')){
         function dbe_generateCircle($label, $value, $limit, $color, $size){
             $circlePath = "M 50,50 m 0,-35 a 35,35 0 1 1 0,70 a 35,35 0 1 1 0,-70";
-            $prefix = "dbe_countdown_circle_";
+            $prefix = "countdown_circle_";
             return '<div class="' . $prefix . $label . '">
                         <svg height="' . $size . '" width="' . $size . '" viewBox="0 0 100 100">
                             <path class="' . $prefix . 'trail" d="' . $circlePath . '" stroke-width="3" ></path>
                             <path class="' . $prefix . 'path" d="'.$circlePath.'" stroke="' . $color .
                                 '" stroke-width="3" style="stroke-dasharray: ' . $value * 219.911/$limit . 'px, 219.911px;"></path>
                         </svg>
-                        <div class="' . $prefix . 'label dbe_countdown_' . $label . '">' . $value . '</div>
+                        <div class="' . $prefix . 'label countdown_' . $label . '">' . $value . '</div>
                     </div>';
         }
     }
@@ -65,7 +65,7 @@ function dbe_render_countdown_block($attributes){
     '<p>'.__( 'Minutes', 'dafunda-blocks' ).'</p>',
     '<p>'.__( 'Seconds', 'dafunda-blocks' ).'</p>'];
     
-    $circularFormat = '<div class="dbe_countdown_circular_container">'.
+    $circularFormat = '<div class="countdown_circular_container">'.
                 implode('', dbe_filter_time_display($circularFormatValues, $largestUnit, $smallestUnit)  ).
                 implode('', dbe_filter_time_display($circularFormatLabels, $largestUnit, $smallestUnit)  ).
                     '</div>';
@@ -85,16 +85,16 @@ function dbe_render_countdown_block($attributes){
                                  array_reverse($digits));
 
             return array_map(function($digit){
-                return '<div class="dbe-countdown-odometer-digit">' . $digit . '</div>';
+                return '<div class="countdown-odometer-digit">' . $digit . '</div>';
             }, $digits);
         }
     }
 
-    $odometerValues = ['<div class="dbe-countdown-odometer dbe-countdown-digit-container dbe_countdown_week">' . implode(dbe_generateDigitArray($weeks)) .'</div>', 
-        '<div class="dbe-countdown-odometer dbe-countdown-digit-container dbe_countdown_day">' . implode(dbe_generateDigitArray($days, $largestUnit === 'day' ? 0 : 6) ) . '</div>',
-        '<div class="dbe-countdown-odometer dbe-countdown-digit-container dbe_countdown_hour">' . implode(dbe_generateDigitArray($hours, $largestUnit === 'hour' ? 0 : 23) )  . '</div>',
-        '<div class="dbe-countdown-odometer dbe-countdown-digit-container dbe_countdown_minute">' . implode(dbe_generateDigitArray($minutes, 59) ) . '</div>',
-        '<div class="dbe-countdown-odometer dbe-countdown-digit-container dbe_countdown_second">' . implode(dbe_generateDigitArray($seconds, 59) ). '</div>'];
+    $odometerValues = ['<div class="countdown-odometer countdown-digit-container dbe_countdown_week">' . implode(dbe_generateDigitArray($weeks)) .'</div>', 
+        '<div class="countdown-odometer countdown-digit-container countdown_day">' . implode(dbe_generateDigitArray($days, $largestUnit === 'day' ? 0 : 6) ) . '</div>',
+        '<div class="countdown-odometer countdown-digit-container countdown_hour">' . implode(dbe_generateDigitArray($hours, $largestUnit === 'hour' ? 0 : 23) )  . '</div>',
+        '<div class="countdown-odometer countdown-digit-container countdown_minute">' . implode(dbe_generateDigitArray($minutes, 59) ) . '</div>',
+        '<div class="countdown-odometer countdown-digit-container countdown_second">' . implode(dbe_generateDigitArray($seconds, 59) ). '</div>'];
 
     $odometerLabels = ['<span>'.__( 'Weeks', 'dafunda-blocks' ).'</span>',
         '<span>'.__( 'Days', 'dafunda-blocks' ).'</span>',
@@ -102,9 +102,9 @@ function dbe_render_countdown_block($attributes){
         '<span>'.__( 'Minutes', 'dafunda-blocks' ).'</span>',
         '<span>'.__( 'Seconds', 'dafunda-blocks' ).'</span>'];
 
-    $odometerFormat = '<div class="dbe-countdown-odometer-container">'.
+    $odometerFormat = '<div class="countdown-odometer-container">'.
         implode('<span></span>', dbe_filter_time_display($odometerLabels, $largestUnit, $smallestUnit)).
-        implode('<span class="dbe-countdown-separator">:</span>', dbe_filter_time_display($odometerValues, $largestUnit, $smallestUnit))
+        implode('<span class="countdown-separator">:</span>', dbe_filter_time_display($odometerValues, $largestUnit, $smallestUnit))
         .'</div>';
 
     $selctedFormat = $defaultFormat;
@@ -120,15 +120,15 @@ function dbe_render_countdown_block($attributes){
     }
 
     if($timeLeft > 0){
-        return '<div '.($blockID === ''?'': 'id="dbe_countdown_'.$blockID.'"' ).'class="dbe-countdown'.
+        return '<div '.($blockID === ''?'': 'id="countdown_'.$blockID.'"' ).'class="countdown'.
                 (isset($className)?' '.esc_attr($className):'').
                 '" data-expirymessage="'.$expiryMessage.'" data-enddate="'.$endDate
                 .'" data-largestUnit="'.$largestUnit.'" data-smallestunit="'.$smallestUnit.'">
             '.$selectedFormat
             .'</div>';
     }
-    else return '<div class="dbe-countdown'.(isset($className) ? ' ' . esc_attr($className) : '').'" '.
-        ($blockID === ''?'style="text-align:'.$messageAlign.';' :'id="dbe_countdown_'.$blockID.'"').'>'.$expiryMessage.'</div>';
+    else return '<div class="countdown'.(isset($className) ? ' ' . esc_attr($className) : '').'" '.
+        ($blockID === ''?'style="text-align:'.$messageAlign.';' :'id="countdown_'.$blockID.'"').'>'.$expiryMessage.'</div>';
 }
 
 function dbe_register_countdown_block() {

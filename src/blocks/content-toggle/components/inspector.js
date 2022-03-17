@@ -44,9 +44,9 @@ export default class Inspector extends Component {
 				/>
 				<PanelBody title={__("Initial State")} initialOpen={true}>
 					<PanelRow>
-						<label htmlFor="dbe-content-toggle-state">{__("Collapsed")}</label>
+						<label htmlFor="content-toggle-state">{__("Collapsed")}</label>
 						<FormToggle
-							id="dbe-content-toggle-state"
+							id="content-toggle-state"
 							label={__("Collapsed")}
 							checked={collapsed}
 							onChange={onCollapseChange}

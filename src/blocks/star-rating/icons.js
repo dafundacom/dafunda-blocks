@@ -48,7 +48,7 @@ export const Star = (props) => (
 		viewBox="-10 -10 170 170"
 	>
 		<defs>
-			<mask id={`dbe_star_rating_filter-${props.id}-${props.index}`}>
+			<mask id={`star_rating_filter-${props.id}-${props.index}`}>
 				<rect
 					height="150"
 					width={Math.max(0, Math.min(props.value, 1)) * 150}
@@ -67,7 +67,7 @@ export const Star = (props) => (
 		/>
 		<path
 			className="star"
-			mask={`url(#dbe_star_rating_filter-${props.id}-${props.index})`}
+			mask={`url(#star_rating_filter-${props.id}-${props.index})`}
 			fill={props.displayColor}
 			strokeWidth="5"
 			d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
