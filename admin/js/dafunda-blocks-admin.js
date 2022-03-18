@@ -140,7 +140,7 @@
 	];
 
 	$(function () {
-		var isBlocksListEmpty = $(".dbe__collection__item").length === 0;
+		var isBlocksListEmpty = $(".collection__item").length === 0;
 
 		if (isBlocksListEmpty) {
 			insertBlocks();
@@ -150,7 +150,7 @@
 			toggleBlockStatus(
 				$(this),
 				$(this).prop("checked"),
-				$(this).closest(".dbe__collection__item").data("id")
+				$(this).closest(".collection__item").data("id")
 			);
 		});
 
@@ -161,13 +161,13 @@
 			var filter_status = $(this).data("filter-status");
 
 			if (filter_status === "all") {
-				$(".dbe__collection__item").removeClass("hide");
+				$(".collection__item").removeClass("hide");
 			} else if (filter_status == "enabled") {
-				$(".dbe__collection__item").addClass("hide");
-				$(".dbe__collection__item.active").removeClass("hide");
+				$(".collection__item").addClass("hide");
+				$(".collection__item.active").removeClass("hide");
 			} else if (filter_status == "disabled") {
-				$(".dbe__collection__item").removeClass("hide");
-				$(".dbe__collection__item.active").addClass("hide");
+				$(".collection__item").removeClass("hide");
+				$(".collection__item.active").addClass("hide");
 			}
 		});
 
@@ -177,17 +177,15 @@
 			$.each(blocks, function (index, block) {
 				//item start
 				blocksHtml +=
-					'<div class="dbe__collection__item" data-id="' + block.name + '">';
+					'<div class="collection__item" data-id="' + block.name + '">';
 
 				//item header start
 				blocksHtml +=
-					'<div class="dbe__collection__item__header" data-id="' +
-					block.name +
-					'">';
+					'<div class="collection__item__header" data-id="' + block.name + '">';
 
 				// title
 				blocksHtml +=
-					'<h3 class="dbe__collection__item__title">' + block.label + "</h3>";
+					'<h3 class="collection__item__title">' + block.label + "</h3>";
 				// switch
 				blocksHtml += '<label class="switch">';
 				blocksHtml += '<input type="checkbox" name="block_status">';
@@ -201,7 +199,7 @@
 				blocksHtml += "</div>";
 			});
 
-			$(".dbe__collection").html(blocksHtml);
+			$(".collection").html(blocksHtml);
 		}
 
 		function toggleBlockStatus(selector, enable, id) {
@@ -218,7 +216,7 @@
 				data: data,
 				"Content-Type": "application/json",
 				success: function (data, status, xhr) {
-					selector.closest(".dbe__collection__item").toggleClass("active");
+					selector.closest(".collection__item").toggleClass("active");
 				},
 				error: function (xhr, status, error) {
 					console.log(error);
