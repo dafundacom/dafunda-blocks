@@ -6,14 +6,8 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { RichText, MediaUpload, InspectorControls } =
 	wp.blockEditor || wp.editor;
 
-const {
-	Button,
-	ToggleControl,
-	PanelBody,
-	RadioControl,
-	RangeControl,
-	SelectControl,
-} = wp.components;
+const { ToggleControl, PanelBody, RadioControl, RangeControl, SelectControl } =
+	wp.components;
 
 class InspectorPanel extends Component {
 	constructor(props) {
@@ -407,26 +401,26 @@ class HowToStep extends Component {
 		return (
 			<>
 				<div className="howto-step__control-button">
-					<Button
+					<button
 						className="howto-delete"
 						icon="trash"
 						label={__("Delete step")}
 						onClick={() => deleteStep()}
 					/>
-					<Button
+					<button
 						className="howto-arrow"
 						icon="arrow-up-alt"
 						onClick={() => moveUp()}
 						label={__("Move step up")}
 					/>
-					<Button
+					<button
 						className="howto-arrow"
 						icon="arrow-down-alt"
 						onClick={() => moveDown()}
 						label={__("Move step down")}
 					/>
 				</div>
-				<li className="howto-step w-full">
+				<li className="howto-step space-y-4">
 					<div className="grid grid-cols-12 grid-flow-row gap-0">
 						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none howto-step__stepnum">
 							<h1>{stepNum + 1}</h1>
@@ -760,12 +754,12 @@ class HowToStep extends Component {
 										allowedTypes={["image"]}
 										value={stepPic.id}
 										render={({ open }) => (
-											<Button
-												className="button is-default is-large howto-button-default !leading-[inherit]"
+											<button
+												className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 												onClick={open}
 											>
 												{__("Upload Image")}
-											</Button>
+											</button>
 										)}
 									/>
 								</div>
@@ -811,7 +805,7 @@ class HowToSection extends Component {
 						value={sectionName}
 						onChange={(sectionName) => editSection({ sectionName, steps })}
 					/>
-					<Button
+					<button
 						className="howto-delete"
 						icon="trash"
 						label={__("Delete section")}
@@ -894,8 +888,8 @@ class HowToSection extends Component {
 						/>
 					))}
 				</ListWrapper>
-				<Button
-					className="howto-button-default"
+				<button
+					className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 					onClick={() => {
 						editSection({
 							sectionName,
@@ -922,7 +916,7 @@ class HowToSection extends Component {
 					}}
 				>
 					{__("Add step")}
-				</Button>
+				</button>
 			</li>
 		);
 	}
@@ -1283,13 +1277,13 @@ export class EditorComponent extends Component {
 										}
 									}}
 								/>
-								<Button
+								<button
 									icon={"editor-break"}
 									label={__("Apply")}
 									type={"submit"}
 									onClick={checkVideoURLInput}
 								/>
-								<Button
+								<button
 									icon="trash"
 									label={__("Delete")}
 									onClick={() => {
@@ -1335,7 +1329,7 @@ export class EditorComponent extends Component {
 															})
 														}
 													/>
-													<Button
+													<button
 														icon="trash"
 														label={__("Delete supply")}
 														onClick={() =>
@@ -1393,20 +1387,20 @@ export class EditorComponent extends Component {
 															allowedTypes={["image"]}
 															value={supply.imageID}
 															render={({ open }) => (
-																<Button
-																	className="button is-default is-large howto-button-default"
+																<button
+																	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 																	onClick={open}
 																>
 																	{__("Upload Image")}
-																</Button>
+																</button>
 															)}
 														/>
 													))}
 											</li>
 										))}
 									</ListWrapper>
-									<Button
-										className="howto-button-default"
+									<button
+										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 										onClick={() =>
 											setAttributes({
 												supplies: [
@@ -1417,7 +1411,7 @@ export class EditorComponent extends Component {
 										}
 									>
 										{__("Add new supplies")}
-									</Button>
+									</button>
 								</>
 							)}
 							{includeToolsList && (
@@ -1450,7 +1444,7 @@ export class EditorComponent extends Component {
 															})
 														}
 													/>
-													<Button
+													<button
 														icon="trash"
 														label={__("Delete tool")}
 														onClick={() =>
@@ -1505,20 +1499,20 @@ export class EditorComponent extends Component {
 															allowedTypes={["image"]}
 															value={tool.imageID}
 															render={({ open }) => (
-																<Button
-																	className="button is-default is-large howto-button-default"
+																<button
+																	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 																	onClick={open}
 																>
 																	{__("Upload Image")}
-																</Button>
+																</button>
 															)}
 														/>
 													))}
 											</li>
 										))}
 									</ListWrapper>
-									<Button
-										className="howto-button-default"
+									<button
+										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 										onClick={() =>
 											setAttributes({
 												tools: [
@@ -1529,7 +1523,7 @@ export class EditorComponent extends Component {
 										}
 									>
 										{__("Add new tools")}
-									</Button>
+									</button>
 								</>
 							)}
 							<div className="howto_cost_container">
@@ -1745,8 +1739,8 @@ export class EditorComponent extends Component {
 									/>
 								))}
 							</ListWrapper>
-							<Button
-								className="howto-button-default"
+							<button
+								className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 								onClick={() => {
 									setAttributes({
 										section: [
@@ -1776,12 +1770,12 @@ export class EditorComponent extends Component {
 								}}
 							>
 								{__("Add step")}
-							</Button>
+							</button>
 						</>
 					)}
 					{useSections && (
-						<Button
-							className="howto-button-default"
+						<button
+							className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 							onClick={() =>
 								setAttributes({
 									section: [
@@ -1812,7 +1806,7 @@ export class EditorComponent extends Component {
 							}
 						>
 							{__("Add Section")}
-						</Button>
+						</button>
 					)}
 					<div className="howto-yield">
 						<RichText
@@ -1872,12 +1866,12 @@ export class EditorComponent extends Component {
 								allowedTypes={["image"]}
 								value={finalImageID}
 								render={({ open }) => (
-									<Button
-										className="button is-default is-large howto-button-default"
+									<button
+										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 										onClick={open}
 									>
 										{__("Upload Image")}
-									</Button>
+									</button>
 								)}
 							/>
 						)}

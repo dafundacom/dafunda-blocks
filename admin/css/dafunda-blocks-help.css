@@ -1,4 +1,4 @@
-.dbe-container {
+.container {
 	margin: 50px auto;
 	max-width: 860px;
 	padding: 0;
@@ -6,9 +6,9 @@
 	border: 1px solid #34495e;
 }
 
-.dbe-container *,
-.dbe-container::before,
-.dbe-container::after {
+.container *,
+.container::before,
+.container::after {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -38,11 +38,11 @@
 	color: #fff;
 }
 
-.dbe-intro {
+.intro {
 	padding: 40px;
 }
 
-.dbe-intro p {
+.intro p {
 	font-family: "Open Sans";
 	font-size: 18px;
 	text-align: center;
@@ -50,18 +50,18 @@
 	line-height: 1.6em;
 }
 
-.dbe-intro h2 {
+.intro h2 {
 	font-size: 30px;
 	font-family: "Open Sans";
 	text-align: center;
 	margin: 60px auto 40px auto;
 }
 
-.dbe-social-intro {
+.social-intro {
 	padding: 40px;
 }
 
-.dbe-social-intro p {
+.social-intro p {
 	font-family: "Open Sans";
 	font-size: 18px;
 	text-align: center;
@@ -69,7 +69,7 @@
 	line-height: 1.6em;
 }
 
-.dbe-social-intro h2 {
+.social-intro h2 {
 	font-size: 30px;
 	font-family: "Open Sans";
 	text-align: center;
@@ -82,22 +82,22 @@
 	display: table;
 }
 
-.dbe-button-wrap {
+.button-wrap {
 	margin-top: 70px !important;
 	text-align: center;
 }
 
-.dbe-button-wrap {
+.button-wrap {
 	max-width: 590px;
 	margin: 0 auto 0 auto;
 }
 
-.dbe-social-button-wrap {
+.social-button-wrap {
 	margin-top: 40px !important;
 	text-align: center;
 }
 
-.dbe-social-button-wrap {
+.social-button-wrap {
 	max-width: 590px;
 	margin: 0 auto 0 auto;
 }
