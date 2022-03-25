@@ -33,7 +33,7 @@
 		@apply border border-b-slate-500;
 	}
 	.indicator-grid-left-border {
-		@apply border border-l-slat-500;
+		@apply border border-l-slate-500;
 	}
 	.indicator-grid-right-border {
 		@apply border border-r-slate-500;
@@ -57,7 +57,7 @@
 		@apply transition-all;
 	}
 	.icon-holder {
-		@apply relative
+		@apply relative;
 		transform: translate(-25%, 25%);
 	}
 	.custom-id-input {
@@ -126,7 +126,7 @@
 		@apply align-middle;
 	}
 	.button-delete {
-		@apply relatice;
+		@apply relative;
 	}
 	.button-delete .dashicons-dismiss {
 		@apply absolute -top-2 -right-2;
@@ -508,8 +508,7 @@
 		@apply min-w-[24px] my-auto;
 	}
 	.howto-button-default {
-		@apply mt-5 ml-auto text-gray-800 border  border-gray-800 rounded-sm bg-slate-100 h-8 text-sm;
-		padding: 0 12px 2px;
+		@apply text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800;
 	}
 	.howto-time-value {
 		@apply text-right;

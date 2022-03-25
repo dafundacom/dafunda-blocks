@@ -158,29 +158,24 @@ function dbe_load_assets()
 		dbe_update_css_version("frontend");
 	}
 
-	wp_enqueue_script(
-		"module_handle",
-		"https://cdn.tailwindcss.com", // Block.build.js: We register the block here. Built with Webpack.
-		[], // Dependencies, defined above.
-		Dafunda_Blocks_Constants::plugin_version(),
-		true // Version: latest version number.
-	);
-
 	add_action("wp_enqueue_scripts", "enqueue_plugin_scripts");
-	// function set_scripts_type_attribute( $tag, $handle, $src ) {
-	//     if ( 'module_handle' === $handle ) {
-	//         $tag = '<script type="module" crossorigin src="'. $src .'"></script>';
-	//     }
-	//     return $tag;
-	// }
-	// add_filter( 'script_loader_tag', 'set_scripts_type_attribute', 10, 3 );
-	wp_enqueue_style(
-		"tailwindcss", // Handle.
-		plugins_url("/src/tailwindcss/style.css", dirname(__FILE__)), // Block.build.js: We register the block here. Built with Webpack.
-		[], // Dependencies, defined above.
-		Dafunda_Blocks_Constants::plugin_version(),
-		true // Version: latest version number.
-	);
+
+	// wp_enqueue_style(
+	// 	"tailwindcss", // Handle.
+	// 	plugins_url("./assets/blocks.editor.css", dirname(__FILE__)),
+	// 	[], // Dependencies, defined above.
+	// 	Dafunda_Blocks_Constants::plugin_version(),
+	// 	true // Version: latest version number.
+	// );
+
+	// wp_enqueue_style(
+	// 	"tailwindcss", // Handle.
+	// 	plugins_url("./assets/blocks.style.css", dirname(__FILE__)),
+	// 	[], // Dependencies, defined above.
+	// 	Dafunda_Blocks_Constants::plugin_version(),
+	// 	true // Version: latest version number.
+	// );
+
 	wp_enqueue_style(
 		"dafunda_blocks-cgb-style-css", // Handle.
 		file_exists(
