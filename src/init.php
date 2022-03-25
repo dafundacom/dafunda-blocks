@@ -160,22 +160,6 @@ function dbe_load_assets()
 
 	add_action("wp_enqueue_scripts", "enqueue_plugin_scripts");
 
-	// wp_enqueue_style(
-	// 	"tailwindcss", // Handle.
-	// 	plugins_url("./assets/blocks.editor.css", dirname(__FILE__)),
-	// 	[], // Dependencies, defined above.
-	// 	Dafunda_Blocks_Constants::plugin_version(),
-	// 	true // Version: latest version number.
-	// );
-
-	// wp_enqueue_style(
-	// 	"tailwindcss", // Handle.
-	// 	plugins_url("./assets/blocks.style.css", dirname(__FILE__)),
-	// 	[], // Dependencies, defined above.
-	// 	Dafunda_Blocks_Constants::plugin_version(),
-	// 	true // Version: latest version number.
-	// );
-
 	wp_enqueue_style(
 		"dafunda_blocks-cgb-style-css", // Handle.
 		file_exists(
@@ -556,8 +540,8 @@ function dbe_include_block_attribute_css()
 						$blockStylesheets .= $prefix . " a{" . PHP_EOL;
 						if ($attributes["buttonIsTransparent"]) {
 							$blockStylesheets .=
-								"background-color: transparent;" .
-								PHP_EOL .
+								// "background-color: transparent;" .
+								// PHP_EOL .
 								"color: " .
 								$attributes["buttonColor"] .
 								";" .
