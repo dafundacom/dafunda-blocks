@@ -2348,6 +2348,15 @@ add_action("wp_head", "include_block_attribute_css");
  *
  * @since 1.0.0
  */
+
+// Don't load Gutenberg-related stylesheets.
+add_action("wp_enqueue_scripts", "remove_block_css", 100);
+function remove_block_css()
+{
+	wp_dequeue_style("wp-block-library"); // Wordpress core
+	wp_dequeue_style("wp-block-library-theme"); // Wordpress core
+}
+
 function dafunda_blocks_cgb_editor_assets()
 {
 	// Scripts.
@@ -2421,6 +2430,23 @@ function dafunda_blocks_cgb_editor_assets()
 		fclose($adminStyleFile);
 		dbe_update_css_version("editor");
 	}
+
+	// wp_enqueue_style(
+	// 	"tailwindcss", // Handle.
+	// 	plugins_url("./assets/blocks.editor.css", dirname(__FILE__)), //
+	// 	[], // Dependencies, defined above.
+	// 	Dafunda_Blocks_Constants::plugin_version(),
+	// 	true // Version: latest version number.
+	// );
+
+	// wp_enqueue_style(
+	// 	"tailwindcss", // Handle.
+	// 	plugins_url("./assets/blocks.style.css", dirname(__FILE__)), //
+	// 	[], // Dependencies, defined above.
+	// 	Dafunda_Blocks_Constants::plugin_version(),
+	// 	true // Version: latest version number.
+	// );
+
 	wp_enqueue_style(
 		"dafunda_blocks-cgb-block-editor-css", // Handle.
 		file_exists(

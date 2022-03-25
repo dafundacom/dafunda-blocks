@@ -420,7 +420,7 @@ class HowToStep extends Component {
 						label={__("Move step down")}
 					/>
 				</div>
-				<li className="howto-step w-full">
+				<li className="howto-step space-y-4">
 					<div className="grid grid-cols-12 grid-flow-row gap-0">
 						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none howto-step__stepnum">
 							<h1>{stepNum + 1}</h1>

@@ -4,15 +4,16 @@ module.exports = {
 	darkMode: "class",
 	content: [
 		"./*.{js,php}",
-		"./**/*.{js,php}",
-		"./**/**/*.{js,php}",
-		"./**/**/**/*.{js,php}",
-		"./**/**/**/**/*.{js,php}",
+		"./src/*.{js,php}",
+		"./src/**/*.{js,php}",
+		"./src/**/**/*.{js,php}",
+		"./src/**/**/**/*.{js,php}",
 	],
 	theme: {
 		extend: {
 			colors: {
 				primary: colors.teal,
+				secondary: colors.slate,
 			},
 		},
 	},

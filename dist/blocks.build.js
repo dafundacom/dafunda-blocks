@@ -31032,7 +31032,7 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
         },
         label: __("Move step down")
       })), /*#__PURE__*/React.createElement("li", {
-        className: "howto-step w-full"
+        className: "howto-step space-y-4"
       }, /*#__PURE__*/React.createElement("div", {
         className: "grid grid-cols-12 grid-flow-row gap-0"
       }, /*#__PURE__*/React.createElement("div", {
