@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
 	darkMode: "class",
 	content: [
@@ -9,7 +11,11 @@ module.exports = {
 		"src/js/**.js",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				primary: colors.teal,
+			},
+		},
 	},
 	variants: {},
 	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
