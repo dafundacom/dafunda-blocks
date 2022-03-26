@@ -31,7 +31,6 @@
 	.advanced-video-container {
 		@apply w-[fit-content] max-w-full;
 	}
-
 	/* Button */
 	.wp-block--button-block {
 		@apply max-w-full;
@@ -698,17 +697,18 @@
 		@apply list-outside;
 	}
 	.howto-step {
-		@apply overflow-auto;
+		@apply mt-4 rounded-lg overflow-hidden border;
+		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 	}
 	.howto-step > figure,
 	.howto-step > img {
 		@apply mb-2;
 	}
 	.howto-step {
-		@apply border  border-slate-100 rounded-lg overflow-hidden;
+		@apply border border-slate-200 rounded-lg overflow-hidden;
 	}
 	.howto-step .howto-step__stepnum {
-		@apply bg-slate-100 flex flex-wrap items-center justify-center;
+		@apply bg-slate-200 flex flex-wrap items-center justify-center;
 	}
 	.howto-step .howto-step__stepnum h1 {
 		@apply font-semibold;
@@ -739,20 +739,20 @@
 	}
 
 	/* Image Slider */
-	.ub_image_slider {
+	.dbe_image_slider {
 		margin-bottom: 30px;
 	}
-	.ub_image_slider .ub_image_slider_image_caption {
+	.dbe_image_slider .dbe_image_slider_image_caption {
 		display: block;
 		text-align: center;
 	}
-	.ub_image_slider .ub_image_slider_alt {
+	.dbe_image_slider .dbe_image_slider_alt {
 		font-size: 0.8em;
 	}
-	.ub_image_slider .swiper-slide > img,
-	.ub_image_slider .swiper-slide > picture > img,
-	.ub_image_slider .swiper-slide figure > img,
-	.ub_image_slider .swiper-slide figure > picture > img {
+	.dbe_image_slider .swiper-slide > img,
+	.dbe_image_slider .swiper-slide > picture > img,
+	.dbe_image_slider .swiper-slide figure > img,
+	.dbe_image_slider .swiper-slide figure > picture > img {
 		display: block;
 		margin: auto;
 	}

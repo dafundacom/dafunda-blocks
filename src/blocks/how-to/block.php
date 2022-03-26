@@ -310,7 +310,7 @@ function dbe_render_how_to_block($attributes)
 		if (isset($section) && count($section) > 0) {
 			foreach ($section[0]["steps"] as $index => $step) {
 				ob_start(); ?>
-                <li class="howto-step mt-5 mb-7">
+                <li class="howto-step">
 
                     <div class="grid grid-cols-12 grid-flow-row gap-0">
 

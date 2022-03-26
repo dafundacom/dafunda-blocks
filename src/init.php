@@ -289,7 +289,7 @@ function dbe_include_block_attribute_css()
 					//nothing could be done
 					break;
 				case "dbe/advanced-video":
-					$prefix = "#advanced-video-" . $attributes["blockID"];
+					$prefix = "#dbe-advanced-video-" . $attributes["blockID"];
 
 					if (
 						json_encode(
@@ -427,9 +427,9 @@ function dbe_include_block_attribute_css()
 						$attributes["shadow"][0]["radius"] > 0
 					) {
 						$blockStylesheets .= $prefix =
-							"advanced-video-" .
+							"#dbe-advanced-video-" .
 							$attributes["blockID"] .
-							" advanced-video-embed{" .
+							" .dbe-advanced-video-embed{" .
 							PHP_EOL .
 							"box-shadow: " .
 							$attributes["shadow"][0]["radius"] *
@@ -474,7 +474,7 @@ function dbe_include_block_attribute_css()
 					break;
 				case "dbe/advanced-heading":
 					$prefix =
-						'.advanced_heading[data-blockid="' .
+						'.dbe_advanced_heading[data-blockid="' .
 						$attributes["blockID"] .
 						'"]';
 					$blockStylesheets .=
@@ -532,7 +532,7 @@ function dbe_include_block_attribute_css()
 						"}";
 					break;
 				case "dbe/button":
-					$prefix = "button-" . $attributes["blockID"];
+					$prefix = "#dbe-button-" . $attributes["blockID"];
 					if (
 						!array_key_exists("buttons", $attributes) ||
 						count($attributes["buttons"]) === 0
@@ -540,8 +540,8 @@ function dbe_include_block_attribute_css()
 						$blockStylesheets .= $prefix . " a{" . PHP_EOL;
 						if ($attributes["buttonIsTransparent"]) {
 							$blockStylesheets .=
-								// "background-color: transparent;" .
-								// PHP_EOL .
+								"background-color: transparent;" .
+								PHP_EOL .
 								"color: " .
 								$attributes["buttonColor"] .
 								";" .
@@ -596,7 +596,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" button-content-holder{" .
+							" .dbe-button-content-holder{" .
 							PHP_EOL .
 							"flex-direction: " .
 							($attributes["iconPosition"] === "left"
@@ -610,7 +610,7 @@ function dbe_include_block_attribute_css()
 						foreach ($attributes["buttons"] as $key => $button) {
 							$blockStylesheets .=
 								$prefix .
-								" button-container:nth-child(" .
+								" .dbe-button-container:nth-child(" .
 								($key + 1) .
 								") a{" .
 								PHP_EOL;
@@ -651,30 +651,109 @@ function dbe_include_block_attribute_css()
 									"border: none;";
 							}
 							if ($attributes["buttons"][$key]["buttonRounded"]) {
-								$blockStylesheets .=
-									"border-radius: " .
-									(array_key_exists(
-										"buttonRadius",
-										$attributes["buttons"][$key]
+								if (
+									array_key_exists(
+										"topLeftRadius",
+										$button
 									) &&
-									$attributes["buttons"][$key]["buttonRadius"]
-										? $attributes["buttons"][$key][
+									array_key_exists(
+										"topLeftRadiusUnit",
+										$button
+									) &&
+									array_key_exists(
+										"topRightRadius",
+										$button
+									) &&
+									array_key_exists(
+										"topRightRadiusUnit",
+										$button
+									) &&
+									array_key_exists(
+										"bottomLeftRadius",
+										$button
+									) &&
+									array_key_exists(
+										"bottomLeftRadiusUnit",
+										$button
+									) &&
+									array_key_exists(
+										"bottomRightRadius",
+										$button
+									) &&
+									array_key_exists(
+										"bottomRightRadiusUnit",
+										$button
+									)
+								) {
+									if (
+										count(
+											array_unique([
+												$button["topLeftRadius"],
+												$button["topRightRadius"],
+												$button["bottomLeftRadius"],
+												$button["bottomRightRadius"],
+											])
+										) === 1 &&
+										count(
+											array_unique([
+												$button["topLeftRadiusUnit"],
+												$button["topRightRadiusUnit"],
+												$button["bottomLeftRadiusUnit"],
+												$button[
+													"bottomRightRadiusUnit"
+												],
+											])
+										) === 1
+									) {
+										$blockStylesheets .=
+											"border-radius: " .
+											$button["topLeftRadius"] .
+											$button["topLeftRadiusUnit"] .
+											";";
+									} else {
+										$blockStylesheets .=
+											"border-radius: " .
+											$button["topLeftRadius"] .
+											$button["topLeftRadiusUnit"] .
+											" " .
+											$button["topRightRadius"] .
+											$button["topRightRadiusUnit"] .
+											" " .
+											$button["bottomRightRadius"] .
+											$button["bottomRightRadiusUnit"] .
+											" " .
+											$button["bottomLeftRadius"] .
+											$button["bottomLeftRadiusUnit"] .
+											";";
+									}
+								} else {
+									$blockStylesheets .=
+										"border-radius: " .
+										(array_key_exists(
+											"buttonRadius",
+											$attributes["buttons"][$key]
+										) &&
+										$attributes["buttons"][$key][
 											"buttonRadius"
 										]
-										: "60") .
-									(array_key_exists(
-										"buttonRadiusUnit",
-										$attributes["buttons"][$key]
-									) &&
-									$attributes["buttons"][$key][
-										"buttonRadiusUnit"
-									]
-										? $attributes["buttons"][$key][
+											? $attributes["buttons"][$key][
+												"buttonRadius"
+											]
+											: "60") .
+										(array_key_exists(
+											"buttonRadiusUnit",
+											$attributes["buttons"][$key]
+										) &&
+										$attributes["buttons"][$key][
 											"buttonRadiusUnit"
 										]
-										: "px") .
-									";" .
-									PHP_EOL;
+											? $attributes["buttons"][$key][
+												"buttonRadiusUnit"
+											]
+											: "px") .
+										";" .
+										PHP_EOL;
+								}
 							} else {
 								$blockStylesheets .=
 									"border-radius: 0;" . PHP_EOL;
@@ -684,7 +763,7 @@ function dbe_include_block_attribute_css()
 								"}" .
 								PHP_EOL .
 								$prefix .
-								" button-container:nth-child(" .
+								" .dbe-button-container:nth-child(" .
 								($key + 1) .
 								") a:hover{" .
 								PHP_EOL;
@@ -725,9 +804,9 @@ function dbe_include_block_attribute_css()
 								"}" .
 								PHP_EOL .
 								$prefix .
-								" button-container:nth-child(" .
+								" .dbe-button-container:nth-child(" .
 								($key + 1) .
-								") button-content-holder{" .
+								") .dbe-button-content-holder{" .
 								PHP_EOL .
 								"flex-direction: " .
 								($attributes["buttons"][$key][
@@ -744,7 +823,7 @@ function dbe_include_block_attribute_css()
 
 					break;
 				case "dbe/call-to-action-block":
-					$prefix = "call_to_action_" . $attributes["blockID"];
+					$prefix = "#dbe_call_to_action_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						"{" .
@@ -764,7 +843,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .call_to_action_headline_text{" .
+						" .dbe_call_to_action_headline_text{" .
 						PHP_EOL .
 						"font-size: " .
 						$attributes["headFontSize"] .
@@ -781,7 +860,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .cta_content_text{" .
+						" .dbe_cta_content_text{" .
 						PHP_EOL .
 						"font-size: " .
 						$attributes["contentFontSize"] .
@@ -798,7 +877,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .cta_button{" .
+						" .dbe_cta_button{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["buttonColor"] .
@@ -811,7 +890,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .cta_button_text{" .
+						" .dbe_cta_button_text{" .
 						PHP_EOL .
 						"color: " .
 						($attributes["buttonTextColor"] ?: "inherit") .
@@ -825,7 +904,7 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/click-to-tweet":
-					$prefix = "click_to_tweet_" . $attributes["blockID"];
+					$prefix = "#dbe_click_to_tweet_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						"{" .
@@ -837,7 +916,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .tweet{" .
+						" .dbe_tweet{" .
 						PHP_EOL .
 						"color: " .
 						($attributes["tweetColor"] ?: "inherit") .
@@ -851,10 +930,10 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/content-filter-block":
-					$prefix = "content-filter-" . $attributes["blockID"];
+					$prefix = "#dbe-content-filter-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" content-filter-tag{" .
+						" .dbe-content-filter-tag{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["buttonColor"] .
@@ -867,7 +946,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" content-filter-tagselected{" .
+						" .dbe-content-filter-tag.dbe-selected{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["activeButtonColor"] .
@@ -890,10 +969,10 @@ function dbe_include_block_attribute_css()
 						]["attributes"]),
 						$block["innerBlocks"][0]["attrs"]
 					);
-					$prefix = "content-toggle-" . $attributes["blockID"];
+					$prefix = "#dbe-content-toggle-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .wp-blockcontent-toggle-accordion{" .
+						" .wp-block-dbe-content-toggle-accordion{" .
 						PHP_EOL .
 						"border-color: " .
 						$attributes["theme"] .
@@ -902,7 +981,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .wp-blockcontent-toggle-accordion-title-wrap{" .
+						" .wp-block-dbe-content-toggle-accordion-title-wrap{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["theme"] .
@@ -911,7 +990,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .wp-blockcontent-toggle-accordion-title{" .
+						" .wp-block-dbe-content-toggle-accordion-title{" .
 						PHP_EOL .
 						"color: " .
 						($attributes["titleColor"] ?: "inherit") .
@@ -920,7 +999,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .wp-blockcontent-toggle-accordion-toggle-wrap{" .
+						" .wp-block-dbe-content-toggle-accordion-toggle-wrap{" .
 						PHP_EOL .
 						"color: " .
 						$attributes["toggleColor"] .
@@ -928,7 +1007,7 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						"}" .
 						PHP_EOL .
-						"content-toggle-title-" .
+						".dbe-content-toggle-title-" .
 						$attributes["blockID"] .
 						" > a{" .
 						PHP_EOL .
@@ -939,7 +1018,7 @@ function dbe_include_block_attribute_css()
 						"}";
 					break;
 				case "dbe/countdown":
-					$prefix = "countdown_" . $attributes["blockID"];
+					$prefix = "#dbe_countdown_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						"{" .
@@ -955,7 +1034,7 @@ function dbe_include_block_attribute_css()
 						case "Odometer":
 							$blockStylesheets .=
 								$prefix .
-								" countdown-odometer-container{" .
+								" .dbe-countdown-odometer-container{" .
 								PHP_EOL .
 								"grid-template-columns: " .
 								implode(
@@ -981,7 +1060,7 @@ function dbe_include_block_attribute_css()
 						case "Circular":
 							$blockStylesheets .=
 								$prefix .
-								" .countdown_circular_container{" .
+								" .dbe_countdown_circular_container{" .
 								PHP_EOL .
 								"grid-template-columns: " .
 								implode(
@@ -1005,7 +1084,7 @@ function dbe_include_block_attribute_css()
 								"}";
 							$blockStylesheets .=
 								$prefix .
-								" .countdown_circular_container > div{" .
+								" .dbe_countdown_circular_container > div{" .
 								PHP_EOL .
 								"height: " .
 								$attributes["circleSize"] .
@@ -1023,7 +1102,7 @@ function dbe_include_block_attribute_css()
 					break;
 				case "dbe/divider":
 					$blockStylesheets .=
-						"divider_" .
+						"#dbe_divider_" .
 						$attributes["blockID"] .
 						"{" .
 						PHP_EOL .
@@ -1048,9 +1127,9 @@ function dbe_include_block_attribute_css()
 					break;
 				case "dbe/expand":
 					$blockStylesheets .=
-						"expand-" .
+						"#dbe-expand-" .
 						$attributes["blockID"] .
-						" .expand-toggle-button{" .
+						" .dbe-expand-toggle-button{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["toggleAlign"] .
@@ -1060,10 +1139,10 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/feature-box-block":
-					$prefix = "feature_box_" . $attributes["blockID"];
+					$prefix = "#dbe_feature_box_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .feature_one_title{" .
+						" .dbe_feature_one_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title1Align"] .
@@ -1072,7 +1151,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .feature_two_title{" .
+						" .dbe_feature_two_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title2Align"] .
@@ -1081,7 +1160,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .feature_three_title{" .
+						" .dbe_feature_three_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title3Align"] .
@@ -1090,7 +1169,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .feature_one_body{" .
+						" .dbe_feature_one_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body1Align"] .
@@ -1099,7 +1178,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .feature_two_body{" .
+						" .dbe_feature_two_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body2Align"] .
@@ -1108,7 +1187,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .feature_three_body{" .
+						" .dbe_feature_three_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body3Align"] .
@@ -1117,15 +1196,15 @@ function dbe_include_block_attribute_css()
 						"}";
 					break;
 				case "dbe/how-to":
-					$prefix = "howto_" . $attributes["blockID"];
+					$prefix = "#dbe_howto_" . $attributes["blockID"];
 					if ($attributes["sectionListStyle"] === "none") {
 						$blockStylesheets .=
 							$prefix .
-							" .howto-section-display," .
+							" .dbe_howto-section-display," .
 							$prefix .
-							" .howto-step-display," .
+							" .dbe_howto-step-display," .
 							$prefix .
-							" .howto-step-display .howto-step{" .
+							" .dbe_howto-step-display .dbe_howto-step{" .
 							PHP_EOL .
 							"list-style: none;" .
 							PHP_EOL .
@@ -1135,7 +1214,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["suppliesListStyle"] === "none") {
 						$blockStylesheets .=
 							$prefix .
-							" .howto-supplies-list{" .
+							" .dbe_howto-supplies-list{" .
 							PHP_EOL .
 							"list-style: none;" .
 							PHP_EOL .
@@ -1145,7 +1224,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["toolsListStyle"] === "none") {
 						$blockStylesheets .=
 							$prefix .
-							" .howto-tools-list{" .
+							" .dbe_howto-tools-list{" .
 							PHP_EOL .
 							"list-style: none;" .
 							PHP_EOL .
@@ -1177,7 +1256,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["useSections"]) {
 						$sectionPicArray = array_map(function ($section) {
 							return array_map(
-								"howto_getStepPic",
+								"dbe_howto_getStepPic",
 								$section["steps"]
 							);
 						}, $attributes["section"]);
@@ -1195,17 +1274,17 @@ function dbe_include_block_attribute_css()
 											) {
 												if ($stepPic["width"] > 0) {
 													return $prefix .
-														" .howto-section:nth-child(" .
+														" .dbe_howto-section:nth-child(" .
 														($outerIndex + 1) .
-														") .howto-step:nth-child(" .
+														") .dbe_howto-step:nth-child(" .
 														($innerIndex + 1) .
-														") .figure," .
+														") figure," .
 														$prefix .
-														" .howto-section:nth-child(" .
+														" .dbe_howto-section:nth-child(" .
 														($outerIndex + 1) .
-														") .howto-step:nth-child(" .
+														") .dbe_howto-step:nth-child(" .
 														($innerIndex + 1) .
-														") .howto-step-image {" .
+														") .dbe_howto-step-image {" .
 														dbe_howto_generateStepPicStyle(
 															$stepPic
 														) .
@@ -1237,14 +1316,35 @@ function dbe_include_block_attribute_css()
 						);
 					} else {
 						$stepPicArray = array_map(
-							"howto_getStepPic",
+							"dbe_howto_getStepPic",
 							array_key_exists("section", $attributes)
 								? $attributes["section"][0]["steps"]
 								: []
 						);
 						$blockStylesheets .= implode(
 							array_map(
-								function ($stepPic, $index, $prefix) {},
+								function ($stepPic, $index, $prefix) {
+									if (
+										array_key_exists("width", $stepPic) &&
+										$stepPic["width"] > 0
+									) {
+										return $prefix .
+											" .dbe_howto-step:nth-child(" .
+											($index + 1) .
+											") figure," .
+											$prefix .
+											".dbe_howto-step:nth-child(" .
+											($index + 1) .
+											") .dbe_howto-step-image {" .
+											dbe_howto_generateStepPicStyle(
+												$stepPic
+											) .
+											"}" .
+											PHP_EOL;
+									} else {
+										return "";
+									}
+								},
 								$stepPicArray,
 								array_keys($stepPicArray),
 								array_fill(0, count($stepPicArray), $prefix)
@@ -1255,7 +1355,10 @@ function dbe_include_block_attribute_css()
 					if ($attributes["finalImageWidth"] > 0) {
 						$blockStylesheets .=
 							$prefix .
-							" .howto-yield-image-container{" .
+							" .dbe_howto-yield-image-container{" .
+							"width: " .
+							$attributes["finalImageWidth"] .
+							"px;" .
 							($attributes["finalImageFloat"] === "left"
 								? "padding-right: 10px;"
 								: ($attributes["finalImageFloat"] === "right"
@@ -1273,7 +1376,7 @@ function dbe_include_block_attribute_css()
 
 					break;
 				case "dbe/image-slider":
-					$prefix = "image_slider_" . $attributes["blockID"];
+					$prefix = "#dbe_image_slider_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						" .swiper-slide img{" .
@@ -1287,9 +1390,9 @@ function dbe_include_block_attribute_css()
 					break;
 				case "dbe/notification-box-block":
 					$blockStylesheets .=
-						"notification-box-" .
+						"#dbe-notification-box-" .
 						$attributes["blockID"] .
-						" .notify_text{" .
+						" .dbe_notify_text{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["align"] .
@@ -1299,10 +1402,10 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/number-box-block":
-					$prefix = "number-box-" . $attributes["blockID"];
+					$prefix = "#dbe-number-box-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .number_one_title{" .
+						" .dbe_number_one_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title1Align"] .
@@ -1311,7 +1414,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_two_title{" .
+						" .dbe_number_two_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title2Align"] .
@@ -1320,7 +1423,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_three_title{" .
+						" .dbe_number_three_title{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["title3Align"] .
@@ -1329,7 +1432,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_one_body{" .
+						" .dbe_number_one_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body1Align"] .
@@ -1338,7 +1441,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_two_body{" .
+						" .dbe_number_two_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body2Align"] .
@@ -1347,7 +1450,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_three_body{" .
+						" .dbe_number_three_body{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["body3Align"] .
@@ -1356,7 +1459,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_column{" .
+						" .dbe_number_column{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["borderColor"] .
@@ -1365,7 +1468,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_box_number{" .
+						" .dbe_number_box_number{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["numberBackground"] .
@@ -1374,7 +1477,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .number_box_number>p{" .
+						" .dbe_number_box_number>p{" .
 						PHP_EOL .
 						"color: " .
 						$attributes["numberColor"] .
@@ -1383,10 +1486,10 @@ function dbe_include_block_attribute_css()
 						"}";
 					break;
 				case "dbe/progress-bar":
-					$prefix = "progress-bar-" . $attributes["blockID"];
+					$prefix = "#dbe-progress-bar-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .progress-bar-text p{" .
+						" .dbe_progress-bar-text p{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["detailAlign"] .
@@ -1395,7 +1498,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .progress-bar-text p{" .
+						" .dbe_progress-bar-text p{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["detailAlign"] .
@@ -1407,14 +1510,14 @@ function dbe_include_block_attribute_css()
 					if ($attributes["barType"] === "linear") {
 						$blockStylesheets .=
 							$prefix .
-							" .progress-bar-line-path{" .
+							" .dbe_progress-bar-line-path{" .
 							PHP_EOL .
 							"stroke-dashoffset: 100px;" .
 							PHP_EOL .
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" .progress-bar-label{" .
+							" .dbe_progress-bar-label{" .
 							PHP_EOL .
 							"width: " .
 							$attributes["percentage"] .
@@ -1425,9 +1528,9 @@ function dbe_include_block_attribute_css()
 							50 - ($attributes["barThickness"] + 3) / 2;
 						$circlePathLength = $circleRadius * M_PI * 2;
 						$blockStylesheets .=
-							"progress-bar-" .
+							"#dbe-progress-bar-" .
 							$attributes["blockID"] .
-							" .progress-bar-container{" .
+							" .dbe_progress-bar-container{" .
 							PHP_EOL .
 							"height: 150px;" .
 							PHP_EOL .
@@ -1444,7 +1547,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" .progress-bar-circle-trail{" .
+							" .dbe_progress-bar-circle-trail{" .
 							PHP_EOL .
 							"stroke-dasharray: " .
 							$circlePathLength .
@@ -1455,7 +1558,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" .progress-bar-circle-path{" .
+							" .dbe_progress-bar-circle-path{" .
 							PHP_EOL .
 							"stroke-dasharray: 0px, " .
 							$circlePathLength .
@@ -1464,7 +1567,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" .progress-bar-label{" .
+							" .dbe_progress-bar-label{" .
 							PHP_EOL;
 					}
 					$blockStylesheets .=
@@ -1477,7 +1580,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						".progress-bar-filled .progress-bar-label{" .
+						".dbe_progress-bar-filled .dbe_progress-bar-label{" .
 						PHP_EOL .
 						"visibility: visible;" .
 						PHP_EOL .
@@ -1486,7 +1589,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["barType"] === "linear") {
 						$blockStylesheets .=
 							$prefix .
-							".progress-bar-filled .progress-bar-line-path{" .
+							".dbe_progress-bar-filled .dbe_progress-bar-line-path{" .
 							PHP_EOL .
 							"stroke-dashoffset: " .
 							(100 - $attributes["percentage"]) .
@@ -1497,7 +1600,7 @@ function dbe_include_block_attribute_css()
 							100;
 						$blockStylesheets .=
 							$prefix .
-							".progress-bar-filled .progress-bar-circle-path{" .
+							".dbe_progress-bar-filled .dbe_progress-bar-circle-path{" .
 							PHP_EOL .
 							"stroke-linecap: round;" .
 							PHP_EOL .
@@ -1511,10 +1614,10 @@ function dbe_include_block_attribute_css()
 					$blockStylesheets .= "}";
 					break;
 				case "dbe/review":
-					$prefix = "review_" . $attributes["blockID"];
+					$prefix = "#dbe_review_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .review_item_name{" .
+						" .dbe_review_item_name{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["titleAlign"] .
@@ -1523,7 +1626,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_author_name{" .
+						" .dbe_review_author_name{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["authorAlign"] .
@@ -1532,7 +1635,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_description{" .
+						" .dbe_review_description{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["descriptionAlign"] .
@@ -1541,7 +1644,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_cta_main{" .
+						" .dbe_review_cta_main{" .
 						PHP_EOL .
 						"justify-content: " .
 						$attributes["ctaAlignment"] .
@@ -1550,7 +1653,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_cta_main>a{" .
+						" .dbe_review_cta_main>a{" .
 						PHP_EOL .
 						"color: " .
 						($attributes["callToActionForeColor"] ?: "inherit") .
@@ -1559,7 +1662,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_cta_btn{" .
+						" .dbe_review_cta_btn{" .
 						PHP_EOL .
 						"color: " .
 						($attributes["callToActionForeColor"] ?: "inherit") .
@@ -1582,7 +1685,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .review_image{" .
+						" .dbe_review_image{" .
 						PHP_EOL .
 						"max-height: " .
 						$attributes["imageSize"] .
@@ -1597,7 +1700,7 @@ function dbe_include_block_attribute_css()
 					if (!$attributes["useSummary"]) {
 						$blockStylesheets .=
 							$prefix .
-							" .review_overall_value{" .
+							" .dbe_review_overall_value{" .
 							PHP_EOL .
 							"display: block;" .
 							PHP_EOL .
@@ -1613,7 +1716,7 @@ function dbe_include_block_attribute_css()
 						"large" => 40,
 					];
 					$icon_size = $icon_sizes[$attributes["iconSize"]];
-					$prefix = "social-share-" . $attributes["blockID"];
+					$prefix = "#dbe-social-share-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						" .social-share-icon{" .
@@ -1681,7 +1784,7 @@ function dbe_include_block_attribute_css()
 						foreach ($siteColors as $siteName => $color) {
 							$blockStylesheets .=
 								$prefix .
-								" social-share-" .
+								" .dbe-social-share-" .
 								$siteName .
 								"-container{" .
 								PHP_EOL .
@@ -1704,7 +1807,7 @@ function dbe_include_block_attribute_css()
 						foreach ($sites as $site) {
 							$blockStylesheets .=
 								$prefix .
-								" social-share-" .
+								" .dbe-social-share-" .
 								$site .
 								"-container{" .
 								PHP_EOL .
@@ -1753,10 +1856,10 @@ function dbe_include_block_attribute_css()
 
 					break;
 				case "dbe/star-rating-block":
-					$prefix = "star-rating-" . $attributes["blockID"];
+					$prefix = "#dbe-star-rating-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" star-outer-container{" .
+						" .dbe-star-outer-container{" .
 						PHP_EOL .
 						"justify-content: " .
 						($attributes["starAlign"] === "center"
@@ -1770,7 +1873,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" review-text{" .
+						" .dbe-review-text{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["reviewTextAlign"] .
@@ -1793,11 +1896,11 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/styled-box":
-					$prefix = "styled-box-" . $attributes["blockID"];
+					$prefix = "#dbe-styled-box-" . $attributes["blockID"];
 					if ($attributes["mode"] === "notification") {
 						$blockStylesheets .=
 							$prefix .
-							"notification-box{" .
+							".dbe-notification-box{" .
 							PHP_EOL .
 							"background-color: " .
 							$attributes["backColor"] .
@@ -1823,9 +1926,9 @@ function dbe_include_block_attribute_css()
 						foreach (range(1, count($attributes["text"])) as $i) {
 							$blockStylesheets .=
 								$prefix .
-								" feature:nth-child(" .
+								" .dbe-feature:nth-child(" .
 								$i .
-								") feature-title{" .
+								") .dbe-feature-title{" .
 								PHP_EOL .
 								"text-align: " .
 								$attributes["titleAlign"][$i - 1] .
@@ -1834,9 +1937,9 @@ function dbe_include_block_attribute_css()
 								"}" .
 								PHP_EOL .
 								$prefix .
-								" feature:nth-child(" .
+								" .dbe-feature:nth-child(" .
 								$i .
-								") feature-body{" .
+								") .dbe-feature-body{" .
 								PHP_EOL .
 								"text-align: " .
 								$attributes["textAlign"][$i - 1] .
@@ -1848,7 +1951,7 @@ function dbe_include_block_attribute_css()
 					} elseif ($attributes["mode"] === "number") {
 						$blockStylesheets .=
 							$prefix .
-							" number-panel{" .
+							" .dbe-number-panel{" .
 							PHP_EOL .
 							"border-color: " .
 							$attributes["outlineColor"] .
@@ -1857,7 +1960,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" number-container{" .
+							" .dbe-number-container{" .
 							PHP_EOL .
 							"background-color: " .
 							$attributes["backColor"] .
@@ -1866,7 +1969,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							" number-display{" .
+							" .dbe-number-display{" .
 							PHP_EOL .
 							"color: " .
 							$attributes["foreColor"] .
@@ -1877,9 +1980,9 @@ function dbe_include_block_attribute_css()
 						foreach (range(1, count($attributes["text"])) as $i) {
 							$blockStylesheets .=
 								$prefix .
-								" number-panel:nth-child(" .
+								" .dbe-number-panel:nth-child(" .
 								$i .
-								") number-box-title{" .
+								") .dbe-number-box-title{" .
 								PHP_EOL .
 								"text-align: " .
 								$attributes["titleAlign"][$i - 1] .
@@ -1888,9 +1991,9 @@ function dbe_include_block_attribute_css()
 								"}" .
 								PHP_EOL .
 								$prefix .
-								" number-panel:nth-child(" .
+								" .dbe-number-panel:nth-child(" .
 								$i .
-								") number-box-body{" .
+								") .dbe-number-box-body{" .
 								PHP_EOL .
 								"text-align: " .
 								$attributes["textAlign"][$i - 1] .
@@ -1912,7 +2015,7 @@ function dbe_include_block_attribute_css()
 						}
 						$blockStylesheets .=
 							$prefix .
-							"bordered-box{" .
+							".dbe-bordered-box{" .
 							PHP_EOL .
 							"border: " .
 							$attributes["outlineThickness"] .
@@ -1936,7 +2039,7 @@ function dbe_include_block_attribute_css()
 					}
 					break;
 				case "dbe/styled-list":
-					$prefix = "styled_list-" . $attributes["blockID"];
+					$prefix = "#dbe_styled_list-" . $attributes["blockID"];
 					if ($attributes["iconSize"] < 3) {
 						$blockStylesheets .=
 							$prefix .
@@ -1957,7 +2060,7 @@ function dbe_include_block_attribute_css()
 							PHP_EOL;
 					}
 
-					$iconData = Dafunda_Blocks_IconSet::generate_fontawesome_icon(
+					$iconData = Ultimate_Blocks_IconSet::generate_fontawesome_icon(
 						$attributes["selectedIcon"]
 					);
 
@@ -2062,12 +2165,12 @@ function dbe_include_block_attribute_css()
 
 					break;
 				case "dbe/tabbed-content-block":
-					$prefix = "tabbed-content-" . $attributes["blockID"];
+					$prefix = "#dbe-tabbed-content-" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
-						" .wp-block-tabbed-content-tab-title-wrap, " .
+						" .wp-block-dbe-tabbed-content-tab-title-wrap, " .
 						$prefix .
-						" .wp-block-tabbed-content-tab-title-vertical-wrap{" .
+						" .wp-block-dbe-tabbed-content-tab-title-vertical-wrap{" .
 						PHP_EOL .
 						($attributes["tabStyle"] === "underline"
 							? ""
@@ -2084,11 +2187,11 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .wp-block-tabbed-content-tab-title-wrap.active, " .
+						" .wp-block-dbe-tabbed-content-tab-title-wrap.active, " .
 						$prefix .
-						" .wp-block-tabbed-content-tab-title-vertical-wrap.active," .
+						" .wp-block-dbe-tabbed-content-tab-title-vertical-wrap.active," .
 						$prefix .
-						" .wp-block-tabbed-content-accordion-toggle.active{" .
+						" .wp-block-dbe-tabbed-content-accordion-toggle.active{" .
 						PHP_EOL .
 						($attributes["tabStyle"] === "underline"
 							? "border-bottom: 5px solid " .
@@ -2105,7 +2208,7 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						"}" .
 						$prefix .
-						" .wp-block-tabbed-content-accordion-toggle.active{" .
+						" .wp-block-dbe-tabbed-content-accordion-toggle.active{" .
 						PHP_EOL .
 						"background-color: " .
 						$attributes["theme"] .
@@ -2113,7 +2216,7 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						"}" .
 						$prefix .
-						" .wp-block-tabbed-content-tabs-title{" .
+						" .wp-block-dbe-tabbed-content-tabs-title{" .
 						PHP_EOL .
 						"justify-content: " .
 						($attributes["tabsAlignment"] === "center"
@@ -2127,7 +2230,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .wp-block-tabbed-content-accordion-toggle{" .
+						" .wp-block-dbe-tabbed-content-accordion-toggle{" .
 						PHP_EOL .
 						"background-color: " .
 						($attributes["normalColor"] ?: "transparent") .
@@ -2145,7 +2248,7 @@ function dbe_include_block_attribute_css()
 					) {
 						$blockStylesheets .=
 							$prefix .
-							" .wp-block-tabbed-content-tab-title-wrap:nth-child(" .
+							" .wp-block-dbe-tabbed-content-tab-title-wrap:nth-child(" .
 							($key + 1) .
 							"){" .
 							PHP_EOL .
@@ -2158,7 +2261,8 @@ function dbe_include_block_attribute_css()
 					}
 					break;
 				case "dbe/table-of-contents-block":
-					$prefix = "#table-of-contents-" . $attributes["blockID"];
+					$prefix =
+						"#dbe_table-of-contents-" . $attributes["blockID"];
 					if ($attributes["listStyle"] === "plain") {
 						$blockStylesheets .=
 							$prefix .
@@ -2185,7 +2289,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["allowToCHiding"]) {
 						$blockStylesheets .=
 							$prefix .
-							".table-of-contents-collapsed {" .
+							".dbe_table-of-contents-collapsed {" .
 							PHP_EOL .
 							"max-width: fit-content;" .
 							PHP_EOL .
@@ -2194,7 +2298,7 @@ function dbe_include_block_attribute_css()
 							"}" .
 							PHP_EOL .
 							$prefix .
-							".table-of-contents-collapsed .table-of-contents-header {" .
+							".dbe_table-of-contents-collapsed .dbe_table-of-contents-header {" .
 							PHP_EOL .
 							"margin-bottom: 0;" .
 							PHP_EOL .
@@ -2203,7 +2307,7 @@ function dbe_include_block_attribute_css()
 					}
 					$blockStylesheets .=
 						$prefix .
-						" .table-of-contents-header{" .
+						" .dbe_table-of-contents-header{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["titleAlignment"] .
@@ -2215,9 +2319,9 @@ function dbe_include_block_attribute_css()
 					if ($attributes["titleBackgroundColor"]) {
 						$blockStylesheets .=
 							$prefix .
-							" .table-of-contents-header-container," .
+							" .dbe_table-of-contents-header-container," .
 							$prefix .
-							" .table-of-contents-toggle-link {" .
+							" .dbe_table-of-contents-toggle-link {" .
 							PHP_EOL .
 							"background-color: " .
 							$attributes["titleBackgroundColor"] .
@@ -2229,7 +2333,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["titleColor"]) {
 						$blockStylesheets .=
 							$prefix .
-							" .table-of-contents-title{" .
+							" .dbe_table-of-contents-title{" .
 							PHP_EOL .
 							"color: " .
 							$attributes["titleColor"] .
@@ -2241,7 +2345,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["listColor"]) {
 						$blockStylesheets .=
 							$prefix .
-							" .table-of-contents-container a{" .
+							" .dbe_table-of-contents-container a{" .
 							PHP_EOL .
 							"color: " .
 							$attributes["listColor"] .
@@ -2253,7 +2357,7 @@ function dbe_include_block_attribute_css()
 					if ($attributes["listBackgroundColor"]) {
 						$blockStylesheets .=
 							$prefix .
-							" .table-of-contents-extra-container{" .
+							" .dbe_table-of-contents-extra-container{" .
 							PHP_EOL .
 							"background-color: " .
 							$attributes["listBackgroundColor"] .
@@ -2276,7 +2380,7 @@ function dbe_include_block_attribute_css()
 					}
 					break;
 				case "dbe/testimonial":
-					$prefix = "testimonial_" . $attributes["blockID"];
+					$prefix = "#dbe_testimonial_" . $attributes["blockID"];
 					$blockStylesheets .=
 						$prefix .
 						"{" .
@@ -2292,7 +2396,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .testimonial_text{" .
+						" .dbe_testimonial_text{" .
 						PHP_EOL .
 						"font-size: " .
 						$attributes["textSize"] .
@@ -2305,7 +2409,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .testimonial_author{" .
+						" .dbe_testimonial_author{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["authorAlign"] .
@@ -2314,7 +2418,7 @@ function dbe_include_block_attribute_css()
 						"}" .
 						PHP_EOL .
 						$prefix .
-						" .testimonial_author_role{" .
+						" .dbe_testimonial_author_role{" .
 						PHP_EOL .
 						"text-align: " .
 						$attributes["authorRoleAlign"] .
@@ -2324,7 +2428,7 @@ function dbe_include_block_attribute_css()
 						PHP_EOL;
 					break;
 				case "dbe/post-grid":
-					$prefix = "post-grid-block_" . $attributes["blockID"];
+					$prefix = "#dbe_post-grid-block_" . $attributes["blockID"];
 					break;
 			}
 		}
@@ -2337,7 +2441,7 @@ function dbe_include_block_attribute_css()
     
     <?php ob_end_flush();
 }
-add_action("wp_head", "include_block_attribute_css");
+add_action("wp_head", "dbe_include_block_attribute_css");
 
 /**
  * Enqueue Gutenberg block assets for backend editor.
@@ -2348,14 +2452,6 @@ add_action("wp_head", "include_block_attribute_css");
  *
  * @since 1.0.0
  */
-
-// Don't load Gutenberg-related stylesheets.
-add_action("wp_enqueue_scripts", "remove_block_css", 100);
-function remove_block_css()
-{
-	wp_dequeue_style("wp-block-library"); // Wordpress core
-	wp_dequeue_style("wp-block-library-theme"); // Wordpress core
-}
 
 function dafunda_blocks_cgb_editor_assets()
 {
@@ -2472,7 +2568,7 @@ function dbe_register_settings()
 	]);
 }
 
-add_action("init", "register_settings");
+add_action("init", "dbe_register_settings");
 
 /**
  * Rank Math ToC Plugins List.
