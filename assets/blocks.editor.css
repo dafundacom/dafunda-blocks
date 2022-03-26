@@ -461,6 +461,9 @@
 	}
 
 	/* How To*/
+	.howto {
+		@apply space-x-4 space-y-4;
+	}
 	.howto figure,
 	.howto li > .components-button,
 	.howto > .components-button {
@@ -471,14 +474,6 @@
 	}
 	.howto figure > .dashicons-dismiss {
 		@apply absolute right-1;
-	}
-	.howto > ul,
-	.howto > ul > li > ul {
-		@apply ml-4 pl-0;
-	}
-	.howto > ol,
-	.howto > ol > li > ol {
-		@apply pl-0;
 	}
 	.howto .howto__title {
 		@apply font-bold;
@@ -493,7 +488,7 @@
 		@apply mt-4 rounded-lg overflow-hidden border border-gray-200;
 	}
 	.howto .howto-steps-list .howto-step .howto-step__stepnum {
-		@apply bg-slate-100 flex flex-wrap items-center  justify-center;
+		@apply bg-slate-200 flex flex-wrap items-center  justify-center;
 	}
 	.howto .howto-steps-list .howto-step .howto-step__stepnum h1 {
 		@apply font-black;
@@ -519,8 +514,7 @@
 		@apply max-w-[200px] aspect-square;
 	}
 	.howto_cost_container {
-		@apply flex;
-		margin: 20px auto;
+		@apply flex my-6 mx-auto;
 	}
 	.howto_cost_display {
 		@apply flex ml-auto;
@@ -532,7 +526,7 @@
 		@apply min-w-[24px] my-auto;
 	}
 	.howto-time-value {
-		@apply text-right;
+		@apply text-center;
 	}
 	.howto-duration-input {
 		@apply grid;
@@ -542,7 +536,7 @@
 		@apply text-center text-sm;
 	}
 	.howto-video-input {
-		@apply flex;
+		@apply flex mt-4;
 	}
 	.howto-video-input > input {
 		@apply flex-grow;

@@ -1759,6 +1759,7 @@ export class AdvancedVideoBlock extends Component {
 						{enterVideoURL && (
 							<div className="advanced-video-url-input">
 								<input
+									className="border border-slate-200"
 									type="url"
 									placeholder={__("Insert video URL")}
 									value={videoURLInput}

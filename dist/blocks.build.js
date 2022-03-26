@@ -20610,6 +20610,7 @@ var AdvancedVideoBlock = /*#__PURE__*/function (_Component) {
       }, __("Insert video URL"))), enterVideoURL && /*#__PURE__*/React.createElement("div", {
         className: "advanced-video-url-input"
       }, /*#__PURE__*/React.createElement("input", {
+        className: "border border-slate-200",
         type: "url",
         placeholder: __("Insert video URL"),
         value: videoURLInput,
@@ -31032,7 +31033,7 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
         },
         label: __("Move step down")
       })), /*#__PURE__*/React.createElement("li", {
-        className: "howto-step space-y-4"
+        className: "howto-step"
       }, /*#__PURE__*/React.createElement("div", {
         className: "grid grid-cols-12 grid-flow-row gap-0"
       }, /*#__PURE__*/React.createElement("div", {
@@ -31654,7 +31655,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           videoDescription: "",
           videoUploadDate: 0,
           videoThumbnailURL: "",
-          videoEmbedCode: "<p>".concat(__("When insertion is successful, video should appear here"), "</p>"),
+          videoEmbedCode: "<p className=\"text-xs\">".concat(__("When insertion is successful, video should appear here"), "</p>"),
           videoDuration: 0
         });
       };
@@ -31712,7 +31713,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
                 } else {
                   resetVideoAttributes();
                   setAttributes({
-                    videoEmbedCode: "<p>".concat(__("No video found at URL"), "</p>")
+                    videoEmbedCode: "<p className=\"text-xs\">".concat(__("No video found at URL"), "</p>")
                   });
                 }
               });
@@ -31847,7 +31848,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
       }, /*#__PURE__*/React.createElement("input", {
         type: "url",
         placeholder: __("Insert video URL"),
-        className: "button-url",
+        className: "border border-slate-200",
         value: videoURLInput,
         onChange: function onChange(e) {
           return _this5.setState({
@@ -31877,7 +31878,8 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
       })), /*#__PURE__*/React.createElement("div", {
         dangerouslySetInnerHTML: {
           __html: videoEmbedCode || "<p>Input error</p>"
-        }
+        },
+        className: "text-xs"
       }), includeSuppliesList && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RichText, {
         tagName: secondLevelTag,
         placeholder: __("Required supplies"),
