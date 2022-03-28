@@ -973,8 +973,8 @@ export class EditorComponent extends Component {
 				toolsListStyle,
 				howToYield,
 				howToRatingValue,
-				howToWorstRating,
-				howToBestRating,
+				// howToWorstRating,
+				// howToBestRating,
 				howToRatingCount,
 				cost,
 				costCurrency,
@@ -1891,8 +1891,8 @@ export class EditorComponent extends Component {
 						/>
 					</div>
 					<div className="howto-review-score">
-						<div className="mb-4 grid grid-cols-4">
-							<div className="howto-worst-rating">
+						<div className="mb-4 grid grid-cols-2">
+							{/* <div className="howto-worst-rating">
 								<h4>Worst Rating Value</h4>
 								<div className="howto-yield">
 									<RichText
@@ -1904,8 +1904,8 @@ export class EditorComponent extends Component {
 										}
 									/>
 								</div>
-							</div>
-							<div className="howto-best-rating">
+							</div> */}
+							{/* <div className="howto-best-rating">
 								<h4>Best Rating Value</h4>
 								<div className="howto-yield">
 									<RichText
@@ -1918,7 +1918,7 @@ export class EditorComponent extends Component {
 										}
 									/>
 								</div>
-							</div>
+							</div> */}
 							<div className="howto-rating-value">
 								<h4>Final Rating Value</h4>
 								<div className="howto-yield">
