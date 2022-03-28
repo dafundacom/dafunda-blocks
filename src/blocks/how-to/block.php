@@ -559,7 +559,23 @@ function dbe_render_how_to_block($attributes)
     "image": "' .
 		$finalImageURL .
 		'"' .
-		"}</script>";
+		',"aggregateRating": {
+	"@type": "AggregateRating",
+	"ratingValue": ' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingValue)) .
+		',
+	"bestRating": ' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToBestRating)) .
+		',
+	"worstRating": ' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToWorstRating)) .
+		',
+	"ratingCount": ' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingCount)) .
+		'
+	}' .
+		"
+	}</script>";
 
 	ob_start();
 	?>
