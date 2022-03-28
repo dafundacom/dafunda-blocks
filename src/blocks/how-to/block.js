@@ -102,16 +102,6 @@ const attributes = {
 		type: "string",
 		default: "5",
 	},
-	howToWorstRating: {
-		//avoid using yield as variable name
-		type: "string",
-		default: "0",
-	},
-	howToBestRating: {
-		//avoid using yield as variable name
-		type: "string",
-		default: "5",
-	},
 	howToRatingCount: {
 		//avoid using yield as variable name
 		type: "string",

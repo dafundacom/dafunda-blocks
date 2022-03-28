@@ -973,8 +973,6 @@ export class EditorComponent extends Component {
 				toolsListStyle,
 				howToYield,
 				howToRatingValue,
-				// howToWorstRating,
-				// howToBestRating,
 				howToRatingCount,
 				cost,
 				costCurrency,
@@ -1892,33 +1890,6 @@ export class EditorComponent extends Component {
 					</div>
 					<div className="howto-review-score">
 						<div className="mb-4 grid grid-cols-2">
-							{/* <div className="howto-worst-rating">
-								<h4>Worst Rating Value</h4>
-								<div className="howto-yield">
-									<RichText
-										placeholder="0"
-										keepPlaceholderOnFocus={true}
-										value={howToWorstRating}
-										onChange={(howToWorstRating) =>
-											setAttributes({ howToWorstRating })
-										}
-									/>
-								</div>
-							</div> */}
-							{/* <div className="howto-best-rating">
-								<h4>Best Rating Value</h4>
-								<div className="howto-yield">
-									<RichText
-										placeholder="0"
-										className="items-center justify-center"
-										keepPlaceholderOnFocus={true}
-										value={howToBestRating}
-										onChange={(howToBestRating) =>
-											setAttributes({ howToBestRating })
-										}
-									/>
-								</div>
-							</div> */}
 							<div className="howto-rating-value">
 								<h4>Final Rating Value</h4>
 								<div className="howto-yield">

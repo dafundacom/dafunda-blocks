@@ -564,12 +564,8 @@ function dbe_render_how_to_block($attributes)
 	"ratingValue": ' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingValue)) .
 		',
-	"bestRating": ' .
-		str_replace("\'", "'", wp_filter_nohtml_kses($howToBestRating)) .
-		',
-	"worstRating": ' .
-		str_replace("\'", "'", wp_filter_nohtml_kses($howToWorstRating)) .
-		',
+	"bestRating": "5",
+	"worstRating": "0",
 	"ratingCount": ' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingCount)) .
 		'
