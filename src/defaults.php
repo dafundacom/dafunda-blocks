@@ -867,14 +867,6 @@ $defaultValues = [
 				"type" => "string",
 				"default" => "5",
 			],
-			"howToWorstRating" => [
-				"type" => "string",
-				"default" => "0",
-			],
-			"howToBestRating" => [
-				"type" => "string",
-				"default" => "5",
-			],
 			"howToRatingCount" => [
 				"type" => "string",
 				"default" => "1",
