@@ -30461,39 +30461,6 @@ var attributes = {
   thirdLevelTag: {
     type: "string",
     "default": "h5"
-  },
-  starCount: {
-    type: "number",
-    "default": 5
-  },
-  starSize: {
-    type: "number",
-    "default": 20
-  },
-  starColor: {
-    type: "string",
-    "default": "#FFB901" //previous defaut is #ffff00, new default is #ffb901, seet in uppercase to facilitate reverse compatibility
-
-  },
-  selectedStars: {
-    type: "number",
-    "default": 0
-  },
-  reviewText: {
-    type: "string",
-    "default": ""
-  },
-  reviewTextAlign: {
-    type: "string",
-    "default": "text"
-  },
-  reviewTextColor: {
-    type: "string",
-    "default": ""
-  },
-  starAlign: {
-    type: "string",
-    "default": "left"
   }
 };
 registerBlockType("dbe/how-to", {
