@@ -710,9 +710,10 @@
 	.howto-step .howto-step__stepnum {
 		@apply bg-slate-200 flex flex-wrap items-center justify-center;
 	}
-	.howto-step .howto-step__stepnum h1 {
+	.howto-step .howto-step__stepnum h1,
+	div.howto-step__stepnum {
 		@apply font-semibold;
-		font-size: clamp(1.2rem, 3rem, 3vw);
+		font-size: clamp(1.2rem, 2rem, 2vw);
 	}
 	.howto-step .howto-step__desc {
 		@apply px-2;
@@ -729,6 +730,7 @@
 	.howto-yield {
 		@apply overflow-auto;
 	}
+
 	@media screen and (max-width: 767px) {
 		.howto .howto-steps-list .howto-step > figure,
 		.howto .howto-section .howto-steps-list .howto-step > figure,

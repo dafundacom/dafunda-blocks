@@ -30257,7 +30257,12 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__; // Import __() from wp.i18n
 
 var registerBlockType = wp.blocks.registerBlockType;
-var withSelect = wp.data.withSelect;
+var _wp$compose = wp.compose,
+    withState = _wp$compose.withState,
+    compose = _wp$compose.compose;
+var _wp$data = wp.data,
+    withDispatch = _wp$data.withDispatch,
+    withSelect = _wp$data.withSelect;
 var attributes = {
   blockID: {
     type: "string",
@@ -30354,6 +30359,26 @@ var attributes = {
     type: "string",
     "default": ""
   },
+  howToRatingValue: {
+    //avoid using yield as variable name
+    type: "string",
+    "default": "5"
+  },
+  howToWorstRating: {
+    //avoid using yield as variable name
+    type: "string",
+    "default": "0"
+  },
+  howToBestRating: {
+    //avoid using yield as variable name
+    type: "string",
+    "default": "5"
+  },
+  howToRatingCount: {
+    //avoid using yield as variable name
+    type: "string",
+    "default": "1"
+  },
   videoURL: {
     type: "string",
     //videoobject
@@ -30436,6 +30461,39 @@ var attributes = {
   thirdLevelTag: {
     type: "string",
     "default": "h5"
+  },
+  starCount: {
+    type: "number",
+    "default": 5
+  },
+  starSize: {
+    type: "number",
+    "default": 20
+  },
+  starColor: {
+    type: "string",
+    "default": "#FFB901" //previous defaut is #ffff00, new default is #ffb901, seet in uppercase to facilitate reverse compatibility
+
+  },
+  selectedStars: {
+    type: "number",
+    "default": 0
+  },
+  reviewText: {
+    type: "string",
+    "default": ""
+  },
+  reviewTextAlign: {
+    type: "string",
+    "default": "text"
+  },
+  reviewTextColor: {
+    type: "string",
+    "default": ""
+  },
+  starAlign: {
+    type: "string",
+    "default": "left"
   }
 };
 registerBlockType("dbe/how-to", {
@@ -31604,6 +31662,10 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           tools = _this$props7$attribut.tools,
           toolsListStyle = _this$props7$attribut.toolsListStyle,
           howToYield = _this$props7$attribut.howToYield,
+          howToRatingValue = _this$props7$attribut.howToRatingValue,
+          howToWorstRating = _this$props7$attribut.howToWorstRating,
+          howToBestRating = _this$props7$attribut.howToBestRating,
+          howToRatingCount = _this$props7$attribut.howToRatingCount,
           cost = _this$props7$attribut.cost,
           costCurrency = _this$props7$attribut.costCurrency,
           costDisplayText = _this$props7$attribut.costDisplayText,
@@ -32370,7 +32432,65 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             currentStep: "final"
           });
         }
-      }))), /*#__PURE__*/React.createElement("style", {
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "howto-review-score"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "mb-4 grid grid-cols-4"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "howto-worst-rating"
+      }, /*#__PURE__*/React.createElement("h4", null, "Worst Rating Value"), /*#__PURE__*/React.createElement("div", {
+        className: "howto-yield"
+      }, /*#__PURE__*/React.createElement(RichText, {
+        placeholder: "0",
+        keepPlaceholderOnFocus: true,
+        value: howToWorstRating,
+        onChange: function onChange(howToWorstRating) {
+          return setAttributes({
+            howToWorstRating: howToWorstRating
+          });
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "howto-best-rating"
+      }, /*#__PURE__*/React.createElement("h4", null, "Best Rating Value"), /*#__PURE__*/React.createElement("div", {
+        className: "howto-yield"
+      }, /*#__PURE__*/React.createElement(RichText, {
+        placeholder: "0",
+        className: "items-center justify-center",
+        keepPlaceholderOnFocus: true,
+        value: howToBestRating,
+        onChange: function onChange(howToBestRating) {
+          return setAttributes({
+            howToBestRating: howToBestRating
+          });
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "howto-rating-value"
+      }, /*#__PURE__*/React.createElement("h4", null, "Final Rating Value"), /*#__PURE__*/React.createElement("div", {
+        className: "howto-yield"
+      }, /*#__PURE__*/React.createElement(RichText, {
+        placeholder: "0",
+        keepPlaceholderOnFocus: true,
+        value: howToRatingValue,
+        onChange: function onChange(howToRatingValue) {
+          return setAttributes({
+            howToRatingValue: howToRatingValue
+          });
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "howto-rating-count"
+      }, /*#__PURE__*/React.createElement("h4", null, "Rating Count"), /*#__PURE__*/React.createElement("div", {
+        className: "howto-yield"
+      }, /*#__PURE__*/React.createElement(RichText, {
+        placeholder: "0",
+        className: "items-center justify-center",
+        keepPlaceholderOnFocus: true,
+        value: howToRatingCount,
+        onChange: function onChange(howToRatingCount) {
+          return setAttributes({
+            howToRatingCount: howToRatingCount
+          });
+        }
+      })))))), /*#__PURE__*/React.createElement("style", {
         dangerouslySetInnerHTML: {
           __html: "@media (min-width:768px) {".concat(useSections ? section.map(function (s, i) {
             return s.steps.map(function (st) {

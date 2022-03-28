@@ -4,7 +4,8 @@ import { EditorComponent } from "./components";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 
-const { withSelect } = wp.data;
+const { withState, compose } = wp.compose;
+const { withDispatch, withSelect } = wp.data;
 
 const attributes = {
 	blockID: {
@@ -96,6 +97,26 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	howToRatingValue: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "5",
+	},
+	howToWorstRating: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "0",
+	},
+	howToBestRating: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "5",
+	},
+	howToRatingCount: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "1",
+	},
 	videoURL: {
 		type: "string", //videoobject
 		default: "", //needed: video url, thumbnail url, video description, upload date
@@ -175,6 +196,38 @@ const attributes = {
 	thirdLevelTag: {
 		type: "string",
 		default: "h5",
+	},
+	starCount: {
+		type: "number",
+		default: 5,
+	},
+	starSize: {
+		type: "number",
+		default: 20,
+	},
+	starColor: {
+		type: "string",
+		default: "#FFB901", //previous defaut is #ffff00, new default is #ffb901, seet in uppercase to facilitate reverse compatibility
+	},
+	selectedStars: {
+		type: "number",
+		default: 0,
+	},
+	reviewText: {
+		type: "string",
+		default: "",
+	},
+	reviewTextAlign: {
+		type: "string",
+		default: "text",
+	},
+	reviewTextColor: {
+		type: "string",
+		default: "",
+	},
+	starAlign: {
+		type: "string",
+		default: "left",
 	},
 };
 

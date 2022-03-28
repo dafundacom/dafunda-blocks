@@ -514,7 +514,7 @@
 		@apply max-w-[200px] aspect-square;
 	}
 	.howto_cost_container {
-		@apply flex my-6 mx-auto;
+		@apply flex my-6;
 	}
 	.howto_cost_display {
 		@apply flex ml-auto;
