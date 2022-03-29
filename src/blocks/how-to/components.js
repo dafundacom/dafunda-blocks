@@ -446,6 +446,7 @@ class HowToStep extends Component {
 							/>
 							<RichText
 								keepPlaceholderOnFocus
+								className="hidden"
 								placeholder={__("Add a tip (optional)")}
 								value={tip}
 								onFocus={selectStep}
