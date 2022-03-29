@@ -584,13 +584,11 @@ function dbe_render_how_to_block($attributes)
         <?= dbe_convert_to_paragraphs($introduction) ?>
         <?= $header ?>
         <?= $advancedMode
-        	? ($videoURL === "" ? "" : $videoEmbedCode) .
-        		"<p>" .
-        		$costDisplayText .
-        		$costDisplay .
-        		"</p>" .
-        		$timeDisplay
+        	? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
+        		? "Free"
+        		: "<p>" . $costDisplayText . $costDisplay . "</p>")
         	: "" ?>
+        <?= $timeDisplay ?>
         <?= $stepsDisplay ?>
 
         <div class="howto-yield">
