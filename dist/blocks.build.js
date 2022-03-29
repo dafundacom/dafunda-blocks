@@ -32096,7 +32096,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             });
           }
         }
-      }))), /*#__PURE__*/React.createElement(RichText, {
+      })))), /*#__PURE__*/React.createElement(RichText, {
         tagName: secondLevelTag,
         placeholder: __("Duration"),
         keepPlaceholderOnFocus: true,
@@ -32150,7 +32150,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           }));
         }
-      }))), useSections ? /*#__PURE__*/React.createElement(ListWrapper, {
+      })), useSections ? /*#__PURE__*/React.createElement(ListWrapper, {
         listStyle: sectionListStyle
       }, section.map(function (s, i) {
         return /*#__PURE__*/React.createElement(HowToSection, _extends({}, s, {
