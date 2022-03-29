@@ -529,8 +529,7 @@
 		@apply text-center;
 	}
 	.howto-duration-input {
-		@apply grid;
-		grid-template-columns: 35% 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		@apply grid grid-cols-4;
 	}
 	.howto-duration-input P {
 		@apply text-center text-sm;

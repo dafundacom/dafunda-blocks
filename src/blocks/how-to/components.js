@@ -1581,33 +1581,70 @@ export class EditorComponent extends Component {
 					/>
 					<div className="howto-duration-input">
 						<span />
-						{units.map((u) => (
-							<p>{__(u)}</p>
-						))}
+						{units.map((u) => {
+							return (
+								<>
+									{(u === "years") |
+									((u === "months") | (u === "weeks") | (u === "days")) ? (
+										<p className="hidden">{__(u)}</p>
+									) : (
+										<p>{__(u)}</p>
+									)}
+								</>
+							);
+						})}
 						<RichText
 							keepPlaceholderOnFocus
 							value={totalTimeText}
 							onChange={(totalTimeText) => setAttributes({ totalTimeText })}
 						/>
-						{totalTime.map((t, i) => (
-							<RichText
-								className="howto-time-value"
-								keepPlaceholderOnFocus
-								placeholder={__("0")}
-								value={String(t)}
-								onChange={(newInput) => {
-									if (!isNaN(Number(newInput))) {
-										setAttributes({
-											totalTime: [
-												...totalTime.slice(0, i),
-												Number(newInput),
-												...totalTime.slice(i + 1),
-											],
-										});
-									}
-								}}
-							/>
-						))}
+						{totalTime.map((t, i) => {
+							if (i < 4) {
+								return (
+									<>
+										<RichText
+											className="hidden"
+											keepPlaceholderOnFocus
+											placeholder={__("0")}
+											value={String(t)}
+											onChange={(newInput) => {
+												if (!isNaN(Number(newInput))) {
+													setAttributes({
+														totalTime: [
+															...totalTime.slice(0, i),
+															Number(newInput),
+															...totalTime.slice(i + 1),
+														],
+													});
+												}
+											}}
+										/>
+									</>
+								);
+							} else {
+								return (
+									<>
+										<RichText
+											className="howto-time-value"
+											keepPlaceholderOnFocus
+											placeholder={__("0")}
+											value={String(t)}
+											onChange={(newInput) => {
+												if (!isNaN(Number(newInput))) {
+													setAttributes({
+														totalTime: [
+															...totalTime.slice(0, i),
+															Number(newInput),
+															...totalTime.slice(i + 1),
+														],
+													});
+												}
+											}}
+										/>
+									</>
+								);
+							}
+						})}
 					</div>
 					{useSections ? (
 						<ListWrapper listStyle={sectionListStyle}>

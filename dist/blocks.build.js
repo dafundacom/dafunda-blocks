@@ -32109,7 +32109,9 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
       }), /*#__PURE__*/React.createElement("div", {
         className: "howto-duration-input"
       }, /*#__PURE__*/React.createElement("span", null), units.map(function (u) {
-        return /*#__PURE__*/React.createElement("p", null, __(u));
+        return /*#__PURE__*/React.createElement(React.Fragment, null, u === "years" | (u === "months" | u === "weeks" | u === "days") ? /*#__PURE__*/React.createElement("p", {
+          className: "hidden"
+        }, __(u)) : /*#__PURE__*/React.createElement("p", null, __(u)));
       }), /*#__PURE__*/React.createElement(RichText, {
         keepPlaceholderOnFocus: true,
         value: totalTimeText,
@@ -32119,19 +32121,35 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           });
         }
       }), totalTime.map(function (t, i) {
-        return /*#__PURE__*/React.createElement(RichText, {
-          className: "howto-time-value",
-          keepPlaceholderOnFocus: true,
-          placeholder: __("0"),
-          value: String(t),
-          onChange: function onChange(newInput) {
-            if (!isNaN(Number(newInput))) {
-              setAttributes({
-                totalTime: [].concat(_toConsumableArray(totalTime.slice(0, i)), [Number(newInput)], _toConsumableArray(totalTime.slice(i + 1)))
-              });
+        if (i < 4) {
+          return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RichText, {
+            className: "hidden",
+            keepPlaceholderOnFocus: true,
+            placeholder: __("0"),
+            value: String(t),
+            onChange: function onChange(newInput) {
+              if (!isNaN(Number(newInput))) {
+                setAttributes({
+                  totalTime: [].concat(_toConsumableArray(totalTime.slice(0, i)), [Number(newInput)], _toConsumableArray(totalTime.slice(i + 1)))
+                });
+              }
             }
-          }
-        });
+          }));
+        } else {
+          return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RichText, {
+            className: "howto-time-value",
+            keepPlaceholderOnFocus: true,
+            placeholder: __("0"),
+            value: String(t),
+            onChange: function onChange(newInput) {
+              if (!isNaN(Number(newInput))) {
+                setAttributes({
+                  totalTime: [].concat(_toConsumableArray(totalTime.slice(0, i)), [Number(newInput)], _toConsumableArray(totalTime.slice(i + 1)))
+                });
+              }
+            }
+          }));
+        }
       })), useSections ? /*#__PURE__*/React.createElement(ListWrapper, {
         listStyle: sectionListStyle
       }, section.map(function (s, i) {
