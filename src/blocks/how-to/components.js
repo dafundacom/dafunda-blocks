@@ -1570,45 +1570,45 @@ export class EditorComponent extends Component {
 									/>
 								</div>
 							</div>
-							<RichText
-								tagName={secondLevelTag}
-								placeholder={__("Duration")}
-								keepPlaceholderOnFocus={true}
-								value={timeIntro}
-								onChange={(timeIntro) => setAttributes({ timeIntro })}
-							/>
-							<div className="howto-duration-input">
-								<span />
-								{units.map((u) => (
-									<p>{__(u)}</p>
-								))}
-								<RichText
-									keepPlaceholderOnFocus
-									value={totalTimeText}
-									onChange={(totalTimeText) => setAttributes({ totalTimeText })}
-								/>
-								{totalTime.map((t, i) => (
-									<RichText
-										className="howto-time-value"
-										keepPlaceholderOnFocus
-										placeholder={__("0")}
-										value={String(t)}
-										onChange={(newInput) => {
-											if (!isNaN(Number(newInput))) {
-												setAttributes({
-													totalTime: [
-														...totalTime.slice(0, i),
-														Number(newInput),
-														...totalTime.slice(i + 1),
-													],
-												});
-											}
-										}}
-									/>
-								))}
-							</div>
 						</>
 					)}
+					<RichText
+						tagName={secondLevelTag}
+						placeholder={__("Duration")}
+						keepPlaceholderOnFocus={true}
+						value={timeIntro}
+						onChange={(timeIntro) => setAttributes({ timeIntro })}
+					/>
+					<div className="howto-duration-input">
+						<span />
+						{units.map((u) => (
+							<p>{__(u)}</p>
+						))}
+						<RichText
+							keepPlaceholderOnFocus
+							value={totalTimeText}
+							onChange={(totalTimeText) => setAttributes({ totalTimeText })}
+						/>
+						{totalTime.map((t, i) => (
+							<RichText
+								className="howto-time-value"
+								keepPlaceholderOnFocus
+								placeholder={__("0")}
+								value={String(t)}
+								onChange={(newInput) => {
+									if (!isNaN(Number(newInput))) {
+										setAttributes({
+											totalTime: [
+												...totalTime.slice(0, i),
+												Number(newInput),
+												...totalTime.slice(i + 1),
+											],
+										});
+									}
+								}}
+							/>
+						))}
+					</div>
 					{useSections ? (
 						<ListWrapper listStyle={sectionListStyle}>
 							{section.map((s, i) => (
