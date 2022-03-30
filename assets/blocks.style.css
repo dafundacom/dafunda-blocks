@@ -694,30 +694,24 @@
 		@apply mt-1 text-center;
 	}
 
-	.content-inner .howto-step-display {
-		@apply pl-0;
-	}
-
-	/* .content-inner .howto-step-display .howto-step .howto-step__title {
-		@apply text-3xl md:text-2xl;
-	} */
-
 	.howto-step-display .howto-step {
 		@apply list-outside;
 	}
 	.howto-step {
-		@apply mt-4 rounded-lg overflow-hidden border;
+		@apply mt-4 rounded-lg border border-slate-200 md:overflow-hidden;
 		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 	}
+	/* .howto-step {
+		@apply border border-slate-200 rounded-lg overflow-hidden;
+	} */
+
 	.howto-step > figure,
 	.howto-step > img {
 		@apply mb-2;
 	}
-	.howto-step {
-		@apply border border-slate-200 rounded-lg overflow-hidden;
-	}
+
 	.howto-step .howto-step__stepnum {
-		@apply bg-slate-200 flex flex-wrap items-center justify-center;
+		@apply bg-slate-200 flex flex-wrap items-center justify-center order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none;
 	}
 	.howto-step .howto-step__stepnum h1,
 	div.howto-step__stepnum {
@@ -728,7 +722,7 @@
 		@apply px-2;
 	}
 	.howto-step .howto-step__desc .howto-step__title {
-		@apply m-0 font-semibold;
+		@apply m-0 font-semibold text-3xl md:text-2xl;
 	}
 	.howto-step .howto-step__desc:nth-child(2) {
 		@apply py-4;
@@ -748,6 +742,43 @@
 			@apply w-full float-none;
 		}
 	}
+	/* How To END */
+
+	/* How To Front */
+
+	.content-inner .howto__title {
+		@apply font-bold;
+	}
+
+	.content-inner .howto__title + p {
+		@apply p-3 rounded-lg border border-slate-200;
+		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
+	}
+
+	.content-inner .howto-step-display {
+		@apply pl-0;
+	}
+
+	.content-inner .howto-step-display .howto-step .howto-step__title {
+		@apply text-xl md:text-2xl;
+	}
+
+	.content-inner .howto-step-display .howto-step .howto-step__stepnum {
+		@apply bg-slate-200 flex flex-wrap items-center justify-center order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none text-3xl md:text-5xl md:w-[3.3rem];
+	}
+
+	.content-inner .howto-step-display .howto-step .howto-step__desc p {
+		@apply mb-0;
+	}
+
+	.content-inner .howto-step-display .howto-step .howto-step__image img {
+		@apply scale-[1.2] translate-y-[1.6rem] md:scale-100 md:translate-y-[0px];
+	}
+
+	.content-inner .howto-step-display .howto-step .howto-step__image figcaption {
+		@apply mt-[3.25rem] md:mt-[0px];
+	}
+	/* How To Front END */
 
 	/* Image Slider */
 	.dbe_image_slider {
