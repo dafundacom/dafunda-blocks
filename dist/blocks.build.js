@@ -26061,7 +26061,7 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
       })), /*#__PURE__*/React.createElement("li", {
         className: "dbe_howto-step w-full"
       }, /*#__PURE__*/React.createElement("div", {
-        className: "grid grid-cols-12 grid-flow-row gap-0"
+        className: "grid grid-cols-12"
       }, /*#__PURE__*/React.createElement("div", {
         className: "order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none dbe_howto-step__stepnum"
       }, /*#__PURE__*/React.createElement("h1", null, stepNum + 1)), /*#__PURE__*/React.createElement("div", {

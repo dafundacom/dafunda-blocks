@@ -427,7 +427,7 @@ class HowToStep extends Component {
 					/>
 				</div>
 				<li className="dbe_howto-step w-full">
-					<div className="grid grid-cols-12 grid-flow-row gap-0">
+					<div className="grid grid-cols-12">
 						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none dbe_howto-step__stepnum">
 							<h1>{stepNum + 1}</h1>
 						</div>

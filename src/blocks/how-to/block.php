@@ -180,7 +180,7 @@ function dbe_render_how_to_block($attributes)
                 ob_start(); ?>
                 <li class="dbe_howto-step mt-5 mb-7">
 
-                    <div class="grid grid-cols-12 grid-flow-row gap-0">
+                    <div class="grid grid-cols-12">
 
                         <div class="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none dbe_howto-step__stepnum">
                             <?= $index + 1 ?>
