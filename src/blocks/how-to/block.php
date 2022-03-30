@@ -146,7 +146,7 @@ function dbe_render_how_to_block($attributes)
 	$timeDisplay =
 		"<div><" .
 		$secondLevelTag .
-		">" .
+		" class=\"mb-0\">" .
 		$timeIntro .
 		"</" .
 		$secondLevelTag .
@@ -312,16 +312,16 @@ function dbe_render_how_to_block($attributes)
 				ob_start(); ?>
                 <li class="howto-step">
 
-                    <div class="grid grid-cols-12 grid-flow-row gap-0">
+                    <div class="grid grid-cols-12">
 
-                        <div class="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none howto-step__stepnum">
+                        <div class="howto-step__stepnum">
                             <?= $index + 1 ?>
                         </div>
 
                         <div class="order-2 md:order-2 col-span-10 md:col-span-11 howto-step__desc">
                             <<?= $thirdLevelTag ?> id="<?= $step[
  	"anchor"
- ] ?>" class="howto-step__title text-3xl md:text-2xl">
+ ] ?>" class="howto-step__title">
                                 <?= $step["title"] ?>
                             </<?= $thirdLevelTag ?>>
                         </div>
@@ -335,7 +335,7 @@ function dbe_render_how_to_block($attributes)
                             	? ($step["stepPic"]["caption"] === ""
                             			? ""
                             			: '<figure class="w-full">') .
-                            		'<img class="howto-step-image rounded" src="' .
+                            		'<img class="howto-step-image" src="' .
                             		$step["stepPic"]["url"] .
                             		'">' .
                             		($step["stepPic"]["caption"] === ""
