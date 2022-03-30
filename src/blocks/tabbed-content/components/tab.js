@@ -36,8 +36,8 @@ registerBlockType("dbe/tab", {
 	save(props) {
 		return (
 			<div
-				className={`wp-block-dbe-tabbed-content-tab-content-wrap ${
-					props.attributes.isActive ? "active" : "dbe-hide"
+				className={`wp-block-tabbed-content-tab-content-wrap ${
+					props.attributes.isActive ? "active" : "hide"
 				}`}
 			>
 				<InnerBlocks.Content />

@@ -9,8 +9,8 @@
 function dbe_render_content_filter_entry_block($attributes, $content){
     extract($attributes);
     
-    return '<div class="dbe-content-filter-panel'.(isset($className) ? ' ' . esc_attr($className) : '').
-        ($initiallyShow ? '' : ' dbe-hide').'" data-selectedFilters="'.json_encode($selectedFilters).
+    return '<div class="content-filter-panel'.(isset($className) ? ' ' . esc_attr($className) : '').
+        ($initiallyShow ? '' : ' hide').'" data-selectedFilters="'.json_encode($selectedFilters).
         '">'.$content.'</div>';
 }
 
@@ -56,15 +56,15 @@ function dbe_render_content_filter_block($attributes, $content){
     $filterList = '';
 
     foreach((array)$newFilterArray as $key1 => $filterGroup){
-        $filterList .= '<div class="dbe-content-filter-category"
+        $filterList .= '<div class="content-filter-category"
         data-canUseMultiple="' . json_encode($filterGroup['canUseMultiple']) . '">
-        <div class="dbe-content-filter-category-name">' . $filterGroup['category'] . '</div>';
+        <div class="content-filter-category-name">' . $filterGroup['category'] . '</div>';
 
         foreach($filterGroup['filters'] as $key2 => $tag){
             $filterList .= '<div data-tagIsSelected="false" data-categoryNumber="' . $key1 . '"
             data-filterNumber="' . $key2 . '" ' . ($blockID === '' ? 'data-normalColor="' . $buttonColor . '" data-normalTextColor="' . $buttonTextColor .
             '" data-activeColor="' . $activeButtonColor . '" data-activeTextColor="' . $activeButtonTextColor .
-            '"style="background-color: ' . $buttonColor.'; color: ' . $buttonTextColor . '"' : '') . ' class="dbe-content-filter-tag">' .
+            '"style="background-color: ' . $buttonColor.'; color: ' . $buttonTextColor . '"' : '') . ' class="content-filter-tag">' .
             $tag.'</div>';
         }
         $filterList .= '</div>';
@@ -76,8 +76,8 @@ $currentSelection = array_map(function($category){
                                 -1);
                     }, (array)$filterArray);
 
-return '<div class="wp-block-dbe-content-filter'.(isset($className) ? ' ' . esc_attr($className) : '').
-        '"'. ($blockID === '' ? : ' id="dbe-content-filter-' . $blockID . '"') .
+return '<div class="wp-block-content-filter'.(isset($className) ? ' ' . esc_attr($className) : '').
+        '"'. ($blockID === '' ? : ' id="content-filter-' . $blockID . '"') .
         ' data-currentSelection="'.json_encode($currentSelection).
         '" data-initiallyShowAll="'.json_encode($initiallyShowAll).
         '" data-matchingOption="'.$matchingOption.'">'. 

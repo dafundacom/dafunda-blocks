@@ -4,7 +4,8 @@ import { EditorComponent } from "./components";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 
-const { withSelect } = wp.data;
+const { withState, compose } = wp.compose;
+const { withDispatch, withSelect } = wp.data;
 
 const attributes = {
 	blockID: {
@@ -95,6 +96,16 @@ const attributes = {
 		//avoid using yield as variable name
 		type: "string",
 		default: "",
+	},
+	howToRatingValue: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "5",
+	},
+	howToRatingCount: {
+		//avoid using yield as variable name
+		type: "string",
+		default: "1",
 	},
 	videoURL: {
 		type: "string", //videoobject

@@ -661,7 +661,7 @@ export class AdvancedVideoBlock extends Component {
 										max={1600}
 									/>
 								)}
-								<div className="dbe-labelled-toggle">
+								<div className="labelled-toggle">
 									<p>{__("Preserve aspect ratio")}</p>
 									<ToggleControl
 										checked={preserveAspectRatio}
@@ -704,7 +704,7 @@ export class AdvancedVideoBlock extends Component {
 									"videopress",
 								].includes(videoSource) ||
 									(videoSource === "vimeo" && vimeoUploaderNotBasic)) && (
-									<div className="dbe-labelled-toggle">
+									<div className="labelled-toggle">
 										<p>{__("Show player controls")}</p>
 										<ToggleControl
 											checked={showPlayerControls}
@@ -759,7 +759,7 @@ export class AdvancedVideoBlock extends Component {
 								{!["facebook", "unknown"].includes(videoSource) &&
 									!(videoSource === "vimeo" && useCustomThumbnail) && (
 										<>
-											<div className="dbe-labelled-toggle">
+											<div className="labelled-toggle">
 												<p>{__("Autoplay")}</p>
 												<ToggleControl
 													checked={autoplay}
@@ -815,7 +815,7 @@ export class AdvancedVideoBlock extends Component {
 													}}
 												/>
 											</div>
-											<div className="dbe-labelled-toggle">
+											<div className="labelled-toggle">
 												<p>{__("Allow custom start time")}</p>
 												<ToggleControl
 													checked={allowCustomStartTime}
@@ -999,7 +999,7 @@ export class AdvancedVideoBlock extends Component {
 									"videopress",
 									"vimeo",
 								].includes(videoSource) && (
-									<div className="dbe-labelled-toggle">
+									<div className="labelled-toggle">
 										<p>{__("Loop")}</p>
 										<ToggleControl
 											checked={loop}
@@ -1064,7 +1064,7 @@ export class AdvancedVideoBlock extends Component {
 									"dailymotion",
 									"videopress",
 								].includes(videoSource) && (
-									<div className="dbe-labelled-toggle">
+									<div className="labelled-toggle">
 										<p>{__("Mute on page load")}</p>
 										<ToggleControl
 											checked={mute}
@@ -1111,7 +1111,7 @@ export class AdvancedVideoBlock extends Component {
 									</div>
 								)}
 								{!(videoSource === "vimeo" && autoplay) && (
-									<div className="dbe-labelled-toggle">
+									<div className="labelled-toggle">
 										<p>{__("Use a custom thumbnail")}</p>
 										<ToggleControl
 											checked={useCustomThumbnail}
@@ -1260,7 +1260,7 @@ export class AdvancedVideoBlock extends Component {
 								/>
 							</PanelBody>
 							<PanelBody title={__("Border settings")}>
-								<div className="dbe-labelled-toggle">
+								<div className="labelled-toggle">
 									<p>{__("Use a border")}</p>
 									<ToggleControl
 										checked={hasBorder}
@@ -1322,11 +1322,11 @@ export class AdvancedVideoBlock extends Component {
 								</div>
 								{hasBorder && (
 									<>
-										<div className="dbe-indicator-grid">
+										<div className="indicator-grid">
 											{/* FIRST ROW */}
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-left-border dbe-indicator-grid-right-border"
+												className="indicator-grid-cell indicator-grid-left-border indicator-grid-right-border"
 												style={{
 													borderTop: `2px solid ${
 														currentBorder === "top" ? "blue" : "black"
@@ -1334,10 +1334,10 @@ export class AdvancedVideoBlock extends Component {
 												}}
 												onClick={() => this.setState({ currentBorder: "top" })}
 											></div>
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											{/* SECOND ROW */}
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-top-border dbe-indicator-grid-bottom-border"
+												className="indicator-grid-cell indicator-grid-top-border indicator-grid-bottom-border"
 												style={{
 													borderLeft: `2px solid ${
 														currentBorder === "left" ? "blue" : "black"
@@ -1346,7 +1346,7 @@ export class AdvancedVideoBlock extends Component {
 												onClick={() => this.setState({ currentBorder: "left" })}
 											/>
 											<div
-												className="dbe-indicator-grid-cell"
+												className="indicator-grid-cell"
 												style={{
 													border: `2px solid ${
 														currentBorder === "all" ? "blue" : "black"
@@ -1355,7 +1355,7 @@ export class AdvancedVideoBlock extends Component {
 												onClick={() => this.setState({ currentBorder: "all" })}
 											/>
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-top-border dbe-indicator-grid-bottom-border"
+												className="indicator-grid-cell indicator-grid-top-border indicator-grid-bottom-border"
 												style={{
 													borderRight: `2px solid ${
 														currentBorder === "right" ? "blue" : "black"
@@ -1366,9 +1366,9 @@ export class AdvancedVideoBlock extends Component {
 												}
 											/>
 											{/* THIRD ROW */}
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-left-border dbe-indicator-grid-right-border"
+												className="indicator-grid-cell indicator-grid-left-border indicator-grid-right-border"
 												style={{
 													borderBottom: `2px solid ${
 														currentBorder === "bottom" ? "blue" : "black"
@@ -1378,7 +1378,7 @@ export class AdvancedVideoBlock extends Component {
 													this.setState({ currentBorder: "bottom" })
 												}
 											/>
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 										</div>
 										<RangeControl
 											label={__(
@@ -1426,10 +1426,10 @@ export class AdvancedVideoBlock extends Component {
 											}
 											max={30}
 										/>
-										<div className="dbe-indicator-grid">
+										<div className="indicator-grid">
 											{/* FIRST ROW */}
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-bottom-border dbe-indicator-grid-right-border"
+												className="indicator-grid-cell indicator-grid-bottom-border indicator-grid-right-border"
 												style={{
 													borderTop: `2px solid ${
 														currentCorner === "topleft" ? "blue" : "black"
@@ -1442,9 +1442,9 @@ export class AdvancedVideoBlock extends Component {
 													this.setState({ currentCorner: "topleft" })
 												}
 											/>
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-bottom-border dbe-indicator-grid-left-border"
+												className="indicator-grid-cell indicator-grid-bottom-border indicator-grid-left-border"
 												style={{
 													borderTop: `2px solid ${
 														currentCorner === "topright" ? "blue" : "black"
@@ -1458,9 +1458,9 @@ export class AdvancedVideoBlock extends Component {
 												}
 											></div>
 											{/* SECOND ROW */}
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											<div
-												className="dbe-indicator-grid-cell"
+												className="indicator-grid-cell"
 												style={{
 													border: `2px solid ${
 														currentCorner === "all" ? "blue" : "black"
@@ -1468,10 +1468,10 @@ export class AdvancedVideoBlock extends Component {
 												}}
 												onClick={() => this.setState({ currentCorner: "all" })}
 											></div>
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											{/* THIRD ROW */}
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-top-border dbe-indicator-grid-right-border"
+												className="indicator-grid-cell indicator-grid-top-border indicator-grid-right-border"
 												style={{
 													borderBottom: `2px solid ${
 														currentCorner === "bottomleft" ? "blue" : "black"
@@ -1484,9 +1484,9 @@ export class AdvancedVideoBlock extends Component {
 													this.setState({ currentCorner: "bottomleft" })
 												}
 											/>
-											<div className="dbe-indicator-grid-cell" />
+											<div className="indicator-grid-cell" />
 											<div
-												className="dbe-indicator-grid-cell dbe-indicator-grid-top-border dbe-indicator-grid-left-border"
+												className="indicator-grid-cell indicator-grid-top-border indicator-grid-left-border"
 												style={{
 													borderBottom: `2px solid ${
 														currentCorner === "bottomright" ? "blue" : "black"
@@ -1705,7 +1705,7 @@ export class AdvancedVideoBlock extends Component {
 					<>
 						<div>{__("Select video source")}</div>
 
-						<div className="dbe-advanced-video-input-choices">
+						<div className="advanced-video-input-choices">
 							<MediaUploadCheck>
 								<MediaUpload
 									onSelect={(media) => {
@@ -1757,8 +1757,9 @@ export class AdvancedVideoBlock extends Component {
 							</Button>
 						</div>
 						{enterVideoURL && (
-							<div className="dbe-advanced-video-url-input">
+							<div className="advanced-video-url-input">
 								<input
+									className="border border-slate-200"
 									type="url"
 									placeholder={__("Insert video URL")}
 									value={videoURLInput}
@@ -1781,7 +1782,7 @@ export class AdvancedVideoBlock extends Component {
 					</>
 				)}
 				<div
-					className="dbe-advanced-video-container"
+					className="advanced-video-container"
 					dangerouslySetInnerHTML={{
 						__html:
 							videoEmbedCode ||

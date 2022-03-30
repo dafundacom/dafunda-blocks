@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 	setTimeout(() => {
 		Array.prototype.slice
-			.call(document.getElementsByClassName("dbe_progress-bar"))
+			.call(document.getElementsByClassName("progress-bar"))
 			.forEach((instance) => {
-				instance.classList.add("dbe_progress-bar-filled");
+				instance.classList.add("progress-bar-filled");
 			});
 	}, 500);
 });

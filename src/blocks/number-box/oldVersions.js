@@ -6,47 +6,47 @@ export const oldAttributes = {
 	columnOneNumber: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_one_number",
+		selector: ".number_one_number",
 	},
 	columnTwoNumber: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_two_number",
+		selector: ".number_two_number",
 	},
 	columnThreeNumber: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_three_number",
+		selector: ".number_three_number",
 	},
 	columnOneTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_one_title",
+		selector: ".number_one_title",
 	},
 	columnTwoTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_two_title",
+		selector: ".number_two_title",
 	},
 	columnThreeTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_three_title",
+		selector: ".number_three_title",
 	},
 	columnOneBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_one_body",
+		selector: ".number_one_body",
 	},
 	columnTwoBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_two_body",
+		selector: ".number_two_body",
 	},
 	columnThreeBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_number_three_body",
+		selector: ".number_three_body",
 	},
 	numberBackground: {
 		type: "string",
@@ -105,21 +105,21 @@ export const version_1_1_2 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={`dbe_number_box column_${column}`}>
+			<div className={`number_box column_${column}`}>
 				<div
-					className="dbe_number_1"
+					className="number_1"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_one_number"
+							className="number_one_number"
 							style={{
 								color: numberColor,
 							}}
@@ -127,23 +127,23 @@ export const version_1_1_2 = (props) => {
 							{columnOneNumber}
 						</p>
 					</div>
-					<p className="dbe_number_one_title">{columnOneTitle}</p>
-					<p className="dbe_number_one_body">{columnOneBody}</p>
+					<p className="number_one_title">{columnOneTitle}</p>
+					<p className="number_one_body">{columnOneBody}</p>
 				</div>
 				<div
-					className="dbe_number_2"
+					className="number_2"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_two_number"
+							className="number_two_number"
 							style={{
 								color: numberColor,
 							}}
@@ -151,23 +151,23 @@ export const version_1_1_2 = (props) => {
 							{columnTwoNumber}
 						</p>
 					</div>
-					<p className="dbe_number_two_title">{columnTwoTitle}</p>
-					<p className="dbe_number_two_body">{columnTwoBody}</p>
+					<p className="number_two_title">{columnTwoTitle}</p>
+					<p className="number_two_body">{columnTwoBody}</p>
 				</div>
 				<div
-					className="dbe_number_3"
+					className="number_3"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_three_number"
+							className="number_three_number"
 							style={{
 								color: numberColor,
 							}}
@@ -175,8 +175,8 @@ export const version_1_1_2 = (props) => {
 							{columnThreeNumber}
 						</p>
 					</div>
-					<p className="dbe_number_three_title">{columnThreeTitle}</p>
-					<p className="dbe_number_three_body">{columnThreeBody}</p>
+					<p className="number_three_title">{columnThreeTitle}</p>
+					<p className="number_three_body">{columnThreeBody}</p>
 				</div>
 			</div>
 		</div>
@@ -208,21 +208,21 @@ export const version_1_1_5 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={`dbe_number_box column_${column}`}>
+			<div className={`number_box column_${column}`}>
 				<div
-					className="dbe_number_1"
+					className="number_1"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_one_number"
+							className="number_one_number"
 							style={{
 								color: numberColor,
 							}}
@@ -230,30 +230,27 @@ export const version_1_1_5 = (props) => {
 							{columnOneNumber}
 						</p>
 					</div>
-					<p
-						className="dbe_number_one_title"
-						style={{ textAlign: title1Align }}
-					>
+					<p className="number_one_title" style={{ textAlign: title1Align }}>
 						{columnOneTitle}
 					</p>
-					<p className="dbe_number_one_body" style={{ textAlign: body1Align }}>
+					<p className="number_one_body" style={{ textAlign: body1Align }}>
 						{columnOneBody}
 					</p>
 				</div>
 				<div
-					className="dbe_number_2"
+					className="number_2"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_two_number"
+							className="number_two_number"
 							style={{
 								color: numberColor,
 							}}
@@ -261,30 +258,27 @@ export const version_1_1_5 = (props) => {
 							{columnTwoNumber}
 						</p>
 					</div>
-					<p
-						className="dbe_number_two_title"
-						style={{ textAlign: title2Align }}
-					>
+					<p className="number_two_title" style={{ textAlign: title2Align }}>
 						{columnTwoTitle}
 					</p>
-					<p className="dbe_number_two_body" style={{ textAlign: body2Align }}>
+					<p className="number_two_body" style={{ textAlign: body2Align }}>
 						{columnTwoBody}
 					</p>
 				</div>
 				<div
-					className="dbe_number_3"
+					className="number_3"
 					style={{
 						borderColor: borderColor,
 					}}
 				>
 					<div
-						className="dbe_number_box_number"
+						className="number_box_number"
 						style={{
 							backgroundColor: numberBackground,
 						}}
 					>
 						<p
-							className="dbe_number_three_number"
+							className="number_three_number"
 							style={{
 								color: numberColor,
 							}}
@@ -292,16 +286,10 @@ export const version_1_1_5 = (props) => {
 							{columnThreeNumber}
 						</p>
 					</div>
-					<p
-						className="dbe_number_three_title"
-						style={{ textAlign: title3Align }}
-					>
+					<p className="number_three_title" style={{ textAlign: title3Align }}>
 						{columnThreeTitle}
 					</p>
-					<p
-						className="dbe_number_three_body"
-						style={{ textAlign: body3Align }}
-					>
+					<p className="number_three_body" style={{ textAlign: body3Align }}>
 						{columnThreeBody}
 					</p>
 				</div>

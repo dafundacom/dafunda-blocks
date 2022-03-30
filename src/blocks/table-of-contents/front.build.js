@@ -67,17 +67,17 @@ function dbe_hashHeaderScroll() {
 document.addEventListener("DOMContentLoaded", function () {
   var instances = [];
 
-  if (document.getElementById("dbe_table-of-contents-toggle-link")) {
-    instances.push(document.getElementById("dbe_table-of-contents-toggle-link"));
+  if (document.getElementById("table-of-contents-toggle-link")) {
+    instances.push(document.getElementById("table-of-contents-toggle-link"));
   } else {
-    instances = Array.prototype.slice.call(document.getElementsByClassName("dbe_table-of-contents-toggle-link"));
+    instances = Array.prototype.slice.call(document.getElementsByClassName("table-of-contents-toggle-link"));
   }
 
   instances.forEach(function (instance) {
-    var block = instance.closest(".dbe_table-of-contents");
-    var tocContainer = block.querySelector(".dbe_table-of-contents-container");
+    var block = instance.closest(".table-of-contents");
+    var tocContainer = block.querySelector(".table-of-contents-container");
     var containerStyle = tocContainer.style;
-    var tocExtraContainer = block.querySelector(".dbe_table-of-contents-extra-container");
+    var tocExtraContainer = block.querySelector(".table-of-contents-extra-container");
     var extraContainerStyle = tocExtraContainer.style;
     var tocMain = tocExtraContainer.parentNode;
     var mainStyle = block.style;
@@ -88,16 +88,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function mobileEvent(mql) {
       if (mql.matches) {
-        if (!tocMain.classList.contains("dbe_table-of-contents-collapsed")) {
-          tocMain.classList.add("dbe_table-of-contents-collapsed");
+        if (!tocMain.classList.contains("table-of-contents-collapsed")) {
+          tocMain.classList.add("table-of-contents-collapsed");
           instance.innerHTML = showButton;
-          tocContainer.classList.add("dbe-hide");
+          tocContainer.classList.add("hide");
         }
       } else {
         if (JSON.parse(tocMain.dataset.initiallyshow)) {
-          tocMain.classList.remove("dbe_table-of-contents-collapsed");
+          tocMain.classList.remove("table-of-contents-collapsed");
           instance.innerHTML = hideButton;
-          tocContainer.classList.remove("dbe-hide");
+          tocContainer.classList.remove("hide");
         }
       }
     }
@@ -112,19 +112,19 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var curWidth = block.offsetWidth;
 
-      if (block.classList.contains("dbe_table-of-contents-collapsed")) {
+      if (block.classList.contains("table-of-contents-collapsed")) {
         //begin showing
-        tocExtraContainer.classList.remove("dbe-hide");
-        tocContainer.classList.remove("dbe-hide");
+        tocExtraContainer.classList.remove("hide");
+        tocContainer.classList.remove("hide");
         var targetHeight = tocExtraContainer.offsetHeight + padding / 2; //doesn't include padding
 
-        tocContainer.classList.add("dbe-hiding");
-        tocExtraContainer.classList.add("dbe-hiding");
+        tocContainer.classList.add("hiding");
+        tocExtraContainer.classList.add("hiding");
         mainStyle.width = "".concat(curWidth, "px"); //also take into account number of columns
 
         setTimeout(function () {
           mainStyle.width = "auto";
-          block.classList.remove("dbe_table-of-contents-collapsed");
+          block.classList.remove("table-of-contents-collapsed");
           var fullWidth = getComputedStyle(block).width.slice(0, -2);
           mainStyle.width = "".concat(curWidth, "px");
           setTimeout(function () {
@@ -136,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
               height: "".concat(targetHeight, "px"),
               width: "100px"
             });
-            tocContainer.classList.remove("dbe-hiding");
-            tocExtraContainer.classList.remove("dbe-hiding");
+            tocContainer.classList.remove("hiding");
+            tocExtraContainer.classList.remove("hiding");
             mainStyle.width = "".concat(fullWidth, "px");
             setTimeout(function () {
               tocContainer.style.width = "".concat(fullWidth - padding, "px");
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
           width: "".concat(tocExtraContainer.offsetWidth, "px")
         });
         setTimeout(function () {
-          tocContainer.classList.add("dbe-hiding");
+          tocContainer.classList.add("hiding");
           Object.assign(containerStyle, {
             height: "0",
             width: "0"
@@ -166,23 +166,23 @@ document.addEventListener("DOMContentLoaded", function () {
             height: "0",
             width: "0"
           });
-          block.classList.add("dbe_table-of-contents-collapsed");
+          block.classList.add("table-of-contents-collapsed");
           padding = parseInt(getComputedStyle(tocExtraContainer).paddingLeft.slice(0, -2)) + parseInt(getComputedStyle(tocExtraContainer).paddingRight.slice(0, -2)); //measure width of toc title + toggle button, then use it as width of block
 
-          mainStyle.width = "".concat(5 + padding + instance.closest(".dbe_table-of-contents-header-container").scrollWidth, "px");
+          mainStyle.width = "".concat(5 + padding + instance.closest(".table-of-contents-header-container").scrollWidth, "px");
         }, 50);
       }
 
-      instance.innerHTML = tocContainer.classList.contains("dbe-hiding") ? hideButton : showButton;
+      instance.innerHTML = tocContainer.classList.contains("hiding") ? hideButton : showButton;
       mobileQuery.removeListener(mobileEvent);
     });
     tocContainer.addEventListener("transitionend", function () {
       if (tocContainer.offsetHeight === 0) {
         //hiding is done
-        tocContainer.classList.remove("dbe-hiding");
-        tocContainer.classList.add("dbe-hide");
-        tocExtraContainer.classList.remove("dbe-hiding");
-        tocExtraContainer.classList.add("dbe-hide");
+        tocContainer.classList.remove("hiding");
+        tocContainer.classList.add("hide");
+        tocExtraContainer.classList.remove("hiding");
+        tocExtraContainer.classList.add("hide");
 
         if (containerStyle.display === "block") {
           containerStyle.display = "";
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   if (window.location.hash) {
-    var sourceToC = document.querySelector(".dbe_table-of-contents");
+    var sourceToC = document.querySelector(".table-of-contents");
     var type = sourceToC.dataset.scrolltype;
     var offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
     var target = type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
@@ -219,21 +219,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 window.onhashchange = function () {
-  var sourceToC = document.querySelector(".dbe_table-of-contents");
+  var sourceToC = document.querySelector(".table-of-contents");
   var type = sourceToC.dataset.scrolltype;
   var offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
   var target = type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
   dbe_hashHeaderScroll(type, target, offset);
 };
 
-Array.prototype.slice.call(document.querySelectorAll(".dbe_table-of-contents-container li > a")).forEach(function (link) {
+Array.prototype.slice.call(document.querySelectorAll(".table-of-contents-container li > a")).forEach(function (link) {
   link.addEventListener("click", function (e) {
     var hashlessLink = link.href.replace(link.hash, "");
     var targetPageNumber = /[?&]page=\d+/g.exec(hashlessLink);
     var currentPageNumber = /[?&]page=\d+/g.exec(window.location.search);
 
     if (window.location.href.includes(hashlessLink) && (currentPageNumber === null || targetPageNumber && currentPageNumber[0] === targetPageNumber[0])) {
-      var tocData = link.closest(".dbe_table-of-contents").dataset;
+      var tocData = link.closest(".table-of-contents").dataset;
       var type = tocData.scrolltype;
       var offset = type === "fixedamount" ? tocData.scrollamount : 0;
       var target = type === "namedelement" ? tocData.scrolltarget : "";

@@ -69,7 +69,7 @@ export class ExpandRoot extends Component {
 		}
 
 		return (
-			<div className="dbe-expand">
+			<div className="expand">
 				<InnerBlocks
 					templateLock={"all"}
 					template={[

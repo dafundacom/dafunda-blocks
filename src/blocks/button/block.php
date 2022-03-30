@@ -24,18 +24,18 @@ function dbe_buttons_parse($b){
 
     $iconSize = array('small' => 25, 'medium' => 30, 'large' => 35, 'larger' => 40);
 
-    return '<div class="dbe-button-container' . ($buttonWidth === 'full' ? ' dbe-button-full-container' : '') . '">
+    return '<div class="button-container' . ($buttonWidth === 'full' ? ' button-full-container' : '') . '">
     <a href="' . esc_url($url) . '" target="' . ($openInNewTab ? '_blank' : '_self') . '"
     rel="noopener noreferrer' . ($addNofollow ? ' nofollow' : '') . ($addSponsored ? ' sponsored' : '') . '"
-    class="dbe-button-block-main dbe-button-' . $size .
-    ($buttonWidth === 'full' ? ' dbe-button-full-width' :
-        ($buttonWidth === 'flex' ? ' dbe-button-flex-'. $size : '')) . '" role="button">
-    <div class="dbe-button-content-holder">'.
-        ($chosenIcon !== '' ? '<span class="dbe-button-icon-holder"><svg xmlns="http://www.w3.org/2000/svg"
+    class="button-block-main button-' . $size .
+    ($buttonWidth === 'full' ? ' button-full-width' :
+        ($buttonWidth === 'flex' ? ' button-flex-'. $size : '')) . '" role="button">
+    <div class="button-content-holder">'.
+        ($chosenIcon !== '' ? '<span class="button-icon-holder"><svg xmlns="http://www.w3.org/2000/svg"
         height="' . $iconSize[$size] . '", width="' . $iconSize[$size] . '"
         viewBox="0, 0, ' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[0] . ', ' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[1]
         . '"><path fill="currentColor" d="' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[2] . '"></svg></span>': '')
-        .'<span class="dbe-button-block-btn">' . $buttonText . '</span>
+        .'<span class="button-block-btn">' . $buttonText . '</span>
     </div></a></div>';
 }
 
@@ -46,22 +46,22 @@ function dbe_render_button_block($attributes){
 
     $iconSize = array('small' => 25, 'medium' => 30, 'large' => 35, 'larger' => 40);
 
-    $buttonDisplay = (!isset($buttons) || count($buttons) === 0 ? '<div class="dbe-button-container align-button-' . $align . (isset($className) ? ' ' . esc_attr($className) : '') . '"' . (!isset($blockID) || $blockID === '' ? ' ': ' id="dbe-button-' . $blockID . '"') . '>
+    $buttonDisplay = (!isset($buttons) || count($buttons) === 0 ? '<div class="button-container align-button-' . $align . (isset($className) ? ' ' . esc_attr($className) : '') . '"' . (!isset($blockID) || $blockID === '' ? ' ': ' id="button-' . $blockID . '"') . '>
     <a href="' . esc_url($url) . '" target="' . ($openInNewTab ? '_blank' : '_self') . '"
     rel="noopener noreferrer' . ($addNofollow ? ' nofollow' : '').'"
-    class="dbe-button-block-main dbe-button-' . $size .
-    ($buttonWidth === 'full' ? ' dbe-button-full-width' :
-        ($buttonWidth === 'flex' ? ' dbe-button-flex-' . $size : '')) . '">
-    <div class="dbe-button-content-holder">' .
-        ($chosenIcon !== '' ? '<span class="dbe-button-icon-holder"><svg xmlns="http://www.w3.org/2000/svg"
+    class="button-block-main button-' . $size .
+    ($buttonWidth === 'full' ? ' button-full-width' :
+        ($buttonWidth === 'flex' ? ' button-flex-' . $size : '')) . '">
+    <div class="button-content-holder">' .
+        ($chosenIcon !== '' ? '<span class="button-icon-holder"><svg xmlns="http://www.w3.org/2000/svg"
         height="' . $iconSize[$size] . '", width="' . $iconSize[$size] . '"
         viewBox="0, 0, ' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[0] . ', ' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[1]
         .'"><path fill="currentColor" d="' . Dafunda_Blocks_IconSet::generate_fontawesome_icon($chosenIcon)[2] . '"></svg></span>': '')
-        .'<span class="dbe-button-block-btn">' . $buttonText . '</span>
+        .'<span class="button-block-btn">' . $buttonText . '</span>
     </div></a></div>' : join('', array_map('dbe_buttons_parse', $buttons)));
 
-    return '<div class="' . (isset($buttons) && count($buttons) > 0 ? 'dbe-buttons' : 'dbe-button') . (isset($buttons) && count($buttons) > 0 ? ' align-button-' . ($align === '' ? 'center' : $align) : '')
-    .(isset($className) ? ' ' . esc_attr($className) : '') . '" ' .(!isset($blockID) || $blockID === '' ? ' ': ' id="dbe-button-' . $blockID . '"') . '>' .$buttonDisplay . '</div>';
+    return '<div class="' . (isset($buttons) && count($buttons) > 0 ? 'buttons' : 'button') . (isset($buttons) && count($buttons) > 0 ? ' align-button-' . ($align === '' ? 'center' : $align) : '')
+    .(isset($className) ? ' ' . esc_attr($className) : '') . '" ' .(!isset($blockID) || $blockID === '' ? ' ': ' id="button-' . $blockID . '"') . '>' .$buttonDisplay . '</div>';
 }
 
 function dbe_button_add_frontend_assets() {

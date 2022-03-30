@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const timeUnits = ["week", "day", "hour", "minute", "second"];
 	Array.prototype.slice
-		.call(document.getElementsByClassName("dbe-countdown"))
+		.call(document.getElementsByClassName("countdown"))
 		.forEach((instance, i) => {
 			timer[i] = setInterval(function () {
 				const timeLeft =
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (!initialValue[i]) {
 					//use queryselector only once, then use saved value in future iterations of the loop
 					initialValue[i] = Array.prototype.slice
-						.call(instance.querySelectorAll(".dbe-countdown-odometer"))
+						.call(instance.querySelectorAll(".countdown-odometer"))
 						.map((unit) =>
 							Array.prototype.slice
 								.call(unit.children)
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				}
 
 				if (timeLeft >= 0) {
-					if (instance.querySelector(".dbe-countdown-odometer-container")) {
+					if (instance.querySelector(".countdown-odometer-container")) {
 						const breakIntoDigits = (num, minDigits) => {
 							//adapted from from https://stackoverflow.com/a/7784664
 							let digits = [];
@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						});
 
 						let odometerSlot = Array.prototype.slice
-							.call(instance.querySelectorAll(".dbe-countdown-odometer"))
+							.call(instance.querySelectorAll(".countdown-odometer"))
 							.map((a) => Array.prototype.slice.call(a.children));
 
 						let finishedTransitions = 0;
@@ -336,11 +336,9 @@ document.addEventListener("DOMContentLoaded", () => {
 						incomingDigits.forEach((arr, j) => {
 							arr.forEach((d, k) => {
 								if (Array.isArray(d)) {
-									odometerSlot[j][k].classList.add(
-										"dbe-countdown-odometer-digits"
-									);
+									odometerSlot[j][k].classList.add("countdown-odometer-digits");
 									odometerSlot[j][k].classList.remove(
-										"dbe-countdown-odometer-digit"
+										"countdown-odometer-digit"
 									);
 
 									odometerSlot[j][k].innerHTML = d
@@ -372,10 +370,10 @@ document.addEventListener("DOMContentLoaded", () => {
 											() => {
 												//switch to pre-animation style
 												odometerSlot[j][k].classList.add(
-													"dbe-countdown-odometer-digit"
+													"countdown-odometer-digit"
 												);
 												odometerSlot[j][k].classList.remove(
-													"dbe-countdown-odometer-digits"
+													"countdown-odometer-digits"
 												);
 												odometerSlot[j][k].removeAttribute("style");
 
@@ -398,68 +396,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
 						animationDirection = "decrease";
 					} else {
-						if (instance.querySelector(".dbe_countdown_week"))
-							instance.querySelector(".dbe_countdown_week").innerHTML = weeks;
-						if (instance.querySelector(".dbe_countdown_day"))
-							instance.querySelector(".dbe_countdown_day").innerHTML = days;
-						if (instance.querySelector(".dbe_countdown_hour"))
-							instance.querySelector(".dbe_countdown_hour").innerHTML = hours;
-						if (instance.querySelector(".dbe_countdown_minute"))
-							instance.querySelector(".dbe_countdown_minute").innerHTML =
-								minutes;
-						if (instance.querySelector(".dbe_countdown_second"))
-							instance.querySelector(".dbe_countdown_second").innerHTML =
-								seconds;
+						if (instance.querySelector(".countdown_week"))
+							instance.querySelector(".countdown_week").innerHTML = weeks;
+						if (instance.querySelector(".countdown_day"))
+							instance.querySelector(".countdown_day").innerHTML = days;
+						if (instance.querySelector(".countdown_hour"))
+							instance.querySelector(".countdown_hour").innerHTML = hours;
+						if (instance.querySelector(".countdown_minute"))
+							instance.querySelector(".countdown_minute").innerHTML = minutes;
+						if (instance.querySelector(".countdown_second"))
+							instance.querySelector(".countdown_second").innerHTML = seconds;
 
-						if (instance.querySelector(".dbe_countdown_circular_container")) {
-							if (instance.querySelector(".dbe_countdown_circle_week")) {
+						if (instance.querySelector(".countdown_circular_container")) {
+							if (instance.querySelector(".countdown_circle_week")) {
 								instance.querySelector(
-									".dbe_countdown_circle_week .dbe_countdown_circle_path"
+									".countdown_circle_week .countdown_circle_path"
 								).style.strokeDasharray = `${
 									(weeks * 219.911) / 52
 								}px, 219.911px`;
 								instance.querySelector(
-									".dbe_countdown_circle_week .dbe_countdown_circle_trail"
+									".countdown_circle_week .countdown_circle_trail"
 								).style.strokeLinecap = weeks > 0 ? "round" : "butt";
 							}
-							if (instance.querySelector(".dbe_countdown_circle_day")) {
+							if (instance.querySelector(".countdown_circle_day")) {
 								instance.querySelector(
-									".dbe_countdown_circle_day .dbe_countdown_circle_path"
+									".countdown_circle_day .countdown_circle_path"
 								).style.strokeDasharray = `${
 									(days * 219.911) / 7
 								}px, 219.911px`;
 								instance.querySelector(
-									".dbe_countdown_circle_day .dbe_countdown_circle_trail"
+									".countdown_circle_day .countdown_circle_trail"
 								).style.strokeLinecap = days > 0 ? "round" : "butt";
 							}
-							if (instance.querySelector(".dbe_countdown_circle_hour")) {
+							if (instance.querySelector(".countdown_circle_hour")) {
 								instance.querySelector(
-									".dbe_countdown_circle_hour .dbe_countdown_circle_path"
+									".countdown_circle_hour .countdown_circle_path"
 								).style.strokeDasharray = `${
 									(hours * 219.911) / 24
 								}px, 219.911px`;
 								instance.querySelector(
-									".dbe_countdown_circle_hour .dbe_countdown_circle_trail"
+									".countdown_circle_hour .countdown_circle_trail"
 								).style.strokeLinecap = hours > 0 ? "round" : "butt";
 							}
-							if (instance.querySelector(".dbe_countdown_circle_minute")) {
+							if (instance.querySelector(".countdown_circle_minute")) {
 								instance.querySelector(
-									".dbe_countdown_circle_minute .dbe_countdown_circle_path"
+									".countdown_circle_minute .countdown_circle_path"
 								).style.strokeDasharray = `${
 									(minutes * 219.911) / 60
 								}px, 219.911px`;
 								instance.querySelector(
-									".dbe_countdown_circle_minute .dbe_countdown_circle_trail"
+									".countdown_circle_minute .countdown_circle_trail"
 								).style.strokeLinecap = minutes > 0 ? "round" : "butt";
 							}
-							if (instance.querySelector(".dbe_countdown_circle_second")) {
+							if (instance.querySelector(".countdown_circle_second")) {
 								instance.querySelector(
-									".dbe_countdown_circle_second .dbe_countdown_circle_path"
+									".countdown_circle_second .countdown_circle_path"
 								).style.strokeDasharray = `${
 									(seconds * 219.911) / 60
 								}px, 219.911px`;
 								instance.querySelector(
-									".dbe_countdown_circle_second .dbe_countdown_circle_trail"
+									".countdown_circle_second .countdown_circle_trail"
 								).style.strokeLinecap = seconds > 0 ? "round" : "butt";
 							}
 						}

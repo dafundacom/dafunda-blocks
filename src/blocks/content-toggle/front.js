@@ -9,14 +9,14 @@ function togglePanel(target) {
 	let bottomPaddingUnit = "";
 
 	const indicator = target.querySelector(
-		".wp-block-dbe-content-toggle-accordion-state-indicator"
+		".wp-block-content-toggle-accordion-state-indicator"
 	);
 
 	const panelContent = target.nextElementSibling;
 
 	const toggleContainer = target.parentElement.parentElement;
 
-	if (panelContent.classList.contains("dbe-hide")) {
+	if (panelContent.classList.contains("hide")) {
 		const panelStyle = getComputedStyle(panelContent);
 
 		let topUnitMatch = /[^\d.]/g.exec(panelStyle.paddingTop);
@@ -31,9 +31,9 @@ function togglePanel(target) {
 		);
 
 		bottomPaddingUnit = panelStyle.paddingBottom.slice(bottomUnitMatch.index);
-		panelContent.classList.remove("dbe-hide");
+		panelContent.classList.remove("hide");
 
-		panelContent.classList.add("dbe-hiding");
+		panelContent.classList.add("hiding");
 		if (
 			"showonlyone" in toggleContainer.dataset &&
 			toggleContainer.dataset.showonlyone
@@ -46,14 +46,14 @@ function togglePanel(target) {
 			siblingToggles.forEach((siblingToggle) => {
 				const siblingContent = siblingToggle.nextElementSibling;
 				const siblingIndicator = siblingToggle.querySelector(
-					".wp-block-dbe-content-toggle-accordion-state-indicator"
+					".wp-block-content-toggle-accordion-state-indicator"
 				);
-				if (!siblingContent.classList.contains("dbe-hide")) {
+				if (!siblingContent.classList.contains("hide")) {
 					if (siblingIndicator) siblingIndicator.classList.remove("open");
-					siblingContent.classList.add("dbe-toggle-transition");
+					siblingContent.classList.add("toggle-transition");
 					siblingContent.style.height = `${siblingContent.scrollHeight}px`;
 					setTimeout(() => {
-						siblingContent.classList.add("dbe-hiding");
+						siblingContent.classList.add("hiding");
 						siblingContent.style.height = "";
 					}, 20);
 				}
@@ -62,11 +62,11 @@ function togglePanel(target) {
 	} else {
 		panelContent.style.height = getComputedStyle(panelContent).height;
 	}
-	panelContent.classList.add("dbe-toggle-transition");
+	panelContent.classList.add("toggle-transition");
 	if (indicator) indicator.classList.toggle("open");
 	setTimeout(() => {
 		//delay is needed for the animation to run properly
-		if (panelContent.classList.contains("dbe-hiding")) {
+		if (panelContent.classList.contains("hiding")) {
 			let convertedTop = convertToPixels(topPadding, topPaddingUnit);
 
 			let convertedBottom = convertToPixels(bottomPadding, bottomPaddingUnit);
@@ -84,7 +84,7 @@ function togglePanel(target) {
 				paddingBottom: `${convertedBottom}px`,
 			});
 			Array.prototype.slice
-				.call(document.getElementsByClassName("dbe_image_slider"))
+				.call(document.getElementsByClassName("image_slider"))
 				.forEach((slider) => {
 					const swiper = new Swiper(
 						`#${slider.id}`,
@@ -92,7 +92,7 @@ function togglePanel(target) {
 					);
 				});
 		} else {
-			panelContent.classList.add("dbe-hiding");
+			panelContent.classList.add("hiding");
 			panelContent.style.height = "";
 		}
 	}, 20);
@@ -106,7 +106,7 @@ function togglePanel(target) {
 }
 
 Array.prototype.slice
-	.call(document.getElementsByClassName("wp-block-dbe-content-toggle"))
+	.call(document.getElementsByClassName("wp-block-content-toggle"))
 	.forEach((toggleContainer) => {
 		const toggleHeads = Array.prototype.slice
 			.call(toggleContainer.children)
@@ -115,7 +115,7 @@ Array.prototype.slice
 				(toggle) =>
 					toggle &&
 					toggle.classList.contains(
-						"wp-block-dbe-content-toggle-accordion-title-wrap"
+						"wp-block-content-toggle-accordion-title-wrap"
 					)
 			);
 
@@ -180,7 +180,7 @@ Array.prototype.slice
 					(toggle) =>
 						toggle &&
 						toggle.classList.contains(
-							"wp-block-dbe-content-toggle-accordion-title-wrap"
+							"wp-block-content-toggle-accordion-title-wrap"
 						)
 				)
 				.forEach((instance) => {
@@ -192,14 +192,14 @@ Array.prototype.slice
 					});
 
 					panelContent.addEventListener("transitionend", function () {
-						panelContent.classList.remove("dbe-toggle-transition");
+						panelContent.classList.remove("toggle-transition");
 						panelContent.previousElementSibling.setAttribute(
 							"aria-expanded",
 							panelContent.offsetHeight !== 0
 						);
 
 						if (panelContent.offsetHeight === 0) {
-							panelContent.classList.add("dbe-hide");
+							panelContent.classList.add("hide");
 						} else {
 							Object.assign(panelContent.style, {
 								height: "",
@@ -207,7 +207,7 @@ Array.prototype.slice
 								paddingBottom: "",
 							});
 						}
-						panelContent.classList.remove("dbe-hiding");
+						panelContent.classList.remove("hiding");
 					});
 
 					panelContent.removeAttribute("style");
@@ -226,7 +226,7 @@ Array.prototype.slice
 
 document.addEventListener("DOMContentLoaded", () => {
 	Array.prototype.slice
-		.call(document.getElementsByClassName("wp-block-dbe-content-toggle"))
+		.call(document.getElementsByClassName("wp-block-content-toggle"))
 		.forEach((toggleContainer) => {
 			if (
 				window.innerWidth < 700 &&

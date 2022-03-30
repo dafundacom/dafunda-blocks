@@ -351,7 +351,7 @@ registerBlockType("dbe/styled-box", {
 			renderedBlock = Array(text.length)
 				.fill("")
 				.map((_, i) => (
-					<div className="dbe-feature">
+					<div className="feature">
 						{image[i] && image[i].id ? (
 							<>
 								{isSelected && (
@@ -375,13 +375,13 @@ registerBlockType("dbe/styled-box", {
 									</Button>
 								)}
 								<img
-									className="dbe-feature-img"
+									className="feature-img"
 									src={image[i].url}
 									alt={image[i].alt}
 								/>
 							</>
 						) : (
-							<div className="dbe-feature-upload-button">
+							<div className="feature-upload-button">
 								<MediaUpload
 									onSelect={(img) =>
 										setAttributes({
@@ -411,7 +411,7 @@ registerBlockType("dbe/styled-box", {
 						)}
 						<RichText
 							tagName="p"
-							className="dbe-feature-title"
+							className="feature-title"
 							style={{ textAlign: titleAlign[i] }}
 							value={title[i]}
 							onChange={(value) =>
@@ -425,7 +425,7 @@ registerBlockType("dbe/styled-box", {
 						/>
 						<RichText
 							tagName="p"
-							className="dbe-feature-body"
+							className="feature-body"
 							style={{ textAlign: textAlign[i] }}
 							value={text[i]}
 							onChange={(value) =>
@@ -486,7 +486,7 @@ registerBlockType("dbe/styled-box", {
 			}
 
 			renderedBlock = (
-				<div className="dbe-styled-box-number-box-main">
+				<div className="styled-box-number-box-main">
 					<InnerBlocks
 						allowedBlocks={["dbe/styled-box-numbered-box-column"]}
 						template={[["dbe/styled-box-numbered-box-column"]]}
@@ -497,7 +497,7 @@ registerBlockType("dbe/styled-box", {
 						}
 					/>
 					<style>
-						{`.dbe-styled-box-number-box-main
+						{`.styled-box-number-box-main
 								> .block-editor-inner-blocks
 								> .block-editor-block-list__layout {
 									display: grid;
@@ -655,9 +655,9 @@ registerBlockType("dbe/styled-box", {
 			);
 		} else {
 			renderedBlock = (
-				<div className="dbe-styled-box-selection">
+				<div className="styled-box-selection">
 					<h4>{__("Select a Style")}</h4>
-					<div className="dbe-styled-box-choices">
+					<div className="styled-box-choices">
 						<div
 							onClick={() => {
 								let newAttributes = {
@@ -816,7 +816,7 @@ registerBlockType("dbe/styled-box", {
 					{inspectorExtras}
 				</InspectorControls>
 			),
-			<div className={`dbe-styled-box dbe-${mode}-box`} style={extraStyles}>
+			<div className={`styled-box ${mode}-box`} style={extraStyles}>
 				{renderedBlock}
 			</div>,
 		];
@@ -973,9 +973,9 @@ registerBlockType("dbe/styled-box-numbered-box-column", {
 		}
 
 		return (
-			<div className="dbe-number-panel" style={{ borderColor: borderColor }}>
+			<div className="number-panel" style={{ borderColor: borderColor }}>
 				<div
-					className="dbe-number-container"
+					className="number-container"
 					style={{ backgroundColor: backColor }}
 				>
 					<RichText
@@ -989,7 +989,7 @@ registerBlockType("dbe/styled-box-numbered-box-column", {
 						keep
 						numerical
 						placeholders
-						className="dbe-number-display"
+						className="number-display"
 						style={{ color: numberColor }}
 						value={number}
 						onChange={(number) => setAttributes({ number })}
@@ -1000,7 +1000,7 @@ registerBlockType("dbe/styled-box-numbered-box-column", {
 					tagName="p"
 					style={{ textAlign: titleAlign }}
 					placeholder={__("Title")}
-					className="dbe-number-box-title"
+					className="number-box-title"
 					value={title}
 					onChange={(title) => setAttributes({ title })}
 					keepPlaceholderOnFocus={true}

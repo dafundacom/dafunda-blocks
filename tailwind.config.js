@@ -1,17 +1,23 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
-	darkMode: false,
-	purge: [
-		// Paths to your templates...
-		"../**.php",
-		"../**/**.php",
-		"./src/js/**.js",
-		"**.php",
-		"**/**.php",
-		"src/js/**.js",
+	darkMode: "class",
+	content: [
+		"./*.{js,php}",
+		"./src/*.{js,php}",
+		"./src/**/*.{js,php}",
+		"./src/**/**/*.{js,php}",
+		"./src/**/**/**/*.{js,php}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				primary: colors.teal,
+				secondary: colors.slate,
+			},
+		},
 	},
 	variants: {},
-	plugins: [],
+	important: true,
+	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };

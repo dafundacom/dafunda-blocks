@@ -30,12 +30,12 @@ function dbe_getNodeindex(elem) {
 }
 
 function dbe_handleTabEvent(tab) {
-  var parent = tab.closest(".wp-block-dbe-tabbed-content-holder");
+  var parent = tab.closest(".wp-block-tabbed-content-holder");
   var isVertical = parent.classList.contains("vertical-holder");
-  var activeStyle = parent.querySelector(".wp-block-dbe-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap.active")).getAttribute("style");
-  var defaultStyle = parent.querySelector(".wp-block-dbe-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap:not(.active)")).getAttribute("style");
+  var activeStyle = parent.querySelector(".wp-block-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap.active")).getAttribute("style");
+  var defaultStyle = parent.querySelector(".wp-block-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap:not(.active)")).getAttribute("style");
   dbe_getSiblings(tab, function (elem) {
-    return elem.classList.contains("wp-block-dbe-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap"));
+    return elem.classList.contains("wp-block-tabbed-content-tab-title-".concat(isVertical ? "vertical-" : "", "wrap"));
   }).forEach(function (sibling) {
     if (sibling.tabIndex === 0) {
       sibling.setAttribute("tabindex", -1);
@@ -79,15 +79,15 @@ function dbe_handleTabEvent(tab) {
 
   if (activeStyle) tab.setAttribute("style", activeStyle);
   var tabContentContainer = Array.prototype.slice.call(parent.children).filter(function (elem) {
-    return elem.classList.contains("wp-block-dbe-tabbed-content-tabs-content");
+    return elem.classList.contains("wp-block-tabbed-content-tabs-content");
   })[0];
   Array.prototype.slice.call(tabContentContainer.children).filter(function (child) {
-    return child.classList.contains("wp-block-dbe-tabbed-content-tab-content-wrap");
+    return child.classList.contains("wp-block-tabbed-content-tab-content-wrap");
   }).forEach(function (tabContent, i) {
     if (dbe_getNodeindex(tab) === i) {
       tabContent.classList.add("active");
-      tabContent.classList.remove("dbe-hide");
-      Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (slider) {
+      tabContent.classList.remove("hide");
+      Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (slider) {
         var swiper = new Swiper("#".concat(slider.id), JSON.parse(slider.dataset.swiperData));
       });
       Array.prototype.slice.call(tabContent.querySelectorAll(".wp-block-embed iframe")).forEach(function (embeddedContent) {
@@ -96,11 +96,11 @@ function dbe_handleTabEvent(tab) {
       });
     } else {
       tabContent.classList.remove("active");
-      tabContent.classList.add("dbe-hide");
+      tabContent.classList.add("hide");
     }
   });
   Array.prototype.slice.call(tabContentContainer.children).filter(function (child) {
-    return child.classList.contains("wp-block-dbe-tabbed-content-accordion-toggle");
+    return child.classList.contains("wp-block-tabbed-content-accordion-toggle");
   }).forEach(function (accordionToggle) {
     if (dbe_getNodeindex(accordionToggle) / 2 === dbe_getNodeindex(tab)) {
       accordionToggle.classList.add("active");
@@ -173,7 +173,7 @@ function dbe_leftRightPress(event) {
   }
 }
 
-Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-tab-title-wrap")).forEach(function (instance) {
+Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-tab-title-wrap")).forEach(function (instance) {
   instance.addEventListener("focus", function () {
     dbe_handleTabEvent(instance);
   });
@@ -202,7 +202,7 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-
     }
   });
 });
-Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-tab-title-vertical-wrap")).forEach(function (instance) {
+Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-tab-title-vertical-wrap")).forEach(function (instance) {
   instance.addEventListener("focus", function () {
     dbe_handleTabEvent(instance);
   });
@@ -236,7 +236,7 @@ function dbe_switchFocusToTab(index, tabBar) {
 
 function dbe_getTabbedContentDisplayModes(block) {
   var dm = [];
-  var classNamePrefix = "wp-block-dbe-tabbed-content";
+  var classNamePrefix = "wp-block-tabbed-content";
 
   if (block.classList.contains("".concat(classNamePrefix, "-vertical-holder-mobile"))) {
     dm.push("verticaltab");
@@ -259,7 +259,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 }
 
 (function () {
-  var displayModes = Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content")).map(function (block) {
+  var displayModes = Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content")).map(function (block) {
     return dbe_getTabbedContentDisplayModes(block);
   });
   var transitionTo = 0;
@@ -267,7 +267,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 
   function processTransition() {
     if (transitionTo && transitionFrom) {
-      Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content")).forEach(function (instance, i) {
+      Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content")).forEach(function (instance, i) {
         if (displayModes[i][transitionFrom - 1] !== displayModes[i][transitionTo - 1]) {
           var tabBar = instance.children[0].children[0];
 
@@ -286,12 +286,12 @@ function dbe_getTabbedContentDisplayModes(block) {
                 Array.prototype.slice.call(instance.children[1].children).forEach(function (child, j) {
                   if (Math.floor(j / 2) === activeTabs[activeTabs.length - 1]) {
                     child.classList.add("active");
-                    child.classList.remove("dbe-hide");
+                    child.classList.remove("hide");
                   } else {
                     child.classList.remove("active");
 
                     if (j % 2 === 1) {
-                      child.classList.add("dbe-hide");
+                      child.classList.add("hide");
                     }
                   }
                 });
@@ -332,7 +332,7 @@ function dbe_getTabbedContentDisplayModes(block) {
                   child.setAttribute("role", "region");
                   child.removeAttribute("aria-labelledby");
                 } else {
-                  child.setAttribute("aria-expanded", !child.nextElementSibling.classList.contains("dbe-hide"));
+                  child.setAttribute("aria-expanded", !child.nextElementSibling.classList.contains("hide"));
 
                   if (!child.hasAttribute("aria-controls")) {
                     child.setAttribute("aria-controls", child.nextElementSibling.id);
@@ -400,7 +400,7 @@ function dbe_getTabbedContentDisplayModes(block) {
 
 function dbe_hashTabSwitch() {
   var targetElement = document.querySelector("[data-tab-anchor='".concat(window.location.hash.slice(1), "']"));
-  var classNamePrefix = "wp-block-dbe-tabbed-content";
+  var classNamePrefix = "wp-block-tabbed-content";
 
   if (targetElement) {
     if (targetElement.classList.contains("".concat(classNamePrefix, "-tab-content-wrap"))) {
@@ -428,12 +428,12 @@ function dbe_hashTabSwitch() {
       var ancestorTabIndexes = [];
 
       var findTabContentRoot = function findTabContentRoot(currentBlock) {
-        var parentTabbedContent = currentBlock.closest(".wp-block-dbe-tabbed-content-tabs-content");
+        var parentTabbedContent = currentBlock.closest(".wp-block-tabbed-content-tabs-content");
 
         if (parentTabbedContent) {
           ancestorTabIndexes.push(Array.prototype.slice.call(parentTabbedContent.children).filter(function (t) {
-            return t.classList.contains("wp-block-dbe-tabbed-content-tab-content-wrap");
-          }).indexOf(currentBlock.closest(".wp-block-dbe-tabbed-content-tab-content-wrap")));
+            return t.classList.contains("wp-block-tabbed-content-tab-content-wrap");
+          }).indexOf(currentBlock.closest(".wp-block-tabbed-content-tab-content-wrap")));
           ancestorTabBlocks.push(parentTabbedContent.parentElement);
           return findTabContentRoot(parentTabbedContent.parentElement);
         } else {
@@ -467,11 +467,11 @@ function dbe_hashTabSwitch() {
           tabContents.forEach(function (tabContent, j) {
             if (j === ancestorTabIndexes[i]) {
               tabContent.classList.add("active");
-              tabContent.classList.remove("dbe-hide");
+              tabContent.classList.remove("hide");
               tabContent.previousElementSibling.classList.add("active");
             } else {
               tabContent.classList.remove("active");
-              tabContent.classList.add("dbe-hide");
+              tabContent.classList.add("hide");
               tabContent.previousElementSibling.classList.remove("active");
             }
           });
@@ -485,7 +485,7 @@ function dbe_hashTabSwitch() {
             if (j === ancestorTabIndexes[i]) {
               tab.classList.add("active");
               tabContents[j].classList.add("active");
-              tabContents[j].classList.remove("dbe-hide");
+              tabContents[j].classList.remove("hide");
 
               if (probableAccordionToggle && probableAccordionToggle.classList.contains("".concat(classNamePrefix, "-accordion-toggle"))) {
                 probableAccordionToggle.classList.add("active");
@@ -498,7 +498,7 @@ function dbe_hashTabSwitch() {
             } else {
               tab.classList.remove("active");
               tabContents[j].classList.remove("active");
-              tabContents[j].classList.add("dbe-hide");
+              tabContents[j].classList.add("hide");
 
               if (probableAccordionToggle && probableAccordionToggle.classList.contains("".concat(classNamePrefix, "-accordion-toggle"))) {
                 probableAccordionToggle.classList.remove("active");
@@ -521,13 +521,13 @@ function dbe_hashTabSwitch() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content")).forEach(function (instance) {
+  Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content")).forEach(function (instance) {
     return dbe_initializeTabBlock(instance);
   });
-  Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-underline")).forEach(function (instance) {
+  Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-underline")).forEach(function (instance) {
     return dbe_initializeTabBlock(instance);
   });
-  Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-pills")).forEach(function (instance) {
+  Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-pills")).forEach(function (instance) {
     return dbe_initializeTabBlock(instance);
   });
   dbe_hashTabSwitch();
@@ -572,7 +572,7 @@ function dbe_initializeTabBlock(instance) {
         child.setAttribute("role", "region");
         child.removeAttribute("aria-labelledby");
       } else {
-        child.setAttribute("aria-expanded", !child.nextElementSibling.classList.contains("dbe-hide"));
+        child.setAttribute("aria-expanded", !child.nextElementSibling.classList.contains("hide"));
         child.setAttribute("aria-controls", child.nextElementSibling.id);
 
         if (child.nextElementSibling.classList.contains("active")) {
@@ -591,9 +591,9 @@ function dbe_initializeTabBlock(instance) {
 }
 
 window.onhashchange = dbe_hashTabSwitch;
-Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-tabs-content")).forEach(function (container) {
+Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-tabs-content")).forEach(function (container) {
   Array.prototype.slice.call(container.children).filter(function (child) {
-    return child.classList.contains("wp-block-dbe-tabbed-content-accordion-toggle");
+    return child.classList.contains("wp-block-tabbed-content-accordion-toggle");
   }).forEach(function (accordionToggle, i) {
     accordionToggle.addEventListener("click", function () {
       var root = container.parentElement;
@@ -609,7 +609,7 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-
           root.dataset.noActiveTabs = true;
         }
       } else {
-        Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (slider) {
+        Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (slider) {
           var swiper = new Swiper("#".concat(slider.id), JSON.parse(slider.dataset.swiperData));
         });
 
@@ -623,11 +623,11 @@ Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-
 
       accordionToggle.classList.toggle("active");
       accordionToggle.nextElementSibling.classList.toggle("active");
-      accordionToggle.nextElementSibling.classList.toggle("dbe-hide");
+      accordionToggle.nextElementSibling.classList.toggle("hide");
     });
   });
 });
-Array.prototype.slice.call(document.getElementsByClassName("wp-block-dbe-tabbed-content-tab-holder")).forEach(function (tabBar) {
+Array.prototype.slice.call(document.getElementsByClassName("wp-block-tabbed-content-tab-holder")).forEach(function (tabBar) {
   var tabBarIsBeingDragged = false;
   var oldScrollPosition = -1;
   var oldMousePosition = -1;

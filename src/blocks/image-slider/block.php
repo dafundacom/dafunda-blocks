@@ -19,14 +19,14 @@ function dbe_render_image_slider_block($attributes)
         $gallery .= '<figure class="swiper-slide">
         <img src="' . $image['url'] . '" alt="' . esc_html($image['alt']) . '"' .
             ($blockID === '' ? ' style="height: ' . $sliderHeight . 'px;"' : '') . '>' .
-            '<figcaption class="dbe_image_slider_image_caption">' . ($captionArray[$key]['link'] === '' ? '' : '<a href="' . esc_url($captionArray[$key]['link']) . '">')
+            '<figcaption class="image_slider_image_caption">' . ($captionArray[$key]['link'] === '' ? '' : '<a href="' . esc_url($captionArray[$key]['link']) . '">')
             . $captionArray[$key]['text']
             . ($captionArray[$key]['link'] === '' ? '' : '</a>') . ' </figcaption></figure>';
     }
 
-    return '<div class="dbe_image_slider swiper-container' . (isset($className) ? ' ' . esc_attr($className) : '') .
+    return '<div class="image_slider swiper-container' . (isset($className) ? ' ' . esc_attr($className) : '') .
         '" ' . ($blockID === '' ? 'style="min-height: ' . (25 + (count($imageArray) > 0) ? $sliderHeight : 200) . 'px;"'
-            : 'id="dbe_image_slider_' . $blockID . '"') .
+            : 'id="image_slider_' . $blockID . '"') .
         ' data-swiper-data=\'{"loop":' . json_encode($wrapsAround) .
         ',"pagination":{"el": ' . ($usePagination ? '".swiper-pagination"' : 'null') . ' , "type": "' . $paginationType . '"' . ($paginationType === 'bullets' ? ', "clickable":true' : '') . '}
             ,"navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"},  "keyboard": { "enabled": true },

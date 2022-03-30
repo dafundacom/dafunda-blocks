@@ -163,7 +163,7 @@ registerBlockType("dbe/divider", {
 
 			<div className={className}>
 				<div
-					className="dbe_divider"
+					className="divider"
 					style={{
 						borderTop: `${borderSize}px ${borderStyle} ${borderColor}`,
 						marginTop: borderHeight + "px",

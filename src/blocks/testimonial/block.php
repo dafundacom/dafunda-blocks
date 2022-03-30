@@ -3,22 +3,22 @@
 function dbe_render_testimonial_block($attributes){
     extract($attributes);
     return '<div>
-    <div class="dbe_testimonial'.(isset($className) ? ' ' . esc_attr($className) : '').
+    <div class="testimonial'.(isset($className) ? ' ' . esc_attr($className) : '').
             '"'.($blockID === '' ? 'style= "background-color: ' . $backgroundColor . '; color: ' . $textColor . ';"'
-                :' id="dbe_testimonial_' . $blockID . '"') . '>
-        <div class="dbe_testimonial_img">
+                :' id="testimonial_' . $blockID . '"') . '>
+        <div class="testimonial_img">
             <img src="' . $imgURL . '" alt="' . $imgAlt . '" height="100" width="100" />
         </div>
-        <div class="dbe_testimonial_content">
-            <p class="dbe_testimonial_text"'.
+        <div class="testimonial_content">
+            <p class="testimonial_text"'.
                 ($blockID === '' ? ' style="font-size: ' . $textSize.'px; text-align: ' . $textAlign . ';"' : '') . '>'.
                 $dbe_testimonial_text . '</p>
         </div>
-        <div class="dbe_testimonial_sign">
-            <p class="dbe_testimonial_author"'.
+        <div class="testimonial_sign">
+            <p class="testimonial_author"'.
                 ($blockID === '' ? ' style="font-size: ' . $textSize . 'px; text-align: ' . $authorAlign.';"' : '') . '>'.
                 $dbe_testimonial_author.'</p>
-            <p class="dbe_testimonial_author_role"'.
+            <p class="testimonial_author_role"'.
                 ($blockID === '' ? ' style="font-size: ' . $textSize . 'px; text-align: ' . $authorRoleAlign . ';"' : '') . '>'.
                 $dbe_testimonial_author_role . '</p>
         </div>

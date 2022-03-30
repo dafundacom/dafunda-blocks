@@ -154,8 +154,8 @@ registerBlockType("dbe/expand-portion", {
 				</BlockControls>
 			),
 			<div
-				className={`dbe-expand-portion dbe-expand-${displayType}${
-					displayType === "full" && !isVisible ? " dbe-hide" : ""
+				className={`expand-portion expand-${displayType}${
+					displayType === "full" && !isVisible ? " hide" : ""
 				}`}
 			>
 				<InnerBlocks

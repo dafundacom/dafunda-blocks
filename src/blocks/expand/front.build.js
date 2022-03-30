@@ -24,26 +24,26 @@ function dbe_getSiblings(element, criteria) {
   return criteria ? children.filter(criteria) : children;
 }
 
-Array.prototype.slice.call(document.getElementsByClassName("dbe-expand-toggle-button")).forEach(function (instance) {
+Array.prototype.slice.call(document.getElementsByClassName("expand-toggle-button")).forEach(function (instance) {
   if (instance.getAttribute("aria-controls") === "") {
     var blockID = instance.parentElement.parentElement.id.slice(10);
-    instance.setAttribute("aria-controls", "dbe-expand-full-".concat(blockID));
+    instance.setAttribute("aria-controls", "expand-full-".concat(blockID));
 
-    if (instance.parentElement.classList.contains("dbe-expand-full")) {
-      instance.parentElement.setAttribute("id", "dbe-expand-full-".concat(blockID));
+    if (instance.parentElement.classList.contains("expand-full")) {
+      instance.parentElement.setAttribute("id", "expand-full-".concat(blockID));
     }
   }
 
   var togglePanel = function togglePanel() {
-    var blockRoot = instance.closest(".dbe-expand");
-    blockRoot.querySelector(".dbe-expand-partial .dbe-expand-toggle-button").classList.toggle("dbe-hide");
+    var blockRoot = instance.closest(".expand");
+    blockRoot.querySelector(".expand-partial .expand-toggle-button").classList.toggle("hide");
     var expandingPart = Array.prototype.slice.call(blockRoot.children).filter(function (child) {
-      return child.classList.contains("dbe-expand-full");
+      return child.classList.contains("expand-full");
     })[0];
-    expandingPart.classList.toggle("dbe-hide");
+    expandingPart.classList.toggle("hide");
 
-    if (!expandingPart.classList.contains("dbe-hide")) {
-      Array.prototype.slice.call(document.getElementsByClassName("dbe_image_slider")).forEach(function (slider) {
+    if (!expandingPart.classList.contains("hide")) {
+      Array.prototype.slice.call(document.getElementsByClassName("image_slider")).forEach(function (slider) {
         var swiper = new Swiper("#".concat(slider.id), JSON.parse(slider.dataset.swiperData));
       });
     }

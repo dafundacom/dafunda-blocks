@@ -2,9 +2,9 @@
 
 function dbe_render_divider_block($attributes){
     extract($attributes);
-    return '<hr class="dbe_divider'.(isset($className) ? ' ' . esc_attr($className) : '').'" '.
+    return '<hr class="divider'.(isset($className) ? ' ' . esc_attr($className) : '').'" '.
     ($blockID === '' ? 'style="border-top: ' . $borderSize . 'px ' . $borderStyle . ' ' . $borderColor . '; margin-top: ' . $borderHeight . 'px; margin-bottom: ' . $borderHeight . 'px;"' :
-        'id="dbe_divider_' . $blockID.'"') . '></hr>';
+        'id="divider_' . $blockID.'"') . '></hr>';
 }
 
 function dbe_register_divider_block(){

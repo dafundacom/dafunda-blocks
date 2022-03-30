@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 Array.prototype.slice
-	.call(document.getElementsByClassName("dbe-button-block-main"))
+	.call(document.getElementsByClassName("button-block-main"))
 	.forEach((instance) => {
 		if (instance.hasAttribute("data-defaultcolor")) {
 			instance.addEventListener("mouseenter", function () {

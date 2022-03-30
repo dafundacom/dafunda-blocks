@@ -2,12 +2,12 @@
 
 function dbe_render_expand_portion_block($attributes, $content){
     extract($attributes);
-    return '<div class="dbe-expand-portion dbe-expand-' . $displayType .
-        ($displayType === 'full' ? ' dbe-hide' : '').
+    return '<div class="expand-portion expand-' . $displayType .
+        ($displayType === 'full' ? ' hide' : '').
         (isset($className) ? ' ' . esc_attr($className) : '') . '">' .
         $content.
-        '<a class="dbe-expand-toggle-button" role="button" aria-expanded="false" aria-controls="'.
-            ($parentID === '' ? '' : "dbe-expand-full-" . $parentID).'" tabindex="0">' . $clickText . '</a>'
+        '<a class="expand-toggle-button" role="button" aria-expanded="false" aria-controls="'.
+            ($parentID === '' ? '' : "expand-full-" . $parentID).'" tabindex="0">' . $clickText . '</a>'
         . '</div>';
 }
 
@@ -22,8 +22,8 @@ function dbe_register_expand_portion_block($attributes){
 
 function dbe_render_expand_block($attributes, $content){
     extract($attributes);
-    return '<div class="dbe-expand '.(isset($className) ? ' ' . esc_attr($className) : '')
-    .'" id="dbe-expand-'.$blockID.'">'.$content.'</div>';
+    return '<div class="expand '.(isset($className) ? ' ' . esc_attr($className) : '')
+    .'" id="expand-'.$blockID.'">'.$content.'</div>';
 }
 
 function dbe_register_expand_block($attributes){

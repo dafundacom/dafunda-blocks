@@ -20,7 +20,7 @@ export const oldAttributes = {
 	reviewText: {
 		type: "array",
 		source: "children",
-		selector: ".dbe-review-text",
+		selector: ".review-text",
 	},
 	reviewTextAlign: {
 		type: "string",
@@ -36,8 +36,8 @@ export const version_1_1_2 = (props) => {
 	const { starCount, starSize, starColor, selectedStars, reviewText } =
 		props.attributes;
 	return (
-		<div className="dbe-star-rating">
-			<div className="dbe-star-container">
+		<div className="star-rating">
+			<div className="star-container">
 				{[...Array(starCount)].map((e, i) => (
 					<div key={i}>
 						{i < selectedStars ? (
@@ -48,7 +48,7 @@ export const version_1_1_2 = (props) => {
 					</div>
 				))}
 			</div>
-			<div className="dbe-review-text">{reviewText}</div>
+			<div className="review-text">{reviewText}</div>
 		</div>
 	);
 };
@@ -63,8 +63,8 @@ export const version_1_1_5 = (props) => {
 		reviewTextAlign,
 	} = props.attributes;
 	return (
-		<div className="dbe-star-rating">
-			<div className="dbe-star-container">
+		<div className="star-rating">
+			<div className="star-container">
 				{[...Array(starCount)].map((e, i) => (
 					<div key={i}>
 						{i < selectedStars ? (
@@ -75,7 +75,7 @@ export const version_1_1_5 = (props) => {
 					</div>
 				))}
 			</div>
-			<div className="dbe-review-text" style={{ textAlign: reviewTextAlign }}>
+			<div className="review-text" style={{ textAlign: reviewTextAlign }}>
 				{reviewText}
 			</div>
 		</div>
@@ -93,9 +93,9 @@ export const version_2_0_0 = (props) => {
 		starAlign,
 	} = props.attributes;
 	return (
-		<div className="dbe-star-rating">
+		<div className="star-rating">
 			<div
-				className="dbe-star-outer-container"
+				className="star-outer-container"
 				style={{
 					justifyContent:
 						starAlign === "center"
@@ -103,7 +103,7 @@ export const version_2_0_0 = (props) => {
 							: `flex-${starAlign === "left" ? "start" : "end"}`,
 				}}
 			>
-				<div className="dbe-star-inner-container">
+				<div className="star-inner-container">
 					{[...Array(starCount)].map((e, i) => (
 						<div key={i}>
 							{i < selectedStars ? (
@@ -115,7 +115,7 @@ export const version_2_0_0 = (props) => {
 					))}
 				</div>
 			</div>
-			<div className="dbe-review-text" style={{ textAlign: reviewTextAlign }}>
+			<div className="review-text" style={{ textAlign: reviewTextAlign }}>
 				{reviewText}
 			</div>
 		</div>

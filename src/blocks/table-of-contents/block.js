@@ -156,9 +156,9 @@ registerBlockType("dbe/table-of-contents", {
 					<PanelBody title={__("Allowed Headers")} initialOpen={true}>
 						{allowedHeaders.map((a, i) => (
 							<PanelRow>
-								<label htmlFor={`dbe_toggle_h${i + 1}`}>{`H${i + 1}`}</label>
+								<label htmlFor={`toggle_h${i + 1}`}>{`H${i + 1}`}</label>
 								<ToggleControl
-									id={`dbe_toggle_h${i + 1}`}
+									id={`toggle_h${i + 1}`}
 									checked={a}
 									onChange={() =>
 										setAttributes({
@@ -175,13 +175,13 @@ registerBlockType("dbe/table-of-contents", {
 					</PanelBody>
 					<PanelBody title={__("Additional Settings")} initialOpen={true}>
 						<PanelRow>
-							<label htmlFor="dbe_toc_toggle_display">
+							<label htmlFor="toc_toggle_display">
 								{__(
 									"Allow users to toggle the visibility of the table of contents"
 								)}
 							</label>
 							<ToggleControl
-								id="dbe_toc_toggle_display"
+								id="toc_toggle_display"
 								checked={allowToCHiding}
 								onChange={(allowToCHiding) =>
 									setAttributes({
@@ -193,11 +193,11 @@ registerBlockType("dbe/table-of-contents", {
 						</PanelRow>
 						{allowToCHiding && (
 							<PanelRow>
-								<label htmlFor="dbe_show_toc">
+								<label htmlFor="show_toc">
 									{__("Initially Show Table of Contents")}
 								</label>
 								<ToggleControl
-									id="dbe_show_toc"
+									id="show_toc"
 									checked={showList}
 									onChange={() => setAttributes({ showList: !showList })}
 								/>
@@ -207,7 +207,7 @@ registerBlockType("dbe/table-of-contents", {
 				</InspectorControls>
 			),
 			isSelected && blockControls(props),
-			<div className="dbe_table-of-contents">
+			<div className="table-of-contents">
 				<button
 					onClick={() => {
 						const { title, ...otherAttributes } = props.attributes;
@@ -241,22 +241,22 @@ registerBlockType("dbe/table-of-contents", {
 		} = props.attributes;
 		return (
 			<div
-				className="dbe_table-of-contents"
+				className="table-of-contents"
 				data-showText={__("show")}
 				data-hideText={__("hide")}
 			>
 				{(title.length > 1 || (title.length === 1 && title[0] !== "")) && (
-					<div className="dbe_table-of-contents-header">
+					<div className="table-of-contents-header">
 						<RichText.Content
 							tagName="div"
-							className="dbe_table-of-contents-title"
+							className="table-of-contents-title"
 							value={title}
 						/>
 						{allowToCHiding && (
-							<div id="dbe_table-of-contents-header-toggle">
-								<div id="dbe_table-of-contents-toggle">
+							<div id="table-of-contents-header-toggle">
+								<div id="table-of-contents-toggle">
 									[
-									<a className="dbe_table-of-contents-toggle-link" href="#">
+									<a className="table-of-contents-toggle-link" href="#">
 										{showList ? __("hide") : __("show")}
 									</a>
 									]
@@ -339,10 +339,10 @@ registerBlockType("dbe/table-of-contents-block", {
 			isSelected && inspectorControls(props),
 			isSelected && blockControls(props),
 			<div
-				className={`dbe_table-of-contents${
-					showList ? "" : " dbe_table-of-contents-collapsed"
+				className={`table-of-contents${
+					showList ? "" : " table-of-contents-collapsed"
 				}`}
-				id={`dbe_table-of-contents-${blockID}`}
+				id={`table-of-contents-${blockID}`}
 			>
 				{editorDisplay(props)}
 			</div>,

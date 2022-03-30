@@ -21,7 +21,7 @@ export const blockControls = (props) => {
 					className="components-icon-button components-toolbar-control"
 					onClick={() =>
 						setAttributes({
-							dbe_selected_notify: "dbe_notify_info",
+							selected_notify: "notify_info",
 						})
 					}
 				>
@@ -31,7 +31,7 @@ export const blockControls = (props) => {
 					className="components-icon-button components-toolbar-control"
 					onClick={() =>
 						setAttributes({
-							dbe_selected_notify: "dbe_notify_success",
+							selected_notify: "notify_success",
 						})
 					}
 				>
@@ -41,7 +41,7 @@ export const blockControls = (props) => {
 					className="components-icon-button components-toolbar-control"
 					onClick={() =>
 						setAttributes({
-							dbe_selected_notify: "dbe_notify_warning",
+							selected_notify: "notify_warning",
 						})
 					}
 				>
@@ -69,7 +69,7 @@ export const blockControls = (props) => {
 export const editorDisplay = (props) => {
 	const { setAttributes } = props;
 
-	const { align, dbe_selected_notify, dbe_notify_info } = props.attributes;
+	const { align, selected_notify, notify_info } = props.attributes;
 	return (
 		<RichText
 			style={{ textAlign: align }}
@@ -81,9 +81,9 @@ export const editorDisplay = (props) => {
 				"core/link",
 				"core/strikethrough",
 			]}
-			className={dbe_selected_notify}
-			onChange={(value) => setAttributes({ dbe_notify_info: value })}
-			value={dbe_notify_info}
+			className={selected_notify}
+			onChange={(value) => setAttributes({ notify_info: value })}
+			value={notify_info}
 			keepPlaceholderOnFocus={true}
 		/>
 	);
@@ -92,21 +92,21 @@ export const editorDisplay = (props) => {
 export const upgradeToStyledBox = (attributes) => {
 	let firstColor;
 	let secondColor;
-	switch (attributes.dbe_selected_notify) {
-		case "dbe_notify_success":
+	switch (attributes.selected_notify) {
+		case "notify_success":
 			[firstColor, secondColor] = ["#3c763d", "#dff0d8"];
 			break;
-		case "dbe_notify_warning":
+		case "notify_warning":
 			[firstColor, secondColor] = ["#d8000c", "#ffd2d2"];
 			break;
-		case "dbe_notify_info":
+		case "notify_info":
 		default:
 			[firstColor, secondColor] = ["#31708f", "#d9edf7"];
 			break;
 	}
 	return createBlock("dbe/styled-box", {
 		mode: "notification",
-		text: [attributes.dbe_notify_info],
+		text: [attributes.notify_info],
 		textAlign: [attributes.align],
 		backColor: secondColor,
 		foreColor: firstColor,

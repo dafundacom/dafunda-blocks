@@ -285,18 +285,18 @@ export const editorDisplay = (props) => {
 	return (
 		<>
 			<div
-				className="dbe_call_to_action"
+				className="call_to_action"
 				style={{
 					backgroundColor: ctaBackgroundColor,
 					borderWidth: ctaBorderSize + "px",
 					borderColor: ctaBorderColor,
 				}}
 			>
-				<div className="dbe_call_to_action_headline">
+				<div className="call_to_action_headline">
 					<RichText
 						tagName={useHeadingTag ? "h2" : "p"}
 						placeholder={__("CTA Title Goes Here", "dafunda-blocks")}
-						className="dbe_call_to_action_headline_text"
+						className="call_to_action_headline_text"
 						style={{
 							fontSize: headFontSize + "px",
 							color: headColor || "inherit",
@@ -312,11 +312,11 @@ export const editorDisplay = (props) => {
 					/>
 				</div>
 
-				<div className="dbe_call_to_action_content">
+				<div className="call_to_action_content">
 					<RichText
 						tagName="p"
 						placeholder={__("Add Call to Action Text Here", "dafunda-blocks")}
-						className="dbe_cta_content_text"
+						className="cta_content_text"
 						style={{
 							fontSize: contentFontSize + "px",
 							color: contentColor || "inherit",
@@ -329,9 +329,9 @@ export const editorDisplay = (props) => {
 					/>
 				</div>
 
-				<div className="dbe_call_to_action_button">
+				<div className="call_to_action_button">
 					<span
-						className={`wp-block-button dbe_cta_button`}
+						className={`wp-block-button cta_button`}
 						style={{
 							backgroundColor: buttonColor,
 							width: buttonWidth + "px",
@@ -340,7 +340,7 @@ export const editorDisplay = (props) => {
 						<RichText
 							tagName="p"
 							placeholder={__("Button Text", "dafunda-blocks")}
-							className="dbe_cta_button_text"
+							className="cta_button_text"
 							style={{
 								color: buttonTextColor || "inherit",
 								fontSize: buttonFontSize + "px",
@@ -355,13 +355,13 @@ export const editorDisplay = (props) => {
 					</span>
 				</div>
 			</div>
-			<div className="dbe_call_to_action_url_input">
+			<div className="call_to_action_url_input">
 				{isSelected && (
 					<form
 						onSubmit={(event) => event.preventDefault()}
-						className={`editor-format-toolbar__link-modal-line dbe_cta_url_input_box flex-container`}
+						className={`editor-format-toolbar__link-modal-line cta_url_input_box flex-container`}
 					>
-						<div className="dbe-icon-holder">
+						<div className="icon-holder">
 							<Icon icon="admin-links" />
 						</div>
 						<URLInput

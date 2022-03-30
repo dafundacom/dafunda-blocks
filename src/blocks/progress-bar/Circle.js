@@ -61,7 +61,7 @@ export default class Circle extends Component {
 
 		return (
 			<div
-				className="dbe_progress-bar-container"
+				className="progress-bar-container"
 				style={Object.assign(
 					{
 						height: `${size}px`,
@@ -73,13 +73,13 @@ export default class Circle extends Component {
 				)}
 			>
 				<svg
-					className="dbe_progress-bar-circle"
+					className="progress-bar-circle"
 					height={size}
 					width={size}
 					viewBox="0 0 100 100"
 				>
 					<path
-						className="dbe_progress-bar-circle-trail"
+						className="progress-bar-circle-trail"
 						d={progressBarPath}
 						strokeWidth={3}
 						style={{
@@ -87,7 +87,7 @@ export default class Circle extends Component {
 						}}
 					/>
 					<path
-						className="dbe_progress-bar-circle-path"
+						className="progress-bar-circle-path"
 						d={progressBarPath}
 						stroke={barColor}
 						strokeWidth={barThickness + 2}
@@ -98,7 +98,7 @@ export default class Circle extends Component {
 					/>
 				</svg>
 				<div
-					className="dbe_progress-bar-label"
+					className="progress-bar-label"
 					style={{
 						visibility: isActive ? "visible" : "hidden",
 						color: labelColor || "inherit",

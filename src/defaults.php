@@ -1,1784 +1,1803 @@
 <?php
 
-$defaultValues = array(
-    'dbe/advanced-heading' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'anchor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'content' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'level' => array(
-                'type' => 'string',
-                'default' => 'h1'
-            ),
-            'alignment' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            'textColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'backgroundColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'fontSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'letterSpacing' => array(
-                'type' => 'number',
-                'default' => 0,
-            ),
-            'textTransform' => array(
-                'type' => 'string',
-                'default' => 'None',
-            ),
-            'fontFamily' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'fontWeight' => array(
-                'type' => 'string',
-                'default' => 'Bold',
-            ),
-            'lineHeight' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'highlightBgColor' => array(
-                'type' => 'string',
-                'default' => 'None',
-            ),
-        )
-    ),
-    'dbe/advanced-video' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'videoId' => array(
-                'type' => 'integer',
-                'default' => -1,
-            ),
-            'videoSource' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'url' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'playerStyle' => array(
-                //custom border styles placed outside embedded player
-                'type' => 'string',
-                'default' => '',
-            ),
-            'vimeoShowDetails' => array(
-                //vimeo only
-                'type' => 'boolean',
-                'default' => true,
-            ),
-            'vimeoShowLogo' => array(
-                //vimeo only
-                'type' => 'boolean',
-                'default' => true,
-            ),
-            'enableYoutubeCookies' => array(
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'autoplay' => array(
-                //applies to: videopress, vimeo, dailymotion, youtube
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'loop' => array(
-                //applies to youtube, vimeo, videopress
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'mute' => array(
-                //applies to youtube, dailymotion, vimeo
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'showPlayerControls' => array(
-                //applies to dailymotion, youtube
-                'type' => 'boolean',
-                'default' => true,
-            ),
-            'playInline' => array(
-                'type' => 'boolean',
-                'default' => true,
-            ),
-            'thumbnail' => array(
-                //replaces embed code, click through thumbnail before seeing embedded player in youtube
-                'type' => 'string',
-                'default' => '',
-            ),
-            'videoEmbedCode' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'startTime' => array(
-                //applies to youtube, dailymotion, videopress, vimeo
-                'type' => 'number',
-                'default' => 0,
-            ),
-            'height' => array(
-                'type' => 'number',
-                'default' => 0,
-            ),
-            'width' => array(
-                'type' => 'number',
-                'default' => 0,
-            ),
+$defaultValues = [
+	"dbe/advanced-heading" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"anchor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"content" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"level" => [
+				"type" => "string",
+				"default" => "h1",
+			],
+			"alignment" => [
+				"type" => "string",
+				"default" => "none",
+			],
+			"textColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"backgroundColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"fontSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"letterSpacing" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"textTransform" => [
+				"type" => "string",
+				"default" => "None",
+			],
+			"fontFamily" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"fontWeight" => [
+				"type" => "string",
+				"default" => "Bold",
+			],
+			"lineHeight" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"highlightBgColor" => [
+				"type" => "string",
+				"default" => "None",
+			],
+		],
+	],
+	"dbe/advanced-video" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"videoId" => [
+				"type" => "integer",
+				"default" => -1,
+			],
+			"videoSource" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"url" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"playerStyle" => [
+				//custom border styles placed outside embedded player
+				"type" => "string",
+				"default" => "",
+			],
+			"vimeoShowDetails" => [
+				//vimeo only
+				"type" => "boolean",
+				"default" => true,
+			],
+			"vimeoShowLogo" => [
+				//vimeo only
+				"type" => "boolean",
+				"default" => true,
+			],
+			"enableYoutubeCookies" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"autoplay" => [
+				//applies to: videopress, vimeo, dailymotion, youtube
+				"type" => "boolean",
+				"default" => false,
+			],
+			"loop" => [
+				//applies to youtube, vimeo, videopress
+				"type" => "boolean",
+				"default" => false,
+			],
+			"mute" => [
+				//applies to youtube, dailymotion, vimeo
+				"type" => "boolean",
+				"default" => false,
+			],
+			"showPlayerControls" => [
+				//applies to dailymotion, youtube
+				"type" => "boolean",
+				"default" => true,
+			],
+			"playInline" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"thumbnail" => [
+				//replaces embed code, click through thumbnail before seeing embedded player in youtube
+				"type" => "string",
+				"default" => "",
+			],
+			"videoEmbedCode" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"startTime" => [
+				//applies to youtube, dailymotion, videopress, vimeo
+				"type" => "number",
+				"default" => 0,
+			],
+			"height" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"width" => [
+				"type" => "number",
+				"default" => 0,
+			],
 
-            //begin border attributes for each side
-            'topBorderSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'rightBorderSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'bottomBorderSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'leftBorderSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
+			//begin border attributes for each side
+			"topBorderSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"rightBorderSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"bottomBorderSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"leftBorderSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
 
-            'topBorderStyle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'rightBorderStyle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'bottomBorderStyle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'leftBorderStyle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
+			"topBorderStyle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"rightBorderStyle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"bottomBorderStyle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"leftBorderStyle" => [
+				"type" => "string",
+				"default" => "",
+			],
 
-            'topBorderColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'rightBorderColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'bottomBorderColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'leftBorderColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-    		//end border attributes for each side
+			"topBorderColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"rightBorderColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"bottomBorderColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"leftBorderColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//end border attributes for each side
 
-            //begin corner attributes
-            'topLeftRadius' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'topRightRadius' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'bottomLeftRadius' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'bottomRightRadius' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            //end corner attributes
-            
-            'showInDesktop' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'showInTablet' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'showInMobile' => array(
-                'type' => 'boolean',
-                'default' => true
-            )
-        )
-    ),
-    'dbe/button' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'buttonText' => array(
-                'type' => 'string',
-                'default' => 'Button Text'
-            ),
-            'align' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'url' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'size' => array(
-                'type' => 'string',
-                'default' => 'medium'
-            ),
-            'buttonColor' => array(
-                'type' => 'string',
-                'default' => '#313131'
-            ),
-            'buttonHoverColor' => array(
-                'type' => 'string',
-                'default' => '#313131'
-            ),
-            'buttonTextColor' => array(
-                'type' => 'string',
-                'default' => '#ffffff'
-            ),
-            'buttonTextHoverColor' => array(
-                'type' => 'string',
-                'default' => '#ffffff'
-            ),
-            'buttonRounded' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'chosenIcon' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'iconPosition' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'buttonIsTransparent' => array(
-                'type' => 'boolean',
-                'default'=> false
-            ),
-            'addNofollow' => array(
-                'type' => 'boolean',
-                'default'=> true
-            ),
-            'openInNewTab' => array(
-                'type' => 'boolean',
-                'default'=> true
-            ),
-            'buttonWidth' => array(
-                'type' => 'string',
-                'default' => 'fixed'
-            )
-        )
-    ),
-    'dbe/call-to-action-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'dbe_call_to_action_headline_text' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'dbe_cta_content_text' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'dbe_cta_button_text' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'headFontSize' => array(
-                'type' => 'number',
-                'default' => 30
-            ),
-            'headColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'headAlign' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'contentFontSize' => array(
-                'type' => 'number',
-                'default' => 15
-            ),
-            'contentColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'buttonFontSize' => array(
-                'type' => 'number',
-                'default' => 14
-            ),
-            'buttonColor' => array(
-                'type' => 'string',
-                'default' => '#E27330'
-            ),
-            'buttonTextColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'buttonWidth' => array(
-                'type' => 'number',
-                'default' => 250
-            ),
-            'ctaBackgroundColor' => array(
-                'type' => 'string',
-                'default' => '#f8f8f8'
-            ),
-            'ctaBorderColor' => array(
-                'type' => 'string',
-                'default' => '#ECECEC'
-            ),
-            'ctaBorderSize' => array(
-                'type' => 'number',
-                'default' => 2
-            ),
-            'url' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'contentAlign' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'addNofollow' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'openInNewTab' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'linkIsSponsored' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'useHeadingTag' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'selectedHeadingTag' => array(
-                'type' => 'string',
-                'default' => 'h2'
-            )
-        )
-    ),
-    'dbe/click-to-tweet' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'ubTweet' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'tweetFontSize' => array(
-                'type' => 'number',
-                'default' => 20
-            ),
-            'tweetColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'borderColor' => array(
-                'type' => 'string',
-                'default' => '#CCCCCC'
-            ),
-        )
-    ),
-    'dbe/content-filter-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            /*COMMENTED OUT TO PREVENT PHP ERRORS
+			//begin corner attributes
+			"topLeftRadius" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"topRightRadius" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"bottomLeftRadius" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"bottomRightRadius" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			//end corner attributes
+
+			"showInDesktop" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"showInTablet" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"showInMobile" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+		],
+	],
+	"dbe/button" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"buttonText" => [
+				"type" => "string",
+				"default" => "Button Text",
+			],
+			"align" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"url" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"size" => [
+				"type" => "string",
+				"default" => "medium",
+			],
+			"buttonColor" => [
+				"type" => "string",
+				"default" => "#313131",
+			],
+			"buttonHoverColor" => [
+				"type" => "string",
+				"default" => "#313131",
+			],
+			"buttonTextColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"buttonTextHoverColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"buttonRounded" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"chosenIcon" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"iconPosition" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"buttonIsTransparent" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"addNofollow" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"openInNewTab" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"buttonWidth" => [
+				"type" => "string",
+				"default" => "fixed",
+			],
+		],
+	],
+	"dbe/call-to-action-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"dbe_call_to_action_headline_text" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"dbe_cta_content_text" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"dbe_cta_button_text" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"headFontSize" => [
+				"type" => "number",
+				"default" => 30,
+			],
+			"headColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"headAlign" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"contentFontSize" => [
+				"type" => "number",
+				"default" => 15,
+			],
+			"contentColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"buttonFontSize" => [
+				"type" => "number",
+				"default" => 14,
+			],
+			"buttonColor" => [
+				"type" => "string",
+				"default" => "#E27330",
+			],
+			"buttonTextColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"buttonWidth" => [
+				"type" => "number",
+				"default" => 250,
+			],
+			"ctaBackgroundColor" => [
+				"type" => "string",
+				"default" => "#f8f8f8",
+			],
+			"ctaBorderColor" => [
+				"type" => "string",
+				"default" => "#ECECEC",
+			],
+			"ctaBorderSize" => [
+				"type" => "number",
+				"default" => 2,
+			],
+			"url" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"contentAlign" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"addNofollow" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"openInNewTab" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"linkIsSponsored" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"useHeadingTag" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"selectedHeadingTag" => [
+				"type" => "string",
+				"default" => "h2",
+			],
+		],
+	],
+	"dbe/click-to-tweet" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"ubTweet" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"tweetFontSize" => [
+				"type" => "number",
+				"default" => 20,
+			],
+			"tweetColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"borderColor" => [
+				"type" => "string",
+				"default" => "#CCCCCC",
+			],
+		],
+	],
+	"dbe/content-filter-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			/*COMMENTED OUT TO PREVENT PHP ERRORS
             'filterArray' => array(
                 'type' => 'array',
                 'default' => array()
             ),*/
-            'buttonColor' => array(
-                'type' => 'string',
-                'default' => '#eeeeee'
-            ),
-            'buttonTextColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'activeButtonColor' => array(
-                'type' => 'string',
-                'default' => '#fcb900'
-            ),
-            'activeButtonTextColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'initiallyShowAll' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'matchingOption' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-        )
-    ),
-    'dbe/content-toggle-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'hasFAQSchema' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'theme' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'collapsed' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'collapsedOnMobile' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'titleColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'titleLinkColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'preventCollapse' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'showOnlyOne' => array(
-                'type' => 'boolean',
-                'default' => false
-            )
-        )
-    ),
-    'dbe/content-toggle-panel-block' => array(
-        'attributes' => array(
-            'index' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'parentID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'theme' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'collapsed' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'titleColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'titleLinkColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'panelTitle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'titleTag' => array(
-                'type' => 'string',
-                'default' => 'p'
-            ),
-            'preventCollapse' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'toggleLocation' => array(
-	            'type' => 'string',
-	            'default' => 'right'
-            ),
-            'toggleColor' => array(
-	            'type' => 'string',
-	            'default' => '#000000'
-            ),
-            'toggleIcon' => array(
-	            'type' => 'string',
-	            'default' => 'chevron'
-            ),
-            'toggleID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'border' => array(
-	            'type' => 'boolean',
-	            'default' => true
-            ),
-            'showOnlyOne' => array(
-                'type' => 'boolean',
-                'default' => false
-            )
-        )
-    ),
-    'dbe/countdown' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'endDate' => array(
-                'type' => 'number',
-                'default' => time()+86400
-            ),
-            'style'=> array(
-                'type' => 'string',
-                'default' => 'Odometer'
-            ),
-            'expiryMessage' => array(
-                'type' => 'string',
-                'default' => 'Timer expired'
-            ),
-            'messageAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'circleColor' => array(
-                'type' => 'string',
-                'default' => '#2DB7F5'
-            ),
-            'circleSize' => array(
-                'type' => 'number',
-                'default' => 70
-            ),
-            'largestUnit' => array(
-                'type' => 'string',
-                'default' => 'week'
-            ),
-            'smallestUnit' => array(
-                'type' => 'string',
-                'default' => 'second'
-            )
-        )
-    ),
-    'dbe/divider' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'borderSize' => array(
-                'type' => 'number',
-                'default' => 2
-            ),
-            'borderStyle' => array(
-                'type' => 'string',
-                'default' => 'solid'
-            ),
-            'borderColor' => array(
-                'type' => 'string',
-                'default' => '#ccc'
-            ),
-            'borderHeight' => array(
-                'type' => 'number',
-                'default' => 20
-            )
-        )
-    ),
-    'dbe/expand' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'initialShow' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'toggleAlign'=> array(
-                'type' => 'string',
-                'default' => 'left'
-            )
-        )
-    ),
-    'dbe/expand-portion' => array(
-        'attributes' => array(
-            'clickText' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'displayType' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'isVisible' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'parentID' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-        )
-    ),
-    'dbe/feature-box-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'column' => array(
-                'type' => 'string',
-                'default' => '2'
-            ),
-            'columnOneTitle' => array(
-                'type' => 'string',
-                'default' => 'Title One'
-            ),
-            'title1Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnTwoTitle' => array(
-                'type' => 'string',
-                'default' => 'Title Two'
-            ),
-            'title2Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnThreeTitle' => array(
-                'type' => 'string',
-                'default' => 'Title Three'
-            ),
-            'title3Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnOneBody' => array(
-                'type' => 'string',
-                'default' =>  'Gutenberg is really awesome! Dafunda Blocks makes it more awesome!'
-            ),
-            'body1Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'columnTwoBody' => array(
-                'type' => 'string',
-                'default' =>  'Gutenberg is really awesome! Dafunda Blocks makes it more awesome!'
-            ),
-            'body2Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'columnThreeBody' => array(
-                'type' => 'string',
-                'default' =>  'Gutenberg is really awesome! Dafunda Blocks makes it more awesome!'
-            ),
-            'body3Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'imgOneURL' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'imgOneID' => array(
-                'type' => 'number',
-                'default' => -1
-            ),
-            'imgOneAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'imgTwoURL' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'imgTwoID' => array(
-                'type' => 'number',
-                'default' => -1
-            ),
-            'imgTwoAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'imgThreeURL' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'imgThreeID' => array(
-                'type' => 'number',
-                'default' => -1
-            ),
-            'imgThreeAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-        )
-    ),
-    'dbe/how-to' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'introduction' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'advancedMode' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'includeToolsList' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'addToolImages' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'toolsIntro' => array(
-                'type' => 'string',
-                'default' => __('Required tools')
-            ),
-            /*COMMENTED OUT TO PREVENT PHP ERRORS
+			"buttonColor" => [
+				"type" => "string",
+				"default" => "#eeeeee",
+			],
+			"buttonTextColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"activeButtonColor" => [
+				"type" => "string",
+				"default" => "#fcb900",
+			],
+			"activeButtonTextColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"initiallyShowAll" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"matchingOption" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/content-toggle-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"hasFAQSchema" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"theme" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"collapsed" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"collapsedOnMobile" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"titleColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"titleLinkColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"preventCollapse" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"showOnlyOne" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+		],
+	],
+	"dbe/content-toggle-panel-block" => [
+		"attributes" => [
+			"index" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"parentID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"theme" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"collapsed" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"titleColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"titleLinkColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"panelTitle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"titleTag" => [
+				"type" => "string",
+				"default" => "p",
+			],
+			"preventCollapse" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"toggleLocation" => [
+				"type" => "string",
+				"default" => "right",
+			],
+			"toggleColor" => [
+				"type" => "string",
+				"default" => "#000000",
+			],
+			"toggleIcon" => [
+				"type" => "string",
+				"default" => "chevron",
+			],
+			"toggleID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"border" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"showOnlyOne" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+		],
+	],
+	"dbe/countdown" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"endDate" => [
+				"type" => "number",
+				"default" => time() + 86400,
+			],
+			"style" => [
+				"type" => "string",
+				"default" => "Odometer",
+			],
+			"expiryMessage" => [
+				"type" => "string",
+				"default" => "Timer expired",
+			],
+			"messageAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"circleColor" => [
+				"type" => "string",
+				"default" => "#2DB7F5",
+			],
+			"circleSize" => [
+				"type" => "number",
+				"default" => 70,
+			],
+			"largestUnit" => [
+				"type" => "string",
+				"default" => "week",
+			],
+			"smallestUnit" => [
+				"type" => "string",
+				"default" => "second",
+			],
+		],
+	],
+	"dbe/divider" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"borderSize" => [
+				"type" => "number",
+				"default" => 2,
+			],
+			"borderStyle" => [
+				"type" => "string",
+				"default" => "solid",
+			],
+			"borderColor" => [
+				"type" => "string",
+				"default" => "#ccc",
+			],
+			"borderHeight" => [
+				"type" => "number",
+				"default" => 20,
+			],
+		],
+	],
+	"dbe/expand" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"initialShow" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"toggleAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+		],
+	],
+	"dbe/expand-portion" => [
+		"attributes" => [
+			"clickText" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"displayType" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"isVisible" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"parentID" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/feature-box-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"column" => [
+				"type" => "string",
+				"default" => "2",
+			],
+			"columnOneTitle" => [
+				"type" => "string",
+				"default" => "Title One",
+			],
+			"title1Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnTwoTitle" => [
+				"type" => "string",
+				"default" => "Title Two",
+			],
+			"title2Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnThreeTitle" => [
+				"type" => "string",
+				"default" => "Title Three",
+			],
+			"title3Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnOneBody" => [
+				"type" => "string",
+				"default" =>
+					"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
+			],
+			"body1Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"columnTwoBody" => [
+				"type" => "string",
+				"default" =>
+					"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
+			],
+			"body2Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"columnThreeBody" => [
+				"type" => "string",
+				"default" =>
+					"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
+			],
+			"body3Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"imgOneURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgOneID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"imgOneAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgTwoURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgTwoID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"imgTwoAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgThreeURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgThreeID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"imgThreeAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/how-to" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"introduction" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"advancedMode" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"includeToolsList" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"addToolImages" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"toolsIntro" => [
+				"type" => "string",
+				"default" => __("Required tools"),
+			],
+			/*COMMENTED OUT TO PREVENT PHP ERRORS
             'tools' => array(
                 'type' => 'array',
                 'default' => array(),
             ),*/
-            'toolsListStyle' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            'addSupplyImages' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'includeSuppliesList' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'suppliesIntro' => array(
-                'type' => 'string',
-                'default' => __('Required supplies')
-            ),
-            /*COMMENTED OUT TO PREVENT PHP ERRORS
+			"toolsListStyle" => [
+				"type" => "string",
+				"default" => "none",
+			],
+			"addSupplyImages" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"includeSuppliesList" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"suppliesIntro" => [
+				"type" => "string",
+				"default" => __("Required supplies"),
+			],
+			/*COMMENTED OUT TO PREVENT PHP ERRORS
             'supplies' => array(
                 'type' => 'array',
                 'default' => array(),
             ),*/
-            'suppliesListStyle' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            /* COMMENTED OUT TO PREVENT PHP ERRORS
+			"suppliesListStyle" => [
+				"type" => "string",
+				"default" => "none",
+			],
+			/* COMMENTED OUT TO PREVENT PHP ERRORS
             'section' => array(
                 'type' => 'array',
                 'default' => array()
             ),*/
-            'sectionListStyle' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            'timeIntro' => array(
-                'type' => 'string',
-                'default' => __('Duration')
-            ),
-            'totalTime' => array(
-                'type' => 'array',
-                'default' => array_fill(0, 7, 0),
-                'items' => array(
-                    'type' => 'number'
-                )
-            ),
-            'totalTimeText' => array(
-                'type' => 'text',
-                'default' => __('Total time: ')
-            ),
-            'cost' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'costCurrency' => array(
-                'type' => 'string',
-                'default' => 'USD'
-            ),
-            'costDisplayText' => array(
-                'type' => 'string',
-                'default' => __('Total cost: ')
-            ),
-            'showUnitFirst' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'howToYield' => array(
-                'type'  => 'string',
-                'default' => ''
-            ),
-            'videoURL' => array(
-                'type' => 'string', //videoobject
-                'default' => '' //url
-            ),
-            'videoThumbnailURL' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'videoName' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'videoDescription' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'videoUploadDate' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'videoEmbedCode' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'videoDuration' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'useSections' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'resultIntro' => array(
-                'type' => 'string',
-                'default' => __('Result')
-            ),
-            'finalImageID' => array(
-                'type' => 'number',
-                'default' => -1
-            ),
-            'finalImageAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'finalImageURL' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'finalImageCaption' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'finalImageWidth' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'finalImageFloat' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            'firstLevelTag' => array(
-                'type' => 'string',
-                'default' => 'h2',
-            ),
-            'secondLevelTag' => array(
-                'type' => 'string',
-                'default' => 'h3',
-            ),
-            'thirdLevelTag' => array(
-                'type' => 'string',
-                'default' => 'h4',
-            ),
-        )
-    ),
-    'dbe/image-slider' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            //retained for reverse compatibility
-            'images' => array(
-                'type' => 'string',
-                'default' => '[]'
-            ),
-            /*COMMENTED OUT TO PREVENT PHP ERRORS
+			"sectionListStyle" => [
+				"type" => "string",
+				"default" => "none",
+			],
+			"timeIntro" => [
+				"type" => "string",
+				"default" => __("Duration"),
+			],
+			"totalTime" => [
+				"type" => "array",
+				"default" => array_fill(0, 7, 0),
+				"items" => [
+					"type" => "number",
+				],
+			],
+			"totalTimeText" => [
+				"type" => "text",
+				"default" => __("Total time: "),
+			],
+			"cost" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"costCurrency" => [
+				"type" => "string",
+				"default" => "USD",
+			],
+			"costDisplayText" => [
+				"type" => "string",
+				"default" => __("Total cost: "),
+			],
+			"showUnitFirst" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"howToYield" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"howToRatingValue" => [
+				"type" => "string",
+				"default" => "5",
+			],
+			"howToRatingCount" => [
+				"type" => "string",
+				"default" => "1",
+			],
+			"videoURL" => [
+				"type" => "string", //videoobject
+				"default" => "", //url
+			],
+			"videoThumbnailURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"videoName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"videoDescription" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"videoUploadDate" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"videoEmbedCode" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"videoDuration" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"useSections" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"resultIntro" => [
+				"type" => "string",
+				"default" => __("Result"),
+			],
+			"finalImageID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"finalImageAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"finalImageURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"finalImageCaption" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"finalImageWidth" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"finalImageFloat" => [
+				"type" => "string",
+				"default" => "none",
+			],
+			"firstLevelTag" => [
+				"type" => "string",
+				"default" => "h2",
+			],
+			"secondLevelTag" => [
+				"type" => "string",
+				"default" => "h3",
+			],
+			"thirdLevelTag" => [
+				"type" => "string",
+				"default" => "h4",
+			],
+		],
+	],
+	"dbe/image-slider" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//retained for reverse compatibility
+			"images" => [
+				"type" => "string",
+				"default" => "[]",
+			],
+			/*COMMENTED OUT TO PREVENT PHP ERRORS
             'pics' => array(
                 'type' => 'array',
                 'default' => array()
             ),*/
-            //retained for reverse compatibility
-            'captions' => array(
-                'type' => 'string',
-                'default' => '[]'
-            ),
-            /*COMMENTED OUT TO PREVENT PHP ERRORS
+			//retained for reverse compatibility
+			"captions" => [
+				"type" => "string",
+				"default" => "[]",
+			],
+			/*COMMENTED OUT TO PREVENT PHP ERRORS
             'descriptions' => array(
                 'type' => 'array',
                 'default' => array()
             ),*/
-            'wrapsAround' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'isDraggable' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'autoplays' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'autoplayDuration' => array(
-                'type' => 'number',
-                'default' => 3
-            ),
-            'sliderHeight' => array(
-                'type' => 'number',
-                'default' => 250
-            ),
-            'showPageDots' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'usePagination' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'paginationType' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'transition' => array(
-                'type' => 'string',
-                'default' => 'slide'
-            ),
-            //for cube, coverflow and flip
-	        'slideShadows' => array(
-                'type' =>'boolean',
-                'default' => true
-            ),
-            //exclusive for coverflow
-            'rotate' => array(
-                'type' => 'number',
-                'default' => 50 //degrees
-            ),
-            'stretch' => array(
-                'type' => 'number',
-                'default' => 0 //pixels
-            ),
-            'depth' => array(
-                'type' => 'number',
-                'default' => 100 //pixels, z-axis
-            ),
-            'modifier' => array(
-                'type' => 'number',
-                'default' => 1 //effect multiplier
-            ),
-            //exclusive for flip
-            'limitRotation' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            //exclusive for cube
-            'shadow' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'shadowOffset' => array(
-                'type' => 'number',
-                'default' => 20
-            ),
-            'shadowScale' => array(
-                'type' => 'number',
-                'default' => 0.94
-            )
-        )
-    ),
-    'dbe/notification-box-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'dbe_selected_notify' => array(
-                'type' => 'string',
-                'default' => 'dbe_notify_info'
-            ),
-            'dbe_notify_info' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            )
-        )
-    ),
-    'dbe/number-box-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' =>  'string',
-                'default' => ''
-            ),
-            'column' => array(
-                'type' => 'string',
-                'default' => '2'
-            ),
-            'columnOneNumber' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'columnOneTitle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title1Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnTwoNumber' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'columnTwoTitle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title2Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnThreeNumber' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'columnThreeTitle' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title3Align' => array(
-                'type' => 'string',
-                'default' => 'center'
-            ),
-            'columnOneBody' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'body1Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'columnTwoBody' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'body2Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'columnThreeBody' => array(
-                'type' => 'string',
-                'default' =>  ''
-            ),
-            'body3Align' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'numberBackground' => array(
-                'type' => 'string',
-                'default' => '#CCCCCC'
-            ),
-            'numberColor' => array(
-                'type' => 'string',
-                'default' => '#000000'
-            ),
-            'borderColor' => array(
-                'type' => 'string',
-                'default' => '#CCCCCC'
-            )
-        )
-    ),
-    'dbe/post-grid' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'wrapAlignment' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'categories' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'categoryArray' => array(
-                'type' => 'array',
-                'default' => [],
-            ),
-            'className' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'amountPosts' => array(
-                'type'    => 'number',
-                'default' => 6,
-            ),
-            'checkPostDate' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'checkPostExcerpt' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'checkPostAuthor' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'checkPostImage' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'postImageWidth' => array(
-                'type'    => 'number',
-                'default' => 600,
-            ),
-            'preservePostImageAspectRatio' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'postImageHeight' => array(
-                'type'=> 'number',
-                'default' => 400
-            ),
-            'checkPostLink' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'checkPostTitle' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'postLayout' => array(
-                'type'    => 'string',
-                'default' => 'grid',
-            ),
-            'columns' => array(
-                'type'    => 'number',
-                'default' => 2,
-            ),
-            'width' => array(
-                'type'    => 'string',
-                'default' => 'wide',
-            ),
-            'order' => array(
-                'type'    => 'string',
-                'default' => 'desc',
-            ),
-            'orderBy' => array(
-                'type'    => 'string',
-                'default' => 'date',
-            ),
-            'readMoreText' => array(
-                'type'    => 'string',
-                'default' => 'Continue Reading',
-            ),
-            'offset' => array(
-                'type'    => 'number',
-                'default' => 0,
-            ),
-            'excerptLength' => array(
-                'type'    => 'number',
-                'default' => 55,
-            ),
-            'postTitleTag' => array(
-                'type' => 'string',
-                'default' => 'h2'
-            ),
-            'tagArray' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'number'
-                )
-            ),
-            'authorArray' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'number'
-                )
-            )
-        )
-    ),
-    'dbe/progress-bar' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'percentage' => array(
-                'type' => 'number',
-                'default' => 25
-            ),
-            'barType' => array(
-                'type' => 'string',
-                'default' => 'linear'
-            ),
-            'detail' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'detailAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'barColor' => array(
-                'type' => 'string',
-                'default' => '#2db7f5'
-            ),
-            'barThickness' => array(
-                'type' => 'number',
-                'default' => 1
-            ),
-            'labelColor' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-        )
-    ),
-    'dbe/review' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'authorName' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'itemName' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'itemPage' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'itemType' => array(
-                'type' => 'string',
-                'default' => 'Product'
-            ),
-            'itemSubtype' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'itemSubsubtype' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'valueType' => array(
-                'type' => 'string',
-                'default' => 'star'
-            ),
-            'description' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'enableDescription' => array(
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'descriptionAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'imgPosition' => array(
-                'type' => 'string',
-                'default' => 'right'
-            ),
-            'imgURL' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'imgID' => array(
-                'type' => 'number',
-                'default' => -1
-            ),
-            'imgAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'enableImage' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'items' => array(
-                'type' => 'string',
-                'default' => '[{"label": "", "value": 0}]'
-            ),
-            'starCount' => array(
-                'type' => 'number',
-                'default' => 5
-            ),
-            'useSummary' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'summaryTitle' => array(
-                'type' => 'string',
-                'default' => 'Summary'
-            ),
-            'summaryDescription' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'callToActionText' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'callToActionFontSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'callToActionURL' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'callToActionBackColor' => array(
-                'type' => 'string',
-                'default' => '#34495E'
-            ),
-            'callToActionBorderColor' => array(
-                'type' => 'string',
-                'default' => '#ffffff'
-            ),
-            'callToActionForeColor' => array(
-                'type' => 'string',
-                'default' => '#ffffff'
-            ),
-            'inactiveStarColor' => array(
-                'type' => 'string',
-                'default' => '#888888'
-            ),
-            'activeStarColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'activePercentBarColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'percentBarColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            //retained for backwards compatibility
-            'selectedStarColor' => array(
-                'type' => 'string',
-                'default' => '#ffff00'
-            ),
-            'titleAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'authorAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'enableCTA' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'ctaNoFollow' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'ctaOpenInNewTab' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'ctaIsSponsored' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'ctaAlignment' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'enableReviewSchema' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'starOutlineColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'imageSize' => array(
-                'type' => 'number',
-                'default' => 100
-            ),
-            'brand' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'sku' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'identifier' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'identifierType' => array(
-                'type' => 'string',
-                'default' => 'gtin'
-            ),
-            'offerType' => array(
-                'type' => 'string',
-                'default' => 'Offer'
-            ),
-            'offerStatus' => array(
-                'type' => 'string',
-                'default' => 'InStock'
-            ),
-            'offerHighPrice' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'offerLowPrice' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'offerCount' => array(
-                'type' => 'number',
-                'default' => 1
-            ),
-            'offerPrice' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'offerCurrency' => array(
-                'type' => 'string',
-                'default' => 'USD'
-            ),
-            'offerExpiry' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            //BEGIN SOFTWAREAPPLICATION ATTRIBUTES
-            'appCategory' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'operatingSystem' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            //END SOFTWAREAPPLICATION ATTRIBUTES
-            'servesCuisine' => array( //FOR FOODESTABLISHMENT AND SUBTYPES ONLY
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            //BEGIN LOCALBUSINESS/ORGANIZATION ATTRIIBUTES
-            'telephone' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'addressName' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'address' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'priceRange' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            //END LOCALBUSINESS/ORGANIZATION ATTRIBUTES
-            //BEGIN BOOK ATTRIBUTES
-            'bookAuthorName' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'isbn' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'reviewPublisher' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'publicationDate' => array(
-                'type' => 'number',
-                'default' => time()
-            ),
-            //END BOOK ATTRIBUTES
-            //BEGIN EVENT ATTRIBUTES
-            'eventStartDate' => array(
-                'type' => 'number',
-                'default' => time() + 86400
-            ),
-            'eventEndDate' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'usePhysicalAddress' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'eventPage' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'organizer' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'performer' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            //END EVENT ATTRIBUTES
-            //BEGIN VIDEO OBJECT ATTRIBUTES
-            'videoUploadDate' => array(
-                'type' => 'number',
-                'default' => time()
-            ),
-            'videoURL' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-            //END VIDEO OBJECT ATTRIBUTES
-        )
-    ),
-    'dbe/social-share' => array(
-        'attributes'      => array(
-            'blockID'=>array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'showFacebookIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'facebookCaption' => array(
-                'type' => 'string',
-                'default' => 'share'
-            ),
-            'showTwitterIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'twitterCaption' => array(
-                'type' => 'string',
-                'default' => 'tweet'
-            ),
-            'showLinkedInIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'linkedInCaption' => array(
-                'type' => 'string',
-                'default' => 'share'
-            ),
-            'showPinterestIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'pinterestCaption' => array(
-                'type' => 'string',
-                'default' => 'pin'
-            ),
-            'showRedditIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'redditCaption' => array(
-                'type' => 'string',
-                'default' => 'post'
-            ),
-            'showGooglePlusIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'showTumblrIcon' => array(
-                'type'    => 'boolean',
-                'default' => true,
-            ),
-            'tumblrCaption' => array(
-                'type' => 'string',
-                'default' => 'share'
-            ),
-            'iconSize'    => array(
-                'type'    => 'string',
-                'default' => 'normal',
-            ),
-            'iconShape'   => array(
-                'type'    => 'string',
-                'default' => 'circle',
-            ),
-            'align'       => array(
-                'type'    => 'string',
-                'default' => 'left',
-            ),
-            'iconOrder'   => array(
-                'type'    => 'array',
-                'default' => array('facebook', 'twitter', 'linkedin', 'pinterest', 'reddit', 'tumblr'),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'buttonColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'useCaptions' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'addOutline' => array(
-                'type' => 'boolean',
-                'default' => false
-            )
-        )
-    ),
-    'dbe/star-rating-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'starCount' => array(
-                'type' => 'number',
-                'default' => 5
-            ),
-            'starSize' => array(
-                'type' => 'number',
-                'default' => 20
-            ),
-            'starColor' => array(
-                'type' => 'string',
-                'default' => '#ffff00'
-            ),
-            'selectedStars' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'reviewText' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'reviewTextAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'reviewTextColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'starAlign' => array(
-                'type' => 'string',
-                'default' => 'left'
-            )
-        )
-    ),
-    'dbe/styled-box' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'mode' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title' => array(
-                'type' => 'array',
-                'default' => array(''),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'titleAlign' => array(
-                'type' => 'array',
-                'default' => array('center'),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'text' => array(
-                'type' => 'array',
-                'default' => array(''),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'textAlign' => array(
-                'type' => 'array',
-                'default' => array('left'),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'number' => array(
-                'type' => 'array',
-                'default' => array('1', '2', '3'),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            /* COMMENTED OUT TO PREVENT PHP ERRORS
+			"wrapsAround" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"isDraggable" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"autoplays" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"autoplayDuration" => [
+				"type" => "number",
+				"default" => 3,
+			],
+			"sliderHeight" => [
+				"type" => "number",
+				"default" => 250,
+			],
+			"showPageDots" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"usePagination" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"paginationType" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"transition" => [
+				"type" => "string",
+				"default" => "slide",
+			],
+			//for cube, coverflow and flip
+			"slideShadows" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			//exclusive for coverflow
+			"rotate" => [
+				"type" => "number",
+				"default" => 50, //degrees
+			],
+			"stretch" => [
+				"type" => "number",
+				"default" => 0, //pixels
+			],
+			"depth" => [
+				"type" => "number",
+				"default" => 100, //pixels, z-axis
+			],
+			"modifier" => [
+				"type" => "number",
+				"default" => 1, //effect multiplier
+			],
+			//exclusive for flip
+			"limitRotation" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			//exclusive for cube
+			"shadow" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"shadowOffset" => [
+				"type" => "number",
+				"default" => 20,
+			],
+			"shadowScale" => [
+				"type" => "number",
+				"default" => 0.94,
+			],
+		],
+	],
+	"dbe/notification-box-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"dbe_selected_notify" => [
+				"type" => "string",
+				"default" => "dbe_notify_info",
+			],
+			"dbe_notify_info" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+		],
+	],
+	"dbe/number-box-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"column" => [
+				"type" => "string",
+				"default" => "2",
+			],
+			"columnOneNumber" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"columnOneTitle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title1Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnTwoNumber" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"columnTwoTitle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title2Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnThreeNumber" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"columnThreeTitle" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title3Align" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"columnOneBody" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"body1Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"columnTwoBody" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"body2Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"columnThreeBody" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"body3Align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"numberBackground" => [
+				"type" => "string",
+				"default" => "#CCCCCC",
+			],
+			"numberColor" => [
+				"type" => "string",
+				"default" => "#000000",
+			],
+			"borderColor" => [
+				"type" => "string",
+				"default" => "#CCCCCC",
+			],
+		],
+	],
+	"dbe/post-grid" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"wrapAlignment" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"categories" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"categoryArray" => [
+				"type" => "array",
+				"default" => [],
+			],
+			"className" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"amountPosts" => [
+				"type" => "number",
+				"default" => 6,
+			],
+			"checkPostDate" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"checkPostExcerpt" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"checkPostAuthor" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"checkPostImage" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"postImageWidth" => [
+				"type" => "number",
+				"default" => 600,
+			],
+			"preservePostImageAspectRatio" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"postImageHeight" => [
+				"type" => "number",
+				"default" => 400,
+			],
+			"checkPostLink" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"checkPostTitle" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"postLayout" => [
+				"type" => "string",
+				"default" => "grid",
+			],
+			"columns" => [
+				"type" => "number",
+				"default" => 2,
+			],
+			"width" => [
+				"type" => "string",
+				"default" => "wide",
+			],
+			"order" => [
+				"type" => "string",
+				"default" => "desc",
+			],
+			"orderBy" => [
+				"type" => "string",
+				"default" => "date",
+			],
+			"readMoreText" => [
+				"type" => "string",
+				"default" => "Continue Reading",
+			],
+			"offset" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"excerptLength" => [
+				"type" => "number",
+				"default" => 55,
+			],
+			"postTitleTag" => [
+				"type" => "string",
+				"default" => "h2",
+			],
+			"tagArray" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "number",
+				],
+			],
+			"authorArray" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "number",
+				],
+			],
+		],
+	],
+	"dbe/progress-bar" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"percentage" => [
+				"type" => "number",
+				"default" => 25,
+			],
+			"barType" => [
+				"type" => "string",
+				"default" => "linear",
+			],
+			"detail" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"detailAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"barColor" => [
+				"type" => "string",
+				"default" => "#2db7f5",
+			],
+			"barThickness" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"labelColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/review" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"authorName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemPage" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemType" => [
+				"type" => "string",
+				"default" => "Product",
+			],
+			"itemSubtype" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemSubsubtype" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"valueType" => [
+				"type" => "string",
+				"default" => "star",
+			],
+			"description" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"enableDescription" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"descriptionAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"imgPosition" => [
+				"type" => "string",
+				"default" => "right",
+			],
+			"imgURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"imgAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"enableImage" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"items" => [
+				"type" => "string",
+				"default" => '[{"label": "", "value": 0}]',
+			],
+			"starCount" => [
+				"type" => "number",
+				"default" => 5,
+			],
+			"useSummary" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"summaryTitle" => [
+				"type" => "string",
+				"default" => "Summary",
+			],
+			"summaryDescription" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionText" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionFontSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"callToActionURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionBackColor" => [
+				"type" => "string",
+				"default" => "#34495E",
+			],
+			"callToActionBorderColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"callToActionForeColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"inactiveStarColor" => [
+				"type" => "string",
+				"default" => "#888888",
+			],
+			"activeStarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"activePercentBarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"percentBarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//retained for backwards compatibility
+			"selectedStarColor" => [
+				"type" => "string",
+				"default" => "#ffff00",
+			],
+			"titleAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"authorAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"enableCTA" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaNoFollow" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaOpenInNewTab" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaIsSponsored" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"ctaAlignment" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"enableReviewSchema" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"starOutlineColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imageSize" => [
+				"type" => "number",
+				"default" => 100,
+			],
+			"brand" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"sku" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"identifier" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"identifierType" => [
+				"type" => "string",
+				"default" => "gtin",
+			],
+			"offerType" => [
+				"type" => "string",
+				"default" => "Offer",
+			],
+			"offerStatus" => [
+				"type" => "string",
+				"default" => "InStock",
+			],
+			"offerHighPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerLowPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerCount" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"offerPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerCurrency" => [
+				"type" => "string",
+				"default" => "USD",
+			],
+			"offerExpiry" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			//BEGIN SOFTWAREAPPLICATION ATTRIBUTES
+			"appCategory" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"operatingSystem" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END SOFTWAREAPPLICATION ATTRIBUTES
+			"servesCuisine" => [
+				//FOR FOODESTABLISHMENT AND SUBTYPES ONLY
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			//BEGIN LOCALBUSINESS/ORGANIZATION ATTRIIBUTES
+			"telephone" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"addressName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"address" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"priceRange" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END LOCALBUSINESS/ORGANIZATION ATTRIBUTES
+			//BEGIN BOOK ATTRIBUTES
+			"bookAuthorName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"isbn" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"reviewPublisher" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"publicationDate" => [
+				"type" => "number",
+				"default" => time(),
+			],
+			//END BOOK ATTRIBUTES
+			//BEGIN EVENT ATTRIBUTES
+			"eventStartDate" => [
+				"type" => "number",
+				"default" => time() + 86400,
+			],
+			"eventEndDate" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"usePhysicalAddress" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"eventPage" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"organizer" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"performer" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END EVENT ATTRIBUTES
+			//BEGIN VIDEO OBJECT ATTRIBUTES
+			"videoUploadDate" => [
+				"type" => "number",
+				"default" => time(),
+			],
+			"videoURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END VIDEO OBJECT ATTRIBUTES
+		],
+	],
+	"dbe/social-share" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"showFacebookIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"facebookCaption" => [
+				"type" => "string",
+				"default" => "share",
+			],
+			"showTwitterIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"twitterCaption" => [
+				"type" => "string",
+				"default" => "tweet",
+			],
+			"showLinkedInIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"linkedInCaption" => [
+				"type" => "string",
+				"default" => "share",
+			],
+			"showPinterestIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"pinterestCaption" => [
+				"type" => "string",
+				"default" => "pin",
+			],
+			"showRedditIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"redditCaption" => [
+				"type" => "string",
+				"default" => "post",
+			],
+			"showGooglePlusIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"showTumblrIcon" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"tumblrCaption" => [
+				"type" => "string",
+				"default" => "share",
+			],
+			"iconSize" => [
+				"type" => "string",
+				"default" => "normal",
+			],
+			"iconShape" => [
+				"type" => "string",
+				"default" => "circle",
+			],
+			"align" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"iconOrder" => [
+				"type" => "array",
+				"default" => [
+					"facebook",
+					"twitter",
+					"linkedin",
+					"pinterest",
+					"reddit",
+					"tumblr",
+				],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"buttonColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"useCaptions" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"addOutline" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+		],
+	],
+	"dbe/star-rating-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"starCount" => [
+				"type" => "number",
+				"default" => 5,
+			],
+			"starSize" => [
+				"type" => "number",
+				"default" => 20,
+			],
+			"starColor" => [
+				"type" => "string",
+				"default" => "#ffff00",
+			],
+			"selectedStars" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"reviewText" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"reviewTextAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"reviewTextColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"starAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+		],
+	],
+	"dbe/styled-box" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"mode" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title" => [
+				"type" => "array",
+				"default" => [""],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"titleAlign" => [
+				"type" => "array",
+				"default" => ["center"],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"text" => [
+				"type" => "array",
+				"default" => [""],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"textAlign" => [
+				"type" => "array",
+				"default" => ["left"],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"number" => [
+				"type" => "array",
+				"default" => ["1", "2", "3"],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			/* COMMENTED OUT TO PREVENT PHP ERRORS
             'image' => array(
                 'type' => 'array',
                 'default' => array(
@@ -1789,339 +1808,337 @@ $defaultValues = array(
                     )
                 )
             ),*/
-            'foreColor' => array(
-                'type' => 'string',
-                'default' => '#000000'
-            ),
-            'backColor' => array(
-                'type' => 'string',
-                'default' => '#CCCCCC'
-            ),
-            'boxColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'outlineColor' => array(
-                'type' => 'string',
-                'default' => '#000000'
-            ),
-            'outlineStyle' => array(
-                'type' => 'string',
-                'default' => 'solid'
-            ),
-            'outlineThickness' => array(
-                'type' => 'number',
-                'default' => 1
-            ),
-            'outlineRoundingRadius' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'outlineRadiusUnit' => array(
-                'type' => 'string',
-                'default' => 'percent'
-            )
-        )
-    ),
-    'dbe/styled-list' => array(
-        'attributes' => array(
-            'alignment' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'list' => array(
-                'type' => 'text',
-                'default' => '<li>Item 1</li><li>Item 2</li><li>Item 3</li>'
-            ),
-            'listItem' => array(
-                'type' => 'array',
-                'default' => array_fill(0, 3,
-                    array(
-                        'text' => '',
-                        'selectedIcon' => 'check',
-                        'indent' => 0
-                    )
-                )
-            ),
-            'selectedIcon' => array(
-                'type' => 'string',
-                'default' => 'check'
-            ),
-            'iconColor' => array(
-                'type' => 'string',
-                'default' => '#000000'
-            ),
-            'iconSize' => array(
-                'type' => 'number',
-                'default' => 5
-            ),
-            'fontSize' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'itemSpacing' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'columns' => array(
-                'type' => 'number',
-                'default' => 1
-            ),
-            'maxMobileColumns' => array(
-                'type' => 'number',
-                'default' => 2
-            )
-        )
-    ),
-    'dbe/tab-block' => array(
-        'attributes' => array(
-            'index' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'isActive' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'parentID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-        )
-    ),
-    'dbe/tabbed-content-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'activeTab' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'theme' => array(
-                'type' => 'string',
-                'default' => '#eeeeee'
-            ),
-            'normalColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'titleColor' => array(
-                'type' => 'string',
-                'default' => '' //should be empty
-            ),
-            'normalTitleColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'borderColor' => array(
-                'type' => 'string',
-                'default' => '#d3d3d3'
-            ),
-            'tabsAlignment' => array(
-                'type' => 'string',
-                'default'=> 'left'
-            ),
-            'tabsTitle' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'tabsAnchor' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'useAnchors' => array(
-                'type' => 'boolean',
-                'default' => false
-            ), 
-            'tabsTitleAlignment' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'string'
-                )
-            ),
-            'tabVertical' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'tabletTabDisplay' => array(
-                'type' => 'string',
-                'default' => 'horizontaltab'
-            ),
-            'mobileTabDisplay' => array(
-                'type' => 'string',
-                'default' => 'horizontaltab'
-            ),
-            'tabStyle' => array(
-                'type' => 'string',
-                'default' => 'tabs'
-            ),
-        )
-    ),
-    'dbe/table-of-contents-block' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'title' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'allowedHeaders' => array(
-                'type' => 'array',
-                'default' => array_fill(0, 6, true),
-                'items' => array(
-                    'type' => 'boolean'
-                )
-            ),
-            'links' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'allowToCHiding' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'hideOnMobile' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'showList' => array(
-                'type' => 'boolean',
-                'default' => true
-            ),
-            'numColumns' => array(
-                'type' => 'number',
-                'default' => 1
-            ),
-            'listStyle' => array(
-                'type' => 'string',
-                'default' => 'bulleted'
-            ),
-            'enableSmoothScroll' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'titleAlignment' => array(
-                'type' => 'string',
-                'default' => 'left'
-            ),
-            'gaps' => array(
-                'type' => 'array',
-                'default' => array(),
-                'items' => array(
-                    'type' => 'number'
-                )
-            ),
-            'removeDiacritics' => array (
-                'type' => 'boolean',
-                'default' => false,
-            ),
-            'scrollOption' => array(
-                'type' => 'string',
-                'default' => 'auto' //other options: namedelement, fixedamount, off
-            ),
-            'scrollOffset' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'scrollTarget' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'scrollTargetType' => array(
-                'type' => 'string',
-                'default' => 'id' //other types: class, element
-            ),
-            'titleColor' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'titleBackgroundColor' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'listColor' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'listBackgroundColor' => array(
-                'type' => 'string',
-                'default' => '',
-            ),
-            'listIconColor' => array(
-                'type' => 'string',
-                'default' => ''
-            )
-        )
-    ),
-    'dbe/testimonial' => array(
-        'attributes' => array(
-            'blockID' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'dbe_testimonial_text' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'textAlign' => array(
-                'type' => 'string',
-                'default' => 'justify'
-            ),
-            'dbe_testimonial_author' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'authorAlign' => array(
-                'type' => 'string',
-                'default' => 'right'
-            ),
-            'dbe_testimonial_author_role' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'authorRoleAlign' => array(
-                'type' => 'string',
-                'default' => 'right'
-            ),
-            'imgURL' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'imgID' => array(
-                'type' => 'number',
-                'default' => 0
-            ),
-            'imgAlt' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'backgroundColor' => array(
-                'type' => 'string',
-                'default' => '#f4f6f6'
-            ),
-            'textColor' => array(
-                'type' => 'string',
-                'default' => ''
-            ),
-            'textSize' => array(
-                'type' => 'number',
-                'default' => 17
-            )
-        )
-    )
-);
+			"foreColor" => [
+				"type" => "string",
+				"default" => "#000000",
+			],
+			"backColor" => [
+				"type" => "string",
+				"default" => "#CCCCCC",
+			],
+			"boxColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"outlineColor" => [
+				"type" => "string",
+				"default" => "#000000",
+			],
+			"outlineStyle" => [
+				"type" => "string",
+				"default" => "solid",
+			],
+			"outlineThickness" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"outlineRoundingRadius" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"outlineRadiusUnit" => [
+				"type" => "string",
+				"default" => "percent",
+			],
+		],
+	],
+	"dbe/styled-list" => [
+		"attributes" => [
+			"alignment" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"list" => [
+				"type" => "text",
+				"default" => "<li>Item 1</li><li>Item 2</li><li>Item 3</li>",
+			],
+			"listItem" => [
+				"type" => "array",
+				"default" => array_fill(0, 3, [
+					"text" => "",
+					"selectedIcon" => "check",
+					"indent" => 0,
+				]),
+			],
+			"selectedIcon" => [
+				"type" => "string",
+				"default" => "check",
+			],
+			"iconColor" => [
+				"type" => "string",
+				"default" => "#000000",
+			],
+			"iconSize" => [
+				"type" => "number",
+				"default" => 5,
+			],
+			"fontSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"itemSpacing" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"columns" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"maxMobileColumns" => [
+				"type" => "number",
+				"default" => 2,
+			],
+		],
+	],
+	"dbe/tab-block" => [
+		"attributes" => [
+			"index" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"isActive" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"parentID" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/tabbed-content-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"activeTab" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"theme" => [
+				"type" => "string",
+				"default" => "#eeeeee",
+			],
+			"normalColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"titleColor" => [
+				"type" => "string",
+				"default" => "", //should be empty
+			],
+			"normalTitleColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"borderColor" => [
+				"type" => "string",
+				"default" => "#d3d3d3",
+			],
+			"tabsAlignment" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"tabsTitle" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"tabsAnchor" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"useAnchors" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"tabsTitleAlignment" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			"tabVertical" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"tabletTabDisplay" => [
+				"type" => "string",
+				"default" => "horizontaltab",
+			],
+			"mobileTabDisplay" => [
+				"type" => "string",
+				"default" => "horizontaltab",
+			],
+			"tabStyle" => [
+				"type" => "string",
+				"default" => "tabs",
+			],
+		],
+	],
+	"dbe/table-of-contents-block" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"allowedHeaders" => [
+				"type" => "array",
+				"default" => array_fill(0, 6, true),
+				"items" => [
+					"type" => "boolean",
+				],
+			],
+			"links" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"allowToCHiding" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"hideOnMobile" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"showList" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"numColumns" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"listStyle" => [
+				"type" => "string",
+				"default" => "bulleted",
+			],
+			"enableSmoothScroll" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"titleAlignment" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"gaps" => [
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "number",
+				],
+			],
+			"removeDiacritics" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"scrollOption" => [
+				"type" => "string",
+				"default" => "auto", //other options: namedelement, fixedamount, off
+			],
+			"scrollOffset" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"scrollTarget" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"scrollTargetType" => [
+				"type" => "string",
+				"default" => "id", //other types: class, element
+			],
+			"titleColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"titleBackgroundColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"listColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"listBackgroundColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"listIconColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
+	"dbe/testimonial" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"dbe_testimonial_text" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"textAlign" => [
+				"type" => "string",
+				"default" => "justify",
+			],
+			"dbe_testimonial_author" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"authorAlign" => [
+				"type" => "string",
+				"default" => "right",
+			],
+			"dbe_testimonial_author_role" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"authorRoleAlign" => [
+				"type" => "string",
+				"default" => "right",
+			],
+			"imgURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgID" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"imgAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"backgroundColor" => [
+				"type" => "string",
+				"default" => "#f4f6f6",
+			],
+			"textColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"textSize" => [
+				"type" => "number",
+				"default" => 17,
+			],
+		],
+	],
+];

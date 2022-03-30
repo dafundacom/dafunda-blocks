@@ -174,15 +174,15 @@ export const editorDisplay = (props) => {
 		body3Align,
 	} = attributes;
 	return (
-		<div className={`dbe_number_box column_${column}`}>
+		<div className={`number_box column_${column}`}>
 			<div
-				className="dbe_number_1"
+				className="number_1"
 				style={{
 					borderColor: borderColor,
 				}}
 			>
 				<div
-					className="dbe_number_box_number"
+					className="number_box_number"
 					style={{
 						backgroundColor: numberBackground,
 					}}
@@ -190,7 +190,7 @@ export const editorDisplay = (props) => {
 					<RichText
 						tagName="p"
 						placeholder={__("1")}
-						className="dbe_number_one_number"
+						className="number_one_number"
 						style={{
 							color: numberColor,
 						}}
@@ -208,7 +208,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Title One")}
 					style={{ textAlign: title1Align }}
-					className="dbe_number_one_title"
+					className="number_one_title"
 					value={columnOneTitle}
 					onChange={(value) => setAttributes({ columnOneTitle: value })}
 					keepPlaceholderOnFocus={true}
@@ -218,7 +218,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Your content goes here.")}
 					style={{ textAlign: body1Align }}
-					className="dbe_number_one_body"
+					className="number_one_body"
 					value={columnOneBody}
 					onChange={(value) => setAttributes({ columnOneBody: value })}
 					keepPlaceholderOnFocus={true}
@@ -226,13 +226,13 @@ export const editorDisplay = (props) => {
 				/>
 			</div>
 			<div
-				className="dbe_number_2"
+				className="number_2"
 				style={{
 					borderColor: borderColor,
 				}}
 			>
 				<div
-					className="dbe_number_box_number"
+					className="number_box_number"
 					style={{
 						backgroundColor: numberBackground,
 					}}
@@ -240,7 +240,7 @@ export const editorDisplay = (props) => {
 					<RichText
 						tagName="p"
 						placeholder={__("2")}
-						className="dbe_number_two_number"
+						className="number_two_number"
 						style={{
 							color: numberColor,
 						}}
@@ -258,7 +258,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Title Two")}
 					style={{ textAlign: title2Align }}
-					className="dbe_number_two_title"
+					className="number_two_title"
 					value={columnTwoTitle}
 					onChange={(value) => setAttributes({ columnTwoTitle: value })}
 					keepPlaceholderOnFocus={true}
@@ -268,7 +268,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Your content goes here.")}
 					style={{ textAlign: body2Align }}
-					className="dbe_number_two_body"
+					className="number_two_body"
 					value={columnTwoBody}
 					onChange={(value) => setAttributes({ columnTwoBody: value })}
 					keepPlaceholderOnFocus={true}
@@ -276,13 +276,13 @@ export const editorDisplay = (props) => {
 				/>
 			</div>
 			<div
-				className="dbe_number_3"
+				className="number_3"
 				style={{
 					borderColor: borderColor,
 				}}
 			>
 				<div
-					className="dbe_number_box_number"
+					className="number_box_number"
 					style={{
 						backgroundColor: numberBackground,
 					}}
@@ -290,7 +290,7 @@ export const editorDisplay = (props) => {
 					<RichText
 						tagName="p"
 						placeholder={__("3")}
-						className="dbe_number_three_number"
+						className="number_three_number"
 						style={{
 							color: numberColor,
 						}}
@@ -308,7 +308,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Title Three")}
 					style={{ textAlign: title3Align }}
-					className="dbe_number_three_title"
+					className="number_three_title"
 					value={columnThreeTitle}
 					onChange={(value) => setAttributes({ columnThreeTitle: value })}
 					keepPlaceholderOnFocus={true}
@@ -318,7 +318,7 @@ export const editorDisplay = (props) => {
 					tagName="p"
 					placeholder={__("Your content goes here.")}
 					style={{ textAlign: body3Align }}
-					className="dbe_number_three_body"
+					className="number_three_body"
 					value={columnThreeBody}
 					onChange={(value) => setAttributes({ columnThreeBody: value })}
 					keepPlaceholderOnFocus={true}

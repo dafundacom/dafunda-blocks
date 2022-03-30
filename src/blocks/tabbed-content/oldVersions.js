@@ -1,21 +1,21 @@
 const { RichText } = wp.editor;
 
 export const version_1_1_2 = (props) => {
-	const className = "wp-block-dbe-tabbed-content";
+	const className = "wp-block-tabbed-content";
 
 	const { activeTab, theme, titleColor, tabsTitle, tabsContent, id } =
 		props.attributes;
 
 	return (
 		<div data-id={id}>
-			<div className={className + "-holder"}>
-				<div className={className + "-tabs-title"}>
+			<div className={className + "holder"}>
+				<div className={className + "tabs-title"}>
 					{tabsTitle.map((value, i) => {
 						return (
 							<div
 								className={
 									className +
-									"-tab-title-wrap" +
+									"tab-title-wrap" +
 									(activeTab === i ? " active" : "")
 								}
 								style={{
@@ -41,7 +41,7 @@ export const version_1_1_2 = (props) => {
 								className={
 									className +
 									"-tab-content-wrap" +
-									(activeTab === i ? " active" : " dbe-hide")
+									(activeTab === i ? " active" : " hide")
 								}
 								key={i}
 							>

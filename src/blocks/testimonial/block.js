@@ -179,18 +179,18 @@ registerBlockType("dbe/testimonial-block", {
 		return (
 			<div className={props.className}>
 				<div
-					className="dbe_testimonial"
+					className="testimonial"
 					style={{
 						backgroundColor: backgroundColor,
 						color: textColor || "inherit",
 					}}
 				>
-					<div className="dbe_testimonial_img">
+					<div className="testimonial_img">
 						<img src={imgURL} alt={imgAlt} height={100} width={100} />
 					</div>
-					<div className="dbe_testimonial_content">
+					<div className="testimonial_content">
 						<p
-							className="dbe_testimonial_text"
+							className="testimonial_text"
 							style={{
 								fontSize: textSize,
 								textAlign: textAlign,
@@ -199,15 +199,15 @@ registerBlockType("dbe/testimonial-block", {
 							{dbe_testimonial_text}
 						</p>
 					</div>
-					<div className="dbe_testimonial_sign">
+					<div className="testimonial_sign">
 						<p
-							className="dbe_testimonial_author"
+							className="testimonial_author"
 							style={{ textAlign: authorAlign }}
 						>
 							{dbe_testimonial_author}
 						</p>
 						<p
-							className="dbe_testimonial_author_role"
+							className="testimonial_author_role"
 							style={{ textAlign: authorRoleAlign }}
 						>
 							{dbe_testimonial_author_role}

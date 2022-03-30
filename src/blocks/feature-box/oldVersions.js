@@ -6,7 +6,7 @@ export const oldAttributes = {
 	columnOneTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_one_title",
+		selector: ".feature_one_title",
 		default: "Title One",
 	},
 	title1Align: {
@@ -16,7 +16,7 @@ export const oldAttributes = {
 	columnTwoTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_two_title",
+		selector: ".feature_two_title",
 		default: "Title Two",
 	},
 	title2Align: {
@@ -26,7 +26,7 @@ export const oldAttributes = {
 	columnThreeTitle: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_three_title",
+		selector: ".feature_three_title",
 		default: "Title Three",
 	},
 	title3Align: {
@@ -36,7 +36,7 @@ export const oldAttributes = {
 	columnOneBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_one_body",
+		selector: ".feature_one_body",
 		default:
 			"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
 	},
@@ -47,7 +47,7 @@ export const oldAttributes = {
 	columnTwoBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_two_body",
+		selector: ".feature_two_body",
 		default:
 			"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
 	},
@@ -58,7 +58,7 @@ export const oldAttributes = {
 	columnThreeBody: {
 		type: "array",
 		source: "children",
-		selector: ".dbe_feature_three_body",
+		selector: ".feature_three_body",
 		default:
 			"Gutenberg is really awesome! Dafunda Blocks makes it more awesome!",
 	},
@@ -70,7 +70,7 @@ export const oldAttributes = {
 		type: "string",
 		source: "attribute",
 		attribute: "src",
-		selector: ".dbe_feature_one_img",
+		selector: ".feature_one_img",
 	},
 	imgOneID: {
 		type: "number",
@@ -79,13 +79,13 @@ export const oldAttributes = {
 		type: "string",
 		source: "attribute",
 		attribute: "alt",
-		selector: ".dbe_feature_one_img",
+		selector: ".feature_one_img",
 	},
 	imgTwoURL: {
 		type: "string",
 		source: "attribute",
 		attribute: "src",
-		selector: ".dbe_feature_two_img",
+		selector: ".feature_two_img",
 	},
 	imgTwoID: {
 		type: "number",
@@ -94,13 +94,13 @@ export const oldAttributes = {
 		type: "string",
 		source: "attribute",
 		attribute: "alt",
-		selector: ".dbe_feature_two_img",
+		selector: ".feature_two_img",
 	},
 	imgThreeURL: {
 		type: "string",
 		source: "attribute",
 		attribute: "src",
-		selector: ".dbe_feature_three_img",
+		selector: ".feature_three_img",
 	},
 	imgThreeID: {
 		type: "number",
@@ -109,7 +109,7 @@ export const oldAttributes = {
 		type: "string",
 		source: "attribute",
 		attribute: "alt",
-		selector: ".dbe_feature_three_img",
+		selector: ".feature_three_img",
 	},
 };
 
@@ -132,33 +132,25 @@ export const version_1_1_2 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={`dbe_feature_box column_${column}`}>
-				<div className="dbe_feature_1">
-					<img
-						className="dbe_feature_one_img"
-						src={imgOneURL}
-						alt={imgOneAlt}
-					/>
-					<p className="dbe_feature_one_title">{columnOneTitle}</p>
-					<p className="dbe_feature_one_body">{columnOneBody}</p>
+			<div className={`feature_box column_${column}`}>
+				<div className="feature_1">
+					<img className="feature_one_img" src={imgOneURL} alt={imgOneAlt} />
+					<p className="feature_one_title">{columnOneTitle}</p>
+					<p className="feature_one_body">{columnOneBody}</p>
 				</div>
-				<div className="dbe_feature_2">
-					<img
-						className="dbe_feature_two_img"
-						src={imgTwoURL}
-						alt={imgTwoAlt}
-					/>
-					<p className="dbe_feature_two_title">{columnTwoTitle}</p>
-					<p className="dbe_feature_two_body">{columnTwoBody}</p>
+				<div className="feature_2">
+					<img className="feature_two_img" src={imgTwoURL} alt={imgTwoAlt} />
+					<p className="feature_two_title">{columnTwoTitle}</p>
+					<p className="feature_two_body">{columnTwoBody}</p>
 				</div>
-				<div className="dbe_feature_3">
+				<div className="feature_3">
 					<img
-						className="dbe_feature_three_img"
+						className="feature_three_img"
 						src={imgThreeURL}
 						alt={imgThreeAlt}
 					/>
-					<p className="dbe_feature_three_title">{columnThreeTitle}</p>
-					<p className="dbe_feature_three_body">{columnThreeBody}</p>
+					<p className="feature_three_title">{columnThreeTitle}</p>
+					<p className="feature_three_body">{columnThreeBody}</p>
 				</div>
 			</div>
 		</div>
@@ -190,49 +182,35 @@ export const version_1_1_5 = (props) => {
 
 	return (
 		<div className={props.className}>
-			<div className={`dbe_feature_box column_${column}`}>
-				<div className="dbe_feature_1">
-					<img
-						className="dbe_feature_one_img"
-						src={imgOneURL}
-						alt={imgOneAlt}
-					/>
-					<p
-						className="dbe_feature_one_title"
-						style={{ textAlign: title1Align }}
-					>
+			<div className={`feature_box column_${column}`}>
+				<div className="feature_1">
+					<img className="feature_one_img" src={imgOneURL} alt={imgOneAlt} />
+					<p className="feature_one_title" style={{ textAlign: title1Align }}>
 						{columnOneTitle}
 					</p>
-					<p className="dbe_feature_one_body" style={{ textAlign: body1Align }}>
+					<p className="feature_one_body" style={{ textAlign: body1Align }}>
 						{columnOneBody}
 					</p>
 				</div>
-				<div className="dbe_feature_2">
-					<img
-						className="dbe_feature_two_img"
-						src={imgTwoURL}
-						alt={imgTwoAlt}
-					/>
-					<p
-						className="dbe_feature_two_title"
-						style={{ textAlign: title2Align }}
-					>
+				<div className="feature_2">
+					<img className="feature_two_img" src={imgTwoURL} alt={imgTwoAlt} />
+					<p className="feature_two_title" style={{ textAlign: title2Align }}>
 						{columnTwoTitle}
 					</p>
-					<p className="dbe_feature_two_body" style={{ textAlign: body2Align }}>
+					<p className="feature_two_body" style={{ textAlign: body2Align }}>
 						{columnTwoBody}
 					</p>
 				</div>
-				<div className="dbe_feature_3">
+				<div className="feature_3">
 					<img
-						className="dbe_feature_three_img"
+						className="feature_three_img"
 						src={imgThreeURL}
 						alt={imgThreeAlt}
 					/>
-					<p className="dbe_feature_three_title" style={{ align: title3Align }}>
+					<p className="feature_three_title" style={{ align: title3Align }}>
 						{columnThreeTitle}
 					</p>
-					<p className="dbe_feature_three_body" style={{ align: body3Align }}>
+					<p className="feature_three_body" style={{ align: body3Align }}>
 						{columnThreeBody}
 					</p>
 				</div>

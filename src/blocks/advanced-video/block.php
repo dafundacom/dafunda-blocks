@@ -4,12 +4,12 @@ function dbe_render_advanced_video_block($attributes){
     extract($attributes);
 
     //enclosing div needed to prevent embedded video from trying to use the full height of the screen
-    return '<div id="dbe-advanced-video-'.$blockID.'" class="dbe-advanced-video-container">' .
+    return '<div id="advanced-video-'.$blockID.'" class="advanced-video-container">' .
     
     (!in_array($videoSource, ['local', 'unknown', 'videopress']) && $thumbnail !== '' ? 
-    '<img class="dbe-advanced-video-thumbnail" height="'.$height.'" width="'.$width.'" src="' . esc_url($thumbnail) . '">' : ''
+    '<img class="advanced-video-thumbnail" height="'.$height.'" width="'.$width.'" src="' . esc_url($thumbnail) . '">' : ''
             ) .
-    '<div class="dbe-advanced-video-embed" '.($thumbnail !== '' && !in_array($videoSource, ['local', 'unknown', 'videopress']) ? 'hidden' : '').'>'
+    '<div class="advanced-video-embed" '.($thumbnail !== '' && !in_array($videoSource, ['local', 'unknown', 'videopress']) ? 'hidden' : '').'>'
     . $videoEmbedCode . '</div></div>';
 }
 

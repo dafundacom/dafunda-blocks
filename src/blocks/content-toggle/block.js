@@ -85,17 +85,17 @@ const attributes = {
 const oldAttributes = Object.assign(Object.assign({}, attributes), {
 	accordions: {
 		source: "query",
-		selector: ".wp-block-dbe-content-toggle-accordion",
+		selector: ".wp-block-content-toggle-accordion",
 		query: {
 			title: {
 				type: "array",
 				source: "children",
-				selector: ".wp-block-dbe-content-toggle-accordion-title",
+				selector: ".wp-block-content-toggle-accordion-title",
 			},
 			content: {
 				type: "array",
 				source: "children",
-				selector: ".wp-block-dbe-content-toggle-accordion-content",
+				selector: ".wp-block-content-toggle-accordion-content",
 			},
 		},
 	},

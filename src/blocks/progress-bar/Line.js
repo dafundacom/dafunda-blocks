@@ -55,19 +55,19 @@ export default class Line extends Component {
 			100 - barThickness / 2
 		},${barThickness / 2}`;
 		return (
-			<div className="dbe_progress-bar-container">
+			<div className="progress-bar-container">
 				<svg
-					className="dbe_progress-bar-line"
+					className="progress-bar-line"
 					viewBox={`0 0 100 ${barThickness}`}
 					preserveAspectRatio="none"
 				>
 					<path
-						className="dbe_progress-bar-line-trail"
+						className="progress-bar-line-trail"
 						d={progressBarPath}
 						strokeWidth="1"
 					/>
 					<path
-						className="dbe_progress-bar-line-path"
+						className="progress-bar-line-path"
 						d={progressBarPath}
 						stroke={barColor}
 						strokeWidth={barThickness}
@@ -75,7 +75,7 @@ export default class Line extends Component {
 					/>
 				</svg>
 				<div
-					className="dbe_progress-bar-label"
+					className="progress-bar-label"
 					style={{
 						width: `${percent}%`,
 						visibility: isActive ? "visible" : "hidden",
