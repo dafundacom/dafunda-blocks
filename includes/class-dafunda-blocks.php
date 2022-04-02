@@ -27,8 +27,8 @@
  * @subpackage dafunda_blocks/includes
  * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
-class Dafunda_Blocks {
-
+class Dafunda_Blocks
+{
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -48,13 +48,12 @@ class Dafunda_Blocks {
 	 *
 	 * @since    0.0.1
 	 */
-	public function __construct() {
-
+	public function __construct()
+	{
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -73,39 +72,44 @@ class Dafunda_Blocks {
 	 * @since    0.0.1
 	 * @access   private
 	 */
-	private function load_dependencies() {
-
+	private function load_dependencies()
+	{
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once DAFUNDA_BLOCKS_PATH . 'includes/class-dafunda-blocks-loader.php';
+		require_once DAFUNDA_BLOCKS_PATH .
+			"includes/class-dafunda-blocks-loader.php";
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once DAFUNDA_BLOCKS_PATH . 'includes/class-dafunda-blocks-i18n.php';
-		require_once DAFUNDA_BLOCKS_PATH . 'includes/class-dafunda-blocks-category.php';
+		require_once DAFUNDA_BLOCKS_PATH .
+			"includes/class-dafunda-blocks-i18n.php";
+		require_once DAFUNDA_BLOCKS_PATH .
+			"includes/class-dafunda-blocks-category.php";
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once DAFUNDA_BLOCKS_PATH . 'admin/class-dafunda-blocks-admin.php';
+		require_once DAFUNDA_BLOCKS_PATH .
+			"admin/class-dafunda-blocks-admin.php";
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin help area.
 		 */
-		require_once DAFUNDA_BLOCKS_PATH . 'admin/class-dafunda-blocks-help.php';
+		require_once DAFUNDA_BLOCKS_PATH .
+			"admin/class-dafunda-blocks-help.php";
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once DAFUNDA_BLOCKS_PATH . 'public/class-dafunda-blocks-public.php';
+		require_once DAFUNDA_BLOCKS_PATH .
+			"public/class-dafunda-blocks-public.php";
 
 		$this->loader = new Dafunda_Blocks_Loader();
-
 	}
 
 	/**
@@ -117,12 +121,15 @@ class Dafunda_Blocks {
 	 * @since    0.0.1
 	 * @access   private
 	 */
-	private function set_locale() {
-
+	private function set_locale()
+	{
 		$plugin_i18n = new Dafunda_Blocks_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action(
+			"plugins_loaded",
+			$plugin_i18n,
+			"load_plugin_textdomain"
+		);
 	}
 
 	/**
@@ -132,32 +139,71 @@ class Dafunda_Blocks {
 	 * @since    0.0.1
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
-
+	private function define_admin_hooks()
+	{
 		$plugin_admin = new Dafunda_Blocks_Admin();
 		$plugin_help = new Dafunda_Blocks_Help();
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'on_admin_init' );
+		$this->loader->add_action(
+			"admin_enqueue_scripts",
+			$plugin_admin,
+			"enqueue_styles"
+		);
+		$this->loader->add_action(
+			"admin_enqueue_scripts",
+			$plugin_admin,
+			"enqueue_scripts"
+		);
+		$this->loader->add_action("admin_init", $plugin_admin, "on_admin_init");
 
 		// Styles and Scripts for Help Page.
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_help, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_help, 'enqueue_scripts' );
+		$this->loader->add_action(
+			"admin_enqueue_scripts",
+			$plugin_help,
+			"enqueue_styles"
+		);
+		$this->loader->add_action(
+			"admin_enqueue_scripts",
+			$plugin_help,
+			"enqueue_scripts"
+		);
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_admin_menus' );
-		$this->loader->add_action( 'admin_menu', $plugin_help, 'register_help_admin_menu' );
+		$this->loader->add_action(
+			"admin_menu",
+			$plugin_admin,
+			"register_admin_menus"
+		);
+		$this->loader->add_action(
+			"admin_menu",
+			$plugin_help,
+			"register_help_admin_menu"
+		);
 
 		// Ajax hooks.
-		$this->loader->add_action( 'wp_ajax_toggle_block_status', $plugin_admin, 'toggle_block_status' );
+		$this->loader->add_action(
+			"wp_ajax_toggle_block_status",
+			$plugin_admin,
+			"toggle_block_status"
+		);
 
 		// Insert blocks setting.
-		$this->loader->add_action( 'admin_head', $plugin_admin, 'insert_blocks_settings' );
+		$this->loader->add_action(
+			"admin_head",
+			$plugin_admin,
+			"insert_blocks_settings"
+		);
 
 		//Review Notice
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'DafundaBlocks_review_notice' );
-		$this->loader->add_action( 'wp_ajax_DafundaBlocksReviewNoticeHide', $plugin_admin, 'DafundaBlocks_hide_review_notify' );
-
+		$this->loader->add_action(
+			"admin_notices",
+			$plugin_admin,
+			"DafundaBlocks_review_notice"
+		);
+		$this->loader->add_action(
+			"wp_ajax_DafundaBlocksReviewNoticeHide",
+			$plugin_admin,
+			"DafundaBlocks_hide_review_notify"
+		);
 	}
 
 	/**
@@ -167,13 +213,20 @@ class Dafunda_Blocks {
 	 * @since    0.0.1
 	 * @access   private
 	 */
-	private function define_public_hooks() {
-
+	private function define_public_hooks()
+	{
 		$plugin_public = new Dafunda_Blocks_Public();
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_action(
+			"wp_enqueue_scripts",
+			$plugin_public,
+			"enqueue_styles"
+		);
+		$this->loader->add_action(
+			"wp_enqueue_scripts",
+			$plugin_public,
+			"enqueue_scripts"
+		);
 	}
 
 	/**
@@ -181,7 +234,8 @@ class Dafunda_Blocks {
 	 *
 	 * @since    0.0.1
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -191,8 +245,8 @@ class Dafunda_Blocks {
 	 * @since     1.0.2
 	 * @return    Dafunda_Blocks_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
-
 }

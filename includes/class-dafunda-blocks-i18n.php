@@ -24,22 +24,19 @@
  * @subpackage Dafunda_Blocks/includes
  * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
-class Dafunda_Blocks_i18n {
-
-
+class Dafunda_Blocks_i18n
+{
 	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since    0.0.1
 	 */
-	public function load_plugin_textdomain() {
-
+	public function load_plugin_textdomain()
+	{
 		load_plugin_textdomain(
-			'dafunda-blocks',
+			"dafunda-blocks",
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname(dirname(plugin_basename(__FILE__))) . "/languages/"
 		);
-
 	}
-
 }

@@ -317,7 +317,7 @@ function dbe_render_how_to_block($attributes)
                         <div class="howto-step__stepnum">
                             <?= $index + 1 ?>
                         </div>
-
+												
                         <div class="order-2 md:order-2 col-span-10 md:col-span-11 howto-step__desc">
                             <<?= $thirdLevelTag ?> id="<?= $step[
  	"anchor"

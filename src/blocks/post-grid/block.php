@@ -3,297 +3,321 @@
  * Server-side rendering for the post grid block
  */
 
-function dbe_query_post( $attributes ){
+function dbe_query_post($attributes)
+{
+	/**
+	 * Global post object.
+	 * Used for excluding the current post from the grid.
+	 *
+	 * @var WP_Post
+	 */
+	global $post;
 
-    /**
-     * Global post object.
-     * Used for excluding the current post from the grid.
-     *
-     * @var WP_Post
-     */
-    global $post;
+	$categories =
+		isset($attributes["categories"]) && $attributes["categories"] != ""
+			? $attributes["categories"]
+			: (isset($attributes["categoryArray"])
+				? join(
+					",",
+					array_map(function ($c) {
+						return $c["id"];
+					}, $attributes["categoryArray"])
+				)
+				: "");
 
-    $categories = isset($attributes['categories']) && $attributes['categories'] != '' ? $attributes['categories'] :
-                    (isset($attributes['categoryArray']) ? join(',',array_map(function($c){return $c['id'];}, $attributes['categoryArray'])) : '');
+	/* Setup the query */
+	$post_query = new WP_Query([
+		"posts_per_page" => $attributes["amountPosts"],
+		"post_status" => "publish",
+		"order" => $attributes["order"],
+		"orderby" => $attributes["orderBy"],
+		"cat" => $categories,
+		"offset" => $attributes["offset"],
+		"post_type" => "post",
+		"ignore_sticky_posts" => 1,
+		"post__not_in" => [absint($post->ID)], // Exclude the current post from the grid.
+		"tag__in" => $attributes["tagArray"],
+		"author__in" => $attributes["authorArray"],
+	]);
 
-    /* Setup the query */
-    $post_query = new WP_Query(
-        array(
-            'posts_per_page' => $attributes['amountPosts'],
-            'post_status' => 'publish',
-            'order' => $attributes['order'],
-            'orderby' => $attributes['orderBy'],
-            'cat' => $categories,
-            'offset' => $attributes['offset'],
-            'post_type' => 'post',
-            'ignore_sticky_posts' => 1,
-            'post__not_in' => array(absint($post->ID)), // Exclude the current post from the grid.
-            'tag__in' => $attributes['tagArray'],
-            'author__in' => $attributes['authorArray']
-        )
-    );
-
-    return $post_query;
-
+	return $post_query;
 }
 
-function dbe_render_post_grid_block( $attributes ){
+function dbe_render_post_grid_block($attributes)
+{
+	/* get posts */
 
-    /* get posts */
+	$post_query = dbe_query_post($attributes);
 
-    $post_query = dbe_query_post( $attributes );
+	/* Start the loop */
 
-    /* Start the loop */
+	$post_grid = "";
 
-    $post_grid = '';
+	if ($post_query->have_posts()) {
+		while ($post_query->have_posts()) {
+			$post_query->the_post();
 
-    if ( $post_query->have_posts() ) {
+			/* Setup the post ID */
+			$post_id = get_the_ID();
 
-        while ( $post_query->have_posts() ) {
-            $post_query->the_post();
+			/* Setup the featured image ID */
+			$post_thumb_id = get_post_thumbnail_id($post_id);
 
-            /* Setup the post ID */
-            $post_id = get_the_ID();
+			/* Setup the post classes */
+			$post_classes = "post-grid-item";
 
-            /* Setup the featured image ID */
-            $post_thumb_id = get_post_thumbnail_id( $post_id );
+			/* Join classes together */
+			$post_classes = join(" ", get_post_class($post_classes, $post_id));
 
-            /* Setup the post classes */
-            $post_classes = 'post-grid-item';
+			/* Start the markup for the post */
+			$post_grid .= sprintf(
+				'<article id="post-%1$s" class="%2$s">',
+				esc_attr($post_id),
+				esc_attr($post_classes)
+			);
 
-            /* Join classes together */
-            $post_classes = join( ' ', get_post_class( $post_classes, $post_id ) );
+			/* Get the featured image */
+			if (
+				isset($attributes["checkPostImage"]) &&
+				$attributes["checkPostImage"] &&
+				$post_thumb_id
+			) {
+				/* Output the featured image */
+				$post_grid .= sprintf(
+					'<div class="block-post-grid-image"><a href="%1$s" rel="bookmark" aria-hidden="true" tabindex="-1">%2$s</a></div>',
+					esc_url(get_permalink($post_id)),
+					wp_get_attachment_image($post_thumb_id, [
+						$attributes["postImageWidth"],
+						$attributes["preservePostImageAspectRatio"]
+							? 0
+							: $attributes["postImageHeight"],
+					]) //use array
+				);
+			}
 
-            /* Start the markup for the post */
-            $post_grid .= sprintf(
-                '<article id="post-%1$s" class="%2$s">',
-                esc_attr( $post_id ),
-                esc_attr( $post_classes )
-            );
+			/* Wrap the text content */
+			$post_grid .= sprintf('<div class="block-post-grid-text">');
 
-            /* Get the featured image */
-            if ( isset( $attributes['checkPostImage'] ) && $attributes['checkPostImage'] && $post_thumb_id ) {
+			$post_grid .= sprintf('<header class="block-post-grid-header">');
 
-                /* Output the featured image */
-                $post_grid .= sprintf(
-                    '<div class="block-post-grid-image"><a href="%1$s" rel="bookmark" aria-hidden="true" tabindex="-1">%2$s</a></div>',
-                    esc_url( get_permalink( $post_id ) ),
-                    wp_get_attachment_image( $post_thumb_id, array($attributes['postImageWidth'], $attributes['preservePostImageAspectRatio'] ? 0 : $attributes['postImageHeight']) )//use array 
-                );
-            }
+			/* Get the post title */
+			$title = get_the_title($post_id);
 
-            /* Wrap the text content */
-            $post_grid .= sprintf(
-                '<div class="block-post-grid-text">'
-            );
+			if (!$title) {
+				$title = __("Untitled", "dafunda-blocks");
+			}
 
-            $post_grid .= sprintf(
-                '<header class="block-post-grid-header">'
-            );
+			if (
+				isset($attributes["checkPostTitle"]) &&
+				$attributes["checkPostTitle"]
+			) {
+				if (isset($attributes["postTitleTag"])) {
+					$post_title_tag = $attributes["postTitleTag"];
+				} else {
+					$post_title_tag = "h2";
+				}
 
-            /* Get the post title */
-            $title = get_the_title( $post_id );
+				$post_grid .= sprintf(
+					'<%3$s class="block-post-grid-title"><a href="%1$s" rel="bookmark">%2$s</a></%3$s>',
+					esc_url(get_permalink($post_id)),
+					esc_html($title),
+					esc_attr($post_title_tag)
+				);
+			}
 
-            if ( ! $title ) {
-                $title = __( 'Untitled', 'dafunda-blocks' );
-            }
+			/* Get the post author */
+			if (
+				isset($attributes["checkPostAuthor"]) &&
+				$attributes["checkPostAuthor"]
+			) {
+				$post_grid .= sprintf(
+					'<div class="block-post-grid-author" itemprop="author"><a class="text-link" href="%2$s" itemprop="url" rel="author"><span itemprop="name">%1$s</span></a></div>',
+					esc_html(
+						get_the_author_meta(
+							"display_name",
+							get_the_author_meta("ID")
+						)
+					),
+					esc_html(get_author_posts_url(get_the_author_meta("ID")))
+				);
+			}
 
-            if ( isset( $attributes['checkPostTitle'] ) && $attributes['checkPostTitle'] ) {
+			/* Get the post date */
+			if (
+				isset($attributes["checkPostDate"]) &&
+				$attributes["checkPostDate"]
+			) {
+				$post_grid .= sprintf(
+					'<time datetime="%1$s" class="block-post-grid-date" itemprop="datePublished">%2$s</time>',
+					esc_attr(get_the_date("c", $post_id)),
+					esc_html(get_the_date("", $post_id))
+				);
+			}
 
-                if ( isset( $attributes['postTitleTag'] ) ) {
-                    $post_title_tag = $attributes['postTitleTag'];
-                } else {
-                    $post_title_tag = 'h2';
-                }
+			/* Close the header content */
+			$post_grid .= sprintf("</header>");
 
-                $post_grid .= sprintf(
-                    '<%3$s class="block-post-grid-title"><a href="%1$s" rel="bookmark">%2$s</a></%3$s>',
-                    esc_url( get_permalink( $post_id ) ),
-                    esc_html( $title ),
-                    esc_attr( $post_title_tag )
-                );
-            }
+			/* Wrap the excerpt content */
+			$post_grid .= sprintf('<div class="block-post-grid-excerpt">');
 
-            /* Get the post author */
-            if ( isset( $attributes['checkPostAuthor'] ) && $attributes['checkPostAuthor'] ) {
-                $post_grid .= sprintf(
-                    '<div class="block-post-grid-author" itemprop="author"><a class="text-link" href="%2$s" itemprop="url" rel="author"><span itemprop="name">%1$s</span></a></div>',
-                    esc_html( get_the_author_meta( 'display_name', get_the_author_meta( 'ID' ) ) ),
-                    esc_html( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
-                );
-            }
+			/* Get the excerpt */
 
-            /* Get the post date */
-            if ( isset( $attributes['checkPostDate'] ) && $attributes['checkPostDate'] ) {
-                $post_grid .= sprintf(
-                    '<time datetime="%1$s" class="block-post-grid-date" itemprop="datePublished">%2$s</time>',
-                    esc_attr( get_the_date( 'c', $post_id ) ),
-                    esc_html( get_the_date( '', $post_id ) )
-                );
-            }
+			$excerpt = apply_filters(
+				"the_excerpt",
+				get_post_field("post_excerpt", $post_id, "display")
+			);
 
-            /* Close the header content */
-            $post_grid .= sprintf(
-                '</header>'
-            );
+			if (empty($excerpt) && isset($attributes["excerptLength"])) {
+				$excerpt = apply_filters(
+					"the_excerpt",
+					wp_trim_words(
+						preg_replace(
+							[
+								"/\<figcaption>.*\<\/figcaption>/",
+								"/\[caption.*\[\/caption\]/",
+							],
+							"",
+							get_the_content()
+						),
+						$attributes["excerptLength"]
+					)
+				);
+			}
 
-            /* Wrap the excerpt content */
-            $post_grid .= sprintf(
-                '<div class="block-post-grid-excerpt">'
-            );
+			if (!$excerpt) {
+				$excerpt = null;
+			}
 
-            /* Get the excerpt */
+			if (
+				isset($attributes["checkPostExcerpt"]) &&
+				$attributes["checkPostExcerpt"]
+			) {
+				$post_grid .= wp_kses_post($excerpt);
+			}
 
-            $excerpt = apply_filters( 'the_excerpt',
-                get_post_field(
-                    'post_excerpt',
-                    $post_id,
-                    'display'
-                )
-            );
+			/* Get the read more link */
+			if (
+				isset($attributes["checkPostLink"]) &&
+				$attributes["checkPostLink"]
+			) {
+				$post_grid .= sprintf(
+					'<p><a class="block-post-grid-more-link text-link" href="%1$s" rel="bookmark">%2$s <span class="screen-reader-text">%3$s</span></a></p>',
+					esc_url(get_permalink($post_id)),
+					esc_html($attributes["readMoreText"]),
+					esc_html($title)
+				);
+			}
 
-            if ( empty( $excerpt ) && isset( $attributes['excerptLength'] ) ) {
-                $excerpt = apply_filters( 'the_excerpt',
-                    wp_trim_words(
-                        preg_replace(
-                            array(
-                                '/\<figcaption>.*\<\/figcaption>/',
-                                '/\[caption.*\[\/caption\]/',
-                            ),
-                            '',
-                            get_the_content()
-                        ),
-                        $attributes['excerptLength']
-                    )
-                );
-            }
+			/* Close the excerpt content */
+			$post_grid .= sprintf("</div>");
 
-            if ( ! $excerpt ) {
-                $excerpt = null;
-            }
+			/* Close the text content */
+			$post_grid .= sprintf("</div>");
 
-            if ( isset( $attributes['checkPostExcerpt'] ) && $attributes['checkPostExcerpt'] ) {
-                $post_grid .= wp_kses_post( $excerpt );
-            }
+			/* Close the post */
+			$post_grid .= "</article>\n";
+		}
 
-            /* Get the read more link */
-            if ( isset( $attributes['checkPostLink'] ) && $attributes['checkPostLink'] ) {
-                $post_grid .= sprintf(
-                    '<p><a class="block-post-grid-more-link text-link" href="%1$s" rel="bookmark">%2$s <span class="screen-reader-text">%3$s</span></a></p>',
-                    esc_url( get_permalink( $post_id ) ),
-                    esc_html( $attributes['readMoreText'] ),
-                    esc_html( $title )
-                );
-            }
+		/* Restore original post data */
+		wp_reset_postdata();
 
-            /* Close the excerpt content */
-            $post_grid .= sprintf(
-                '</div>'
-            );
+		/* Build the block classes */
+		$class = "block-post-grid align" . $attributes["wrapAlignment"];
 
-            /* Close the text content */
-            $post_grid .= sprintf(
-                '</div>'
-            );
+		if (isset($attributes["className"])) {
+			$class .= " " . $attributes["className"];
+		}
 
-            /* Close the post */
-            $post_grid .= "</article>\n";
-        }
+		/* Layout orientation class */
+		$grid_class = "post-grid-items";
 
-        /* Restore original post data */
-        wp_reset_postdata();
+		if (
+			isset($attributes["postLayout"]) &&
+			"list" === $attributes["postLayout"]
+		) {
+			$grid_class .= " is-list";
+		} else {
+			$grid_class .= " is-grid";
+		}
 
-        /* Build the block classes */
-        $class = "block-post-grid align". $attributes['wrapAlignment'];
+		/* Grid columns class */
+		if (
+			isset($attributes["columns"]) &&
+			"grid" === $attributes["postLayout"]
+		) {
+			$grid_class .= " columns-" . $attributes["columns"];
+		}
 
-        if ( isset( $attributes['className'] ) ) {
-            $class .= ' ' . $attributes['className'];
-        }
+		/* Post grid section tag */
 
-        /* Layout orientation class */
-        $grid_class = 'post-grid-items';
+		$section_tag = "section";
 
-        if ( isset( $attributes['postLayout'] ) && 'list' === $attributes['postLayout'] ) {
-            $grid_class .= ' is-list';
-        } else {
-            $grid_class .= ' is-grid';
-        }
-
-        /* Grid columns class */
-        if ( isset( $attributes['columns'] ) && 'grid' === $attributes['postLayout'] ) {
-            $grid_class .= ' columns-' . $attributes['columns'];
-        }
-
-        /* Post grid section tag */
-
-        $section_tag = 'section';
-
-        /* Output the post markup */
-        $block_content = sprintf(
-            '<%1$s class="%2$s"><div class="%3$s">%4$s</div></%1$s>',
-            $section_tag,
-            esc_attr( $class ),
-            esc_attr( $grid_class ),
-            $post_grid
-        );
-        return $block_content;
-    }
+		/* Output the post markup */
+		$block_content = sprintf(
+			'<%1$s class="%2$s"><div class="%3$s">%4$s</div></%1$s>',
+			$section_tag,
+			esc_attr($class),
+			esc_attr($grid_class),
+			$post_grid
+		);
+		return $block_content;
+	}
 }
 
-function dbe_register_post_grid_block() {
-    if( function_exists( 'register_block_type' ) ) {
-        require dirname( dirname(__DIR__) ) . '/defaults.php';
-        register_block_type( 'dbe/post-grid', array(
-            'attributes' => $defaultValues['dbe/post-grid']['attributes'],
-            'render_callback' => 'dbe_render_post_grid_block'));
-    }
+function dbe_register_post_grid_block()
+{
+	if (function_exists("register_block_type")) {
+		require dirname(dirname(__DIR__)) . "/defaults.php";
+		register_block_type("dbe/post-grid", [
+			"attributes" => $defaultValues["dbe/post-grid"]["attributes"],
+			"render_callback" => "dbe_render_post_grid_block",
+		]);
+	}
 }
 
-add_action( 'init', 'dbe_register_post_grid_block' );
+add_action("init", "dbe_register_post_grid_block");
 
 /**
  * Add image sizes
  */
 
-function dbe_blocks_register_rest_fields() {
-    /* Add landscape featured image source */
-    register_rest_field(
-        array( 'post', 'page' ),
-        'featured_image_src',
-        array(
-            'get_callback'    => 'dbe_blocks_get_image_src_landscape',
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
-    /* Add author info */
-    register_rest_field(
-        'post',
-        'author_info',
-        array(
-            'get_callback'    => 'dbe_blocks_get_author_info',
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
+function dbe_blocks_register_rest_fields()
+{
+	/* Add landscape featured image source */
+	register_rest_field(["post", "page"], "featured_image_src", [
+		"get_callback" => "dbe_blocks_get_image_src_landscape",
+		"update_callback" => null,
+		"schema" => null,
+	]);
+	/* Add author info */
+	register_rest_field("post", "author_info", [
+		"get_callback" => "dbe_blocks_get_author_info",
+		"update_callback" => null,
+		"schema" => null,
+	]);
 }
 
-add_action( 'rest_api_init', 'dbe_blocks_register_rest_fields' );
+add_action("rest_api_init", "dbe_blocks_register_rest_fields");
 
-function dbe_blocks_get_image_src_landscape( $object, $field_name, $request ) {
-    $feat_img_array = wp_get_attachment_image_src(
-        $object['featured_media'],
-        'full',
-        false
-    );
-    return $feat_img_array ? $feat_img_array[0] : null;
+function dbe_blocks_get_image_src_landscape($object, $field_name, $request)
+{
+	$feat_img_array = wp_get_attachment_image_src(
+		$object["featured_media"],
+		"full",
+		false
+	);
+	return $feat_img_array ? $feat_img_array[0] : null;
 }
 
-function dbe_blocks_get_author_info( $object,  $field_name, $request ) {
-    /* Get the author name */
-    $author_data['display_name'] = get_the_author_meta( 'display_name', $object['author'] );
-    /* Get the author link */
-    $author_data['author_link'] = get_author_posts_url( $object['author'] );
-    /* Return the author data */
-    return $author_data;
+function dbe_blocks_get_author_info($object, $field_name, $request)
+{
+	/* Get the author name */
+	$author_data["display_name"] = get_the_author_meta(
+		"display_name",
+		$object["author"]
+	);
+	/* Get the author link */
+	$author_data["author_link"] = get_author_posts_url($object["author"]);
+	/* Return the author data */
+	return $author_data;
 }
