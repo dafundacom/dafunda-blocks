@@ -20,128 +20,127 @@
  * @subpackage dafunda_blocks/includes
  * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
-class Dafunda_Blocks_Util {
-
+class Dafunda_Blocks_Util
+{
 	/**
 	 * Get all Blocks.
 	 *
 	 * @since    0.0.1
 	 * @return array
 	 */
-	public static function blocks() {
-
+	public static function blocks()
+	{
 		return [
-			array(
-				'label'  => 'Advanced Heading',
-				'name'   => 'dbe/advanced-heading',
-				'active' => true,
-			),
-			array(
-				'label'  => 'Advanced Video',
-				'name'   => 'dbe/advanced-video',
-				'active' => true,
-			),
-			array(
-				'label'  => 'Button',
-				'name'   => 'dbe/button',
-				'active' => true,
-			),
-			array(
-				'label'  => 'Call To Action',
-				'name'   => 'dbe/call-to-action-block',
-				'active' => true,
-			),
-			array(
-				'label'  => 'Click To Tweet',
-				'name'   => 'dbe/click-to-tweet',
-				'active' => true,
-            ),
-            array(
-				'label'  => 'Content Filter',
-				'name'   => 'dbe/content-filter-block',
-				'active' => true,
-            ),
-			array(
-				'label'  => 'Content Toggle',
-				'name'   => 'dbe/content-toggle-block',
-				'active' => true,
-            ),
-            array(
-                'label'  => 'Countdown',
-                'name'   => 'dbe/countdown',
-                'active' => true,
-            ),
-			array(
-				'label'  => 'Divider',
-				'name'   => 'dbe/divider',
-				'active' => true,
-            ),
-            array(
-				'label'  => 'Expand',
-				'name'   => 'dbe/expand',
-				'active' => true,
-			),
-			array(
-				'label'  => 'How To',
-				'name'   => 'dbe/how-to',
-				'active' => true,
-			),
-            array(
-                'label'  => 'Image Slider',
-                'name'   => 'dbe/image-slider',
-                'active' => true,
-            ),
-            array(
-                'label'  => 'Post Grid',
-                'name'   => 'dbe/post-grid',
-                'active' => true,
-            ),
-            array(
-				'label'  => 'Progress Bar',
-				'name'   => 'dbe/progress-bar',
-				'active' => true,
-            ),
-            array(
-                'label'  => 'Review',
-                'name'   => 'dbe/review',
-                'active' => true,
-            ),
-			array(
-				'label'  => 'Social Share',
-				'name'   => 'dbe/social-share',
-				'active' => true,
-            ),
-            array(
-				'label'  => 'Star Rating',
-				'name'   => 'dbe/star-rating-block',
-				'active' => true,
-            ),
-            array(
-				'label'  => 'Styled Box',
-				'name'   => 'dbe/styled-box',
-				'active' => true,
-			),
-            array(
-				'label'  => 'Styled List',
-				'name'   => 'dbe/styled-list',
-				'active' => true,
-			),
-			array(
-				'label'  => 'Tabbed Content',
-				'name'   => 'dbe/tabbed-content-block',
-				'active' => true,
-            ),
-			array(
-				'label'  => 'Table of Contents',
-				'name'   => 'dbe/table-of-contents-block',
-				'active' => true,
-            ),
-            array(
-				'label'  => 'Testimonial',
-				'name'   => 'dbe/testimonial',
-				'active' => true,
-			)
+			[
+				"label" => "Advanced Heading",
+				"name" => "dbe/advanced-heading",
+				"active" => true,
+			],
+			[
+				"label" => "Advanced Video",
+				"name" => "dbe/advanced-video",
+				"active" => true,
+			],
+			[
+				"label" => "Button",
+				"name" => "dbe/button",
+				"active" => true,
+			],
+			[
+				"label" => "Call To Action",
+				"name" => "dbe/call-to-action-block",
+				"active" => true,
+			],
+			[
+				"label" => "Click To Tweet",
+				"name" => "dbe/click-to-tweet",
+				"active" => true,
+			],
+			[
+				"label" => "Content Filter",
+				"name" => "dbe/content-filter-block",
+				"active" => true,
+			],
+			[
+				"label" => "Content Toggle",
+				"name" => "dbe/content-toggle-block",
+				"active" => true,
+			],
+			[
+				"label" => "Countdown",
+				"name" => "dbe/countdown",
+				"active" => true,
+			],
+			[
+				"label" => "Divider",
+				"name" => "dbe/divider",
+				"active" => true,
+			],
+			[
+				"label" => "Expand",
+				"name" => "dbe/expand",
+				"active" => true,
+			],
+			[
+				"label" => "How To",
+				"name" => "dbe/how-to",
+				"active" => true,
+			],
+			[
+				"label" => "Image Slider",
+				"name" => "dbe/image-slider",
+				"active" => true,
+			],
+			[
+				"label" => "Post Grid",
+				"name" => "dbe/post-grid",
+				"active" => true,
+			],
+			[
+				"label" => "Progress Bar",
+				"name" => "dbe/progress-bar",
+				"active" => true,
+			],
+			[
+				"label" => "Review",
+				"name" => "dbe/review",
+				"active" => true,
+			],
+			[
+				"label" => "Social Share",
+				"name" => "dbe/social-share",
+				"active" => true,
+			],
+			[
+				"label" => "Star Rating",
+				"name" => "dbe/star-rating-block",
+				"active" => true,
+			],
+			[
+				"label" => "Styled Box",
+				"name" => "dbe/styled-box",
+				"active" => true,
+			],
+			[
+				"label" => "Styled List",
+				"name" => "dbe/styled-list",
+				"active" => true,
+			],
+			[
+				"label" => "Tabbed Content",
+				"name" => "dbe/tabbed-content-block",
+				"active" => true,
+			],
+			[
+				"label" => "Table of Contents",
+				"name" => "dbe/table-of-contents-block",
+				"active" => true,
+			],
+			[
+				"label" => "Testimonial",
+				"name" => "dbe/testimonial",
+				"active" => true,
+			],
 		];
 	}
-
 }

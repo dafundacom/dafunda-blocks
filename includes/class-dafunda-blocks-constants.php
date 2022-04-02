@@ -20,18 +20,19 @@
  * @subpackage Dafunda_Blocks_Constants/includes
  * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
-class Dafunda_Blocks_Constants {
+class Dafunda_Blocks_Constants
+{
+	const PLUGIN_VERSION = "0.0.1";
 
-	const PLUGIN_VERSION = '0.0.1';
-
-	const PLUGIN_NAME = 'dafunda-blocks';
+	const PLUGIN_NAME = "dafunda-blocks";
 
 	/**
 	 * Get Plugin version
 	 *
 	 * @return string
 	 */
-	public static function plugin_version() {
+	public static function plugin_version()
+	{
 		return self::PLUGIN_VERSION;
 	}
 
@@ -40,7 +41,8 @@ class Dafunda_Blocks_Constants {
 	 *
 	 * @return string
 	 */
-	public static function plugin_name() {
+	public static function plugin_name()
+	{
 		return self::PLUGIN_NAME;
 	}
 
@@ -49,8 +51,9 @@ class Dafunda_Blocks_Constants {
 	 *
 	 * @return string
 	 */
-	public static function plugin_path() {
-		return WP_PLUGIN_DIR . '/' . self::plugin_name() . '/';
+	public static function plugin_path()
+	{
+		return WP_PLUGIN_DIR . "/" . self::plugin_name() . "/";
 	}
 
 	/**
@@ -58,8 +61,9 @@ class Dafunda_Blocks_Constants {
 	 *
 	 * @return string
 	 */
-	public static function plugin_url() {
-		return plugin_dir_url( dirname( __FILE__ ) );
+	public static function plugin_url()
+	{
+		return plugin_dir_url(dirname(__FILE__));
 	}
 
 	/**
@@ -67,7 +71,8 @@ class Dafunda_Blocks_Constants {
 	 *
 	 * @return string
 	 */
-	public static function text_domain() {
-		return 'dafunda-blocks';
+	public static function text_domain()
+	{
+		return "dafunda-blocks";
 	}
 }

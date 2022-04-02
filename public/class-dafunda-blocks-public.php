@@ -20,8 +20,8 @@
  * @subpackage Dafunda_Blocks/public
  * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
-class Dafunda_Blocks_Public {
-
+class Dafunda_Blocks_Public
+{
 	/**
 	 * The ID of this plugin.
 	 *
@@ -47,11 +47,10 @@ class Dafunda_Blocks_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct() {
-
+	public function __construct()
+	{
 		$this->plugin_name = DAFUNDA_BLOCKS_NAME;
-		$this->version     = DAFUNDA_BLOCKS_VERSION;
-
+		$this->version = DAFUNDA_BLOCKS_VERSION;
 	}
 
 	/**
@@ -59,8 +58,8 @@ class Dafunda_Blocks_Public {
 	 *
 	 * @since    0.0.1
 	 */
-	public function enqueue_styles() {
-
+	public function enqueue_styles()
+	{
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -74,7 +73,6 @@ class Dafunda_Blocks_Public {
 		 */
 
 		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dafunda-blocks-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -82,8 +80,8 @@ class Dafunda_Blocks_Public {
 	 *
 	 * @since    0.0.1
 	 */
-	public function enqueue_scripts() {
-
+	public function enqueue_scripts()
+	{
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -97,7 +95,5 @@ class Dafunda_Blocks_Public {
 		 */
 
 		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dafunda-blocks-public.js', array( 'jquery' ), $this->version, false );
-
 	}
-
 }

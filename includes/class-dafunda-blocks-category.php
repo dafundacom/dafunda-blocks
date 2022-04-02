@@ -8,8 +8,8 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (!defined("ABSPATH")) {
+	exit();
 }
 
 /**
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    0.0.1
  */
-class DafundaBlocks_Block_Category {
-
+class DafundaBlocks_Block_Category
+{
 	/**
 	 * This class's instance.
 	 *
@@ -29,8 +29,9 @@ class DafundaBlocks_Block_Category {
 	/**
 	 * Registers the class.
 	 */
-	public static function register() {
-		if ( null === self::$instance ) {
+	public static function register()
+	{
+		if (null === self::$instance) {
 			self::$instance = new DafundaBlocks_Block_Category();
 		}
 	}
@@ -38,8 +39,9 @@ class DafundaBlocks_Block_Category {
 	/**
 	 * The Constructor.
 	 */
-	private function __construct() {
-		add_filter( 'block_categories_all', array( $this, 'block_categories' ) );
+	private function __construct()
+	{
+		add_filter("block_categories_all", [$this, "block_categories"]);
 	}
 
 	/**
@@ -49,17 +51,14 @@ class DafundaBlocks_Block_Category {
 	 * @param array $categories All categories.
 	 * @link https://wordpress.org/gutenberg/handbook/extensibility/extending-blocks/#managing-block-categories
 	 */
-	public function block_categories( $categories ) {
-
-		return array_merge(
-			$categories,
-			array(
-				array(
-					'slug'  => 'dafundablocks',
-					'title' => __( 'Dafunda Blocks', 'dafunda-blocks' ),
-				),
-			)
-		);
+	public function block_categories($categories)
+	{
+		return array_merge($categories, [
+			[
+				"slug" => "dafundablocks",
+				"title" => __("Dafunda Blocks", "dafunda-blocks"),
+			],
+		]);
 	}
 }
 
