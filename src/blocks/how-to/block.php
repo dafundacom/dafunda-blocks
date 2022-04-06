@@ -566,9 +566,9 @@ function dbe_render_how_to_block($attributes)
 		',
 	"bestRating": "5",
 	"worstRating": "0",
-	"ratingCount": ' .
+	"ratingCount": "' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingCount)) .
-		'
+		'"
 	}' .
 		"
 	}</script>";
