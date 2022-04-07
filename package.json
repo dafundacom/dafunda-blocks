@@ -48,6 +48,7 @@
 		"gulp-wp-pot": "^2.5.0",
 		"husky": "^7.0.0",
 		"ignore-emit-webpack-plugin": "^2.0.6",
+		"lint-staged": "^12.3.7",
 		"mini-css-extract-plugin": "^2.6.0",
 		"path": "^0.12.7",
 		"postcss": "^8.4.12",
