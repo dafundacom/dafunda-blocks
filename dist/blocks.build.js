@@ -30336,7 +30336,7 @@ var attributes = {
   },
   totalTimeText: {
     type: "string",
-    "default": __("Total time: ")
+    "default": __("Sekitar ")
   },
   cost: {
     type: "number",
@@ -31654,7 +31654,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
       var _this$state2 = this.state,
           videoURLInput = _this$state2.videoURLInput,
           currentStep = _this$state2.currentStep;
-      var units = ["years", "months", "weeks", "days", "hours", "minutes", "seconds"];
+      var units = ["Tahun", "Bulan", "Minggu", "Hari", "Jam", "Menit", "Detik"];
 
       var resetVideoAttributes = function resetVideoAttributes() {
         var newSection = JSON.parse(JSON.stringify(section));

@@ -144,13 +144,15 @@ function dbe_render_how_to_block($attributes)
 		: $cost . " " . $costCurrency;
 
 	$timeDisplay =
-		"<div><" .
-		$secondLevelTag .
-		" class=\"mb-0\">" .
-		$timeIntro .
-		"</" .
-		$secondLevelTag .
-		">";
+		"<div>";
+	// "<div>
+	// <" .
+	// $secondLevelTag .
+	// " class=\"mb-0\">" .
+	// $timeIntro .
+	// "</" .
+	// $secondLevelTag .
+	// ">";
 
 	$totalTimeDisplay = "";
 
@@ -161,7 +163,7 @@ function dbe_render_how_to_block($attributes)
 		}
 	}
 
-	$timeDisplay .= "<p>" . $totalTimeText . $totalTimeDisplay . "</div>";
+	$timeDisplay .= "<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</div>";
 
 	$ISOTotalTime = generateISODurationCode($totalTime);
 
@@ -212,15 +214,15 @@ function dbe_render_how_to_block($attributes)
 					PHP_EOL .
 					($advancedMode
 						? '"url": "' .
-							get_permalink() .
-							"#" .
-							$step["anchor"] .
-							'",' .
-							PHP_EOL .
-							($step["hasVideoClip"]
-								? '"video":{"@id": "' . $step["anchor"] . '"},'
-								: "") .
-							PHP_EOL
+						get_permalink() .
+						"#" .
+						$step["anchor"] .
+						'",' .
+						PHP_EOL .
+						($step["hasVideoClip"]
+							? '"video":{"@id": "' . $step["anchor"] . '"},'
+							: "") .
+						PHP_EOL
 						: "") .
 					'"image": "' .
 					$step["stepPic"]["url"] .
@@ -241,16 +243,16 @@ function dbe_render_how_to_block($attributes)
 					">" .
 					($step["stepPic"]["url"] !== ""
 						? ($step["stepPic"]["caption"] === ""
-								? ""
-								: '<figure class="w-full">') .
-							'<img class="howto-step-image" src="' .
-							$step["stepPic"]["url"] .
-							'">' .
-							($step["stepPic"]["caption"] === ""
-								? ""
-								: "<figcaption>" .
-									$step["stepPic"]["caption"] .
-									"</figcaption></figure>")
+							? ""
+							: '<figure class="w-full">') .
+						'<img class="howto-step-image " src="' .
+						$step["stepPic"]["url"] .
+						'">' .
+						($step["stepPic"]["caption"] === ""
+							? ""
+							: "<figcaption>" .
+							$step["stepPic"]["caption"] .
+							"</figcaption></figure>")
 						: "") .
 					dbe_convert_to_paragraphs($step["direction"]) .
 					PHP_EOL;
@@ -262,10 +264,10 @@ function dbe_render_how_to_block($attributes)
 					($step["title"] === "" || !$advancedMode
 						? ""
 						: str_replace(
-								"\'",
-								"'",
-								wp_filter_nohtml_kses($step["title"])
-							) . " ") .
+							"\'",
+							"'",
+							wp_filter_nohtml_kses($step["title"])
+						) . " ") .
 					str_replace(
 						"\'",
 						"'",
@@ -310,120 +312,119 @@ function dbe_render_how_to_block($attributes)
 		if (isset($section) && count($section) > 0) {
 			foreach ($section[0]["steps"] as $index => $step) {
 				ob_start(); ?>
-                <li class="howto-step">
+				<li class="howto-step p-3">
 
-                    <div class="grid grid-cols-12">
+					<div class="flex flex-wrap">
 
-                        <div class="howto-step__stepnum">
-                            <?= $index + 1 ?>
-                        </div>
-												
-                        <div class="order-2 md:order-2 col-span-10 md:col-span-11 howto-step__desc">
-                            <<?= $thirdLevelTag ?> id="<?= $step[
- 	"anchor"
- ] ?>" class="howto-step__title">
-                                <?= $step["title"] ?>
-                            </<?= $thirdLevelTag ?>>
-                        </div>
+						<div class="flex flex-wrap">
+							<div class="bg-slate-200 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+								<?= $index + 1 ?>
+							</div>
 
-                        <div class="order-4 md:order-3 col-span-12 md:col-span-11 howto-step__desc">
-                            <?= dbe_convert_to_paragraphs($step["direction"]) ?>
-                        </div>
+							<div class="px-2 flex-1">
+								<<?= $thirdLevelTag ?> id="<?= $step["anchor"] ?>" class="howto-step__title my-2 font-semibold text-[1.3rem] md:text-2xl">
+									<?= $step["title"] ?>
+								</<?= $thirdLevelTag ?>>
+							</div>
+						</div>
 
-                        <div class="order-3 md:order-4 col-span-12 howto-step__image">
-                            <?= $step["stepPic"]["url"] !== ""
-                            	? ($step["stepPic"]["caption"] === ""
-                            			? ""
-                            			: '<figure class="w-full">') .
-                            		'<img class="howto-step-image" src="' .
-                            		$step["stepPic"]["url"] .
-                            		'">' .
-                            		($step["stepPic"]["caption"] === ""
-                            			? ""
-                            			: "<figcaption>" .
-                            				$step["stepPic"]["caption"] .
-                            				"</figcaption></figure>")
-                            	: "" ?>
-                        </div>
-                    </div>
+						<div class="col-span-12 md:col-span-11">
+							<?= dbe_convert_to_paragraphs($step["direction"]) ?>
+						</div>
 
-                    <?php
-                    $stepsCode .=
-                    	'{"@type": "HowToStep",' .
-                    	PHP_EOL .
-                    	'"name": "' .
-                    	str_replace(
-                    		"\'",
-                    		"'",
-                    		wp_filter_nohtml_kses($step["title"])
-                    	) .
-                    	'",' .
-                    	PHP_EOL .
-                    	($advancedMode
-                    		? '"url": "' .
-                    			get_permalink() .
-                    			"#" .
-                    			$step["anchor"] .
-                    			'",' .
-                    			PHP_EOL .
-                    			($step["hasVideoClip"]
-                    				? '"video":{"@id": "' .
-                    					$step["anchor"] .
-                    					'"},'
-                    				: "") .
-                    			PHP_EOL
-                    		: "") .
-                    	'"image": "' .
-                    	$step["stepPic"]["url"] .
-                    	'",' .
-                    	PHP_EOL .
-                    	'"itemListElement" :[{' .
-                    	PHP_EOL .
-                    	'"@type": "HowToDirection",' .
-                    	PHP_EOL .
-                    	'"text": "' .
-                    	($step["title"] === "" || !$advancedMode
-                    		? ""
-                    		: str_replace(
-                    				"\'",
-                    				"'",
-                    				wp_filter_nohtml_kses($step["title"])
-                    			) . " ") .
-                    	str_replace(
-                    		"\'",
-                    		"'",
-                    		wp_filter_nohtml_kses($step["direction"])
-                    	) .
-                    	'"}' .
-                    	PHP_EOL;
+						<div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+							<?= $step["stepPic"]["url"] !== ""
+								? ($step["stepPic"]["caption"] === ""
+									? ""
+									: '<figure class="w-full">') .
+								'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
+								$step["stepPic"]["url"] .
+								'">' .
+								($step["stepPic"]["caption"] === ""
+									? ""
+									: "<figcaption>" .
+									$step["stepPic"]["caption"] .
+									"</figcaption></figure>")
+								: "" ?>
+						</div>
+					</div>
 
-                    if ($step["tip"] !== "") {
-                    	echo dbe_convert_to_paragraphs($step["tip"]);
-                    	$stepsCode .=
-                    		',{"@type": "HowToTip",' .
-                    		PHP_EOL .
-                    		'"text": "' .
-                    		str_replace(
-                    			"\'",
-                    			"'",
-                    			wp_filter_nohtml_kses($step["tip"])
-                    		) .
-                    		'"}' .
-                    		PHP_EOL;
-                    }
-                    ?>
-                </li>
+					<?php
+					$stepsCode .=
+						'{"@type": "HowToStep",' .
+						PHP_EOL .
+						'"name": "' .
+						str_replace(
+							"\'",
+							"'",
+							wp_filter_nohtml_kses($step["title"])
+						) .
+						'",' .
+						PHP_EOL .
+						($advancedMode
+							? '"url": "' .
+							get_permalink() .
+							"#" .
+							$step["anchor"] .
+							'",' .
+							PHP_EOL .
+							($step["hasVideoClip"]
+								? '"video":{"@id": "' .
+								$step["anchor"] .
+								'"},'
+								: "") .
+							PHP_EOL
+							: "") .
+						'"image": "' .
+						$step["stepPic"]["url"] .
+						'",' .
+						PHP_EOL .
+						'"itemListElement" :[{' .
+						PHP_EOL .
+						'"@type": "HowToDirection",' .
+						PHP_EOL .
+						'"text": "' .
+						($step["title"] === "" || !$advancedMode
+							? ""
+							: str_replace(
+								"\'",
+								"'",
+								wp_filter_nohtml_kses($step["title"])
+							) . " ") .
+						str_replace(
+							"\'",
+							"'",
+							wp_filter_nohtml_kses($step["direction"])
+						) .
+						'"}' .
+						PHP_EOL;
 
-    <?php
-    $stepsDisplay .= ob_get_contents();
-    ob_end_clean();
-    // ob_flush();
+					if ($step["tip"] !== "") {
+						echo dbe_convert_to_paragraphs($step["tip"]);
+						$stepsCode .=
+							',{"@type": "HowToTip",' .
+							PHP_EOL .
+							'"text": "' .
+							str_replace(
+								"\'",
+								"'",
+								wp_filter_nohtml_kses($step["tip"])
+							) .
+							'"}' .
+							PHP_EOL;
+					}
+					?>
+				</li>
 
-    $stepsCode .= "]}" . PHP_EOL;
-    if ($index < count($section[0]["steps"]) - 1) {
-    	$stepsCode .= ",";
-    }
+	<?php
+				$stepsDisplay .= ob_get_contents();
+				ob_end_clean();
+				// ob_flush();
 
+				$stepsCode .= "]}" . PHP_EOL;
+				if ($index < count($section[0]["steps"]) - 1) {
+					$stepsCode .= ",";
+				}
 			}
 		}
 	}
@@ -495,62 +496,62 @@ function dbe_render_how_to_block($attributes)
 		'",' .
 		($advancedMode
 			? (array_unique($totalTime) !== [0]
-					? '"totalTime": "' . $ISOTotalTime . '",'
-					: "") .
-				($videoURL === ""
-					? ""
-					: '"video": {
+				? '"totalTime": "' . $ISOTotalTime . '",'
+				: "") .
+			($videoURL === ""
+				? ""
+				: '"video": {
                 "@type": "VideoObject",
                 "name": "' .
-						str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($videoName)
-						) .
-						'",
+				str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($videoName)
+				) .
+				'",
                 "description": "' .
-						(str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($videoDescription)
-						) ?:
-							__("No description provided")) .
-						'",
+				(str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($videoDescription)
+				) ?:
+					__("No description provided")) .
+				'",
                 "duration" : "' .
-						generateISODurationCode($videoDuration) .
-						'",
+				generateISODurationCode($videoDuration) .
+				'",
                 "thumbnailUrl": "' .
-						esc_url($videoThumbnailURL) .
-						'",
+				esc_url($videoThumbnailURL) .
+				'",
                 "contentUrl": "' .
-						esc_url($videoURL) .
-						'",
+				esc_url($videoURL) .
+				'",
                 "uploadDate": "' .
-						date("c", $videoUploadDate) .
-						'",
+				date("c", $videoUploadDate) .
+				'",
                 "hasPart":[' .
-						$clips .
-						']
+				$clips .
+				']
             },') .
-				($cost > 0
-					? '"estimatedCost": {
+			($cost > 0
+				? '"estimatedCost": {
                 "@type": "MonetaryAmount",
                 "currency": "' .
-						str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($costCurrency)
-						) .
-						'",
+				str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($costCurrency)
+				) .
+				'",
                 "value": "' .
-						wp_filter_nohtml_kses($cost) .
-						'"
+				wp_filter_nohtml_kses($cost) .
+				'"
             },'
-					: "") .
-				$suppliesCode .
-				"," .
-				$toolsCode .
-				","
+				: "") .
+			$suppliesCode .
+			"," .
+			$toolsCode .
+			","
 			: "") .
 		$stepsCode .
 		',"yield": "' .
@@ -575,44 +576,52 @@ function dbe_render_how_to_block($attributes)
 
 	ob_start();
 	?>
-    <div class="howto" id="howto_<?= $blockID ?>">
+	<div class="howto" id="howto_<?= $blockID ?>">
 
-        <<?= $firstLevelTag ?> class="howto__title">
-            <?= $title ?>
-        </<?= $firstLevelTag ?>>
+		<<?= $firstLevelTag ?> class="howto__title">
+			<?= $title ?>
+		</<?= $firstLevelTag ?>>
 
-        <?= dbe_convert_to_paragraphs($introduction) ?>
-        <?= $header ?>
-        <?= $advancedMode
-        	? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
-        		? "Free"
-        		: "<p>" . $costDisplayText . $costDisplay . "</p>")
-        	: "" ?>
-        <?= $timeDisplay ?>
-        <?= $stepsDisplay ?>
+		<?= dbe_convert_to_paragraphs($introduction) ?>
+		<?= $header ?>
+		<div class="flex w-full justify-center">
+			<div class="mr-5">
+				<i class="fa fa-tag" aria-hidden="true"></i>
+				<?= $advancedMode
+					? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
+						? "Gratis"
+						: "<p>" . $costDisplayText . $costDisplay . "</p>")
+					: "" ?>
+			</div>
+			<div class="flex items-center">
+				<i class="fa fa-clock-o mr-2" aria-hidden="true"></i> <?= $timeDisplay ?>
+			</div>
+		</div>
 
-        <div class="howto-yield">
-            <<?= $secondLevelTag ?>>
-                <?= $resultIntro ?>
-            </<?= $secondLevelTag ?>>
-            <?= $finalImageURL === ""
-            	? ""
-            	: (!isset($finalImageCaption) || $finalImageCaption === ""
-            			? ""
-            			: '<figure class="howto-yield-image-container mt-2">') .
-            		'<img class="howto-yield-image rounded" src="' .
-            		$finalImageURL .
-            		'">' .
-            		(!isset($finalImageCaption) || $finalImageCaption === ""
-            			? ""
-            			: "<figcaption>" .
-            				$finalImageCaption .
-            				"</figcaption></figure>") ?>
-            <?= dbe_convert_to_paragraphs($howToYield) ?>
-        </div>
+		<?= $stepsDisplay ?>
 
-    </div>
-    <?= $JSONLD ?>
+		<!-- <div class="howto-yield">
+			<<?= $secondLevelTag ?>>
+				<?= $resultIntro ?>
+			</<?= $secondLevelTag ?>>
+			<?= $finalImageURL === ""
+				? ""
+				: (!isset($finalImageCaption) || $finalImageCaption === ""
+					? ""
+					: '<figure class="howto-yield-image-container mt-2">') .
+				'<img class="howto-yield-image rounded" src="' .
+				$finalImageURL .
+				'">' .
+				(!isset($finalImageCaption) || $finalImageCaption === ""
+					? ""
+					: "<figcaption>" .
+					$finalImageCaption .
+					"</figcaption></figure>") ?>
+			<?= dbe_convert_to_paragraphs($howToYield) ?>
+		</div> -->
+
+	</div>
+	<?= $JSONLD ?>
 <?php return ob_get_clean();
 }
 function dbe_register_how_to_block()
