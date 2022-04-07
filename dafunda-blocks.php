@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Plugin Name: Dafunda Blocks
  * Plugin URI: https://github.com/dafundacom/dafunda-blocks
  * Description: Dafunda Custom Blocks
  * Plugin Author: Dafunda Dev Team
  * Author URI: https://dafunda.io
- * Version: 0.0.1-rc-3:c
+ * Version: 0.0.1-rc-3d
  * Text Domain: dafunda-blocks
  * Domain Path: /languages
  *
@@ -14,7 +15,7 @@
 
 // Exit if accessed directly.
 if (!defined("ABSPATH")) {
-	exit();
+  exit();
 }
 
 require_once "includes/class-dafunda-blocks-constants.php";
@@ -52,9 +53,9 @@ require_once plugin_dir_path(__FILE__) . "src/init.php";
  */
 function activate_dafunda_blocks()
 {
-	require_once plugin_dir_path(__FILE__) .
-		"includes/class-dafunda-blocks-activator.php";
-	Dafunda_Blocks_Activator::activate();
+  require_once plugin_dir_path(__FILE__) .
+    "includes/class-dafunda-blocks-activator.php";
+  Dafunda_Blocks_Activator::activate();
 }
 
 /**
@@ -63,38 +64,38 @@ function activate_dafunda_blocks()
  */
 function deactivate_dafunda_blocks()
 {
-	require_once plugin_dir_path(__FILE__) .
-		"includes/class-dafunda-blocks-deactivator.php";
-	Dafunda_Blocks_Deactivator::deactivate();
+  require_once plugin_dir_path(__FILE__) .
+    "includes/class-dafunda-blocks-deactivator.php";
+  Dafunda_Blocks_Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, "activate_dafunda_blocks");
 register_deactivation_hook(__FILE__, "deactivate_dafunda_blocks");
 
 if (!function_exists("dbe_safe_welcome_redirect")) {
-	add_action("admin_init", "dbe_safe_welcome_redirect");
+  add_action("admin_init", "dbe_safe_welcome_redirect");
 
-	function dbe_safe_welcome_redirect()
-	{
-		if (!get_transient("_welcome_redirect_ub")) {
-			return;
-		}
+  function dbe_safe_welcome_redirect()
+  {
+    if (!get_transient("_welcome_redirect_ub")) {
+      return;
+    }
 
-		delete_transient("_welcome_redirect_ub");
+    delete_transient("_welcome_redirect_ub");
 
-		if (is_network_admin() || isset($_GET["activate-multi"])) {
-			return;
-		}
+    if (is_network_admin() || isset($_GET["activate-multi"])) {
+      return;
+    }
 
-		wp_safe_redirect(
-			add_query_arg(
-				[
-					"page" => "dafunda-blocks-help",
-				],
-				admin_url("admin.php")
-			)
-		);
-	}
+    wp_safe_redirect(
+      add_query_arg(
+        [
+          "page" => "dafunda-blocks-help",
+        ],
+        admin_url("admin.php")
+      )
+    );
+  }
 }
 
 /**
@@ -114,7 +115,7 @@ require plugin_dir_path(__FILE__) . "includes/class-dafunda-blocks.php";
  */
 function run_dafunda_blocks()
 {
-	$plugin = new Dafunda_Blocks();
-	$plugin->run();
+  $plugin = new Dafunda_Blocks();
+  $plugin->run();
 }
 run_dafunda_blocks();
