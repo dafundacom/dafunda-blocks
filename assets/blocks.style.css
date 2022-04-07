@@ -679,14 +679,14 @@
 	}
 
 	/* How To*/
-	.howto-step{
+	.howto-step {
 		@apply list-none;
 	}
 
-	.howto-step-image,
+	/* .howto-step-image,
 	.howto-yield-image {
 		@apply w-full;
-	}
+	} */
 	.howto-supplies-list img,
 	.howto-tools-list img {
 		@apply max-w-[200px];
@@ -714,26 +714,6 @@
 		@apply mb-2;
 	}
 
-	.howto-step .howto-step__stepnum {
-		@apply bg-slate-200 flex flex-wrap items-center justify-center order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none self-center md:h-[-webkit-fill-available];
-	}
-	.howto-step .howto-step__stepnum h1,
-	div.howto-step__stepnum {
-		@apply font-semibold;
-		font-size: clamp(1.2rem, 2rem, 2vw);
-	}
-	.howto-step .howto-step__desc {
-		@apply px-2;
-	}
-	.howto-step .howto-step__desc .howto-step__title {
-		@apply m-0 font-semibold text-3xl md:text-2xl;
-	}
-	.howto-step .howto-step__desc:nth-child(2) {
-		@apply py-4;
-	}
-	.howto-step .howto-step__desc:nth-child(3) {
-		@apply pb-4;
-	}
 	.howto-yield {
 		@apply overflow-auto;
 	}
@@ -761,18 +741,6 @@
 
 	.content-inner .howto-step-display {
 		@apply pl-0;
-	}
-
-	.content-inner .howto-step-display .howto-step .howto-step__title {
-		@apply text-xl md:text-2xl;
-	}
-
-	.content-inner .howto-step-display .howto-step .howto-step__stepnum {
-		@apply bg-slate-200 flex flex-wrap items-center justify-center order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none text-3xl md:text-5xl md:w-[3.3rem];
-	}
-
-	.content-inner .howto-step-display .howto-step .howto-step__desc p {
-		@apply mb-0;
 	}
 
 	/* How To Front END */
