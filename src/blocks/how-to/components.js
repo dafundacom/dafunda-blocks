@@ -1009,15 +1009,7 @@ export class EditorComponent extends Component {
 
 		const { videoURLInput, currentStep } = this.state;
 
-		const units = [
-			"Tahun",
-			"Bulan",
-			"Minggu",
-			"Hari",
-			"Jam",
-			"Menit",
-			"Detik",
-		];
+		const units = ["Tahun", "Bulan", "Minggu", "Hari", "Jam", "Menit", "Detik"];
 
 		const resetVideoAttributes = () => {
 			let newSection = JSON.parse(JSON.stringify(section));
