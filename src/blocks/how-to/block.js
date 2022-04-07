@@ -74,7 +74,7 @@ const attributes = {
 	},
 	totalTimeText: {
 		type: "string",
-		default: __("Total time: "),
+		default: __("Sekitar "),
 	},
 	cost: {
 		type: "number",

@@ -1010,13 +1010,13 @@ export class EditorComponent extends Component {
 		const { videoURLInput, currentStep } = this.state;
 
 		const units = [
-			"years",
-			"months",
-			"weeks",
-			"days",
-			"hours",
-			"minutes",
-			"seconds",
+			"Tahun",
+			"Bulan",
+			"Minggu",
+			"Hari",
+			"Jam",
+			"Menit",
+			"Detik",
 		];
 
 		const resetVideoAttributes = () => {
