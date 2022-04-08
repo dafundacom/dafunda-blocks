@@ -477,65 +477,55 @@ function dbe_render_how_to_block($attributes)
         "description": "' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($introduction)) .
 		'",' .
-		($advancedMode
-			? (array_unique($totalTime) !== [0]
-				? '"totalTime": "' . $ISOTotalTime . '",'
-				: "") .
-			($videoURL === ""
-				? ""
-				: '"video": {
+		(array_unique($totalTime) !== [0]
+			? '"totalTime": "' . $ISOTotalTime . '",'
+			: "") .
+		($videoURL === ""
+			? ""
+			: '"video": {
                 "@type": "VideoObject",
                 "name": "' .
-				str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($videoName)
-				) .
-				'",
+			str_replace("\'", "'", wp_filter_nohtml_kses($videoName)) .
+			'",
                 "description": "' .
-				(str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($videoDescription)
-				) ?:
-					__("No description provided")) .
-				'",
+			(str_replace(
+				"\'",
+				"'",
+				wp_filter_nohtml_kses($videoDescription)
+			) ?:
+				__("No description provided")) .
+			'",
                 "duration" : "' .
-				generateISODurationCode($videoDuration) .
-				'",
+			generateISODurationCode($videoDuration) .
+			'",
                 "thumbnailUrl": "' .
-				esc_url($videoThumbnailURL) .
-				'",
+			esc_url($videoThumbnailURL) .
+			'",
                 "contentUrl": "' .
-				esc_url($videoURL) .
-				'",
+			esc_url($videoURL) .
+			'",
                 "uploadDate": "' .
-				date("c", $videoUploadDate) .
-				'",
+			date("c", $videoUploadDate) .
+			'",
                 "hasPart":[' .
-				$clips .
-				']
+			$clips .
+			']
             },') .
-			($cost > 0
-				? '"estimatedCost": {
+		($cost > 0
+			? '"estimatedCost": {
                 "@type": "MonetaryAmount",
                 "currency": "' .
-				str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($costCurrency)
-				) .
-				'",
+			str_replace("\'", "'", wp_filter_nohtml_kses($costCurrency)) .
+			'",
                 "value": "' .
-				wp_filter_nohtml_kses($cost) .
-				'"
+			wp_filter_nohtml_kses($cost) .
+			'"
             },'
-				: "") .
-			$suppliesCode .
-			"," .
-			$toolsCode .
-			","
 			: "") .
+		$suppliesCode .
+		"," .
+		$toolsCode .
+		"," .
 		$stepsCode .
 		',"yield": "' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToYield)) .
@@ -585,7 +575,7 @@ function dbe_render_how_to_block($attributes)
 
 		<div class="howto-yield bg-[#16A085] rounded-xl text-white p-5">
 			<div class="w-100 flex flex-wrap justify-center mb-3">
-				<<?= $secondLevelTag ?> class="text-white font-bold m-0" >
+				<<?= $secondLevelTag ?> class="text-white font-bold m-0">
 					<?= $resultIntro ?>
 				</<?= $secondLevelTag ?>>
 			</div>
