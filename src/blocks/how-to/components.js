@@ -400,43 +400,54 @@ class HowToStep extends Component {
 
 		return (
 			<>
-				<div className="howto-step__control-button">
-					<button
-						className="howto-delete"
-						icon="trash"
-						label={__("Delete step")}
-						onClick={() => deleteStep()}
-					/>
-					<button
-						className="howto-arrow"
-						icon="arrow-up-alt"
-						onClick={() => moveUp()}
-						label={__("Move step up")}
-					/>
-					<button
-						className="howto-arrow"
-						icon="arrow-down-alt"
-						onClick={() => moveDown()}
-						label={__("Move step down")}
-					/>
-				</div>
-				<li className="howto-step">
-					<div className="grid grid-cols-12 grid-flow-row gap-0">
-						<div className="order-1 md:order-1 row-span-6 col-span-2 m-2 mr-0 md:m-0 aspect-square  md:aspect-auto md:col-span-1 rounded-xl md:rounded-none howto-step__stepnum">
-							<h1>{stepNum + 1}</h1>
+				<li className="howto-step p-3 relative overflow-visible mt-12">
+					<div className="howto-step__control-button absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg">
+						<button
+							className="howto-arrow"
+							icon="arrow-up-alt"
+							onClick={() => moveUp()}
+							label={__("Move step up")}
+						>
+							<i class="fa fa-arrow-up" aria-hidden="true"></i>
+						</button>
+						<button
+							className="howto-arrow"
+							icon="arrow-down-alt"
+							onClick={() => moveDown()}
+							label={__("Move step down")}
+						>
+							<i class="fa fa-arrow-down" aria-hidden="true"></i>
+						</button>
+						<button
+							className="howto-delete"
+							icon="trash"
+							label={__("Delete step")}
+							onClick={() => deleteStep()}
+						>
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+					</div>
+
+					<div className="flex flex-wrap">
+						<div className="flex flex-wrap w-full">
+							<h1 className="bg-slate-200 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+								{stepNum + 1}
+							</h1>
+
+							<div className="px-2 flex-1">
+								<RichText
+									tagName={stepTag}
+									keepPlaceholderOnFocus
+									placeholder={__("Title goes here")}
+									className="howto-step__title my-2 font-semibold text-[1.3rem] md:text-2xl"
+									value={title}
+									onChange={(newVal) => editStep({ title: newVal })}
+									onFocus={selectStep}
+								/>
+							</div>
 						</div>
-						<div className="order-2 md:order-2 col-span-10 md:col-span-11 howto-step__desc">
-							<RichText
-								tagName={stepTag}
-								keepPlaceholderOnFocus
-								placeholder={__("Title goes here")}
-								className="howto-step__title"
-								value={title}
-								onChange={(newVal) => editStep({ title: newVal })}
-								onFocus={selectStep}
-							/>
-						</div>
-						<div className="order-4 md:order-3 col-span-12 md:col-span-11 howto-step__desc">
+
+						<div className="w-full">
 							<RichText
 								keepPlaceholderOnFocus
 								placeholder={__("Direction goes here")}
@@ -695,18 +706,18 @@ class HowToStep extends Component {
 								</>
 							)}
 						</div>
-						<div className="order-3 md:order-4 col-span-12 howto-step__image">
+						<div className="w-full howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto mt-3">
 							{stepPic.url !== "" ? (
-								<figure>
+								<figure className="w-full relative">
 									<img
-										className="howto-step-image"
+										className="howto-step-image mx-auto rounded-xl overflow-hidden"
 										src={stepPic.url}
 										onClick={selectStep}
 									/>
 									{blockIsSelected && (
 										<span
 											title={__("Delete image")}
-											className="dashicons dashicons-dismiss"
+											className="dashicons dashicons-trash howto-delete-image cursor-pointer"
 											onClick={() =>
 												editStep({
 													stepPic: {
@@ -755,12 +766,48 @@ class HowToStep extends Component {
 										allowedTypes={["image"]}
 										value={stepPic.id}
 										render={({ open }) => (
-											<button
-												className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-												onClick={open}
-											>
-												{__("Upload Image")}
-											</button>
+											<>
+												<div
+													className="w-full bg-[#EEEEEE] aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
+													onClick={open}
+												>
+													<div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															xmlnsXlink="http://www.w3.org/1999/xlink"
+															width="100"
+															height="100"
+															fill="none"
+															viewBox="0 0 100 100"
+														>
+															<path
+																fill="url(#pattern0)"
+																d="M0 0H100V100H0z"
+															></path>
+															<defs>
+																<pattern
+																	id="pattern0"
+																	width="1"
+																	height="1"
+																	patternContentUnits="objectBoundingBox"
+																>
+																	<use
+																		transform="scale(.00781)"
+																		xlinkHref="#image0_315_38"
+																	></use>
+																</pattern>
+																<image
+																	id="image0_315_38"
+																	width="128"
+																	height="128"
+																	xlinkHref="data:image/png;base64,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"
+																></image>
+															</defs>
+														</svg>
+														<p className="text-[#999999]">Tambahkan Media</p>
+													</div>
+												</div>
+											</>
 										)}
 									/>
 								</div>
@@ -772,6 +819,13 @@ class HowToStep extends Component {
 		);
 	}
 }
+
+// <button
+// 	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+// 	onClick={open}
+// >
+// 	{__("Upload Image")}
+// </button>
 
 class HowToSection extends Component {
 	constructor(props) {
@@ -813,7 +867,10 @@ class HowToSection extends Component {
 						onClick={() => deleteSection()}
 					/>
 				</div>
-				<ListWrapper className="howto-steps-list" listStyle={sectionListStyle}>
+				<ListWrapper
+					className="howto-steps-list pl-0"
+					listStyle={sectionListStyle}
+				>
 					{steps.map((step, i) => (
 						<HowToStep
 							{...step}
@@ -889,8 +946,8 @@ class HowToSection extends Component {
 						/>
 					))}
 				</ListWrapper>
-				<button
-					className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+
+				<ButtonAddStep
 					onClick={() => {
 						editSection({
 							sectionName,
@@ -915,12 +972,27 @@ class HowToSection extends Component {
 							],
 						});
 					}}
-				>
-					{__("Add step")}
-				</button>
+				/>
 			</li>
 		);
 	}
+}
+
+function ButtonAddStep(props) {
+	const { onClick } = props;
+	return (
+		<>
+			<div className="w-full flex flex-wrap justify-center my-12">
+				<button
+					className="text-gray-800 hover:text-gray-50 bg-transparent border hover:bg-slate-400 ring-gray-500  focus:ring-4 focus:ring-gray-500 font-thin text-sm px-2 py-1 focus:outline-none rounded-full transition duration-200 ease-in-out"
+					onClick={onClick}
+				>
+					<i class="fa fa-plus mr-2" aria-hidden="true"></i>
+					{__("Tambah Langkah")}
+				</button>
+			</div>
+		</>
+	);
 }
 
 export class EditorComponent extends Component {
@@ -1254,16 +1326,17 @@ export class EditorComponent extends Component {
 					<RichText
 						placeholder={__("How to introduction")}
 						keepPlaceholderOnFocus={true}
+						className="mb-3"
 						value={introduction}
 						onChange={(introduction) => setAttributes({ introduction })}
 					/>
 					{advancedMode && (
 						<>
-							<div className="howto-video-input">
+							<div className="howto-video-input w-full relative mb-2">
 								<input
 									type="url"
 									placeholder={__("Insert video URL")}
-									className="border border-slate-200"
+									className="border border-slate-200 w-full"
 									value={videoURLInput}
 									onChange={(e) =>
 										this.setState({ videoURLInput: e.target.value })
@@ -1274,20 +1347,24 @@ export class EditorComponent extends Component {
 										}
 									}}
 								/>
-								<button
-									icon={"editor-break"}
-									label={__("Apply")}
-									type={"submit"}
-									onClick={checkVideoURLInput}
-								/>
-								<button
-									icon="trash"
-									label={__("Delete")}
-									onClick={() => {
-										resetVideoAttributes();
-										this.setState({ videoURLInput: "" });
-									}}
-								/>
+								<div className="absolute top-0 right-0 flex-wrap flex items-center h-full">
+									<button
+										icon={"editor-break"}
+										label={__("Apply")}
+										type={"submit"}
+										className={`dashicons dashicons-yes-alt text-2xl mr-2 h-auto`}
+										onClick={checkVideoURLInput}
+									></button>
+									<button
+										icon="trash"
+										label={__("Delete")}
+										className={`dashicons dashicons-dismiss text-2xl mr-3 h-auto`}
+										onClick={() => {
+											resetVideoAttributes();
+											this.setState({ videoURLInput: "" });
+										}}
+									></button>
+								</div>
 							</div>
 							<div
 								dangerouslySetInnerHTML={{
@@ -1350,7 +1427,7 @@ export class EditorComponent extends Component {
 															{isSelected && (
 																<span
 																	title={__("Delete image")}
-																	className="dashicons dashicons-dismiss"
+																	className="dashicons dashicons-trash howto-delete-image cursor-pointer"
 																	onClick={() =>
 																		setAttributes({
 																			supplies: [
@@ -1462,7 +1539,7 @@ export class EditorComponent extends Component {
 															{isSelected && (
 																<span
 																	title={__("Delete image")}
-																	className="dashicons dashicons-dismiss"
+																	className="dashicons dashicons-trash howto-delete-image cursor-pointer"
 																	onClick={() =>
 																		setAttributes({
 																			tools: [
@@ -1524,15 +1601,16 @@ export class EditorComponent extends Component {
 									</button>
 								</>
 							)}
-							<div className="howto_cost_container">
+							<div className="howto_cost_container mb-3 mt-0 flex flex-wrap justify-between">
 								<RichText
 									value={costDisplayText}
+									className={`font-medium`}
 									onChange={(costDisplayText) =>
 										setAttributes({ costDisplayText })
 									}
 								/>
 								<div
-									className="howto_cost_display"
+									className="howto_cost_display flex"
 									style={{
 										flexDirection: showUnitFirst ? "row" : "row-reverse",
 									}}
@@ -1567,77 +1645,103 @@ export class EditorComponent extends Component {
 					)}
 					<RichText
 						tagName={secondLevelTag}
+						className={`mt-0 mb-1`}
 						placeholder={__("Duration")}
 						keepPlaceholderOnFocus={true}
 						value={timeIntro}
 						onChange={(timeIntro) => setAttributes({ timeIntro })}
 					/>
 					<div className="howto-duration-input">
-						<span />
-						{units.map((u) => {
-							return (
-								<>
-									{(u === "years") |
-									((u === "months") | (u === "weeks") | (u === "days")) ? (
-										<p className="hidden">{__(u)}</p>
-									) : (
-										<p>{__(u)}</p>
-									)}
-								</>
-							);
-						})}
-						<RichText
-							keepPlaceholderOnFocus
-							value={totalTimeText}
-							onChange={(totalTimeText) => setAttributes({ totalTimeText })}
-						/>
-						{totalTime.map((t, i) => {
-							if (i < 4) {
+						<p className="m-0">
+							<RichText
+								keepPlaceholderOnFocus
+								value={totalTimeText}
+								onChange={(totalTimeText) => setAttributes({ totalTimeText })}
+							/>
+						</p>
+						<div className="grid grid-cols-3 md:grid-cols-7 gap-4">
+							{units.map((u, i) => {
 								return (
 									<>
-										<RichText
-											className="hidden"
-											keepPlaceholderOnFocus
-											placeholder={__("0")}
-											value={String(t)}
-											onChange={(newInput) => {
-												if (!isNaN(Number(newInput))) {
-													setAttributes({
-														totalTime: [
-															...totalTime.slice(0, i),
-															Number(newInput),
-															...totalTime.slice(i + 1),
-														],
-													});
-												}
-											}}
-										/>
+										{(u === "years") |
+										((u === "months") | (u === "weeks") | (u === "days")) ? (
+											<p className="hidden">{__(u)}</p>
+										) : (
+											<>
+												<p className="m-0">
+													{__(u)} :{" "}
+													<RichText
+														className="howto-time-value inline-block"
+														keepPlaceholderOnFocus
+														placeholder={__("0")}
+														value={String(totalTime[i])}
+														onChange={(newInput) => {
+															if (!isNaN(Number(newInput))) {
+																setAttributes({
+																	totalTime: [
+																		...totalTime.slice(0, i),
+																		Number(newInput),
+																		...totalTime.slice(i + 1),
+																	],
+																});
+															}
+														}}
+													/>
+												</p>
+											</>
+										)}
 									</>
 								);
-							} else {
-								return (
-									<>
-										<RichText
-											className="howto-time-value"
-											keepPlaceholderOnFocus
-											placeholder={__("0")}
-											value={String(t)}
-											onChange={(newInput) => {
-												if (!isNaN(Number(newInput))) {
-													setAttributes({
-														totalTime: [
-															...totalTime.slice(0, i),
-															Number(newInput),
-															...totalTime.slice(i + 1),
-														],
-													});
-												}
-											}}
-										/>
-									</>
-								);
-							}
-						})}
+							})}
+
+							{/* {totalTime.map((t, i) => {
+								if (i < 4) {
+									return (
+										<>
+											<RichText
+												className="hidden"
+												keepPlaceholderOnFocus
+												placeholder={__("0")}
+												value={String(t)}
+												onChange={(newInput) => {
+													if (!isNaN(Number(newInput))) {
+														setAttributes({
+															totalTime: [
+																...totalTime.slice(0, i),
+																Number(newInput),
+																...totalTime.slice(i + 1),
+															],
+														});
+													}
+												}}
+											/>
+										</>
+									);
+								} else {
+									return (
+										<>
+											<RichText
+												className="howto-time-value"
+												keepPlaceholderOnFocus
+												placeholder={__("0")}
+												value={String(t)}
+												onChange={(newInput) => {
+													if (!isNaN(Number(newInput))) {
+														setAttributes({
+															totalTime: [
+																...totalTime.slice(0, i),
+																Number(newInput),
+																...totalTime.slice(i + 1),
+															],
+														});
+													}
+												}}
+											/>
+										</>
+									);
+								}
+							})} */}
+						</div>
 					</div>
 					{useSections ? (
 						<ListWrapper listStyle={sectionListStyle}>
@@ -1681,7 +1785,7 @@ export class EditorComponent extends Component {
 					) : (
 						<>
 							<ListWrapper
-								className={"howto-steps-list"}
+								className={"howto-steps-list pl-0"}
 								listStyle={sectionListStyle}
 							>
 								{section[0].steps.map((step, i) => (
@@ -1774,7 +1878,37 @@ export class EditorComponent extends Component {
 									/>
 								))}
 							</ListWrapper>
-							<button
+
+							<ButtonAddStep
+								onClick={() => {
+									setAttributes({
+										section: [
+											Object.assign(section[0], {
+												steps: [
+													...section[0].steps,
+													{
+														anchor: `step${section[0].steps.length}`,
+														stepPic: {
+															img: -1,
+															alt: "",
+															url: "",
+															width: 0,
+															float: "none",
+														},
+														direction: "",
+														tip: "",
+														title: "",
+														hasVideoClip: false,
+														videoClipStart: 0,
+														videoClipEnd: 0,
+													},
+												],
+											}),
+										],
+									});
+								}}
+							/>
+							{/* <button
 								className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 								onClick={() => {
 									setAttributes({
@@ -1804,8 +1938,8 @@ export class EditorComponent extends Component {
 									});
 								}}
 							>
-								{__("Add step")}
-							</button>
+								{__("Tambah Langkah")}
+							</button> */}
 						</>
 					)}
 					{useSections && (
@@ -1843,25 +1977,30 @@ export class EditorComponent extends Component {
 							{__("Add Section")}
 						</button>
 					)}
-					<div className="howto-yield">
-						<RichText
-							tagName={secondLevelTag}
-							placeholder={__("Result")}
-							keepPlaceholderOnFocus={true}
-							value={resultIntro}
-							onChange={(resultIntro) => setAttributes({ resultIntro })}
-							onFocus={() => this.setState({ currentStep: "final" })}
-						/>
+
+					<div className="howto-yield bg-[#16A085] rounded-xl text-white p-5">
+						<div className="w-100 flex flex-wrap justify-center mb-3">
+							<RichText
+								tagName={secondLevelTag}
+								className={`text-white font-bold m-0`}
+								placeholder={__("Result")}
+								keepPlaceholderOnFocus={true}
+								value={resultIntro}
+								onChange={(resultIntro) => setAttributes({ resultIntro })}
+								onFocus={() => this.setState({ currentStep: "final" })}
+							/>
+						</div>
 						{finalImageURL !== "" ? (
-							<figure className="howto-yield-image-container">
+							<figure className="howto-yield-image-container w-full relative">
 								<img
+									className="howto-step-image mx-auto rounded-xl overflow-hidden"
 									src={finalImageURL}
 									onClick={() => this.setState({ currentStep: "final" })}
 								/>
 								{isSelected && (
 									<span
 										title={__("Delete image")}
-										className="dashicons dashicons-dismiss"
+										className="dashicons dashicons-trash howto-delete-image cursor-pointer"
 										onClick={() =>
 											setAttributes({
 												finalImageID: -1,
@@ -1886,29 +2025,67 @@ export class EditorComponent extends Component {
 								/>
 							</figure>
 						) : (
-							<MediaUpload
-								onSelect={(img) => {
-									this.setState({ currentStep: "final" });
-									setAttributes({
-										finalImageID: img.id,
-										finalImageAlt: img.alt,
-										finalImageURL: img.url,
-										finalImageCaption: img.caption,
-										finalImageWidth: Math.min(Math.max(img.width, 200), 800),
-										finalImageFloat: "none",
-									});
-								}}
-								allowedTypes={["image"]}
-								value={finalImageID}
-								render={({ open }) => (
-									<button
-										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-										onClick={open}
-									>
-										{__("Upload Image")}
-									</button>
-								)}
-							/>
+							<div className="flex flex-wrap justify-center align-center py-5">
+								<MediaUpload
+									onSelect={(img) => {
+										this.setState({ currentStep: "final" });
+										setAttributes({
+											finalImageID: img.id,
+											finalImageAlt: img.alt,
+											finalImageURL: img.url,
+											finalImageCaption: img.caption,
+											finalImageWidth: Math.min(Math.max(img.width, 200), 800),
+											finalImageFloat: "none",
+										});
+									}}
+									allowedTypes={["image"]}
+									value={finalImageID}
+									render={({ open }) => (
+										<>
+											<div
+												className="w-full bg-[#EEEEEE] aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
+												onClick={open}
+											>
+												<div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														xmlnsXlink="http://www.w3.org/1999/xlink"
+														width="100"
+														height="100"
+														fill="none"
+														viewBox="0 0 100 100"
+													>
+														<path
+															fill="url(#pattern0)"
+															d="M0 0H100V100H0z"
+														></path>
+														<defs>
+															<pattern
+																id="pattern0"
+																width="1"
+																height="1"
+																patternContentUnits="objectBoundingBox"
+															>
+																<use
+																	transform="scale(.00781)"
+																	xlinkHref="#image0_315_38"
+																></use>
+															</pattern>
+															<image
+																id="image0_315_38"
+																width="128"
+																height="128"
+																xlinkHref="data:image/png;base64,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"
+															></image>
+														</defs>
+													</svg>
+													<p className="text-[#999999]">Tambahkan Media</p>
+												</div>
+											</div>
+										</>
+									)}
+								/>
+							</div>
 						)}
 						<RichText
 							keepPlaceholderOnFocus
