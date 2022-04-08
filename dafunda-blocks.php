@@ -5,7 +5,7 @@
  * Description: Dafunda Custom Blocks
  * Plugin Author: Dafunda Dev Team
  * Author URI: https://dafunda.io
- * Version: 0.0.1-rc-3:c
+ * Version: 0.0.1-rc-3d
  * Text Domain: dafunda-blocks
  * Domain Path: /languages
  *
@@ -21,7 +21,7 @@ require_once "includes/class-dafunda-blocks-constants.php";
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Start at version 0.0.1 and use SemVer - https://semver.org
  */
 define("DAFUNDA_BLOCKS_VERSION", Dafunda_Blocks_Constants::plugin_version());
 /**

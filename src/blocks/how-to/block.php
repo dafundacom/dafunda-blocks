@@ -548,14 +548,14 @@ function dbe_render_how_to_block($attributes)
 		'"' .
 		',"aggregateRating": {
 	"@type": "AggregateRating",
-	"ratingValue": ' .
+	"ratingValue": "' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingValue)) .
-		',
+		'",
 	"bestRating": "5",
-	"worstRating": "0",
-	"ratingCount": ' .
+	"worstRating": "1",
+	"ratingCount": "' .
 		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingCount)) .
-		'
+		'"
 	}' .
 		"
 	}</script>";
