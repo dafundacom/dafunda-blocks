@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+	.editor-styles-wrapper .wp-block .howto i,
+	.editor-styles-wrapper .wp-block .howto em {
+		font-style: inherit;
+	}
+
 	h1 {
 		@apply text-4xl font-bold;
 	}
@@ -461,93 +466,77 @@
 	}
 
 	/* How To*/
-	.howto {
-		@apply space-x-4 space-y-4;
+	.howto-step {
+		@apply list-none;
 	}
-	.howto figure,
-	.howto li > .components-button,
-	.howto > .components-button {
-		@apply mb-3;
+
+	.howto-supplies-list img,
+	.howto-tools-list img {
+		@apply max-w-[200px];
 	}
-	.howto figure {
-		@apply relative;
+	.howto-section-display {
+		@apply ml-4;
 	}
-	.howto figure > .dashicons-dismiss {
-		@apply absolute right-1;
+	.howto figcaption {
+		@apply mt-1 text-center;
 	}
+
+	.howto-step-display .howto-step {
+		@apply list-outside;
+	}
+	.howto-step {
+		@apply rounded-lg border border-slate-200 md:overflow-hidden;
+		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
+	}
+
+	.howto-step > figure,
+	.howto-step > img {
+		@apply mb-2;
+	}
+
+	.howto-yield {
+		@apply overflow-auto;
+	}
+
+	@media screen and (max-width: 767px) {
+		.howto .howto-steps-list .howto-step > figure,
+		.howto .howto-section .howto-steps-list .howto-step > figure,
+		.howto .howto-step-display .howto-step > figure,
+		.howto .howto-section .howto-step-display .howto-step > figure {
+			@apply w-full float-none;
+		}
+	}
+
 	.howto .howto__title {
 		@apply font-bold;
 	}
-	.howto .howto-steps-list {
-		@apply ml-0;
+
+	.howto .howto__title + p {
+		@apply p-3 rounded-lg border border-slate-200;
+		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 	}
-	.howto .howto-steps-list .howto-step__control-button {
-		@apply flex flex-wrap justify-end;
+
+	.howto .howto-step-display {
+		@apply pl-0;
 	}
-	.howto .howto-steps-list .howto-step {
-		@apply mt-4 rounded-lg overflow-hidden border border-gray-200;
+
+	.howto .howto-delete-image {
+		@apply absolute right-[20px] top-[20px] text-white bg-red-600 hover:bg-red-700 text-xl p-2 w-auto h-auto rounded-lg leading-none transition duration-200 ease-in-out;
 	}
-	.howto .howto-steps-list .howto-step .howto-step__stepnum {
-		@apply bg-slate-200 flex flex-wrap items-center  justify-center;
+
+	.howto .howto-arrow,
+	.howto .howto-delete {
+		@apply text-gray-100 hover:text-gray-100  ring-gray-500  text-lg px-2 py-0.5 focus:outline-none rounded-full transition duration-200 ease-in-out aspect-square;
 	}
-	.howto .howto-steps-list .howto-step .howto-step__stepnum h1 {
-		@apply font-black;
-		font-size: clamp(1.2rem, 3rem, 3vw);
+
+	.howto .howto-arrow {
+		@apply bg-gray-400 hover:bg-gray-700;
 	}
-	.howto .howto-steps-list .howto-step .howto-step__desc {
-		@apply px-2;
+	.howto .howto-delete {
+		@apply bg-gray-400 hover:bg-red-700;
 	}
-	.howto .howto-steps-list .howto-step .howto-step__desc .howto-step__title {
-		@apply m-0 font-semibold;
-	}
-	.howto .howto-steps-list .howto-step .howto-step__desc h5.howto-step__title {
-		@apply text-lg;
-	}
-	.howto .howto-steps-list .howto-step .howto-step__desc:nth-child(2) {
-		@apply py-4;
-	}
-	.howto .howto-steps-list .howto-step .howto-step__desc:nth-child(3) {
-		@apply pb-4;
-	}
-	.howto-tools-list figure,
-	.howto-supplies-list figure {
-		@apply max-w-[200px] aspect-square;
-	}
-	.howto_cost_container {
-		@apply flex my-6;
-	}
-	.howto_cost_display {
-		@apply flex ml-auto;
-	}
-	.howto-delete {
-		@apply my-auto ml-auto min-w-[24px];
-	}
-	.howto-arrow {
-		@apply min-w-[24px] my-auto;
-	}
-	.howto-time-value {
-		@apply text-center;
-	}
-	.howto-duration-input {
-		@apply grid grid-cols-4;
-	}
-	.howto-duration-input P {
-		@apply text-center text-sm;
-	}
-	.howto-video-input {
-		@apply flex mt-4;
-	}
-	.howto-video-input > input {
-		@apply flex-grow;
-	}
-	.howto-supplies-list li > div,
-	.howto-tools-list li > div {
-		@apply flex;
-	}
-	.howto-supplies-list .components-button,
-	.howto-tools-list .components-button {
-		@apply ml-auto;
-	}
+
+	/* How To END */
 
 	/* Image Slider */
 	.custom-id-input {

@@ -60,7 +60,7 @@ function dbe_render_how_to_block($attributes)
 
 	$header = "";
 
-	$timeUnits = ["second", "minute", "hour", "day", "week", "month", "year"];
+	$timeUnits = ["Detik", "Menit", "Jam", "Hari", "Minggu", "Bulan", "Tahun"];
 
 	$suppliesCode = '"supply": [';
 	if ($advancedMode && $includeSuppliesList) {
@@ -158,7 +158,7 @@ function dbe_render_how_to_block($attributes)
 	foreach ($totalTime as $i => $t) {
 		if ($t > 0) {
 			$totalTimeDisplay .=
-				$t . " " . __($timeUnits[6 - $i] . ($t > 1 ? "s" : "")) . " ";
+				$t . " " . __($timeUnits[6 - $i] . ($t > 1 ? "" : "")) . " ";
 		}
 	}
 
