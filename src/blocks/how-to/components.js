@@ -776,7 +776,9 @@ class HowToStep extends Component {
 															class="fa fa-picture-o text-8xl"
 															aria-hidden="true"
 														></i>
-														<p className="text-[#999999] m-0">Tambahkan Media</p>
+														<p className="text-[#999999] m-0">
+															Tambahkan Media
+														</p>
 													</div>
 												</div>
 											</>
@@ -1635,9 +1637,28 @@ export class EditorComponent extends Component {
 							{units.map((u, i) => {
 								return (
 									<>
-										{(u === "years") |
-										((u === "months") | (u === "weeks") | (u === "days")) ? (
-											<p className="hidden">{__(u)}</p>
+										{(u === "Tahun") |
+										((u === "Bulan") | (u === "Minggu") | (u === "Hari")) ? (
+											<p className="hidden">
+												{__(u)}
+												<RichText
+													className="hidden"
+													keepPlaceholderOnFocus
+													placeholder={__("0")}
+													value={String(totalTime[i])}
+													onChange={(newInput) => {
+														if (!isNaN(Number(newInput))) {
+															setAttributes({
+																totalTime: [
+																	...totalTime.slice(0, i),
+																	Number(newInput),
+																	...totalTime.slice(i + 1),
+																],
+															});
+														}
+													}}
+												/>
+											</p>
 										) : (
 											<>
 												<p className="m-0">
