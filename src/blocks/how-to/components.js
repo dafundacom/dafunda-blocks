@@ -767,7 +767,6 @@ class HowToStep extends Component {
 										value={stepPic.id}
 										render={({ open }) => (
 											<>
-											
 												<div
 													className="w-full bg-[#EEEEEE] aspect-[16/9] md:aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
 													onClick={open}
