@@ -439,7 +439,7 @@ class HowToStep extends Component {
 									tagName={stepTag}
 									keepPlaceholderOnFocus
 									placeholder={__("Title goes here")}
-									className="howto-step__title my-2 font-semibold text-[1.3rem] md:text-2xl"
+									className="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl"
 									value={title}
 									onChange={(newVal) => editStep({ title: newVal })}
 									onFocus={selectStep}
@@ -769,43 +769,15 @@ class HowToStep extends Component {
 											<>
 											
 												<div
-													className="w-full bg-[#EEEEEE] aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
+													className="w-full bg-[#EEEEEE] aspect-[16/9] md:aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
 													onClick={open}
 												>
 													<div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															xmlnsXlink="http://www.w3.org/1999/xlink"
-															width="100"
-															height="100"
-															fill="none"
-															viewBox="0 0 100 100"
-														>
-															<path
-																fill="url(#pattern0)"
-																d="M0 0H100V100H0z"
-															></path>
-															<defs>
-																<pattern
-																	id="pattern0"
-																	width="1"
-																	height="1"
-																	patternContentUnits="objectBoundingBox"
-																>
-																	<use
-																		transform="scale(.00781)"
-																		xlinkHref="#image0_315_38"
-																	></use>
-																</pattern>
-																<image
-																	id="image0_315_38"
-																	width="128"
-																	height="128"
-																	xlinkHref="data:image/png;base64,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"
-																></image>
-															</defs>
-														</svg>
-														<p className="text-[#999999]">Tambahkan Media</p>
+														<i
+															class="fa fa-picture-o text-8xl"
+															aria-hidden="true"
+														></i>
+														<p className="text-[#999999] m-0">Tambahkan Media</p>
 													</div>
 												</div>
 											</>
@@ -1321,7 +1293,7 @@ export class EditorComponent extends Component {
 						placeholder={__("How to title")}
 						keepPlaceholderOnFocus={true}
 						value={title}
-						className="howto__title"
+						className="howto__title font-semibold"
 						onChange={(title) => setAttributes({ title })}
 					/>
 					<RichText
@@ -1660,7 +1632,7 @@ export class EditorComponent extends Component {
 								onChange={(totalTimeText) => setAttributes({ totalTimeText })}
 							/>
 						</p>
-						<div className="grid grid-cols-3 md:grid-cols-7 gap-4">
+						<div className="grid grid-cols-4 md:grid-cols-7 gap-4">
 							{units.map((u, i) => {
 								return (
 									<>
@@ -2044,43 +2016,15 @@ export class EditorComponent extends Component {
 									render={({ open }) => (
 										<>
 											<div
-												className="w-full bg-[#EEEEEE] aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
+												className="w-full bg-[#EEEEEE] aspect-[16/9] md:aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
 												onClick={open}
 											>
 												<div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														xmlnsXlink="http://www.w3.org/1999/xlink"
-														width="100"
-														height="100"
-														fill="none"
-														viewBox="0 0 100 100"
-													>
-														<path
-															fill="url(#pattern0)"
-															d="M0 0H100V100H0z"
-														></path>
-														<defs>
-															<pattern
-																id="pattern0"
-																width="1"
-																height="1"
-																patternContentUnits="objectBoundingBox"
-															>
-																<use
-																	transform="scale(.00781)"
-																	xlinkHref="#image0_315_38"
-																></use>
-															</pattern>
-															<image
-																id="image0_315_38"
-																width="128"
-																height="128"
-																xlinkHref="data:image/png;base64,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"
-															></image>
-														</defs>
-													</svg>
-													<p className="text-[#999999]">Tambahkan Media</p>
+													<i
+														class="fa fa-picture-o text-8xl"
+														aria-hidden="true"
+													></i>
+													<p className="text-[#999999] m-0">Tambahkan Media</p>
 												</div>
 											</div>
 										</>
