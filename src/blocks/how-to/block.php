@@ -630,7 +630,7 @@ function dbe_render_how_to_block($attributes)
 			echo "howto-review-result__bad";
 		}
 		?> ">
-			<h3 class="my-auto ml-3 mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</h3>
+			<h3 class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</h3>
 			<div>
 				<p class="m-0">Orang menganggap tutorial ini</p>
 				<p class="m-0 howto-review-result__membantu">
