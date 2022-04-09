@@ -322,7 +322,7 @@ function dbe_render_how_to_block($attributes)
 							</div>
 
 							<div class="px-2 flex-1">
-								<<?= $thirdLevelTag ?> id="<?= $step["anchor"] ?>" class="howto-step__title my-2 font-semibold text-[1.3rem] md:text-2xl">
+								<<?= $thirdLevelTag ?> id="<?= $step["anchor"] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
 									<?= $step["title"] ?>
 								</<?= $thirdLevelTag ?>>
 							</div>
@@ -594,6 +594,63 @@ function dbe_render_how_to_block($attributes)
 					"</figcaption></figure>") ?>
 			<?= dbe_convert_to_paragraphs($howToYield) ?>
 		</div>
+
+		<div class="howto-review p-3 mb-3">
+			<div class="howto-review__vote">
+				<div class="w-full text-center mb-4">
+					Apakah artikel ini membantu mu?
+				</div>
+				<div class="w-full flex flex-wrap justify-center items-center mb-3">
+					<div class="howto-review__like mr-3">
+						<button class="dashicons dashicons-thumbs-up text-emerald-600"></button>
+					</div>
+					<div class="howto-review__dislike">
+						<button class="dashicons dashicons-thumbs-down text-rose-800"></button>
+					</div>
+				</div>
+			</div>
+
+			<div class="howto-review__thank w-full text-center my-4 text-lg hidden">
+				<h2 class="m-0">Terimakasih sudah memberi jawaban</h1>
+			</div>
+
+		</div>
+
+		<div class="text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result
+		<?php
+		$howToReviewPercent = $howToRatingCount / $howToRatingValue * 100;
+		$howToReviewPercentIcon = "dashicons-thumbs-up";
+		if ($howToReviewPercent >= 65) {
+			echo "howto-review-result__good";
+		} else if ($howToReviewPercent >= 50) {
+			$howToReviewPercentIcon = "dashicons-thumbs-down";
+			echo "howto-review-result__medium";
+		} else {
+			$howToReviewPercentIcon = "dashicons-thumbs-down";
+			echo "howto-review-result__bad";
+		}
+		?> ">
+			<h3 class="my-auto ml-3 mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</h3>
+			<div>
+				<p class="m-0">Orang menganggap tutorial ini</p>
+				<p class="m-0 howto-review-result__membantu">
+					<?php
+					if ($howToReviewPercent >= 65) echo "sangat ";
+					?>
+					membantu
+				</p>
+			</div>
+			<i class="howto-review-result__icon dashicons <?= $howToReviewPercentIcon ?>"></i>
+		</div>
+
+		<script>
+			document.querySelectorAll(".howto-review .dashicons-thumbs-up, .howto-review .dashicons-thumbs-down").forEach((el, i) => {
+				el.addEventListener("click", (e) => {
+					e.target.closest(".howto-review__vote").classList.add("hidden")
+					e.target.closest(".howto-review").querySelector(".howto-review__thank").classList.remove("hidden")
+				})
+			})
+		</script>
 
 	</div>
 	<?= $JSONLD ?>

@@ -701,7 +701,8 @@
 	.howto-step-display .howto-step {
 		@apply list-outside;
 	}
-	.howto-step {
+	.howto-step,
+	.howto-review {
 		@apply mt-4 rounded-lg border border-slate-200 md:overflow-hidden;
 		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 	}
@@ -725,6 +726,51 @@
 		.howto .howto-section .howto-step-display .howto-step > figure {
 			@apply w-full float-none;
 		}
+	}
+
+	.howto-review .howto-review__like,
+	.howto-review .howto-review__dislike {
+		@apply bg-[#EEEEEE] hover:bg-[#cdcdcd] rounded-full px-[1.55rem] py-[0.1rem] w-fit;
+	}
+	.howto-review .howto-review__like button,
+	.howto-review .howto-review__dislike button {
+		@apply text-3xl h-auto w-auto;
+	}
+
+	.howto-review-result__good {
+		@apply bg-[#16A085];
+	}
+
+	.howto-review-result__medium {
+		@apply bg-[#F19066];
+	}
+
+	.howto-review-result__bad {
+		@apply bg-[#C44569];
+	}
+
+	.howto-review-result__good .howto-review-result__icon {
+		@apply ml-auto my-auto text-4xl w-auto h-auto rotate-[-13.41deg];
+	}
+
+	.howto-review-result__bad .howto-review-result__icon {
+		@apply ml-auto my-auto text-4xl w-auto h-auto rotate-[19.2deg];
+	}
+
+	.howto-review-result__medium .howto-review-result__icon {
+		@apply ml-auto my-auto text-2xl w-auto h-auto relative;
+	}
+
+	.howto-review-result__medium .howto-review-result__icon:before {
+		position: absolute;
+    transform: translate(0px, -25px);
+    right: 0;
+	}
+	.howto-review-result__medium .howto-review-result__icon:after {
+		content: "\f529";
+		position: absolute;
+    right: 0;
+    transform: translate(-13px, -8px);
 	}
 	/* How To END */
 
