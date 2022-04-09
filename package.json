@@ -5,7 +5,7 @@
 	"scripts": {
 		"unlock-limit": "echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
 		"start": "concurrently -k \"wp-scripts start\" \"node recompileOnChange.js\" \"npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify --watch\" \"npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c tailwind.config.js --minify --watch\"",
-		"prebuild": "npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify && npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c ./tailwind.config.js --minify",
+		"prebuild": "yarn clean-dist && npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify && npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c ./tailwind.config.js --minify",
 		"build": "wp-scripts build & node recompile.js",
 		"format": "prettier -w .",
 		"check": "prettier -C",
