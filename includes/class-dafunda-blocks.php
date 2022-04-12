@@ -25,7 +25,6 @@
  * @since    0.0.1
  * @package    dafunda_blocks
  * @subpackage dafunda_blocks/includes
- * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
 class Dafunda_Blocks
 {
@@ -191,18 +190,6 @@ class Dafunda_Blocks
 			"admin_head",
 			$plugin_admin,
 			"insert_blocks_settings"
-		);
-
-		//Review Notice
-		$this->loader->add_action(
-			"admin_notices",
-			$plugin_admin,
-			"DafundaBlocks_review_notice"
-		);
-		$this->loader->add_action(
-			"wp_ajax_DafundaBlocksReviewNoticeHide",
-			$plugin_admin,
-			"DafundaBlocks_hide_review_notify"
 		);
 	}
 

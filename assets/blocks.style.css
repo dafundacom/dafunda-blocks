@@ -763,14 +763,14 @@
 
 	.howto-review-result__medium .howto-review-result__icon:before {
 		position: absolute;
-    transform: translate(0px, -25px);
-    right: 0;
+		transform: translate(0px, -25px);
+		right: 0;
 	}
 	.howto-review-result__medium .howto-review-result__icon:after {
 		content: "\f529";
 		position: absolute;
-    right: 0;
-    transform: translate(-13px, -8px);
+		right: 0;
+		transform: translate(-13px, -8px);
 	}
 	/* How To END */
 

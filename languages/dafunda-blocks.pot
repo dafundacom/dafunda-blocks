@@ -12,15 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin/class-dafunda-blocks-admin.php:357
-msgid ""
-"Hey,<br> I noticed that you have been using <strong>Dafunda Blocks "
-"Plugin</strong> for a while now - that’s awesome! Could you please do me a "
-"BIG favor and <b>give it a 5-star rating on WordPress</b>? Just to help us "
-"spread the word and boost our motivation. <br>~ Imtiaz Rayhan<br>~ Lead "
-"Developer, Dafunda Blocks."
-msgstr ""
-
 #. Author of the plugin
 #: includes/class-dafunda-blocks-category.php:59
 msgid "Dafunda Blocks"

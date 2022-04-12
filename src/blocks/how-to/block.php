@@ -214,15 +214,15 @@ function dbe_render_how_to_block($attributes)
 					PHP_EOL .
 					($advancedMode
 						? '"url": "' .
-						get_permalink() .
-						"#" .
-						$step["anchor"] .
-						'",' .
-						PHP_EOL .
-						($step["hasVideoClip"]
-							? '"video":{"@id": "' . $step["anchor"] . '"},'
-							: "") .
-						PHP_EOL
+							get_permalink() .
+							"#" .
+							$step["anchor"] .
+							'",' .
+							PHP_EOL .
+							($step["hasVideoClip"]
+								? '"video":{"@id": "' . $step["anchor"] . '"},'
+								: "") .
+							PHP_EOL
 						: "") .
 					'"image": "' .
 					$step["stepPic"]["url"] .
@@ -243,16 +243,16 @@ function dbe_render_how_to_block($attributes)
 					">" .
 					($step["stepPic"]["url"] !== ""
 						? ($step["stepPic"]["caption"] === ""
-							? ""
-							: '<figure class="w-full">') .
-						'<img class="howto-step-image " src="' .
-						$step["stepPic"]["url"] .
-						'">' .
-						($step["stepPic"]["caption"] === ""
-							? ""
-							: "<figcaption>" .
-							$step["stepPic"]["caption"] .
-							"</figcaption></figure>")
+								? ""
+								: '<figure class="w-full">') .
+							'<img class="howto-step-image " src="' .
+							$step["stepPic"]["url"] .
+							'">' .
+							($step["stepPic"]["caption"] === ""
+								? ""
+								: "<figcaption>" .
+									$step["stepPic"]["caption"] .
+									"</figcaption></figure>")
 						: "") .
 					dbe_convert_to_paragraphs($step["direction"]) .
 					PHP_EOL;
@@ -264,10 +264,10 @@ function dbe_render_how_to_block($attributes)
 					($step["title"] === "" || !$advancedMode
 						? ""
 						: str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($step["title"])
-						) . " ") .
+								"\'",
+								"'",
+								wp_filter_nohtml_kses($step["title"])
+							) . " ") .
 					str_replace(
 						"\'",
 						"'",
@@ -322,7 +322,9 @@ function dbe_render_how_to_block($attributes)
 							</div>
 
 							<div class="px-2 flex-1">
-								<<?= $thirdLevelTag ?> id="<?= $step["anchor"] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
+								<<?= $thirdLevelTag ?> id="<?= $step[
+ 	"anchor"
+ ] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
 									<?= $step["title"] ?>
 								</<?= $thirdLevelTag ?>>
 							</div>
@@ -334,80 +336,81 @@ function dbe_render_how_to_block($attributes)
 
 						<div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
 							<?= $step["stepPic"]["url"] !== ""
-								? ($step["stepPic"]["caption"] === ""
-									? ""
-									: '<figure class="w-full">') .
-								'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
-								$step["stepPic"]["url"] .
-								'">' .
-								($step["stepPic"]["caption"] === ""
-									? ""
-									: "<figcaption>" .
-									$step["stepPic"]["caption"] .
-									"</figcaption></figure>")
-								: "" ?>
+       	? ($step["stepPic"]["caption"] === ""
+       			? ""
+       			: '<figure class="w-full">') .
+       		'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
+       		$step["stepPic"]["url"] .
+       		'">' .
+       		($step["stepPic"]["caption"] === ""
+       			? ""
+       			: "<figcaption>" .
+       				$step["stepPic"]["caption"] .
+       				"</figcaption></figure>")
+       	: "" ?>
 						</div>
 					</div>
 
 					<?php
-					$stepsCode .=
-						'{"@type": "HowToStep",' .
-						PHP_EOL .
-						'"name": "' .
-						str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
-						'",' .
-						PHP_EOL .
-						($advancedMode
-							? '"url": "' .
-							get_permalink() .
-							"#" .
-							$step["anchor"] .
-							'",' .
-							PHP_EOL .
-							($step["hasVideoClip"]
-								? '"video":{"@id": "' . $step["anchor"] . '"},'
-								: "") .
-							PHP_EOL
-							: "") .
-						'"image": "' .
-						$step["stepPic"]["url"] .
-						'",' .
-						PHP_EOL .
-						'"itemListElement" :[{' .
-						PHP_EOL .
-						'"@type": "HowToDirection",' .
-						PHP_EOL .
-						'"text": "' .
-						($step["title"] === "" || !$advancedMode
-							? ""
-							: str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
-							" ") .
-						str_replace("\'", "'", wp_filter_nohtml_kses($step["direction"])) .
-						'"}' .
-						PHP_EOL;
+     $stepsCode .=
+     	'{"@type": "HowToStep",' .
+     	PHP_EOL .
+     	'"name": "' .
+     	str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
+     	'",' .
+     	PHP_EOL .
+     	($advancedMode
+     		? '"url": "' .
+     			get_permalink() .
+     			"#" .
+     			$step["anchor"] .
+     			'",' .
+     			PHP_EOL .
+     			($step["hasVideoClip"]
+     				? '"video":{"@id": "' . $step["anchor"] . '"},'
+     				: "") .
+     			PHP_EOL
+     		: "") .
+     	'"image": "' .
+     	$step["stepPic"]["url"] .
+     	'",' .
+     	PHP_EOL .
+     	'"itemListElement" :[{' .
+     	PHP_EOL .
+     	'"@type": "HowToDirection",' .
+     	PHP_EOL .
+     	'"text": "' .
+     	($step["title"] === "" || !$advancedMode
+     		? ""
+     		: str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
+     			" ") .
+     	str_replace("\'", "'", wp_filter_nohtml_kses($step["direction"])) .
+     	'"}' .
+     	PHP_EOL;
 
-					if ($step["tip"] !== "") {
-						echo dbe_convert_to_paragraphs($step["tip"]);
-						$stepsCode .=
-							',{"@type": "HowToTip",' .
-							PHP_EOL .
-							'"text": "' .
-							str_replace("\'", "'", wp_filter_nohtml_kses($step["tip"])) .
-							'"}' .
-							PHP_EOL;
-					}
-					?>
+     if ($step["tip"] !== "") {
+     	echo dbe_convert_to_paragraphs($step["tip"]);
+     	$stepsCode .=
+     		',{"@type": "HowToTip",' .
+     		PHP_EOL .
+     		'"text": "' .
+     		str_replace("\'", "'", wp_filter_nohtml_kses($step["tip"])) .
+     		'"}' .
+     		PHP_EOL;
+     }
+     ?>
 				</li>
 
 	<?php
-				$stepsDisplay .= ob_get_contents();
-				ob_end_clean();
-				// ob_flush();
+ $stepsDisplay .= ob_get_contents();
+ ob_end_clean();
+ // ob_flush();
 
-				$stepsCode .= "]}" . PHP_EOL;
-				if ($index < count($section[0]["steps"]) - 1) {
-					$stepsCode .= ",";
-				}
+ $stepsCode .= "]}" . PHP_EOL;
+ if ($index < count($section[0]["steps"]) - 1) {
+ 	$stepsCode .= ",";
+ }
+
 			}
 		}
 	}
@@ -485,41 +488,41 @@ function dbe_render_how_to_block($attributes)
 			: '"video": {
                 "@type": "VideoObject",
                 "name": "' .
-			str_replace("\'", "'", wp_filter_nohtml_kses($videoName)) .
-			'",
+				str_replace("\'", "'", wp_filter_nohtml_kses($videoName)) .
+				'",
                 "description": "' .
-			(str_replace(
-				"\'",
-				"'",
-				wp_filter_nohtml_kses($videoDescription)
-			) ?:
-				__("No description provided")) .
-			'",
+				(str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($videoDescription)
+				) ?:
+					__("No description provided")) .
+				'",
                 "duration" : "' .
-			generateISODurationCode($videoDuration) .
-			'",
+				generateISODurationCode($videoDuration) .
+				'",
                 "thumbnailUrl": "' .
-			esc_url($videoThumbnailURL) .
-			'",
+				esc_url($videoThumbnailURL) .
+				'",
                 "contentUrl": "' .
-			esc_url($videoURL) .
-			'",
+				esc_url($videoURL) .
+				'",
                 "uploadDate": "' .
-			date("c", $videoUploadDate) .
-			'",
+				date("c", $videoUploadDate) .
+				'",
                 "hasPart":[' .
-			$clips .
-			']
+				$clips .
+				']
             },') .
 		($cost > 0
 			? '"estimatedCost": {
                 "@type": "MonetaryAmount",
                 "currency": "' .
-			str_replace("\'", "'", wp_filter_nohtml_kses($costCurrency)) .
-			'",
+				str_replace("\'", "'", wp_filter_nohtml_kses($costCurrency)) .
+				'",
                 "value": "' .
-			wp_filter_nohtml_kses($cost) .
-			'"
+				wp_filter_nohtml_kses($cost) .
+				'"
             },'
 			: "") .
 		$suppliesCode .
@@ -561,10 +564,10 @@ function dbe_render_how_to_block($attributes)
 			<div class="mr-5">
 				<i class="fa fa-tag" aria-hidden="true"></i>
 				<?= $advancedMode
-					? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
-						? "Gratis"
-						: "<p>" . $costDisplayText . $costDisplay . "</p>")
-					: "" ?>
+    	? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
+    		? "Gratis"
+    		: "<p>" . $costDisplayText . $costDisplay . "</p>")
+    	: "" ?>
 			</div>
 			<div class="flex items-center">
 				<i class="fa fa-clock-o mr-2" aria-hidden="true"></i> <?= $timeDisplay ?>
@@ -580,18 +583,18 @@ function dbe_render_how_to_block($attributes)
 				</<?= $secondLevelTag ?>>
 			</div>
 			<?= $finalImageURL === ""
-				? ""
-				: (!isset($finalImageCaption) || $finalImageCaption === ""
-					? ""
-					: '<figure class="howto-yield-image-container mt-2 w-full relative">') .
-				'<img class="howto-yield-image mx-auto rounded-xl overflow-hidden" src="' .
-				$finalImageURL .
-				'">' .
-				(!isset($finalImageCaption) || $finalImageCaption === ""
-					? ""
-					: "<figcaption class=\"text-white\">" .
-					$finalImageCaption .
-					"</figcaption></figure>") ?>
+   	? ""
+   	: (!isset($finalImageCaption) || $finalImageCaption === ""
+   			? ""
+   			: '<figure class="howto-yield-image-container mt-2 w-full relative">') .
+   		'<img class="howto-yield-image mx-auto rounded-xl overflow-hidden" src="' .
+   		$finalImageURL .
+   		'">' .
+   		(!isset($finalImageCaption) || $finalImageCaption === ""
+   			? ""
+   			: "<figcaption class=\"text-white\">" .
+   				$finalImageCaption .
+   				"</figcaption></figure>") ?>
 			<?= dbe_convert_to_paragraphs($howToYield) ?>
 		</div>
 
@@ -618,25 +621,25 @@ function dbe_render_how_to_block($attributes)
 
 		<div class="text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result
 		<?php
-		$howToReviewPercent = $howToRatingCount / $howToRatingValue * 100;
-		$howToReviewPercentIcon = "dashicons-thumbs-up";
-		if ($howToReviewPercent >= 65) {
-			echo "howto-review-result__good";
-		} else if ($howToReviewPercent >= 50) {
-			$howToReviewPercentIcon = "dashicons-thumbs-down";
-			echo "howto-review-result__medium";
-		} else {
-			$howToReviewPercentIcon = "dashicons-thumbs-down";
-			echo "howto-review-result__bad";
-		}
-		?> ">
+  $howToReviewPercent = ($howToRatingCount / $howToRatingValue) * 100;
+  $howToReviewPercentIcon = "dashicons-thumbs-up";
+  if ($howToReviewPercent >= 65) {
+  	echo "howto-review-result__good";
+  } elseif ($howToReviewPercent >= 50) {
+  	$howToReviewPercentIcon = "dashicons-thumbs-down";
+  	echo "howto-review-result__medium";
+  } else {
+  	$howToReviewPercentIcon = "dashicons-thumbs-down";
+  	echo "howto-review-result__bad";
+  }
+  ?> ">
 			<h3 class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</h3>
 			<div>
 				<p class="m-0">Orang menganggap tutorial ini</p>
 				<p class="m-0 howto-review-result__membantu">
-					<?php
-					if ($howToReviewPercent >= 65) echo "sangat ";
-					?>
+					<?php if ($howToReviewPercent >= 65) {
+     	echo "sangat ";
+     } ?>
 					membantu
 				</p>
 			</div>
