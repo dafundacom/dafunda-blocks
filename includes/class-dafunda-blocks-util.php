@@ -18,7 +18,6 @@
  * @since    0.0.1
  * @package    dafunda_blocks
  * @subpackage dafunda_blocks/includes
- * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
 class Dafunda_Blocks_Util
 {

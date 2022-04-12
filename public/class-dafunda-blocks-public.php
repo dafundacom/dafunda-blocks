@@ -18,7 +18,6 @@
  *
  * @package    Dafunda_Blocks
  * @subpackage Dafunda_Blocks/public
- * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
 class Dafunda_Blocks_Public
 {

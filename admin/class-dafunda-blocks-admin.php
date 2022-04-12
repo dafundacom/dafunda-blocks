@@ -18,7 +18,6 @@
  *
  * @package    Dafunda_Blocks
  * @subpackage Dafunda_Blocks/admin
- * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
 class Dafunda_Blocks_Admin
 {
@@ -429,72 +428,5 @@ class Dafunda_Blocks_Admin
 			"includes/class-dafunda-blocks-util.php";
 
 		return Dafunda_Blocks_Util::blocks();
-	}
-
-	/**
-	 * Generating the review notice.
-	 *
-	 * @since    0.0.1
-	 */
-	public static function DafundaBlocks_review_notice()
-	{
-		$install_date = get_option("DafundaBlocks_installDate");
-		$display_date = date("Y-m-d h:i:s");
-		$datetime1 = new DateTime($install_date);
-		$datetime2 = new DateTime($display_date);
-		$diff_intrval = round(
-			($datetime2->format("U") - $datetime1->format("U")) / (60 * 60 * 24)
-		);
-		if (
-			$diff_intrval >= 14 &&
-			get_option("DafundaBlocks_review_notify") == "no"
-		) { ?>
-            <div class="DafundaBlocks-review-notice notice notice-info">
-                <p style="font-size: 14px;">
-					<?php _e(
-     	"Hey,<br> I noticed that you have been using <strong>Dafunda Blocks Plugin</strong> for a while now - that’s awesome! Could you please do me a BIG favor and <b>give it a 5-star rating on WordPress</b>? Just to help us spread the word and boost our motivation. <br>~ Imtiaz Rayhan<br>~ Lead Developer, Dafunda Blocks.",
-     	"dafunda-blocks"
-     ); ?>
-                </p>
-                <ul>
-                    <li><a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary"
-                           href="https://wordpress.org/support/plugin/dafunda-blocks/reviews/?filter=5#new-post"
-                           target="_blank">Sure, you deserve it.</a>
-                        <a style="margin-right: 5px;" class="DafundaBlocks_HideReview_Notice button" href="javascript:void(0);">I already did.</a>
-                        <a class="DafundaBlocks_HideReview_Notice button" href="javascript:void(0);">No, not good enough.</a>
-                    </li>
-                </ul>
-            </div>
-            <script>
-                jQuery(document).ready(function ($) {
-                    jQuery('.DafundaBlocks_HideReview_Notice').click(function () {
-                        var data = {'action': 'DafundaBlocksReviewNoticeHide'};
-                        jQuery.ajax({
-                            url: "<?php echo admin_url("admin-ajax.php"); ?>",
-                            type: "post",
-                            data: data,
-                            dataType: "json",
-                            async: !0,
-                            success: function (notice_hide) {
-                                if (notice_hide == "success") {
-                                    jQuery('.DafundaBlocks-review-notice').slideUp('fast');
-                                }
-                            }
-                        });
-                    });
-                });
-            </script>
-			<?php }
-	}
-	/**
-	 * Hides the review notice.
-	 *
-	 * @since    0.0.1
-	 */
-	public function DafundaBlocks_hide_review_notify()
-	{
-		update_option("DafundaBlocks_review_notify", "yes");
-		echo json_encode(["success"]);
-		exit();
 	}
 }

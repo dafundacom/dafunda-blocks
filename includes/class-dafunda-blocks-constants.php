@@ -18,7 +18,6 @@
  * @since    0.0.1
  * @package    Dafunda_Blocks_Constants
  * @subpackage Dafunda_Blocks_Constants/includes
- * @author     Imtiaz Rayhan <imtiazrayhan@gmail.com>
  */
 class Dafunda_Blocks_Constants
 {
