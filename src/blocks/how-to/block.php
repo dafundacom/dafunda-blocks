@@ -616,7 +616,6 @@ function dbe_render_how_to_block($attributes)
 			<div class="howto-review__thank w-full text-center my-4 text-lg hidden">
 				<p class="m-0">Terimakasih sudah memberi jawaban</p>
 			</div>
-
 		</div>
 
 		<div class="text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result
