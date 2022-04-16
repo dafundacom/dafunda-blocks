@@ -469,6 +469,52 @@ function dbe_render_how_to_block($attributes)
 		}
 	}
 
+	$SCHEMEJSON = [
+		"@context" => "http://schema.org",
+		"@type" => "HowTo",
+		"name" => str_replace("\'", "'", wp_filter_nohtml_kses($title)),
+		"description" => str_replace(
+			"\'",
+			"'",
+			wp_filter_nohtml_kses($introduction)
+		),
+	];
+
+	if (array_unique($totalTime) !== [0]) {
+		$SCHEMEJSON["totalTime"] = $ISOTotalTime;
+	}
+
+	if ($videoURL) {
+		$SCHEMEJSON["video"] = [
+			"@type" => "VideoObject",
+			"name" => str_replace("\'", "'", wp_filter_nohtml_kses($videoName)),
+			"description" =>
+				str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($videoDescription)
+				) ?:
+				__("No description provided"),
+			"duration" => generateISODurationCode($videoDuration),
+			"thumbnailUrl" => esc_url($videoThumbnailURL),
+			"contentUrl" => esc_url($videoURL),
+			"uploadDate" => date("c", $videoUploadDate),
+			"hasPart" => "[" . $clips . "]",
+		];
+	}
+
+	if ($cost > 0) {
+		$SCHEMEJSON["estimatedCost"] = [
+			"@type" => "MonetaryAmount",
+			"currency" => str_replace(
+				"\'",
+				"'",
+				wp_filter_nohtml_kses($costCurrency)
+			),
+			"value" => wp_filter_nohtml_kses($cost),
+		];
+	}
+
 	$JSONLD =
 		'<script type="application/ld+json">
     {
@@ -598,6 +644,7 @@ function dbe_render_how_to_block($attributes)
 			<?= dbe_convert_to_paragraphs($howToYield) ?>
 		</div>
 
+
 		<div class="howto-review p-3 mb-3">
 			<div class="howto-review__vote">
 				<div class="w-full text-center mb-4">
@@ -605,10 +652,19 @@ function dbe_render_how_to_block($attributes)
 				</div>
 				<div class="w-full flex flex-wrap justify-center items-center mb-3">
 					<div class="howto-review__like mr-3">
-						<button class="dashicons dashicons-thumbs-up text-emerald-600"></button>
+						<button class="flex items-center py-1">
+
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#16A085">
+								<path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+							</svg>
+						</button>
 					</div>
 					<div class="howto-review__dislike">
-						<button class="dashicons dashicons-thumbs-down text-rose-800"></button>
+						<button class="flex items-center py-1">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#C44569">
+								<path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+							</svg>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -621,14 +677,17 @@ function dbe_render_how_to_block($attributes)
 		<div class="text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result
 		<?php
   $howToReviewPercent = intval(($howToRatingCount / $howToRatingValue) * 100);
-  $howToReviewPercentIcon = "dashicons-thumbs-up";
+  $howToReviewPercentIcon =
+  	'<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
   if ($howToReviewPercent >= 65) {
   	echo "howto-review-result__good";
   } elseif ($howToReviewPercent >= 50) {
-  	$howToReviewPercentIcon = "dashicons-thumbs-down";
+  	$howToReviewPercentIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor">
+			<path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" /></svg>';
   	echo "howto-review-result__medium";
   } else {
-  	$howToReviewPercentIcon = "dashicons-thumbs-down";
+  	$howToReviewPercentIcon =
+  		'<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
   	echo "howto-review-result__bad";
   }
   ?> ">
@@ -642,11 +701,15 @@ function dbe_render_how_to_block($attributes)
 					membantu
 				</p>
 			</div>
-			<i class="howto-review-result__icon dashicons <?= $howToReviewPercentIcon ?>"></i>
+			<div class="ml-auto flex items-center">
+				<?= $howToReviewPercentIcon ?>
+
+
+			</div>
 		</div>
 
 		<script>
-			document.querySelectorAll(".howto-review .dashicons-thumbs-up, .howto-review .dashicons-thumbs-down").forEach((el, i) => {
+			document.querySelectorAll(".howto-review .howto-review__like, .howto-review .howto-review__dislike").forEach((el, i) => {
 				el.addEventListener("click", (e) => {
 					e.target.closest(".howto-review__vote").classList.add("hidden")
 					e.target.closest(".howto-review").querySelector(".howto-review__thank").classList.remove("hidden")
@@ -655,6 +718,29 @@ function dbe_render_how_to_block($attributes)
 		</script>
 
 	</div>
+
+
+	<?php
+ $SCHEMEJSON = json_encode(
+ 	$SCHEMEJSON,
+ 	JSON_UNESCAPED_UNICODE |
+ 		JSON_PRETTY_PRINT |
+ 		JSON_UNESCAPED_SLASHES |
+ 		JSON_HEX_TAG |
+ 		JSON_HEX_AMP |
+ 		JSON_HEX_APOS |
+ 		JSON_HEX_QUOT
+ );
+ $SCHEMEJSON =
+ 	PHP_EOL .
+ 	'<script type="application/ld+json">' .
+ 	PHP_EOL .
+ 	$SCHEMEJSON .
+ 	PHP_EOL .
+ 	"</script>";
+ // echo $SCHEMEJSON;
+	?>
+
 	<?= $JSONLD ?>
 <?php return ob_get_clean();
 }

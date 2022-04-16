@@ -749,29 +749,6 @@
 		@apply bg-[#C44569];
 	}
 
-	.howto-review-result__good .howto-review-result__icon {
-		@apply ml-auto my-auto text-4xl w-auto h-auto rotate-[-13.41deg];
-	}
-
-	.howto-review-result__bad .howto-review-result__icon {
-		@apply ml-auto my-auto text-4xl w-auto h-auto rotate-[19.2deg];
-	}
-
-	.howto-review-result__medium .howto-review-result__icon {
-		@apply ml-auto my-auto text-2xl w-auto h-auto relative;
-	}
-
-	.howto-review-result__medium .howto-review-result__icon:before {
-		position: absolute;
-		transform: translate(0px, -25px);
-		right: 0;
-	}
-	.howto-review-result__medium .howto-review-result__icon:after {
-		content: "\f529";
-		position: absolute;
-		right: 0;
-		transform: translate(-13px, -8px);
-	}
 	/* How To END */
 
 	/* How To Front */

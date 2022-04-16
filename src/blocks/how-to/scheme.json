@@ -1,0 +1,72 @@
+{
+	"@context": "http://schema.org",
+	"@type": "HowTo",
+	"name": "Judul How To",
+	"description": "Berikut ini cara mendapatkan skin Karrie Wheel of Justice di Mobile Legends. Pastikan kalian sudah melengkapi kebutuhannya sebelum melakukannya.",
+	"totalTime": "PT3M",
+	"supply": [],
+	"tool": [],
+	"step": [
+		{
+			"@type": "HowToStep",
+			"name": "Login akun Mobile Legends",
+			"url": "http://testwp.local/hello-world/#step0",
+
+			"image": "http://testwp.local/wp-content/uploads/2022/02/IMG.png",
+			"itemListElement": [
+				{
+					"@type": "HowToDirection",
+					"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
+				}
+			]
+		},
+		{
+			"@type": "HowToStep",
+			"name": "Login akun Mobile Legends",
+			"url": "http://testwp.local/hello-world/#step1",
+
+			"image": "http://testwp.local/wp-content/uploads/2022/02/mario-losereit-fSLo3ehnTr0-unsplash.jpg",
+			"itemListElement": [
+				{
+					"@type": "HowToDirection",
+					"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
+				}
+			]
+		},
+		{
+			"@type": "HowToStep",
+			"name": "Step Lorem, ipsum dolor sit adqwd",
+			"url": "http://testwp.local/hello-world/#step2",
+
+			"image": "",
+			"itemListElement": [
+				{
+					"@type": "HowToDirection",
+					"text": "Step Lorem, ipsum dolor sit adqwd Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
+				}
+			]
+		},
+		{
+			"@type": "HowToStep",
+			"name": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit",
+			"url": "http://testwp.local/hello-world/#step3",
+
+			"image": "http://testwp.local/wp-content/uploads/2022/02/IMG-1.png",
+			"itemListElement": [
+				{
+					"@type": "HowToDirection",
+					"text": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
+				}
+			]
+		}
+	],
+	"yield": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus",
+	"image": "http://testwp.local/wp-content/uploads/2022/02/daniel-tong-dxYdPSuBr-U-unsplash.jpg",
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "5",
+		"bestRating": "5",
+		"worstRating": "1",
+		"ratingCount": "1.6"
+	}
+}
