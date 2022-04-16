@@ -614,14 +614,13 @@ function dbe_render_how_to_block($attributes)
 			</div>
 
 			<div class="howto-review__thank w-full text-center my-4 text-lg hidden">
-				<h2 class="m-0">Terimakasih sudah memberi jawaban</h1>
+				<p class="m-0">Terimakasih sudah memberi jawaban</p>
 			</div>
-
 		</div>
 
 		<div class="text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result
 		<?php
-  $howToReviewPercent = ($howToRatingCount / $howToRatingValue) * 100;
+  $howToReviewPercent = intval(($howToRatingCount / $howToRatingValue) * 100);
   $howToReviewPercentIcon = "dashicons-thumbs-up";
   if ($howToReviewPercent >= 65) {
   	echo "howto-review-result__good";
@@ -633,7 +632,7 @@ function dbe_render_how_to_block($attributes)
   	echo "howto-review-result__bad";
   }
   ?> ">
-			<h3 class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</h3>
+			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8  text-amber-300 text-4xl font-bold leading-none"><?= $howToReviewPercent ?>%</p>
 			<div>
 				<p class="m-0">Orang menganggap tutorial ini</p>
 				<p class="m-0 howto-review-result__membantu">

@@ -1971,7 +1971,7 @@ export class EditorComponent extends Component {
 						</button>
 					)}
 
-					<div className="howto-yield bg-[#16A085] rounded-xl text-white p-5">
+					<div className="howto-yield bg-[#16A085] rounded-xl text-white p-5 mb-4">
 						<div className="w-100 flex flex-wrap justify-center mb-3">
 							<RichText
 								tagName={secondLevelTag}
@@ -2060,8 +2060,53 @@ export class EditorComponent extends Component {
 							onFocus={() => this.setState({ currentStep: "final" })}
 						/>
 					</div>
+
 					<div className="howto-review-score">
-						<div className="mb-4 grid grid-cols-2">
+						<h4>Rating Count</h4>
+						<div className="howto-rating-range-input mb-4 w-full md:w-96">
+							<input
+								type="range"
+								min="0"
+								max="100"
+								defaultValue={howToRatingCount * 20}
+								step="1"
+								onChange={(e) => {
+									let howToRatingCount = parseFloat(
+										e.target.value / 20
+									).toFixed(1);
+									let step = parseFloat(e.target.step);
+									let top = (parseFloat(howToRatingCount * 20) / step) * -40;
+									e.target.nextElementSibling.querySelector(
+										".howto-rating-range-input__value div"
+									).style.marginTop = top + "px";
+									setAttributes({ howToRatingCount });
+								}}
+							/>
+							<div className="howto-rating-range-input__value">
+								<div
+									style={{
+										marginTop: (parseFloat(howToRatingCount * 20) / 1) * -40,
+										width: "max-content",
+									}}
+								>
+									{Array(101)
+										.fill()
+										.map((v, i) => (
+											<div>{i}</div>
+										))}
+								</div>
+							</div>
+						</div>
+
+						{/* <input type="range" min="0" max="100" step="1" defaultValue={0} /> */}
+						{/* <div className="howto-rating-range-input mb-4 w-full md:w-96">
+							<input type="range" min="0" max="100" step="1" defaultValue={howToRatingCount * 20} />
+							<div className="howto-rating-range-input__value">
+								<div>{howToRatingCount * 20}</div>
+							</div>
+						</div> */}
+
+						{/* <div className="mb-4 grid grid-cols-2">
 							<div className="howto-rating-value">
 								<h4>Final Rating Value</h4>
 								<div className="howto-yield">
@@ -2089,7 +2134,7 @@ export class EditorComponent extends Component {
 									/>
 								</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<style
