@@ -224,9 +224,12 @@ function dbe_render_how_to_block($attributes)
 			"duration" => generateISODurationCode($videoDuration),
 			"thumbnailUrl" => esc_url($videoThumbnailURL),
 			"contentUrl" => esc_url($videoURL),
+			"embedUrl" => esc_url($videoURL),
 			"uploadDate" => date("c", $videoUploadDate),
-			"hasPart" => "[" . $clips . "]",
 		];
+		if ($clips) {
+			$SCHEMEJSON["video"]["hasPart"] = "[" . $clips . "]";
+		}
 	}
 
 	if ($cost > 0) {
@@ -252,8 +255,9 @@ function dbe_render_how_to_block($attributes)
 						"'",
 						wp_filter_nohtml_kses($s["name"])
 					),
+					"url" => get_permalink() . "#supply" . $i,
 				];
-				if ($s["imageURL"] != "") {
+				if ($s["imageURL"]) {
 					$suppliesScheme["image"] = $s["imageURL"];
 				}
 
@@ -273,8 +277,9 @@ function dbe_render_how_to_block($attributes)
 						"'",
 						wp_filter_nohtml_kses($t["name"])
 					),
+					"url" => get_permalink() . "#tool" . $i,
 				];
-				if ($s["imageURL"] != "") {
+				if ($s["imageURL"]) {
 					$toolsScheme["image"] = $t["imageURL"];
 				}
 
@@ -315,7 +320,9 @@ function dbe_render_how_to_block($attributes)
 					}
 				}
 
-				$stepScheme["image"] = $step["stepPic"]["url"];
+				if ($step["stepPic"]["url"]) {
+					$stepScheme["image"] = $step["stepPic"]["url"];
+				}
 				$stepScheme["itemListElement"] = [
 					[
 						"@type" => "HowToDirection",
@@ -414,7 +421,7 @@ function dbe_render_how_to_block($attributes)
 		"ratingCount" => str_replace(
 			"\'",
 			"'",
-			wp_filter_nohtml_kses($howToRatingCount)
+			wp_filter_nohtml_kses(intval($howToRatingCount))
 		),
 	];
 
