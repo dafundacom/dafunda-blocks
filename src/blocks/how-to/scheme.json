@@ -4,58 +4,97 @@
 	"name": "Judul How To",
 	"description": "Berikut ini cara mendapatkan skin Karrie Wheel of Justice di Mobile Legends. Pastikan kalian sudah melengkapi kebutuhannya sebelum melakukannya.",
 	"totalTime": "PT3M",
-	"supply": [],
-	"tool": [],
+	"video": {
+		"@type": "VideoObject",
+		"name": "Alaska in 8K 60p HDR  (Dolby Vision)",
+		"description": "Explore Juneau, Alaska with us as we navigate through an Alaskan summer.We visited the Tracy Arm Fjord, Mendenhall Glacier, Pack Creek bears, Hoonah, and some beautiful Juneau icebergs. To view at 8K 60P you'll need to use Chrome.",
+		"duration": "PT4M28S",
+		"thumbnailUrl": "https://i.ytimg.com/vi/CHSnz0bCaUk/default.jpg",
+		"contentUrl": "https://www.youtube.com/watch?v=CHSnz0bCaUk",
+		"uploadDate": "2022-03-25T17:58:18+00:00",
+		"hasPart": []
+	},
+	"estimatedCost": {
+		"@type": "MonetaryAmount",
+		"currency": "Rp",
+		"value": "1000"
+	},
+	"supply": [
+		{
+			"@type": "HowToSupply",
+			"name": "Judul Suply 1",
+			"image": "http://testwp.local/wp-content/uploads/2022/02/IMG-1.png"
+		},
+		{
+			"@type": "HowToSupply",
+			"name": "Judul Suply 2",
+			"image": "http://testwp.local/wp-content/uploads/2022/02/chrissy-bogomilova-H-IkEgzJb-M-unsplash.jpg"
+		}
+	],
+	"tool": [
+		{
+			"@type": "HowToTool",
+			"name": "Judul tool 1",
+			"image": "http://testwp.local/wp-content/uploads/2022/02/mario-losereit-fSLo3ehnTr0-unsplash.jpg"
+		},
+		{
+			"@type": "HowToTool",
+			"name": "Judul Tool 2",
+			"image": "http://testwp.local/wp-content/uploads/2022/02/roman-purtov-ivLah6BfKgI-unsplash-1.jpg"
+		}
+	],
 	"step": [
 		{
-			"@type": "HowToStep",
-			"name": "Login akun Mobile Legends",
-			"url": "http://testwp.local/hello-world/#step0",
-
-			"image": "http://testwp.local/wp-content/uploads/2022/02/IMG.png",
+			"@type": "HowToSection",
+			"name": "Section 1",
 			"itemListElement": [
 				{
-					"@type": "HowToDirection",
-					"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
-				}
-			]
-		},
-		{
-			"@type": "HowToStep",
-			"name": "Login akun Mobile Legends",
-			"url": "http://testwp.local/hello-world/#step1",
-
-			"image": "http://testwp.local/wp-content/uploads/2022/02/mario-losereit-fSLo3ehnTr0-unsplash.jpg",
-			"itemListElement": [
+					"@type": "HowToStep",
+					"name": "Login akun Mobile Legends",
+					"url": "http://testwp.local/hello-world/#step0",
+					"image": "http://testwp.local/wp-content/uploads/2022/02/IMG.png",
+					"itemListElement": [
+						{
+							"@type": "HowToDirection",
+							"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
+						}
+					]
+				},
 				{
-					"@type": "HowToDirection",
-					"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
-				}
-			]
-		},
-		{
-			"@type": "HowToStep",
-			"name": "Step Lorem, ipsum dolor sit adqwd",
-			"url": "http://testwp.local/hello-world/#step2",
-
-			"image": "",
-			"itemListElement": [
+					"@type": "HowToStep",
+					"name": "Login akun Mobile Legends",
+					"url": "http://testwp.local/hello-world/#step1",
+					"image": "http://testwp.local/wp-content/uploads/2022/02/mario-losereit-fSLo3ehnTr0-unsplash.jpg",
+					"itemListElement": [
+						{
+							"@type": "HowToDirection",
+							"text": "Login akun Mobile Legends Login akun Mobile Legend kalian dengan detail yang sudah kalian punya sebelumnya. Kalau belum membuat akun Mobile Legends, Kalian bisa membuatnya dengan Email atau Nomor Telepon."
+						}
+					]
+				},
 				{
-					"@type": "HowToDirection",
-					"text": "Step Lorem, ipsum dolor sit adqwd Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
-				}
-			]
-		},
-		{
-			"@type": "HowToStep",
-			"name": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit",
-			"url": "http://testwp.local/hello-world/#step3",
-
-			"image": "http://testwp.local/wp-content/uploads/2022/02/IMG-1.png",
-			"itemListElement": [
+					"@type": "HowToStep",
+					"name": "Step Lorem, ipsum dolor sit adqwd",
+					"url": "http://testwp.local/hello-world/#step2",
+					"image": "",
+					"itemListElement": [
+						{
+							"@type": "HowToDirection",
+							"text": "Step Lorem, ipsum dolor sit adqwd Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
+						}
+					]
+				},
 				{
-					"@type": "HowToDirection",
-					"text": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
+					"@type": "HowToStep",
+					"name": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit",
+					"url": "http://testwp.local/hello-world/#step3",
+					"image": "http://testwp.local/wp-content/uploads/2022/02/IMG-1.png",
+					"itemListElement": [
+						{
+							"@type": "HowToDirection",
+							"text": "Step Lorem, ipsum dolor sit step Lorem, ipsum dolor sit ipsum dolor sit step Lorem, ipsum dolor sit Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia amet vitae adipisci, vero repellendus nesciunt quibusdam facere sed maxime excepturi. Voluptate nisi quae aperiam facilis dicta deleniti autem dolores ad, suscipit incidunt ullam sint, distinctio mollitia aliquam recusandae possimus! Adipisci?"
+						}
+					]
 				}
 			]
 		}

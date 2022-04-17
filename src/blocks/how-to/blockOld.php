@@ -62,6 +62,7 @@ function dbe_render_how_to_block($attributes)
 
 	$timeUnits = ["Detik", "Menit", "Jam", "Hari", "Minggu", "Bulan", "Tahun"];
 
+	$suppliesCode = '"supply": [';
 	if ($advancedMode && $includeSuppliesList) {
 		$header .=
 			"<" .
@@ -82,10 +83,24 @@ function dbe_render_how_to_block($attributes)
 						? ""
 						: '<br><img src="' . $s["imageURL"] . '"/>') .
 					"</li>";
+				if ($i > 0) {
+					$suppliesCode .= ",";
+				}
+				$suppliesCode .=
+					'{"@type": "HowToSupply", "name": "' .
+					str_replace("\'", "'", wp_filter_nohtml_kses($s["name"])) .
+					'"' .
+					($s["imageURL"] === ""
+						? ""
+						: ',"image": "' . $s["imageURL"] . '"') .
+					"}";
 			}
 			$header .= $suppliesListStyle === "ordered" ? "</ol>" : "</ul>";
 		}
 	}
+	$suppliesCode .= "]";
+
+	$toolsCode = '"tool": [';
 
 	if ($advancedMode && $includeToolsList) {
 		$header .=
@@ -107,16 +122,36 @@ function dbe_render_how_to_block($attributes)
 						? ""
 						: '<br><img src="' . $t["imageURL"] . '"/>') .
 					"</li>";
+				if ($i > 0) {
+					$toolsCode .= ",";
+				}
+				$toolsCode .=
+					'{"@type": "HowToTool", "name": "' .
+					str_replace("\'", "'", wp_filter_nohtml_kses($t["name"])) .
+					'"' .
+					($t["imageURL"] === ""
+						? ""
+						: ',"image": "' . $t["imageURL"] . '"') .
+					"}";
 			}
 			$header .= $toolsListStyle === "ordered" ? "</ol>" : "</ul>";
 		}
 	}
+	$toolsCode .= "]";
 
 	$costDisplay = $showUnitFirst
 		? $costCurrency . " " . $cost
 		: $cost . " " . $costCurrency;
 
 	$timeDisplay = "<div>";
+	// $timeDisplay = "<div>
+	// <" .
+	// $secondLevelTag .
+	// " class=\"mb-0\">" .
+	// $timeIntro .
+	// "</" .
+	// $secondLevelTag .
+	// ">";
 
 	$totalTimeDisplay = "";
 
@@ -133,6 +168,7 @@ function dbe_render_how_to_block($attributes)
 	$ISOTotalTime = generateISODurationCode($totalTime);
 
 	$stepsDisplay = "";
+	$stepsCode = PHP_EOL . '"step": [';
 
 	if ($useSections) {
 		$stepsDisplay =
@@ -149,8 +185,52 @@ function dbe_render_how_to_block($attributes)
 				">" .
 				($sectionListStyle === "ordered" ? "<ol" : "<ul") .
 				' class="howto-step-display">';
+			$stepsCode .=
+				'{"@type": "HowToSection",' .
+				PHP_EOL .
+				'"name": "' .
+				str_replace(
+					"\'",
+					"'",
+					wp_filter_nohtml_kses($s["sectionName"])
+				) .
+				'",' .
+				PHP_EOL .
+				'"itemListElement": [' .
+				PHP_EOL;
+			//get each step inside section
 
 			foreach ($s["steps"] as $j => $step) {
+				$stepsCode .=
+					'{"@type": "HowToStep",' .
+					PHP_EOL .
+					'"name": "' .
+					str_replace(
+						"\'",
+						"'",
+						wp_filter_nohtml_kses($step["title"])
+					) .
+					'",' .
+					PHP_EOL .
+					($advancedMode
+						? '"url": "' .
+							get_permalink() .
+							"#" .
+							$step["anchor"] .
+							'",' .
+							PHP_EOL .
+							($step["hasVideoClip"]
+								? '"video":{"@id": "' . $step["anchor"] . '"},'
+								: "") .
+							PHP_EOL
+						: "") .
+					'"image": "' .
+					$step["stepPic"]["url"] .
+					'",' .
+					PHP_EOL .
+					'"itemListElement" :[{' .
+					PHP_EOL;
+
 				$stepsDisplay .=
 					'<li class="howto-step"><' .
 					$thirdLevelTag .
@@ -177,15 +257,53 @@ function dbe_render_how_to_block($attributes)
 					dbe_convert_to_paragraphs($step["direction"]) .
 					PHP_EOL;
 
+				$stepsCode .=
+					'"@type": "HowToDirection",' .
+					PHP_EOL .
+					'"text": "' .
+					($step["title"] === "" || !$advancedMode
+						? ""
+						: str_replace(
+								"\'",
+								"'",
+								wp_filter_nohtml_kses($step["title"])
+							) . " ") .
+					str_replace(
+						"\'",
+						"'",
+						wp_filter_nohtml_kses($step["direction"])
+					) .
+					'"}' .
+					PHP_EOL;
+
 				if ($step["tip"] !== "") {
 					$stepsDisplay .= dbe_convert_to_paragraphs($step["tip"]);
+					$stepsCode .=
+						',{"@type": "HowToTip",' .
+						PHP_EOL .
+						'"text": "' .
+						str_replace(
+							"\'",
+							"'",
+							wp_filter_nohtml_kses($step["tip"])
+						) .
+						'"}' .
+						PHP_EOL;
 				}
 
+				$stepsCode .= "]}" . PHP_EOL;
 				$stepsDisplay .= "</li>";
+				if ($j < count($s["steps"]) - 1) {
+					$stepsCode .= ",";
+				}
 			}
 
 			$stepsDisplay .=
 				($sectionListStyle === "ordered" ? "</ol>" : "</ul>") . "</li>"; //close section div
+			$stepsCode .= "]}";
+			if ($i < count($section) - 1) {
+				$stepsCode .= ",";
+			}
 		}
 	} else {
 		$stepsDisplay .=
@@ -232,6 +350,55 @@ function dbe_render_how_to_block($attributes)
        	: "" ?>
 						</div>
 					</div>
+
+					<?php
+     $stepsCode .=
+     	'{"@type": "HowToStep",' .
+     	PHP_EOL .
+     	'"name": "' .
+     	str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
+     	'",' .
+     	PHP_EOL .
+     	($advancedMode
+     		? '"url": "' .
+     			get_permalink() .
+     			"#" .
+     			$step["anchor"] .
+     			'",' .
+     			PHP_EOL .
+     			($step["hasVideoClip"]
+     				? '"video":{"@id": "' . $step["anchor"] . '"},'
+     				: "") .
+     			PHP_EOL
+     		: "") .
+     	'"image": "' .
+     	$step["stepPic"]["url"] .
+     	'",' .
+     	PHP_EOL .
+     	'"itemListElement" :[{' .
+     	PHP_EOL .
+     	'"@type": "HowToDirection",' .
+     	PHP_EOL .
+     	'"text": "' .
+     	($step["title"] === "" || !$advancedMode
+     		? ""
+     		: str_replace("\'", "'", wp_filter_nohtml_kses($step["title"])) .
+     			" ") .
+     	str_replace("\'", "'", wp_filter_nohtml_kses($step["direction"])) .
+     	'"}' .
+     	PHP_EOL;
+
+     if ($step["tip"] !== "") {
+     	echo dbe_convert_to_paragraphs($step["tip"]);
+     	$stepsCode .=
+     		',{"@type": "HowToTip",' .
+     		PHP_EOL .
+     		'"text": "' .
+     		str_replace("\'", "'", wp_filter_nohtml_kses($step["tip"])) .
+     		'"}' .
+     		PHP_EOL;
+     }
+     ?>
 				</li>
 
 	<?php
@@ -239,235 +406,149 @@ function dbe_render_how_to_block($attributes)
  ob_end_clean();
  // ob_flush();
 
+ $stepsCode .= "]}" . PHP_EOL;
+ if ($index < count($section[0]["steps"]) - 1) {
+ 	$stepsCode .= ",";
+ }
+
 			}
 		}
 	}
 	$stepsDisplay .= $sectionListStyle === "ordered" ? "</ol>" : "</ul>";
+	$stepsCode .= "]";
 
+	$parts = array_map(
+		function ($sec) {
+			return $sec["steps"];
+		},
+		isset($section) ? $section : []
+	);
 	$clips = "";
 
-	$SCHEMEJSON = [
-		"@context" => "http://schema.org",
-		"@type" => "HowTo",
-		"name" => str_replace("\'", "'", wp_filter_nohtml_kses($title)),
-		"description" => str_replace(
-			"\'",
-			"'",
-			wp_filter_nohtml_kses($introduction)
-		),
-	];
-
-	if (array_unique($totalTime) !== [0]) {
-		$SCHEMEJSON["totalTime"] = $ISOTotalTime;
+	if ($videoURL !== "") {
+		if (strpos($videoURL, "https://www.youtube.com") === 0) {
+			$videoClipArg = "?t=";
+		}
+		if (strpos($videoURL, "https://vimeo.com") === 0) {
+			$videoClipArg = "#t=";
+		}
+		if (strpos($videoURL, "https://www.dailymotion.com") === 0) {
+			$videoClipArg = "?start=";
+		}
+		if (strpos($videoURL, "https://videopress.com") === 0) {
+			$videoClipArg = "?at=";
+		}
 	}
 
-	if ($videoURL) {
-		$SCHEMEJSON["video"] = [
-			"@type" => "VideoObject",
-			"name" => str_replace("\'", "'", wp_filter_nohtml_kses($videoName)),
-			"description" =>
-				str_replace(
+	foreach ($parts as $part) {
+		foreach ($part as $step) {
+			if ($step["hasVideoClip"]) {
+				if ($clips !== "") {
+					$clips .= ",";
+				}
+				$clips .=
+					'{"@type": "Clip",
+                            "@id": "' .
+					$step["anchor"] .
+					'",
+                            "name": "' .
+					str_replace("\'", "'", $step["title"]) .
+					'",
+                            "startOffset": "' .
+					$step["videoClipStart"] .
+					'",
+                            "endOffset": "' .
+					$step["videoClipEnd"] .
+					'",
+                            "url": "' .
+					$videoURL .
+					$videoClipArg .
+					$step["videoClipStart"] .
+					'" }';
+			}
+		}
+	}
+
+	$JSONLD =
+		'<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "HowTo",
+        "name":"' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($title)) .
+		'",
+        "description": "' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($introduction)) .
+		'",' .
+		(array_unique($totalTime) !== [0]
+			? '"totalTime": "' . $ISOTotalTime . '",'
+			: "") .
+		($videoURL === ""
+			? ""
+			: '"video": {
+                "@type": "VideoObject",
+                "name": "' .
+				str_replace("\'", "'", wp_filter_nohtml_kses($videoName)) .
+				'",
+                "description": "' .
+				(str_replace(
 					"\'",
 					"'",
 					wp_filter_nohtml_kses($videoDescription)
 				) ?:
-				__("No description provided"),
-			"duration" => generateISODurationCode($videoDuration),
-			"thumbnailUrl" => esc_url($videoThumbnailURL),
-			"contentUrl" => esc_url($videoURL),
-			"uploadDate" => date("c", $videoUploadDate),
-			"hasPart" => "[" . $clips . "]",
-		];
-	}
-
-	if ($cost > 0) {
-		$SCHEMEJSON["estimatedCost"] = [
-			"@type" => "MonetaryAmount",
-			"currency" => str_replace(
-				"\'",
-				"'",
-				wp_filter_nohtml_kses($costCurrency)
-			),
-			"value" => wp_filter_nohtml_kses($cost),
-		];
-	}
-
-	$SCHEMEJSON["supply"] = [];
-	if ($advancedMode && $includeSuppliesList) {
-		if (isset($supplies) && count($supplies) > 0) {
-			foreach ($supplies as $i => $s) {
-				$suppliesScheme = [
-					"@type" => "HowToSupply",
-					"name" => str_replace(
-						"\'",
-						"'",
-						wp_filter_nohtml_kses($s["name"])
-					),
-				];
-				if ($s["imageURL"] != "") {
-					$suppliesScheme["image"] = $s["imageURL"];
-				}
-
-				array_push($SCHEMEJSON["supply"], $suppliesScheme);
-			}
-		}
-	}
-
-	$SCHEMEJSON["tool"] = [];
-	if ($advancedMode && $includeToolsList) {
-		if (isset($tools) && count($tools) > 0) {
-			foreach ($tools as $i => $t) {
-				$toolsScheme = [
-					"@type" => "HowToTool",
-					"name" => str_replace(
-						"\'",
-						"'",
-						wp_filter_nohtml_kses($t["name"])
-					),
-				];
-				if ($s["imageURL"] != "") {
-					$toolsScheme["image"] = $t["imageURL"];
-				}
-
-				array_push($SCHEMEJSON["tool"], $toolsScheme);
-			}
-		}
-	}
-
-	$SCHEMEJSON["step"] = [];
-	if ($useSections) {
-		foreach ($section as $i => $s) {
-			$stepsScheme = [
-				"@type" => "HowToSection",
-				"name" => str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($s["sectionName"])
-				),
-			];
-			$stepsScheme["itemListElement"] = [];
-			foreach ($s["steps"] as $j => $step) {
-				$stepScheme = [
-					"@type" => "HowToStep",
-					"name" => str_replace(
-						"\'",
-						"'",
-						wp_filter_nohtml_kses($step["title"])
-					),
-				];
-
-				if ($advancedMode) {
-					$stepScheme["url"] =
-						get_permalink() . "#" . $step["anchor"];
-					if ($step["hasVideoClip"]) {
-						$stepScheme["video"] = [
-							"@id" => $step["anchor"],
-						];
-					}
-				}
-
-				$stepScheme["image"] = $step["stepPic"]["url"];
-				$stepScheme["itemListElement"] = [
-					[
-						"@type" => "HowToDirection",
-						"text" => "",
-					],
-				];
-				if ($step["title"] !== "") {
-					$stepScheme["itemListElement"][0]["text"] =
-						str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($step["title"])
-						) . " ";
-				}
-				$stepScheme["itemListElement"][0]["text"] .= str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($step["direction"])
-				);
-
-				if ($step["tip"] !== "") {
-					// Belum ada, gak paham maksudnya gimana
-				}
-				array_push($stepsScheme["itemListElement"], $stepScheme);
-			}
-
-			array_push($SCHEMEJSON["step"], $stepsScheme);
-		}
-	} else {
-		if (isset($section) && count($section) > 0) {
-			foreach ($section[0]["steps"] as $index => $step) {
-				$stepScheme = [
-					"@type" => "HowToStep",
-					"name" => str_replace(
-						"\'",
-						"'",
-						wp_filter_nohtml_kses($step["title"])
-					),
-				];
-
-				if ($advancedMode) {
-					$stepScheme["url"] =
-						get_permalink() . "#" . $step["anchor"];
-					if ($step["hasVideoClip"]) {
-						$stepScheme["video"] = [
-							"@id" => $step["anchor"],
-						];
-					}
-				}
-
-				$stepScheme["image"] = $step["stepPic"]["url"];
-				$stepScheme["itemListElement"] = [
-					[
-						"@type" => "HowToDirection",
-						"text" => "",
-					],
-				];
-				if ($step["title"] !== "") {
-					$stepScheme["itemListElement"][0]["text"] =
-						str_replace(
-							"\'",
-							"'",
-							wp_filter_nohtml_kses($step["title"])
-						) . " ";
-				}
-				$stepScheme["itemListElement"][0]["text"] .= str_replace(
-					"\'",
-					"'",
-					wp_filter_nohtml_kses($step["direction"])
-				);
-
-				if ($step["tip"] !== "") {
-					// Belum ada, gak paham maksudnya gimana
-				}
-
-				array_push($SCHEMEJSON["step"], $stepScheme);
-			}
-		}
-	}
-
-	$SCHEMEJSON["yield"] = str_replace(
-		"\'",
-		"'",
-		wp_filter_nohtml_kses($howToYield)
-	);
-	$SCHEMEJSON["image"] = $finalImageURL;
-	$SCHEMEJSON["aggregateRating"] = [
-		"@type" => "AggregateRating",
-		"ratingValue" => str_replace(
-			"\'",
-			"'",
-			wp_filter_nohtml_kses($howToRatingValue)
-		),
-		"bestRating" => "5",
-		"worstRating" => "1",
-		"ratingCount" => str_replace(
-			"\'",
-			"'",
-			wp_filter_nohtml_kses($howToRatingCount)
-		),
-	];
+					__("No description provided")) .
+				'",
+                "duration" : "' .
+				generateISODurationCode($videoDuration) .
+				'",
+                "thumbnailUrl": "' .
+				esc_url($videoThumbnailURL) .
+				'",
+                "contentUrl": "' .
+				esc_url($videoURL) .
+				'",
+                "uploadDate": "' .
+				date("c", $videoUploadDate) .
+				'",
+                "hasPart":[' .
+				$clips .
+				']
+            },') .
+		($cost > 0
+			? '"estimatedCost": {
+                "@type": "MonetaryAmount",
+                "currency": "' .
+				str_replace("\'", "'", wp_filter_nohtml_kses($costCurrency)) .
+				'",
+                "value": "' .
+				wp_filter_nohtml_kses($cost) .
+				'"
+            },'
+			: "") .
+		$suppliesCode .
+		"," .
+		$toolsCode .
+		"," .
+		$stepsCode .
+		',"yield": "' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToYield)) .
+		'",
+    "image": "' .
+		$finalImageURL .
+		'"' .
+		',"aggregateRating": {
+	"@type": "AggregateRating",
+	"ratingValue": "' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingValue)) .
+		'",
+	"bestRating": "5",
+	"worstRating": "1",
+	"ratingCount": "' .
+		str_replace("\'", "'", wp_filter_nohtml_kses($howToRatingCount)) .
+		'"
+	}' .
+		"
+	}</script>";
 
 	ob_start();
 	?>
@@ -592,31 +673,9 @@ function dbe_render_how_to_block($attributes)
 
 	</div>
 
-
-	<?php
- $SCHEMEJSON = json_encode(
- 	$SCHEMEJSON,
- 	JSON_UNESCAPED_UNICODE |
- 		JSON_PRETTY_PRINT |
- 		JSON_UNESCAPED_SLASHES |
- 		JSON_HEX_TAG |
- 		JSON_HEX_AMP |
- 		JSON_HEX_APOS |
- 		JSON_HEX_QUOT
- );
- $SCHEMEJSON =
- 	PHP_EOL .
- 	'<script type="application/ld+json">' .
- 	PHP_EOL .
- 	$SCHEMEJSON .
- 	PHP_EOL .
- 	"</script>";
- echo $SCHEMEJSON;
- ?>
-
+	<?= $JSONLD ?>
 <?php return ob_get_clean();
 }
-
 function dbe_register_how_to_block()
 {
 	if (function_exists("register_block_type")) {
