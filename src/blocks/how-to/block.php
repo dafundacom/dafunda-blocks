@@ -54,63 +54,124 @@ function dbe_convert_to_paragraphs($string)
 	}
 }
 
+function dbe_render_how_to_supply(
+	$advancedMode,
+	$includeSuppliesList,
+	$secondLevelTag,
+	$suppliesIntro,
+	$suppliesListStyle,
+	$supplies,
+	$tools,
+	$includeToolsList,
+	$toolsIntro,
+	$toolsListStyle
+) {
+	if ($advancedMode && $includeSuppliesList) {
+		ob_start(); ?>
+		<hr>
+		<<?= $secondLevelTag ?> class="mt-0">
+			<?= $suppliesIntro ?>
+		</<?= $secondLevelTag ?>>
+		<?php if (isset($supplies) && count($supplies) > 0): ?>
+			<?php $suppliesListStyleTag = $suppliesListStyle === "ordered" ? "ol" : "ul"; ?>
+			<<?= $suppliesListStyleTag ?> class="howto-supplies-list pl-0">
+				<?php foreach ($supplies as $i => $s): ?>
+					<li class="howto-card p-3">
+						<p class="text-md mb-3"><?= $i + 1 ?> . <?= $s["name"] ?></p>
+						<?php if ($s["imageURL"] !== ""): ?>
+							<div class="max-h-[1000px] md:max-h-[1600px] mx-auto">
+								<figure class="w-full">
+									<img src="<?= $s["imageURL"] ?>" class="mx-auto rounded-xl overflow-hidden" />
+								</figure>
+							</div>
+						<?php endif; ?>
+					</li>
+
+				<?php endforeach; ?>
+
+			</<?= $suppliesListStyleTag ?>>
+		<?php endif; ?>
+	<?php return ob_get_clean();
+	} else {
+		return "";
+	}
+}
+
+function dbe_render_how_to_tool(
+	$advancedMode,
+	$includeSuppliesList,
+	$secondLevelTag,
+	$suppliesIntro,
+	$suppliesListStyle,
+	$supplies,
+	$tools,
+	$includeToolsList,
+	$toolsIntro,
+	$toolsListStyle
+) {
+	if ($advancedMode && $includeToolsList) {
+		ob_start(); ?>
+		<hr>
+		<<?= $secondLevelTag ?> class="mt-0">
+			<?= $toolsIntro ?>
+		</<?= $secondLevelTag ?>>
+		<?php if (isset($tools) && count($tools) > 0): ?>
+			<?php $toolsListStyleTag = $toolsListStyle === "ordered" ? "ol" : "ul"; ?>
+			<<?= $toolsListStyleTag ?> class="howto-tools-list pl-0">
+				<?php foreach ($tools as $i => $t): ?>
+					<li class="howto-card p-3">
+						<p class="text-md mb-3"><?= $i + 1 ?> . <?= $t["name"] ?></p>
+						<?php if ($t["imageURL"] !== ""): ?>
+							<div class="max-h-[1000px] md:max-h-[1600px] mx-auto">
+								<figure class="w-full">
+									<img src="<?= $t["imageURL"] ?>" class="mx-auto rounded-xl overflow-hidden" />
+								</figure>
+							</div>
+						<?php endif; ?>
+					</li>
+
+				<?php endforeach; ?>
+
+			</<?= $toolsListStyleTag ?>>
+		<?php endif; ?>
+	<?php return ob_get_clean();
+	} else {
+		return "";
+	}
+}
+
 function dbe_render_how_to_block($attributes)
 {
 	extract($attributes);
 
-	$header = "";
-
 	$timeUnits = ["Detik", "Menit", "Jam", "Hari", "Minggu", "Bulan", "Tahun"];
 
-	if ($advancedMode && $includeSuppliesList) {
-		$header .=
-			"<" .
-			$secondLevelTag .
-			">" .
-			$suppliesIntro .
-			"</" .
-			$secondLevelTag .
-			">";
-		if (isset($supplies) && count($supplies) > 0) {
-			$header .= $suppliesListStyle === "ordered" ? "<ol" : "<ul";
-			$header .= ' class="howto-supplies-list">';
-			foreach ($supplies as $i => $s) {
-				$header .=
-					'<li class="ml-5">' .
-					$s["name"] .
-					($s["imageURL"] === ""
-						? ""
-						: '<br><img src="' . $s["imageURL"] . '"/>') .
-					"</li>";
-			}
-			$header .= $suppliesListStyle === "ordered" ? "</ol>" : "</ul>";
-		}
-	}
+	$header = "";
+	$header .= dbe_render_how_to_supply(
+		$advancedMode,
+		$includeSuppliesList,
+		$secondLevelTag,
+		$suppliesIntro,
+		$suppliesListStyle,
+		$supplies,
+		$tools,
+		$includeToolsList,
+		$toolsIntro,
+		$toolsListStyle
+	);
 
-	if ($advancedMode && $includeToolsList) {
-		$header .=
-			"<" .
-			$secondLevelTag .
-			">" .
-			$toolsIntro .
-			"</" .
-			$secondLevelTag .
-			">";
-		if (isset($tools) && count($tools) > 0) {
-			$header .= $toolsListStyle === "ordered" ? "<ol" : "<ul";
-			$header .= ' class="howto-tools-list">';
-			foreach ($tools as $i => $t) {
-				$header .=
-					"<li>" .
-					$t["name"] .
-					($t["imageURL"] === ""
-						? ""
-						: '<br><img src="' . $t["imageURL"] . '"/>') .
-					"</li>";
-			}
-			$header .= $toolsListStyle === "ordered" ? "</ol>" : "</ul>";
-		}
-	}
+	$header .= dbe_render_how_to_tool(
+		$advancedMode,
+		$includeSuppliesList,
+		$secondLevelTag,
+		$suppliesIntro,
+		$suppliesListStyle,
+		$supplies,
+		$tools,
+		$includeToolsList,
+		$toolsIntro,
+		$toolsListStyle
+	);
 
 	$costDisplay = $showUnitFirst
 		? $costCurrency . " " . $cost
@@ -127,122 +188,10 @@ function dbe_render_how_to_block($attributes)
 		}
 	}
 
-	$timeDisplay .=
-		"<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</div>";
+	$timeDisplay .= "<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</p>";
+	$timeDisplay .= "</div>";
 
 	$ISOTotalTime = generateISODurationCode($totalTime);
-
-	$stepsDisplay = "";
-
-	if ($useSections) {
-		$stepsDisplay =
-			($sectionListStyle === "ordered" ? "<ol" : "<ul") .
-			' class="ml-4">';
-		foreach ($section as $i => $s) {
-			$stepsDisplay .=
-				'<li class="howto-section"><' .
-				$secondLevelTag .
-				">" .
-				$s["sectionName"] .
-				"</" .
-				$secondLevelTag .
-				">" .
-				($sectionListStyle === "ordered" ? "<ol" : "<ul") .
-				' class="howto-step-display">';
-
-			foreach ($s["steps"] as $j => $step) {
-				$stepsDisplay .=
-					'<li class="howto-step"><' .
-					$thirdLevelTag .
-					' id="' .
-					$step["anchor"] .
-					'">' .
-					$step["title"] .
-					"</" .
-					$thirdLevelTag .
-					">" .
-					($step["stepPic"]["url"] !== ""
-						? ($step["stepPic"]["caption"] === ""
-								? ""
-								: '<figure class="w-full">') .
-							'<img class="howto-step-image " src="' .
-							$step["stepPic"]["url"] .
-							'">' .
-							($step["stepPic"]["caption"] === ""
-								? ""
-								: "<figcaption>" .
-									$step["stepPic"]["caption"] .
-									"</figcaption></figure>")
-						: "") .
-					dbe_convert_to_paragraphs($step["direction"]) .
-					PHP_EOL;
-
-				if ($step["tip"] !== "") {
-					$stepsDisplay .= dbe_convert_to_paragraphs($step["tip"]);
-				}
-
-				$stepsDisplay .= "</li>";
-			}
-
-			$stepsDisplay .=
-				($sectionListStyle === "ordered" ? "</ol>" : "</ul>") . "</li>"; //close section div
-		}
-	} else {
-		$stepsDisplay .=
-			($sectionListStyle === "ordered" ? "<ol" : "<ul") .
-			' class="howto-step-display">';
-		if (isset($section) && count($section) > 0) {
-			foreach ($section[0]["steps"] as $index => $step) {
-				ob_start(); ?>
-				<li class="howto-step p-3">
-
-					<div class="flex flex-wrap">
-
-						<div class="flex flex-wrap">
-							<div class="bg-slate-200 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
-								<?= $index + 1 ?>
-							</div>
-
-							<div class="px-2 flex-1">
-								<<?= $thirdLevelTag ?> id="<?= $step[
- 	"anchor"
- ] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
-									<?= $step["title"] ?>
-								</<?= $thirdLevelTag ?>>
-							</div>
-						</div>
-
-						<div class="col-span-12 md:col-span-11">
-							<?= dbe_convert_to_paragraphs($step["direction"]) ?>
-						</div>
-
-						<div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
-							<?= $step["stepPic"]["url"] !== ""
-       	? ($step["stepPic"]["caption"] === ""
-       			? ""
-       			: '<figure class="w-full">') .
-       		'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
-       		$step["stepPic"]["url"] .
-       		'">' .
-       		($step["stepPic"]["caption"] === ""
-       			? ""
-       			: "<figcaption>" .
-       				$step["stepPic"]["caption"] .
-       				"</figcaption></figure>")
-       	: "" ?>
-						</div>
-					</div>
-				</li>
-
-	<?php
- $stepsDisplay .= ob_get_contents();
- ob_end_clean();
- // ob_flush();
-
-			}
-		}
-	}
-	$stepsDisplay .= $sectionListStyle === "ordered" ? "</ol>" : "</ul>";
 
 	$clips = "";
 
@@ -478,14 +427,17 @@ function dbe_render_how_to_block($attributes)
 		</<?= $firstLevelTag ?>>
 
 		<?= dbe_convert_to_paragraphs($introduction) ?>
-		<?= $header ?>
+
 		<div class="flex w-full justify-center">
 			<div class="mr-5">
 				<i class="fa fa-tag" aria-hidden="true"></i>
 				<?= $advancedMode
     	? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
     		? "Gratis"
-    		: "<p>" . $costDisplayText . $costDisplay . "</p>")
+    		: "<p class='inline-block m-0'>" .
+    			$costDisplayText .
+    			$costDisplay .
+    			"</p>")
     	: "" ?>
 			</div>
 			<div class="flex items-center">
@@ -493,7 +445,16 @@ function dbe_render_how_to_block($attributes)
 			</div>
 		</div>
 
-		<?= $stepsDisplay ?>
+		<?= $header ?>
+
+
+		<?php echo dbe_render_how_to_block_section(
+  	$useSections,
+  	$section,
+  	$secondLevelTag,
+  	$sectionListStyle,
+  	$thirdLevelTag
+  ); ?>
 
 		<div class="howto-yield bg-[#16A085] rounded-xl text-white p-5">
 			<div class="w-100 flex flex-wrap justify-center mb-3">
@@ -614,7 +575,149 @@ function dbe_render_how_to_block($attributes)
  echo $SCHEMEJSON;
  ?>
 
-<?php return ob_get_clean();
+	<?php return ob_get_clean();
+}
+
+function dbe_render_how_to_block_section(
+	$useSections,
+	$section,
+	$secondLevelTag,
+	$sectionListStyle,
+	$thirdLevelTag
+) {
+	$stepsDisplay = "";
+	if ($useSections) {
+		foreach ($section as $i => $s) {
+			ob_start(); ?>
+			<li class="howto-section list-none">
+				<<?= $secondLevelTag ?>>
+					<?= $s["sectionName"] ?>
+				</<?= $secondLevelTag ?>>
+
+				<?php
+    $sectionListStyleTag = "ul";
+    if ($sectionListStyle === "ordered") {
+    	$sectionListStyleTag = "ol";
+    }
+    ?>
+
+				<<?= $sectionListStyleTag ?> class="howto-step-display">
+					<?= dbe_render_how_to_block_step($s["steps"], [
+     	"thirdLevelTag" => $thirdLevelTag,
+     ]) ?>
+				</<?= $sectionListStyleTag ?>>
+
+			</li>
+			<?php
+		}
+	} else {
+		$stepsDisplay .=
+			($sectionListStyle === "ordered" ? "<ol" : "<ul") .
+			' class="howto-step-display">';
+		if (isset($section) && count($section) > 0) {
+			foreach ($section[0]["steps"] as $index => $step) {
+				ob_start(); ?>
+				<li class="howto-step p-3 mb-12">
+
+					<div class="flex flex-wrap">
+
+						<div class="flex flex-wrap">
+							<div class="bg-slate-200 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+								<?= $index + 1 ?>
+							</div>
+
+							<div class="px-2 flex-1">
+								<<?= $thirdLevelTag ?> id="<?= $step[
+ 	"anchor"
+ ] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
+									<?= $step["title"] ?>
+								</<?= $thirdLevelTag ?>>
+							</div>
+						</div>
+
+						<div class="col-span-12 md:col-span-11">
+							<?= dbe_convert_to_paragraphs($step["direction"]) ?>
+						</div>
+
+						<div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+							<?= $step["stepPic"]["url"] !== ""
+       	? ($step["stepPic"]["caption"] === ""
+       			? ""
+       			: '<figure class="w-full">') .
+       		'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
+       		$step["stepPic"]["url"] .
+       		'">' .
+       		($step["stepPic"]["caption"] === ""
+       			? ""
+       			: "<figcaption>" .
+       				$step["stepPic"]["caption"] .
+       				"</figcaption></figure>")
+       	: "" ?>
+						</div>
+					</div>
+				</li>
+
+		<?php
+			}
+		}
+	}
+	$stepsDisplay .= $sectionListStyle === "ordered" ? "</ol>" : "</ul>";
+
+	$stepsDisplay .= ob_get_clean();
+	// $stepsDisplay .= ob_get_contents();
+	// ob_end_clean();
+	// ob_flush();
+	return $stepsDisplay;
+}
+function dbe_render_how_to_block_step($steps, $attr)
+{
+	$stepsDisplay = "";
+	foreach ($steps as $index => $step) {
+		ob_start(); ?>
+		<li class="howto-step p-3 mb-12">
+			<div class="flex flex-wrap">
+
+				<div class="flex flex-wrap">
+					<div class="bg-slate-200 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+						<?= $index + 1 ?>
+					</div>
+
+					<div class="px-2 flex-1">
+						<<?= $attr["thirdLevelTag"] ?> id="<?= $step[
+ 	"anchor"
+ ] ?>" class="howto-step__title my-2 font-normal text-[1.3rem] md:text-2xl">
+							<?= $step["title"] ?>
+						</<?= $attr["thirdLevelTag"] ?>>
+					</div>
+				</div>
+
+				<div class="col-span-12 md:col-span-11">
+					<?= dbe_convert_to_paragraphs($step["direction"]) ?>
+				</div>
+
+				<div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+					<?= $step["stepPic"]["url"] !== ""
+     	? ($step["stepPic"]["caption"] === ""
+     			? ""
+     			: '<figure class="w-full">') .
+     		'<img class="howto-step-image mx-auto rounded-xl overflow-hidden" src="' .
+     		$step["stepPic"]["url"] .
+     		'">' .
+     		($step["stepPic"]["caption"] === ""
+     			? ""
+     			: "<figcaption>" .
+     				$step["stepPic"]["caption"] .
+     				"</figcaption></figure>")
+     	: "" ?>
+				</div>
+			</div>
+		</li>
+<?php
+	}
+	$stepsDisplay .= ob_get_contents();
+	ob_get_clean();
+	ob_flush();
+	return $stepsDisplay;
 }
 
 function dbe_register_how_to_block()

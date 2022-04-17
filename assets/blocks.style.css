@@ -683,10 +683,6 @@
 		@apply list-none;
 	}
 
-	/* .howto-step-image,
-	.howto-yield-image {
-		@apply w-full;
-	} */
 	.howto-supplies-list img,
 	.howto-tools-list img {
 		@apply max-w-[200px];
@@ -701,8 +697,10 @@
 	.howto-step-display .howto-step {
 		@apply list-outside;
 	}
+
 	.howto-step,
-	.howto-review {
+	.howto-review,
+	.howto-card {
 		@apply mt-4 rounded-lg border border-slate-200 md:overflow-hidden;
 		border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 	}
