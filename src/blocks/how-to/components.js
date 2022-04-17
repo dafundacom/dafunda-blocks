@@ -2071,6 +2071,7 @@ export class EditorComponent extends Component {
 								defaultValue={howToRatingCount * 20}
 								step="1"
 								onChange={(e) => {
+									e.persist();
 									let howToRatingCount = parseFloat(
 										e.target.value / 20
 									).toFixed(1);
