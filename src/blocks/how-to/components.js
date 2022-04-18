@@ -2061,44 +2061,59 @@ export class EditorComponent extends Component {
 						/>
 					</div>
 
-					<div className="howto-review-score">
-						<h4>Rating Count</h4>
-						<div className="howto-rating-range-input mb-4 w-full md:w-96">
-							<input
-								type="range"
-								min="0"
-								max="100"
-								defaultValue={howToRatingCount * 20}
-								step="1"
-								onChange={(e) => {
-									e.persist();
-									let howToRatingCount = parseFloat(
-										e.target.value / 20
-									).toFixed(1);
-									let step = parseFloat(e.target.step);
-									let top = (parseFloat(howToRatingCount * 20) / step) * -40;
-									e.target.nextElementSibling.querySelector(
-										".howto-rating-range-input__value div"
-									).style.marginTop = top + "px";
-									setAttributes({ howToRatingCount });
-								}}
-							/>
-							<div className="howto-rating-range-input__value">
-								<div
-									style={{
-										marginTop: (parseFloat(howToRatingCount * 20) / 1) * -40,
-										width: "max-content",
+					<div className="howto-review-score grid grid-cols-1  gap-4 md:grid-cols-2 md:gap-8 mb-4">
+						<div>
+							<h4>Rating Value</h4>
+							<div className="howto-rating-range-input w-full">
+								<input
+									type="range"
+									min="0"
+									max="100"
+									defaultValue={howToRatingValue * 20}
+									step="1"
+									onChange={(e) => {
+										e.persist();
+										let howToRatingValue = parseFloat(
+											e.target.value / 20
+										).toFixed(1);
+										let step = parseFloat(e.target.step);
+										let top = (parseFloat(howToRatingValue * 20) / step) * -40;
+										e.target.nextElementSibling.querySelector(
+											".howto-rating-range-input__value div"
+										).style.marginTop = top + "px";
+										setAttributes({ howToRatingValue });
 									}}
-								>
-									{Array(101)
-										.fill()
-										.map((v, i) => (
-											<div>{i}</div>
-										))}
+								/>
+								<div className="howto-rating-range-input__value">
+									<div
+										style={{
+											marginTop: (parseFloat(howToRatingValue * 20) / 1) * -40,
+											width: "max-content",
+										}}
+									>
+										{Array(101)
+											.fill()
+											.map((v, i) => (
+												<div>{i}</div>
+											))}
+									</div>
 								</div>
 							</div>
 						</div>
-
+						<div className="howto-rating-count">
+							<h4>Rating Count</h4>
+							<div className="howto-yield">
+								<RichText
+									placeholder="0"
+									className="items-center justify-center"
+									keepPlaceholderOnFocus={true}
+									value={howToRatingCount}
+									onChange={(howToRatingCount) =>
+										setAttributes({ howToRatingCount })
+									}
+								/>
+							</div>
+						</div>
 						{/* <input type="range" min="0" max="100" step="1" defaultValue={0} /> */}
 						{/* <div className="howto-rating-range-input mb-4 w-full md:w-96">
 							<input type="range" min="0" max="100" step="1" defaultValue={howToRatingCount * 20} />
