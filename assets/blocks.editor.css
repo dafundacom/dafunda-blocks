@@ -987,3 +987,22 @@
 		margin: 5px 0 0 3px;
 	}
 }
+
+.edit-post-layout__metaboxes {
+	@apply hidden;
+}
+
+/* Input */
+.interface-interface-skeleton__body
+	.components-form-toggle__input[type="checkbox"] {
+	@apply !w-full !h-full;
+}
+
+.interface-interface-skeleton__body
+	.components-range-control__slider[type="range"] {
+	@apply !w-full !h-full;
+}
+
+.components-select-control {
+	@apply h-auto;
+}
