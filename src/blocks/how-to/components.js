@@ -1,5 +1,10 @@
 import { Component } from "react";
 import { convertFromSeconds } from "../../common";
+import {
+	ButtonAddStep,
+	ButtonDeleteImage,
+	InputUpload,
+} from "./_components/index";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
@@ -708,17 +713,15 @@ class HowToStep extends Component {
 						</div>
 						<div className="w-full howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto mt-3">
 							{stepPic.url !== "" ? (
-								<figure className="w-full relative">
+								<figure className="relative mx-auto w-fit">
 									<img
-										className="howto-step-image mx-auto rounded-xl overflow-hidden"
+										className="howto-step-image rounded-xl overflow-hidden"
 										src={stepPic.url}
 										onClick={selectStep}
 									/>
 									{blockIsSelected && (
-										<span
-											title={__("Delete image")}
-											className="dashicons dashicons-trash howto-delete-image cursor-pointer"
-											onClick={() =>
+										<ButtonDeleteImage
+											onClick={() => {
 												editStep({
 													stepPic: {
 														id: -1,
@@ -728,8 +731,8 @@ class HowToStep extends Component {
 														width: 0,
 														float: "none",
 													},
-												})
-											}
+												});
+											}}
 										/>
 									)}
 									<RichText
@@ -814,6 +817,8 @@ class HowToSection extends Component {
 			steps,
 			stepTag,
 			editSection,
+			moveUp,
+			moveDown,
 			deleteSection,
 			videoDuration,
 			clips,
@@ -826,7 +831,7 @@ class HowToSection extends Component {
 
 		return (
 			<li className="howto-section">
-				<div>
+				<div className="relative">
 					<RichText
 						keepPlaceholderOnFocus
 						tagName={sectionTag}
@@ -834,12 +839,38 @@ class HowToSection extends Component {
 						value={sectionName}
 						onChange={(sectionName) => editSection({ sectionName, steps })}
 					/>
-					<button
-						className="howto-delete"
+					{/* <button
+						className="howto-delete absolute right-[20px] top-[20px] text-white bg-gray-900 hover:bg-gray-800 text-xl p-2 w-auto h-auto rounded-lg leading-none transition duration-200 ease-in-out dashicons dashicons-dismiss"
 						icon="trash"
 						label={__("Delete section")}
 						onClick={() => deleteSection()}
-					/>
+					/> */}
+					<div className="howto-step__control-button absolute top-[50%] right-[10px] translate-y-[-50%] bg-black px-2 py-1 grid grid-cols-3 gap-2 rounded-lg">
+						<button
+							className="howto-arrow"
+							icon="arrow-up-alt"
+							onClick={() => moveUp()}
+							label={__("Move step up")}
+						>
+							<i class="fa fa-arrow-up" aria-hidden="true"></i>
+						</button>
+						<button
+							className="howto-arrow"
+							icon="arrow-down-alt"
+							onClick={() => moveDown()}
+							label={__("Move step down")}
+						>
+							<i class="fa fa-arrow-down" aria-hidden="true"></i>
+						</button>
+						<button
+							className="howto-delete"
+							icon="trash"
+							label={__("Delete step")}
+							onClick={() => deleteSection()}
+						>
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+					</div>
 				</div>
 				<ListWrapper
 					className="howto-steps-list pl-0"
@@ -950,23 +981,6 @@ class HowToSection extends Component {
 			</li>
 		);
 	}
-}
-
-function ButtonAddStep(props) {
-	const { onClick } = props;
-	return (
-		<>
-			<div className="w-full flex flex-wrap justify-center my-12">
-				<button
-					className="text-gray-800 hover:text-gray-50 bg-transparent border hover:bg-slate-400 ring-gray-500  focus:ring-4 focus:ring-gray-500 font-thin text-sm px-2 py-1 focus:outline-none rounded-full transition duration-200 ease-in-out"
-					onClick={onClick}
-				>
-					<i class="fa fa-plus mr-2" aria-hidden="true"></i>
-					{__("Tambah Langkah")}
-				</button>
-			</div>
-		</>
-	);
 }
 
 export class EditorComponent extends Component {
@@ -1281,6 +1295,13 @@ export class EditorComponent extends Component {
 			}
 		};
 
+		const moveElement = (array, from, to) => {
+			const copy = [...array];
+			const valueToMove = copy.splice(from, 1)[0];
+			copy.splice(to, 0, valueToMove);
+			return copy;
+		};
+
 		return (
 			<>
 				<InspectorPanel
@@ -1304,6 +1325,7 @@ export class EditorComponent extends Component {
 						value={introduction}
 						onChange={(introduction) => setAttributes({ introduction })}
 					/>
+
 					{advancedMode && (
 						<>
 							<div className="howto-video-input w-full relative mb-2">
@@ -1362,9 +1384,65 @@ export class EditorComponent extends Component {
 										listStyle={suppliesListStyle}
 									>
 										{supplies.map((supply, i) => (
-											<li>
+											<li className="mb-8 relative">
+												<div className="howto-step__control-button absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg">
+													<button
+														className="howto-arrow"
+														icon="arrow-up-alt"
+														onClick={() => {
+															if (i > 0) {
+																let newSupplies = moveElement(
+																	supplies,
+																	i,
+																	i - 1
+																);
+																setAttributes({
+																	supplies: newSupplies,
+																});
+															}
+														}}
+														label={__("Move step up")}
+													>
+														<i class="fa fa-arrow-up" aria-hidden="true"></i>
+													</button>
+													<button
+														className="howto-arrow"
+														icon="arrow-down-alt"
+														onClick={() => {
+															if (i < supplies.length - 1) {
+																let newSupplies = moveElement(
+																	supplies,
+																	i,
+																	i + 1
+																);
+																setAttributes({
+																	supplies: newSupplies,
+																});
+															}
+														}}
+														label={__("Move step down")}
+													>
+														<i class="fa fa-arrow-down" aria-hidden="true"></i>
+													</button>
+													<button
+														className="howto-delete"
+														icon="trash"
+														label={__("Delete step")}
+														onClick={() => {
+															setAttributes({
+																supplies: [
+																	...supplies.slice(0, i),
+																	...supplies.slice(i + 1),
+																],
+															});
+														}}
+													>
+														<i class="fa fa-times" aria-hidden="true"></i>
+													</button>
+												</div>
 												<div>
 													<RichText
+														className="mb-3"
 														keepPlaceholderOnFocus
 														value={supply.name}
 														placeholder={__("Enter supply name")}
@@ -1378,7 +1456,7 @@ export class EditorComponent extends Component {
 															})
 														}
 													/>
-													<button
+													{/* <button
 														icon="trash"
 														label={__("Delete supply")}
 														onClick={() =>
@@ -1389,20 +1467,18 @@ export class EditorComponent extends Component {
 																],
 															})
 														}
-													/>
+													/> */}
 												</div>
 												{addSupplyImages &&
 													(supply.imageURL !== "" ? (
-														<figure>
+														<figure className="relative mx-auto w-fit">
 															<img
 																className="howto-supply-image"
 																src={supply.imageURL}
 															/>
 															{isSelected && (
-																<span
-																	title={__("Delete image")}
-																	className="dashicons dashicons-trash howto-delete-image cursor-pointer"
-																	onClick={() =>
+																<ButtonDeleteImage
+																	onClick={() => {
 																		setAttributes({
 																			supplies: [
 																				...supplies.slice(0, i),
@@ -1413,8 +1489,8 @@ export class EditorComponent extends Component {
 																				}),
 																				...supplies.slice(i + 1),
 																			],
-																		})
-																	}
+																		});
+																	}}
 																/>
 															)}
 														</figure>
@@ -1435,32 +1511,23 @@ export class EditorComponent extends Component {
 															}
 															allowedTypes={["image"]}
 															value={supply.imageID}
-															render={({ open }) => (
-																<button
-																	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-																	onClick={open}
-																>
-																	{__("Upload Image")}
-																</button>
-															)}
+															render={({ open }) => <InputUpload open={open} />}
 														/>
 													))}
 											</li>
 										))}
 									</ListWrapper>
-									<button
-										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-										onClick={() =>
+									<ButtonAddStep
+										label="Tambah supplies"
+										onClick={() => {
 											setAttributes({
 												supplies: [
 													...supplies,
 													{ name: "", imageID: 0, imageAlt: "", imageURL: "" },
 												],
-											})
-										}
-									>
-										{__("Add new supplies")}
-									</button>
+											});
+										}}
+									/>
 								</>
 							)}
 							{includeToolsList && (
@@ -1477,9 +1544,57 @@ export class EditorComponent extends Component {
 										listStyle={toolsListStyle}
 									>
 										{tools.map((tool, i) => (
-											<li>
+											<li className="mb-8 relative">
+												<div className="howto-step__control-button absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg">
+													<button
+														className="howto-arrow"
+														icon="arrow-up-alt"
+														onClick={() => {
+															if (i > 0) {
+																let newSupplies = moveElement(tools, i, i - 1);
+																setAttributes({
+																	tools: newSupplies,
+																});
+															}
+														}}
+														label={__("Move step up")}
+													>
+														<i class="fa fa-arrow-up" aria-hidden="true"></i>
+													</button>
+													<button
+														className="howto-arrow"
+														icon="arrow-down-alt"
+														onClick={() => {
+															if (i < tools.length - 1) {
+																let newSupplies = moveElement(tools, i, i + 1);
+																setAttributes({
+																	tools: newSupplies,
+																});
+															}
+														}}
+														label={__("Move step down")}
+													>
+														<i class="fa fa-arrow-down" aria-hidden="true"></i>
+													</button>
+													<button
+														className="howto-delete"
+														icon="trash"
+														label={__("Delete step")}
+														onClick={() => {
+															setAttributes({
+																tools: [
+																	...tools.slice(0, i),
+																	...tools.slice(i + 1),
+																],
+															});
+														}}
+													>
+														<i class="fa fa-times" aria-hidden="true"></i>
+													</button>
+												</div>
 												<div>
 													<RichText
+														className="mb-3"
 														keepPlaceholderOnFocus
 														value={tool.name}
 														placeholder={__("Enter tool name")}
@@ -1493,28 +1608,14 @@ export class EditorComponent extends Component {
 															})
 														}
 													/>
-													<button
-														icon="trash"
-														label={__("Delete tool")}
-														onClick={() =>
-															setAttributes({
-																tools: [
-																	...tools.slice(0, i),
-																	...tools.slice(i + 1),
-																],
-															})
-														}
-													/>
 												</div>
 												{addToolImages &&
 													(tool.imageURL !== "" ? (
-														<figure>
+														<figure className="relative mx-auto w-fit">
 															<img src={tool.imageURL} />
 															{isSelected && (
-																<span
-																	title={__("Delete image")}
-																	className="dashicons dashicons-trash howto-delete-image cursor-pointer"
-																	onClick={() =>
+																<ButtonDeleteImage
+																	onClick={() => {
 																		setAttributes({
 																			tools: [
 																				...tools.slice(0, i),
@@ -1525,8 +1626,8 @@ export class EditorComponent extends Component {
 																				}),
 																				...tools.slice(i + 1),
 																			],
-																		})
-																	}
+																		});
+																	}}
 																/>
 															)}
 														</figure>
@@ -1547,35 +1648,26 @@ export class EditorComponent extends Component {
 															}
 															allowedTypes={["image"]}
 															value={tool.imageID}
-															render={({ open }) => (
-																<button
-																	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-																	onClick={open}
-																>
-																	{__("Upload Image")}
-																</button>
-															)}
+															render={({ open }) => <InputUpload open={open} />}
 														/>
 													))}
 											</li>
 										))}
 									</ListWrapper>
-
-									<button
-										className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-										onClick={() =>
+									<ButtonAddStep
+										label="Tambah tools"
+										onClick={() => {
 											setAttributes({
 												tools: [
 													...tools,
 													{ name: "", imageID: 0, imageAlt: "", imageURL: "" },
 												],
-											})
-										}
-									>
-										{__("Add new tools")}
-									</button>
+											});
+										}}
+									/>
 								</>
 							)}
+
 							<div className="howto_cost_container mb-3 mt-0 flex flex-wrap justify-between">
 								<RichText
 									value={costDisplayText}
@@ -1762,6 +1854,24 @@ export class EditorComponent extends Component {
 											],
 										})
 									}
+									moveUp={() => {
+										console.log(section);
+										if (i > 0) {
+											let newSection = moveElement(section, i, i - 1);
+											setAttributes({
+												section: newSection,
+											});
+										}
+									}}
+									moveDown={() => {
+										console.log(section);
+										if (i < section.length - 1) {
+											let newSection = moveElement(section, i, i + 1);
+											setAttributes({
+												section: newSection,
+											});
+										}
+									}}
 									deleteSection={() =>
 										setAttributes({
 											section: [
@@ -1937,9 +2047,9 @@ export class EditorComponent extends Component {
 						</>
 					)}
 					{useSections && (
-						<button
-							className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-							onClick={() =>
+						<ButtonAddStep
+							label="Tambah section"
+							onClick={() => {
 								setAttributes({
 									section: [
 										...section,
@@ -1965,11 +2075,9 @@ export class EditorComponent extends Component {
 											],
 										},
 									],
-								})
-							}
-						>
-							{__("Add Section")}
-						</button>
+								});
+							}}
+						/>
 					)}
 
 					<div className="howto-yield bg-[#16A085] rounded-xl text-white p-5 mb-4">
@@ -1985,17 +2093,15 @@ export class EditorComponent extends Component {
 							/>
 						</div>
 						{finalImageURL !== "" ? (
-							<figure className="howto-yield-image-container w-full relative">
+							<figure className="howto-yield-image-container relative mx-auto w-fit">
 								<img
-									className="howto-step-image mx-auto rounded-xl overflow-hidden"
+									className="howto-step-image rounded-xl overflow-hidden"
 									src={finalImageURL}
 									onClick={() => this.setState({ currentStep: "final" })}
 								/>
 								{isSelected && (
-									<span
-										title={__("Delete image")}
-										className="dashicons dashicons-trash howto-delete-image cursor-pointer"
-										onClick={() =>
+									<ButtonDeleteImage
+										onClick={() => {
 											setAttributes({
 												finalImageID: -1,
 												finalImageAlt: "",
@@ -2003,8 +2109,8 @@ export class EditorComponent extends Component {
 												finalImageCaption: "",
 												finalImageWidth: 0,
 												finalImageFloat: "none",
-											})
-										}
+											});
+										}}
 									/>
 								)}
 								<RichText
@@ -2034,22 +2140,7 @@ export class EditorComponent extends Component {
 									}}
 									allowedTypes={["image"]}
 									value={finalImageID}
-									render={({ open }) => (
-										<>
-											<div
-												className="w-full bg-[#EEEEEE] aspect-[16/9] md:aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
-												onClick={open}
-											>
-												<div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
-													<i
-														class="fa fa-picture-o text-8xl"
-														aria-hidden="true"
-													></i>
-													<p className="text-[#999999] m-0">Tambahkan Media</p>
-												</div>
-											</div>
-										</>
-									)}
+									render={({ open }) => <InputUpload open={open} />}
 								/>
 							</div>
 						)}

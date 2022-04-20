@@ -4,7 +4,6 @@ import { EditorComponent } from "./components";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 
-const { withState, compose } = wp.compose;
 const { withDispatch, withSelect } = wp.data;
 
 const attributes = {
