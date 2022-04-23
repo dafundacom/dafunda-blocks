@@ -5,7 +5,6 @@ import {
 	ButtonDeleteImage,
 	InputUpload,
 } from "./_components/index";
-
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
 const { RichText, MediaUpload, InspectorControls } =
