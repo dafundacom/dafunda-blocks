@@ -639,6 +639,12 @@
 		transform: translate(-50%, -50%);
 	}
 
+	.swiper-pagination.swiper-pagination-bullets {
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
 	/* Number Box */
 	.wp-block-number-box {
 		margin: 0 auto;

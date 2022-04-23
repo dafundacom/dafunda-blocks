@@ -228,7 +228,7 @@ function dbe_render_how_to_block($attributes)
 
 		<?= $header ?>
 		<?php $sectionListStyleTag = $sectionListStyle === "ordered" ? "ul" : "ol"; ?>
-		<<?= $sectionListStyleTag ?> class="ml-4">
+		<<?= $sectionListStyleTag ?> class="pl-0">
 			<?php if ($useSections): ?>
 				<?php foreach ($section as $i => $s): ?>
 					<li class="howto-section list-none">
@@ -667,29 +667,10 @@ function dbe_render_how_to_block($attributes)
  	$SCHEMEJSON .
  	PHP_EOL .
  	"</script>";
-
- $SCHEMEJSON = json_encode(
- 	$SCHEMEJSON,
- 	JSON_UNESCAPED_UNICODE |
- 		JSON_PRETTY_PRINT |
- 		JSON_UNESCAPED_SLASHES |
- 		JSON_HEX_TAG |
- 		JSON_HEX_AMP |
- 		JSON_HEX_APOS |
- 		JSON_HEX_QUOT
- );
- $SCHEMEJSON =
- 	PHP_EOL .
- 	'<script type="application/ld+json">' .
- 	PHP_EOL .
- 	$SCHEMEJSON .
- 	PHP_EOL .
- 	"</script>";
  ?>
 	<?= $SCHEMEJSON ?>
-	<?php return ob_get_clean();
+<?php return ob_get_clean();
 }
-
 function dbe_register_how_to_block()
 {
 	if (function_exists("register_block_type")) {

@@ -508,8 +508,8 @@ registerBlockType("dbe/image-slider", {
 									>
 										<img
 											key={i}
+											className="mx-auto"
 											src={c.url}
-											// className="w-full"
 											style={{
 												height: `${sliderHeight}px`,
 											}}

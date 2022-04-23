@@ -11,5 +11,5 @@ const icon = (
 		/>
 	</svg>
 );
-
+// await wp.data.dispatch('core/editor').autosave()
 export default icon;
