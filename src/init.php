@@ -2464,13 +2464,13 @@ function dafunda_blocks_cgb_editor_assets()
 		true // Version: latest version number.
 	);
 
-	wp_enqueue_script(
-		"dafunda_blocks-cgb-deactivator-js", // Handle.
-		plugins_url("/dist/deactivator.build.js", dirname(__FILE__)), // Block.build.js: We register the block here. Built with Webpack.
-		["wp-editor", "wp-blocks", "wp-i18n", "wp-element"], // Dependencies, defined above.
-		Dafunda_Blocks_Constants::plugin_version(), // Version: latest version number.
-		true
-	);
+	// wp_enqueue_script(
+	// 	"dafunda_blocks-cgb-deactivator-js", // Handle.
+	// 	plugins_url("/dist/deactivator.build.js", dirname(__FILE__)), // Block.build.js: We register the block here. Built with Webpack.
+	// 	["wp-editor", "wp-blocks", "wp-i18n", "wp-element"], // Dependencies, defined above.
+	// 	Dafunda_Blocks_Constants::plugin_version(), // Version: latest version number.
+	// 	true
+	// );
 
 	// Styles.
 	if (
@@ -2646,6 +2646,9 @@ require_once plugin_dir_path(__FILE__) . "blocks/styled-list/block.php";
 
 // How To
 require_once plugin_dir_path(__FILE__) . "blocks/how-to/block.php";
+
+// Rangked List
+require_once plugin_dir_path(__FILE__) . "blocks/rangked-list/block.php";
 
 // Advanced Heading
 require_once plugin_dir_path(__FILE__) . "blocks/advanced-heading/block.php";
