@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-	.editor-styles-wrapper .wp-block .howto i,
-	.editor-styles-wrapper .wp-block .howto em {
-		font-style: inherit;
+	.editor-styles-wrapper .wp-block i,
+	.editor-styles-wrapper .wp-block em {
+		font-style: inherit !important;
 	}
 
 	h1 {
@@ -995,10 +995,6 @@
 		text-align: justify;
 		margin: 5px 0 0 3px;
 	}
-}
-
-.edit-post-layout__metaboxes {
-	@apply hidden;
 }
 
 /* Input */

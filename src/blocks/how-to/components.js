@@ -281,6 +281,7 @@ class InspectorPanel extends Component {
 		);
 	}
 }
+
 const defaultTimeDisplay = {
 	w: 0,
 	d: 0,
@@ -796,13 +797,6 @@ class HowToStep extends Component {
 	}
 }
 
-// <button
-// 	className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-// 	onClick={open}
-// >
-// 	{__("Upload Image")}
-// </button>
-
 class HowToSection extends Component {
 	constructor(props) {
 		super(props);
@@ -981,7 +975,6 @@ class HowToSection extends Component {
 		);
 	}
 }
-
 export class EditorComponent extends Component {
 	constructor(props) {
 		super(props);
@@ -1308,6 +1301,7 @@ export class EditorComponent extends Component {
 					{...this.state}
 					updateState={(newState) => this.setState(newState)}
 				/>
+
 				<div className="howto" id={`howto-${blockID}`}>
 					<RichText
 						tagName={firstLevelTag}

@@ -83,6 +83,11 @@
 			active: true,
 		},
 		{
+			label: "Rangked List",
+			name: "dbe/rangked-list",
+			active: true,
+		},
+		{
 			label: "Image Slider",
 			name: "dbe/image-slider",
 			active: true,

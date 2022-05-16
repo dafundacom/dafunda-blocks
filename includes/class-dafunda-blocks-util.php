@@ -86,6 +86,11 @@ class Dafunda_Blocks_Util
 				"active" => true,
 			],
 			[
+				"label" => "Ranked List",
+				"name" => "dbe/rangked-list",
+				"active" => true,
+			],
+			[
 				"label" => "Image Slider",
 				"name" => "dbe/image-slider",
 				"active" => true,
