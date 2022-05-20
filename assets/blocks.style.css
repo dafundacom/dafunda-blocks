@@ -768,7 +768,7 @@
 
 	/* Rangked List */
 
-	.rangked-list-vote .button {
+	.ranked-list-vote .button {
 		position: relative;
 		height: unset;
 		width: 3rem;
@@ -778,13 +778,13 @@
 		background: unset;
 		color: #000;
 	}
-	.rangked-list-vote .button > span {
+	.ranked-list-vote .button > span {
 		position: absolute;
 		display: block;
 		width: 100%;
 		height: 100%;
 	}
-	.rangked-list-vote .bg {
+	.ranked-list-vote .bg {
 		border-radius: 20%;
 		background-color: rgba(255, 255, 255, 0.2);
 		/* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); */
@@ -793,8 +793,8 @@
 		transition: all 0.2s linear;
 	}
 
-	.rangked-list-vote .bg::before,
-	.rangked-list-vote .bg::after {
+	.ranked-list-vote .bg::before,
+	.ranked-list-vote .bg::after {
 		position: absolute;
 		display: block;
 		width: 100%;
@@ -806,40 +806,40 @@
 		transform: scale(0.4);
 		opacity: 0;
 	}
-	.rangked-list-vote .button:hover .bg {
+	.ranked-list-vote .button:hover .bg {
 		background-color: rgba(255, 255, 255, 0.3);
 	}
-	.rangked-list-vote .button.disable {
+	.ranked-list-vote .button.disable {
 		opacity: 0.3;
 	}
-	.rangked-list-vote .button.active .bg {
+	.ranked-list-vote .button.active .bg {
 		animation: push 1s ease-out;
 		transition: all 1s linear;
 	}
 
-	.rangked-list-vote .button.active svg {
+	.ranked-list-vote .button.active svg {
 		color: #fff;
 	}
-	.rangked-list-vote .button.active:hover svg {
+	.ranked-list-vote .button.active:hover svg {
 		color: #e9e9e9;
 	}
 
-	.rangked-list-vote .button.active #plus,
-	.rangked-list-vote .button.active #plus::before {
+	.ranked-list-vote .button.active #plus,
+	.ranked-list-vote .button.active #plus::before {
 		background-color: #1e3a8a;
 	}
-	.rangked-list-vote .button.active #minus,
-	.rangked-list-vote .button.active #minus::after {
+	.ranked-list-vote .button.active #minus,
+	.ranked-list-vote .button.active #minus::after {
 		background-color: #b91c1c;
 	}
-	.rangked-list-vote .button.active .bg::before,
-	.rangked-list-vote .button.active .bg::after {
+	.ranked-list-vote .button.active .bg::before,
+	.ranked-list-vote .button.active .bg::after {
 		animation: wave 1s ease-in-out;
 	}
-	.rangked-list-vote .button.active .bg::before {
+	.ranked-list-vote .button.active .bg::before {
 		animation-delay: 0.2s;
 	}
-	.rangked-list-vote .button.active .bg::after {
+	.ranked-list-vote .button.active .bg::after {
 		animation-delay: 0.3s;
 	}
 
