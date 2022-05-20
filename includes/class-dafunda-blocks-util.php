@@ -87,7 +87,7 @@ class Dafunda_Blocks_Util
 			],
 			[
 				"label" => "Ranked List",
-				"name" => "dbe/rangked-list",
+				"name" => "dbe/ranked-list",
 				"active" => true,
 			],
 			[

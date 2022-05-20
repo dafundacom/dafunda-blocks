@@ -84,7 +84,7 @@
 		},
 		{
 			label: "Rangked List",
-			name: "dbe/rangked-list",
+			name: "dbe/ranked-list",
 			active: true,
 		},
 		{
