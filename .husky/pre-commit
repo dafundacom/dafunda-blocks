@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged
-yarn format
-yarn build
+pnpm lint-staged
+pnpm format
+pnpm build

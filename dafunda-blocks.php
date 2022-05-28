@@ -6,7 +6,7 @@
  * Description: Dafunda Custom Blocks
  * Plugin Author: Dafunda Dev Team
  * Author URI: https://dafunda.io
- * Version: 0.0.5-rc-3h
+ * Version: 0.0.6-rc-3h
  * Text Domain: dafunda-blocks
  * Domain Path: /languages
  *
