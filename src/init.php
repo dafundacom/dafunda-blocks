@@ -2648,7 +2648,7 @@ require_once plugin_dir_path(__FILE__) . "blocks/styled-list/block.php";
 require_once plugin_dir_path(__FILE__) . "blocks/how-to/block.php";
 
 // Rangked List
-require_once plugin_dir_path(__FILE__) . "blocks/rangked-list/block.php";
+require_once plugin_dir_path(__FILE__) . "blocks/ranked-list/block.php";
 
 // Advanced Heading
 require_once plugin_dir_path(__FILE__) . "blocks/advanced-heading/block.php";

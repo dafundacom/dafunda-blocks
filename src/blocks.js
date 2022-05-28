@@ -36,6 +36,6 @@ import "./blocks/expand/block";
 import "./blocks/styled-list/block";
 import "./blocks/post-grid/block";
 import "./blocks/how-to/block";
-import "./blocks/rangked-list/block";
+import "./blocks/ranked-list/block";
 import "./blocks/advanced-heading/block";
 import "./blocks/advanced-video/block";

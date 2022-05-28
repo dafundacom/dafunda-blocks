@@ -945,7 +945,7 @@ $defaultValues = [
 			],
 		],
 	],
-	"dbe/rangked-list" => [
+	"dbe/ranked-list" => [
 		"attributes" => [
 			"blockID" => [
 				"type" => "string",

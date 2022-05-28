@@ -12,7 +12,7 @@ specifiers:
   '@fortawesome/free-brands-svg-icons': ^6.1.1
   '@fortawesome/free-solid-svg-icons': ^6.1.1
   '@fortawesome/react-fontawesome': ^0.1.18
-  '@prettier/plugin-php': ^0.18.6
+  '@prettier/plugin-php': ^0.18.4
   '@tailwindcss/forms': ^0.5.2
   '@tailwindcss/line-clamp': ^0.4.0
   '@wordpress/scripts': ^23.1.0

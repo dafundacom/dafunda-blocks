@@ -34,7 +34,7 @@
 		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-conventional": "^17.0.0",
 		"@commitlint/cz-commitlint": "^17.0.0",
-		"@prettier/plugin-php": "^0.18.6",
+		"@prettier/plugin-php": "^0.18.4",
 		"@tailwindcss/forms": "^0.5.2",
 		"@tailwindcss/line-clamp": "^0.4.0",
 		"@wordpress/scripts": "^23.1.0",
@@ -60,7 +60,7 @@
 	},
 	"lint-staged": {
 		"**/*.{js,jsx,ts,tsx,html,css,json,php}": [
-			"npx prettier --write ."
+			"pnpm prettier --write"
 		]
 	},
 	"config": {
