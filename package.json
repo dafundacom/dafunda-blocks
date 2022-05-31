@@ -8,7 +8,7 @@
 		"prebuild": "pnpm clean-dist && npx tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify && npx tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c ./tailwind.config.js --minify",
 		"build": "wp-scripts build & node recompile.js",
 		"format": "prettier -w .",
-		"check": "prettier -C",
+		"check": "prettier -c .",
 		"clean": "rimraf {node_modules, dist}",
 		"clean-dist": "rimraf dist",
 		"prepare": "husky install",
