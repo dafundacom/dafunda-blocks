@@ -59,8 +59,8 @@
 		"tailwindcss": "^3.0.24"
 	},
 	"lint-staged": {
-		"**/*.{js,jsx,ts,tsx,html,css,json,php}": [
-			"pnpm prettier --write"
+		"**/*.{js,jsx,ts,tsx,html,css,json}": [
+			"npx prettier --write"
 		]
 	},
 	"config": {

@@ -36,7 +36,7 @@ function dbe_filterJsonldString($string)
   return str_replace("\'", "'", wp_filter_nohtml_kses($string));
 }
 
-function dbe_render_review_block()
+function dbe_render_review_block($attributes)
 {
   require_once dirname(dirname(__DIR__)) . "/common.php";
 
@@ -53,7 +53,6 @@ function dbe_render_review_block()
 
   $average = round(array_sum($extractedValues) / count($extractedValues), 1);
 
-  $ratings = "";
   ob_start();
 ?>
 
@@ -68,13 +67,13 @@ function dbe_render_review_block()
     </p>
 
     <?php if (($enableImage || $enableDescription) && ($imgURL !== "" || $description !== "")) : ?>
-      <div class="review_description_container review_<?= $imgPosition ?>_image">
+      <div class="review_description_container review_<?= $imgPosition ?>_image flex-col">
         <?php if ($enableImage && $imgURL != "") : ?>
           <img src="<?= $imgURL ?>" alt="<?= $imgAlt ?>" class="review_image">
         <?php endif ?>
 
         <?php if ($enableDescription && $description != "") : ?>
-          <div class="review_description">
+          <div class="review_description text-center text-sm opacity-70 italic">
             <?= $description ?>
           </div>
         <?php endif ?>
@@ -347,3 +346,5 @@ function dbe_register_review_block()
 }
 
 add_action("init", "dbe_register_review_block");
+
+echo "aasas";
