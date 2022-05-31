@@ -306,7 +306,7 @@ export class ReviewBody extends Component {
 				/>
 				{(imageEnabled || descriptionEnabled) && (
 					<div
-						className={`review_description_container review_${imgPosition}_image`}
+						className={`review_description_container review_${imgPosition}_image flex-col`}
 					>
 						{imageEnabled &&
 							(imgID ? (
@@ -315,10 +315,10 @@ export class ReviewBody extends Component {
 										className="review_image"
 										src={imgURL}
 										alt={imgAlt}
-										style={{
-											maxHeight: `${imageSize}px`,
-											maxWidth: `${imageSize}px`,
-										}}
+										// style={{
+										// 	maxHeight: `${imageSize}px`,
+										// 	maxWidth: `${imageSize}px`,
+										// }}
 									/>
 									{isSelected && (
 										<Button
@@ -354,7 +354,7 @@ export class ReviewBody extends Component {
 							))}
 						{descriptionEnabled && (
 							<RichText
-								className="review_description"
+								className="review_description text-center text-md opacity-70"
 								placeholder={__("Item description")}
 								value={description}
 								onChange={(text) => setDescription(text)}

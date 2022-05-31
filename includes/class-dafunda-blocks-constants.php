@@ -21,7 +21,7 @@
  */
 class Dafunda_Blocks_Constants
 {
-	const PLUGIN_VERSION = "0.0.5";
+	const PLUGIN_VERSION = "0.0.6";
 
 	const PLUGIN_NAME = "dafunda-blocks";
 

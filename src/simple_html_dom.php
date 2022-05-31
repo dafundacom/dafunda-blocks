@@ -234,12 +234,11 @@ class simple_html_dom_node
 		}
 
 		$string .= " HDOM_INNER_INFO: ";
-
-		if (isset($node->_[HDOM_INFO_INNER])) {
-			$string .= "'" . $node->_[HDOM_INFO_INNER] . "'";
-		} else {
-			$string .= " NULL ";
-		}
+		// if (isset($node->_[HDOM_INFO_INNER])) {
+		// 	$string .= "'" . $node->_[HDOM_INFO_INNER] . "'";
+		// } else {
+		// 	$string .= " NULL ";
+		// }
 
 		$string .= " children: " . count($this->children);
 		$string .= " nodes: " . count($this->nodes);
