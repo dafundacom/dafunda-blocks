@@ -18,10 +18,10 @@ const attributes = {
 };
 
 registerBlockType("dbe/ranked-list", {
-	title: __("Rangked List"),
+	title: __("Ranked List"),
 	icon: icon,
 	category: "dafundablocks",
-	keywords: [__("Tutorial"), __("Rangked List"), __("Dafunda Blocks")],
+	keywords: [__("Tutorial"), __("Ranked List"), __("Dafunda Blocks")],
 	attributes,
 	supports: {
 		multiple: false,
