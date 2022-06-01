@@ -347,4 +347,3 @@ function dbe_register_review_block()
 
 add_action("init", "dbe_register_review_block");
 
-echo "aasas";
