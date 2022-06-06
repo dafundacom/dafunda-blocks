@@ -24,6 +24,10 @@
 	h7 {
 		@apply text-base font-bold;
 	}
+
+	a {
+		@apply block;
+	}
 }
 
 @layer components {
@@ -766,7 +770,7 @@
 
 	/* How To Front END */
 
-	/* Rangked List */
+	/* Ranked List */
 
 	.ranked-list-vote .button {
 		position: relative;
@@ -866,7 +870,16 @@
 			opacity: 0;
 		}
 	}
-	/* Rangked List END */
+
+	.rankedlist-count {
+		@apply absolute top-[-50%] left-[-50%] translate-x-[50%] translate-y-[50%] min-w-[1.7rem] aspect-square rounded-full text-center bg-amber-400 flex flex-wrap justify-center items-center;
+	}
+
+	.rankedlist-count p {
+		@apply p-0 m-0 pb-[0.2rem] text-sm font-bold;
+	}
+
+	/* Ranked List END */
 
 	/* Modal */
 	.modal {

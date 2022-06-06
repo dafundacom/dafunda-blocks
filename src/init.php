@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Blocks Initializer
  *
@@ -90,7 +91,7 @@ function dbe_load_assets()
 				"/dafunda-blocks/blocks.style.build.css"
 		) &&
 		get_option("dafunda_blocks_css_version") !=
-			Dafunda_Blocks_Constants::plugin_version()
+		Dafunda_Blocks_Constants::plugin_version()
 	) {
 		$frontStyleFile = fopen(
 			wp_upload_dir()["basedir"] .
@@ -306,67 +307,67 @@ function dbe_include_block_attribute_css()
 							"{" .
 							($attributes["topBorderSize"] > 0
 								? "border-top: " .
-									$attributes["topBorderSize"] .
-									"px " .
-									$attributes["topBorderStyle"] .
-									" " .
-									$attributes["topBorderColor"] .
-									";" .
-									PHP_EOL
+								$attributes["topBorderSize"] .
+								"px " .
+								$attributes["topBorderStyle"] .
+								" " .
+								$attributes["topBorderColor"] .
+								";" .
+								PHP_EOL
 								: "") .
 							($attributes["leftBorderSize"] > 0
 								? "border-left: " .
-									$attributes["leftBorderSize"] .
-									"px " .
-									$attributes["leftBorderStyle"] .
-									" " .
-									$attributes["leftBorderColor"] .
-									";" .
-									PHP_EOL
+								$attributes["leftBorderSize"] .
+								"px " .
+								$attributes["leftBorderStyle"] .
+								" " .
+								$attributes["leftBorderColor"] .
+								";" .
+								PHP_EOL
 								: "") .
 							($attributes["rightBorderSize"] > 0
 								? "border-right: " .
-									$attributes["rightBorderSize"] .
-									"px " .
-									$attributes["rightBorderStyle"] .
-									" " .
-									$attributes["rightBorderColor"] .
-									";" .
-									PHP_EOL
+								$attributes["rightBorderSize"] .
+								"px " .
+								$attributes["rightBorderStyle"] .
+								" " .
+								$attributes["rightBorderColor"] .
+								";" .
+								PHP_EOL
 								: "") .
 							($attributes["bottomBorderSize"] > 0
 								? "border-bottom: " .
-									$attributes["bottomBorderSize"] .
-									"px " .
-									$attributes["bottomBorderStyle"] .
-									" " .
-									$attributes["bottomBorderColor"] .
-									";" .
-									PHP_EOL
+								$attributes["bottomBorderSize"] .
+								"px " .
+								$attributes["bottomBorderStyle"] .
+								" " .
+								$attributes["bottomBorderColor"] .
+								";" .
+								PHP_EOL
 								: "") .
 							($attributes["topLeftRadius"] > 0
 								? "border-top-left-radius: " .
-									$attributes["topLeftRadius"] .
-									"px;" .
-									PHP_EOL
+								$attributes["topLeftRadius"] .
+								"px;" .
+								PHP_EOL
 								: "") .
 							($attributes["topRightRadius"] > 0
 								? "border-top-right-radius: " .
-									$attributes["topRightRadius"] .
-									"px;" .
-									PHP_EOL
+								$attributes["topRightRadius"] .
+								"px;" .
+								PHP_EOL
 								: "") .
 							($attributes["bottomLeftRadius"] > 0
 								? "border-bottom-left-radius: " .
-									$attributes["bottomLeftRadius"] .
-									"px;" .
-									PHP_EOL
+								$attributes["bottomLeftRadius"] .
+								"px;" .
+								PHP_EOL
 								: "") .
 							($attributes["bottomRightRadius"] > 0
 								? "border-bottom-right-radius: " .
-									$attributes["bottomRightRadius"] .
-									"px;" .
-									PHP_EOL
+								$attributes["bottomRightRadius"] .
+								"px;" .
+								PHP_EOL
 								: "") .
 							"}";
 					}
@@ -433,11 +434,11 @@ function dbe_include_block_attribute_css()
 							PHP_EOL .
 							"box-shadow: " .
 							$attributes["shadow"][0]["radius"] *
-								cos(
-									deg2rad(
-										450 - $attributes["shadow"][0]["angle"]
-									) % 360
-								) .
+							cos(
+								deg2rad(
+									450 - $attributes["shadow"][0]["angle"]
+								) % 360
+							) .
 							"px " .
 							-$attributes["shadow"][0]["radius"] *
 								sin(
@@ -464,7 +465,7 @@ function dbe_include_block_attribute_css()
 							) .
 							", " .
 							(100 - $attributes["shadow"][0]["transparency"]) /
-								100 .
+							100 .
 							")" .
 							";" .
 							PHP_EOL .
@@ -484,26 +485,26 @@ function dbe_include_block_attribute_css()
 						($attributes["alignment"] === "none"
 							? ""
 							: "text-align: " .
-								$attributes["alignment"] .
-								";" .
-								PHP_EOL) .
+							$attributes["alignment"] .
+							";" .
+							PHP_EOL) .
 						($attributes["textColor"]
 							? "color: " .
-								$attributes["textColor"] .
-								";" .
-								PHP_EOL
+							$attributes["textColor"] .
+							";" .
+							PHP_EOL
 							: "") .
 						($attributes["backgroundColor"]
 							? "background-color: " .
-								$attributes["backgroundColor"] .
-								";" .
-								PHP_EOL
+							$attributes["backgroundColor"] .
+							";" .
+							PHP_EOL
 							: "") .
 						($attributes["fontSize"]
 							? "font-size: " .
-								$attributes["fontSize"] .
-								"px;" .
-								PHP_EOL
+							$attributes["fontSize"] .
+							"px;" .
+							PHP_EOL
 							: "") .
 						"letter-spacing: " .
 						$attributes["letterSpacing"] .
@@ -525,9 +526,9 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						($attributes["lineHeight"]
 							? "line-height: " .
-								$attributes["lineHeight"] .
-								"px;" .
-								PHP_EOL
+							$attributes["lineHeight"] .
+							"px;" .
+							PHP_EOL
 							: "") .
 						"}";
 					break;
@@ -615,36 +616,26 @@ function dbe_include_block_attribute_css()
 								") a{" .
 								PHP_EOL;
 							if (
-								$attributes["buttons"][$key][
-									"buttonIsTransparent"
-								]
+								$attributes["buttons"][$key]["buttonIsTransparent"]
 							) {
 								$blockStylesheets .=
 									"background-color: transparent;" .
 									PHP_EOL .
 									"color: " .
-									$attributes["buttons"][$key][
-										"buttonColor"
-									] .
+									$attributes["buttons"][$key]["buttonColor"] .
 									";" .
 									PHP_EOL .
 									"border: 3px solid " .
-									$attributes["buttons"][$key][
-										"buttonColor"
-									] .
+									$attributes["buttons"][$key]["buttonColor"] .
 									";";
 							} else {
 								$blockStylesheets .=
 									"background-color: " .
-									$attributes["buttons"][$key][
-										"buttonColor"
-									] .
+									$attributes["buttons"][$key]["buttonColor"] .
 									";" .
 									PHP_EOL .
 									"color: " .
-									($attributes["buttons"][$key][
-										"buttonTextColor"
-									] ?:
+									($attributes["buttons"][$key]["buttonTextColor"] ?:
 										"inherit") .
 									";" .
 									PHP_EOL .
@@ -699,9 +690,7 @@ function dbe_include_block_attribute_css()
 												$button["topLeftRadiusUnit"],
 												$button["topRightRadiusUnit"],
 												$button["bottomLeftRadiusUnit"],
-												$button[
-													"bottomRightRadiusUnit"
-												],
+												$button["bottomRightRadiusUnit"],
 											])
 										) === 1
 									) {
@@ -733,23 +722,15 @@ function dbe_include_block_attribute_css()
 											"buttonRadius",
 											$attributes["buttons"][$key]
 										) &&
-										$attributes["buttons"][$key][
-											"buttonRadius"
-										]
-											? $attributes["buttons"][$key][
-												"buttonRadius"
-											]
+											$attributes["buttons"][$key]["buttonRadius"]
+											? $attributes["buttons"][$key]["buttonRadius"]
 											: "60") .
 										(array_key_exists(
 											"buttonRadiusUnit",
 											$attributes["buttons"][$key]
 										) &&
-										$attributes["buttons"][$key][
-											"buttonRadiusUnit"
-										]
-											? $attributes["buttons"][$key][
-												"buttonRadiusUnit"
-											]
+											$attributes["buttons"][$key]["buttonRadiusUnit"]
+											? $attributes["buttons"][$key]["buttonRadiusUnit"]
 											: "px") .
 										";" .
 										PHP_EOL;
@@ -768,34 +749,24 @@ function dbe_include_block_attribute_css()
 								") a:hover{" .
 								PHP_EOL;
 							if (
-								$attributes["buttons"][$key][
-									"buttonIsTransparent"
-								]
+								$attributes["buttons"][$key]["buttonIsTransparent"]
 							) {
 								$blockStylesheets .=
 									"color: " .
-									$attributes["buttons"][$key][
-										"buttonHoverColor"
-									] .
+									$attributes["buttons"][$key]["buttonHoverColor"] .
 									";" .
 									PHP_EOL .
 									"border: 3px solid " .
-									$attributes["buttons"][$key][
-										"buttonHoverColor"
-									] .
+									$attributes["buttons"][$key]["buttonHoverColor"] .
 									";";
 							} else {
 								$blockStylesheets .=
 									"background-color: " .
-									$attributes["buttons"][$key][
-										"buttonHoverColor"
-									] .
+									$attributes["buttons"][$key]["buttonHoverColor"] .
 									";" .
 									PHP_EOL .
 									"color: " .
-									$attributes["buttons"][$key][
-										"buttonTextHoverColor"
-									] .
+									$attributes["buttons"][$key]["buttonTextHoverColor"] .
 									";" .
 									PHP_EOL .
 									"border: none;";
@@ -809,9 +780,7 @@ function dbe_include_block_attribute_css()
 								") .dbe-button-content-holder{" .
 								PHP_EOL .
 								"flex-direction: " .
-								($attributes["buttons"][$key][
-									"iconPosition"
-								] === "left"
+								($attributes["buttons"][$key]["iconPosition"] === "left"
 									? "row"
 									: "row-reverse") .
 								";" .
@@ -964,9 +933,7 @@ function dbe_include_block_attribute_css()
 						$attributes,
 						array_map(function ($attribute) {
 							return $attribute["default"];
-						}, $defaultValues[
-							"dbe/content-toggle-panel-block"
-						]["attributes"]),
+						}, $defaultValues["dbe/content-toggle-panel-block"]["attributes"]),
 						$block["innerBlocks"][0]["attrs"]
 					);
 					$prefix = "#dbe-content-toggle-" . $attributes["blockID"];
@@ -1367,8 +1334,8 @@ function dbe_include_block_attribute_css()
 							($attributes["finalImageFloat"] === "none"
 								? ""
 								: "float: " .
-									$attributes["finalImageFloat"] .
-									";");
+								$attributes["finalImageFloat"] .
+								";");
 						"}";
 					}
 
@@ -1678,9 +1645,9 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						($attributes["callToActionFontSize"] > 0
 							? "font-size: " .
-								$attributes["callToActionFontSize"] .
-								"px;" .
-								PHP_EOL
+							$attributes["callToActionFontSize"] .
+							"px;" .
+							PHP_EOL
 							: "") .
 						"}" .
 						PHP_EOL .
@@ -1865,9 +1832,9 @@ function dbe_include_block_attribute_css()
 						($attributes["starAlign"] === "center"
 							? "center"
 							: "flex-" .
-								($attributes["starAlign"] === "left"
-									? "start"
-									: "end")) .
+							($attributes["starAlign"] === "left"
+								? "start"
+								: "end")) .
 						";" .
 						PHP_EOL .
 						"}" .
@@ -1917,9 +1884,9 @@ function dbe_include_block_attribute_css()
 							($attributes["text"][0] === ""
 								? ""
 								: "text-align: " .
-									$attributes["textAlign"][0] .
-									";" .
-									PHP_EOL) .
+								$attributes["textAlign"][0] .
+								";" .
+								PHP_EOL) .
 							"}" .
 							PHP_EOL;
 					} elseif ($attributes["mode"] === "feature") {
@@ -2111,9 +2078,9 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						($attributes["fontSize"] > 0
 							? "font-size: " .
-								$attributes["fontSize"] .
-								"px;" .
-								PHP_EOL
+							$attributes["fontSize"] .
+							"px;" .
+							PHP_EOL
 							: "");
 					if ($attributes["itemSpacing"] > 0) {
 						$blockStylesheets .=
@@ -2175,9 +2142,9 @@ function dbe_include_block_attribute_css()
 						($attributes["tabStyle"] === "underline"
 							? ""
 							: "background-color: " .
-								($attributes["normalColor"] ?: "inherit") .
-								";" .
-								PHP_EOL) .
+							($attributes["normalColor"] ?: "inherit") .
+							";" .
+							PHP_EOL) .
 						"border-color: lightgrey;" .
 						PHP_EOL .
 						"color: " .
@@ -2195,13 +2162,13 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						($attributes["tabStyle"] === "underline"
 							? "border-bottom: 5px solid " .
-								$attributes["titleColor"] .
-								";" .
-								PHP_EOL
+							$attributes["titleColor"] .
+							";" .
+							PHP_EOL
 							: "background-color: " .
-								$attributes["theme"] .
-								";" .
-								PHP_EOL) .
+							$attributes["theme"] .
+							";" .
+							PHP_EOL) .
 						"color: " .
 						($attributes["titleColor"] ?: "inherit") .
 						";" .
@@ -2222,9 +2189,9 @@ function dbe_include_block_attribute_css()
 						($attributes["tabsAlignment"] === "center"
 							? "center"
 							: "flex-" .
-								($attributes["tabsAlignment"] === "left"
-									? "start"
-									: "end")) .
+							($attributes["tabsAlignment"] === "left"
+								? "start"
+								: "end")) .
 						";" .
 						PHP_EOL .
 						"}" .
@@ -2242,10 +2209,8 @@ function dbe_include_block_attribute_css()
 						PHP_EOL .
 						"}" .
 						PHP_EOL;
-					foreach (
-						$attributes["tabsTitleAlignment"]
-						as $key => $titleAlign
-					) {
+					foreach ($attributes["tabsTitleAlignment"]
+						as $key => $titleAlign) {
 						$blockStylesheets .=
 							$prefix .
 							" .wp-block-dbe-tabbed-content-tab-title-wrap:nth-child(" .
@@ -2435,11 +2400,13 @@ function dbe_include_block_attribute_css()
 	}
 	$blockStylesheets = preg_replace("/\s+/", " ", $blockStylesheets);
 	ob_start();
-	?>
+?>
 
-<style><?php echo $blockStylesheets; ?></style>
-    
-    <?php ob_end_flush();
+	<style>
+		<?php echo $blockStylesheets; ?>
+	</style>
+
+<?php ob_end_flush();
 }
 add_action("wp_head", "dbe_include_block_attribute_css");
 
@@ -2479,7 +2446,7 @@ function dafunda_blocks_cgb_editor_assets()
 				"/dafunda-blocks/blocks.editor.build.css"
 		) &&
 		get_option("dafunda_blocks_css_version") !=
-			Dafunda_Blocks_Constants::plugin_version()
+		Dafunda_Blocks_Constants::plugin_version()
 	) {
 		$adminStyleFile = fopen(
 			wp_upload_dir()["basedir"] .
@@ -2647,7 +2614,7 @@ require_once plugin_dir_path(__FILE__) . "blocks/styled-list/block.php";
 // How To
 require_once plugin_dir_path(__FILE__) . "blocks/how-to/block.php";
 
-// Rangked List
+// Ranked List
 require_once plugin_dir_path(__FILE__) . "blocks/ranked-list/block.php";
 
 // Advanced Heading

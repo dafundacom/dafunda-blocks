@@ -12,7 +12,8 @@
 		"clean": "rimraf {node_modules, dist}",
 		"clean-dist": "rimraf dist",
 		"prepare": "husky install",
-		"commit": "git-cz"
+		"commit": "git-cz",
+		"prettier": "prettier"
 	},
 	"dependencies": {
 		"@babel/core": "^7.18.0",
@@ -24,6 +25,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.1.1",
 		"@fortawesome/react-fontawesome": "^0.1.18",
 		"moment": "^2.29.3",
+		"prop-types": "^15.8.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-sortable-hoc": "^2.0.0",
@@ -34,7 +36,7 @@
 		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-conventional": "^17.0.0",
 		"@commitlint/cz-commitlint": "^17.0.0",
-		"@prettier/plugin-php": "^0.18.4",
+		"@prettier/plugin-php": "^0.18.6",
 		"@tailwindcss/forms": "^0.5.2",
 		"@tailwindcss/line-clamp": "^0.4.0",
 		"@wordpress/scripts": "^23.1.0",

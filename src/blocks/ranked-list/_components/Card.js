@@ -19,7 +19,8 @@ export function Card(props) {
 		editList,
 	} = props;
 	data = validateObj(data);
-	let { title, description, imageurl, imagealt, imageid } = data;
+	let { title, description, imageurl, imagealt, imageid, likes, dislikes } =
+		data;
 	return (
 		<li className="ranked-list-card flex flex-wrap p-3 relative">
 			<div className="absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg text-2xl">
@@ -172,6 +173,8 @@ export function Card(props) {
 				/>
 
 				{/* Info */}
+				<p>Likes: {likes.length}</p>
+				<p>Dislikes: {dislikes.length}</p>
 			</div>
 		</li>
 	);
@@ -185,6 +188,12 @@ function validateObj(obj) {
 		else newObj[key] = obj[key];
 	});
 	return newObj;
+}
+
+function fet() {
+	fetch("/rest/v1.1/me/settings/")
+		.then((res) => res.json())
+		.then(console.log);
 }
 
 // let arr = [];
