@@ -83,7 +83,7 @@
 			active: true,
 		},
 		{
-			label: "Rangked List",
+			label: "Ranked List",
 			name: "dbe/ranked-list",
 			active: true,
 		},
