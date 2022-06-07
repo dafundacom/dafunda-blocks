@@ -62,10 +62,11 @@ function dbe_render_review_block($attributes)
       <?= $itemName ?>
     </p>
 
+  
+
     <p class="review_author_name" <?= $blockID === "" ? ' style="text-align: ' . $authorAlign . ';"' : "" ?>>
       <?= $authorName ?>
     </p>
-
     <?php if (($enableImage || $enableDescription) && ($imgURL !== "" || $description !== "")) : ?>
       <div class="review_description_container review_<?= $imgPosition ?>_image flex-col">
         <?php if ($enableImage && $imgURL != "") : ?>

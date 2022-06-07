@@ -11,7 +11,7 @@ function dbe_render_ranked_list_block($attributes)
 			<?php foreach ($lists as $index => $list) : ?>
 				<li class="ranked-list-card flex flex-wrap p-0 relative mb-6" data-index="<?= $index ?>">
 					<div class="relative h-fit w-fit">
-						<div class="absolute left-0 top-[50%] translate-y-[-50%] translate-x-[-15%] md:translate-x-[-50%] rounded-lg flex items-center justify-center aspect-square w-12 md:w-16 text-2xl md:text-4xl bg-white/90 shadow-xl font-bold">
+						<div class="absolute left-0 top-[25%] translate-y-[-25%] translate-x-[-15%] md:translate-x-[-50%] rounded-lg flex items-center justify-center aspect-square w-12 md:w-16 text-2xl md:text-4xl bg-white/90 shadow-xl font-bold">
 							<?= $index + 1 ?>
 						</div>
 						<img src="<?= $list["imageurl"] ?>" alt="<?= $list["imagealt"] ?>" class="rounded-xl aspect-square h-fit w-24 md:w-48">
@@ -116,6 +116,9 @@ function dbe_render_ranked_list_block($attributes)
 					e.stopPropagation()
 					let parent = e.target.closest(".ranked-list-vote")
 					let button = e.target.closest("a")
+
+					if (button.classList.contains("active")) return false
+
 					let action = button.getAttribute("data-action")
 					let countDiv = button.querySelector(".rankedlist-count")
 					let countP = button.querySelector(".rankedlist-count p")
@@ -126,14 +129,13 @@ function dbe_render_ranked_list_block($attributes)
 					if (count > 0 && countDiv.classList.contains("hidden")) countDiv.classList.remove("hidden")
 
 					let s_button = action == "like" ? button.nextElementSibling : button.previousElementSibling
+
 					let s_countDiv = s_button.querySelector(".rankedlist-count")
 					let s_countP = s_button.querySelector(".rankedlist-count p")
 					let s_count = parseInt(s_countP.innerText) ?? 0
-					if(s_count > 0) s_count--
-					s_countP.innerText = count
+					if (s_count > 0) s_count--
+					s_countP.innerText = s_count
 					if (s_count == 0 && !s_countDiv.classList.contains("hidden")) s_countDiv.classList.add("hidden")
-
-
 
 					parent.querySelectorAll(".button.active").forEach(el => el.classList.remove("active"))
 					parent.querySelectorAll(".button.disable").forEach(el => el.classList.remove("disable"))
@@ -160,6 +162,7 @@ function dbe_render_ranked_list_block($attributes)
 						})
 						// .then(res => res.json())
 						// .then(res => {
+						// 	console.log("res ", res);
 						// })
 
 				})

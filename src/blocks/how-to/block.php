@@ -536,10 +536,11 @@ function dbe_render_how_to_block($attributes)
  					"'",
  					wp_filter_nohtml_kses($step["title"])
  				),
+				 "url" => get_permalink() . "#" . $step["anchor"],
  			];
 
  			if ($advancedMode) {
- 				$stepScheme["url"] = get_permalink() . "#" . $step["anchor"];
+ 				// $stepScheme["url"] = get_permalink() . "#" . $step["anchor"];
  				if ($step["hasVideoClip"]) {
  					$stepScheme["video"] = [
  						"@id" => $step["anchor"],
@@ -588,10 +589,11 @@ function dbe_render_how_to_block($attributes)
  					"'",
  					wp_filter_nohtml_kses($step["title"])
  				),
+				 "url" => get_permalink() . "#" . $step["anchor"],
  			];
 
  			if ($advancedMode) {
- 				$stepScheme["url"] = get_permalink() . "#" . $step["anchor"];
+ 				// $stepScheme["url"] = get_permalink() . "#" . $step["anchor"];
  				if ($step["hasVideoClip"]) {
  					$stepScheme["video"] = [
  						"@id" => $step["anchor"],

@@ -870,6 +870,13 @@
 			opacity: 0;
 		}
 	}
+
+	.rankedlist-count {
+		@apply absolute left-[-50%]  top-[-50%] translate-x-[50%] translate-y-[50%] min-w-[1.7rem] bg-amber-400 aspect-square rounded-full flex flex-wrap justify-center items-center p-[0.1rem];
+	}
+	.rankedlist-count p {
+		@apply text-sm font-bold;
+	}
 	/* Ranked List END */
 
 	/* Modal */
