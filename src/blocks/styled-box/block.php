@@ -131,6 +131,7 @@ function dbe_render_styled_box_block($attributes, $content)
 	} elseif (in_array($mode, ["bordered", "notification"])) {
 		$renderedBlock = $content;
 	}
+	
 
 	return '<div class="styled-box ' .
 		$mode .

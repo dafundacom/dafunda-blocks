@@ -3,7 +3,7 @@ function dbe_generatePercentageBar($value, $id, $activeColor, $inactiveColor)
 {
   $percentBar = "M 0.5,0.5 L 99.5,0.5";
   return '<div class="review_percentage">
-            <svg class="review_percentage_bar" viewBox="0 0 100 1" preserveAspectRatio="none" height="10">
+            <svg class="review_percentage_bar w-full" viewBox="0 0 100 1" preserveAspectRatio="none" height="10">
                 <path
                     class="review_percentage_bar_trail"
                     d="' .
@@ -62,14 +62,15 @@ function dbe_render_review_block($attributes)
       <?= $itemName ?>
     </p>
 
+  
+
     <p class="review_author_name" <?= $blockID === "" ? ' style="text-align: ' . $authorAlign . ';"' : "" ?>>
       <?= $authorName ?>
     </p>
-
     <?php if (($enableImage || $enableDescription) && ($imgURL !== "" || $description !== "")) : ?>
       <div class="review_description_container review_<?= $imgPosition ?>_image flex-col">
         <?php if ($enableImage && $imgURL != "") : ?>
-          <img src="<?= $imgURL ?>" alt="<?= $imgAlt ?>" class="review_image">
+          <img src="<?= $imgURL ?>" alt="<?= $imgAlt ?>" class="review_image w-full">
         <?php endif ?>
 
         <?php if ($enableDescription && $description != "") : ?>
@@ -346,4 +347,3 @@ function dbe_register_review_block()
 }
 
 add_action("init", "dbe_register_review_block");
-

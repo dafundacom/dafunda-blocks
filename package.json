@@ -12,7 +12,8 @@
 		"clean": "rimraf {node_modules, dist}",
 		"clean-dist": "rimraf dist",
 		"prepare": "husky install",
-		"commit": "git-cz"
+		"commit": "git-cz",
+		"prettier": "prettier"
 	},
 	"dependencies": {
 		"@babel/core": "^7.18.2",

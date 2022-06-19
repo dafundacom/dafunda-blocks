@@ -13,7 +13,7 @@ const attributes = {
 	},
 	lists: {
 		type: "array",
-		default: [], //format: {title, imageid, imagealt, imageurl}
+		default: [], //format: {title, imageid, imagealt, imageurl, }
 	},
 };
 
