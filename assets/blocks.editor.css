@@ -260,6 +260,14 @@
 		top: 4px !important;
 	}
 
+	/* Rekomendasi list */
+	.recomendasi-list-description br {
+		@apply mb-4 block;
+		content: "";
+	}
+
+	/* Rekomendasi list END */
+
 	/* Content Filter */
 	.content-filter-tag:hover .content-filter-tag-top {
 		opacity: 1;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card } from "./_components";
+import { Card, ButtonAddStep } from "./_components";
 import dummyDatas from "./data";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
@@ -42,19 +42,25 @@ export function EditorComponent(props) {
 	const [listsState, setLists] = useState(lists);
 	useEffect(() => {
 		setAttributes({ lists: listsState });
+		console.log(listsState);
 	}, [listsState]);
 
 	return (
 		<>
 			<InspectorPanel {...props} />
-			<button
-				onClick={() => {
-					lists = dummyDatas;
-					setLists(dummyDatas);
-				}}
-			>
-				Reset Data
-			</button>
+			{window.location.host == "dafudablock.test" ? (
+				<button
+					onClick={() => {
+						lists = dummyDatas;
+						setLists(dummyDatas);
+					}}
+				>
+					Reset Data
+				</button>
+			) : (
+				""
+			)}
+
 			<ol className="ranked-list p-0" id={`ranked-list-${blockID}`}>
 				{listsState.map((list, index) => (
 					<Card
@@ -85,6 +91,23 @@ export function EditorComponent(props) {
 					/>
 				))}
 			</ol>
+			<ButtonAddStep
+				label="Tambah list"
+				onClick={() => {
+					setLists([
+						...listsState,
+						{
+							title: "",
+							description: "",
+							imageurl: "",
+							imagealt: "",
+							imageid: "",
+							likes: [],
+							dislikes: [],
+						},
+					]);
+				}}
+			/>
 		</>
 	);
 }

@@ -14,11 +14,17 @@ function dbe_render_ranked_list_block($attributes)
 						<div class="absolute left-0 top-[25%] translate-y-[-25%] translate-x-[-15%] md:translate-x-[-50%] rounded-lg flex items-center justify-center aspect-square w-12 md:w-16 text-2xl md:text-4xl bg-white/90 shadow-xl font-bold">
 							<?= $index + 1 ?>
 						</div>
-						<img src="<?= $list["imageurl"] ?>" alt="<?= $list["imagealt"] ?>" class="rounded-xl aspect-square h-fit w-24 md:w-48">
+						<?php if (isset($list["imageurl"]) && $list["imageurl"] != "") : ?>
+							<img src="<?= $list["imageurl"] ?>" alt="<?= $list["imagealt"] ?>" class="rounded-xl aspect-square h-fit w-24 md:w-48 object-cover object-center">
+						<?php else : ?>
+							<div class="rounded-xl aspect-square h-fit w-24 md:w-48 object-cover object-center bg-gray-200 flex justify-center items-center">
+								<span class="text-lg font-bold">NO IMAGE</span>
+							</div>
+						<?php endif ?>
 					</div>
 					<div class="flex flex-[1] flex-wrap flex-col">
 						<p class="font-normal text-[1.3rem] md:text-2xl ml-3 mr-3 w-full mb-3 break-all pr-3">
-							<?= $list["title"] ?> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex, ipsa.
+							<?= $list["title"] ?>
 						</p>
 
 						<!-- Vote Form -->
@@ -152,18 +158,18 @@ function dbe_render_ranked_list_block($attributes)
 					}
 
 					fetch("<?= site_url('wp-json/dbe/v1/rankedlist/vote'); ?>", {
-							method: "POST",
-							mode: "same-origin",
-							credentials: "same-origin",
-							headers: {
-								"Content-Type": "application/json"
-							},
-							body: JSON.stringify(body)
-						})
-						// .then(res => res.json())
-						// .then(res => {
-						// 	console.log("res ", res);
-						// })
+						method: "POST",
+						mode: "same-origin",
+						credentials: "same-origin",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(body)
+					})
+					// .then(res => res.json())
+					// .then(res => {
+					// 	console.log("res ", res);
+					// })
 
 				})
 			})
