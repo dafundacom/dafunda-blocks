@@ -173,8 +173,8 @@ export function Card(props) {
 				/>
 
 				{/* Info */}
-				<p>Likes: {likes.length}</p>
-				<p>Dislikes: {dislikes.length}</p>
+				{/* <p>Likes: {likes.length}</p>
+				<p>Dislikes: {dislikes.length}</p> */}
 			</div>
 		</li>
 	);

@@ -2617,6 +2617,9 @@ require_once plugin_dir_path(__FILE__) . "blocks/how-to/block.php";
 // Ranked List
 require_once plugin_dir_path(__FILE__) . "blocks/ranked-list/block.php";
 
+// Rekomendasi List
+require_once plugin_dir_path(__FILE__) . "blocks/rekomendasi-list/block.php";
+
 // Advanced Heading
 require_once plugin_dir_path(__FILE__) . "blocks/advanced-heading/block.php";
 

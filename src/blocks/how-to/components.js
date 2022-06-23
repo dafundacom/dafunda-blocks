@@ -2085,6 +2085,7 @@ export class EditorComponent extends Component {
 								onFocus={() => this.setState({ currentStep: "final" })}
 							/>
 						</div>
+
 						{finalImageURL !== "" ? (
 							<figure className="howto-yield-image-container relative mx-auto w-fit">
 								<img

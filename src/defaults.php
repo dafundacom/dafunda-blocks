@@ -953,6 +953,14 @@ $defaultValues = [
 			],
 		],
 	],
+	"dbe/rekomendasi-list" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+		],
+	],
 	"dbe/image-slider" => [
 		"attributes" => [
 			"blockID" => [
