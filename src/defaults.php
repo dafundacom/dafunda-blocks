@@ -871,6 +871,18 @@ $defaultValues = [
 				"type" => "string",
 				"default" => "1",
 			],
+			"howToLikeCount" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"howToDisikeCount" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"howToVoteCount" => [
+				"type" => "number",
+				"default" => 0,
+			],
 			"videoURL" => [
 				"type" => "string", //videoobject
 				"default" => "", //url
