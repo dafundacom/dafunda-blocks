@@ -4,7 +4,7 @@
  */
 
 .hide {
-	display: none !important;
+  display: none !important;
 }
 
 /*******************************************
@@ -14,49 +14,49 @@
 /* Slider Switch Input*/
 
 .switch-input input {
-	display: none;
+  display: none;
 }
 
 .switch-input {
-	display: inline-block;
-	width: 50px;
-	height: 20px;
-	transform: translateY(0%);
-	position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  transform: translateY(0%);
+  position: relative;
 }
 
 .switch-input-slider {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	border-radius: 15px;
-	cursor: pointer;
-	border: 2px solid transparent;
-	overflow: hidden;
-	transition: 0.4s;
-	background-color: #e2e2e3;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  overflow: hidden;
+  transition: 0.4s;
+  background-color: #e2e2e3;
 }
 
 .switch-input-slider:before {
-	position: absolute;
-	content: "";
-	width: 100%;
-	height: 100%;
-	background: white;
-	border-radius: 30px;
-	transform: translateX(-30px);
-	transition: 0.4s;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 30px;
+  transform: translateX(-30px);
+  transition: 0.4s;
 }
 
 input:checked + .switch-input-slider:before {
-	transform: translateX(30px);
-	background: white;
+  transform: translateX(30px);
+  background: white;
 }
 
 input:checked + .switch-input-slider {
-	background-color: #34495e;
+  background-color: #34495e;
 }
 
 /*******************************************
@@ -64,152 +64,152 @@ input:checked + .switch-input-slider {
  *********************************************/
 
 #main-menu {
-	background: #f8f8f8;
-	margin-left: -20px;
-	padding-bottom: 40px;
+  background: #f8f8f8;
+  margin-left: -20px;
+  padding-bottom: 40px;
 }
 
 #main-menu__header {
-	padding: 0;
-	background: #fff;
-	margin-bottom: 40px;
-	box-shadow: 0px 2px 8px #e8e8e8;
+  padding: 0;
+  background: #fff;
+  margin-bottom: 40px;
+  box-shadow: 0px 2px 8px #e8e8e8;
 }
 
 .header-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	max-width: 960px;
-	margin-left: auto;
-	margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header-container img {
-	max-height: 80px;
-	justify-content: flex-start;
+  max-height: 80px;
+  justify-content: flex-start;
 }
 
 .collection {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 15px;
-	margin: auto;
-	height: 740px;
-	width: 100%;
-	max-width: 1040px;
-	box-sizing: border-box;
-	flex-direction: column;
-	background: #fff;
-	border: 1px solid #e8e8e8;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  margin: auto;
+  height: 740px;
+  width: 100%;
+  max-width: 1040px;
+  box-sizing: border-box;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e8e8e8;
 }
 
 .collection__item {
-	border-radius: 10px;
-	padding: 10px;
-	margin: 15px 0;
-	height: 70px;
-	max-width: 50%;
-	margin: 10px;
-	transition: all 0.5s ease-in-out;
-	box-sizing: border-box;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 15px 0;
+  height: 70px;
+  max-width: 50%;
+  margin: 10px;
+  transition: all 0.5s ease-in-out;
+  box-sizing: border-box;
 }
 
 .collection__item.active {
-	border: 1px solid #34495e;
+  border: 1px solid #34495e;
 }
 
 .collection__item__header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .collection__item:hover {
-	box-shadow: 0 0 10px lightgrey;
+  box-shadow: 0 0 10px lightgrey;
 }
 
 .collection__item__title {
-	font-weight: 300;
-	font-size: 16px;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 .collection_filter {
-	justify-content: center;
-	margin-right: 20px;
+  justify-content: center;
+  margin-right: 20px;
 }
 
 .collection_filter .filter-action {
-	display: inline-block;
-	padding: 5px;
-	margin: 0 10px;
-	cursor: pointer;
-	transition: all 0.5s ease-in-out;
-	font-size: 15px;
+  display: inline-block;
+  padding: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  font-size: 15px;
 }
 
 .collection_filter .filter-action.active {
-	color: #34495e;
-	border-bottom: 2px solid #34495e;
+  color: #34495e;
+  border-bottom: 2px solid #34495e;
 }
 
 #settings_cta {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	padding: 20px 60px;
-	margin: auto;
-	height: auto;
-	width: 100%;
-	max-width: 1040px;
-	box-sizing: border-box;
-	background: #fff;
-	border: 1px solid #e8e8e8;
-	margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 60px;
+  margin: auto;
+  height: auto;
+  width: 100%;
+  max-width: 1040px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  margin-top: 20px;
 }
 
 .settings_column {
-	flex: 50%;
+  flex: 50%;
 }
 
 .settings_column h3 {
-	font-size: 22px;
-	margin-left: 15px;
-	margin-bottom: 30px;
+  font-size: 22px;
+  margin-left: 15px;
+  margin-bottom: 30px;
 }
 
 .settings_column ul li {
-	position: relative;
-	padding-bottom: 10px;
-	margin-left: 30px;
+  position: relative;
+  padding-bottom: 10px;
+  margin-left: 30px;
 }
 
 .settings_column ul {
-	list-style: none;
+  list-style: none;
 }
 
 .settings_column ul li:before {
-	content: "";
-	position: absolute;
-	border-right: 2px solid black;
-	border-bottom: 2px solid black;
-	width: 10px;
-	height: 10px;
-	top: calc(50% - 6px);
-	left: -20px;
-	transform: translateY(-50%) rotate(-45deg);
+  content: "";
+  position: absolute;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 10px;
+  height: 10px;
+  top: calc(50% - 6px);
+  left: -20px;
+  transform: translateY(-50%) rotate(-45deg);
 }
 
 .settings_list a {
-	color: #34495e;
-	font-size: 18px;
+  color: #34495e;
+  font-size: 18px;
 }
 
 #adminmenu .toplevel_page_dafunda-blocks-settings .wp-menu-image > img {
-	width: 21px !important;
-	margin: 5px 9px;
-	display: block;
-	padding: 0;
+  width: 21px !important;
+  margin: 5px 9px;
+  display: block;
+  padding: 0;
 }

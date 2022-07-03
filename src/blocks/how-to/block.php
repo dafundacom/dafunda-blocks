@@ -406,6 +406,9 @@ function dbe_render_how_to_block($attributes)
 		</div>
 		<?php
 		// $howToReviewPercent = intval(($howToRatingValue / 5) * 100);
+		if(!isset($howToLikeCount)) $howToLikeCount = 0;
+		if(!isset($howToDisikeCount)) $howToDisikeCount = 0;
+		if(!isset($howToVoteCount)) $howToVoteCount = 0;
 		$howToReviewPercent = intval(($howToLikeCount / $howToVoteCount) * 100);
 		$howToReviewClass = "howto-review-result__good";
 		if ($howToReviewPercent > 100) {

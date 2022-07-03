@@ -4,9 +4,9 @@ const { registerFormatType } = wp.richText;
 
 /* register the formats */
 function registerFormats() {
-	[highlight].forEach(({ name, ...settings }) =>
-		registerFormatType(name, settings)
-	);
+  [highlight].forEach(({ name, ...settings }) =>
+    registerFormatType(name, settings)
+  );
 }
 
 registerFormats();

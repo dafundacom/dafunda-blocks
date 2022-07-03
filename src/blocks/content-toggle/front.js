@@ -1,243 +1,243 @@
 function convertToPixels(amount, unit) {
-	return unit === "%" ? (amount / 100) * window.innerWidth : amount;
+  return unit === "%" ? (amount / 100) * window.innerWidth : amount;
 }
 
 function togglePanel(target) {
-	let topPadding = 0;
-	let topPaddingUnit = "";
-	let bottomPadding = 0;
-	let bottomPaddingUnit = "";
+  let topPadding = 0;
+  let topPaddingUnit = "";
+  let bottomPadding = 0;
+  let bottomPaddingUnit = "";
 
-	const indicator = target.querySelector(
-		".wp-block-content-toggle-accordion-state-indicator"
-	);
+  const indicator = target.querySelector(
+    ".wp-block-content-toggle-accordion-state-indicator"
+  );
 
-	const panelContent = target.nextElementSibling;
+  const panelContent = target.nextElementSibling;
 
-	const toggleContainer = target.parentElement.parentElement;
+  const toggleContainer = target.parentElement.parentElement;
 
-	if (panelContent.classList.contains("hide")) {
-		const panelStyle = getComputedStyle(panelContent);
+  if (panelContent.classList.contains("hide")) {
+    const panelStyle = getComputedStyle(panelContent);
 
-		let topUnitMatch = /[^\d.]/g.exec(panelStyle.paddingTop);
-		let bottomUnitMatch = /[^\d.]/g.exec(panelStyle.paddingBottom);
+    let topUnitMatch = /[^\d.]/g.exec(panelStyle.paddingTop);
+    let bottomUnitMatch = /[^\d.]/g.exec(panelStyle.paddingBottom);
 
-		topPadding = Number(panelStyle.paddingTop.slice(0, topUnitMatch.index));
+    topPadding = Number(panelStyle.paddingTop.slice(0, topUnitMatch.index));
 
-		topPaddingUnit = panelStyle.paddingTop.slice(topUnitMatch.index);
+    topPaddingUnit = panelStyle.paddingTop.slice(topUnitMatch.index);
 
-		bottomPadding = Number(
-			panelStyle.paddingBottom.slice(0, bottomUnitMatch.index)
-		);
+    bottomPadding = Number(
+      panelStyle.paddingBottom.slice(0, bottomUnitMatch.index)
+    );
 
-		bottomPaddingUnit = panelStyle.paddingBottom.slice(bottomUnitMatch.index);
-		panelContent.classList.remove("hide");
+    bottomPaddingUnit = panelStyle.paddingBottom.slice(bottomUnitMatch.index);
+    panelContent.classList.remove("hide");
 
-		panelContent.classList.add("hiding");
-		if (
-			"showonlyone" in toggleContainer.dataset &&
-			toggleContainer.dataset.showonlyone
-		) {
-			const siblingToggles = Array.prototype.slice
-				.call(toggleContainer.children)
-				.map((p) => p.children[0])
-				.filter((p) => p !== target);
+    panelContent.classList.add("hiding");
+    if (
+      "showonlyone" in toggleContainer.dataset &&
+      toggleContainer.dataset.showonlyone
+    ) {
+      const siblingToggles = Array.prototype.slice
+        .call(toggleContainer.children)
+        .map((p) => p.children[0])
+        .filter((p) => p !== target);
 
-			siblingToggles.forEach((siblingToggle) => {
-				const siblingContent = siblingToggle.nextElementSibling;
-				const siblingIndicator = siblingToggle.querySelector(
-					".wp-block-content-toggle-accordion-state-indicator"
-				);
-				if (!siblingContent.classList.contains("hide")) {
-					if (siblingIndicator) siblingIndicator.classList.remove("open");
-					siblingContent.classList.add("toggle-transition");
-					siblingContent.style.height = `${siblingContent.scrollHeight}px`;
-					setTimeout(() => {
-						siblingContent.classList.add("hiding");
-						siblingContent.style.height = "";
-					}, 20);
-				}
-			});
-		}
-	} else {
-		panelContent.style.height = getComputedStyle(panelContent).height;
-	}
-	panelContent.classList.add("toggle-transition");
-	if (indicator) indicator.classList.toggle("open");
-	setTimeout(() => {
-		//delay is needed for the animation to run properly
-		if (panelContent.classList.contains("hiding")) {
-			let convertedTop = convertToPixels(topPadding, topPaddingUnit);
+      siblingToggles.forEach((siblingToggle) => {
+        const siblingContent = siblingToggle.nextElementSibling;
+        const siblingIndicator = siblingToggle.querySelector(
+          ".wp-block-content-toggle-accordion-state-indicator"
+        );
+        if (!siblingContent.classList.contains("hide")) {
+          if (siblingIndicator) siblingIndicator.classList.remove("open");
+          siblingContent.classList.add("toggle-transition");
+          siblingContent.style.height = `${siblingContent.scrollHeight}px`;
+          setTimeout(() => {
+            siblingContent.classList.add("hiding");
+            siblingContent.style.height = "";
+          }, 20);
+        }
+      });
+    }
+  } else {
+    panelContent.style.height = getComputedStyle(panelContent).height;
+  }
+  panelContent.classList.add("toggle-transition");
+  if (indicator) indicator.classList.toggle("open");
+  setTimeout(() => {
+    //delay is needed for the animation to run properly
+    if (panelContent.classList.contains("hiding")) {
+      let convertedTop = convertToPixels(topPadding, topPaddingUnit);
 
-			let convertedBottom = convertToPixels(bottomPadding, bottomPaddingUnit);
+      let convertedBottom = convertToPixels(bottomPadding, bottomPaddingUnit);
 
-			Object.assign(panelContent.style, {
-				height: `${
-					panelContent.scrollHeight +
-					convertedTop +
-					convertedBottom -
-					(topPaddingUnit === "%" || bottomPaddingUnit === "%"
-						? panelContent.parentElement.scrollHeight
-						: 0)
-				}px`,
-				paddingTop: `${convertedTop}px`,
-				paddingBottom: `${convertedBottom}px`,
-			});
-			Array.prototype.slice
-				.call(document.getElementsByClassName("image_slider"))
-				.forEach((slider) => {
-					const swiper = new Swiper(
-						`#${slider.id}`,
-						JSON.parse(slider.dataset.swiperData)
-					);
-				});
-		} else {
-			panelContent.classList.add("hiding");
-			panelContent.style.height = "";
-		}
-	}, 20);
+      Object.assign(panelContent.style, {
+        height: `${
+          panelContent.scrollHeight +
+          convertedTop +
+          convertedBottom -
+          (topPaddingUnit === "%" || bottomPaddingUnit === "%"
+            ? panelContent.parentElement.scrollHeight
+            : 0)
+        }px`,
+        paddingTop: `${convertedTop}px`,
+        paddingBottom: `${convertedBottom}px`,
+      });
+      Array.prototype.slice
+        .call(document.getElementsByClassName("image_slider"))
+        .forEach((slider) => {
+          const swiper = new Swiper(
+            `#${slider.id}`,
+            JSON.parse(slider.dataset.swiperData)
+          );
+        });
+    } else {
+      panelContent.classList.add("hiding");
+      panelContent.style.height = "";
+    }
+  }, 20);
 
-	Array.prototype.slice
-		.call(panelContent.querySelectorAll(".wp-block-embed iframe"))
-		.forEach((embeddedContent) => {
-			embeddedContent.style.removeProperty("width");
-			embeddedContent.style.removeProperty("height");
-		});
+  Array.prototype.slice
+    .call(panelContent.querySelectorAll(".wp-block-embed iframe"))
+    .forEach((embeddedContent) => {
+      embeddedContent.style.removeProperty("width");
+      embeddedContent.style.removeProperty("height");
+    });
 }
 
 Array.prototype.slice
-	.call(document.getElementsByClassName("wp-block-content-toggle"))
-	.forEach((toggleContainer) => {
-		const toggleHeads = Array.prototype.slice
-			.call(toggleContainer.children)
-			.map((toggle) => toggle.children[0])
-			.filter(
-				(toggle) =>
-					toggle &&
-					toggle.classList.contains(
-						"wp-block-content-toggle-accordion-title-wrap"
-					)
-			);
+  .call(document.getElementsByClassName("wp-block-content-toggle"))
+  .forEach((toggleContainer) => {
+    const toggleHeads = Array.prototype.slice
+      .call(toggleContainer.children)
+      .map((toggle) => toggle.children[0])
+      .filter(
+        (toggle) =>
+          toggle &&
+          toggle.classList.contains(
+            "wp-block-content-toggle-accordion-title-wrap"
+          )
+      );
 
-		toggleHeads.forEach((toggleHead, i) => {
-			toggleHead.addEventListener("keydown", (e) => {
-				if (e.key === "ArrowUp" && i > 0) {
-					e.preventDefault();
-					toggleHeads[i - 1].focus();
-				}
-				if (e.key === "ArrowDown" && i < toggleHeads.length - 1) {
-					e.preventDefault();
-					toggleHeads[i + 1].focus();
-				}
-				if ([" ", "Enter"].indexOf(e.key) > -1) {
-					e.preventDefault();
-					togglePanel(toggleHead);
-				}
+    toggleHeads.forEach((toggleHead, i) => {
+      toggleHead.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp" && i > 0) {
+          e.preventDefault();
+          toggleHeads[i - 1].focus();
+        }
+        if (e.key === "ArrowDown" && i < toggleHeads.length - 1) {
+          e.preventDefault();
+          toggleHeads[i + 1].focus();
+        }
+        if ([" ", "Enter"].indexOf(e.key) > -1) {
+          e.preventDefault();
+          togglePanel(toggleHead);
+        }
 
-				if (e.key === "Home" && i > 0) {
-					e.preventDefault();
-					toggleHeads[0].focus();
-				}
-				if (e.key === "End" && i < toggleHeads.length - 1) {
-					e.preventDefault();
-					toggleHeads[toggleHeads.length - 1].focus();
-				}
-			});
-		});
+        if (e.key === "Home" && i > 0) {
+          e.preventDefault();
+          toggleHeads[0].focus();
+        }
+        if (e.key === "End" && i < toggleHeads.length - 1) {
+          e.preventDefault();
+          toggleHeads[toggleHeads.length - 1].focus();
+        }
+      });
+    });
 
-		if (!toggleContainer.hasAttribute("data-preventcollapse")) {
-			let parentIsHidden = false;
-			let parentClassIsHidden = false;
+    if (!toggleContainer.hasAttribute("data-preventcollapse")) {
+      let parentIsHidden = false;
+      let parentClassIsHidden = false;
 
-			let targetElement = toggleContainer;
+      let targetElement = toggleContainer;
 
-			while (
-				!(parentIsHidden || parentClassIsHidden) &&
-				targetElement.parentElement.tagName !== "BODY"
-			) {
-				targetElement = targetElement.parentElement;
-				if (targetElement.style.display === "none") {
-					parentIsHidden = true;
-				}
+      while (
+        !(parentIsHidden || parentClassIsHidden) &&
+        targetElement.parentElement.tagName !== "BODY"
+      ) {
+        targetElement = targetElement.parentElement;
+        if (targetElement.style.display === "none") {
+          parentIsHidden = true;
+        }
 
-				if (getComputedStyle(targetElement).display === "none") {
-					parentClassIsHidden = true;
-				}
-			}
+        if (getComputedStyle(targetElement).display === "none") {
+          parentClassIsHidden = true;
+        }
+      }
 
-			if (parentClassIsHidden || parentIsHidden) {
-				toggleContainer.parentElement.style.setProperty(
-					"display",
-					"block", //make the parent block display to give way for height measurements
-					"important" //just in case blocks from other plugins use !important
-				);
-			}
+      if (parentClassIsHidden || parentIsHidden) {
+        toggleContainer.parentElement.style.setProperty(
+          "display",
+          "block", //make the parent block display to give way for height measurements
+          "important" //just in case blocks from other plugins use !important
+        );
+      }
 
-			Array.prototype.slice
-				.call(toggleContainer.children)
-				.map((p) => p.children[0])
-				.filter(
-					(toggle) =>
-						toggle &&
-						toggle.classList.contains(
-							"wp-block-content-toggle-accordion-title-wrap"
-						)
-				)
-				.forEach((instance) => {
-					const panelContent = instance.nextElementSibling;
+      Array.prototype.slice
+        .call(toggleContainer.children)
+        .map((p) => p.children[0])
+        .filter(
+          (toggle) =>
+            toggle &&
+            toggle.classList.contains(
+              "wp-block-content-toggle-accordion-title-wrap"
+            )
+        )
+        .forEach((instance) => {
+          const panelContent = instance.nextElementSibling;
 
-					instance.addEventListener("click", function (e) {
-						e.stopImmediatePropagation();
-						togglePanel(instance);
-					});
+          instance.addEventListener("click", function (e) {
+            e.stopImmediatePropagation();
+            togglePanel(instance);
+          });
 
-					panelContent.addEventListener("transitionend", function () {
-						panelContent.classList.remove("toggle-transition");
-						panelContent.previousElementSibling.setAttribute(
-							"aria-expanded",
-							panelContent.offsetHeight !== 0
-						);
+          panelContent.addEventListener("transitionend", function () {
+            panelContent.classList.remove("toggle-transition");
+            panelContent.previousElementSibling.setAttribute(
+              "aria-expanded",
+              panelContent.offsetHeight !== 0
+            );
 
-						if (panelContent.offsetHeight === 0) {
-							panelContent.classList.add("hide");
-						} else {
-							Object.assign(panelContent.style, {
-								height: "",
-								paddingTop: "",
-								paddingBottom: "",
-							});
-						}
-						panelContent.classList.remove("hiding");
-					});
+            if (panelContent.offsetHeight === 0) {
+              panelContent.classList.add("hide");
+            } else {
+              Object.assign(panelContent.style, {
+                height: "",
+                paddingTop: "",
+                paddingBottom: "",
+              });
+            }
+            panelContent.classList.remove("hiding");
+          });
 
-					panelContent.removeAttribute("style");
-				});
+          panelContent.removeAttribute("style");
+        });
 
-			//hide the parent element again;
-			if (parentIsHidden) {
-				toggleContainer.parentElement.style.display = "none";
-			}
+      //hide the parent element again;
+      if (parentIsHidden) {
+        toggleContainer.parentElement.style.display = "none";
+      }
 
-			if (parentClassIsHidden) {
-				toggleContainer.parentElement.style.display = "";
-			}
-		}
-	});
+      if (parentClassIsHidden) {
+        toggleContainer.parentElement.style.display = "";
+      }
+    }
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
-	Array.prototype.slice
-		.call(document.getElementsByClassName("wp-block-content-toggle"))
-		.forEach((toggleContainer) => {
-			if (
-				window.innerWidth < 700 &&
-				JSON.parse(toggleContainer.dataset.mobilecollapse) !==
-					JSON.parse(toggleContainer.dataset.desktopcollapse)
-			) {
-				Array.prototype.slice
-					.call(toggleContainer.children)
-					.forEach((child) => {
-						togglePanel(child.children[0]);
-					});
-			}
-		});
+  Array.prototype.slice
+    .call(document.getElementsByClassName("wp-block-content-toggle"))
+    .forEach((toggleContainer) => {
+      if (
+        window.innerWidth < 700 &&
+        JSON.parse(toggleContainer.dataset.mobilecollapse) !==
+          JSON.parse(toggleContainer.dataset.desktopcollapse)
+      ) {
+        Array.prototype.slice
+          .call(toggleContainer.children)
+          .forEach((child) => {
+            togglePanel(child.children[0]);
+          });
+      }
+    });
 });

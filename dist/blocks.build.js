@@ -24161,13 +24161,13 @@ var attributes = {
 
   }
   /*,allowReset: {
-         type: 'boolean',
-         default: false
-     },
-     resetButtonLabel: {
-         type: 'string',
-         default: 'Reset'
-     }*/
+        type: 'boolean',
+        default: false
+    },
+    resetButtonLabel: {
+        type: 'string',
+        default: 'Reset'
+    }*/
 
 };
 registerBlockType("dbe/content-filter", {

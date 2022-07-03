@@ -1,281 +1,281 @@
 if (!Element.prototype.matches) {
-	Element.prototype.matches =
-		Element.prototype.msMatchesSelector ||
-		Element.prototype.webkitMatchesSelector;
+  Element.prototype.matches =
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.webkitMatchesSelector;
 }
 
 if (!Element.prototype.closest) {
-	Element.prototype.closest = function (s) {
-		let el = this;
+  Element.prototype.closest = function (s) {
+    let el = this;
 
-		do {
-			if (el.matches(s)) return el;
-			el = el.parentElement || el.parentNode;
-		} while (el !== null && el.nodeType === 1);
-		return null;
-	};
+    do {
+      if (el.matches(s)) return el;
+      el = el.parentElement || el.parentNode;
+    } while (el !== null && el.nodeType === 1);
+    return null;
+  };
 }
 
 function dbe_hashHeaderScroll(scrollType = "auto", target = "", offset = 0) {
-	if (window.location.hash) {
-		const targetHeading = document.getElementById(
-			window.location.hash.slice(1)
-		);
+  if (window.location.hash) {
+    const targetHeading = document.getElementById(
+      window.location.hash.slice(1)
+    );
 
-		let probableHeaders;
+    let probableHeaders;
 
-		try {
-			probableHeaders = document.elementsFromPoint(window.innerWidth / 2, 0);
-		} catch (e) {
-			probableHeaders = document.msElementsFromPoint(window.innerWidth / 2, 0);
-		}
+    try {
+      probableHeaders = document.elementsFromPoint(window.innerWidth / 2, 0);
+    } catch (e) {
+      probableHeaders = document.msElementsFromPoint(window.innerWidth / 2, 0);
+    }
 
-		const stickyHeaders = Array.prototype.slice
-			.call(probableHeaders)
-			.filter((e) =>
-				["fixed", "sticky"].includes(window.getComputedStyle(e).position)
-			);
+    const stickyHeaders = Array.prototype.slice
+      .call(probableHeaders)
+      .filter((e) =>
+        ["fixed", "sticky"].includes(window.getComputedStyle(e).position)
+      );
 
-		const stickyHeaderHeights = stickyHeaders.map((h) => h.offsetHeight);
+    const stickyHeaderHeights = stickyHeaders.map((h) => h.offsetHeight);
 
-		const deficit =
-			targetHeading.getBoundingClientRect().y ||
-			targetHeading.getBoundingClientRect().top;
+    const deficit =
+      targetHeading.getBoundingClientRect().y ||
+      targetHeading.getBoundingClientRect().top;
 
-		switch (scrollType) {
-			default:
-				window.scrollBy(0, deficit);
-				break;
-			case "off":
-				window.scrollBy(0, deficit);
-				break;
-			case "auto":
-				window.scrollBy(
-					0,
-					deficit -
-						(stickyHeaders.length
-							? Math.max.apply(Math, stickyHeaderHeights)
-							: 0)
-				);
-				break;
-			case "fixedamount":
-				window.scrollBy(0, deficit - offset);
-				break;
-			case "namedelement":
-				window.scrollBy(
-					0,
-					deficit - document.querySelector(target)
-						? document.querySelector(target).offsetHeight
-						: 0
-				);
-				break;
-		}
-	}
+    switch (scrollType) {
+      default:
+        window.scrollBy(0, deficit);
+        break;
+      case "off":
+        window.scrollBy(0, deficit);
+        break;
+      case "auto":
+        window.scrollBy(
+          0,
+          deficit -
+            (stickyHeaders.length
+              ? Math.max.apply(Math, stickyHeaderHeights)
+              : 0)
+        );
+        break;
+      case "fixedamount":
+        window.scrollBy(0, deficit - offset);
+        break;
+      case "namedelement":
+        window.scrollBy(
+          0,
+          deficit - document.querySelector(target)
+            ? document.querySelector(target).offsetHeight
+            : 0
+        );
+        break;
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-	let instances = [];
-	if (document.getElementById("table-of-contents-toggle-link")) {
-		instances.push(document.getElementById("table-of-contents-toggle-link"));
-	} else {
-		instances = Array.prototype.slice.call(
-			document.getElementsByClassName("table-of-contents-toggle-link")
-		);
-	}
-	instances.forEach((instance) => {
-		const block = instance.closest(".table-of-contents");
+  let instances = [];
+  if (document.getElementById("table-of-contents-toggle-link")) {
+    instances.push(document.getElementById("table-of-contents-toggle-link"));
+  } else {
+    instances = Array.prototype.slice.call(
+      document.getElementsByClassName("table-of-contents-toggle-link")
+    );
+  }
+  instances.forEach((instance) => {
+    const block = instance.closest(".table-of-contents");
 
-		const tocContainer = block.querySelector(".table-of-contents-container");
-		const containerStyle = tocContainer.style;
+    const tocContainer = block.querySelector(".table-of-contents-container");
+    const containerStyle = tocContainer.style;
 
-		const tocExtraContainer = block.querySelector(
-			".table-of-contents-extra-container"
-		);
-		const extraContainerStyle = tocExtraContainer.style;
+    const tocExtraContainer = block.querySelector(
+      ".table-of-contents-extra-container"
+    );
+    const extraContainerStyle = tocExtraContainer.style;
 
-		const tocMain = tocExtraContainer.parentNode;
-		const mainStyle = block.style;
+    const tocMain = tocExtraContainer.parentNode;
+    const mainStyle = block.style;
 
-		const showButton = block.getAttribute("data-showtext") || "show";
-		const hideButton = block.getAttribute("data-hidetext") || "hide";
+    const showButton = block.getAttribute("data-showtext") || "show";
+    const hideButton = block.getAttribute("data-hidetext") || "hide";
 
-		tocContainer.removeAttribute("style");
+    tocContainer.removeAttribute("style");
 
-		let padding = 60;
+    let padding = 60;
 
-		function mobileEvent(mql) {
-			if (mql.matches) {
-				if (!tocMain.classList.contains("table-of-contents-collapsed")) {
-					tocMain.classList.add("table-of-contents-collapsed");
-					instance.innerHTML = showButton;
-					tocContainer.classList.add("hide");
-				}
-			} else {
-				if (JSON.parse(tocMain.dataset.initiallyshow)) {
-					tocMain.classList.remove("table-of-contents-collapsed");
-					instance.innerHTML = hideButton;
-					tocContainer.classList.remove("hide");
-				}
-			}
-		}
+    function mobileEvent(mql) {
+      if (mql.matches) {
+        if (!tocMain.classList.contains("table-of-contents-collapsed")) {
+          tocMain.classList.add("table-of-contents-collapsed");
+          instance.innerHTML = showButton;
+          tocContainer.classList.add("hide");
+        }
+      } else {
+        if (JSON.parse(tocMain.dataset.initiallyshow)) {
+          tocMain.classList.remove("table-of-contents-collapsed");
+          instance.innerHTML = hideButton;
+          tocContainer.classList.remove("hide");
+        }
+      }
+    }
 
-		let mobileQuery = window.matchMedia("(max-width: 800px)");
+    let mobileQuery = window.matchMedia("(max-width: 800px)");
 
-		if (JSON.parse(block.getAttribute("data-initiallyhideonmobile"))) {
-			mobileQuery.addListener(mobileEvent);
-		}
+    if (JSON.parse(block.getAttribute("data-initiallyhideonmobile"))) {
+      mobileQuery.addListener(mobileEvent);
+    }
 
-		instance.addEventListener("click", function (event) {
-			event.preventDefault();
-			const curWidth = block.offsetWidth;
+    instance.addEventListener("click", function (event) {
+      event.preventDefault();
+      const curWidth = block.offsetWidth;
 
-			if (block.classList.contains("table-of-contents-collapsed")) {
-				//begin showing
-				tocExtraContainer.classList.remove("hide");
-				tocContainer.classList.remove("hide");
-				const targetHeight = tocExtraContainer.offsetHeight + padding / 2; //doesn't include padding
-				tocContainer.classList.add("hiding");
-				tocExtraContainer.classList.add("hiding");
-				mainStyle.width = `${curWidth}px`; //also take into account number of columns
+      if (block.classList.contains("table-of-contents-collapsed")) {
+        //begin showing
+        tocExtraContainer.classList.remove("hide");
+        tocContainer.classList.remove("hide");
+        const targetHeight = tocExtraContainer.offsetHeight + padding / 2; //doesn't include padding
+        tocContainer.classList.add("hiding");
+        tocExtraContainer.classList.add("hiding");
+        mainStyle.width = `${curWidth}px`; //also take into account number of columns
 
-				setTimeout(() => {
-					mainStyle.width = "auto";
-					block.classList.remove("table-of-contents-collapsed");
-					const fullWidth = getComputedStyle(block).width.slice(0, -2);
-					mainStyle.width = `${curWidth}px`;
+        setTimeout(() => {
+          mainStyle.width = "auto";
+          block.classList.remove("table-of-contents-collapsed");
+          const fullWidth = getComputedStyle(block).width.slice(0, -2);
+          mainStyle.width = `${curWidth}px`;
 
-					setTimeout(() => {
-						Object.assign(containerStyle, {
-							height: `${targetHeight}px`,
-							width: "100px",
-						});
-						Object.assign(extraContainerStyle, {
-							height: `${targetHeight}px`,
-							width: "100px",
-						});
-						tocContainer.classList.remove("hiding");
-						tocExtraContainer.classList.remove("hiding");
+          setTimeout(() => {
+            Object.assign(containerStyle, {
+              height: `${targetHeight}px`,
+              width: "100px",
+            });
+            Object.assign(extraContainerStyle, {
+              height: `${targetHeight}px`,
+              width: "100px",
+            });
+            tocContainer.classList.remove("hiding");
+            tocExtraContainer.classList.remove("hiding");
 
-						mainStyle.width = `${fullWidth}px`;
+            mainStyle.width = `${fullWidth}px`;
 
-						setTimeout(() => {
-							tocContainer.style.width = `${fullWidth - padding}px`;
-							tocExtraContainer.style.width = `${fullWidth - padding}px`;
-						}, 50);
-					}, 50);
-				}, 50);
-			} else {
-				//begin hiding
-				mainStyle.width = `${block.offsetWidth}px`;
-				Object.assign(containerStyle, {
-					height: `${tocContainer.offsetHeight}px`,
-					width: `${tocContainer.offsetWidth}px`,
-				});
-				Object.assign(extraContainerStyle, {
-					height: `${tocExtraContainer.offsetHeight}px`,
-					width: `${tocExtraContainer.offsetWidth}px`,
-				});
+            setTimeout(() => {
+              tocContainer.style.width = `${fullWidth - padding}px`;
+              tocExtraContainer.style.width = `${fullWidth - padding}px`;
+            }, 50);
+          }, 50);
+        }, 50);
+      } else {
+        //begin hiding
+        mainStyle.width = `${block.offsetWidth}px`;
+        Object.assign(containerStyle, {
+          height: `${tocContainer.offsetHeight}px`,
+          width: `${tocContainer.offsetWidth}px`,
+        });
+        Object.assign(extraContainerStyle, {
+          height: `${tocExtraContainer.offsetHeight}px`,
+          width: `${tocExtraContainer.offsetWidth}px`,
+        });
 
-				setTimeout(() => {
-					tocContainer.classList.add("hiding");
-					Object.assign(containerStyle, {
-						height: "0",
-						width: "0",
-					});
-					Object.assign(extraContainerStyle, {
-						height: "0",
-						width: "0",
-					});
-					block.classList.add("table-of-contents-collapsed");
+        setTimeout(() => {
+          tocContainer.classList.add("hiding");
+          Object.assign(containerStyle, {
+            height: "0",
+            width: "0",
+          });
+          Object.assign(extraContainerStyle, {
+            height: "0",
+            width: "0",
+          });
+          block.classList.add("table-of-contents-collapsed");
 
-					padding =
-						parseInt(
-							getComputedStyle(tocExtraContainer).paddingLeft.slice(0, -2)
-						) +
-						parseInt(
-							getComputedStyle(tocExtraContainer).paddingRight.slice(0, -2)
-						);
+          padding =
+            parseInt(
+              getComputedStyle(tocExtraContainer).paddingLeft.slice(0, -2)
+            ) +
+            parseInt(
+              getComputedStyle(tocExtraContainer).paddingRight.slice(0, -2)
+            );
 
-					//measure width of toc title + toggle button, then use it as width of block
+          //measure width of toc title + toggle button, then use it as width of block
 
-					mainStyle.width = `${
-						5 +
-						padding +
-						instance.closest(".table-of-contents-header-container").scrollWidth
-					}px`;
-				}, 50);
-			}
+          mainStyle.width = `${
+            5 +
+            padding +
+            instance.closest(".table-of-contents-header-container").scrollWidth
+          }px`;
+        }, 50);
+      }
 
-			instance.innerHTML = tocContainer.classList.contains("hiding")
-				? hideButton
-				: showButton;
+      instance.innerHTML = tocContainer.classList.contains("hiding")
+        ? hideButton
+        : showButton;
 
-			mobileQuery.removeListener(mobileEvent);
-		});
+      mobileQuery.removeListener(mobileEvent);
+    });
 
-		tocContainer.addEventListener("transitionend", function () {
-			if (tocContainer.offsetHeight === 0) {
-				//hiding is done
-				tocContainer.classList.remove("hiding");
-				tocContainer.classList.add("hide");
-				tocExtraContainer.classList.remove("hiding");
-				tocExtraContainer.classList.add("hide");
-				if (containerStyle.display === "block") {
-					containerStyle.display = "";
-				}
-				if (extraContainerStyle.display === "block") {
-					extraContainerStyle.display = "";
-				}
-				mainStyle.minWidth = "";
-			}
-			Object.assign(containerStyle, {
-				height: "",
-				width: "",
-			});
-			Object.assign(extraContainerStyle, {
-				height: "",
-				width: "",
-			});
-			mainStyle.width = "";
-		});
-	});
-	if (window.location.hash) {
-		const sourceToC = document.querySelector(".table-of-contents");
-		const type = sourceToC.dataset.scrolltype;
-		const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
-		const target =
-			type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
-		setTimeout(() => dbe_hashHeaderScroll(type, target, offset), 50);
-	}
+    tocContainer.addEventListener("transitionend", function () {
+      if (tocContainer.offsetHeight === 0) {
+        //hiding is done
+        tocContainer.classList.remove("hiding");
+        tocContainer.classList.add("hide");
+        tocExtraContainer.classList.remove("hiding");
+        tocExtraContainer.classList.add("hide");
+        if (containerStyle.display === "block") {
+          containerStyle.display = "";
+        }
+        if (extraContainerStyle.display === "block") {
+          extraContainerStyle.display = "";
+        }
+        mainStyle.minWidth = "";
+      }
+      Object.assign(containerStyle, {
+        height: "",
+        width: "",
+      });
+      Object.assign(extraContainerStyle, {
+        height: "",
+        width: "",
+      });
+      mainStyle.width = "";
+    });
+  });
+  if (window.location.hash) {
+    const sourceToC = document.querySelector(".table-of-contents");
+    const type = sourceToC.dataset.scrolltype;
+    const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
+    const target =
+      type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
+    setTimeout(() => dbe_hashHeaderScroll(type, target, offset), 50);
+  }
 });
 
 window.onhashchange = function () {
-	const sourceToC = document.querySelector(".table-of-contents");
-	const type = sourceToC.dataset.scrolltype;
-	const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
-	const target = type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
-	dbe_hashHeaderScroll(type, target, offset);
+  const sourceToC = document.querySelector(".table-of-contents");
+  const type = sourceToC.dataset.scrolltype;
+  const offset = type === "fixedamount" ? sourceToC.dataset.scrollamount : 0;
+  const target = type === "namedelement" ? sourceToC.dataset.scrolltarget : "";
+  dbe_hashHeaderScroll(type, target, offset);
 };
 
 Array.prototype.slice
-	.call(document.querySelectorAll(".table-of-contents-container li > a"))
-	.forEach((link) => {
-		link.addEventListener("click", (e) => {
-			const hashlessLink = link.href.replace(link.hash, "");
-			const targetPageNumber = /[?&]page=\d+/g.exec(hashlessLink);
-			const currentPageNumber = /[?&]page=\d+/g.exec(window.location.search);
-			if (
-				window.location.href.includes(hashlessLink) &&
-				(currentPageNumber === null ||
-					(targetPageNumber && currentPageNumber[0] === targetPageNumber[0]))
-			) {
-				const tocData = link.closest(".table-of-contents").dataset;
-				const type = tocData.scrolltype;
-				const offset = type === "fixedamount" ? tocData.scrollamount : 0;
-				const target = type === "namedelement" ? tocData.scrolltarget : "";
-				e.preventDefault();
-				history.pushState(null, "", link.hash);
-				dbe_hashHeaderScroll(type, target, offset);
-			}
-		});
-	});
+  .call(document.querySelectorAll(".table-of-contents-container li > a"))
+  .forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const hashlessLink = link.href.replace(link.hash, "");
+      const targetPageNumber = /[?&]page=\d+/g.exec(hashlessLink);
+      const currentPageNumber = /[?&]page=\d+/g.exec(window.location.search);
+      if (
+        window.location.href.includes(hashlessLink) &&
+        (currentPageNumber === null ||
+          (targetPageNumber && currentPageNumber[0] === targetPageNumber[0]))
+      ) {
+        const tocData = link.closest(".table-of-contents").dataset;
+        const type = tocData.scrolltype;
+        const offset = type === "fixedamount" ? tocData.scrollamount : 0;
+        const target = type === "namedelement" ? tocData.scrolltarget : "";
+        e.preventDefault();
+        history.pushState(null, "", link.hash);
+        dbe_hashHeaderScroll(type, target, offset);
+      }
+    });
+  });
