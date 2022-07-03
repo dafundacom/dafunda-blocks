@@ -406,10 +406,15 @@ function dbe_render_how_to_block($attributes)
 		</div>
 		<?php
 		// $howToReviewPercent = intval(($howToRatingValue / 5) * 100);
-		if(!isset($howToLikeCount)) $howToLikeCount = 0;
-		if(!isset($howToDisikeCount)) $howToDisikeCount = 0;
-		if(!isset($howToVoteCount)) $howToVoteCount = 0;
-		$howToReviewPercent = intval(($howToLikeCount / $howToVoteCount) * 100);
+		if (!isset($howToLikeCount) || gettype($howToLikeCount) != 'integer') $howToLikeCount = 0;
+		if (!isset($howToDisikeCount)  || gettype($howToDisikeCount) != 'integer') $howToDisikeCount = 0;
+		if (!isset($howToVoteCount)  || gettype($howToVoteCount) != 'integer') $howToVoteCount = 0;
+		try {
+			$howToReviewPercent = intval(($howToLikeCount / $howToVoteCount) * 100);
+		} catch (\Throwable $th) {
+			$howToReviewPercent = 0;
+		}
+		// $howToReviewPercent = 60;
 		$howToReviewClass = "howto-review-result__good";
 		if ($howToReviewPercent > 100) {
 			$howToReviewPercent = 100;
@@ -432,15 +437,18 @@ function dbe_render_how_to_block($attributes)
 		}
 		?>
 
-		<!-- <p>
-			howToLikeCount : <?= $howToLikeCount ?>
-		</p>
-		<p>
-			howToDisikeCount : <?= $howToDisikeCount ?>
-		</p>
-		<p>
-			howToVoteCount : <?= $howToVoteCount ?>
-		</p> -->
+
+		<?php if ($_SERVER['SERVER_NAME'] == "dafudablock.test") : ?>
+			<p>
+				howToLikeCount : <?= $howToLikeCount ?>
+			</p>
+			<p>
+				howToDisikeCount : <?= $howToDisikeCount ?>
+			</p>
+			<p>
+				howToVoteCount : <?= $howToVoteCount ?>
+			</p>
+		<?php endif ?>
 
 
 		<div class="wrapper-how-to-review text-white rounded-xl flex flex-wrap px-4 py-2 mb-3 howto-review-result <?= $howToReviewClass ?>">

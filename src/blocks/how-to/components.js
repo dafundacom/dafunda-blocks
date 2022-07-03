@@ -415,7 +415,20 @@ class HowToStep extends Component {
               onClick={() => moveUp()}
               label={__("Move step up")}
             >
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
             <button
               className="howto-arrow"
@@ -423,7 +436,20 @@ class HowToStep extends Component {
               onClick={() => moveDown()}
               label={__("Move step down")}
             >
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
             <button
               className="howto-delete"
@@ -431,7 +457,20 @@ class HowToStep extends Component {
               label={__("Delete step")}
               onClick={() => deleteStep()}
             >
-              <i class="fa fa-times" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
 
@@ -778,7 +817,7 @@ class HowToStep extends Component {
                         >
                           <div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
                             <i
-                              class="fa fa-picture-o text-8xl"
+                              className="fa fa-picture-o text-8xl"
                               aria-hidden="true"
                             ></i>
                             <p className="text-[#999999] m-0">
@@ -803,6 +842,7 @@ class HowToSection extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     const {
       sectionListStyle,
@@ -847,7 +887,20 @@ class HowToSection extends Component {
               onClick={() => moveUp()}
               label={__("Move step up")}
             >
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
             <button
               className="howto-arrow"
@@ -855,7 +908,20 @@ class HowToSection extends Component {
               onClick={() => moveDown()}
               label={__("Move step down")}
             >
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
             <button
               className="howto-delete"
@@ -863,7 +929,20 @@ class HowToSection extends Component {
               label={__("Delete step")}
               onClick={() => deleteSection()}
             >
-              <i class="fa fa-times" aria-hidden="true"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -977,6 +1056,22 @@ class HowToSection extends Component {
     );
   }
 }
+
+function isNeedLocked(sections) {
+  let needLocked = false;
+  sections.forEach((section) => {
+    if (section.steps.length == 0) needLocked = true;
+    else {
+      section.steps.forEach((step) => {
+        if (step.title == "") needLocked = true;
+      });
+    }
+  });
+  if (needLocked)
+    wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");
+  else wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+  return needLocked;
+}
 export class EditorComponent extends Component {
   constructor(props) {
     super(props);
@@ -1010,9 +1105,12 @@ export class EditorComponent extends Component {
       setAttributes({ section: sectionClone });
     }
 
-    console.log(this.props.attributes);
     setAttributes(setMissingAttr(this.props.attributes));
-    console.log(this.props.attributes);
+    isNeedLocked(this.props.attributes.section);
+  }
+
+  componentDidUpdate() {
+    isNeedLocked(this.props.attributes.section);
   }
 
   render() {
@@ -1067,7 +1165,6 @@ export class EditorComponent extends Component {
       getClientIdsWithDescendants,
       isSelected,
     } = this.props;
-    // console.log("attributes", attributes);
     const { videoURLInput, currentStep } = this.state;
 
     const units = ["Tahun", "Bulan", "Minggu", "Hari", "Jam", "Menit", "Detik"];
@@ -1405,7 +1502,20 @@ export class EditorComponent extends Component {
                             }}
                             label={__("Move step up")}
                           >
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </button>
                           <button
                             className="howto-arrow"
@@ -1424,7 +1534,20 @@ export class EditorComponent extends Component {
                             }}
                             label={__("Move step down")}
                           >
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </button>
                           <button
                             className="howto-delete"
@@ -1439,7 +1562,20 @@ export class EditorComponent extends Component {
                               });
                             }}
                           >
-                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="5"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
                           </button>
                         </div>
                         <div>
@@ -1561,7 +1697,20 @@ export class EditorComponent extends Component {
                             }}
                             label={__("Move step up")}
                           >
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </button>
                           <button
                             className="howto-arrow"
@@ -1576,7 +1725,20 @@ export class EditorComponent extends Component {
                             }}
                             label={__("Move step down")}
                           >
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
                           </button>
                           <button
                             className="howto-delete"
@@ -1591,7 +1753,20 @@ export class EditorComponent extends Component {
                               });
                             }}
                           >
-                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="5"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
                           </button>
                         </div>
                         <div>
@@ -2321,7 +2496,7 @@ export class EditorComponent extends Component {
 
 function setMissingAttr(attr) {
   return Object.keys(attr).map((key, index) => {
-    if (!attr[key]) return defaultAttr[key].default;
+    if (key != "blockID" && !attr[key]) return defaultAttr[key].default;
     return attr[key];
   });
 }

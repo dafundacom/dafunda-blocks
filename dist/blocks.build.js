@@ -31436,30 +31436,54 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
           return moveUp();
         },
         label: __("Move step up")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-up",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-arrow",
         icon: "arrow-down-alt",
         onClick: function onClick() {
           return moveDown();
         },
         label: __("Move step down")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-down",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-delete",
         icon: "trash",
         label: __("Delete step"),
         onClick: function onClick() {
           return deleteStep();
         }
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-times",
-        "aria-hidden": "true"
-      }))), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor",
+        "stroke-width": "5"
+      }, /*#__PURE__*/React.createElement("path", {
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+        d: "M6 18L18 6M6 6l12 12"
+      })))), /*#__PURE__*/React.createElement("div", {
         className: "flex flex-wrap"
       }, /*#__PURE__*/React.createElement("div", {
         className: "flex flex-wrap w-full"
@@ -31804,7 +31828,7 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
           }, /*#__PURE__*/React.createElement("div", {
             className: "flex flex-wrap justify-center items-center text-[#999999] flex-col"
           }, /*#__PURE__*/React.createElement("i", {
-            "class": "fa fa-picture-o text-8xl",
+            className: "fa fa-picture-o text-8xl",
             "aria-hidden": "true"
           }), /*#__PURE__*/React.createElement("p", {
             className: "text-[#999999] m-0"
@@ -31875,30 +31899,54 @@ var HowToSection = /*#__PURE__*/function (_Component3) {
           return moveUp();
         },
         label: __("Move step up")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-up",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-arrow",
         icon: "arrow-down-alt",
         onClick: function onClick() {
           return moveDown();
         },
         label: __("Move step down")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-down",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-delete",
         icon: "trash",
         label: __("Delete step"),
         onClick: function onClick() {
           return deleteSection();
         }
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-times",
-        "aria-hidden": "true"
-      })))), /*#__PURE__*/React.createElement(ListWrapper, {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor",
+        "stroke-width": "5"
+      }, /*#__PURE__*/React.createElement("path", {
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+        d: "M6 18L18 6M6 6l12 12"
+      }))))), /*#__PURE__*/React.createElement(ListWrapper, {
         className: "howto-steps-list pl-0",
         listStyle: sectionListStyle
       }, steps.map(function (step, i) {
@@ -31999,6 +32047,19 @@ var HowToSection = /*#__PURE__*/function (_Component3) {
   return HowToSection;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
+function isNeedLocked(sections) {
+  var needLocked = false;
+  sections.forEach(function (section) {
+    if (section.steps.length == 0) needLocked = true;else {
+      section.steps.forEach(function (step) {
+        if (step.title == "") needLocked = true;
+      });
+    }
+  });
+  if (needLocked) wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");else wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+  return needLocked;
+}
+
 var EditorComponent = /*#__PURE__*/function (_Component4) {
   _inherits(EditorComponent, _Component4);
 
@@ -32047,9 +32108,13 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
         });
       }
 
-      console.log(this.props.attributes);
       setAttributes(setMissingAttr(this.props.attributes));
-      console.log(this.props.attributes);
+      isNeedLocked(this.props.attributes.section);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      isNeedLocked(this.props.attributes.section);
     }
   }, {
     key: "render",
@@ -32104,8 +32169,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           block = _this$props7.block,
           getBlock = _this$props7.getBlock,
           getClientIdsWithDescendants = _this$props7.getClientIdsWithDescendants,
-          isSelected = _this$props7.isSelected; // console.log("attributes", attributes);
-
+          isSelected = _this$props7.isSelected;
       var _this$state2 = this.state,
           videoURLInput = _this$state2.videoURLInput,
           currentStep = _this$state2.currentStep;
@@ -32396,10 +32460,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step up")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-up",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          className: "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-arrow",
           icon: "arrow-down-alt",
           onClick: function onClick() {
@@ -32411,10 +32483,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step down")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-down",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-delete",
           icon: "trash",
           label: __("Delete step"),
@@ -32423,10 +32503,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
               supplies: [].concat(_toConsumableArray(supplies.slice(0, i)), _toConsumableArray(supplies.slice(i + 1)))
             });
           }
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-times",
-          "aria-hidden": "true"
-        }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          fill: "none",
+          viewBox: "0 0 24 24",
+          stroke: "currentColor",
+          "stroke-width": "5"
+        }, /*#__PURE__*/React.createElement("path", {
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
+          d: "M6 18L18 6M6 6l12 12"
+        })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
           className: "mb-3",
           keepPlaceholderOnFocus: true,
           value: supply.name,
@@ -32514,10 +32602,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step up")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-up",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          className: "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-arrow",
           icon: "arrow-down-alt",
           onClick: function onClick() {
@@ -32529,10 +32625,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step down")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-down",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-delete",
           icon: "trash",
           label: __("Delete step"),
@@ -32541,10 +32645,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
               tools: [].concat(_toConsumableArray(tools.slice(0, i)), _toConsumableArray(tools.slice(i + 1)))
             });
           }
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-times",
-          "aria-hidden": "true"
-        }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          fill: "none",
+          viewBox: "0 0 24 24",
+          stroke: "currentColor",
+          "stroke-width": "5"
+        }, /*#__PURE__*/React.createElement("path", {
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
+          d: "M6 18L18 6M6 6l12 12"
+        })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
           className: "mb-3",
           keepPlaceholderOnFocus: true,
           value: tool.name,
@@ -33078,7 +33190,7 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
 
 function setMissingAttr(attr) {
   return Object.keys(attr).map(function (key, index) {
-    if (!attr[key]) return _attributes__WEBPACK_IMPORTED_MODULE_3__["default"][key]["default"];
+    if (key != "blockID" && !attr[key]) return _attributes__WEBPACK_IMPORTED_MODULE_3__["default"][key]["default"];
     return attr[key];
   });
 }
