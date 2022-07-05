@@ -1,5 +1,7 @@
 <?php
 
+require_once DAFUNDA_BLOCKS_PATH . "/includes/class-dafunda-blocks-util.php";
+
 /**
  * Fired during plugin activation
  *
@@ -30,10 +32,9 @@ class Dafunda_Blocks_Activator
 	 */
 	public static function activate()
 	{
-		set_transient("_welcome_redirect_ub", true, 60);
+		global $wpdb;
 
-		require_once DAFUNDA_BLOCKS_PATH .
-			"includes/class-dafunda-blocks-util.php";
+		set_transient("_welcome_redirect_ub", true, 60);
 
 		$blocks = get_option("dafunda_blocks", false);
 
@@ -50,5 +51,12 @@ class Dafunda_Blocks_Activator
 
 		add_option("DafundaBlocks_installDate", date("Y-m-d h:i:s"));
 		add_option("DafundaBlocks_review_notify", "no");
+
+		self::plugin_activate();
+	}
+
+	private static function plugin_activate()
+	{
+		Dafunda_Blocks_Util::create_log_table();
 	}
 }

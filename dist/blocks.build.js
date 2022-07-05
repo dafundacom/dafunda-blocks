@@ -24161,13 +24161,13 @@ var attributes = {
 
   }
   /*,allowReset: {
-         type: 'boolean',
-         default: false
-     },
-     resetButtonLabel: {
-         type: 'string',
-         default: 'Reset'
-     }*/
+        type: 'boolean',
+        default: false
+    },
+    resetButtonLabel: {
+        type: 'string',
+        default: 'Reset'
+    }*/
 
 };
 registerBlockType("dbe/content-filter", {
@@ -30615,25 +30615,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/blocks/how-to/block.js":
-/*!************************************!*\
-  !*** ./src/blocks/how-to/block.js ***!
-  \************************************/
+/***/ "./src/blocks/how-to/attributes.js":
+/*!*****************************************!*\
+  !*** ./src/blocks/how-to/attributes.js ***!
+  \*****************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./icon */ "./src/blocks/how-to/icon.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./src/blocks/how-to/components.js");
-
-
 var __ = wp.i18n.__; // Import __() from wp.i18n
 
-var registerBlockType = wp.blocks.registerBlockType;
-var _wp$data = wp.data,
-    withDispatch = _wp$data.withDispatch,
-    withSelect = _wp$data.withSelect;
-var attributes = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   blockID: {
     type: "string",
     "default": ""
@@ -30739,6 +30731,18 @@ var attributes = {
     type: "string",
     "default": "1"
   },
+  howToLikeCount: {
+    type: "number",
+    "default": 0
+  },
+  howToDisikeCount: {
+    type: "number",
+    "default": 0
+  },
+  howToVoteCount: {
+    type: "number",
+    "default": 0
+  },
   videoURL: {
     type: "string",
     //videoobject
@@ -30822,13 +30826,36 @@ var attributes = {
     type: "string",
     "default": "h5"
   }
-};
+});
+
+/***/ }),
+
+/***/ "./src/blocks/how-to/block.js":
+/*!************************************!*\
+  !*** ./src/blocks/how-to/block.js ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./icon */ "./src/blocks/how-to/icon.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./src/blocks/how-to/components.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes */ "./src/blocks/how-to/attributes.js");
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType;
+var _wp$data = wp.data,
+    withDispatch = _wp$data.withDispatch,
+    withSelect = _wp$data.withSelect;
+
 registerBlockType("dbe/how-to", {
   title: __("How To"),
   icon: _icon__WEBPACK_IMPORTED_MODULE_0__["default"],
   category: "dafundablocks",
   keywords: [__("Tutorial"), __("How To"), __("Dafunda Blocks")],
-  attributes: attributes,
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_2__["default"],
   supports: {
     multiple: false
   },
@@ -30865,6 +30892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/common.js");
 /* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_components/index */ "./src/blocks/how-to/_components/index.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributes */ "./src/blocks/how-to/attributes.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -30917,6 +30945,7 @@ var _wp$components = wp.components,
     RadioControl = _wp$components.RadioControl,
     RangeControl = _wp$components.RangeControl,
     SelectControl = _wp$components.SelectControl;
+
 
 var InspectorPanel = /*#__PURE__*/function (_Component) {
   _inherits(InspectorPanel, _Component);
@@ -31407,30 +31436,54 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
           return moveUp();
         },
         label: __("Move step up")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-up",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-arrow",
         icon: "arrow-down-alt",
         onClick: function onClick() {
           return moveDown();
         },
         label: __("Move step down")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-down",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-delete",
         icon: "trash",
         label: __("Delete step"),
         onClick: function onClick() {
           return deleteStep();
         }
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-times",
-        "aria-hidden": "true"
-      }))), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor",
+        "stroke-width": "5"
+      }, /*#__PURE__*/React.createElement("path", {
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+        d: "M6 18L18 6M6 6l12 12"
+      })))), /*#__PURE__*/React.createElement("div", {
         className: "flex flex-wrap"
       }, /*#__PURE__*/React.createElement("div", {
         className: "flex flex-wrap w-full"
@@ -31775,7 +31828,7 @@ var HowToStep = /*#__PURE__*/function (_Component2) {
           }, /*#__PURE__*/React.createElement("div", {
             className: "flex flex-wrap justify-center items-center text-[#999999] flex-col"
           }, /*#__PURE__*/React.createElement("i", {
-            "class": "fa fa-picture-o text-8xl",
+            className: "fa fa-picture-o text-8xl",
             "aria-hidden": "true"
           }), /*#__PURE__*/React.createElement("p", {
             className: "text-[#999999] m-0"
@@ -31846,30 +31899,54 @@ var HowToSection = /*#__PURE__*/function (_Component3) {
           return moveUp();
         },
         label: __("Move step up")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-up",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-arrow",
         icon: "arrow-down-alt",
         onClick: function onClick() {
           return moveDown();
         },
         label: __("Move step down")
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-arrow-down",
-        "aria-hidden": "true"
-      })), /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        viewBox: "0 0 20 20",
+        fill: "currentColor",
+        "stroke-width": "1.5",
+        stroke: "currentColor"
+      }, /*#__PURE__*/React.createElement("path", {
+        "fill-rule": "evenodd",
+        d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+        "clip-rule": "evenodd"
+      }))), /*#__PURE__*/React.createElement("button", {
         className: "howto-delete",
         icon: "trash",
         label: __("Delete step"),
         onClick: function onClick() {
           return deleteSection();
         }
-      }, /*#__PURE__*/React.createElement("i", {
-        "class": "fa fa-times",
-        "aria-hidden": "true"
-      })))), /*#__PURE__*/React.createElement(ListWrapper, {
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        "class": "h-4 w-4",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor",
+        "stroke-width": "5"
+      }, /*#__PURE__*/React.createElement("path", {
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+        d: "M6 18L18 6M6 6l12 12"
+      }))))), /*#__PURE__*/React.createElement(ListWrapper, {
         className: "howto-steps-list pl-0",
         listStyle: sectionListStyle
       }, steps.map(function (step, i) {
@@ -31970,6 +32047,19 @@ var HowToSection = /*#__PURE__*/function (_Component3) {
   return HowToSection;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
+function isNeedLocked(sections) {
+  var needLocked = false;
+  sections.forEach(function (section) {
+    if (section.steps.length == 0) needLocked = true;else {
+      section.steps.forEach(function (step) {
+        if (step.title == "") needLocked = true;
+      });
+    }
+  });
+  if (needLocked) wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");else wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+  return needLocked;
+}
+
 var EditorComponent = /*#__PURE__*/function (_Component4) {
   _inherits(EditorComponent, _Component4);
 
@@ -32017,6 +32107,14 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           section: sectionClone
         });
       }
+
+      setAttributes(setMissingAttr(this.props.attributes));
+      isNeedLocked(this.props.attributes.section);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      isNeedLocked(this.props.attributes.section);
     }
   }, {
     key: "render",
@@ -32040,6 +32138,9 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           howToYield = _this$props7$attribut.howToYield,
           howToRatingValue = _this$props7$attribut.howToRatingValue,
           howToRatingCount = _this$props7$attribut.howToRatingCount,
+          howToLikeCount = _this$props7$attribut.howToLikeCount,
+          howToDisikeCount = _this$props7$attribut.howToDisikeCount,
+          howToVoteCount = _this$props7$attribut.howToVoteCount,
           cost = _this$props7$attribut.cost,
           costCurrency = _this$props7$attribut.costCurrency,
           costDisplayText = _this$props7$attribut.costDisplayText,
@@ -32359,10 +32460,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step up")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-up",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          className: "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-arrow",
           icon: "arrow-down-alt",
           onClick: function onClick() {
@@ -32374,10 +32483,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step down")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-down",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-delete",
           icon: "trash",
           label: __("Delete step"),
@@ -32386,10 +32503,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
               supplies: [].concat(_toConsumableArray(supplies.slice(0, i)), _toConsumableArray(supplies.slice(i + 1)))
             });
           }
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-times",
-          "aria-hidden": "true"
-        }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          fill: "none",
+          viewBox: "0 0 24 24",
+          stroke: "currentColor",
+          "stroke-width": "5"
+        }, /*#__PURE__*/React.createElement("path", {
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
+          d: "M6 18L18 6M6 6l12 12"
+        })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
           className: "mb-3",
           keepPlaceholderOnFocus: true,
           value: supply.name,
@@ -32477,10 +32602,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step up")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-up",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          className: "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-arrow",
           icon: "arrow-down-alt",
           onClick: function onClick() {
@@ -32492,10 +32625,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
             }
           },
           label: __("Move step down")
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-arrow-down",
-          "aria-hidden": "true"
-        })), /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          viewBox: "0 0 20 20",
+          fill: "currentColor",
+          "stroke-width": "1.5",
+          stroke: "currentColor"
+        }, /*#__PURE__*/React.createElement("path", {
+          "fill-rule": "evenodd",
+          d: "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z",
+          "clip-rule": "evenodd"
+        }))), /*#__PURE__*/React.createElement("button", {
           className: "howto-delete",
           icon: "trash",
           label: __("Delete step"),
@@ -32504,10 +32645,18 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
               tools: [].concat(_toConsumableArray(tools.slice(0, i)), _toConsumableArray(tools.slice(i + 1)))
             });
           }
-        }, /*#__PURE__*/React.createElement("i", {
-          "class": "fa fa-times",
-          "aria-hidden": "true"
-        }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          "class": "h-4 w-4",
+          fill: "none",
+          viewBox: "0 0 24 24",
+          stroke: "currentColor",
+          "stroke-width": "5"
+        }, /*#__PURE__*/React.createElement("path", {
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
+          d: "M6 18L18 6M6 6l12 12"
+        })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(RichText, {
           className: "mb-3",
           keepPlaceholderOnFocus: true,
           value: tool.name,
@@ -32938,8 +33087,30 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
           });
         }
       })), /*#__PURE__*/React.createElement("div", {
+        className: "grid grid-cols-1  gap-4 md:grid-cols-3 md:gap-3 mb-4"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "rounded-lg border border-slate-200 px-4 py-2"
+      }, /*#__PURE__*/React.createElement("h6", {
+        className: "m-0 font-normal normal-case"
+      }, "Like Count"), /*#__PURE__*/React.createElement("p", {
+        className: "m-0"
+      }, howToLikeCount)), /*#__PURE__*/React.createElement("div", {
+        className: "rounded-lg border border-slate-200 px-4 py-2"
+      }, /*#__PURE__*/React.createElement("h6", {
+        className: "m-0 font-normal normal-case"
+      }, "Disike Count"), /*#__PURE__*/React.createElement("p", {
+        className: "m-0"
+      }, howToDisikeCount)), /*#__PURE__*/React.createElement("div", {
+        className: "rounded-lg border border-slate-200 px-4 py-2"
+      }, /*#__PURE__*/React.createElement("h6", {
+        className: "m-0 font-normal normal-case"
+      }, "Vote Total Count"), /*#__PURE__*/React.createElement("p", {
+        className: "m-0"
+      }, howToVoteCount))), /*#__PURE__*/React.createElement("div", {
         className: "howto-review-score grid grid-cols-1  gap-4 md:grid-cols-2 md:gap-8 mb-4"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Rating Value"), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h5", {
+        className: "m-0 font-normal normal-case"
+      }, "Rating Value"), /*#__PURE__*/React.createElement("div", {
         className: "howto-rating-range-input w-full"
       }, /*#__PURE__*/React.createElement("input", {
         type: "range",
@@ -32968,7 +33139,9 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
         return /*#__PURE__*/React.createElement("div", null, i);
       }))))), /*#__PURE__*/React.createElement("div", {
         className: "howto-rating-count"
-      }, /*#__PURE__*/React.createElement("h4", null, "Rating Count"), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("h5", {
+        className: "m-0 font-normal normal-case"
+      }, "Rating Count"), /*#__PURE__*/React.createElement("div", {
         className: "howto-yield"
       }, /*#__PURE__*/React.createElement(RichText, {
         placeholder: "0",
@@ -33014,6 +33187,13 @@ var EditorComponent = /*#__PURE__*/function (_Component4) {
 
   return EditorComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+function setMissingAttr(attr) {
+  return Object.keys(attr).map(function (key, index) {
+    if (key != "blockID" && !attr[key]) return _attributes__WEBPACK_IMPORTED_MODULE_3__["default"][key]["default"];
+    return attr[key];
+  });
+}
 
 /***/ }),
 

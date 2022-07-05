@@ -1199,9 +1199,11 @@ function dbe_include_block_attribute_css()
 							PHP_EOL;
 					}
 
-					function dbe_howto_getStepPic($step)
-					{
-						return $step["stepPic"];
+					if (!function_exists('dbe_howto_getStepPic')) {
+						function dbe_howto_getStepPic($step)
+						{
+							return $step["stepPic"];
+						}
 					}
 
 					function dbe_howto_generateStepPicStyle($stepPic)
