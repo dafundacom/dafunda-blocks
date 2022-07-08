@@ -16,6 +16,16 @@ const moveElement = (array, from, to) => {
   return copy;
 };
 
+let list_interface = {
+  title: "",
+  description: "",
+  imageurl: "",
+  imagealt: "",
+  imageid: "",
+  likes: [],
+  dislikes: [],
+};
+
 export function EditorComponent(props) {
   let {
     attributes: { blockID, lists },
@@ -25,6 +35,8 @@ export function EditorComponent(props) {
     getClientIdsWithDescendants,
     isSelected,
   } = props;
+
+  const [listsState, setLists] = useState(lists);
 
   useEffect(() => {
     if (
@@ -37,12 +49,11 @@ export function EditorComponent(props) {
     ) {
       setAttributes({ blockID: block.clientId });
     }
+    if (listsState.length == 0) setLists([{ ...list_interface }]);
   }, []);
 
-  const [listsState, setLists] = useState(lists);
   useEffect(() => {
     setAttributes({ lists: listsState });
-    console.log(listsState);
   }, [listsState]);
 
   return (
@@ -94,18 +105,7 @@ export function EditorComponent(props) {
       <ButtonAddStep
         label="Tambah list"
         onClick={() => {
-          setLists([
-            ...listsState,
-            {
-              title: "",
-              description: "",
-              imageurl: "",
-              imagealt: "",
-              imageid: "",
-              likes: [],
-              dislikes: [],
-            },
-          ]);
+          setLists([...listsState, list_interface]);
         }}
       />
     </>

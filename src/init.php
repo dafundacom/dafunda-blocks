@@ -532,6 +532,9 @@ function dbe_include_block_attribute_css()
 							: "") .
 						"}";
 					break;
+
+				// case "dbe/download-button":
+				// 	break;
 				case "dbe/button":
 					$prefix = "#dbe-button-" . $attributes["blockID"];
 					if (
@@ -2570,6 +2573,9 @@ require_once plugin_dir_path(__FILE__) . "blocks/image-slider/block.php";
 
 // Table of Contents Block
 require_once plugin_dir_path(__FILE__) . "blocks/table-of-contents/block.php";
+
+// Download Button Block
+require_once plugin_dir_path(__FILE__) . "blocks/download-button/block.php";
 
 // Button Block
 require_once plugin_dir_path(__FILE__) . "blocks/button/block.php";

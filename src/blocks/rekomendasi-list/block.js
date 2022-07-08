@@ -5,17 +5,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 
 const { withSelect } = wp.data;
-
-const attributes = {
-  blockID: {
-    type: "string",
-    default: "",
-  },
-  lists: {
-    type: "array",
-    default: [], //format: {title, imageid, imagealt, imageurl, }
-  },
-};
+import attributes from "./attributes";
 
 registerBlockType("dbe/rekomendasi-list", {
   title: __("Rekomendasi List"),
