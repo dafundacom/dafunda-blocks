@@ -338,10 +338,20 @@ export function Card(props) {
           tagName={"p"}
           keepPlaceholderOnFocus
           placeholder={__("Description goes here")}
-          className="font-normal w-full"
+          className="font-normal w-full my-0"
           value={description}
           onChange={(description) => editList({ description })}
           // onFocus={selectStep}
+        />
+      </div>
+
+      <div className="p-5 pt-0">
+        <input
+          className="w-full"
+          type="text"
+          name="url"
+          onChange={(e) => editList({ url: e.target.value })}
+          placeholder={__("Link for the product")}
         />
       </div>
     </li>

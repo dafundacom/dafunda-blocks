@@ -22,8 +22,8 @@ export function Card(props) {
   let { title, description, imageurl, imagealt, imageid, likes, dislikes } =
     data;
   return (
-    <li className="ranked-list-card flex flex-wrap p-3 relative">
-      <div className="absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg text-2xl">
+    <li className="ranked-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6">
+      <div className="absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg text-2xl z-10">
         <button
           className="howto-arrow"
           icon="arrow-up-alt"
@@ -86,96 +86,130 @@ export function Card(props) {
       </div>
 
       {/* Image */}
-      {imageurl && imageurl != "" ? (
-        <figure className="relative w-48">
-          <img
-            className="rounded-xl aspect-square w-full"
-            src={imageurl}
-            // onClick={selectStep}
-          />
+      <div className="relative aspect-[16/7] object-cover object-center w-full overflow-hidden rounded-t-lg">
+        {imageurl && imageurl != "" ? (
+          <figure>
+            <img
+              className="w-full"
+              src={imageurl}
+              // onClick={selectStep}
+            />
 
-          <ButtonDeleteImage
-            onClick={() => {
-              editList({
-                imagealt: "",
-                imageid: "",
-                imageurl: "",
-              });
-            }}
-          />
-          {/* {blockIsSelected && (
-					<ButtonDeleteImage
-						onClick={() => {
-							editStep({
-								stepPic: {
-									id: -1,
-									alt: "",
-									url: "",
-									caption: "",
-									width: 0,
-									float: "none",
-								},
-							});
-						}}
-					/>
-        <button>Delete Image</button>
-				)} */}
-        </figure>
-      ) : (
-        <div className="flex flex-wrap justify-center align-center w-48 aspect-square cursor-pointer">
-          <MediaUpload
-            onSelect={(newImage) => {
-              editList({
-                imagealt: newImage?.alt ?? "",
-                imageid: newImage?.id ?? "",
-                imageurl: newImage?.url ?? "",
-              });
-            }}
-            allowedTypes={["image"]}
-            value={index}
-            render={({ open }) => (
-              <>
-                <div
-                  className="w-full bg-[#EEEEEE] aspect-[16/9] md:aspect-[16/6] rounded-lg flex flex-wrap justify-center items-center"
-                  onClick={open}
-                >
-                  <div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
-                    <i class="fa fa-picture-o text-8xl" aria-hidden="true"></i>
-                    <p className="text-[#999999] m-0">Tambahkan Media</p>
+            <ButtonDeleteImage
+              onClick={() => {
+                editList({
+                  imagealt: "",
+                  imageid: "",
+                  imageurl: "",
+                });
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                boxShadow: "rgb(0 0 0 / 54%) -3px -125px 35px -14px inset",
+              }}
+            ></div>
+          </figure>
+        ) : (
+          <div className="cursor-pointer h-full">
+            <MediaUpload
+              onSelect={(newImage) => {
+                editList({
+                  imagealt: newImage?.alt ?? "",
+                  imageid: newImage?.id ?? "",
+                  imageurl: newImage?.url ?? "",
+                });
+              }}
+              allowedTypes={["image"]}
+              value={index}
+              render={({ open }) => (
+                <>
+                  <div
+                    className="w-full h-full bg-[#EEEEEE] flex flex-wrap justify-center items-center"
+                    onClick={open}
+                  >
+                    <div className="flex flex-wrap justify-center items-center text-[#999999] flex-col">
+                      <i
+                        class="fa fa-picture-o text-8xl"
+                        aria-hidden="true"
+                      ></i>
+                      <p className="text-[#999999] m-0">Tambahkan Media</p>
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
+            />
+          </div>
+        )}
+
+        <div className="absolute left-6 bottom-3 flex flex-wrap">
+          <h4
+            className={`m-0 font-semibold ${
+              imageurl && imageurl != "" ? "text-white" : ""
+            }`}
+          >
+            {index + 1}. &nbsp;
+          </h4>
+          <RichText
+            tagName={"h4"}
+            keepPlaceholderOnFocus
+            placeholder={__("Title")}
+            className={`m-0 font-semibold ${
+              imageurl && imageurl != "" ? "text-white" : ""
+            }`}
+            value={title}
+            onChange={(title) => editList({ title })}
+            // onFocus={selectStep}
           />
         </div>
-      )}
+      </div>
+      {/* Image END */}
 
-      <div className="flex flex-[1] flex-wrap flex-col">
-        {/* Input */}
-        <RichText
-          // tagName={"p"}
-          keepPlaceholderOnFocus
-          placeholder={__("Title goes here")}
-          className="font-normal text-[1.3rem] md:text-2xl ml-3 w-full mb-3"
-          value={title}
-          onChange={(title) => editList({ title })}
-          // onFocus={selectStep}
-        />
+      {/* Vote Count */}
+      <div className="p-5 flex">
+        <div className="flex flex-wrap items-start w-fit opacity-50">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 inline-block translate-y-[-2px]"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+          </svg>
+          <p className="m-0 ml-1 inline-block font-bold text-xl leading-6">
+            {likes.length}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-start w-fit opacity-50 ml-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 inline-block translate-y-[2px]"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+          </svg>
+          <p className="m-0 ml-1 inline-block font-bold text-xl leading-6">
+            {dislikes.length + 1}
+          </p>
+        </div>
+      </div>
+      {/* Vote Count END */}
 
+      {/* Description */}
+      <div className="recomendasi-list-description p-5 pt-0">
         <RichText
-          // tagName={"p"}
+          tagName={"p"}
           keepPlaceholderOnFocus
           placeholder={__("Description goes here")}
-          className="font-normal ml-3 w-full"
+          className="w-full my-0 text-base"
           value={description}
           onChange={(description) => editList({ description })}
           // onFocus={selectStep}
         />
-
-        {/* Info */}
-        {/* <p>Likes: {likes.length}</p>
-				<p>Dislikes: {dislikes.length}</p> */}
       </div>
+      {/* Description END */}
     </li>
   );
 }

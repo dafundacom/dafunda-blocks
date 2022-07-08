@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('moment', 'react', 'react-dom'), 'version' => 'a320cb0b790aad2ee1ef');
+<?php return array('dependencies' => array('moment', 'react', 'react-dom', 'wp-components'), 'version' => '13022e14c76b7781410c');

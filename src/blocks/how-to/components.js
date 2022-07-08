@@ -1104,7 +1104,47 @@ export class EditorComponent extends Component {
     if (hasMissingProperties) {
       setAttributes({ section: sectionClone });
     }
-
+    console.log(this.props.attributes.section);
+    console.log(
+      this.props.attributes.section.length,
+      this.props.attributes.section[0].steps.length
+    );
+    if (
+      this.props.attributes.section.length == 1 &&
+      this.props.attributes.section[0].steps.length == 0
+    ) {
+      // setAttributes({
+      //   section: [{
+      //     sectionName: "",
+      //     steps: [{}]
+      //   }]
+      // })
+      setAttributes({
+        section: [
+          {
+            sectionName: "",
+            steps: [
+              {
+                anchor: `section-0-step-0`,
+                stepPic: {
+                  img: -1,
+                  alt: "",
+                  url: "",
+                  width: 0,
+                  float: "none",
+                },
+                direction: "",
+                tip: "",
+                title: "",
+                hasVideoClip: false,
+                videoClipStart: 0,
+                videoClipEnd: 0,
+              },
+            ],
+          },
+        ],
+      });
+    }
     setAttributes(setMissingAttr(this.props.attributes));
     isNeedLocked(this.props.attributes.section);
   }

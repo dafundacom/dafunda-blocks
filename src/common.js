@@ -24,11 +24,12 @@ export const mergeRichTextArray = (input) =>
     .map((item) => (typeof item === "string" ? item : richTextToHTML(item)))
     .join("");
 
-export const dashesToCamelcase = (str) =>
+export const dashesToCamelcase = (str) => {
   str
     .split("-")
     .map((s) => s[0].toUpperCase() + s.slice(1))
     .join("");
+};
 
 export const generateIcon = (selectedIcon, size) => (
   <svg

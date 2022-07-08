@@ -16,16 +16,17 @@ const moveElement = (array, from, to) => {
   return copy;
 };
 
-let rekom_interface = {
+let list_interface = {
   title: "",
   price: 0,
-  priceTag: "Rp",
+  pricetag: "",
   subtitle: "",
-  description: ``,
+  description: "",
   imageurl: "",
   imagealt: "",
   imageid: "",
   olshops: [],
+  url: "",
 };
 
 export function EditorComponent(props) {
@@ -38,6 +39,30 @@ export function EditorComponent(props) {
     isSelected,
   } = props;
 
+  const [listsState, setLists] = useState(lists);
+
+  useEffect(() => {
+    setAttributes({ lists: listsState });
+  }, [listsState]);
+
+  function validateList(list, index) {
+    let newList = {};
+    let needUpdate = false;
+    Object.keys(list_interface).forEach((key, key_i) => {
+      if (list[key] == undefined || list[key] == null) {
+        needUpdate = true;
+        newList[key] = list_interface[key];
+      } else {
+        newList[key] = list[key];
+      }
+    });
+    if (needUpdate) {
+      listsState[index] = Object.assign(listsState[index], newList);
+      setLists([...listsState]);
+    }
+    return;
+  }
+
   useEffect(() => {
     if (
       blockID === "" ||
@@ -49,33 +74,13 @@ export function EditorComponent(props) {
     ) {
       setAttributes({ blockID: block.clientId });
     }
-  }, []);
 
-  let listsDummy = [
-    {
-      title: "Poco F3",
-      price: 4000000,
-      priceTag: "Rp",
-      subtitle: "Smartphone Mid-end Killer terbaik saat ini",
-      description: `HP gaming harga 4 Jutaan terbaik pertama ada Poco X3 GT, HP ini rilis pada bulan Agustus 2021. Dengan spesifikasi layar IPS LCD, refresh rate 120Hz, ukuran layar 6,6 inci, resolusi Full HD+ (1080 x 2400 piksel), HDR10 dan kecerahan layar 450 nits (minimum). Serta jenis perlindungan Corning Gorilla Glass Victus.<br>Performanya menggunakan jenis Chipset MediaTek Dimensity 1100 5G dengan kapasitas RAM 8GB dan memori internal 128/256GB. Menjalankan sistem operasi berbasis Android 11, MIUI 12.5 for POCO. Punya kapasitas baterai 5.000 mAh yang mendukung Fast Charging 67W (100% dalam 42 menit).`,
-      imageurl:
-        "https://fdn.gsmarena.com/imgroot/reviews/21/poco-f3/lifestyle/-1200w5/gsmarena_024.jpg",
-      imagealt: "Poco F3",
-      imageid: "1",
-      olshops: [
-        { name: "Tokopedia", slug: "tokopedia", url: "#" },
-        { name: "Shopee", slug: "shopee", url: "#" },
-        { name: "Lazada", slug: "lazada", url: "#" },
-        { name: "Bukalapak", slug: "bukalapak", url: "#" },
-      ],
-    },
-    { ...rekom_interface },
-  ];
-  const [listsState, setLists] = useState(lists);
-  // const [listsState, setLists] = useState(listsDummy);
-  useEffect(() => {
-    setAttributes({ lists: listsState });
-  }, [listsState]);
+    lists.forEach((list, list_i) => {
+      validateList(list, list_i);
+    });
+
+    if (listsState.length == 0) setLists([{ ...list_interface }]);
+  }, []);
 
   return (
     <>
@@ -117,7 +122,7 @@ export function EditorComponent(props) {
           setLists([
             ...listsState,
             {
-              ...rekom_interface,
+              ...list_interface,
             },
           ]);
         }}
@@ -127,9 +132,21 @@ export function EditorComponent(props) {
 }
 
 function InspectorPanel(props) {
+  let {
+    attributes: { openNewTab },
+    setAttributes,
+  } = props;
   return (
     <InspectorControls>
-      <PanelBody title={__("Ranked List Settings")}></PanelBody>
+      <PanelBody title={__("Ranked List Settings")}>
+        <ToggleControl
+          label={__("Open link in new tab")}
+          checked={openNewTab}
+          onChange={(openNewTab) => {
+            setAttributes({ openNewTab });
+          }}
+        />
+      </PanelBody>
     </InspectorControls>
   );
 }
