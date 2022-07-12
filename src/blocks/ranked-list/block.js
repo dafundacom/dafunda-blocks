@@ -7,34 +7,34 @@ const { registerBlockType } = wp.blocks;
 const { withSelect } = wp.data;
 
 const attributes = {
-	blockID: {
-		type: "string",
-		default: "",
-	},
-	lists: {
-		type: "array",
-		default: [], //format: {title, imageid, imagealt, imageurl, }
-	},
+  blockID: {
+    type: "string",
+    default: "",
+  },
+  lists: {
+    type: "array",
+    default: [], //format: {title, imageid, imagealt, imageurl, }
+  },
 };
 
 registerBlockType("dbe/ranked-list", {
-	title: __("Ranked List"),
-	icon: icon,
-	category: "dafundablocks",
-	keywords: [__("Tutorial"), __("Ranked List"), __("Dafunda Blocks")],
-	attributes,
-	supports: {
-		multiple: false,
-	},
-	edit: withSelect((select, ownProps) => {
-		const { getBlock, getClientIdsWithDescendants } =
-			select("core/block-editor") || select("core/editor");
+  title: __("Ranked List"),
+  icon: icon,
+  category: "dafundablocks",
+  keywords: [__("Tutorial"), __("Ranked List"), __("Dafunda Blocks")],
+  attributes,
+  supports: {
+    multiple: false,
+  },
+  edit: withSelect((select, ownProps) => {
+    const { getBlock, getClientIdsWithDescendants } =
+      select("core/block-editor") || select("core/editor");
 
-		return {
-			block: getBlock(ownProps.clientId),
-			getBlock,
-			getClientIdsWithDescendants,
-		};
-	})(EditorComponent),
-	save: () => null,
+    return {
+      block: getBlock(ownProps.clientId),
+      getBlock,
+      getClientIdsWithDescendants,
+    };
+  })(EditorComponent),
+  save: () => null,
 });

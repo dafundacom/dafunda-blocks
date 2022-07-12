@@ -20,6 +20,7 @@ import "./blocks/social-share/block";
 import "./blocks/content-toggle/block";
 import "./blocks/content-toggle/components/panel";
 import "./blocks/button/block";
+import "./blocks/download-button/block";
 import "./blocks/tabbed-content/block";
 import "./blocks/tabbed-content/components/tab";
 

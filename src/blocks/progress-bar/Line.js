@@ -24,67 +24,67 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 import { Component } from "react";
 
 export default class Line extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			indicator: 0,
-			isActive: false,
-		};
-	}
-	componentDidMount() {
-		setTimeout(
-			() =>
-				this.setState({
-					indicator: this.props.percent,
-					isActive: true,
-				}),
-			1000
-		);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      indicator: 0,
+      isActive: false,
+    };
+  }
+  componentDidMount() {
+    setTimeout(
+      () =>
+        this.setState({
+          indicator: this.props.percent,
+          isActive: true,
+        }),
+      1000
+    );
+  }
 
-	componentWillReceiveProps(nextProps) {
-		if (this.state.isActive && this.props.percent !== nextProps.percent) {
-			this.setState({ indicator: nextProps.percent });
-		}
-	}
+  componentWillReceiveProps(nextProps) {
+    if (this.state.isActive && this.props.percent !== nextProps.percent) {
+      this.setState({ indicator: nextProps.percent });
+    }
+  }
 
-	render() {
-		const { indicator, isActive } = this.state;
-		const { barColor, barThickness, percent, labelColor } = this.props;
-		const progressBarPath = `M ${barThickness / 2},${barThickness / 2} L ${
-			100 - barThickness / 2
-		},${barThickness / 2}`;
-		return (
-			<div className="progress-bar-container">
-				<svg
-					className="progress-bar-line"
-					viewBox={`0 0 100 ${barThickness}`}
-					preserveAspectRatio="none"
-				>
-					<path
-						className="progress-bar-line-trail"
-						d={progressBarPath}
-						strokeWidth="1"
-					/>
-					<path
-						className="progress-bar-line-path"
-						d={progressBarPath}
-						stroke={barColor}
-						strokeWidth={barThickness}
-						style={{ strokeDashoffset: `${100 - indicator}px` }}
-					/>
-				</svg>
-				<div
-					className="progress-bar-label"
-					style={{
-						width: `${percent}%`,
-						visibility: isActive ? "visible" : "hidden",
-						color: labelColor || "inherit",
-					}}
-				>
-					{percent}%
-				</div>
-			</div>
-		);
-	}
+  render() {
+    const { indicator, isActive } = this.state;
+    const { barColor, barThickness, percent, labelColor } = this.props;
+    const progressBarPath = `M ${barThickness / 2},${barThickness / 2} L ${
+      100 - barThickness / 2
+    },${barThickness / 2}`;
+    return (
+      <div className="progress-bar-container">
+        <svg
+          className="progress-bar-line"
+          viewBox={`0 0 100 ${barThickness}`}
+          preserveAspectRatio="none"
+        >
+          <path
+            className="progress-bar-line-trail"
+            d={progressBarPath}
+            strokeWidth="1"
+          />
+          <path
+            className="progress-bar-line-path"
+            d={progressBarPath}
+            stroke={barColor}
+            strokeWidth={barThickness}
+            style={{ strokeDashoffset: `${100 - indicator}px` }}
+          />
+        </svg>
+        <div
+          className="progress-bar-label"
+          style={{
+            width: `${percent}%`,
+            visibility: isActive ? "visible" : "hidden",
+            color: labelColor || "inherit",
+          }}
+        >
+          {percent}%
+        </div>
+      </div>
+    );
+  }
 }

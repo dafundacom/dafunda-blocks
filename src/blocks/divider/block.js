@@ -20,26 +20,26 @@ const { PanelBody, RangeControl, SelectControl } = wp.components;
 const { withSelect } = wp.data;
 
 const attributes = {
-	blockID: {
-		type: "string",
-		default: "",
-	},
-	borderSize: {
-		type: "number",
-		default: 2,
-	},
-	borderStyle: {
-		type: "string",
-		default: "solid",
-	},
-	borderColor: {
-		type: "string",
-		default: "#ccc",
-	},
-	borderHeight: {
-		type: "number",
-		default: 20,
-	},
+  blockID: {
+    type: "string",
+    default: "",
+  },
+  borderSize: {
+    type: "number",
+    default: 2,
+  },
+  borderStyle: {
+    type: "string",
+    default: "solid",
+  },
+  borderColor: {
+    type: "string",
+    default: "#ccc",
+  },
+  borderHeight: {
+    type: "number",
+    default: 20,
+  },
 };
 /**
  * Register: aa Gutenberg Block.
@@ -55,141 +55,141 @@ const attributes = {
  *                             registered; otherwise `undefined`.
  */
 registerBlockType("dbe/divider", {
-	title: __("Divider"),
-	icon: icon,
-	category: "dafundablocks",
-	keywords: [__("Divider"), __("Separator"), __("Dafunda Blocks")],
-	attributes,
+  title: __("Divider"),
+  icon: icon,
+  category: "dafundablocks",
+  keywords: [__("Divider"), __("Separator"), __("Dafunda Blocks")],
+  attributes,
 
-	/**
-	 * The edit function describes the structure of your block in the context of the editor.
-	 * This represents what the editor will render when the block is used.
-	 *
-	 * The "edit" property must be a valid function.
-	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 */
-	edit: withSelect((select, ownProps) => {
-		const { getBlock, getClientIdsWithDescendants } =
-			select("core/block-editor") || select("core/editor");
+  /**
+   * The edit function describes the structure of your block in the context of the editor.
+   * This represents what the editor will render when the block is used.
+   *
+   * The "edit" property must be a valid function.
+   *
+   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+   */
+  edit: withSelect((select, ownProps) => {
+    const { getBlock, getClientIdsWithDescendants } =
+      select("core/block-editor") || select("core/editor");
 
-		return {
-			block: getBlock(ownProps.clientId),
-			getBlock,
-			getClientIdsWithDescendants,
-		};
-	})(function (props) {
-		const {
-			attributes: {
-				blockID,
-				borderSize,
-				borderStyle,
-				borderColor,
-				borderHeight,
-			},
-			isSelected,
-			setAttributes,
-			className,
-			block,
-			getBlock,
-			getClientIdsWithDescendants,
-		} = props;
+    return {
+      block: getBlock(ownProps.clientId),
+      getBlock,
+      getClientIdsWithDescendants,
+    };
+  })(function (props) {
+    const {
+      attributes: {
+        blockID,
+        borderSize,
+        borderStyle,
+        borderColor,
+        borderHeight,
+      },
+      isSelected,
+      setAttributes,
+      className,
+      block,
+      getBlock,
+      getClientIdsWithDescendants,
+    } = props;
 
-		// Creates a <p class='wp-block-cgb-block-divider'></p>.
+    // Creates a <p class='wp-block-cgb-block-divider'></p>.
 
-		if (
-			blockID === "" ||
-			getClientIdsWithDescendants().some(
-				(ID) =>
-					"blockID" in getBlock(ID).attributes &&
-					getBlock(ID).attributes.blockID === blockID
-			)
-		) {
-			setAttributes({ blockID: block.clientId });
-		}
+    if (
+      blockID === "" ||
+      getClientIdsWithDescendants().some(
+        (ID) =>
+          "blockID" in getBlock(ID).attributes &&
+          getBlock(ID).attributes.blockID === blockID
+      )
+    ) {
+      setAttributes({ blockID: block.clientId });
+    }
 
-		return [
-			isSelected && (
-				<InspectorControls>
-					<PanelBody title={__("Divider Settings")}>
-						<RangeControl
-							label={__("Thickness")}
-							value={borderSize}
-							onChange={(value) => setAttributes({ borderSize: value })}
-							min={1}
-							max={20}
-							beforeIcon="minus"
-							allowReset
-						/>
+    return [
+      isSelected && (
+        <InspectorControls>
+          <PanelBody title={__("Divider Settings")}>
+            <RangeControl
+              label={__("Thickness")}
+              value={borderSize}
+              onChange={(value) => setAttributes({ borderSize: value })}
+              min={1}
+              max={20}
+              beforeIcon="minus"
+              allowReset
+            />
 
-						<RangeControl
-							label={__("Height")}
-							value={borderHeight}
-							onChange={(value) => setAttributes({ borderHeight: value })}
-							min={10}
-							max={200}
-							beforeIcon="minus"
-							allowReset
-						/>
+            <RangeControl
+              label={__("Height")}
+              value={borderHeight}
+              onChange={(value) => setAttributes({ borderHeight: value })}
+              min={10}
+              max={200}
+              beforeIcon="minus"
+              allowReset
+            />
 
-						<p>
-							{__("Color")}
-							<span
-								class="component-color-indicator"
-								aria-label={`(Color: ${borderColor})`}
-								style={{ background: borderColor }}
-							/>
-						</p>
-						<ColorPalette
-							value={borderColor}
-							onChange={(borderColor) => setAttributes({ borderColor })}
-							allowReset
-						/>
+            <p>
+              {__("Color")}
+              <span
+                class="component-color-indicator"
+                aria-label={`(Color: ${borderColor})`}
+                style={{ background: borderColor }}
+              />
+            </p>
+            <ColorPalette
+              value={borderColor}
+              onChange={(borderColor) => setAttributes({ borderColor })}
+              allowReset
+            />
 
-						<p>{__("Style")}</p>
-						<SelectControl
-							options={["solid", "dotted", "dashed"].map((o) => ({
-								value: o,
-								label: __(o),
-							}))}
-							value={borderStyle}
-							onChange={(borderStyle) => {
-								setAttributes({ borderStyle });
-							}}
-						/>
-					</PanelBody>
-				</InspectorControls>
-			),
+            <p>{__("Style")}</p>
+            <SelectControl
+              options={["solid", "dotted", "dashed"].map((o) => ({
+                value: o,
+                label: __(o),
+              }))}
+              value={borderStyle}
+              onChange={(borderStyle) => {
+                setAttributes({ borderStyle });
+              }}
+            />
+          </PanelBody>
+        </InspectorControls>
+      ),
 
-			<div className={className}>
-				<div
-					className="divider"
-					style={{
-						borderTop: `${borderSize}px ${borderStyle} ${borderColor}`,
-						marginTop: borderHeight + "px",
-						marginBottom: borderHeight + "px",
-					}}
-				/>
-			</div>,
-		];
-	}),
+      <div className={className}>
+        <div
+          className="divider"
+          style={{
+            borderTop: `${borderSize}px ${borderStyle} ${borderColor}`,
+            marginTop: borderHeight + "px",
+            marginBottom: borderHeight + "px",
+          }}
+        />
+      </div>,
+    ];
+  }),
 
-	/**
-	 * The save function defines the way in which the different attributes should be combined
-	 * into the final markup, which is then serialized by Gutenberg into post_content.
-	 *
-	 * The "save" property must be specified and must be a valid function.
-	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 */
-	save() {
-		return null;
-	},
+  /**
+   * The save function defines the way in which the different attributes should be combined
+   * into the final markup, which is then serialized by Gutenberg into post_content.
+   *
+   * The "save" property must be specified and must be a valid function.
+   *
+   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+   */
+  save() {
+    return null;
+  },
 
-	deprecated: [
-		{
-			attributes,
-			save: version_1_1_2,
-		},
-	],
+  deprecated: [
+    {
+      attributes,
+      save: version_1_1_2,
+    },
+  ],
 });

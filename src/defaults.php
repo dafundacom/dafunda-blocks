@@ -299,6 +299,82 @@ $defaultValues = [
 			],
 		],
 	],
+	"dbe/download-button" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"title" => [
+				"type" => "string",
+				"default" => "Title",
+			],
+			"titleTag" => [
+				"type" => "string",
+				"default" => "h4",
+			],
+			"description" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imageurl" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imageid" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imagealt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"buttonText" => [
+				"type" => "string",
+				"default" => "Download",
+			],
+			"buttonAlign" => [
+				"type" => "string",
+				"default" => "center",
+			],
+			"url" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"buttonColor" => [
+				"type" => "string",
+				"default" => "#313131",
+			],
+			"buttonHoverColor" => [
+				"type" => "string",
+				"default" => "#313131",
+			],
+			"buttonTextColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"buttonTextHoverColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"buttonRounded" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"addNofollow" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"openInNewTab" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"addSponsored" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+		],
+	],
 	"dbe/call-to-action-block" => [
 		"attributes" => [
 			"blockID" => [
@@ -870,6 +946,18 @@ $defaultValues = [
 			"howToRatingCount" => [
 				"type" => "string",
 				"default" => "1",
+			],
+			"howToLikeCount" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"howToDisikeCount" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"howToVoteCount" => [
+				"type" => "number",
+				"default" => 0,
 			],
 			"videoURL" => [
 				"type" => "string", //videoobject

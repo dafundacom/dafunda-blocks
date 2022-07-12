@@ -532,6 +532,9 @@ function dbe_include_block_attribute_css()
 							: "") .
 						"}";
 					break;
+
+				// case "dbe/download-button":
+				// 	break;
 				case "dbe/button":
 					$prefix = "#dbe-button-" . $attributes["blockID"];
 					if (
@@ -1199,9 +1202,11 @@ function dbe_include_block_attribute_css()
 							PHP_EOL;
 					}
 
-					function dbe_howto_getStepPic($step)
-					{
-						return $step["stepPic"];
+					if (!function_exists('dbe_howto_getStepPic')) {
+						function dbe_howto_getStepPic($step)
+						{
+							return $step["stepPic"];
+						}
 					}
 
 					function dbe_howto_generateStepPicStyle($stepPic)
@@ -2568,6 +2573,9 @@ require_once plugin_dir_path(__FILE__) . "blocks/image-slider/block.php";
 
 // Table of Contents Block
 require_once plugin_dir_path(__FILE__) . "blocks/table-of-contents/block.php";
+
+// Download Button Block
+require_once plugin_dir_path(__FILE__) . "blocks/download-button/block.php";
 
 // Button Block
 require_once plugin_dir_path(__FILE__) . "blocks/button/block.php";

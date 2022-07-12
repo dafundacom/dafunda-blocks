@@ -36,8 +36,6 @@ function dbe_callback_rankedlist_vote_api(WP_REST_Request $request)
     return $block;
   }, $post_blocks);
 
-  // return $post_blocks;
-
   $serialize = serialize_blocks($post_blocks);
   $serialize = preg_replace("/\\\u0026/i", "&", $serialize);
 
