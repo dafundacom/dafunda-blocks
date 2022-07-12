@@ -187,6 +187,38 @@ class Dafunda_Blocks_Admin
 
 		$saved_blocks = get_option("dafunda_blocks", false);
 		if ($saved_blocks) {
+			foreach ($saved_blocks as $key => $block) {
+				if ($block["name"] === $block_name) {
+					$saved_blocks[$key]["active"] = $enable === "true";
+				}
+			}
+			update_option("dafunda_blocks", $saved_blocks);
+		} else {
+			update_option("dafunda_blocks", $this->blocks());
+		}
+
+		wp_send_json_success(get_option("dafunda_blocks", false));
+	}
+
+	public function toggle_block_status_old()
+	{
+		check_ajax_referer("toggle_block_status");
+
+		$block_name = sanitize_text_field($_POST["block_name"]);
+
+		$enable = sanitize_text_field($_POST["enable"]);
+
+		if (!$this->block_exists($block_name)) {
+			wp_send_json_error([
+				"error_message" => "Unknown block name",
+			]);
+		}
+
+		$uploadDir = dirname(dirname(dirname(__DIR__))) . "/uploads";
+		$canMakeCustomFile = is_writable($uploadDir);
+
+		$saved_blocks = get_option("dafunda_blocks", false);
+		if ($saved_blocks) {
 			if ($canMakeCustomFile) {
 				if (!file_exists($uploadDir . "/dafunda-blocks")) {
 					mkdir($uploadDir . "/dafunda-blocks");

@@ -184,7 +184,6 @@ function dbe_render_how_to_block($attributes)
 		? $costCurrency . " " . $cost
 		: $cost . " " . $costCurrency;
 
-	$timeDisplay = "<div>";
 
 	$totalTimeDisplay = "";
 
@@ -194,9 +193,12 @@ function dbe_render_how_to_block($attributes)
 				$t . " " . __($timeUnits[6 - $i] . ($t > 1 ? "" : "")) . " ";
 		}
 	}
-
-	$timeDisplay .= "<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</p>";
-	$timeDisplay .= "</div>";
+	$timeDisplay = "";
+	if ($totalTimeDisplay) {
+		$timeDisplay .= "<div>";
+		$timeDisplay .= "<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</p>";
+		$timeDisplay .= "</div>";
+	}
 
 	$ISOTotalTime = generateISODurationCode($totalTime);
 
@@ -230,13 +232,15 @@ function dbe_render_how_to_block($attributes)
 					</p>
 				</div>
 			<?php endif ?>
-			<div class="flex items-center text-base">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-				</svg>
-				&nbsp;
-				<?= $timeDisplay ?>
-			</div>
+			<?php if ($totalTimeDisplay) : ?>
+				<div class="flex items-center text-base">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+					&nbsp;
+					<?= $timeDisplay ?>
+				</div>
+			<?php endif ?>
 		</div>
 
 		<?= $header ?>
@@ -382,15 +386,14 @@ function dbe_render_how_to_block($attributes)
 					</div>
 					<div class="w-full flex flex-wrap justify-center items-center mb-3">
 						<div class="howto-review__like mr-3 cursor-pointer" data-action="like">
-							<button class="flex items-center py-1">
-
+							<button class="flex items-center py-1 bg-transparent">
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#16A085">
 									<path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
 								</svg>
 							</button>
 						</div>
 						<div class="howto-review__dislike cursor-pointer" data-action="dislike">
-							<button class="flex items-center py-1">
+							<button class="flex items-center py-1 bg-transparent">
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#C44569">
 									<path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
 								</svg>

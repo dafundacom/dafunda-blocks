@@ -64,27 +64,30 @@ const attributes = {
     default: "None",
   },
 };
+let block_name = "dbe/advanced-heading";
+let block_config = dafunda_blocks.filter((con) => con.name == block_name);
+if (block_config[0] && block_config[0].active) {
+  registerBlockType(block_name, {
+    title: __("Advanced Heading", "dafunda-blocks"),
+    icon,
+    category: "dafundablocks",
+    keywords: [
+      __("Heading", "dafunda-blocks"),
+      __("Advanced Heading", "dafunda-blocks"),
+      __("Dafunda Blocks", "dafunda-blocks"),
+    ],
+    attributes,
+    transforms,
+    edit: withSelect((select, ownProps) => {
+      const { getBlock, getClientIdsWithDescendants } =
+        select("core/block-editor") || select("core/editor");
 
-registerBlockType("dbe/advanced-heading", {
-  title: __("Advanced Heading", "dafunda-blocks"),
-  icon,
-  category: "dafundablocks",
-  keywords: [
-    __("Heading", "dafunda-blocks"),
-    __("Advanced Heading", "dafunda-blocks"),
-    __("Dafunda Blocks", "dafunda-blocks"),
-  ],
-  attributes,
-  transforms,
-  edit: withSelect((select, ownProps) => {
-    const { getBlock, getClientIdsWithDescendants } =
-      select("core/block-editor") || select("core/editor");
-
-    return {
-      getBlock,
-      block: getBlock(ownProps.clientId),
-      getClientIdsWithDescendants,
-    };
-  })(edit),
-  save: () => null,
-});
+      return {
+        getBlock,
+        block: getBlock(ownProps.clientId),
+        getClientIdsWithDescendants,
+      };
+    })(edit),
+    save: () => null,
+  });
+}

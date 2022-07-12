@@ -41,6 +41,11 @@ class Dafunda_Blocks_Util
 				"active" => true,
 			],
 			[
+				"label" => "Download Button",
+				"name" => "dbe/download-button",
+				"active" => true,
+			],
+			[
 				"label" => "Button",
 				"name" => "dbe/button",
 				"active" => true,
@@ -83,6 +88,11 @@ class Dafunda_Blocks_Util
 			[
 				"label" => "How To",
 				"name" => "dbe/how-to",
+				"active" => true,
+			],
+			[
+				"label" => "Rekomendasi List",
+				"name" => "dbe/rekomendasi-list",
 				"active" => true,
 			],
 			[

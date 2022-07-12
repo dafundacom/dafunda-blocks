@@ -3,8 +3,14 @@ import { useState, useEffect } from "react";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 import { Card } from "./_components";
 
-const { RichText, MediaUpload, InspectorControls, PanelColorSettings } =
-  wp.blockEditor || wp.editor;
+const {
+  RichText,
+  MediaUpload,
+  InspectorControls,
+  PanelColorSettings,
+  useBlockProps,
+  BlockVerticalAlignmentToolbar,
+} = wp.blockEditor || wp.editor;
 
 const {
   ToggleControl,
@@ -13,11 +19,8 @@ const {
   RangeControl,
   SelectControl,
   TabPanel,
+  TextControl,
 } = wp.components;
-import {
-  __experimentalRadio as Radio,
-  __experimentalRadioGroup as RadioGroup,
-} from "@wordpress/components";
 
 export function EditorComponent(props) {
   let {
@@ -55,7 +58,6 @@ function InspectorPanel(props) {
     attributes: {
       title,
       description,
-      titleTag,
       imageurl,
       imageid,
       imagealt,
@@ -70,6 +72,14 @@ function InspectorPanel(props) {
       openInNewTab,
       buttonAlign,
       addSponsored,
+
+      version,
+      system,
+      fileSize,
+      license,
+      developer,
+      currency,
+      price,
     },
     setAttributes,
   } = props;
@@ -108,37 +118,105 @@ function InspectorPanel(props) {
 
   return (
     <InspectorControls>
-      <PanelBody title={__("Button Setting")}>
-        <RadioGroup
-          id={`buttonAlign`}
-          label="Button Align"
-          onChange={(buttonAlign) => setAttributes({ buttonAlign })}
-          checked={buttonAlign}
-        >
-          <label htmlFor={`buttonAlign`} className={`block mb-2`}>
-            Button Align
-          </label>
-          <Radio value="top">Top</Radio>
-          <Radio value="center">Center</Radio>
-          <Radio value="bottom">Bottom</Radio>
-        </RadioGroup>
+      <PanelBody title={__("Download Button Setting")}>
+        <TextControl
+          label="version"
+          labelPosition="top"
+          // placeholder="0.0.1"
+          value={version}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(version) => {
+            setAttributes({ version });
+            console.log("version", version);
+          }}
+        />
+
+        <TextControl
+          label="system"
+          labelPosition="top"
+          placeholder="Android"
+          value={system}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(system) => setAttributes({ system })}
+        />
+
+        <TextControl
+          label="file size"
+          labelPosition="top"
+          placeholder="7 MB"
+          value={fileSize}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(fileSize) => setAttributes({ fileSize })}
+        />
+
+        <TextControl
+          label="license"
+          labelPosition="top"
+          placeholder="Freeware"
+          value={license}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(license) => setAttributes({ license })}
+        />
+
+        <TextControl
+          label="developer"
+          labelPosition="top"
+          placeholder="Moon & Sun"
+          value={developer}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(developer) => setAttributes({ developer })}
+        />
+
+        <TextControl
+          label="currency"
+          labelPosition="top"
+          placeholder="USD"
+          value={currency}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(currency) => setAttributes({ currency })}
+        />
+
+        <TextControl
+          label="price"
+          labelPosition="top"
+          placeholder="5.12 or 6"
+          value={price}
+          type="text"
+          className={`capitalize mb-4`}
+          onChange={(price) => setAttributes({ price })}
+        />
       </PanelBody>
 
       <PanelBody title={__("Button Style", "dafunda-blocks")}>
-        <ToggleControl
-          label={__("Rounded", "dafunda-blocks")}
-          checked={buttonRounded}
-          onChange={(buttonRounded) => setAttributes({ buttonRounded })}
-        />
-      </PanelBody>
+        <div
+          {...useBlockProps({
+            style: { backgroundPosition: `center ${buttonAlign}` },
+            className: "m-0 mb-4",
+          })}
+        >
+          <label className={`block mb-2`}>Button Align</label>
+          <BlockVerticalAlignmentToolbar
+            value={buttonAlign}
+            onChange={(buttonAlign) => {
+              setAttributes({ buttonAlign });
+            }}
+          />
+        </div>
 
-      <PanelBody title={__("Tag Settings")}>
-        <SelectControl
-          label={__("Title tag")}
-          value={titleTag}
-          options={tagList.map((tag) => ({ label: __(tag), value: tag }))}
-          onChange={(titleTag) => setAttributes({ titleTag })}
-        />
+        <div>
+          <label className={`block mb-2`}>Button Rounded</label>
+          <ToggleControl
+            label={__("Button Rounded", "dafunda-blocks")}
+            checked={buttonRounded}
+            onChange={(buttonRounded) => setAttributes({ buttonRounded })}
+          />
+        </div>
       </PanelBody>
 
       <TabPanel
