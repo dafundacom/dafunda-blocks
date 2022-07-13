@@ -474,7 +474,6 @@ function dbe_render_how_to_block($attributes)
 
 		<script>
 			renderHowToReview(<?= $howToReviewPercent ?>)
-			// console.log(<?= json_encode($attributes) ?>);
 			document.querySelectorAll(".howto-review .howto-review__like, .howto-review .howto-review__dislike").forEach((el, i) => {
 				el.addEventListener("click", (e) => {
 					e.target.closest(".howto-review__vote").classList.add("hidden")
@@ -485,7 +484,6 @@ function dbe_render_how_to_block($attributes)
 						block_name: "dbe/how-to",
 						action: el.getAttribute("data-action")
 					}
-					// console.log("body", body);
 					fetch("<?= site_url('wp-json/dbe/v1/howto/vote'); ?>", {
 							method: "POST",
 							mode: "same-origin",

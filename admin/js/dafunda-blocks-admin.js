@@ -226,20 +226,15 @@
         _ajax_nonce: $('input[name="dafunda_blocks_nonce"]').val(),
       };
 
-      console.log("data", data);
-
       $.ajax({
         url: $('input[name="dafunda_blocks_ajax_url"]').val(),
         type: "POST",
         data: data,
         "Content-Type": "application/json",
         success: function (data, status, xhr) {
-          console.log("res", data);
           selector.closest(".collection__item").toggleClass("active");
         },
-        error: function (xhr, status, error) {
-          console.log(error);
-        },
+        error: function (xhr, status, error) {},
       });
     }
   });

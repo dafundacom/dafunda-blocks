@@ -110,14 +110,6 @@ function dbe_render_ranked_list_block($attributes)
 						})
 						// .then(res => res.json())
 						// .then(res => {
-						// 	console.log("res ", res);
-						// 	el.closest(".ranked-list-vote").querySelectorAll("button").forEach(ell => {
-						// 		if (el == ell) {
-						// 			ell.querySelector("p").innerText = parseInt(ell.querySelector("p").innerText) + 1
-						// 		} else {
-						// 			ell.querySelector("p").innerText = parseInt(ell.querySelector("p").innerText) - 1
-						// 		}
-						// 	})
 						// })
 					}
 				})

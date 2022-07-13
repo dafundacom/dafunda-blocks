@@ -128,7 +128,6 @@ function InspectorPanel(props) {
           className={`capitalize mb-4`}
           onChange={(version) => {
             setAttributes({ version });
-            console.log("version", version);
           }}
         />
 
