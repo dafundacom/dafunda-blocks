@@ -32,7 +32,6 @@ export function Card(props) {
     attributes: {
       title,
       description,
-      titleTag,
       imageurl,
       imageid,
       imagealt,
@@ -124,11 +123,11 @@ export function Card(props) {
       {/* Title and Description */}
       <div className="basis-auto md:basis-7/12 ml-3">
         <RichText
-          tagName={titleTag ?? "h4"}
+          tagName={"p"}
           multiline={false}
           keepPlaceholderOnFocus
           placeholder={__("Title")}
-          className={`m-0`}
+          className={`m-0 text-lg font-semibold`}
           value={title}
           allowedFormats={defaultFormats}
           onChange={(title) => setAttributes({ title })}
@@ -190,7 +189,6 @@ function ToolbarCard(props) {
     attributes: {
       title,
       description,
-      titleTag,
       imageurl,
       imageid,
       imagealt,

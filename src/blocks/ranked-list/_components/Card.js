@@ -223,18 +223,3 @@ function validateObj(obj) {
   });
   return newObj;
 }
-
-function fet() {
-  fetch("/rest/v1.1/me/settings/")
-    .then((res) => res.json())
-    .then(console.log);
-}
-
-// let arr = [];
-// document.querySelectorAll(".listItem_main__2bFpq").forEach((el) => {
-// 	let item = {};
-// 	item.image = el.querySelector("img").getAttribute("src");
-// 	item.title = el.querySelector("h2 a").innerText;
-// 	arr.push(item);
-// });
-// copy(arr);

@@ -1104,11 +1104,7 @@ export class EditorComponent extends Component {
     if (hasMissingProperties) {
       setAttributes({ section: sectionClone });
     }
-    console.log(this.props.attributes.section);
-    console.log(
-      this.props.attributes.section.length,
-      this.props.attributes.section[0].steps.length
-    );
+
     if (
       this.props.attributes.section.length == 1 &&
       this.props.attributes.section[0].steps.length == 0
@@ -2072,7 +2068,6 @@ export class EditorComponent extends Component {
                     })
                   }
                   moveUp={() => {
-                    console.log(section);
                     if (i > 0) {
                       let newSection = moveElement(section, i, i - 1);
                       setAttributes({
@@ -2081,7 +2076,6 @@ export class EditorComponent extends Component {
                     }
                   }}
                   moveDown={() => {
-                    console.log(section);
                     if (i < section.length - 1) {
                       let newSection = moveElement(section, i, i + 1);
                       setAttributes({

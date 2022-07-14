@@ -1,6 +1,5 @@
 <?php
 
-
 function dbe_render_download_button_block($attributes)
 {
 	extract($attributes);
@@ -14,9 +13,9 @@ function dbe_render_download_button_block($attributes)
 		</div>
 
 		<div class="basis-auto md:basis-7/12 ml-3">
-			<<?= $titleTag ?> class="m-0">
+			<p class="m-0">
 				<?= $title ?>
-			</<?= $titleTag ?>>
+			</p>
 			<p class="m-0 text-sm">
 				<?= $description ?>
 			</p>
