@@ -363,6 +363,7 @@ function dbe_render_how_to_block($attributes)
 		<?php endif; ?>
 		<?php
 		$isVoted = function () use ($dbe_device_id) {
+			if(!$dbe_device_id) return false;
 			global $wpdb;
 			$table_name = $wpdb->prefix . "dbe_vote_log";
 			$block_name = "dbe/how-to";

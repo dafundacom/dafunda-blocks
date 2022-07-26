@@ -91,6 +91,10 @@
     "type": "boolean",
     "default": true
   },
+  "schemaApplicationCategory": {
+    "type": "string",
+    "default": "GameApplication"
+  },
   "buttonAlign": {
     "type": "string",
     "default": "center"

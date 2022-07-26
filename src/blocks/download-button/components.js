@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 import { Card } from "./_components";
-
+import schemaApplicationCategories from "./schemaApplicationCategories.json";
 const {
   RichText,
   MediaUpload,
@@ -10,6 +10,7 @@ const {
   PanelColorSettings,
   useBlockProps,
   BlockVerticalAlignmentToolbar,
+  InspectorAdvancedControls,
 } = wp.blockEditor || wp.editor;
 
 const {
@@ -20,6 +21,7 @@ const {
   SelectControl,
   TabPanel,
   TextControl,
+  ComboboxControl,
 } = wp.components;
 
 export function EditorComponent(props) {
@@ -73,6 +75,7 @@ function InspectorPanel(props) {
       buttonAlign,
       addSponsored,
 
+      schemaApplicationCategory,
       version,
       system,
       fileSize,
@@ -119,6 +122,15 @@ function InspectorPanel(props) {
   return (
     <InspectorControls>
       <PanelBody title={__("Download Button Setting")}>
+        <SelectControl
+          label={__("Select a scheme type")}
+          value={schemaApplicationCategory}
+          onChange={(schemaApplicationCategory) =>
+            setAttributes({ schemaApplicationCategory })
+          }
+          options={schemaApplicationCategories}
+        />
+
         <TextControl
           label="version"
           labelPosition="top"
