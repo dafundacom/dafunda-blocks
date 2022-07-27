@@ -8,7 +8,7 @@ function dbe_render_download_button_block($attributes)
 	<div class="download-button rounded-lg border border-slate-200 p-3 flex flex-wrap overflow-hidden">
 		<div class="basis-2/12">
 			<figure class="relative">
-				<img class="w-full aspect-square rounded-lg" src="<?= $imageurl ?>" />
+				<img class="w-full aspect-square rounded-lg  object-cover object-center" src="<?= $imageurl ?>" />
 			</figure>
 		</div>
 

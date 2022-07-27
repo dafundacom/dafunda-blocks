@@ -62,7 +62,7 @@ export function Card(props) {
         {imageurl && imageurl != "" ? (
           <figure className="relative">
             <img
-              className="w-full aspect-square rounded-lg"
+              className="w-full aspect-square rounded-lg object-cover object-center"
               src={imageurl}
               // onClick={selectStep}
             />
