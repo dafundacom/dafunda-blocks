@@ -25,7 +25,7 @@ function dbe_render_rekomendasi_list_block($attributes)
                 <?= $index + 1 ?>. &nbsp;
               </h4>
               <h4 class="m-0 font-semibold text-white"><?= $list['title'] ?></h4>
-              <p class="w-full m-0 text-white"><?= $list['title'] ?></p>
+              <p class="w-full m-0 text-white"><?= $list['subtitle'] ?></p>
             </div>
           </div>
           <!-- Image END -->

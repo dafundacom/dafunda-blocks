@@ -41,6 +41,11 @@ class Dafunda_Blocks_Util
 				"active" => true,
 			],
 			[
+				"label" => "Download Button",
+				"name" => "dbe/download-button",
+				"active" => true,
+			],
+			[
 				"label" => "Button",
 				"name" => "dbe/button",
 				"active" => true,
@@ -83,6 +88,11 @@ class Dafunda_Blocks_Util
 			[
 				"label" => "How To",
 				"name" => "dbe/how-to",
+				"active" => true,
+			],
+			[
+				"label" => "Rekomendasi List",
+				"name" => "dbe/rekomendasi-list",
 				"active" => true,
 			],
 			[
@@ -174,12 +184,16 @@ class Dafunda_Blocks_Util
 
 	public static function get_device_id()
 	{
-		$dbe_device_id = $_COOKIE['dbe_device_id'] ?? "";
+		try {
+			$dbe_device_id = $_COOKIE['dbe_device_id'] ?? "";
 		if (!isset($dbe_device_id) || $dbe_device_id == "") {
 			$dbe_device_id = hash("sha256", rand());
-			setcookie("dbe_device_id", $dbe_device_id, time() + (20 * 365 * 24 * 60 * 60), "/");
+			// setcookie("dbe_device_id", $dbe_device_id, time() + (20 * 365 * 24 * 60 * 60), "/");
 		}
 		return $dbe_device_id;
+		} catch (\Throwable $th) {
+			return null;
+		}
 	}
 
 	public static function microtime_float()

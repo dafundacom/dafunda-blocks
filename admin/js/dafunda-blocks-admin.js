@@ -48,6 +48,11 @@
       active: true,
     },
     {
+      label: "Download Button",
+      name: "dbe/download-button",
+      active: true,
+    },
+    {
       label: "Call To Action",
       name: "dbe/call-to-action",
       active: true,
@@ -80,6 +85,11 @@
     {
       label: "How To",
       name: "dbe/how-to",
+      active: true,
+    },
+    {
+      label: "Rekomendasi List",
+      name: "dbe/rekomendasi-list",
       active: true,
     },
     {
@@ -180,6 +190,7 @@
       var blocksHtml = "";
 
       $.each(blocks, function (index, block) {
+        console.log("block", block);
         //item start
         blocksHtml +=
           '<div class="collection__item" data-id="' + block.name + '">';
@@ -223,9 +234,7 @@
         success: function (data, status, xhr) {
           selector.closest(".collection__item").toggleClass("active");
         },
-        error: function (xhr, status, error) {
-          console.log(error);
-        },
+        error: function (xhr, status, error) {},
       });
     }
   });
