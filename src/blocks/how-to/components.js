@@ -10,8 +10,14 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { RichText, MediaUpload, InspectorControls } =
   wp.blockEditor || wp.editor;
 
-const { ToggleControl, PanelBody, RadioControl, RangeControl, SelectControl } =
-  wp.components;
+const {
+  ToggleControl,
+  PanelBody,
+  RadioControl,
+  RangeControl,
+  SelectControl,
+  TextControl,
+} = wp.components;
 
 import defaultAttr from "./attributes";
 
@@ -1145,8 +1151,20 @@ export class EditorComponent extends Component {
     isNeedLocked(this.props.attributes.section);
   }
 
-  componentDidUpdate() {
-    isNeedLocked(this.props.attributes.section);
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      attributes: { howToLikeCount, howToDisikeCount, section },
+      setAttributes,
+    } = this.props;
+    isNeedLocked(section);
+    if (
+      howToLikeCount != prevProps.attributes.howToLikeCount ||
+      howToDisikeCount != prevProps.attributes.howToDisikeCount
+    ) {
+      setAttributes({
+        howToVoteCount: Number(howToLikeCount) + Number(howToDisikeCount),
+      });
+    }
   }
 
   render() {
@@ -2368,109 +2386,26 @@ export class EditorComponent extends Component {
           <div className="grid grid-cols-1  gap-4 md:grid-cols-3 md:gap-3 mb-4">
             <div className="rounded-lg border border-slate-200 px-4 py-2">
               <h6 className="m-0 font-normal normal-case">Like Count</h6>
-              <p className="m-0">{howToLikeCount}</p>
+              <TextControl
+                value={howToLikeCount}
+                onChange={(howToLikeCount) => setAttributes({ howToLikeCount })}
+                type="number"
+              />
             </div>
             <div className="rounded-lg border border-slate-200 px-4 py-2">
               <h6 className="m-0 font-normal normal-case">Disike Count</h6>
-              <p className="m-0">{howToDisikeCount}</p>
+              <TextControl
+                value={howToDisikeCount}
+                onChange={(howToDisikeCount) =>
+                  setAttributes({ howToDisikeCount })
+                }
+                type="number"
+              />
             </div>
             <div className="rounded-lg border border-slate-200 px-4 py-2">
               <h6 className="m-0 font-normal normal-case">Vote Total Count</h6>
               <p className="m-0">{howToVoteCount}</p>
             </div>
-          </div>
-
-          <div className="howto-review-score grid grid-cols-1  gap-4 md:grid-cols-2 md:gap-8 mb-4">
-            <div>
-              <h5 className="m-0 font-normal normal-case">Rating Value</h5>
-              <div className="howto-rating-range-input w-full">
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  defaultValue={howToRatingValue * 20}
-                  step="1"
-                  onChange={(e) => {
-                    e.persist();
-                    let howToRatingValue = parseFloat(
-                      e.target.value / 20
-                    ).toFixed(1);
-                    let step = parseFloat(e.target.step);
-                    let top = (parseFloat(howToRatingValue * 20) / step) * -40;
-                    e.target.nextElementSibling.querySelector(
-                      ".howto-rating-range-input__value div"
-                    ).style.marginTop = top + "px";
-                    setAttributes({ howToRatingValue });
-                  }}
-                />
-                <div className="howto-rating-range-input__value">
-                  <div
-                    style={{
-                      marginTop: (parseFloat(howToRatingValue * 20) / 1) * -40,
-                      width: "max-content",
-                    }}
-                  >
-                    {Array(101)
-                      .fill()
-                      .map((v, i) => (
-                        <div>{i}</div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="howto-rating-count">
-              <h5 className="m-0 font-normal normal-case">Rating Count</h5>
-              <div className="howto-yield">
-                <RichText
-                  placeholder="0"
-                  className="items-center justify-center"
-                  keepPlaceholderOnFocus={true}
-                  value={howToRatingCount}
-                  onChange={(howToRatingCount) =>
-                    setAttributes({ howToRatingCount })
-                  }
-                />
-              </div>
-            </div>
-
-            {/* <input type="range" min="0" max="100" step="1" defaultValue={0} /> */}
-            {/* <div className="howto-rating-range-input mb-4 w-full md:w-96">
-							<input type="range" min="0" max="100" step="1" defaultValue={howToRatingCount * 20} />
-							<div className="howto-rating-range-input__value">
-								<div>{howToRatingCount * 20}</div>
-							</div>
-						</div> */}
-
-            {/* <div className="mb-4 grid grid-cols-2">
-							<div className="howto-rating-value">
-								<h4>Final Rating Value</h4>
-								<div className="howto-yield">
-									<RichText
-										placeholder="0"
-										keepPlaceholderOnFocus={true}
-										value={howToRatingValue}
-										onChange={(howToRatingValue) =>
-											setAttributes({ howToRatingValue })
-										}
-									/>
-								</div>
-							</div>
-							<div className="howto-rating-count">
-								<h4>Rating Count</h4>
-								<div className="howto-yield">
-									<RichText
-										placeholder="0"
-										className="items-center justify-center"
-										keepPlaceholderOnFocus={true}
-										value={howToRatingCount}
-										onChange={(howToRatingCount) =>
-											setAttributes({ howToRatingCount })
-										}
-									/>
-								</div>
-							</div>
-						</div> */}
           </div>
         </div>
         <style
