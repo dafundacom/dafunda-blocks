@@ -83,6 +83,13 @@ export function Card(props) {
     form.url.value = "";
   }
 
+  function editOlshopForm(index, url, olshop) {
+    let newOlshops = [...olshops];
+    newOlshops[index].url = url.target.value;
+    console.log("newOlshops", newOlshops);
+    editList({ olshops: newOlshops });
+  }
+
   return (
     <li className="rekomendasi-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6">
       <div className="absolute top-0 right-[10px] translate-y-[-50%] bg-gray-400 px-2 py-1 grid grid-cols-3 gap-2 rounded-lg text-2xl z-10">
@@ -283,11 +290,15 @@ export function Card(props) {
         <div className="mb-3">
           {olshops.map((olshop, olshop_i) => (
             <div className="flex flex-wrap border-b">
+              <div className="flex flex-wrap items-center justify-center">
+                <ChoiceIcon name={olshop.name} />
+              </div>
               <input
                 type="text"
                 placeholder="URL"
                 className="grow rounded-r-none border-0"
                 value={olshop.url}
+                onChange={(value) => editOlshopForm(olshop_i, value, olshop)}
               />
               <button
                 type="button"

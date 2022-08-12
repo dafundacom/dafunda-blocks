@@ -5,9 +5,13 @@ $SCHEMEJSON = [
   "@type" => "SoftwareApplication",
   "name" => $title,
 ];
-if(isset($system) && $system != "") $SCHEMEJSON["operatingSystem"] = $system;
-if(isset($schemaApplicationCategory) && $schemaApplicationCategory != "") $SCHEMEJSON["applicationCategory"] = $schemaApplicationCategory;
-if(isset($system) && $system != "") $SCHEMEJSON["operatingSystem"] = $system;
+
+if(isset($system) && $system != "") {
+    $SCHEMEJSON["operatingSystem"] = $system;
+}
+if(isset($schemaApplicationCategory) && $schemaApplicationCategory != "") {
+    $SCHEMEJSON["applicationCategory"] = $schemaApplicationCategory;
+}
 
 $SCHEMEJSON = json_encode(
   $SCHEMEJSON,
