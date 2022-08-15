@@ -16,11 +16,13 @@ module.exports = {
     filename: "blocks.build.js",
   },
   module: {
+    ...defaultConfig.module,
     rules: [
+      // ...defaultConfig.module.rules,
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        loader: "babel-loader",
       },
       {
         test: /\.svg$/,

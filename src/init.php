@@ -85,81 +85,81 @@ function dbe_update_css_version($updated)
 
 function dbe_load_assets()
 {
-	if (
-		file_exists(
-			wp_upload_dir()["basedir"] .
-				"/dafunda-blocks/blocks.style.build.css"
-		) &&
-		get_option("dafunda_blocks_css_version") !=
-		Dafunda_Blocks_Constants::plugin_version()
-	) {
-		$frontStyleFile = fopen(
-			wp_upload_dir()["basedir"] .
-				"/dafunda-blocks/blocks.style.build.css",
-			"w"
-		);
-		$blockDir = dirname(__DIR__) . "/src/blocks/";
-		$blockList = get_option("dafunda_blocks", false);
+	// if (
+	// 	file_exists(
+	// 		wp_upload_dir()["basedir"] .
+	// 			"/dafunda-blocks/blocks.style.build.css"
+	// 	) &&
+	// 	get_option("dafunda_blocks_css_version") !=
+	// 	Dafunda_Blocks_Constants::plugin_version()
+	// ) {
+	// 	$frontStyleFile = fopen(
+	// 		wp_upload_dir()["basedir"] .
+	// 			"/dafunda-blocks/blocks.style.build.css",
+	// 		"w"
+	// 	);
+	// 	$blockDir = dirname(__DIR__) . "/src/blocks/";
+	// 	$blockList = get_option("dafunda_blocks", false);
 
-		foreach ($blockList as $key => $block) {
-			$blockDirName = strtolower(
-				str_replace(
-					" ",
-					"-",
-					trim(
-						preg_replace("/\(.+\)/", "", $blockList[$key]["label"])
-					)
-				)
-			);
-			$frontStyleLocation = $blockDir . $blockDirName . "/style.css";
+	// 	foreach ($blockList as $key => $block) {
+	// 		$blockDirName = strtolower(
+	// 			str_replace(
+	// 				" ",
+	// 				"-",
+	// 				trim(
+	// 					preg_replace("/\(.+\)/", "", $blockList[$key]["label"])
+	// 				)
+	// 			)
+	// 		);
+	// 		$frontStyleLocation = $blockDir . $blockDirName . "/style.css";
 
-			if (
-				file_exists($frontStyleLocation) &&
-				$blockList[$key]["active"]
-			) {
-				//also detect if block is enabled
-				if ($block["name"] === "dbe/click-to-tweet") {
-					fwrite(
-						$frontStyleFile,
-						str_replace(
-							"src/blocks/click-to-tweet/icons",
-							"dafunda-blocks",
-							file_get_contents($frontStyleLocation)
-						)
-					);
-				} else {
-					fwrite(
-						$frontStyleFile,
-						file_get_contents($frontStyleLocation)
-					);
-				}
-			}
-			if (
-				$block["name"] === "dbe/styled-box" &&
-				$blockList[$key]["active"]
-			) {
-				//add css for blocks phased out by styled box
-				fwrite(
-					$frontStyleFile,
-					file_get_contents($blockDir . "feature-box" . "/style.css")
-				);
-				fwrite(
-					$frontStyleFile,
-					file_get_contents(
-						$blockDir . "notification-box" . "/style.css"
-					)
-				);
-				fwrite(
-					$frontStyleFile,
-					file_get_contents($blockDir . "number-box" . "/style.css")
-				);
-			}
-		}
-		fclose($frontStyleFile);
-		dbe_update_css_version("frontend");
-	}
+	// 		if (
+	// 			file_exists($frontStyleLocation) &&
+	// 			$blockList[$key]["active"]
+	// 		) {
+	// 			//also detect if block is enabled
+	// 			if ($block["name"] === "dbe/click-to-tweet") {
+	// 				fwrite(
+	// 					$frontStyleFile,
+	// 					str_replace(
+	// 						"src/blocks/click-to-tweet/icons",
+	// 						"dafunda-blocks",
+	// 						file_get_contents($frontStyleLocation)
+	// 					)
+	// 				);
+	// 			} else {
+	// 				fwrite(
+	// 					$frontStyleFile,
+	// 					file_get_contents($frontStyleLocation)
+	// 				);
+	// 			}
+	// 		}
+	// 		if (
+	// 			$block["name"] === "dbe/styled-box" &&
+	// 			$blockList[$key]["active"]
+	// 		) {
+	// 			//add css for blocks phased out by styled box
+	// 			fwrite(
+	// 				$frontStyleFile,
+	// 				file_get_contents($blockDir . "feature-box" . "/style.css")
+	// 			);
+	// 			fwrite(
+	// 				$frontStyleFile,
+	// 				file_get_contents(
+	// 					$blockDir . "notification-box" . "/style.css"
+	// 				)
+	// 			);
+	// 			fwrite(
+	// 				$frontStyleFile,
+	// 				file_get_contents($blockDir . "number-box" . "/style.css")
+	// 			);
+	// 		}
+	// 	}
+	// 	fclose($frontStyleFile);
+	// 	dbe_update_css_version("frontend");
+	// }
 
-	add_action("wp_enqueue_scripts", "enqueue_plugin_scripts");
+	// add_action("wp_enqueue_scripts", "enqueue_plugin_scripts");
 
 	wp_enqueue_style(
 		"dafunda_blocks-cgb-style-css", // Handle.

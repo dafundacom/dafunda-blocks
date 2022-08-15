@@ -25,7 +25,7 @@ function dbe_render_rekomendasi_list_block($attributes)
                 <?= $index + 1 ?>. &nbsp;
               </h4>
               <h4 class="m-0 font-semibold text-white"><?= $list['title'] ?></h4>
-              <p class="w-full m-0 text-white"><?= $list['title'] ?></p>
+              <p class="w-full m-0 text-white"><?= $list['subtitle'] ?></p>
             </div>
           </div>
           <!-- Image END -->
@@ -34,7 +34,7 @@ function dbe_render_rekomendasi_list_block($attributes)
           <div class="p-5">
             <div class="grid grid-cols-2 gap-3">
               <?php foreach ($list["olshops"] as $index => $olshop) : ?>
-                <a href={olshop.url} class="py-2 bg-[#EEEEEE] flex justify-center items-center rounded-lg font-bold text-sm">
+                <a href="<?= $olshop["url"] ?>" class="py-2 bg-[#EEEEEE] flex justify-center items-center rounded-lg font-bold text-sm" <?= isset($openNewTab) && $openNewTab ? "target='_blank'" : "" ?> >
                   <?= file_get_contents(__DIR__ . "/icons/Icon" . $olshop['name'] . ".svg") ?>
                   &nbsp; <?= $olshop["name"] ?>
                 </a>
