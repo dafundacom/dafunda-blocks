@@ -55,7 +55,7 @@
     "gulp-wp-pot": "^2.5.0",
     "husky": "^8.0.1",
     "ignore-emit-webpack-plugin": "^2.0.6",
-    "inquirer": "^9.1.0",
+    "inquirer": "^8.0.0",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
     "path": "^0.12.7",
