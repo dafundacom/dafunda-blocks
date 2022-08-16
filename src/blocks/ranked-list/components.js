@@ -16,7 +16,7 @@ const moveElement = (array, from, to) => {
   return copy;
 };
 
-let list_interface = {
+const list_interface = {
   title: "",
   description: "",
   imageurl: "",
@@ -105,7 +105,9 @@ export function EditorComponent(props) {
       <ButtonAddStep
         label="Tambah list"
         onClick={() => {
-          setLists([...listsState, list_interface]);
+          setLists((prevData) => {
+            return [...prevData, { ...list_interface }];
+          });
         }}
       />
     </>
