@@ -16,7 +16,7 @@ const moveElement = (array, from, to) => {
   return copy;
 };
 
-let list_interface = {
+const list_interface = {
   title: "",
   price: 0,
   pricetag: "",
