@@ -488,6 +488,12 @@
     @apply mt-1 text-center;
   }
 
+  .howto figcaption:before,
+  .howto .wp-caption-text:before,
+  .howto dd.wp-caption-dd:before {
+    display: none;
+  }
+
   .howto-step-display .howto-step {
     @apply list-outside;
   }

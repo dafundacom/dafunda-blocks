@@ -1115,12 +1115,6 @@ export class EditorComponent extends Component {
       this.props.attributes.section.length == 1 &&
       this.props.attributes.section[0].steps.length == 0
     ) {
-      // setAttributes({
-      //   section: [{
-      //     sectionName: "",
-      //     steps: [{}]
-      //   }]
-      // })
       setAttributes({
         section: [
           {
