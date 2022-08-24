@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "unlock-limit": "echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
-    "start": "concurrently -k \"wp-scripts start\" \"node recompileOnChange.js\" \"pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify --watch\" \"pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c tailwind.config.js --minify --watch\"",
+    "start": "concurrently -k \"wp-scripts start --mode=development\" \"node recompileOnChange.js\" \"pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify --watch\" \"pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c tailwind.config.js --minify --watch\"",
     "start:hot": "concurrently -k \"wp-scripts start  --hot\" \"node recompileOnChange.js\" \"pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify --watch\" \"pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c tailwind.config.js --minify --watch\"",
     "build:css": "pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify && pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c ./tailwind.config.js --minify",
-    "build": "pnpm clean:dist && pnpm build:css && wp-scripts build & node recompile.js",
+    "build": "pnpm clean:dist && pnpm build:css && wp-scripts build --mode=production & node recompile.js",
     "format": "prettier -w .",
     "check": "prettier -c .",
     "clean": "rimraf {node_modules, dist}",
