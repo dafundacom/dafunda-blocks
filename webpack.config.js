@@ -3,8 +3,9 @@ const path = require("path");
 const IgnoreEmitPlugin = require("ignore-emit-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-module.exports = {
+var config = {
   ...defaultConfig,
+  devtool: "source-map",
   entry: {
     index: path.resolve(process.cwd(), "src", "blocks.js"),
   },
@@ -30,4 +31,14 @@ module.exports = {
       },
     ],
   },
+};
+
+module.exports = (env, argv) => {
+  const is_production = argv.mode === "production";
+  const is_development = !is_production;
+  if (is_production) {
+    config.devtool = "source-map";
+  }
+
+  return config;
 };
