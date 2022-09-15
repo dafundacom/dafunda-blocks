@@ -146,8 +146,6 @@ function dbe_render_how_to_tool(
 function dbe_render_how_to_block($attributes)
 {
 	extract($attributes);
-	$dbe_device_id = Dafunda_Blocks_Util::get_device_id();
-
 	$timeUnits = ["Detik", "Menit", "Jam", "Hari", "Minggu", "Bulan", "Tahun"];
 
 	$header = "";
@@ -204,6 +202,8 @@ function dbe_render_how_to_block($attributes)
 
 	$clips = "";
 
+	// $dbe_device_id = Dafunda_Blocks_Util::get_device_id();
+	$dbe_device_id = $_COOKIE['dbe_device_id'] ?? "";
 	ob_start();
 	?>
 	<div class="howto mb-8" id="howto_<?= $blockID ?>" data-blockID="<?= $blockID ?>" block>
@@ -363,7 +363,7 @@ function dbe_render_how_to_block($attributes)
 		<?php endif; ?>
 		<?php
 		$isVoted = function () use ($dbe_device_id) {
-			if(!$dbe_device_id) return false;
+			if($dbe_device_id === "") return false;
 			global $wpdb;
 			$table_name = $wpdb->prefix . "dbe_vote_log";
 			$block_name = "dbe/how-to";
