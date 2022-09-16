@@ -8,13 +8,13 @@
     "start:hot": "concurrently -k \"wp-scripts start  --hot\" \"node recompileOnChange.js\" \"pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify --watch\" \"pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c tailwind.config.js --minify --watch\"",
     "build:css": "pnpm tailwindcss -i ./assets/blocks.style.css -o ./dist/blocks.style.build.css -c ./tailwind.config.js --minify && pnpm tailwindcss -i ./assets/blocks.editor.css -o ./dist/blocks.editor.build.css -c ./tailwind.config.js --minify",
     "build": "pnpm clean:dist && pnpm build:css && wp-scripts build --mode=production & node recompile.js",
-    "format": "prettier -w .",
-    "check": "prettier -c .",
     "clean": "rimraf {node_modules, dist}",
     "clean:dist": "rimraf dist",
     "prepare": "husky install",
     "commit": "git-cz",
     "test:e2e:help": "wp-scripts test-e2e --help",
+    "format": "prettier -w .",
+    "check": "prettier -c .",
     "prettier": "prettier"
   },
   "dependencies": {

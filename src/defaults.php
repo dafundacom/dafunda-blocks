@@ -976,6 +976,317 @@ $defaultValues = [
 			],
 		],
 	],
+    "dbe/review" => [
+		"attributes" => [
+			"blockID" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"authorName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemPage" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemType" => [
+				"type" => "string",
+				"default" => "Product",
+			],
+			"itemSubtype" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"itemSubsubtype" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"valueType" => [
+				"type" => "string",
+				"default" => "star",
+			],
+			"description" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"enableDescription" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"descriptionAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"imgPosition" => [
+				"type" => "string",
+				"default" => "right",
+			],
+			"imgURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imgID" => [
+				"type" => "number",
+				"default" => -1,
+			],
+			"imgAlt" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"enableImage" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"items" => [
+				"type" => "string",
+				"default" => '[{"label": "", "value": 0}]',
+			],
+			"starCount" => [
+				"type" => "number",
+				"default" => 5,
+			],
+			"useSummary" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"summaryTitle" => [
+				"type" => "string",
+				"default" => "Summary",
+			],
+			"summaryDescription" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionText" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionFontSize" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"callToActionURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"callToActionBackColor" => [
+				"type" => "string",
+				"default" => "#34495E",
+			],
+			"callToActionBorderColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"callToActionForeColor" => [
+				"type" => "string",
+				"default" => "#ffffff",
+			],
+			"inactiveStarColor" => [
+				"type" => "string",
+				"default" => "#888888",
+			],
+			"activeStarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"activePercentBarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"percentBarColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//retained for backwards compatibility
+			"selectedStarColor" => [
+				"type" => "string",
+				"default" => "#ffff00",
+			],
+			"titleAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"authorAlign" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"enableCTA" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaNoFollow" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaOpenInNewTab" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"ctaIsSponsored" => [
+				"type" => "boolean",
+				"default" => false,
+			],
+			"ctaAlignment" => [
+				"type" => "string",
+				"default" => "left",
+			],
+			"enableReviewSchema" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"starOutlineColor" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"imageSize" => [
+				"type" => "number",
+				"default" => 100,
+			],
+			"brand" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"sku" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"identifier" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"identifierType" => [
+				"type" => "string",
+				"default" => "gtin",
+			],
+			"offerType" => [
+				"type" => "string",
+				"default" => "Offer",
+			],
+			"offerStatus" => [
+				"type" => "string",
+				"default" => "InStock",
+			],
+			"offerHighPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerLowPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerCount" => [
+				"type" => "number",
+				"default" => 1,
+			],
+			"offerPrice" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"offerCurrency" => [
+				"type" => "string",
+				"default" => "USD",
+			],
+			"offerExpiry" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			//BEGIN SOFTWAREAPPLICATION ATTRIBUTES
+			"appCategory" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"operatingSystem" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END SOFTWAREAPPLICATION ATTRIBUTES
+			"servesCuisine" => [
+				//FOR FOODESTABLISHMENT AND SUBTYPES ONLY
+				"type" => "array",
+				"default" => [],
+				"items" => [
+					"type" => "string",
+				],
+			],
+			//BEGIN LOCALBUSINESS/ORGANIZATION ATTRIIBUTES
+			"telephone" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"addressName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"address" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"priceRange" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END LOCALBUSINESS/ORGANIZATION ATTRIBUTES
+			//BEGIN BOOK ATTRIBUTES
+			"bookAuthorName" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"isbn" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"reviewPublisher" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"publicationDate" => [
+				"type" => "number",
+				"default" => time(),
+			],
+			//END BOOK ATTRIBUTES
+			//BEGIN EVENT ATTRIBUTES
+			"eventStartDate" => [
+				"type" => "number",
+				"default" => time() + 86400,
+			],
+			"eventEndDate" => [
+				"type" => "number",
+				"default" => 0,
+			],
+			"usePhysicalAddress" => [
+				"type" => "boolean",
+				"default" => true,
+			],
+			"eventPage" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"organizer" => [
+				"type" => "string",
+				"default" => "",
+			],
+			"performer" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END EVENT ATTRIBUTES
+			//BEGIN VIDEO OBJECT ATTRIBUTES
+			"videoUploadDate" => [
+				"type" => "number",
+				"default" => time(),
+			],
+			"videoURL" => [
+				"type" => "string",
+				"default" => "",
+			],
+			//END VIDEO OBJECT ATTRIBUTES
+		],
+	],
 	"dbe/image-slider" => [
 		"attributes" => [
 			"blockID" => [
@@ -1334,317 +1645,7 @@ $defaultValues = [
 			],
 		],
 	],
-	"dbe/review" => [
-		"attributes" => [
-			"blockID" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"authorName" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"itemName" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"itemPage" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"itemType" => [
-				"type" => "string",
-				"default" => "Product",
-			],
-			"itemSubtype" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"itemSubsubtype" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"valueType" => [
-				"type" => "string",
-				"default" => "star",
-			],
-			"description" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"enableDescription" => [
-				"type" => "boolean",
-				"default" => false,
-			],
-			"descriptionAlign" => [
-				"type" => "string",
-				"default" => "left",
-			],
-			"imgPosition" => [
-				"type" => "string",
-				"default" => "right",
-			],
-			"imgURL" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"imgID" => [
-				"type" => "number",
-				"default" => -1,
-			],
-			"imgAlt" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"enableImage" => [
-				"type" => "boolean",
-				"default" => false,
-			],
-			"items" => [
-				"type" => "string",
-				"default" => '[{"label": "", "value": 0}]',
-			],
-			"starCount" => [
-				"type" => "number",
-				"default" => 5,
-			],
-			"useSummary" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"summaryTitle" => [
-				"type" => "string",
-				"default" => "Summary",
-			],
-			"summaryDescription" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"callToActionText" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"callToActionFontSize" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			"callToActionURL" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"callToActionBackColor" => [
-				"type" => "string",
-				"default" => "#34495E",
-			],
-			"callToActionBorderColor" => [
-				"type" => "string",
-				"default" => "#ffffff",
-			],
-			"callToActionForeColor" => [
-				"type" => "string",
-				"default" => "#ffffff",
-			],
-			"inactiveStarColor" => [
-				"type" => "string",
-				"default" => "#888888",
-			],
-			"activeStarColor" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"activePercentBarColor" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"percentBarColor" => [
-				"type" => "string",
-				"default" => "",
-			],
-			//retained for backwards compatibility
-			"selectedStarColor" => [
-				"type" => "string",
-				"default" => "#ffff00",
-			],
-			"titleAlign" => [
-				"type" => "string",
-				"default" => "left",
-			],
-			"authorAlign" => [
-				"type" => "string",
-				"default" => "left",
-			],
-			"enableCTA" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"ctaNoFollow" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"ctaOpenInNewTab" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"ctaIsSponsored" => [
-				"type" => "boolean",
-				"default" => false,
-			],
-			"ctaAlignment" => [
-				"type" => "string",
-				"default" => "left",
-			],
-			"enableReviewSchema" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"starOutlineColor" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"imageSize" => [
-				"type" => "number",
-				"default" => 100,
-			],
-			"brand" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"sku" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"identifier" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"identifierType" => [
-				"type" => "string",
-				"default" => "gtin",
-			],
-			"offerType" => [
-				"type" => "string",
-				"default" => "Offer",
-			],
-			"offerStatus" => [
-				"type" => "string",
-				"default" => "InStock",
-			],
-			"offerHighPrice" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			"offerLowPrice" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			"offerCount" => [
-				"type" => "number",
-				"default" => 1,
-			],
-			"offerPrice" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			"offerCurrency" => [
-				"type" => "string",
-				"default" => "USD",
-			],
-			"offerExpiry" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			//BEGIN SOFTWAREAPPLICATION ATTRIBUTES
-			"appCategory" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"operatingSystem" => [
-				"type" => "string",
-				"default" => "",
-			],
-			//END SOFTWAREAPPLICATION ATTRIBUTES
-			"servesCuisine" => [
-				//FOR FOODESTABLISHMENT AND SUBTYPES ONLY
-				"type" => "array",
-				"default" => [],
-				"items" => [
-					"type" => "string",
-				],
-			],
-			//BEGIN LOCALBUSINESS/ORGANIZATION ATTRIIBUTES
-			"telephone" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"addressName" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"address" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"priceRange" => [
-				"type" => "string",
-				"default" => "",
-			],
-			//END LOCALBUSINESS/ORGANIZATION ATTRIBUTES
-			//BEGIN BOOK ATTRIBUTES
-			"bookAuthorName" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"isbn" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"reviewPublisher" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"publicationDate" => [
-				"type" => "number",
-				"default" => time(),
-			],
-			//END BOOK ATTRIBUTES
-			//BEGIN EVENT ATTRIBUTES
-			"eventStartDate" => [
-				"type" => "number",
-				"default" => time() + 86400,
-			],
-			"eventEndDate" => [
-				"type" => "number",
-				"default" => 0,
-			],
-			"usePhysicalAddress" => [
-				"type" => "boolean",
-				"default" => true,
-			],
-			"eventPage" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"organizer" => [
-				"type" => "string",
-				"default" => "",
-			],
-			"performer" => [
-				"type" => "string",
-				"default" => "",
-			],
-			//END EVENT ATTRIBUTES
-			//BEGIN VIDEO OBJECT ATTRIBUTES
-			"videoUploadDate" => [
-				"type" => "number",
-				"default" => time(),
-			],
-			"videoURL" => [
-				"type" => "string",
-				"default" => "",
-			],
-			//END VIDEO OBJECT ATTRIBUTES
-		],
-	],
+	
 	"dbe/social-share" => [
 		"attributes" => [
 			"blockID" => [
