@@ -1,23 +1,21 @@
-const colors = require("tailwindcss/colors");
+const typography = require('@tailwindcss/typography')
 
 module.exports = {
-  darkMode: "class",
-  content: [
-    "./*.{js,php,jsx}",
-    "./src/*.{js,php,jsx}",
-    "./src/**/*.{js,php,jsx}",
-    "./src/**/**/*.{js,php,jsx}",
-    "./src/**/**/**/*.{js,php,jsx}",
-  ],
+  important: true,
+  purge: {
+    enabled: true,
+    content: [
+      './src/**/*.{ts,tsx,js,jsx,php}',
+      './build/**/*.{ts,tsx,js,jsx,php}',
+    ],
+    important: true,
+  },
+  content: ['./src/**/*.{ts,tsx,js,jsx,php}'],
   theme: {
-    extend: {
-      colors: {
-        primary: colors.teal,
-        secondary: colors.slate,
-      },
-    },
+    extend: {},
   },
   variants: {},
-  important: true,
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
-};
+  plugins: [
+    typography,
+  ],
+}

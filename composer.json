@@ -1,0 +1,41 @@
+{
+  "name": "dafundacom/dafunda-blocks",
+  "description": "Dafunda WordPress Block Editor",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "autoload": {
+    "classmap": [
+      "src/",
+      "includes/"
+    ],
+    "psr-4": {
+      "GB\\": [
+        "src/",
+        "includes/"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Dafunda Dev Team",
+      "email": "dev@dafunda.io"
+    }
+  ],
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+    "squizlabs/php_codesniffer": "^3.6",
+    "wp-coding-standards/wpcs": "^2.3",
+    "phpcompatibility/phpcompatibility-wp": "dev-master",
+    "automattic/vipwpcs": "dev-develop",
+    "phpcsstandards/phpcsutils": "1.x-dev"
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs --standard=phpcs.xml"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

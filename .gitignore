@@ -1,12 +1,4 @@
-.idea/
-.vscode/
-node_modules/
-.node_modules/
-.DS_Store
-.idea
-.swp
-
-.yarn/
+node_modules
 yarn-error.log
-
-.pnpm-debug.log
+yarn.lock
+pnpm-error.log

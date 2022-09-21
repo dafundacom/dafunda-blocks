@@ -1,44 +1,68 @@
-const defaultConfig = require("@wordpress/scripts/config/webpack.config.js");
-const path = require("path");
-const IgnoreEmitPlugin = require("ignore-emit-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path')
+const fs = require('fs')
 
-var config = {
-  ...defaultConfig,
-  devtool: "source-map",
-  entry: {
-    index: path.resolve(process.cwd(), "src", "blocks.js"),
-  },
-  plugins: [
-    ...defaultConfig.plugins.filter((p) => !(p instanceof CleanWebpackPlugin)),
-    new IgnoreEmitPlugin(["blocks.build.asset.php", "blocks.build.js.map"]),
-  ],
-  output: {
-    filename: "blocks.build.js",
-  },
-  module: {
-    ...defaultConfig.module,
-    rules: [
-      // ...defaultConfig.module.rules,
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-      },
-      {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      },
-    ],
-  },
-};
+const defaultConfig = require('@wordpress/scripts/config/webpack.config')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-module.exports = (env, argv) => {
-  const is_production = argv.mode === "production";
-  const is_development = !is_production;
-  if (is_production) {
-    config.devtool = "source-map";
-  }
+module.exports = (env, { mode }) => {
+    const is_production = mode === 'production'
+    const is_development = !is_production
+    if (is_production) {
+        require('./.config/utils/regenerate-setup-file.v1')()
+        const BUILD_PATH = path.resolve(process.cwd(), 'build')
+        if (fs.existsSync(BUILD_PATH)) {
+            fs.rmSync(BUILD_PATH, { recursive: true, force: true })
+            fs.mkdirSync(BUILD_PATH, { recursive: true, force: true })
+        }
+    }
 
-  return config;
-};
+    const config = {
+        ...defaultConfig,
+        module: {
+            ...defaultConfig.module,
+            rules: [
+                {
+                    test: /\.svg$/,
+                    use: ['@svgr/webpack', 'url-loader'],
+                },
+                ...defaultConfig.module.rules,
+            ],
+        },
+        resolve: {
+            symlinks: false,
+            extensions: ['js', 'jsx'],
+            alias: {
+                ...defaultConfig.resolve.alias,
+                '@': path.resolve(__dirname, "src/"),
+            },
+            ...defaultConfig.resolve,
+        },
+        plugins: [...defaultConfig.plugins],
+    }
+
+    if (is_development) {
+        config.plugins.push(
+            new BrowserSyncPlugin({
+                // browse to http://localhost:3000/ during development,
+                // ./public directory is being served
+                host: 'localhost',
+                port: 3000,
+                proxy: 'http://goblocks.test/',
+            }),
+        )
+    }
+
+    config.plugins.push(
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: '**/*.svg',
+                    context: process.env.WP_SRC_DIRECTORY,
+                },
+            ],
+        }),
+    )
+
+    return config
+}
