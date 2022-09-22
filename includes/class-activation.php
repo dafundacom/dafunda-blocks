@@ -1,13 +1,13 @@
 <?php
-namespace GB;
+namespace DBE;
 
-use GB\Setup;
+use DBE\Setup;
 
 class Activation {
 
     public static function init()
     {
-        register_activation_hook(GB_PLUGIN_DIR . "/setup.php", function(){
+        register_activation_hook(DBE_PLUGIN_DIR . "/setup.php", function(){
             // wp_die("Message");
             self::create_log_table();
         });
@@ -15,7 +15,7 @@ class Activation {
 
     public static function create_log_table() {
 		global $wpdb;
-		$prefix = $wpdb->prefix . GB_PREFIX;
+		$prefix = $wpdb->prefix . DBE_PREFIX;
 
 		$charset_collate = "";
 		if ( ! empty($wpdb->collate)) $charset_collate = "COLLATE `{$wpdb->collate}`";

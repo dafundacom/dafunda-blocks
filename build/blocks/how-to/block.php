@@ -1,6 +1,6 @@
 <?php
 
-use GB\Block\HowTo\API;
+use DBE\Block\HowTo\API;
 
 API::init();
 

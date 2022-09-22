@@ -1,6 +1,6 @@
 <?php
 
-namespace GB;
+namespace DBE;
 
 require_once __DIR__ . '/Block.php';
 

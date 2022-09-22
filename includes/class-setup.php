@@ -1,8 +1,8 @@
 <?php
-namespace GB;
+namespace DBE;
 
-use GB\Activation;
-use GB\Uninstall;
+use DBE\Activation;
+use DBE\Uninstall;
 
 final class Setup {
 	private static $instance;
@@ -11,9 +11,9 @@ final class Setup {
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Setup ) ) {
 			self::$instance = new Setup();
-			self::$instance->enqueue_goblock();
-			self::$instance->enqueue_goblock_sample();
-			self::$instance->enqueue_goblock_asset();
+			self::$instance->enqueue_dafunda_block();
+			self::$instance->enqueue_dafunda_block_sample();
+			self::$instance->enqueue_dafunda_block_asset();
 
             Activation::init();
             Uninstall::init();
@@ -21,17 +21,17 @@ final class Setup {
 		return self::$instance;
 	}
 
-	public function enqueue_goblock_asset() {
+	public function enqueue_dafunda_block_asset() {
 		add_action(
 			'init',
 			function () {
 
-				$prefix = GB_PREFIX;
+				$prefix = DBE_PREFIX;
 				wp_register_style(
 					'dbe-block-editor', // Handle.
 					plugins_url( "build/$prefix.blocks.editor.build.css", dirname( __FILE__ ) ),
 					array( 'wp-edit-blocks' ),
-					GB_ASSET_VERSION
+					DBE_ASSET_VERSION
 				);
 			}
 		);
@@ -50,28 +50,28 @@ final class Setup {
 		);
 
         add_action('wp_enqueue_scripts', function () {
-				$prefix = GB_PREFIX;
-                wp_enqueue_style('dbe-block-style-front',plugins_url( "/build/$prefix.blocks.style.build.css", dirname( __FILE__ ) ), GB_ASSET_VERSION, 'all');
+				$prefix = DBE_PREFIX;
+                wp_enqueue_style('dbe-block-style-front',plugins_url( "/build/$prefix.blocks.style.build.css", dirname( __FILE__ ) ), DBE_ASSET_VERSION, 'all');
             }
         );
 
 		return true;
 	}
 
-	public function enqueue_goblock() {
-        $folders = $this->get_folders(GB_PLUGIN_DIR . 'src/blocks');
+	public function enqueue_dafunda_block() {
+        $folders = $this->get_folders(DBE_PLUGIN_DIR . 'src/blocks');
         foreach ( $folders as $key => $folder ) {
-            $path_block = GB_PLUGIN_DIR . "build/blocks/$folder/block.php";
+            $path_block = DBE_PLUGIN_DIR . "build/blocks/$folder/block.php";
             if ( file_exists($path_block) ) {
                 require $path_block;
             }
         }
 	}
 
-	public function enqueue_goblock_sample() {
-		$folders = $this->get_folders(GB_PLUGIN_DIR . 'src/sample-blocks');
+	public function enqueue_dafunda_block_sample() {
+		$folders = $this->get_folders(DBE_PLUGIN_DIR . 'src/sample-blocks');
         foreach ( $folders as $key => $folder ) {
-            $path = GB_PLUGIN_DIR . "build/sample-blocks/$folder/index.php";
+            $path = DBE_PLUGIN_DIR . "build/sample-blocks/$folder/index.php";
             if ( file_exists($path) ) {
                 require $path;
             }

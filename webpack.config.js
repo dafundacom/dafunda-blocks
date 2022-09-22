@@ -48,7 +48,7 @@ module.exports = (env, { mode }) => {
                 // ./public directory is being served
                 host: 'localhost',
                 port: 3000,
-                proxy: 'http://goblocks.test/',
+                proxy: 'http://dbe.test/',
             }),
         )
     }

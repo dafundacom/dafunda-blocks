@@ -13,7 +13,7 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         ),
         'G' => 
         array (
-            'GB\\' => 3,
+            'DBE\\' => 3,
         ),
         'D' => 
         array (
@@ -26,7 +26,7 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         array (
             0 => __DIR__ . '/..' . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis',
         ),
-        'GB\\' => 
+        'DBE\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
             1 => __DIR__ . '/../..' . '/includes',
@@ -39,14 +39,14 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'GB\\Activation' => __DIR__ . '/../..' . '/includes/class-activation.php',
-        'GB\\Block' => __DIR__ . '/../..' . '/includes/class-block.php',
-        'GB\\Block\\HowTo\\API' => __DIR__ . '/../..' . '/src/blocks/how-to/api.php',
-        'GB\\Blocks' => __DIR__ . '/../..' . '/includes/class-blocks.php',
-        'GB\\Deactivation' => __DIR__ . '/../..' . '/includes/class-deactivation.php',
-        'GB\\Helper' => __DIR__ . '/../..' . '/includes/class-helper.php',
-        'GB\\Setup' => __DIR__ . '/../..' . '/includes/class-setup.php',
-        'GB\\Uninstall' => __DIR__ . '/../..' . '/includes/class-uninstall.php',
+        'DBE\\Activation' => __DIR__ . '/../..' . '/includes/class-activation.php',
+        'DBE\\Block' => __DIR__ . '/../..' . '/includes/class-block.php',
+        'DBE\\Block\\HowTo\\API' => __DIR__ . '/../..' . '/src/blocks/how-to/api.php',
+        'DBE\\Blocks' => __DIR__ . '/../..' . '/includes/class-blocks.php',
+        'DBE\\Deactivation' => __DIR__ . '/../..' . '/includes/class-deactivation.php',
+        'DBE\\Helper' => __DIR__ . '/../..' . '/includes/class-helper.php',
+        'DBE\\Setup' => __DIR__ . '/../..' . '/includes/class-setup.php',
+        'DBE\\Uninstall' => __DIR__ . '/../..' . '/includes/class-uninstall.php',
         'PHPCSUtils\\AbstractSniffs\\AbstractArrayDeclarationSniff' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/AbstractSniffs/AbstractArrayDeclarationSniff.php',
         'PHPCSUtils\\BackCompat\\BCFile' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/BackCompat/BCFile.php',
         'PHPCSUtils\\BackCompat\\BCTokens' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/BackCompat/BCTokens.php',

@@ -7,6 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'VariableAnalysis\\' => array($vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis'),
-    'GB\\' => array($baseDir . '/src', $baseDir . '/includes'),
+    'DBE\\' => array($baseDir . '/src', $baseDir . '/includes'),
     'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => array($vendorDir . '/dealerdirect/phpcodesniffer-composer-installer/src'),
 );

@@ -1,7 +1,7 @@
 <?php
 // require_once DAFUNDA_BLOCKS_PATH . "/includes/class-dafunda-blocks-util.php";
 
-use GB\Helper;
+use DBE\Helper;
 
 if ( function_exists("generate_iso_duration_code") === false ) {
     function generate_iso_duration_code( $rawInput ) {

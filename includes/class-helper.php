@@ -1,5 +1,5 @@
 <?php
-namespace GB;
+namespace DBE;
 
 class Helper{
 	public static function get_device_id() {

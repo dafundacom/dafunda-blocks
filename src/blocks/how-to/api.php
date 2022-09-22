@@ -1,15 +1,15 @@
 <?php
 
-namespace GB\Block\HowTo;
+namespace DBE\Block\HowTo;
 
-use GB\Helper;
+use DBE\Helper;
 
 class API
 {
     public static function init()
     {
         add_action("rest_api_init", function () {
-            register_rest_route(GB_PREFIX . "/v1/howto", "/vote", [
+            register_rest_route(DBE_PREFIX . "/v1/howto", "/vote", [
                 //   "methods" => [ "POST" ],
                 "methods" => ["POST", "GET"],
                 //   "methods" => [ "GET" ],
@@ -18,7 +18,7 @@ class API
                     $dbe_device_id = Helper::get_device_id();
                     $exec_time = 0;
                     $start = Helper::microtime_float();
-                    $table_name = $wpdb->prefix . GB_PREFIX . "_vote_log";
+                    $table_name = $wpdb->prefix . DBE_PREFIX . "_vote_log";
 
                     if ($request->get_method() == "GET") {
                         [$block_id, $block_name, $action, $post_id] = [

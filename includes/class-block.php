@@ -1,6 +1,6 @@
 <?php
 
-namespace GB;
+namespace DBE;
 
 class Block {
     private string $block_name;

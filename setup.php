@@ -17,9 +17,9 @@
 
 declare(strict_types=1);
 
-namespace GB;
+namespace DBE;
 
-use GB\Setup;
+use DBE\Setup;
 
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
@@ -33,14 +33,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Block Initializer.
  */
-define( 'GB_NAME', 'dafunda-blocks' );
-define( 'GB_VERSION', '0.1.0-alpha' );
-define( 'GB_ASSET_VERSION', '0.1.0-alpha-qcvTk' );
-define( 'GB_PLUGIN_BASE', plugin_basename( __FILE__ ) );
-define( 'GB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'GB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'GB_PLUGIN_FILE', __FILE__ );
-define( 'GB_PREFIX', 'dbe' );
+define( 'DBE_NAME', 'dafunda-blocks' );
+define( 'DBE_VERSION', '0.1.0-alpha' );
+define( 'DBE_ASSET_VERSION', '0.1.0-alpha-CNeAV' );
+define( 'DBE_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+define( 'DBE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'DBE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DBE_PLUGIN_FILE', __FILE__ );
+define( 'DBE_PREFIX', 'dbe' );
 
 if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	add_action(

@@ -166,8 +166,8 @@
 		$isVoted = function () use ( $dbe_device_id ) {
 			if ( ! $dbe_device_id) return false;
 			global $wpdb;
-			$table_name = $wpdb->prefix . GB_PREFIX . "_vote_log";
-			$block_name = GB_PREFIX . "/how-to";
+			$table_name = $wpdb->prefix . DBE_PREFIX . "_vote_log";
+			$block_name = DBE_PREFIX . "/how-to";
 			$post_id = get_the_ID();
 			$sql_string = "SELECT * FROM $table_name WHERE post_id = $post_id AND block_name = '$block_name' AND dbe_device_id = '$dbe_device_id'";
 			$result = $wpdb->get_row($sql_string);
@@ -253,10 +253,10 @@
 					let body = {
 						post_id: <?= get_the_ID() ?>,
 						block_id: e.target.closest(".howto").getAttribute("data-blockID"),
-						block_name: "<?= GB_PREFIX ?>/how-to",
+						block_name: "<?= DBE_PREFIX ?>/how-to",
 						action: el.getAttribute("data-action")
 					}
-					fetch("<?= site_url("wp-json/" . GB_PREFIX . "/v1/howto/vote"); ?>", {
+					fetch("<?= site_url("wp-json/" . DBE_PREFIX . "/v1/howto/vote"); ?>", {
 							method: "POST",
 							mode: "same-origin",
 							credentials: "same-origin",

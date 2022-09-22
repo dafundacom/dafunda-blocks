@@ -9,7 +9,7 @@
       "includes/"
     ],
     "psr-4": {
-      "GB\\": [
+      "DBE\\": [
         "src/",
         "includes/"
       ]

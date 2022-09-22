@@ -28,9 +28,9 @@ module.exports = function (
 
 declare(strict_types=1);
 
-namespace GB;
+namespace DBE;
 
-use GB\\Setup;
+use DBE\\Setup;
 
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
@@ -44,14 +44,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Block Initializer.
  */
-define( 'GB_NAME', '${pkg.name}' );
-define( 'GB_VERSION', '${pkg.version}' );
-define( 'GB_ASSET_VERSION', '${pkg.version}-${ranstr(5)}' );
-define( 'GB_PLUGIN_BASE', plugin_basename( __FILE__ ) );
-define( 'GB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'GB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'GB_PLUGIN_FILE', __FILE__ );
-define( 'GB_PREFIX', '${pkg.prefix}' );
+define( 'DBE_NAME', '${pkg.name}' );
+define( 'DBE_VERSION', '${pkg.version}' );
+define( 'DBE_ASSET_VERSION', '${pkg.version}-${ranstr(5)}' );
+define( 'DBE_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+define( 'DBE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'DBE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DBE_PLUGIN_FILE', __FILE__ );
+define( 'DBE_PREFIX', '${pkg.prefix}' );
 
 if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	add_action(

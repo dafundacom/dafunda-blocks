@@ -1,5 +1,5 @@
 <?php
-namespace GB;
+namespace DBE;
 
 class Deactivation {
     public static function init()
