@@ -1,10 +1,10 @@
-import pkg from '../package.json' assert {type: "json"}
+import pkg from '../package.json' assert { type: 'json' }
 
 let config = {
-    title: pkg.title ?? "",
-    name: pkg.name ?? "",
-    prefix: pkg.prefix ?? "",
-    category: "widgets",
+  title: pkg.title ?? '',
+  name: pkg.name ?? '',
+  prefix: pkg.prefix ?? '',
+  category: 'widgets',
 }
 
 config.keywords = [config.prefix, config.title, config.name]

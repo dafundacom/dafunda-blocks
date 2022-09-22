@@ -6,7 +6,5 @@ module.exports = {
     extend: {},
   },
   variants: {},
-  plugins: [
-    typography,
-  ],
+  plugins: [typography],
 }

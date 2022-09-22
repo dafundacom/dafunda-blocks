@@ -3,15 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb'],
   overrides: [
     {
-      files: [
-        '*.js', '*.jsx',
-      ],
+      files: ['*.js', '*.jsx'],
       rules: {
         'linebreak-style': ['error', 'windows'],
         'no-undef': 'off',
@@ -39,29 +34,17 @@ module.exports = {
             // argsIgnorePattern: '^_+$',
           },
         ],
-
       },
-
     },
-
   ],
 
   parserOptions: {
-
     ecmaVersion: 'latest',
 
     sourceType: 'module',
-
   },
 
-  plugins: [
+  plugins: ['react'],
 
-    'react',
-
-  ],
-
-  rules: {
-
-  },
-
-};
+  rules: {},
+}
