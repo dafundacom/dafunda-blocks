@@ -15,7 +15,7 @@ class API
                 //   "methods" => [ "GET" ],
                 "callback" => function ( \WP_REST_Request $request ) use ( $user_id ) {
                     global $wpdb;
-                    if ( !$user_id )  return new \WP_Error('invalid_request', 'Kamu belum login', [
+                    if ( $user_id == null || $user_id == false )  return new \WP_Error('invalid_request', 'Kamu belum login', [
                         'status' => 409,
                         'user_id' => $user_id,
                     ]);
