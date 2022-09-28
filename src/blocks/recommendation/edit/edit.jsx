@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Card, ButtonAddStep, InspectorPanel } from './components'
+
 const { __ } = wp.i18n // Import __() from wp.i18n
 
-const { RichText, MediaUpload, InspectorControls } = wp.blockEditor || wp.editor
-
-const { ToggleControl, PanelBody, RadioControl, RangeControl, SelectControl } =
-  wp.components
+// const { RichText, MediaUpload, InspectorControls } = wp.blockEditor || wp.editor
+// const { ToggleControl, PanelBody, RadioControl, RangeControl, SelectControl } = wp.components
 
 const moveElement = (array, from, to) => {
   const copy = [...array]
@@ -28,13 +27,13 @@ const list_interface = {
 }
 
 export default function Edit(props) {
-  let {
+  const {
     attributes: { blockID, lists },
     setAttributes,
     block,
     getBlock,
     getClientIdsWithDescendants,
-    isSelected,
+    // isSelected,
   } = props
 
   const [listsState, setLists] = useState(lists)
@@ -42,9 +41,7 @@ export default function Edit(props) {
   useEffect(() => {
     setAttributes({ lists: listsState })
 
-    let check_title = listsState.every(({ title }) => {
-      return title && title != ''
-    })
+    const check_title = listsState.every(({ title }) => title && title !== '')
 
     if (check_title) {
       wp.data.dispatch('core/editor').unlockPostSaving('requiredValueLock')
@@ -54,10 +51,10 @@ export default function Edit(props) {
   }, [listsState])
 
   function validateList(list, index) {
-    let newList = {}
+    const newList = {}
     let needUpdate = false
-    Object.keys(list_interface).forEach((key, key_i) => {
-      if (list[key] == undefined || list[key] == null) {
+    Object.keys(list_interface).forEach((key) => {
+      if (list[key] === undefined || list[key] === null) {
         needUpdate = true
         newList[key] = list_interface[key]
       } else {
@@ -68,7 +65,6 @@ export default function Edit(props) {
       listsState[index] = Object.assign(listsState[index], newList)
       setLists([...listsState])
     }
-    return
   }
 
   useEffect(() => {
@@ -87,54 +83,55 @@ export default function Edit(props) {
       validateList(list, list_i)
     })
 
-    if (listsState.length == 0) setLists([{ ...list_interface }])
+    if (listsState.length === 0) setLists([{ ...list_interface }])
   }, [])
 
   return (
     <>
       <InspectorPanel {...props} />
-
-      <ol className='rekomendasi-list p-0' id={`rekomendasi-list-${blockID}`}>
-        {listsState.map((list, index) => (
-          <Card
-            data={list}
-            index={index}
-            key={index}
-            {...props}
-            editList={(newList) => {
-              listsState[index] = Object.assign(listsState[index], newList)
-              setLists([...listsState])
-            }}
-            deleteList={() => {
-              setLists([
-                ...listsState.slice(0, index),
-                ...listsState.slice(index + 1, listsState.length),
-              ])
-            }}
-            moveUp={() => {
-              if (index > 0) {
-                setLists([...moveElement(listsState, index, index - 1)])
-              }
-            }}
-            moveDown={() => {
-              if (index < listsState.length - 1) {
-                setLists([...moveElement(listsState, index, index + 1)])
-              }
-            }}
-          />
-        ))}
-      </ol>
-      <ButtonAddStep
-        label='Tambah Rekomendasi List'
-        onClick={() => {
-          setLists([
-            ...listsState,
-            {
-              ...list_interface,
-            },
-          ])
-        }}
-      />
+      <div className='wp-block'>
+        <ol className='rekomendasi-list p-0' id={`rekomendasi-list-${blockID}`}>
+          {listsState.map((list, index) => (
+            <Card
+              data={list}
+              index={index}
+              key={index}
+              {...props}
+              editList={(newList) => {
+                listsState[index] = Object.assign(listsState[index], newList)
+                setLists([...listsState])
+              }}
+              deleteList={() => {
+                setLists([
+                  ...listsState.slice(0, index),
+                  ...listsState.slice(index + 1, listsState.length),
+                ])
+              }}
+              moveUp={() => {
+                if (index > 0) {
+                  setLists([...moveElement(listsState, index, index - 1)])
+                }
+              }}
+              moveDown={() => {
+                if (index < listsState.length - 1) {
+                  setLists([...moveElement(listsState, index, index + 1)])
+                }
+              }}
+            />
+          ))}
+        </ol>
+        <ButtonAddStep
+          label='Tambah Rekomendasi List'
+          onClick={() => {
+            setLists([
+              ...listsState,
+              {
+                ...list_interface,
+              },
+            ])
+          }}
+        />
+      </div>
     </>
   )
 }

@@ -9,6 +9,7 @@ module.exports = (env, { mode }) => {
   const is_production = mode === 'production'
   const is_development = !is_production
   if (is_production) {
+    // eslint-disable-next-line global-require
     require('./.config/utils/regenerate-setup-file.v1')()
     const BUILD_PATH = path.resolve(process.cwd(), 'build')
     if (fs.existsSync(BUILD_PATH)) {
