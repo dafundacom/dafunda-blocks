@@ -63,56 +63,58 @@ export default function Edit(props) {
   return (
     <>
       <InspectorPanel {...props} />
-      {window.location.host === 'localhost:3000' ? (
-        <button
-          onClick={() => {
-            lists = dummyDatas
-            setLists(dummyDatas)
-          }}
-          type='button'
-        >
-          Reset Data
-        </button>
-      ) : (
-        ''
-      )}
+      <div className='wp-block'>
+        {window.location.host === 'localhost:3000' ? (
+          <button
+            onClick={() => {
+              lists = dummyDatas
+              setLists(dummyDatas)
+            }}
+            type='button'
+          >
+            Reset Data
+          </button>
+        ) : (
+          ''
+        )}
 
-      <ol className='ranked-list p-0' id={`ranked-list-${blockID}`}>
-        {listsState.map((list, index) => (
-          <Card
-            data={list}
-            index={index}
-            key={index}
-            {...props}
-            editList={(newList) => {
-              listsState[index] = Object.assign(listsState[index], newList)
-              setLists([...listsState])
-            }}
-            deleteList={() => {
-              setLists([
-                ...listsState.slice(0, index),
-                ...listsState.slice(index + 1, listsState.length),
-              ])
-            }}
-            moveUp={() => {
-              if (index > 0) {
-                setLists([...moveElement(listsState, index, index - 1)])
-              }
-            }}
-            moveDown={() => {
-              if (index < listsState.length - 1) {
-                setLists([...moveElement(listsState, index, index + 1)])
-              }
-            }}
-          />
-        ))}
-      </ol>
-      <ButtonAddStep
-        label='Tambah list'
-        onClick={() => {
-          setLists((prevData) => [...prevData, { ...list_interface }])
-        }}
-      />
+        <ol className='ranked-list p-0' id={`ranked-list-${blockID}`}>
+          {listsState.map((list, index) => (
+            <Card
+              data={list}
+              index={index}
+              key={index}
+              {...props}
+              editList={(newList) => {
+                listsState[index] = Object.assign(listsState[index], newList)
+                setLists([...listsState])
+              }}
+              deleteList={() => {
+                setLists([
+                  ...listsState.slice(0, index),
+                  ...listsState.slice(index + 1, listsState.length),
+                ])
+              }}
+              moveUp={() => {
+                if (index > 0) {
+                  setLists([...moveElement(listsState, index, index - 1)])
+                }
+              }}
+              moveDown={() => {
+                if (index < listsState.length - 1) {
+                  setLists([...moveElement(listsState, index, index + 1)])
+                }
+              }}
+            />
+          ))}
+        </ol>
+        <ButtonAddStep
+          label='Tambah list'
+          onClick={() => {
+            setLists((prevData) => [...prevData, { ...list_interface }])
+          }}
+        />
+      </div>
     </>
   )
 }

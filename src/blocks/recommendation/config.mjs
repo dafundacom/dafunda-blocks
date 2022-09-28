@@ -1,8 +1,8 @@
 import { __ } from '@wordpress/i18n'
-import slug from 'slug';
-import base_config from '../../config.mjs';
+import slug from 'slug'
+import base_config from '../../config.mjs'
 
-const NAME = 'Recommendation List';
+const NAME = 'Recommendation List'
 
 const config = {
   $schema: 'https://schemas.wp.org/trunk/block.json',
@@ -36,6 +36,6 @@ const config = {
   },
   editorScript: 'file:./block.jsx',
   viewScript: 'file:./scripts/index.js',
-};
+}
 
-export default config;
+export default config
