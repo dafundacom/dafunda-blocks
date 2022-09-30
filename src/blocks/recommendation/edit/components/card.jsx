@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { ButtonDeleteImage } from './index'
 
 import { ReactComponent as IconShopee } from '../../icons/IconShopee.svg'
@@ -12,11 +11,11 @@ const { RichText, MediaUpload } = wp.blockEditor || wp.editor
 export function Card(props) {
   const {
     data,
-    setAttributes,
-    block,
-    getBlock,
-    getClientIdsWithDescendants,
-    isSelected,
+    _setAttributes,
+    _block,
+    _getBlock,
+    _getClientIdsWithDescendants,
+    _isSelected,
     index,
     moveUp,
     moveDown,
@@ -30,7 +29,7 @@ export function Card(props) {
     description,
     imageurl,
     imagealt,
-    imageid,
+    _imageid,
     olshops,
     price,
     pricetag,
@@ -60,7 +59,7 @@ export function Card(props) {
   ]
 
   function ChoiceIcon({ name }) {
-    return olshops_lists.filter((olshops_list) => olshops_list.name == name)[0]
+    return olshops_lists.filter((olshops_list) => olshops_list.name === name)[0]
       .logo
   }
 
@@ -68,7 +67,7 @@ export function Card(props) {
     e.preventDefault()
     const form = e.target
     const olshops_list = olshops_lists.filter(
-      (ol) => ol.slug == form.olshop.value,
+      (ol) => ol.slug === form.olshop.value,
     )[0]
     editList({
       olshops: [
@@ -84,10 +83,9 @@ export function Card(props) {
     form.url.value = ''
   }
 
-  function editOlshopForm(index, url, olshop) {
+  function editOlshopForm(index, url, _olshop) {
     const newOlshops = [...olshops]
     newOlshops[index].url = url.target.value
-    console.log('newOlshops', newOlshops)
     editList({ olshops: newOlshops })
   }
 
@@ -99,6 +97,7 @@ export function Card(props) {
           icon='arrow-up-alt'
           onClick={() => moveUp()}
           label={__('Move step up')}
+          type='button'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -118,6 +117,7 @@ export function Card(props) {
           icon='arrow-down-alt'
           onClick={() => moveDown()}
           label={__('Move step down')}
+          type='button'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -137,6 +137,7 @@ export function Card(props) {
           icon='trash'
           label={__('Delete step')}
           onClick={deleteList}
+          type='button'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -157,11 +158,12 @@ export function Card(props) {
 
       {/* Image */}
       <div className='relative aspect-[16/7] w-full overflow-hidden rounded-t-lg object-cover object-center'>
-        {imageurl && imageurl != '' ? (
+        {imageurl && imageurl !== '' ? (
           <figure>
             <img
               className=''
               src={imageurl}
+              alt={imagealt}
               // onClick={selectStep}
             />
 
@@ -197,6 +199,7 @@ export function Card(props) {
                 <div
                   className='flex h-full w-full flex-wrap items-center justify-center bg-[#EEEEEE]'
                   onClick={open}
+                  aria-hidden='true'
                 >
                   <div className='flex flex-col flex-wrap items-center justify-center text-[#999999]'>
                     <i
@@ -214,7 +217,7 @@ export function Card(props) {
         <div className='absolute left-6 bottom-3 flex flex-wrap'>
           <h4
             className={`m-0 font-semibold ${
-              imageurl && imageurl != '' ? 'text-white' : ''
+              imageurl && imageurl !== '' ? 'text-white' : ''
             }`}
           >
             {index + 1}. &nbsp;
@@ -224,7 +227,7 @@ export function Card(props) {
             keepPlaceholderOnFocus
             placeholder={__('Title')}
             className={`m-0 font-semibold ${
-              imageurl && imageurl != '' ? 'text-white' : ''
+              imageurl && imageurl !== '' ? 'text-white' : ''
             }`}
             value={title}
             onChange={(title) => editList({ title })}
@@ -236,7 +239,7 @@ export function Card(props) {
             keepPlaceholderOnFocus
             placeholder={__('Subtitle')}
             className={`m-0 w-full ${
-              imageurl && imageurl != '' ? 'text-white' : ''
+              imageurl && imageurl !== '' ? 'text-white' : ''
             }`}
             value={subtitle}
             onChange={(subtitle) => editList({ subtitle })}

@@ -6,21 +6,20 @@ use DBE\Helper;
 
 class API
 {
-    public static function init()
-    {
+    public static function init() {
         add_action("rest_api_init", function () {
             register_rest_route(DBE_PREFIX . "/v1/howto", "/vote", [
                 //   "methods" => [ "POST" ],
-                "methods" => ["POST", "GET"],
+                "methods" => [ "POST", "GET" ],
                 //   "methods" => [ "GET" ],
-                "callback" => function (\WP_REST_Request $request) {
+                "callback" => function ( \WP_REST_Request $request ) {
                     global $wpdb;
                     $dbe_device_id = Helper::get_device_id();
                     $exec_time = 0;
                     $start = Helper::microtime_float();
                     $table_name = $wpdb->prefix . DBE_PREFIX . "_vote_log";
 
-                    if ($request->get_method() == "GET") {
+                    if ( $request->get_method() == "GET" ) {
                         [$block_id, $block_name, $action, $post_id] = [
                             '5a69c53c-c022-48b3-b9f0-9c32a2a4bd7ada',
                             'how_to',
@@ -38,8 +37,8 @@ class API
                         // $post_block = array_filter($post_blocks, function ($v, $k) use ($block_id) {
                         //   return $v["attrs"]["blockID"] == $block_id;
                         // }, ARRAY_FILTER_USE_BOTH)[0];
-                        foreach ($post_blocks as $index => $arr) {
-                            if ($arr["attrs"]["blockID"] == $block_id) {
+                        foreach ( $post_blocks as $index => $arr ) {
+                            if ( $arr["attrs"]["blockID"] == $block_id ) {
                                 $post_block = $arr;
                                 $post_block["index"] = $index;
                             }
@@ -62,23 +61,23 @@ class API
                         'dbe_device_id' => $dbe_device_id,
                     ];
                     $status = 'old';
-                    if ($result == null) {
+                    if ( $result == null ) {
                         $result = $wpdb->insert(
                             $table_name,
                             $sql_insert
                         );
                         $status = 'new';
-                    } else if ($action != $result->action) {
+                    } else if ( $action != $result->action ) {
                         $result = $wpdb->update(
                             $table_name,
-                            ['action' => $action],
-                            ["id" => $result->id],
+                            [ 'action' => $action ],
+                            [ "id" => $result->id ],
                         );
                         $status = 'update';
                     }
 
                     $updated_post_block = self::update_vote_attr($post_block, $status, $action);
-                    $post_blocks[$post_block["index"]] = $updated_post_block;
+                    $post_blocks[ $post_block["index"] ] = $updated_post_block;
                     $serialize = serialize_blocks($post_blocks);
                     $serialize = preg_replace("/\\\u0026/i", "&", $serialize);
                     wp_update_post([
@@ -95,7 +94,7 @@ class API
                         'status' => $status,
                     ];
 
-                    if ($result) {
+                    if ( $result ) {
                         $end = Helper::microtime_float();
                         $exec_time += round($end - $start, 6);
                         $response['response'] = "WPP: OK. Execution time: " . $exec_time . " seconds";
@@ -109,16 +108,15 @@ class API
         });
     }
 
-    public static function update_vote_attr($post_block, $status, $action)
-    {
-        if ($action == "dislike") {
+    public static function update_vote_attr( $post_block, $status, $action ) {
+        if ( $action == "dislike" ) {
             $post_block["attrs"]["howToDisikeCount"]++;
         } else {
             $post_block["attrs"]["howToLikeCount"]++;
         }
 
-        if ($status == "update") {
-            if ($action == "like") {
+        if ( $status == "update" ) {
+            if ( $action == "like" ) {
                 if ($post_block["attrs"]["howToDisikeCount"] > 0) $post_block["attrs"]["howToDisikeCount"]--;
             } else {
                 if ($post_block["attrs"]["howToLikeCount"] > 0) $post_block["attrs"]["howToLikeCount"]--;

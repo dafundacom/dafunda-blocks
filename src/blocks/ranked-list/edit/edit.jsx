@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Card, ButtonAddStep, InspectorPanel } from './components'
+import { ButtonAddStep } from '../../../components/button_add_step'
+import { Card } from './components/card'
+import dummyDatas from './data'
 
 const { __ } = wp.i18n // Import __() from wp.i18n
 
-// const { RichText, MediaUpload, InspectorControls } = wp.blockEditor || wp.editor
-// const { ToggleControl, PanelBody, RadioControl, RangeControl, SelectControl } = wp.components
+const { InspectorControls } = wp.blockEditor || wp.editor
+
+const { PanelBody } = wp.components
 
 const moveElement = (array, from, to) => {
   const copy = [...array]
@@ -15,57 +18,29 @@ const moveElement = (array, from, to) => {
 
 const list_interface = {
   title: '',
-  price: 0,
-  pricetag: '',
-  subtitle: '',
   description: '',
   imageurl: '',
   imagealt: '',
   imageid: '',
-  olshops: [],
-  url: '',
+  likes: [],
+  dislikes: [],
 }
 
 export default function Edit(props) {
   const {
-    attributes: { blockID, lists },
+    attributes: { blockID },
     setAttributes,
     block,
     getBlock,
     getClientIdsWithDescendants,
-    // isSelected,
+    _isSelected,
+  } = props
+
+  let {
+    attributes: { lists },
   } = props
 
   const [listsState, setLists] = useState(lists)
-
-  useEffect(() => {
-    setAttributes({ lists: listsState })
-
-    const check_title = listsState.every(({ title }) => title && title !== '')
-
-    if (check_title) {
-      wp.data.dispatch('core/editor').unlockPostSaving('requiredValueLock')
-    } else {
-      wp.data.dispatch('core/editor').lockPostSaving('requiredValueLock')
-    }
-  }, [listsState])
-
-  function validateList(list, index) {
-    const newList = {}
-    let needUpdate = false
-    Object.keys(list_interface).forEach((key) => {
-      if (list[key] === undefined || list[key] === null) {
-        needUpdate = true
-        newList[key] = list_interface[key]
-      } else {
-        newList[key] = list[key]
-      }
-    })
-    if (needUpdate) {
-      listsState[index] = Object.assign(listsState[index], newList)
-      setLists([...listsState])
-    }
-  }
 
   useEffect(() => {
     if (
@@ -78,19 +53,32 @@ export default function Edit(props) {
     ) {
       setAttributes({ blockID: block.clientId })
     }
-
-    lists.forEach((list, list_i) => {
-      validateList(list, list_i)
-    })
-
     if (listsState.length === 0) setLists([{ ...list_interface }])
   }, [])
+
+  useEffect(() => {
+    setAttributes({ lists: listsState })
+  }, [listsState])
 
   return (
     <>
       <InspectorPanel {...props} />
       <div className='wp-block'>
-        <ol className='rekomendasi-list p-0' id={`rekomendasi-list-${blockID}`}>
+        {window.location.host === 'localhost:3000' ? (
+          <button
+            onClick={() => {
+              lists = dummyDatas
+              setLists(dummyDatas)
+            }}
+            type='button'
+          >
+            Reset Data
+          </button>
+        ) : (
+          ''
+        )}
+
+        <ol className='ranked-list p-0' id={`ranked-list-${blockID}`}>
           {listsState.map((list, index) => (
             <Card
               data={list}
@@ -121,17 +109,20 @@ export default function Edit(props) {
           ))}
         </ol>
         <ButtonAddStep
-          label='Tambah Rekomendasi List'
+          label='Tambah list'
           onClick={() => {
-            setLists([
-              ...listsState,
-              {
-                ...list_interface,
-              },
-            ])
+            setLists((prevData) => [...prevData, { ...list_interface }])
           }}
         />
       </div>
     </>
+  )
+}
+
+function InspectorPanel(_props) {
+  return (
+    <InspectorControls>
+      <PanelBody title={__('Ranked List Settings')} />
+    </InspectorControls>
   )
 }
