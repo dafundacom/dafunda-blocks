@@ -1,10 +1,10 @@
 import { __ } from '@wordpress/i18n'
-import base_config from '../../config.mjs'
 import slug from 'slug'
+import base_config from '../../config.mjs'
 
-let NAME = 'How To'
+const NAME = 'How To'
 
-let config = {
+const config = {
   $schema: 'https://schemas.wp.org/trunk/block.json',
   apiVersion: 2,
   title: __(`${NAME} (${base_config.title})`),
@@ -35,7 +35,7 @@ let config = {
     },
     tools: {
       type: 'array',
-      default: [], //format: {name, imageid, imagealt, imageurl}
+      default: [], // format: {name, imageid, imagealt, imageurl}
     },
     toolsListStyle: {
       type: 'string',
@@ -51,7 +51,7 @@ let config = {
     },
     supplies: {
       type: 'array',
-      default: [], //format: {name, imageid, imagealt, imageurl}
+      default: [], // format: {name, imageid, imagealt, imageurl}
     },
     suppliesListStyle: {
       type: 'string',
@@ -63,7 +63,7 @@ let config = {
     },
     section: {
       type: 'array',
-      default: [{ sectionName: '', steps: [] }], //contains steps, if useSections is set to false, then only use contents of the first section. minimum of two steps.
+      default: [{ sectionName: '', steps: [] }], // contains steps, if useSections is set to false, then only use contents of the first section. minimum of two steps.
     },
     sectionListStyle: {
       type: 'string',
@@ -98,17 +98,17 @@ let config = {
       default: true,
     },
     howToYield: {
-      //avoid using yield as variable name
+      // avoid using yield as variable name
       type: 'string',
       default: '',
     },
     howToRatingValue: {
-      //avoid using yield as variable name
+      // avoid using yield as variable name
       type: 'string',
       default: '5',
     },
     howToRatingCount: {
-      //avoid using yield as variable name
+      // avoid using yield as variable name
       type: 'string',
       default: '1',
     },
@@ -125,8 +125,8 @@ let config = {
       default: 0,
     },
     videoURL: {
-      type: 'string', //videoobject
-      default: '', //needed: video url, thumbnail url, video description, upload date
+      type: 'string', // videoobject
+      default: '', // needed: video url, thumbnail url, video description, upload date
     },
     videoThumbnailURL: {
       type: 'string',
@@ -141,7 +141,7 @@ let config = {
       default: '',
     },
     videoUploadDate: {
-      type: 'number', //UNIX Date
+      type: 'number', // UNIX Date
       default: 0,
     },
     videoEmbedCode: {

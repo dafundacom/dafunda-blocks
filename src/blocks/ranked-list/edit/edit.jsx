@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useBlockProps } from '@wordpress/block-editor'
 import { ButtonAddStep } from '../../../components/button_add_step'
 import { Card } from './components/card'
 import dummyDatas from './data'
@@ -44,33 +45,44 @@ export default function Edit(props) {
 
   useEffect(() => {
     if (
-      blockID === '' ||
-      getClientIdsWithDescendants().some(
-        (ID) =>
-          'blockID' in getBlock(ID).attributes &&
-          getBlock(ID).attributes.blockID === blockID,
+      blockID === ''
+      || getClientIdsWithDescendants().some(
+        (ID) => 'blockID' in getBlock(ID).attributes
+          && getBlock(ID).attributes.blockID === blockID,
       )
     ) {
       setAttributes({ blockID: block.clientId })
     }
     if (listsState.length === 0) setLists([{ ...list_interface }])
+
+    return () => {
+      wp.data.dispatch('core/editor').unlockPostSaving('requiredValueLock')
+      wp.data.dispatch('core/editor').enablePublishSidebar();
+    }
   }, [])
 
   useEffect(() => {
     setAttributes({ lists: listsState })
+    if (listsState.every((list) => list.title === "")) {
+      wp.data.dispatch('core/editor').lockPostSaving('requiredValueLock')
+      wp.data.dispatch('core/editor').disablePublishSidebar();
+    } else {
+      wp.data.dispatch('core/editor').unlockPostSaving('requiredValueLock')
+      wp.data.dispatch('core/editor').enablePublishSidebar();
+    }
   }, [listsState])
 
   return (
-    <>
+    <div {...useBlockProps()}>
       <InspectorPanel {...props} />
-      <div className='wp-block'>
+      <div className="wp-block">
         {window.location.host === 'localhost:3000' ? (
           <button
             onClick={() => {
               lists = dummyDatas
               setLists(dummyDatas)
             }}
-            type='button'
+            type="button"
           >
             Reset Data
           </button>
@@ -78,7 +90,7 @@ export default function Edit(props) {
           ''
         )}
 
-        <ol className='ranked-list p-0' id={`ranked-list-${blockID}`}>
+        <ol className="ranked-list p-0" id={`ranked-list-${blockID}`}>
           {listsState.map((list, index) => (
             <Card
               data={list}
@@ -109,13 +121,13 @@ export default function Edit(props) {
           ))}
         </ol>
         <ButtonAddStep
-          label='Tambah list'
+          label="Tambah list"
           onClick={() => {
             setLists((prevData) => [...prevData, { ...list_interface }])
           }}
         />
       </div>
-    </>
+    </div>
   )
 }
 
