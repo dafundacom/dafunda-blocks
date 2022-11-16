@@ -11,13 +11,10 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         array (
             'VariableAnalysis\\' => 17,
         ),
-        'G' => 
-        array (
-            'DBE\\' => 3,
-        ),
         'D' => 
         array (
             'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 55,
+            'DBE\\' => 4,
         ),
     );
 
@@ -26,14 +23,14 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         array (
             0 => __DIR__ . '/..' . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis',
         ),
+        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
+        ),
         'DBE\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
             1 => __DIR__ . '/../..' . '/includes',
-        ),
-        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
         ),
     );
 
@@ -41,7 +38,8 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DBE\\Activation' => __DIR__ . '/../..' . '/includes/class-activation.php',
         'DBE\\Block' => __DIR__ . '/../..' . '/includes/class-block.php',
-        'DBE\\Block\\HowTo\\API' => __DIR__ . '/../..' . '/src/blocks/how-to/api.php',
+        'DBE\\Block\\HowTo\\API' => __DIR__ . '/../..' . '/src/blocks/how-to/class-api.php',
+        'DBE\\Block\\RankedList\\API' => __DIR__ . '/../..' . '/src/blocks/ranked-list/class-api.php',
         'DBE\\Blocks' => __DIR__ . '/../..' . '/includes/class-blocks.php',
         'DBE\\Deactivation' => __DIR__ . '/../..' . '/includes/class-deactivation.php',
         'DBE\\Helper' => __DIR__ . '/../..' . '/includes/class-helper.php',

@@ -6,7 +6,7 @@ module.exports = {
   extends: ['plugin:react/recommended', 'airbnb'],
   overrides: [
     {
-      files: ['*.js', '*.jsx'],
+      files: ['*.js', '*.jsx', '*.mjs'],
       rules: {
         'linebreak-style': ['error', 'windows'],
         'no-undef': 'off',
@@ -24,6 +24,8 @@ module.exports = {
         'import/no-extraneous-dependencies': 'off',
         'import/prefer-default-export': 'off',
         'import/no-cycle': 'off',
+        'import/no-named-as-default': 'off',
+        'import/no-named-as-default-member': 'off',
 
         'no-unused-vars': [
           'error',
@@ -40,7 +42,7 @@ module.exports = {
 
   parserOptions: {
     ecmaVersion: 'latest',
-
+    // requireConfigFile: false,
     sourceType: 'module',
   },
 

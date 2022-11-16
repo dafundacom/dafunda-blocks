@@ -1,4 +1,4 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor'
+import { useBlockProps } from '@wordpress/block-editor'
 import { __ } from '@wordpress/i18n'
 import { useEffect } from 'react'
 import { InspectorPanel, Card } from './components'
@@ -10,7 +10,7 @@ export default function Edit(props) {
     block,
     getBlock,
     getClientIdsWithDescendants,
-    isSelected,
+    // isSelected,
   } = props
 
   useEffect(() => {
@@ -29,7 +29,9 @@ export default function Edit(props) {
   return (
     <div {...useBlockProps()}>
       <InspectorPanel {...props} />
-      <Card {...props} />
+      <div className='wp-block'>
+        <Card {...props} />
+      </div>
     </div>
   )
 }
