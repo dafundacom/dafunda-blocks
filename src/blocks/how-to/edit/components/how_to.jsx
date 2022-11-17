@@ -2,9 +2,7 @@
 /* eslint-disable no-prototype-builtins */
 import { useEffect } from 'react'
 
-import {
-  InputUpload, ListWrapper, HowToSection, HowToStep,
-} from './index'
+import { InputUpload, ListWrapper, HowToSection, HowToStep } from './index'
 
 import { ButtonDeleteImage } from '../../../../components/button_delete_image'
 import { ButtonAddStep } from '../../../../components/button_add_step'
@@ -88,18 +86,22 @@ export function HowTo(props) {
 
   const checkVideoURLInput = () => {
     if (/^http(s)?:\/\//g.test(videoURLInput)) {
-      const youtubeMatch = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/g.exec(
-        videoURLInput,
-      )
-      const vimeoMatch = /^(?:https?\:\/\/)?(?:www\.|player\.)?(?:vimeo\.com\/)([0-9]+)/g.exec(
-        videoURLInput,
-      )
-      const dailyMotionMatch = /^(?:https?\:\/\/)?(?:www\.)?(?:dailymotion\.com\/video|dai\.ly)\/([0-9a-z]+)(?:[\-_0-9a-zA-Z]+#video=([a-z0-9]+))?/g.exec(
-        videoURLInput,
-      )
-      const videoPressMatch = /^https?:\/\/(?:www\.)?videopress\.com\/(?:embed|v)\/([a-zA-Z0-9]{8,})/g.exec(
-        videoURLInput,
-      )
+      const youtubeMatch =
+        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/g.exec(
+          videoURLInput,
+        )
+      const vimeoMatch =
+        /^(?:https?\:\/\/)?(?:www\.|player\.)?(?:vimeo\.com\/)([0-9]+)/g.exec(
+          videoURLInput,
+        )
+      const dailyMotionMatch =
+        /^(?:https?\:\/\/)?(?:www\.)?(?:dailymotion\.com\/video|dai\.ly)\/([0-9a-z]+)(?:[\-_0-9a-zA-Z]+#video=([a-z0-9]+))?/g.exec(
+          videoURLInput,
+        )
+      const videoPressMatch =
+        /^https?:\/\/(?:www\.)?videopress\.com\/(?:embed|v)\/([a-zA-Z0-9]{8,})/g.exec(
+          videoURLInput,
+        )
       if (youtubeMatch) {
         fetch(
           `https://www.googleapis.com/youtube/v3/videos?id=${youtubeMatch[1]}&part=snippet,contentDetails,player&key=AIzaSyDgItjYofyXkIZ4OxF6gN92PIQkuvU319c`,
@@ -129,8 +131,8 @@ export function HowTo(props) {
                       S: 1,
                     }
                     return (
-                      sum
-                      + Number(part.slice(0, -1)) * multiplier[part.slice(-1)]
+                      sum +
+                      Number(part.slice(0, -1)) * multiplier[part.slice(-1)]
                     )
                   }, 0),
                 })
@@ -293,10 +295,11 @@ export function HowTo(props) {
 
   useEffect(() => {
     if (
-      blockID === ''
-      || getClientIdsWithDescendants().some(
-        (ID) => 'blockID' in getBlock(ID).attributes
-          && getBlock(ID).attributes.blockID === blockID,
+      blockID === '' ||
+      getClientIdsWithDescendants().some(
+        (ID) =>
+          'blockID' in getBlock(ID).attributes &&
+          getBlock(ID).attributes.blockID === blockID,
       )
     ) {
       setAttributes({ blockID: block.clientId })
@@ -363,30 +366,30 @@ export function HowTo(props) {
 
   return (
     <>
-      <div className="howto" id={`howto-${blockID}`}>
+      <div className='howto' id={`howto-${blockID}`}>
         <RichText
           tagName={firstLevelTag}
           placeholder={__('How to title')}
           keepPlaceholderOnFocus
           value={title}
-          className="howto__title font-semibold"
+          className='howto__title font-semibold'
           onChange={(title) => setAttributes({ title })}
         />
         <RichText
           placeholder={__('How to introduction')}
           keepPlaceholderOnFocus
-          className="mb-3"
+          className='mb-3'
           value={introduction}
           onChange={(introduction) => setAttributes({ introduction })}
         />
 
         {advancedMode && (
           <>
-            <div className="howto-video-input relative mb-2 w-full">
+            <div className='howto-video-input relative mb-2 w-full'>
               <input
-                type="url"
+                type='url'
                 placeholder={__('Insert video URL')}
-                className="w-full border border-slate-200"
+                className='w-full border border-slate-200'
                 value={videoURLInput}
                 onChange={(e) => setStates({ videoURLInput: e.target.value })}
                 onKeyDown={(e) => {
@@ -395,19 +398,19 @@ export function HowTo(props) {
                   }
                 }}
               />
-              <div className="absolute top-0 right-0 flex h-full flex-wrap items-center">
+              <div className='absolute top-0 right-0 flex h-full flex-wrap items-center'>
                 <button
-                  icon="editor-break"
+                  icon='editor-break'
                   label={__('Apply')}
-                  type="submit"
-                  className="dashicons dashicons-yes-alt mr-2 h-auto text-2xl"
+                  type='submit'
+                  className='dashicons dashicons-yes-alt mr-2 h-auto text-2xl'
                   onClick={checkVideoURLInput}
                 />
                 <button
-                  type="button"
-                  icon="trash"
+                  type='button'
+                  icon='trash'
                   label={__('Delete')}
-                  className="dashicons dashicons-dismiss mr-3 h-auto text-2xl"
+                  className='dashicons dashicons-dismiss mr-3 h-auto text-2xl'
                   onClick={() => {
                     resetVideoAttributes()
                     setStates({ videoURLInput: '' })
@@ -419,7 +422,7 @@ export function HowTo(props) {
               dangerouslySetInnerHTML={{
                 __html: videoEmbedCode || '<p>Input error</p>',
               }}
-              className="text-xs"
+              className='text-xs'
             />
             {includeSuppliesList && (
               <>
@@ -431,16 +434,16 @@ export function HowTo(props) {
                   onChange={(suppliesIntro) => setAttributes({ suppliesIntro })}
                 />
                 <ListWrapper
-                  className="howto-supplies-list"
+                  className='howto-supplies-list'
                   listStyle={suppliesListStyle}
                 >
                   {supplies.map((supply, i) => (
-                    <li className="relative mb-8">
-                      <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
+                    <li className='relative mb-8'>
+                      <div className='howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1'>
                         <button
-                          type="button"
-                          className="howto-arrow"
-                          icon="arrow-up-alt"
+                          type='button'
+                          className='howto-arrow'
+                          icon='arrow-up-alt'
                           onClick={() => {
                             if (i > 0) {
                               const newSupplies = moveElement(
@@ -456,24 +459,24 @@ export function HowTo(props) {
                           label={__('Move step up')}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                            strokeWidth='1.5'
+                            stroke='currentColor'
                           >
                             <path
-                              fillRule="evenodd"
-                              d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
-                              clipRule="evenodd"
+                              fillRule='evenodd'
+                              d='M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z'
+                              clipRule='evenodd'
                             />
                           </svg>
                         </button>
                         <button
-                          type="button"
-                          className="howto-arrow"
-                          icon="arrow-down-alt"
+                          type='button'
+                          className='howto-arrow'
+                          icon='arrow-down-alt'
                           onClick={() => {
                             if (i < supplies.length - 1) {
                               const newSupplies = moveElement(
@@ -489,24 +492,24 @@ export function HowTo(props) {
                           label={__('Move step down')}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                            strokeWidth='1.5'
+                            stroke='currentColor'
                           >
                             <path
-                              fillRule="evenodd"
-                              d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
+                              fillRule='evenodd'
+                              d='M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z'
+                              clipRule='evenodd'
                             />
                           </svg>
                         </button>
                         <button
-                          type="button"
-                          className="howto-delete"
-                          icon="trash"
+                          type='button'
+                          className='howto-delete'
+                          icon='trash'
                           label={__('Delete step')}
                           onClick={() => {
                             setAttributes({
@@ -518,43 +521,45 @@ export function HowTo(props) {
                           }}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="5"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            strokeWidth='5'
                           >
                             <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M6 18L18 6M6 6l12 12'
                             />
                           </svg>
                         </button>
                       </div>
                       <div>
                         <RichText
-                          className="mb-3"
+                          className='mb-3'
                           keepPlaceholderOnFocus
                           value={supply.name}
                           placeholder={__('Enter supply name')}
-                          onChange={(newName) => setAttributes({
-                            supplies: [
-                              ...supplies.slice(0, i),
-                              Object.assign(supplies[i], { name: newName }),
-                              ...supplies.slice(i + 1),
-                            ],
-                          })}
+                          onChange={(newName) =>
+                            setAttributes({
+                              supplies: [
+                                ...supplies.slice(0, i),
+                                Object.assign(supplies[i], { name: newName }),
+                                ...supplies.slice(i + 1),
+                              ],
+                            })
+                          }
                         />
                       </div>
-                      {addSupplyImages
-                        && (supply.imageURL !== '' ? (
-                          <figure className="relative mx-auto w-fit">
+                      {addSupplyImages &&
+                        (supply.imageURL !== '' ? (
+                          <figure className='relative mx-auto w-fit'>
                             <img
-                              className="howto-supply-image"
+                              className='howto-supply-image'
                               src={supply.imageURL}
-                              alt=""
+                              alt=''
                             />
                             {isSelected && (
                               <ButtonDeleteImage
@@ -576,17 +581,19 @@ export function HowTo(props) {
                           </figure>
                         ) : (
                           <MediaUpload
-                            onSelect={(img) => setAttributes({
-                              supplies: [
-                                ...supplies.slice(0, i),
-                                Object.assign(supply, {
-                                  imageID: img.id,
-                                  imageURL: img.url,
-                                  imageAlt: img.alt,
-                                }),
-                                ...supplies.slice(i + 1),
-                              ],
-                            })}
+                            onSelect={(img) =>
+                              setAttributes({
+                                supplies: [
+                                  ...supplies.slice(0, i),
+                                  Object.assign(supply, {
+                                    imageID: img.id,
+                                    imageURL: img.url,
+                                    imageAlt: img.alt,
+                                  }),
+                                  ...supplies.slice(i + 1),
+                                ],
+                              })
+                            }
                             allowedTypes={['image']}
                             value={supply.imageID}
                             render={({ open }) => <InputUpload open={open} />}
@@ -596,7 +603,7 @@ export function HowTo(props) {
                   ))}
                 </ListWrapper>
                 <ButtonAddStep
-                  label="Tambah supplies"
+                  label='Tambah supplies'
                   onClick={() => {
                     setAttributes({
                       supplies: [
@@ -623,16 +630,16 @@ export function HowTo(props) {
                   onChange={(toolsIntro) => setAttributes({ toolsIntro })}
                 />
                 <ListWrapper
-                  className="howto-tools-list"
+                  className='howto-tools-list'
                   listStyle={toolsListStyle}
                 >
                   {tools.map((tool, i) => (
-                    <li className="relative mb-8">
-                      <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
+                    <li className='relative mb-8'>
+                      <div className='howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1'>
                         <button
-                          type="button"
-                          className="howto-arrow"
-                          icon="arrow-up-alt"
+                          type='button'
+                          className='howto-arrow'
+                          icon='arrow-up-alt'
                           onClick={() => {
                             if (i > 0) {
                               const newSupplies = moveElement(tools, i, i - 1)
@@ -644,24 +651,24 @@ export function HowTo(props) {
                           label={__('Move step up')}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                            strokeWidth='1.5'
+                            stroke='currentColor'
                           >
                             <path
-                              fillRule="evenodd"
-                              d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
-                              clipRule="evenodd"
+                              fillRule='evenodd'
+                              d='M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z'
+                              clipRule='evenodd'
                             />
                           </svg>
                         </button>
                         <button
-                          type="button"
-                          className="howto-arrow"
-                          icon="arrow-down-alt"
+                          type='button'
+                          className='howto-arrow'
+                          icon='arrow-down-alt'
                           onClick={() => {
                             if (i < tools.length - 1) {
                               const newSupplies = moveElement(tools, i, i + 1)
@@ -673,24 +680,24 @@ export function HowTo(props) {
                           label={__('Move step down')}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                            strokeWidth='1.5'
+                            stroke='currentColor'
                           >
                             <path
-                              fillRule="evenodd"
-                              d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
+                              fillRule='evenodd'
+                              d='M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z'
+                              clipRule='evenodd'
                             />
                           </svg>
                         </button>
                         <button
-                          type="button"
-                          className="howto-delete"
-                          icon="trash"
+                          type='button'
+                          className='howto-delete'
+                          icon='trash'
                           label={__('Delete step')}
                           onClick={() => {
                             setAttributes({
@@ -702,40 +709,42 @@ export function HowTo(props) {
                           }}
                         >
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="5"
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-4 w-4'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            strokeWidth='5'
                           >
                             <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M6 18L18 6M6 6l12 12'
                             />
                           </svg>
                         </button>
                       </div>
                       <div>
                         <RichText
-                          className="mb-3"
+                          className='mb-3'
                           keepPlaceholderOnFocus
                           value={tool.name}
                           placeholder={__('Enter tool name')}
-                          onChange={(newTool) => setAttributes({
-                            tools: [
-                              ...tools.slice(0, i),
-                              Object.assign(tools[i], { name: newTool }),
-                              ...tools.slice(i + 1),
-                            ],
-                          })}
+                          onChange={(newTool) =>
+                            setAttributes({
+                              tools: [
+                                ...tools.slice(0, i),
+                                Object.assign(tools[i], { name: newTool }),
+                                ...tools.slice(i + 1),
+                              ],
+                            })
+                          }
                         />
                       </div>
-                      {addToolImages
-                        && (tool.imageURL !== '' ? (
-                          <figure className="relative mx-auto w-fit">
-                            <img src={tool.imageURL} alt="" />
+                      {addToolImages &&
+                        (tool.imageURL !== '' ? (
+                          <figure className='relative mx-auto w-fit'>
+                            <img src={tool.imageURL} alt='' />
                             {isSelected && (
                               <ButtonDeleteImage
                                 onClick={() => {
@@ -756,17 +765,19 @@ export function HowTo(props) {
                           </figure>
                         ) : (
                           <MediaUpload
-                            onSelect={(img) => setAttributes({
-                              tools: [
-                                ...tools.slice(0, i),
-                                Object.assign(tool, {
-                                  imageID: img.id,
-                                  imageURL: img.url,
-                                  imageAlt: img.alt,
-                                }),
-                                ...tools.slice(i + 1),
-                              ],
-                            })}
+                            onSelect={(img) =>
+                              setAttributes({
+                                tools: [
+                                  ...tools.slice(0, i),
+                                  Object.assign(tool, {
+                                    imageID: img.id,
+                                    imageURL: img.url,
+                                    imageAlt: img.alt,
+                                  }),
+                                  ...tools.slice(i + 1),
+                                ],
+                              })
+                            }
                             allowedTypes={['image']}
                             value={tool.imageID}
                             render={({ open }) => <InputUpload open={open} />}
@@ -776,7 +787,7 @@ export function HowTo(props) {
                   ))}
                 </ListWrapper>
                 <ButtonAddStep
-                  label="Tambah tools"
+                  label='Tambah tools'
                   onClick={() => {
                     setAttributes({
                       tools: [
@@ -794,14 +805,16 @@ export function HowTo(props) {
               </>
             )}
 
-            <div className="howto_cost_container mb-3 mt-0 flex flex-wrap justify-between">
+            <div className='howto_cost_container mb-3 mt-0 flex flex-wrap justify-between'>
               <RichText
                 value={costDisplayText}
-                className="font-medium"
-                onChange={(costDisplayText) => setAttributes({ costDisplayText })}
+                className='font-medium'
+                onChange={(costDisplayText) =>
+                  setAttributes({ costDisplayText })
+                }
               />
               <div
-                className="howto_cost_display flex"
+                className='howto_cost_display flex'
                 style={{
                   flexDirection: showUnitFirst ? 'row' : 'row-reverse',
                 }}
@@ -837,31 +850,31 @@ export function HowTo(props) {
         )}
         <RichText
           tagName={secondLevelTag}
-          className="mt-0 mb-1"
+          className='mt-0 mb-1'
           placeholder={__('Duration')}
           keepPlaceholderOnFocus
           value={timeIntro}
           onChange={(timeIntro) => setAttributes({ timeIntro })}
         />
-        <div className="howto-duration-input">
-          <p className="m-0">
+        <div className='howto-duration-input'>
+          <p className='m-0'>
             <RichText
               keepPlaceholderOnFocus
               value={totalTimeText}
               onChange={(totalTimeText) => setAttributes({ totalTimeText })}
             />
           </p>
-          <div className="grid grid-cols-4 gap-4 md:grid-cols-7">
+          <div className='grid grid-cols-4 gap-4 md:grid-cols-7'>
             {units.map((u, i) => (
               <div key={i}>
-                {u === 'Tahun'
-                || u === 'Bulan'
-                || u === 'Minggu'
-                || u === 'Hari' ? (
-                  <p className="hidden">
+                {u === 'Tahun' ||
+                u === 'Bulan' ||
+                u === 'Minggu' ||
+                u === 'Hari' ? (
+                  <p className='hidden'>
                     {__(u)}
                     <RichText
-                      className="hidden"
+                      className='hidden'
                       keepPlaceholderOnFocus
                       placeholder={__('0')}
                       value={String(totalTime[i])}
@@ -878,31 +891,28 @@ export function HowTo(props) {
                       }}
                     />
                   </p>
-                  ) : (
-                    <p className="m-0">
-                      {__(u)}
-                      {' '}
-                      :
-                      {' '}
-                      <RichText
-                        className="howto-time-value inline-block"
-                        keepPlaceholderOnFocus
-                        placeholder={__('0')}
-                        value={String(totalTime[i])}
-                        onChange={(newInput) => {
-                          if (!Number.isNaN(Number(newInput))) {
-                            setAttributes({
-                              totalTime: [
-                                ...totalTime.slice(0, i),
-                                Number(newInput),
-                                ...totalTime.slice(i + 1),
-                              ],
-                            })
-                          }
-                        }}
-                      />
-                    </p>
-                  )}
+                ) : (
+                  <p className='m-0'>
+                    {__(u)} :{' '}
+                    <RichText
+                      className='howto-time-value inline-block'
+                      keepPlaceholderOnFocus
+                      placeholder={__('0')}
+                      value={String(totalTime[i])}
+                      onChange={(newInput) => {
+                        if (!Number.isNaN(Number(newInput))) {
+                          setAttributes({
+                            totalTime: [
+                              ...totalTime.slice(0, i),
+                              Number(newInput),
+                              ...totalTime.slice(i + 1),
+                            ],
+                          })
+                        }
+                      }}
+                    />
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -920,14 +930,18 @@ export function HowTo(props) {
                 sectionNum={i}
                 sectionTag={secondLevelTag}
                 stepTag={thirdLevelTag}
-                selectStepInSection={(step) => setStates({ currentStep: `section-${i}-step-${step}` })}
-                editSection={(newSection) => setAttributes({
-                  section: [
-                    ...section.slice(0, i),
-                    newSection,
-                    ...section.slice(i + 1),
-                  ],
-                })}
+                selectStepInSection={(step) =>
+                  setStates({ currentStep: `section-${i}-step-${step}` })
+                }
+                editSection={(newSection) =>
+                  setAttributes({
+                    section: [
+                      ...section.slice(0, i),
+                      newSection,
+                      ...section.slice(i + 1),
+                    ],
+                  })
+                }
                 moveUp={() => {
                   if (i > 0) {
                     const newSection = moveElement(section, i, i - 1)
@@ -944,9 +958,11 @@ export function HowTo(props) {
                     })
                   }
                 }}
-                deleteSection={() => setAttributes({
-                  section: [...section.slice(0, i), ...section.slice(i + 1)],
-                })}
+                deleteSection={() =>
+                  setAttributes({
+                    section: [...section.slice(0, i), ...section.slice(i + 1)],
+                  })
+                }
                 blockIsSelected={isSelected}
                 currentStep={currentStep}
                 updateState={(newState) => setStates(newState)}
@@ -956,7 +972,7 @@ export function HowTo(props) {
         ) : (
           <>
             <ListWrapper
-              className="howto-steps-list pl-0"
+              className='howto-steps-list pl-0'
               listStyle={sectionListStyle}
             >
               {section[0].steps.map((step, i) => (
@@ -1084,7 +1100,7 @@ export function HowTo(props) {
         )}
         {useSections && (
           <ButtonAddStep
-            label="Tambah section"
+            label='Tambah section'
             onClick={() => {
               setAttributes({
                 section: [
@@ -1116,11 +1132,11 @@ export function HowTo(props) {
           />
         )}
 
-        <div className="howto-yield mb-4 rounded-xl bg-[#16A085] p-5 text-white">
-          <div className="w-100 mb-3 flex flex-wrap justify-center">
+        <div className='howto-yield mb-4 rounded-xl bg-[#16A085] p-5 text-white'>
+          <div className='w-100 mb-3 flex flex-wrap justify-center'>
             <RichText
               tagName={secondLevelTag}
-              className="m-0 font-bold text-white"
+              className='m-0 font-bold text-white'
               placeholder={__('Result')}
               keepPlaceholderOnFocus
               value={resultIntro}
@@ -1130,13 +1146,13 @@ export function HowTo(props) {
           </div>
 
           {finalImageURL !== '' ? (
-            <figure className="howto-yield-image-container relative mx-auto w-fit">
+            <figure className='howto-yield-image-container relative mx-auto w-fit'>
               <img
-                alt=""
-                className="howto-step-image overflow-hidden rounded-xl"
+                alt=''
+                className='howto-step-image overflow-hidden rounded-xl'
                 src={finalImageURL}
                 onClick={() => setStates({ currentStep: 'final' })}
-                aria-hidden="true"
+                aria-hidden='true'
               />
               {isSelected && (
                 <ButtonDeleteImage
@@ -1153,16 +1169,18 @@ export function HowTo(props) {
                 />
               )}
               <RichText
-                tagName="figcaption"
+                tagName='figcaption'
                 keepPlaceholderOnFocus
                 placeholder={__('Final image caption')}
                 value={finalImageCaption}
-                onChange={(finalImageCaption) => setAttributes({ finalImageCaption })}
+                onChange={(finalImageCaption) =>
+                  setAttributes({ finalImageCaption })
+                }
                 onFocus={() => setStates({ currentStep: 'final' })}
               />
             </figure>
           ) : (
-            <div className="align-center flex flex-wrap justify-center py-5">
+            <div className='align-center flex flex-wrap justify-center py-5'>
               <MediaUpload
                 onSelect={(img) => {
                   setStates({ currentStep: 'final' })
@@ -1190,26 +1208,28 @@ export function HowTo(props) {
           />
         </div>
 
-        <div className="mb-4 grid  grid-cols-1 gap-4 md:grid-cols-3 md:gap-3">
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
-            <h6 className="m-0 font-normal normal-case">Like Count</h6>
+        <div className='mb-4 grid  grid-cols-1 gap-4 md:grid-cols-3 md:gap-3'>
+          <div className='rounded-lg border border-slate-200 px-4 py-2'>
+            <h6 className='m-0 font-normal normal-case'>Like Count</h6>
             <TextControl
               value={howToLikeCount}
               onChange={(howToLikeCount) => setAttributes({ howToLikeCount })}
-              type="number"
+              type='number'
             />
           </div>
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
-            <h6 className="m-0 font-normal normal-case">Disike Count</h6>
+          <div className='rounded-lg border border-slate-200 px-4 py-2'>
+            <h6 className='m-0 font-normal normal-case'>Disike Count</h6>
             <TextControl
               value={howToDisikeCount}
-              onChange={(howToDisikeCount) => setAttributes({ howToDisikeCount })}
-              type="number"
+              onChange={(howToDisikeCount) =>
+                setAttributes({ howToDisikeCount })
+              }
+              type='number'
             />
           </div>
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
-            <h6 className="m-0 font-normal normal-case">Vote Total Count</h6>
-            <p className="m-0">{howToVoteCount}</p>
+          <div className='rounded-lg border border-slate-200 px-4 py-2'>
+            <h6 className='m-0 font-normal normal-case'>Vote Total Count</h6>
+            <p className='m-0'>{howToVoteCount}</p>
           </div>
         </div>
       </div>
@@ -1218,29 +1238,39 @@ export function HowTo(props) {
           __html: `@media (min-width:768px) {${
             useSections
               ? section
-                .map((s, i) => s.steps
-                  .map((st) => (({ width, float }) => ({ width, float }))(st.stepPic))
-                  .map((img, j) => (img.width > 0
-                    ? `#howto-${blockID} .howto-section:nth-child(${
-                      i + 1
-                    }) .howto-step:nth-child(${
-                      j + 1
-                    }) figure { width: ${img.width}px; float: ${
-                      img.float
-                    };}`
-                    : ''))
-                  .join(''))
-                .join('')
+                  .map((s, i) =>
+                    s.steps
+                      .map((st) =>
+                        (({ width, float }) => ({ width, float }))(st.stepPic),
+                      )
+                      .map((img, j) =>
+                        img.width > 0
+                          ? `#howto-${blockID} .howto-section:nth-child(${
+                              i + 1
+                            }) .howto-step:nth-child(${
+                              j + 1
+                            }) figure { width: ${img.width}px; float: ${
+                              img.float
+                            };}`
+                          : '',
+                      )
+                      .join(''),
+                  )
+                  .join('')
               : section[0].steps
-                .map((s) => (({ width, float }) => ({ width, float }))(s.stepPic))
-                .map((img, i) => (img.width > 0
-                  ? `#howto-${blockID} .howto-step:nth-child(${
-                    i + 1
-                  }) figure { width: ${img.width}px; float: ${
-                    img.float
-                  };}`
-                  : ''))
-                .join('')
+                  .map((s) =>
+                    (({ width, float }) => ({ width, float }))(s.stepPic),
+                  )
+                  .map((img, i) =>
+                    img.width > 0
+                      ? `#howto-${blockID} .howto-step:nth-child(${
+                          i + 1
+                        }) figure { width: ${img.width}px; float: ${
+                          img.float
+                        };}`
+                      : '',
+                  )
+                  .join('')
           }${
             finalImageWidth > 0
               ? `#howto-${blockID} .howto-yield-image-container{width: ${finalImageWidth}px;float: ${finalImageFloat};}`

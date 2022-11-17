@@ -70,10 +70,11 @@ export default function Edit(props) {
 
   useEffect(() => {
     if (
-      blockID === ''
-      || getClientIdsWithDescendants().some(
-        (ID) => 'blockID' in getBlock(ID).attributes
-          && getBlock(ID).attributes.blockID === blockID,
+      blockID === '' ||
+      getClientIdsWithDescendants().some(
+        (ID) =>
+          'blockID' in getBlock(ID).attributes &&
+          getBlock(ID).attributes.blockID === blockID,
       )
     ) {
       setAttributes({ blockID: block.clientId })
@@ -89,8 +90,8 @@ export default function Edit(props) {
   return (
     <div {...useBlockProps()}>
       <InspectorPanel {...props} />
-      <div className="wp-block">
-        <ol className="rekomendasi-list p-0" id={`rekomendasi-list-${blockID}`}>
+      <div className='wp-block'>
+        <ol className='rekomendasi-list p-0' id={`rekomendasi-list-${blockID}`}>
           {listsState.map((list, index) => (
             <Card
               data={list}
@@ -121,7 +122,7 @@ export default function Edit(props) {
           ))}
         </ol>
         <ButtonAddStep
-          label="Tambah Rekomendasi List"
+          label='Tambah Rekomendasi List'
           onClick={() => {
             setLists([
               ...listsState,

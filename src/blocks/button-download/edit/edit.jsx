@@ -15,10 +15,11 @@ export default function Edit(props) {
 
   useEffect(() => {
     if (
-      blockID === ''
-      || getClientIdsWithDescendants().some(
-        (ID) => 'blockID' in getBlock(ID).attributes
-          && getBlock(ID).attributes.blockID === blockID,
+      blockID === '' ||
+      getClientIdsWithDescendants().some(
+        (ID) =>
+          'blockID' in getBlock(ID).attributes &&
+          getBlock(ID).attributes.blockID === blockID,
       )
     ) {
       setAttributes({ blockID: block.clientId })
@@ -28,7 +29,7 @@ export default function Edit(props) {
   return (
     <div {...useBlockProps()}>
       <InspectorPanel {...props} />
-      <div className="wp-block">
+      <div className='wp-block'>
         <Card {...props} />
       </div>
     </div>
