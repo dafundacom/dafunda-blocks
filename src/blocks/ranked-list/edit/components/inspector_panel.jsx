@@ -1,5 +1,8 @@
-const { __ } = wp.i18n // Import __() from wp.i18n
+// Import __() from wp.i18n
 import schemaApplicationCategories from './schemaApplicationCategories.json'
+
+const { __ } = wp.i18n
+
 const {
   InspectorControls,
   PanelColorSettings,
@@ -10,7 +13,7 @@ const {
 const { ToggleControl, PanelBody, SelectControl, TabPanel, TextControl } =
   wp.components
 
-export const InspectorPanel = (props) => {
+export function InspectorPanel(props) {
   const {
     attributes: {
       title,
@@ -29,7 +32,6 @@ export const InspectorPanel = (props) => {
       openInNewTab,
       buttonAlign,
       addSponsored,
-
       schemaApplicationCategory,
       version,
       system,
@@ -92,7 +94,7 @@ export const InspectorPanel = (props) => {
           // placeholder="0.0.1"
           value={version}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(version) => {
             setAttributes({ version })
           }}
@@ -104,7 +106,7 @@ export const InspectorPanel = (props) => {
           placeholder='Android'
           value={system}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(system) => setAttributes({ system })}
         />
 
@@ -114,7 +116,7 @@ export const InspectorPanel = (props) => {
           placeholder='7 MB'
           value={fileSize}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(fileSize) => setAttributes({ fileSize })}
         />
 
@@ -124,7 +126,7 @@ export const InspectorPanel = (props) => {
           placeholder='Freeware'
           value={license}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(license) => setAttributes({ license })}
         />
 
@@ -134,7 +136,7 @@ export const InspectorPanel = (props) => {
           placeholder='Moon & Sun'
           value={developer}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(developer) => setAttributes({ developer })}
         />
 
@@ -144,7 +146,7 @@ export const InspectorPanel = (props) => {
           placeholder='USD'
           value={currency}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(currency) => setAttributes({ currency })}
         />
 
@@ -154,7 +156,7 @@ export const InspectorPanel = (props) => {
           placeholder='5.12 or 6'
           value={price}
           type='text'
-          className={`mb-4 capitalize`}
+          className='mb-4 capitalize'
           onChange={(price) => setAttributes({ price })}
         />
       </PanelBody>
@@ -168,7 +170,7 @@ export const InspectorPanel = (props) => {
             className: 'm-0 mb-4',
           })}
         >
-          <label className={`mb-2 block`}>Button Align</label>
+          <label className='mb-2 block'>Button Align</label>
           <BlockVerticalAlignmentToolbar
             value={buttonAlign}
             onChange={(buttonAlign) => {
@@ -178,7 +180,7 @@ export const InspectorPanel = (props) => {
         </div>
 
         <div>
-          <label className={`mb-2 block`}>Button Rounded</label>
+          <label className='mb-2 block'>Button Rounded</label>
           <ToggleControl
             label={__('Button Rounded', 'dafunda-blocks')}
             checked={buttonRounded}
@@ -202,7 +204,7 @@ export const InspectorPanel = (props) => {
         {(tab) => (
           <PanelColorSettings
             title={__('Button Colors', 'dafunda-blocks')}
-            initialOpen={true}
+            initialOpen
             colorSettings={
               tab.name === 'buttoncolor'
                 ? makeNormalColorPanels()
