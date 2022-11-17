@@ -8,8 +8,8 @@ $schemejson = [
 if ( isset($system) && $system != "" ) {
     $schemejson["operatingSystem"] = $system;
 }
-if ( isset($schema_application_category) && $schema_application_category != "" ) {
-    $schemejson["applicationCategory"] = $schema_application_category;
+if ( isset($schemaApplicationCategory) && $schemaApplicationCategory != "" ) {
+    $schemejson["applicationCategory"] = $schemaApplicationCategory;
 }
 
 $schemejson = json_encode(

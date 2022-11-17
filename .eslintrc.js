@@ -8,7 +8,6 @@ module.exports = {
     {
       files: ['*.js', '*.jsx', '*.mjs'],
       rules: {
-        'linebreak-style': ['error', 'windows'],
         'no-undef': 'off',
         'no-shadow': 'off',
         semi: 'off',
@@ -20,7 +19,6 @@ module.exports = {
         'react/prop-type': 'off',
         'react/prop-types': 'off',
         'react/no-array-index-key': 'off',
-
         'import/no-extraneous-dependencies': 'off',
         'import/prefer-default-export': 'off',
         'import/no-cycle': 'off',
@@ -32,8 +30,6 @@ module.exports = {
           {
             varsIgnorePattern: '^_',
             argsIgnorePattern: '^_',
-            // varsIgnorePattern: '^_+$',
-            // argsIgnorePattern: '^_+$',
           },
         ],
       },
@@ -42,7 +38,6 @@ module.exports = {
 
   parserOptions: {
     ecmaVersion: 'latest',
-    // requireConfigFile: false,
     sourceType: 'module',
   },
 

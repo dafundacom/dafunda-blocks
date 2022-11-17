@@ -1,10 +1,10 @@
 import { __ } from '@wordpress/i18n'
-import base_config from '../../config.mjs'
 import slug from 'slug'
+import base_config from '../../config.mjs'
 
-let NAME = 'Download Button'
+const NAME = 'Download Button'
 
-let config = {
+const config = {
   $schema: 'https://schemas.wp.org/trunk/block.json',
   apiVersion: 2,
   title: __(`${NAME} (${base_config.title})`),
