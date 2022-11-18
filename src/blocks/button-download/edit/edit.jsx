@@ -29,7 +29,7 @@ export default function Edit(props) {
   return (
     <div {...useBlockProps()}>
       <InspectorPanel {...props} />
-      <div className='wp-block'>
+      <div className="wp-block">
         <Card {...props} />
       </div>
     </div>

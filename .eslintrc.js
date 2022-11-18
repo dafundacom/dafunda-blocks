@@ -10,9 +10,13 @@ module.exports = {
       rules: {
         'no-undef': 'off',
         'no-shadow': 'off',
+        'no-nested-ternary': 'off',
+        'no-tabs': 'off',
+        indent: 'off',
         semi: 'off',
         camelcase: 'off',
         quotes: 'off',
+        eqeqeq: 'off',
         'no-underscore-dangle': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/react-in-jsx-scope': 'off',
@@ -24,7 +28,11 @@ module.exports = {
         'import/no-cycle': 'off',
         'import/no-named-as-default': 'off',
         'import/no-named-as-default-member': 'off',
-
+        'react/jsx-filename-extension': 'off',
+        'jsx-a11y/alt-text': 'off',
+        'jsx-a11y/click-events-have-key-events': 'off',
+        'jsx-a11y/no-static-element-interactions': 'off',
+        'jsx-a11y/label-has-associated-control': 'off',
         'no-unused-vars': [
           'error',
           {
