@@ -9,19 +9,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { RichText, MediaUpload } = wp.blockEditor || wp.editor;
 
 export function Card(props) {
-  const {
-    data,
-    _setAttributes,
-    _block,
-    _getBlock,
-    _getClientIdsWithDescendants,
-    _isSelected,
-    index,
-    moveUp,
-    moveDown,
-    deleteList,
-    editList,
-  } = props;
+  const { data, index, moveUp, moveDown, deleteList, editList } = props;
 
   const {
     title,
@@ -29,7 +17,6 @@ export function Card(props) {
     description,
     imageurl,
     imagealt,
-    _imageid,
     olshops,
     price,
     pricetag,

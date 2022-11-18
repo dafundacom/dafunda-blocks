@@ -1,18 +1,12 @@
 import { useEffect } from "react";
 
 import { InputUpload, ListWrapper, HowToSection, HowToStep } from "./index";
-
 import { ButtonDeleteImage } from "../../../../components/button_delete_image";
 import { ButtonAddStep } from "../../../../components/button_add_step";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
-
 const { RichText, MediaUpload } = wp.blockEditor || wp.editor;
-
 const { TextControl } = wp.components;
-
-// import config from '../../config.mjs'
-// const defaultAttr = config.attributes
 
 const units = ["Tahun", "Bulan", "Minggu", "Hari", "Jam", "Menit", "Detik"];
 
@@ -93,7 +87,7 @@ export function HowTo(props) {
         );
 
       const dailyMotionMatch =
-        /^(?:https?:\/\/)?(?:www\.)?(?:dailymotion\.com\/video|dai\.ly)\/([0-9a-z]+)(?:[\-_0-9a-zA-Z]+#video=([a-z0-9]+))?/g.exec(
+        /^(?:https?:\/\/)?(?:www\.)?(?:dailymotion\.com\/video|dai\.ly)\/([0-9a-z]+)(?:[-_0-9a-zA-Z]+#video=([a-z0-9]+))?/g.exec(
           videoURLInput
         );
 
@@ -310,6 +304,7 @@ export function HowTo(props) {
 
     sectionClone.forEach((s, si) => {
       s.steps.forEach((st, sti) => {
+        // eslint-disable-next-line no-prototype-builtins
         if (!st.stepPic.hasOwnProperty("width")) {
           hasMissingProperties = true;
           sectionClone[si].steps[sti].stepPic.width = 200;
@@ -389,7 +384,7 @@ export function HowTo(props) {
               <input
                 type="url"
                 placeholder={__("Insert video URL")}
-                className="w-full border border-slate-200"
+                className="w-full !border border-slate-200"
                 value={videoURLInput}
                 onChange={(e) => setStates({ videoURLInput: e.target.value })}
                 onKeyDown={(e) => {
@@ -438,7 +433,7 @@ export function HowTo(props) {
                   listStyle={suppliesListStyle}
                 >
                   {supplies.map((supply, i) => (
-                    <li className="relative mb-8">
+                    <li className="relative mb-8" key={i}>
                       <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
                         <button
                           type="button"
@@ -634,7 +629,7 @@ export function HowTo(props) {
                   listStyle={toolsListStyle}
                 >
                   {tools.map((tool, i) => (
-                    <li className="relative mb-8">
+                    <li className="relative mb-8" key={i}>
                       <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
                         <button
                           type="button"
@@ -921,6 +916,7 @@ export function HowTo(props) {
           <ListWrapper listStyle={sectionListStyle}>
             {section.map((s, i) => (
               <HowToSection
+                key={i}
                 {...s}
                 advancedMode={advancedMode}
                 clips={clips}
@@ -977,6 +973,7 @@ export function HowTo(props) {
             >
               {section[0].steps.map((step, i) => (
                 <HowToStep
+                  key={i}
                   advancedMode={advancedMode}
                   sectionNum={-1}
                   stepNum={i}
@@ -1209,7 +1206,7 @@ export function HowTo(props) {
         </div>
 
         <div className="mb-4 grid  grid-cols-1 gap-4 md:grid-cols-3 md:gap-3">
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
+          <div className="rounded-lg !border border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Like Count</h6>
             <TextControl
               value={howToLikeCount}
@@ -1217,7 +1214,7 @@ export function HowTo(props) {
               type="number"
             />
           </div>
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
+          <div className="rounded-lg !border border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Disike Count</h6>
             <TextControl
               value={howToDisikeCount}
@@ -1227,7 +1224,7 @@ export function HowTo(props) {
               type="number"
             />
           </div>
-          <div className="rounded-lg border border-slate-200 px-4 py-2">
+          <div className="rounded-lg !border border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Vote Total Count</h6>
             <p className="m-0">{howToVoteCount}</p>
           </div>

@@ -1,11 +1,11 @@
-const ranstr = require('./random-string')
-const fs = require('fs')
-const path = require('path')
+const ranstr = require("./random-string");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = function (
   pkg = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8'),
-  ),
+    fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf8")
+  )
 ) {
   let str = `<?php
 /**
@@ -22,7 +22,7 @@ module.exports = function (
  * WC tested up to: 6.7
  *
  * @package dafundacom\\DafundaBlocks
- */`
+ */`;
 
   str += `
 
@@ -65,6 +65,10 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	Setup::instance();
 }
 
-`
-  return fs.writeFileSync(path.resolve(process.cwd(), 'setup.php'), str, 'utf8')
-}
+`;
+  return fs.writeFileSync(
+    path.resolve(process.cwd(), "setup.php"),
+    str,
+    "utf8"
+  );
+};

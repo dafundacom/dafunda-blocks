@@ -1,5 +1,5 @@
-/* eslint-disable react/destructuring-assignment */
 import { Component } from "react";
+
 import { ButtonDeleteImage } from "../../../../components/button_delete_image";
 import { ButtonUpDownDelete } from "../../../../components/button_up_down_delete";
 

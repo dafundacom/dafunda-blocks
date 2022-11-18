@@ -39,7 +39,7 @@
 }
 
 .wp-block-gutenberg-examples-example-05-recipe-card-esnext::after {
-  content: '';
+  content: "";
   clear: both;
   display: table;
 }

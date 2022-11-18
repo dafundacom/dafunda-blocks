@@ -1,216 +1,216 @@
-import { __ } from '@wordpress/i18n'
-import base_config from '../../config.mjs'
-import slug from 'slug'
+import { __ } from "@wordpress/i18n";
+import base_config from "../../config.mjs";
+import slug from "slug";
 
-let NAME = 'How To'
+let NAME = "How To";
 
 let config = {
-  $schema: 'https://schemas.wp.org/trunk/block.json',
+  $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 2,
   title: __(`${NAME} (${base_config.title})`),
   name: `${base_config.prefix}/${slug(NAME)}`,
-  version: '0.0.1',
+  version: "0.0.1",
   keywords: [...base_config.keywords.map((v) => __(v)), __(NAME)],
   category: base_config.category,
   attributes: {
     blockID: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     title: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     introduction: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     advancedMode: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     toolsIntro: {
-      type: 'string',
-      default: __('Required tools'),
+      type: "string",
+      default: __("Required tools"),
     },
     tools: {
-      type: 'array',
+      type: "array",
       default: [], //format: {name, imageid, imagealt, imageurl}
     },
     toolsListStyle: {
-      type: 'string',
-      default: 'none',
+      type: "string",
+      default: "none",
     },
     addToolImages: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     suppliesIntro: {
-      type: 'string',
-      default: __('Required supplies'),
+      type: "string",
+      default: __("Required supplies"),
     },
     supplies: {
-      type: 'array',
+      type: "array",
       default: [], //format: {name, imageid, imagealt, imageurl}
     },
     suppliesListStyle: {
-      type: 'string',
-      default: 'none',
+      type: "string",
+      default: "none",
     },
     addSupplyImages: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     section: {
-      type: 'array',
-      default: [{ sectionName: '', steps: [] }], //contains steps, if useSections is set to false, then only use contents of the first section. minimum of two steps.
+      type: "array",
+      default: [{ sectionName: "", steps: [] }], //contains steps, if useSections is set to false, then only use contents of the first section. minimum of two steps.
     },
     sectionListStyle: {
-      type: 'string',
-      default: 'none',
+      type: "string",
+      default: "none",
     },
     timeIntro: {
-      type: 'string',
-      default: __('Duration'),
+      type: "string",
+      default: __("Duration"),
     },
     totalTime: {
-      type: 'array',
+      type: "array",
       default: Array(7).fill(0),
     },
     totalTimeText: {
-      type: 'string',
-      default: __('Sekitar '),
+      type: "string",
+      default: __("Sekitar "),
     },
     cost: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     costCurrency: {
-      type: 'string',
-      default: 'USD',
+      type: "string",
+      default: "USD",
     },
     costDisplayText: {
-      type: 'string',
-      default: __('Total cost: '),
+      type: "string",
+      default: __("Total cost: "),
     },
     showUnitFirst: {
-      type: 'boolean',
+      type: "boolean",
       default: true,
     },
     howToYield: {
       //avoid using yield as variable name
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     howToRatingValue: {
       //avoid using yield as variable name
-      type: 'string',
-      default: '5',
+      type: "string",
+      default: "5",
     },
     howToRatingCount: {
       //avoid using yield as variable name
-      type: 'string',
-      default: '1',
+      type: "string",
+      default: "1",
     },
     howToLikeCount: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     howToDisikeCount: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     howToVoteCount: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     videoURL: {
-      type: 'string', //videoobject
-      default: '', //needed: video url, thumbnail url, video description, upload date
+      type: "string", //videoobject
+      default: "", //needed: video url, thumbnail url, video description, upload date
     },
     videoThumbnailURL: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     videoName: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     videoDescription: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     videoUploadDate: {
-      type: 'number', //UNIX Date
+      type: "number", //UNIX Date
       default: 0,
     },
     videoEmbedCode: {
-      type: 'string',
-      default: '<p>When insertion is successful, video should appear here</p>',
+      type: "string",
+      default: "<p>When insertion is successful, video should appear here</p>",
     },
     videoDuration: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     useSections: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     includeSuppliesList: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     includeToolsList: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
     resultIntro: {
-      type: 'string',
-      default: __('Result'),
+      type: "string",
+      default: __("Result"),
     },
     finalImageID: {
-      type: 'number',
+      type: "number",
       default: -1,
     },
     finalImageAlt: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     finalImageURL: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     finalImageCaption: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     finalImageWidth: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
     finalImageFloat: {
-      type: 'string',
-      default: 'none',
+      type: "string",
+      default: "none",
     },
     firstLevelTag: {
-      type: 'string',
-      default: 'h2',
+      type: "string",
+      default: "h2",
     },
     secondLevelTag: {
-      type: 'string',
-      default: 'h3',
+      type: "string",
+      default: "h3",
     },
     thirdLevelTag: {
-      type: 'string',
-      default: 'h5',
+      type: "string",
+      default: "h5",
     },
   },
   supports: {
     html: false,
     multiple: false,
   },
-  editorScript: 'file:./block.jsx',
-  viewScript: 'file:./scripts/index.js',
-}
+  editorScript: "file:./block.jsx",
+  viewScript: "file:./scripts/index.js",
+};
 
-export default config
+export default config;

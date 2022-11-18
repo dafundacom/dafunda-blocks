@@ -79,7 +79,7 @@ export function InspectorPanel(props) {
         <TextControl
           label="version"
           labelPosition="top"
-          // placeholder="0.0.1"
+          placeholder="0.0.1"
           value={version}
           type="text"
           className="mb-4 capitalize"

@@ -1,9 +1,7 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prefer-stateless-function */
 import { Component } from "react";
+
 import { ButtonAddStep } from "../../../../components/button_add_step";
 import { ButtonUpDownDelete } from "../../../../components/button_up_down_delete";
-
 import { ListWrapper, HowToStep } from "./index";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
@@ -11,10 +9,6 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { RichText } = wp.blockEditor || wp.editor;
 
 export class HowToSection extends Component {
-  //   constructor(props) {
-  //     super(props)
-  //   }
-
   render() {
     const {
       sectionListStyle,
@@ -60,6 +54,7 @@ export class HowToSection extends Component {
           {steps.map((step, i) => (
             <HowToStep
               {...step}
+              key={i}
               advancedMode={advancedMode}
               clips={clips}
               sectionNum={sectionNum}
@@ -80,7 +75,7 @@ export class HowToSection extends Component {
               }}
               deleteStep={() => {
                 const newSteps = [...steps.slice(0, i), ...steps.slice(i + 1)];
-                newSteps.forEach((step, j) => {
+                newSteps.forEach((_step, j) => {
                   // step.anchor = `section${sectionNum}step${j}`
                   newSteps[j].anchor = `section${sectionNum}step${j}`;
                 });
