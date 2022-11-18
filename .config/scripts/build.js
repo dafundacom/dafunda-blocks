@@ -4,7 +4,7 @@ const { result } = concurrently(
   [
     {
       command:
-        "wp-scripts build --webpack-copy-php --webpack-src-dir=src/blocks --output-path=build/blocks --node-env production --mode production --performance-hints warning --color",
+        "wp-scripts build --webpack-copy-php --webpack-src-dir=src/blocks --output-path=build/blocks --mode production --performance-hints warning --color",
       name: "script",
       env: { APP_ENV: "production" },
     },
