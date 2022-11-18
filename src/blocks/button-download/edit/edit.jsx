@@ -1,7 +1,7 @@
-import { useBlockProps } from '@wordpress/block-editor'
-import { __ } from '@wordpress/i18n'
-import { useEffect } from 'react'
-import { InspectorPanel, Card } from './components'
+import { useBlockProps } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "react";
+import { InspectorPanel, Card } from "./components";
 
 export default function Edit(props) {
   const {
@@ -10,21 +10,20 @@ export default function Edit(props) {
     block,
     getBlock,
     getClientIdsWithDescendants,
-    // isSelected,
-  } = props
+  } = props;
 
   useEffect(() => {
     if (
-      blockID === '' ||
+      blockID === "" ||
       getClientIdsWithDescendants().some(
         (ID) =>
-          'blockID' in getBlock(ID).attributes &&
-          getBlock(ID).attributes.blockID === blockID,
+          "blockID" in getBlock(ID).attributes &&
+          getBlock(ID).attributes.blockID === blockID
       )
     ) {
-      setAttributes({ blockID: block.clientId })
+      setAttributes({ blockID: block.clientId });
     }
-  }, [])
+  }, []);
 
   return (
     <div {...useBlockProps()}>
@@ -33,5 +32,5 @@ export default function Edit(props) {
         <Card {...props} />
       </div>
     </div>
-  )
+  );
 }

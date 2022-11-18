@@ -10,9 +10,9 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/richtext/
  */
-import { useBlockProps, RichText } from '@wordpress/block-editor'
-import { useSelect } from '@wordpress/data'
-import { __ } from '@wordpress/i18n'
+import { useBlockProps, RichText } from "@wordpress/block-editor";
+import { useSelect } from "@wordpress/data";
+import { __ } from "@wordpress/i18n";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -20,7 +20,7 @@ import { __ } from '@wordpress/i18n'
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss'
+import "./editor.scss";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -33,21 +33,21 @@ import './editor.scss'
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes: { message }, setAttributes }) {
-  const { title } = useSelect((select) => select('core').getSite() ?? {})
+  const { title } = useSelect((select) => select("core").getSite() ?? {});
 
   return (
     <p
       {...useBlockProps({
-        className: 'bg-yellow-400',
+        className: "bg-yellow-400",
       })}
     >
       <RichText
-        tagName='span'
-        className=''
+        tagName="span"
+        className=""
         value={message}
         onChange={(newMessage) => setAttributes({ message: newMessage })}
       />
-      <span> | {title ?? __('loading…', 'gutenberg-examples')}</span>
+      <span> | {title ?? __("loading…", "gutenberg-examples")}</span>
     </p>
-  )
+  );
 }

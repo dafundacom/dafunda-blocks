@@ -1,17 +1,16 @@
-// Import __() from wp.i18n
-import schemaApplicationCategories from './schemaApplicationCategories.json'
+import schemaApplicationCategories from "./schemaApplicationCategories.json";
 
-const { __ } = wp.i18n
+const { __ } = wp.i18n;
 
 const {
   InspectorControls,
   PanelColorSettings,
   useBlockProps,
   BlockVerticalAlignmentToolbar,
-} = wp.blockEditor || wp.editor
+} = wp.blockEditor || wp.editor;
 
 const { ToggleControl, PanelBody, SelectControl, TabPanel, TextControl } =
-  wp.components
+  wp.components;
 
 export function InspectorPanel(props) {
   const {
@@ -32,43 +31,43 @@ export function InspectorPanel(props) {
       price,
     },
     setAttributes,
-  } = props
+  } = props;
 
   const makeNormalColorPanels = () => [
     {
       value: buttonColor,
       onChange: (buttonColor) => setAttributes({ buttonColor }),
-      label: __('Button Color'),
+      label: __("Button Color"),
     },
     ...[
       {
         value: buttonTextColor,
         onChange: (buttonTextColor) => setAttributes({ buttonTextColor }),
-        label: __('Button Text Color'),
+        label: __("Button Text Color"),
       },
     ],
-  ]
+  ];
   const makeHoverColorPanels = () => [
     {
       value: buttonHoverColor,
       onChange: (buttonHoverColor) => setAttributes({ buttonHoverColor }),
-      label: __('Button Color'),
+      label: __("Button Color"),
     },
     ...[
       {
         value: buttonTextHoverColor,
         onChange: (buttonTextHoverColor) =>
           setAttributes({ buttonTextHoverColor }),
-        label: __('Button Text Color'),
+        label: __("Button Text Color"),
       },
     ],
-  ]
+  ];
 
   return (
     <InspectorControls>
-      <PanelBody title={__('Download Button Setting')}>
+      <PanelBody title={__("Download Button Setting")}>
         <SelectControl
-          label={__('Select a scheme type')}
+          label={__("Select a scheme type")}
           value={schemaApplicationCategory}
           onChange={(schemaApplicationCategory) =>
             setAttributes({ schemaApplicationCategory })
@@ -84,7 +83,7 @@ export function InspectorPanel(props) {
           type="text"
           className="mb-4 capitalize"
           onChange={(version) => {
-            setAttributes({ version })
+            setAttributes({ version });
           }}
         />
 
@@ -149,20 +148,20 @@ export function InspectorPanel(props) {
         />
       </PanelBody>
 
-      <PanelBody title={__('Button Style', 'dafunda-blocks')}>
+      <PanelBody title={__("Button Style", "dafunda-blocks")}>
         <div
           {...useBlockProps({
             style: {
               backgroundPosition: `center ${buttonAlign}`,
             },
-            className: 'm-0 mb-4',
+            className: "m-0 mb-4",
           })}
         >
           <label className="mb-2 block">Button Align</label>
           <BlockVerticalAlignmentToolbar
             value={buttonAlign}
             onChange={(buttonAlign) => {
-              setAttributes({ buttonAlign })
+              setAttributes({ buttonAlign });
             }}
           />
         </div>
@@ -170,7 +169,7 @@ export function InspectorPanel(props) {
         <div>
           <label className="mb-2 block">Button Rounded</label>
           <ToggleControl
-            label={__('Button Rounded', 'dafunda-blocks')}
+            label={__("Button Rounded", "dafunda-blocks")}
             checked={buttonRounded}
             onChange={(buttonRounded) => setAttributes({ buttonRounded })}
           />
@@ -180,21 +179,21 @@ export function InspectorPanel(props) {
       <TabPanel
         tabs={[
           {
-            name: 'buttoncolor',
-            title: __('Normal'),
+            name: "buttoncolor",
+            title: __("Normal"),
           },
           {
-            name: 'buttonhovercolor',
-            title: __('Hover'),
+            name: "buttonhovercolor",
+            title: __("Hover"),
           },
         ]}
       >
         {(tab) => (
           <PanelColorSettings
-            title={__('Button Colors', 'dafunda-blocks')}
+            title={__("Button Colors", "dafunda-blocks")}
             initialOpen
             colorSettings={
-              tab.name === 'buttoncolor'
+              tab.name === "buttoncolor"
                 ? makeNormalColorPanels()
                 : makeHoverColorPanels()
             }
@@ -202,5 +201,5 @@ export function InspectorPanel(props) {
         )}
       </TabPanel>
     </InspectorControls>
-  )
+  );
 }

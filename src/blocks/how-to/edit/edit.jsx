@@ -1,9 +1,9 @@
-import { useBlockProps } from '@wordpress/block-editor'
-import { useState } from 'react'
-import { HowTo, InspectorPanel } from './components'
+import { useBlockProps } from "@wordpress/block-editor";
+import { useState } from "react";
+import { HowTo, InspectorPanel } from "./components";
 
 export default function Edit(props) {
-  const [states, setStates] = useState({ videoURLInput: '', currentStep: '' })
+  const [states, setStates] = useState({ videoURLInput: "", currentStep: "" });
 
   return (
     <div {...useBlockProps()}>
@@ -20,5 +20,5 @@ export default function Edit(props) {
         setStates={(newState) => setStates({ ...states, ...newState })}
       />
     </div>
-  )
+  );
 }

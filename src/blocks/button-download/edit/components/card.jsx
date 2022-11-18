@@ -1,28 +1,27 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { ButtonDeleteImage } from "./index";
 
-import { ButtonDeleteImage } from './index'
-
-const { __ } = wp.i18n // Import __() from wp.i18n
+const { __ } = wp.i18n; // Import __() from wp.i18n
 
 const { RichText, MediaUpload, BlockControls, URLInput } =
-  wp.blockEditor || wp.editor
+  wp.blockEditor || wp.editor;
 
 const { Button, CheckboxControl, Popover, ToolbarGroup, ToolbarButton } =
-  wp.components
+  wp.components;
 
 const defaultFormats = [
-  'core/annotation',
-  'core/bold',
-  'core/code',
-  'core/italic',
-  'core/strikethrough',
-  'core/underline',
-  'core/text-color',
-  'core/subscript',
-  'core/superscript',
-  'core/keyboard',
-  'dafunda-blocks/highlight',
-]
+  "core/annotation",
+  "core/bold",
+  "core/code",
+  "core/italic",
+  "core/strikethrough",
+  "core/underline",
+  "core/text-color",
+  "core/subscript",
+  "core/superscript",
+  "core/keyboard",
+  "dafunda-blocks/highlight",
+];
 
 export function Card(props) {
   const {
@@ -39,9 +38,9 @@ export function Card(props) {
       buttonAlign,
     },
     setAttributes,
-  } = props
+  } = props;
 
-  const [buttonOnHover, setButtonOnHover] = useState(false)
+  const [buttonOnHover, setButtonOnHover] = useState(false);
 
   return (
     <div className="download-button !important flex flex-wrap overflow-hidden rounded-lg border border-slate-200 p-3">
@@ -50,24 +49,20 @@ export function Card(props) {
       {/* Image */}
 
       <div className="basis-2/12">
-        {imageurl && imageurl != '' ? (
+        {imageurl && imageurl != "" ? (
           <figure className="relative">
             <img
               className="aspect-square w-full rounded-lg object-cover object-center"
               src={imageurl}
-
-              // onClick={selectStep}
             />
 
             <ButtonDeleteImage
               onClick={() => {
                 setAttributes({
-                  imagealt: '',
-
-                  imageid: '',
-
-                  imageurl: '',
-                })
+                  imagealt: "",
+                  imageid: "",
+                  imageurl: "",
+                });
               }}
             />
           </figure>
@@ -76,14 +71,14 @@ export function Card(props) {
             <MediaUpload
               onSelect={(newImage) => {
                 setAttributes({
-                  imagealt: newImage?.alt ?? '',
+                  imagealt: newImage?.alt ?? "",
 
-                  imageid: newImage?.id ?? '',
+                  imageid: newImage?.id ?? "",
 
-                  imageurl: newImage?.url ?? '',
-                })
+                  imageurl: newImage?.url ?? "",
+                });
               }}
-              allowedTypes={['image']}
+              allowedTypes={["image"]}
               render={({ open }) => (
                 <div
                   className="flex h-full w-full flex-wrap items-center justify-center bg-[#EEEEEE]"
@@ -123,7 +118,7 @@ export function Card(props) {
           tagName="p"
           multiline={false}
           keepPlaceholderOnFocus
-          placeholder={__('Title')}
+          placeholder={__("Title")}
           className="m-0 text-lg font-semibold"
           value={title}
           allowedFormats={defaultFormats}
@@ -135,7 +130,7 @@ export function Card(props) {
           allowedFormats={defaultFormats}
           multiline={false}
           keepPlaceholderOnFocus
-          placeholder={__('Descriptions')}
+          placeholder={__("Descriptions")}
           className="m-0 text-sm"
           value={description}
           onChange={(description) => setAttributes({ description })}
@@ -153,13 +148,13 @@ export function Card(props) {
         onMouseLeave={() => setButtonOnHover(false)}
         className={`mx-auto mt-3 h-fit w-fit py-2 px-5 text-base font-bold text-white md:mt-0 md:ml-auto
 				${
-          buttonAlign == 'top'
-            ? 'self-start'
-            : buttonAlign == 'bottom'
-            ? 'self-end'
-            : 'self-center'
+          buttonAlign == "top"
+            ? "self-start"
+            : buttonAlign == "bottom"
+            ? "self-end"
+            : "self-center"
         }
-				${buttonRounded ? 'rounded-lg' : ''}
+				${buttonRounded ? "rounded-lg" : ""}
 				`}
         style={{
           backgroundColor: buttonOnHover ? buttonHoverColor : buttonColor,
@@ -169,7 +164,7 @@ export function Card(props) {
           tagName="span"
           multiline={false}
           keepPlaceholderOnFocus
-          placeholder={__('Download')}
+          placeholder={__("Download")}
           className="m-0"
           allowedFormats={defaultFormats}
           // withoutInteractiveFormatting={true}
@@ -182,7 +177,7 @@ export function Card(props) {
 
       {/* Button END */}
     </div>
-  )
+  );
 }
 
 function ToolbarCard(props) {
@@ -190,12 +185,12 @@ function ToolbarCard(props) {
     attributes: { url, addNofollow, openInNewTab, addSponsored },
     setAttributes,
     isSelected,
-  } = props
+  } = props;
 
-  const [URLPopoverisVisible, setURLPopoverisVisible] = useState(false)
+  const [URLPopoverisVisible, setURLPopoverisVisible] = useState(false);
 
   if (!isSelected && URLPopoverisVisible) {
-    setURLPopoverisVisible(false)
+    setURLPopoverisVisible(false);
   }
 
   return (
@@ -204,7 +199,7 @@ function ToolbarCard(props) {
         <ToolbarGroup>
           <ToolbarButton
             icon="admin-links"
-            label={__('Add button link')}
+            label={__("Add button link")}
             onClick={() => setURLPopoverisVisible(true)}
           />
         </ToolbarGroup>
@@ -229,19 +224,19 @@ function ToolbarCard(props) {
             </div>
 
             <CheckboxControl
-              label={__('Open Link in New Tab', 'dafunda-blocks')}
+              label={__("Open Link in New Tab", "dafunda-blocks")}
               checked={openInNewTab}
               onChange={(openInNewTab) => setAttributes({ openInNewTab })}
             />
 
             <CheckboxControl
-              label={__('Add Nofollow to Link', 'dafunda-blocks')}
+              label={__("Add Nofollow to Link", "dafunda-blocks")}
               checked={addNofollow}
               onChange={(addNofollow) => setAttributes({ addNofollow })}
             />
 
             <CheckboxControl
-              label={__('Mark link as sponsored', 'dafunda-blocks')}
+              label={__("Mark link as sponsored", "dafunda-blocks")}
               checked={addSponsored}
               onChange={(addSponsored) => setAttributes({ addSponsored })}
             />
@@ -249,5 +244,5 @@ function ToolbarCard(props) {
         </Popover>
       )}
     </>
-  )
+  );
 }

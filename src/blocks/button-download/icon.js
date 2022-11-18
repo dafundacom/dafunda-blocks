@@ -10,6 +10,6 @@ const icon = (
       fill="#34495E"
     />
   </svg>
-)
+);
 // await wp.data.dispatch('core/editor').autosave()
-export default icon
+export default icon;
