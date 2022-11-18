@@ -64,3 +64,5 @@ function log_str(array, env_dev = false) {
 }
 // log_str(Object.keys(dev), true)
 log_str(Object.keys(dependency), true)
+
+// "test-e2e": "wp-scripts test-e2e -- --wordpress-base-url=http://localhost:3000/ --puppeteer-interactive",
