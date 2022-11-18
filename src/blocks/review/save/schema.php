@@ -2,13 +2,15 @@
 $schemejson = [
 	"@context" => "http://schema.org",
 	"@type" => "SoftwareApplication",
-	"name" => str_replace("\'", "'", wp_filter_nohtml_kses($title)),
-    "description" => str_replace(
-        "\'",
-        "'",
-        wp_filter_nohtml_kses($introduction)
-      ),
+	"name" => $title,
 ];
+
+if ( isset($system) && $system != "" ) {
+    $schemejson["operatingSystem"] = $system;
+}
+if ( isset($schema_application_category) && $schema_application_category != "" ) {
+    $schemejson["applicationCategory"] = $schema_application_category;
+}
 
 $schemejson = json_encode(
   $schemejson,

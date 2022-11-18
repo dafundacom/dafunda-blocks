@@ -22,6 +22,7 @@ specifiers:
   '@wordpress/blocks': ^11.21.0
   '@wordpress/browserslist-config': ^5.5.0
   '@wordpress/components': ^21.3.0
+  '@wordpress/compose': ^5.20.0
   '@wordpress/data': ^7.6.0
   '@wordpress/e2e-test-utils': ^8.6.0
   '@wordpress/element': ^4.20.0
@@ -73,7 +74,9 @@ specifiers:
   jest-circus: ^29.3.1
   lint-staged: ^13.0.3
   merge-stream: ^2.0.0
+  nanoid: ^4.0.0
   node-sass: ^7.0.3
+  picocolors: ^1.0.0
   postcss: ^8.4.19
   postcss-import: ^15.0.0
   postcss-loader: ^7.0.1
@@ -123,6 +126,7 @@ devDependencies:
   '@wordpress/blocks': 11.21.0_react@18.2.0
   '@wordpress/browserslist-config': 5.5.0
   '@wordpress/components': 21.3.0_mqvh5p7ejg4taogoj6tpk3gd5a
+  '@wordpress/compose': 5.20.0_react@18.2.0
   '@wordpress/data': 7.6.0_react@18.2.0
   '@wordpress/e2e-test-utils': 8.6.0_deccptpvuaqxxilvbol2ktx5hm
   '@wordpress/element': 4.20.0
@@ -174,7 +178,9 @@ devDependencies:
   jest-circus: 29.3.1
   lint-staged: 13.0.3
   merge-stream: 2.0.0
+  nanoid: 4.0.0
   node-sass: 7.0.3
+  picocolors: 1.0.0
   postcss: 8.4.19
   postcss-import: 15.0.0_postcss@8.4.19
   postcss-loader: 7.0.1_upg3rk2kpasnbk27hkqapxaxfq
@@ -12377,6 +12383,12 @@ packages:
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: true
+
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
     hasBin: true
     dev: true
 
