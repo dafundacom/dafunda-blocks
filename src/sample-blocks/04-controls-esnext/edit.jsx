@@ -6,24 +6,24 @@ import {
   AlignmentToolbar,
   BlockControls,
   useBlockProps,
-} from '@wordpress/block-editor'
+} from "@wordpress/block-editor";
 
 const Edit = (props) => {
-  const blockProps = useBlockProps()
+  const blockProps = useBlockProps();
   const {
     attributes: { content, alignment },
     className,
-  } = props
+  } = props;
 
   const onChangeContent = (newContent) => {
-    props.setAttributes({ content: newContent })
-  }
+    props.setAttributes({ content: newContent });
+  };
 
   const onChangeAlignment = (newAlignment) => {
     props.setAttributes({
-      alignment: newAlignment === undefined ? 'none' : newAlignment,
-    })
-  }
+      alignment: newAlignment === undefined ? "none" : newAlignment,
+    });
+  };
 
   return (
     <div {...blockProps}>
@@ -35,12 +35,12 @@ const Edit = (props) => {
       <RichText
         className={className}
         style={{ textAlign: alignment }}
-        tagName='p'
+        tagName="p"
         onChange={onChangeContent}
         value={content}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;

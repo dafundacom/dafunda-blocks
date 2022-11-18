@@ -1,14 +1,14 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prefer-stateless-function */
-import { Component } from 'react'
-import { ButtonAddStep } from '../../../../components/button_add_step'
-import { ButtonUpDownDelete } from '../../../../components/button_up_down_delete'
+import { Component } from "react";
+import { ButtonAddStep } from "../../../../components/button_add_step";
+import { ButtonUpDownDelete } from "../../../../components/button_up_down_delete";
 
-import { ListWrapper, HowToStep } from './index'
+import { ListWrapper, HowToStep } from "./index";
 
-const { __ } = wp.i18n // Import __() from wp.i18n
+const { __ } = wp.i18n; // Import __() from wp.i18n
 
-const { RichText } = wp.blockEditor || wp.editor
+const { RichText } = wp.blockEditor || wp.editor;
 
 export class HowToSection extends Component {
   //   constructor(props) {
@@ -34,15 +34,15 @@ export class HowToSection extends Component {
       blockIsSelected,
       updateState,
       currentStep,
-    } = this.props
+    } = this.props;
 
     return (
-      <li className='howto-section'>
-        <div className='relative'>
+      <li className="howto-section">
+        <div className="relative">
           <RichText
             keepPlaceholderOnFocus
             tagName={sectionTag}
-            placeholder={__('Section name goes here')}
+            placeholder={__("Section name goes here")}
             value={sectionName}
             onChange={(sectionName) => editSection({ sectionName, steps })}
           />
@@ -54,7 +54,7 @@ export class HowToSection extends Component {
           />
         </div>
         <ListWrapper
-          className='howto-steps-list pl-0'
+          className="howto-steps-list pl-0"
           listStyle={sectionListStyle}
         >
           {steps.map((step, i) => (
@@ -76,20 +76,20 @@ export class HowToSection extends Component {
                     Object.assign(steps[i], newStep),
                     ...steps.slice(i + 1),
                   ],
-                })
+                });
               }}
               deleteStep={() => {
-                const newSteps = [...steps.slice(0, i), ...steps.slice(i + 1)]
+                const newSteps = [...steps.slice(0, i), ...steps.slice(i + 1)];
                 newSteps.forEach((step, j) => {
                   // step.anchor = `section${sectionNum}step${j}`
-                  newSteps[j].anchor = `section${sectionNum}step${j}`
-                })
+                  newSteps[j].anchor = `section${sectionNum}step${j}`;
+                });
                 editSection({
                   sectionName,
                   steps: [...steps.slice(0, i), ...steps.slice(i + 1)],
-                })
+                });
                 if (currentStep === `section-${sectionNum}-step-${i}`) {
-                  updateState({ currentStep: '' })
+                  updateState({ currentStep: "" });
                 }
               }}
               moveUp={() => {
@@ -99,16 +99,16 @@ export class HowToSection extends Component {
                     steps[i],
                     steps[i - 1],
                     ...steps.slice(i + 1),
-                  ]
+                  ];
                   newSteps.forEach((step, j) => {
                     //   step.anchor = `section${sectionNum}step${j}`
-                    newSteps[j].anchor = `section${sectionNum}step${j}`
-                  })
-                  editSection({ sectionName, steps: newSteps })
+                    newSteps[j].anchor = `section${sectionNum}step${j}`;
+                  });
+                  editSection({ sectionName, steps: newSteps });
                   // set value of currentStep to recently-moved step
                   updateState({
                     currentStep: `section-${sectionNum}-step-${i - 1}`,
-                  })
+                  });
                 }
               }}
               moveDown={() => {
@@ -118,15 +118,15 @@ export class HowToSection extends Component {
                     steps[i + 1],
                     steps[i],
                     ...steps.slice(i + 2),
-                  ]
+                  ];
                   newSteps.forEach((step, j) => {
                     //   step.anchor = `section${sectionNum}step${j}`
-                    newSteps[j].anchor = `section${sectionNum}step${j}`
-                  })
-                  editSection({ sectionName, steps: newSteps })
+                    newSteps[j].anchor = `section${sectionNum}step${j}`;
+                  });
+                  editSection({ sectionName, steps: newSteps });
                   updateState({
                     currentStep: `section-${sectionNum}-step-${i + 1}`,
-                  })
+                  });
                 }
               }}
               blockIsSelected={blockIsSelected}
@@ -146,23 +146,23 @@ export class HowToSection extends Component {
                   anchor: `section${sectionNum}step${steps.length}`,
                   stepPic: {
                     img: -1,
-                    alt: '',
-                    url: '',
+                    alt: "",
+                    url: "",
                     width: 0,
-                    float: 'none',
+                    float: "none",
                   },
-                  direction: '',
-                  tip: '',
-                  title: '',
+                  direction: "",
+                  tip: "",
+                  title: "",
                   hasVideoClip: false,
                   videoClipStart: 0,
                   videoClipEnd: 0,
                 },
               ],
-            })
+            });
           }}
         />
       </li>
-    )
+    );
   }
 }
