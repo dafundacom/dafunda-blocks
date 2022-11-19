@@ -13,23 +13,12 @@ const { ToggleControl, PanelBody, SelectControl, TabPanel, TextControl } =
 export const InspectorPanel = (props) => {
   const {
     attributes: {
-      title,
-      description,
-      imageurl,
-      imageid,
-      imagealt,
-      url,
-      buttonText,
       buttonColor,
       buttonHoverColor,
       buttonTextColor,
       buttonTextHoverColor,
       buttonRounded,
-      addNofollow,
-      openInNewTab,
       buttonAlign,
-      addSponsored,
-
       schemaApplicationCategory,
       version,
       system,
@@ -72,8 +61,6 @@ export const InspectorPanel = (props) => {
     ],
   ];
 
-  const tagList = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong"];
-
   return (
     <InspectorControls>
       <PanelBody title={__("Download Button Setting")}>
@@ -89,7 +76,6 @@ export const InspectorPanel = (props) => {
         <TextControl
           label="version"
           labelPosition="top"
-          // placeholder="0.0.1"
           value={version}
           type="text"
           className={`mb-4 capitalize`}

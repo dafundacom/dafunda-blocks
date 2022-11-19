@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-globals */
 /* eslint-disable no-prototype-builtins */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { registerBlockType } from "@wordpress/blocks";
 import { withSelect } from "@wordpress/data";
 import {
@@ -43,14 +41,6 @@ const { attributes } = config;
 registerBlockType(config.name, {
   ...config,
   icon: Icon,
-  //   edit: withSelect((select, ownProps) => {
-  //     const { getBlock, getClientIdsWithDescendants } = select('core/block-editor') || select('core/editor')
-  //     return {
-  //       block: getBlock(ownProps.clientId),
-  //       getBlock,
-  //       getClientIdsWithDescendants,
-  //     }
-  //   })(Edit),
   edit: compose([
     withState({
       editable: "",
@@ -209,7 +199,6 @@ registerBlockType(config.name, {
       }
     };
 
-    // eslint-disable-next-line consistent-return
     const getCurrentAlignment = (target) => {
       switch (target) {
         case "reviewTitle":
@@ -485,7 +474,7 @@ registerBlockType(config.name, {
         <ul className="review_cuisine_list">
           {cuisines.length > 0 ? (
             cuisines.map((c, i) => (
-              <li>
+              <li key={i}>
                 {c}
                 <span
                   className="dashicons dashicons-dismiss"
@@ -667,9 +656,10 @@ registerBlockType(config.name, {
               }}
             />
             {setEventEndDate && [
-              <h3>{__("Event end date")}</h3>,
+              <h3 key={i}>{__("Event end date")}</h3>,
               <DatePicker
                 currentDate={eventEndDate * 1000}
+                key={i}
                 onChange={(newDate) =>
                   setAttributes({
                     eventEndDate: Math.floor(Date.parse(newDate) / 1000),

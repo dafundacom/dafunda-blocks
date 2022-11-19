@@ -1,15 +1,7 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/no-deprecated */
-/* eslint-disable react/sort-comp */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-useless-constructor */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable max-classes-per-file */
 import { RichText, MediaUpload, URLInput } from "@wordpress/block-editor";
 import { Button, Dashicon } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { Component, createRef } from "react";
-// import { InspectorPanel } from './components'
 
 import { removeIcon } from "../icon";
 
@@ -109,6 +101,7 @@ export class Stars extends Component {
     });
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillReceiveProps(newProps) {
     const { value, activeStarColor } = newProps;
     if (this.props.onHover || this.state.displayValue !== value) {
