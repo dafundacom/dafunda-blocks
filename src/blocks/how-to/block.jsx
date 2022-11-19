@@ -11,7 +11,6 @@ registerBlockType(config.name, {
   edit: withSelect((select, ownProps) => {
     const { getBlock, getClientIdsWithDescendants } =
       select("core/block-editor") || select("core/editor");
-
     return {
       block: getBlock(ownProps.clientId),
       getBlock,

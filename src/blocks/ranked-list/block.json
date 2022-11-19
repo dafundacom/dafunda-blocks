@@ -1,16 +1,1 @@
-{
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 2,
-  "title": "Ranked List (Dafunda Blocks)",
-  "name": "dbe/ranked-list",
-  "version": "0.0.1",
-  "keywords": ["dbe", "Dafunda Blocks", "dafunda-blocks", "Ranked List"],
-  "category": "widgets",
-  "attributes": {
-    "blockID": { "type": "string", "default": "" },
-    "lists": { "type": "array", "default": [] }
-  },
-  "supports": { "html": false, "multiple": false },
-  "editorScript": "file:./block.jsx",
-  "viewScript": "file:./scripts/index.js"
-}
+{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"title":"Ranked List (Dafunda Blocks)","name":"dbe/ranked-list","version":"0.0.1","keywords":["dbe","Dafunda Blocks","dafunda-blocks","Ranked List"],"category":"widgets","attributes":{"blockID":{"type":"string","default":""},"lists":{"type":"array","default":[]}},"supports":{"html":false,"multiple":false},"editorScript":"file:./block.jsx","viewScript":"file:./scripts/index.js"}

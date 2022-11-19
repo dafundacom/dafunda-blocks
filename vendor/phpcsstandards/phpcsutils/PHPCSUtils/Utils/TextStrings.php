@@ -22,8 +22,9 @@ use PHPCSUtils\Utils\GetTokensAsString;
  * Utility functions for working with text string tokens.
  *
  * @since 1.0.0
+ * @since 1.0.0-alpha4 Dropped support for PHPCS < 3.7.1.
  */
-class TextStrings
+final class TextStrings
 {
 
     /**
@@ -102,10 +103,6 @@ class TextStrings
     /**
      * Get the stack pointer to the end of a - potentially multi-line - text string.
      *
-     * This method also correctly handles a particular type of double quoted string
-     * with an embedded expression which is incorrectly tokenized in PHPCS itself prior to
-     * PHPCS version 3.7.0.
-     *
      * @see \PHPCSUtils\Utils\TextStrings::getCompleteTextString() Retrieve the contents of a complete - potentially
      *                                                             multi-line - text string.
      *
@@ -169,117 +166,14 @@ class TextStrings
 
         $lastPtr = ($current - 1);
 
-        if ($targetType === \T_DOUBLE_QUOTED_STRING) {
-            /*
-             * BC for PHPCS < 3.7.0.
-             * Prior to PHPCS 3.7.0, when a select group of embedded variables/expressions was encountered
-             * in a double quoted string, the embed would not be tokenized as part of the T_DOUBLE_QUOTED_STRING,
-             * but would still have the PHP native tokenization.
-             */
-            $end = self::getEndOfDoubleQuotedString($phpcsFile, $lastPtr);
-            if ($end !== $lastPtr) {
-                // Check if the double quoted string continues after the end of the embed.
-                if ($tokens[$end]['code'] === \T_DOUBLE_QUOTED_STRING) {
-                    // Handles `"Text {embed} Text` followed by new line and additional text.
-                    $end = self::getEndOfCompleteTextString($phpcsFile, $end);
-                } elseif ($tokens[($end + 1)]['code'] === \T_DOUBLE_QUOTED_STRING) {
-                    // Handles `"Text {multi-line embed}` followed by additional text.
-                    $end = self::getEndOfCompleteTextString($phpcsFile, ($end + 1));
-                }
-            }
-
-            $lastPtr = $end;
-        }
-
         Cache::set($phpcsFile, __METHOD__, $stackPtr, $lastPtr);
         return $lastPtr;
     }
 
     /**
-     * Get the stack pointer to the end of a (single) double quoted text string.
-     *
-     * This method provides a protection layer against a tokenizer bug in PHPCS < 3.7.0.
-     * When a select group of embedded variables/expressions was encountered in a double quoted string,
-     * PHPCS would not tokenize the double quoted string as one token per line, but instead the original
-     * PHP native tokens would be included in the token stream.
-     * This throws off the scope map (which can't be helped), but also makes examining
-     * the contents of double quoted strings difficult.
-     *
-     * This method can help remedy that.
-     *
-     * Note: If the embed is spread over multiple lines, the last token of the mistokenized
-     * part of the embed will be returned. The double quoted string _may_ still continue after that.
-     *
-     * @link https://github.com/squizlabs/PHP_CodeSniffer/pull/3604 PHPCS PR #3604
-     *
-     * @see \PHPCSUtils\Utils\GetTokensAsString                         Methods to retrieve the contents of the
-     *                                                                  combined tokens.
-     * @see \PHPCSUtils\Utils\TextStrings::getEndOfCompleteTextString() Get the stack pointer to the end of a complete
-     *                                                                  - potentially multi-line - text string.
-     * @see \PHPCSUtils\Utils\TextStrings::getCompleteTextString()      Retrieve the contents of a complete -
-     *                                                                  - potentially multi-line - text string.
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
-     * @param int                         $stackPtr  Pointer to the first text string token
-     *                                               of a - potentially multi-token - double
-     *                                               quoted text string.
-     *
-     * @return int Stack pointer to the last token (which may be the original stack pointer).
-     *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified position is not a
-     *                                                      T_DOUBLE_QUOTED_STRING token.
-     */
-    public static function getEndOfDoubleQuotedString(File $phpcsFile, $stackPtr)
-    {
-        $tokens = $phpcsFile->getTokens();
-
-        if (isset($tokens[$stackPtr]) === false || $tokens[$stackPtr]['code'] !== \T_DOUBLE_QUOTED_STRING) {
-            throw new RuntimeException('$stackPtr must be of type T_DOUBLE_QUOTED_STRING');
-        }
-
-        $next = ($stackPtr + 1);
-        if (isset($tokens[$next]) === false || $tokens[$next]['code'] !== \T_DOLLAR_OPEN_CURLY_BRACES) {
-            // This code is not affected by the tokenizer bug.
-            return $stackPtr;
-        }
-
-        /*
-         * BC for PHPCS < 3.7.0.
-         */
-        $nestedBraces = [$next];
-        for ($next = ($next + 1); $next < $phpcsFile->numTokens; $next++) {
-            if ($tokens[$next]['code'] === \T_DOUBLE_QUOTED_STRING
-                && empty($nestedBraces) === true
-            ) {
-                break;
-            }
-
-            if (\strpos($tokens[$next]['content'], '{') !== false) {
-                $nestedBraces[] = $next;
-            }
-
-            if (\strpos($tokens[$next]['content'], '}') !== false) {
-                \array_pop($nestedBraces);
-            }
-        }
-
-        if ($next === $phpcsFile->numTokens) {
-            return ($phpcsFile->numTokens - 1);
-        }
-
-        if ($tokens[$next]['line'] > $tokens[$stackPtr]['line']) {
-            return ($next - 1);
-        }
-
-        return self::getEndOfDoubleQuotedString($phpcsFile, $next);
-    }
-
-    /**
      * Strip text delimiter quotes from an arbitrary text string.
      *
-     * Intended for use with the "contents" of a `T_CONSTANT_ENCAPSED_STRING` / `T_DOUBLE_QUOTED_STRING`.
+     * Intended for use with the "content" of a `T_CONSTANT_ENCAPSED_STRING` / `T_DOUBLE_QUOTED_STRING`.
      *
      * - Prevents stripping mis-matched quotes.
      * - Prevents stripping quotes from the textual content of the text string.
@@ -301,6 +195,8 @@ class TextStrings
      * Note: this function gets the complete variables/expressions _as they are embedded_,
      * i.e. including potential curly brace wrappers, array access, method calls etc.
      *
+     * @since 1.0.0-alpha4
+     *
      * @param string $text The contents of a T_DOUBLE_QUOTED_STRING or T_HEREDOC token.
      *
      * @return array<int, string> Array of encountered variable names/expressions with the offset at which
@@ -313,6 +209,8 @@ class TextStrings
 
     /**
      * Strip embedded variables/expressions from an arbitrary string.
+     *
+     * @since 1.0.0-alpha4
      *
      * @param string $text The contents of a T_DOUBLE_QUOTED_STRING or T_HEREDOC token.
      *
@@ -336,8 +234,11 @@ class TextStrings
      *
      * This method handles all types of embeds, including recognition of whether an embed is escaped or not.
      *
-     * @link https://www.php.net/manual/en/language.types.string.php#language.types.string.parsing
-     * @link https://wiki.php.net/rfc/deprecate_dollar_brace_string_interpolation
+     * @link https://www.php.net/language.types.string#language.types.string.parsing PHP Manual on string parsing
+     * @link https://wiki.php.net/rfc/deprecate_dollar_brace_string_interpolation    PHP RFC on deprecating select
+     *                                                                               string interpolation syntaxes
+     *
+     * @since 1.0.0-alpha4
      *
      * @param string $text The contents of a T_DOUBLE_QUOTED_STRING or T_HEREDOC token.
      *

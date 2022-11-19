@@ -1,9 +1,9 @@
 <div class="ranked-list " id="ranked-list-<?= $blockID ?>">
     <ol class="ranked-list p-0">
-    <?php foreach ( $lists as $index => $list ) : ?>
+    <?php foreach ($lists as $index => $list) : ?>
         <li class="ranked-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6" data-index="<?= $index ?>">
             <div class="relative aspect-[16/7] object-cover object-center w-full overflow-hidden rounded-t-lg">
-                <?php if ( isset($list["imageurl"]) && $list["imageurl"] != "" ) : ?>
+                <?php if (isset($list["imageurl"]) && $list["imageurl"] != "") : ?>
                     <figure>
                         <img class="w-full" src="<?= $list["imageurl"] ?>" />
                     </figure>
@@ -23,9 +23,13 @@
 
             <?php
             $userVoted = "";
-            if (in_array(get_current_user_id(), $list["likes"])) $userVoted = "like";
-            if (in_array(get_current_user_id(), $list["dislikes"])) $userVoted = "dislike";
-            ?>
+        if (in_array(get_current_user_id(), $list["likes"])) {
+            $userVoted = "like";
+        }
+        if (in_array(get_current_user_id(), $list["dislikes"])) {
+            $userVoted = "dislike";
+        }
+        ?>
             <div class="p-5 flex ranked-list-vote w-full justify-center " data-voted="<?= $userVoted ?>">
                 <button type="button" class="ranked-list-vote-button flex flex-wrap items-start w-fit opacity-50 hover:shadow-none bg-transparent <?= in_array(get_current_user_id(), $list["likes"]) ? "opacity-80" : "" ?> <?= in_array(get_current_user_id(), $list["dislikes"]) ? "opacity-30" : "" ?>" data-action="like">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block translate-y-[-2px] text-gray-700 " viewBox="0 0 20 20" fill="currentColor">
@@ -45,7 +49,7 @@
                 </button>
             </div>
 
-                <?php if ( isset($list["description"]) ) : ?>
+                <?php if (isset($list["description"])) : ?>
                     <div class="recomendasi-list-description p-5 pt-0">
                         <p class="w-full my-0 text-base"><?= $list["description"] ?? "" ?></p>
                     </div>
