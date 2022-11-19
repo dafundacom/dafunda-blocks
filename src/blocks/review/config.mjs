@@ -1,21 +1,21 @@
-import { __ } from '@wordpress/i18n'
-import slug from 'slug'
-import base_config from '../../config.mjs'
+import { __ } from "@wordpress/i18n";
+import slug from "slug";
+import base_config from "../../config.mjs";
 
-const NAME = 'Review'
+const NAME = "Review";
 
 const config = {
-  $schema: 'https://schemas.wp.org/trunk/block.json',
+  $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 2,
   title: __(`${NAME} (${base_config.title})`),
   name: `${base_config.prefix}/${slug(NAME)}`,
-  version: '0.0.1',
+  version: "0.0.1",
   keywords: [...base_config.keywords.map((v) => __(v)), __(NAME)],
   category: base_config.category,
   attributes: {
     blockID: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     ID: {
       type: "string",
@@ -339,8 +339,8 @@ const config = {
     html: false,
     multiple: false,
   },
-  editorScript: 'file:./block.jsx',
-  viewScript: 'file:./scripts/index.js',
-}
+  editorScript: "file:./block.jsx",
+  viewScript: "file:./scripts/index.js",
+};
 
-export default config
+export default config;
