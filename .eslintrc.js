@@ -13,6 +13,7 @@ module.exports = {
     {
       files: ["*.js", "*.jsx", "*.mjs"],
       rules: {
+        "max-len": "off",
         "no-undef": "off",
         "no-shadow": "off",
         "no-nested-ternary": "off",

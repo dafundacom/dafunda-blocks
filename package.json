@@ -39,7 +39,6 @@
     "prettier": "prettier"
   },
   "dependencies": {
-    "cssnano": "^5.1.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -61,7 +60,9 @@
     "@wordpress/blocks": "^11.21.0",
     "@wordpress/browserslist-config": "^5.5.0",
     "@wordpress/components": "^22.1.0",
+    "@wordpress/compose": "^5.20.0",
     "@wordpress/data": "^7.6.0",
+    "@wordpress/e2e-test-utils": "^8.6.0",
     "@wordpress/element": "^4.20.0",
     "@wordpress/i18n": "^4.22.0",
     "@wordpress/prettier-config": "^2.5.0",
@@ -77,6 +78,9 @@
     "concurrently": "^7.5.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.2",
+    "cssnano": "^5.1.14",
+    "nanoid": "^4.0.0",
+    "picocolors": "^1.0.0",
     "esbuild": "^0.15.14",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",

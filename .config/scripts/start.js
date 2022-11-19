@@ -20,3 +20,13 @@ const { result } = concurrently(
     cwd: path.resolve(),
   }
 );
+
+function success(params) {
+  console.log("success");
+  // console.log(params);
+}
+function failure(params) {
+  console.log("failure");
+  // console.log(params);
+}
+result.then(success, failure);
