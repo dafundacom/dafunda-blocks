@@ -14,7 +14,6 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCSUtils\BackCompat\BCFile;
-use PHPCSUtils\BackCompat\BCTokens;
 use PHPCSUtils\Internal\Cache;
 use PHPCSUtils\Tokens\Collections;
 use PHPCSUtils\Utils\Conditions;
@@ -28,8 +27,9 @@ use PHPCSUtils\Utils\Parentheses;
  * @link https://www.php.net/language.namespaces PHP Manual on namespaces.
  *
  * @since 1.0.0
+ * @since 1.0.0-alpha4 Dropped support for PHPCS < 3.7.1.
  */
-class Namespaces
+final class Namespaces
 {
 
     /**
@@ -58,17 +58,16 @@ class Namespaces
              * Set up array of tokens which can only be used in combination with the keyword as operator
              * and which cannot be confused with other keywords.
              */
-            $findAfter = BCTokens::assignmentTokens()
-                + BCTokens::comparisonTokens()
-                + BCTokens::operators()
+            $findAfter = Tokens::$assignmentTokens
+                + Tokens::$comparisonTokens
+                + Tokens::$operators
                 + Tokens::$castTokens
                 + Tokens::$blockOpeners
                 + Collections::incrementDecrementOperators()
-                + Collections::objectOperators();
+                + Collections::objectOperators()
+                + Collections::shortArrayListOpenTokensBC();
 
-            $findAfter[\T_OPEN_CURLY_BRACKET]  = \T_OPEN_CURLY_BRACKET;
-            $findAfter[\T_OPEN_SQUARE_BRACKET] = \T_OPEN_SQUARE_BRACKET;
-            $findAfter[\T_OPEN_SHORT_ARRAY]    = \T_OPEN_SHORT_ARRAY;
+            $findAfter[\T_OPEN_CURLY_BRACKET] = \T_OPEN_CURLY_BRACKET;
         }
 
         $tokens = $phpcsFile->getTokens();
@@ -100,14 +99,14 @@ class Namespaces
         $start = BCFile::findStartOfStatement($phpcsFile, $stackPtr);
         if ($start === $stackPtr
             && ($tokens[$next]['code'] === \T_STRING
-               || $tokens[$next]['type'] === 'T_NAME_QUALIFIED'
+               || $tokens[$next]['code'] === \T_NAME_QUALIFIED
                || $tokens[$next]['code'] === \T_OPEN_CURLY_BRACKET)
         ) {
             return 'declaration';
         }
 
         if (($tokens[$next]['code'] === \T_NS_SEPARATOR
-            || $tokens[$next]['type'] === 'T_NAME_FULLY_QUALIFIED') // PHP 8.0 parse error.
+            || $tokens[$next]['code'] === \T_NAME_FULLY_QUALIFIED) // PHP 8.0 parse error.
             && ($start !== $stackPtr
                 || $phpcsFile->findNext($findAfter, ($stackPtr + 1), null, false, null, true) !== false)
         ) {
@@ -285,6 +284,7 @@ class Namespaces
             \T_CLOSE_SHORT_ARRAY,
             \T_CLOSE_SQUARE_BRACKET,
             \T_DOC_COMMENT_CLOSE_TAG,
+            \T_ATTRIBUTE_END,
         ];
         $returnValue = false;
 
@@ -298,12 +298,6 @@ class Namespaces
                 // Stop if we encounter a scoped namespace declaration as we already know we're not in one.
                 if (isset($tokens[$prev]['scope_condition']) === true
                     && $tokens[$tokens[$prev]['scope_condition']]['code'] === \T_NAMESPACE
-                    /*
-                     * BC: Work around a bug where curlies for variable variables received an incorrect
-                     * and irrelevant scope condition in PHPCS < 3.3.0.
-                     * {@link https://github.com/squizlabs/PHP_CodeSniffer/issues/1882}
-                     */
-                    && self::isDeclaration($phpcsFile, $tokens[$prev]['scope_condition']) === true
                 ) {
                     break;
                 }
@@ -330,6 +324,12 @@ class Namespaces
                 continue;
             } elseif (isset($tokens[$prev]['parenthesis_opener']) === true) {
                 $prev = $tokens[$prev]['parenthesis_opener'];
+                continue;
+            }
+
+            // Skip over potentially large attributes.
+            if (isset($tokens[$prev]['attribute_opener'])) {
+                $prev = $tokens[$prev]['attribute_opener'];
                 continue;
             }
 

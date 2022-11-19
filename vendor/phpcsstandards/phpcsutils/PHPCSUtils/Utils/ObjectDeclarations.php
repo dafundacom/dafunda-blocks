@@ -19,18 +19,19 @@ use PHPCSUtils\Utils\GetTokensAsString;
 /**
  * Utility functions for use when examining object declaration statements.
  *
- * @since 1.0.0 The `ObjectDeclarations::get(Declaration)Name()`,
- *              `ObjectDeclarations::getClassProperties()`, `ObjectDeclarations::findExtendedClassName()`
- *              and `ObjectDeclarations::findImplementedInterfaceNames()` methods are based on and
- *              inspired by the methods of the same name in the PHPCS native
- *              `PHP_CodeSniffer\Files\File` class.
- *              Also see {@see \PHPCSUtils\BackCompat\BCFile}.
+ * @since 1.0.0        The `ObjectDeclarations::get(Declaration)Name()`,
+ *                     `ObjectDeclarations::getClassProperties()`, `ObjectDeclarations::findExtendedClassName()`
+ *                     and `ObjectDeclarations::findImplementedInterfaceNames()` methods are based on and
+ *                     inspired by the methods of the same name in the PHPCS native
+ *                     `PHP_CodeSniffer\Files\File` class.
+ *                     Also see {@see \PHPCSUtils\BackCompat\BCFile}.
+ * @since 1.0.0-alpha4 Dropped support for PHPCS < 3.7.1.
  */
-class ObjectDeclarations
+final class ObjectDeclarations
 {
 
     /**
-     * Retrieves the declaration name for classes, interfaces, traits, and functions.
+     * Retrieves the declaration name for classes, interfaces, traits, enums and functions.
      *
      * Main differences with the PHPCS version:
      * - Defensive coding against incorrect calls to this method.
@@ -43,27 +44,24 @@ class ObjectDeclarations
      *   Using this version of the utility method, either the complete name (invalid or not) will
      *   be returned or `null` in case of no name (parse error).
      *
-     * Note:
-     * - For ES6 classes in combination with PHPCS 2.x, passing a `T_STRING` token to
-     *   this method will be accepted for JS files.
-     * - Support for JS ES6 method syntax has not been back-filled for PHPCS < 3.0.0.
-     *
      * @see \PHP_CodeSniffer\Files\File::getDeclarationName()   Original source.
      * @see \PHPCSUtils\BackCompat\BCFile::getDeclarationName() Cross-version compatible version of the original.
      *
      * @since 1.0.0
+     * @since 1.0.0-alpha4 Added support for PHP 8.1 enums.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the declaration token
      *                                               which declared the class, interface,
-     *                                               trait, or function.
+     *                                               trait, enum or function.
      *
-     * @return string|null The name of the class, interface, trait, or function;
+     * @return string|null The name of the class, interface, trait, enum, or function;
      *                     or `NULL` if the passed token doesn't exist, the function or
      *                     class is anonymous or in case of a parse error/live coding.
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified token is not of type
-     *                                                      `T_FUNCTION`, `T_CLASS`, `T_TRAIT`, or `T_INTERFACE`.
+     *                                                      `T_FUNCTION`, `T_CLASS`, `T_ANON_CLASS`,
+     *                                                      `T_CLOSURE`, `T_TRAIT`, `T_ENUM` or `T_INTERFACE`.
      */
     public static function getName(File $phpcsFile, $stackPtr)
     {
@@ -77,24 +75,15 @@ class ObjectDeclarations
 
         $tokenCode = $tokens[$stackPtr]['code'];
 
-        /*
-         * BC: Work-around JS ES6 classes not being tokenized as T_CLASS in PHPCS < 3.0.0.
-         */
-        if (isset($phpcsFile->tokenizerType)
-            && $phpcsFile->tokenizerType === 'JS'
-            && $tokenCode === \T_STRING
-            && $tokens[$stackPtr]['content'] === 'class'
-        ) {
-            $tokenCode = \T_CLASS;
-        }
-
         if ($tokenCode !== \T_FUNCTION
             && $tokenCode !== \T_CLASS
             && $tokenCode !== \T_INTERFACE
             && $tokenCode !== \T_TRAIT
+            && $tokenCode !== \T_ENUM
         ) {
             throw new RuntimeException(
-                'Token type "' . $tokens[$stackPtr]['type'] . '" is not T_FUNCTION, T_CLASS, T_INTERFACE or T_TRAIT'
+                'Token type "' . $tokens[$stackPtr]['type']
+                . '" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM'
             );
         }
 
@@ -123,6 +112,7 @@ class ObjectDeclarations
         $exclude[] = \T_OPEN_PARENTHESIS;
         $exclude[] = \T_OPEN_CURLY_BRACKET;
         $exclude[] = \T_BITWISE_AND;
+        $exclude[] = \T_COLON; // Backed enums.
 
         $nameStart = $phpcsFile->findNext($exclude, ($stackPtr + 1), $stopPoint, true);
         if ($nameStart === false) {
@@ -133,17 +123,7 @@ class ObjectDeclarations
         $tokenAfterNameEnd = $phpcsFile->findNext($exclude, $nameStart, $stopPoint);
 
         if ($tokenAfterNameEnd === false) {
-            $content = null;
-
-            /*
-             * BC: In PHPCS 2.6.0, in case of live coding, the last token in a file will be tokenized
-             * as T_STRING, but won't have the `content` index set.
-             */
-            if (isset($tokens[$nameStart]['content'])) {
-                $content = $tokens[$nameStart]['content'];
-            }
-
-            return $content;
+            return $tokens[$nameStart]['content'];
         }
 
         // Name starts with number, so is composed of multiple tokens.
@@ -158,11 +138,14 @@ class ObjectDeclarations
      *   - Handling of PHPCS annotations.
      *   - Handling of unorthodox docblock placement.
      * - Defensive coding against incorrect calls to this method.
+     * - Support for PHP 8.2 readonly classes.
+     * - Additional `'abstract_token'`, `'final_token'`, and `'readonly_token'` indexes in the return array.
      *
      * @see \PHP_CodeSniffer\Files\File::getClassProperties()   Original source.
      * @see \PHPCSUtils\BackCompat\BCFile::getClassProperties() Cross-version compatible version of the original.
      *
      * @since 1.0.0
+     * @since 1.0.0-alpha4 Added support for the PHP 8.2 readonly keyword.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position in the stack of the `T_CLASS`
@@ -172,8 +155,15 @@ class ObjectDeclarations
      *               The format of the return value is:
      *               ```php
      *               array(
-     *                 'is_abstract' => false, // TRUE if the abstract keyword was found.
-     *                 'is_final'    => false, // TRUE if the final keyword was found.
+     *                 'is_abstract'    => bool,      // TRUE if the abstract keyword was found.
+     *                 'abstract_token' => int|false, // The stack pointer to the `abstract` keyword or
+     *                                                // FALSE if the abstract keyword was not found.
+     *                 'is_final'       => bool,      // TRUE if the final keyword was found.
+     *                 'final_token'    => int|false, // The stack pointer to the `final` keyword or
+     *                                                // FALSE if the abstract keyword was not found.
+     *                 'is_readonly'    => bool,      // TRUE if the readonly keyword was found.
+     *                 'readonly_token' => int|false, // The stack pointer to the `readonly` keyword or
+     *                                                // FALSE if the abstract keyword was not found.
      *               );
      *               ```
      *
@@ -190,8 +180,12 @@ class ObjectDeclarations
 
         $valid      = Collections::classModifierKeywords() + Tokens::$emptyTokens;
         $properties = [
-            'is_abstract' => false,
-            'is_final'    => false,
+            'is_abstract'    => false,
+            'abstract_token' => false,
+            'is_final'       => false,
+            'final_token'    => false,
+            'is_readonly'    => false,
+            'readonly_token' => false,
         ];
 
         for ($i = ($stackPtr - 1); $i > 0; $i--) {
@@ -201,11 +195,18 @@ class ObjectDeclarations
 
             switch ($tokens[$i]['code']) {
                 case \T_ABSTRACT:
-                    $properties['is_abstract'] = true;
+                    $properties['is_abstract']    = true;
+                    $properties['abstract_token'] = $i;
                     break;
 
                 case \T_FINAL:
-                    $properties['is_final'] = true;
+                    $properties['is_final']    = true;
+                    $properties['final_token'] = $i;
+                    break;
+
+                case \T_READONLY:
+                    $properties['is_readonly']    = true;
+                    $properties['readonly_token'] = $i;
                     break;
             }
         }
@@ -255,7 +256,7 @@ class ObjectDeclarations
     }
 
     /**
-     * Retrieves the names of the interfaces that the specified class implements.
+     * Retrieves the names of the interfaces that the specified class or enum implements.
      *
      * Main differences with the PHPCS version:
      * - Bugs fixed:
@@ -271,9 +272,10 @@ class ObjectDeclarations
      *                                                                     the original.
      *
      * @since 1.0.0
+     * @since 1.0.0-alpha4 Added support for PHP 8.1 enums.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The stack position of the class.
+     * @param int                         $stackPtr  The stack position of the class or enum token.
      *
      * @return array|false Array with names of the implemented interfaces or `FALSE` on
      *                     error or if there are no implemented interface names.
@@ -330,24 +332,13 @@ class ObjectDeclarations
 
         if (isset($tokens[$stackPtr]) === false
             || isset($allowedFor[$tokens[$stackPtr]['code']]) === false
+            || isset($tokens[$stackPtr]['scope_opener']) === false
         ) {
             return false;
         }
 
-        if (isset($tokens[$stackPtr]['scope_opener']) === true) {
-            $scopeOpener = $tokens[$stackPtr]['scope_opener'];
-        } else {
-            /*
-             * Work-around for a scope map tokenizer bug in PHPCS.
-             * {@link https://github.com/squizlabs/PHP_CodeSniffer/pull/3066}
-             */
-            $scopeOpener = $phpcsFile->findNext(\T_OPEN_CURLY_BRACKET, ($stackPtr + 1), null);
-            if ($scopeOpener === false) {
-                return false;
-            }
-        }
-
-        $keywordPtr = $phpcsFile->findNext($keyword, ($stackPtr + 1), $scopeOpener);
+        $scopeOpener = $tokens[$stackPtr]['scope_opener'];
+        $keywordPtr  = $phpcsFile->findNext($keyword, ($stackPtr + 1), $scopeOpener);
         if ($keywordPtr === false) {
             return false;
         }

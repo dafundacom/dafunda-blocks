@@ -1,11 +1,11 @@
 <?php
-// require_once DAFUNDA_BLOCKS_PATH . "/includes/class-dafunda-blocks-util.php";
 
 use DBE\Helper;
 
-if ( function_exists("generate_iso_duration_code") === false ) {
-    function generate_iso_duration_code( $rawInput ) {
-        if ( is_array($rawInput) ) {
+if (function_exists("generate_iso_duration_code") === false) {
+    function generate_iso_duration_code($rawInput)
+    {
+        if (is_array($rawInput)) {
             $inputArr = $rawInput;
         } else {
             $inputArr = array_fill(0, 7, 0);
@@ -23,7 +23,7 @@ if ( function_exists("generate_iso_duration_code") === false ) {
         if (
             $inputArr[2] > 0 &&
             count(
-                array_filter($inputArr, function ( $item ) {
+                array_filter($inputArr, function ($item) {
                     return $item > 0;
                 })
             ) > 1
@@ -32,12 +32,12 @@ if ( function_exists("generate_iso_duration_code") === false ) {
             $inputArr[2] = 0;
         }
 
-        foreach ( $inputArr as $i => $t ) {
-            if ( $i > 3 && $tIsAbsent ) {
+        foreach ($inputArr as $i => $t) {
+            if ($i > 3 && $tIsAbsent) {
                 $output .= "T";
                 $tIsAbsent = false;
             }
-            if ( $t > 0 ) {
+            if ($t > 0) {
                 $output .= round($t) . $unitLetters[ $i ]; //decimal values for time aren't recognized
             }
         }
@@ -45,13 +45,14 @@ if ( function_exists("generate_iso_duration_code") === false ) {
     }
 }
 
-if ( function_exists("dbe_convert_to_paragraphs") === false ) {
-    function dbe_convert_to_paragraphs( $string ) {
-        if ( $string === "" ) {
+if (function_exists("dbe_convert_to_paragraphs") === false) {
+    function dbe_convert_to_paragraphs($string)
+    {
+        if ($string === "") {
             return "";
         } else {
             $string = explode("<br>", $string);
-            $string = array_map(function ( $p ) {
+            $string = array_map(function ($p) {
                 return $p;
             }, $string);
             return implode("", $string);
@@ -59,7 +60,7 @@ if ( function_exists("dbe_convert_to_paragraphs") === false ) {
     }
 }
 
-if ( function_exists("dbe_render_how_to_supply") === false ) {
+if (function_exists("dbe_render_how_to_supply") === false) {
     function dbe_render_how_to_supply(
         $advancedMode,
         $includeSuppliesList,
@@ -72,19 +73,19 @@ if ( function_exists("dbe_render_how_to_supply") === false ) {
         $toolsIntro,
         $toolsListStyle
     ) {
-            if ( $advancedMode && $includeSuppliesList ) {
-			ob_start(); ?>
+        if ($advancedMode && $includeSuppliesList) {
+            ob_start(); ?>
             <hr>
             <<?= $secondLevelTag ?> class="mt-0">
                     <?= $suppliesIntro ?>
             </<?= $secondLevelTag ?>>
                 <?php $suppliesListStyleTag = $suppliesListStyle === "ordered" ? "ol" : "ul"; ?>
-                <?php if ( isset($supplies) && count($supplies) > 0 ) : ?>
+                <?php if (isset($supplies) && count($supplies) > 0) : ?>
                 <<?= $suppliesListStyleTag ?> class="howto-supplies-list pl-0">
-                    <?php foreach ( $supplies as $i => $s ) : ?>
+                    <?php foreach ($supplies as $i => $s) : ?>
                         <li class="howto-card p-3">
                             <p class="text-md mb-3"><?= $i + 1 ?> . <?= $s["name"] ?></p>
-                            <?php if ( $s["imageURL"] == "" ) : ?>
+                            <?php if ($s["imageURL"] == "") : ?>
                                 <div class="max-h-[1000px] md:max-h-[1600px] mx-auto">
                                     <figure class="w-full">
                                         <img src="<?= $s["imageURL"] ?>" class="mx-auto rounded-xl overflow-hidden" />
@@ -99,13 +100,13 @@ if ( function_exists("dbe_render_how_to_supply") === false ) {
             <?php endif; ?>
             <?php
             return ob_get_clean();
-                } else {
-		return "";
-                }
+        } else {
+            return "";
+        }
     }
 }
 
-if ( function_exists("dbe_render_how_to_tool") === false ) {
+if (function_exists("dbe_render_how_to_tool") === false) {
     function dbe_render_how_to_tool(
         $advancedMode,
         $includeSuppliesList,
@@ -118,20 +119,20 @@ if ( function_exists("dbe_render_how_to_tool") === false ) {
         $toolsIntro,
         $toolsListStyle
     ) {
-            if ( $advancedMode && $includeToolsList ) {
-			ob_start();
-			?>
+        if ($advancedMode && $includeToolsList) {
+            ob_start();
+            ?>
             <hr>
             <<?= $secondLevelTag ?> class="mt-0">
 			<?= $toolsIntro ?>
             </<?= $secondLevelTag ?>>
-            <?php if ( isset($tools) && count($tools) > 0 ) : ?>
+            <?php if (isset($tools) && count($tools) > 0) : ?>
                 <?php $toolsListStyleTag = $toolsListStyle === "ordered" ? "ol" : "ul"; ?>
                 <<?= $toolsListStyleTag ?> class="howto-tools-list pl-0">
-                    <?php foreach ( $tools as $i => $t ) : ?>
+                    <?php foreach ($tools as $i => $t) : ?>
                         <li class="howto-card p-3">
                             <p class="text-md mb-3"><?= $i + 1 ?> . <?= $t["name"] ?></p>
-                            <?php if ( $t["imageURL"] !== "" ) : ?>
+                            <?php if ($t["imageURL"] !== "") : ?>
                                 <div class="max-h-[1000px] md:max-h-[1600px] mx-auto">
                                     <figure class="w-full">
                                         <img src="<?= $t["imageURL"] ?>" class="mx-auto rounded-xl overflow-hidden" />
@@ -146,9 +147,9 @@ if ( function_exists("dbe_render_how_to_tool") === false ) {
             <?php endif; ?>
             <?php
             return ob_get_clean();
-                } else {
-		return "";
-                }
+        } else {
+            return "";
+        }
     }
 }
 
@@ -157,7 +158,7 @@ $dbe_device_id = Helper::get_device_id();
 $timeUnits = [ "Detik", "Menit", "Jam", "Hari", "Minggu", "Bulan", "Tahun" ];
 
 $header = "";
-if ( isset($supplies) && count($supplies) > 0 ) {
+if (isset($supplies) && count($supplies) > 0) {
     $header .= dbe_render_how_to_supply(
         $advancedMode,
         $includeSuppliesList,
@@ -172,7 +173,7 @@ if ( isset($supplies) && count($supplies) > 0 ) {
     );
 }
 
-if ( isset($tools) && count($tools) > 0 ) {
+if (isset($tools) && count($tools) > 0) {
     $header .= dbe_render_how_to_tool(
         $advancedMode,
         $includeSuppliesList,
@@ -193,14 +194,14 @@ $costDisplay = $showUnitFirst
 
 $totalTimeDisplay = "";
 
-foreach ( $totalTime as $i => $t ) {
-    if ( $t > 0 ) {
+foreach ($totalTime as $i => $t) {
+    if ($t > 0) {
         $text = $timeUnits[ 6 - $i ];
         $totalTimeDisplay .= $t . " " . $text . " ";
     }
 }
 $timeDisplay = "";
-if ( $totalTimeDisplay ) {
+if ($totalTimeDisplay) {
     $timeDisplay .= "<div>";
     $timeDisplay .= "<p class=\"mb-0\"> Sekitar " . $totalTimeDisplay . "</p>";
     $timeDisplay .= "</div>";
@@ -210,5 +211,5 @@ $ISOTotalTime = generate_iso_duration_code($totalTime);
 
 $clips = "";
 
-require __DIR__ . "/tamplate.php";
+require __DIR__ . "/template.php";
 require __DIR__ . "/schema.php";

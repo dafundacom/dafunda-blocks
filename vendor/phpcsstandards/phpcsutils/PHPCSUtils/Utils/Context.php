@@ -22,9 +22,9 @@ use PHPCSUtils\Utils\Parentheses;
  * - A sniff looking for incrementor/decrementors may want to disregard these when used
  *   as the third expression in a `for()` condition.
  *
- * @since 1.0.0
+ * @since 1.0.0-alpha4
  */
-class Context
+final class Context
 {
 
     /**
@@ -34,7 +34,7 @@ class Context
      * For more complex/combined queries, it is recommended to call the {@see Parentheses::getLastOwner()}
      * method directly._
      *
-     * @since 1.0.0
+     * @since 1.0.0-alpha4
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the token we are checking.
@@ -53,7 +53,7 @@ class Context
      * For more complex/combined queries, it is recommended to call the {@see Parentheses::getLastOwner()}
      * method directly._
      *
-     * @since 1.0.0
+     * @since 1.0.0-alpha4
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the token we are checking.
@@ -72,7 +72,7 @@ class Context
      * For more complex/combined queries, it is recommended to call the {@see Parentheses::getLastOwner()}
      * method directly._
      *
-     * @since 1.0.0
+     * @since 1.0.0-alpha4
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the token we are checking.
@@ -85,10 +85,37 @@ class Context
     }
 
     /**
+     * Check whether an arbitrary token is within an attribute.
+     *
+     * @since 1.0.0-alpha4
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the token we are checking.
+     *
+     * @return bool
+     */
+    public static function inAttribute(File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        // Check for the existence of the token.
+        if (isset($tokens[$stackPtr]) === false) {
+            return false;
+        }
+
+        if (isset($tokens[$stackPtr]['attribute_opener'], $tokens[$stackPtr]['attribute_closer']) === false) {
+            return false;
+        }
+
+        return ($stackPtr !== $tokens[$stackPtr]['attribute_opener']
+            && $stackPtr !== $tokens[$stackPtr]['attribute_closer']);
+    }
+
+    /**
      * Check whether an arbitrary token is in a foreach condition and if so, in which part:
      * before or after the "as".
      *
-     * @since 1.0.0
+     * @since 1.0.0-alpha4
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the token we are checking.
@@ -140,7 +167,7 @@ class Context
      * Note: the semicolons separating the conditions are regarded as belonging with the
      * expression before it.
      *
-     * @since 1.0.0
+     * @since 1.0.0-alpha4
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the token we are checking.

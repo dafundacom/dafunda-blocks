@@ -11,14 +11,13 @@
 namespace PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\BackCompat\Helper;
 
 /**
  * Helper functions for creating PHPCS error/warning messages.
  *
  * @since 1.0.0
  */
-class MessageHelper
+final class MessageHelper
 {
 
     /**
@@ -100,27 +99,20 @@ class MessageHelper
      *
      * @since 1.0.0-alpha4
      *
-     * @param string $text Arbitrary text string intended to be used in an error code.
+     * @param string $text       Arbitrary text string intended to be used in an error code.
+     * @param bool   $strtolower Whether or not to convert the text string to lowercase.
      *
      * @return string
      */
-    public static function stringToErrorcode($text)
+    public static function stringToErrorcode($text, $strtolower = false)
     {
-        return \preg_replace('`[^a-z0-9_]`i', '_', $text);
-    }
+        $text = \preg_replace('`[^a-z0-9_]`i', '_', $text);
 
-    /**
-     * Check whether PHPCS can properly handle new lines in violation messages.
-     *
-     * @link https://github.com/squizlabs/PHP_CodeSniffer/pull/2093
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return bool
-     */
-    public static function hasNewLineSupport()
-    {
-        return \version_compare(Helper::getVersion(), '3.3.1', '>=');
+        if ($strtolower === true) {
+            $text = \strtolower($text);
+        }
+
+        return $text;
     }
 
     /**

@@ -10,7 +10,7 @@
 
 namespace PHPCSUtils\Tokens;
 
-use PHPCSUtils\Tokens\TokenHelper;
+use PHPCSUtils\Exceptions\InvalidTokenArray;
 
 /**
  * Collections of related tokens as often used and needed for sniffs.
@@ -22,12 +22,45 @@ use PHPCSUtils\Tokens\TokenHelper;
  * @see \PHPCSUtils\BackCompat\BCTokens Backward compatible version of the PHPCS native token groups.
  *
  * @since 1.0.0
+ * @since 1.0.0-alpha4 Dropped support for PHPCS < 3.7.1.
+ * @since 1.0.0-alpha4 Direct property access is deprecated for forward-compatibility reasons.
+ *                     Use the methods of the same name as the property instead.
+ *
+ * @method static array arrayOpenTokensBC()           Tokens which can open an array (PHPCS cross-version compatible).
+ * @method static array arrayTokens()                 Tokens which are used to create arrays.
+ * @method static array arrayTokensBC()               Tokens which are used to create arrays
+ *                                                    (PHPCS cross-version compatible).
+ * @method static array classModifierKeywords()       Modifier keywords which can be used for a class declaration.
+ * @method static array closedScopes()                List of tokens which represent "closed" scopes.
+ * @method static array constantModifierKeywords()    Tokens which can be used as modifiers for a constant
+ *                                                    declaration (in OO structures).
+ * @method static array controlStructureTokens()      Control structure tokens.
+ * @method static array functionDeclarationTokens()   Tokens which represent a keyword which starts
+ *                                                    a function declaration.
+ * @method static array incrementDecrementOperators() Increment/decrement operator tokens.
+ * @method static array listTokens()                  Tokens which are used to create lists.
+ * @method static array listTokensBC()                Tokens which are used to create lists
+ *                                                    (PHPCS cross-version compatible)
+ * @method static array namespaceDeclarationClosers() List of tokens which can end a namespace declaration statement.
+ * @method static array nameTokens()                  Tokens used for "names", be it namespace, OO, function
+ *                                                    or constant names.
+ * @method static array objectOperators()             Object operator tokens.
+ * @method static array phpOpenTags()                 Tokens which open PHP.
+ * @method static array propertyModifierKeywords()    Modifier keywords which can be used for a property declaration.
+ * @method static array shortArrayListOpenTokensBC()  Tokens which can open a short array or short list
+ *                                                    (PHPCS cross-version compatible).
+ * @method static array shortArrayTokens()            Tokens which are used for short arrays.
+ * @method static array shortArrayTokensBC()          Tokens which are used for short arrays
+ *                                                    (PHPCS cross-version compatible).
+ * @method static array shortListTokens()             Tokens which are used for short lists.
+ * @method static array shortListTokensBC()           Tokens which are used for short lists
+ *                                                    (PHPCS cross-version compatible).
  */
-class Collections
+final class Collections
 {
 
     /**
-     * DEPRECATED: Control structures which can use the alternative control structure syntax.
+     * DEPRECATED: Tokens for control structures which can use the alternative control structure syntax.
      *
      * @since 1.0.0-alpha2
      *
@@ -48,7 +81,7 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Alternative control structure syntax closer keyword tokens.
+     * DEPRECATED: Tokens representing alternative control structure syntax closer keywords.
      *
      * @since 1.0.0-alpha2
      *
@@ -67,12 +100,40 @@ class Collections
     ];
 
     /**
+     * Tokens which can open an array (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` to allow for handling intermittent tokenizer issues related
+     * to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::arrayTokensBC()      Related method to retrieve tokens used
+     *                                                           for arrays (PHPCS cross-version).
+     * @see \PHPCSUtils\Tokens\Collections::shortArrayTokensBC() Related method to retrieve only tokens used
+     *                                                           for short arrays (PHPCS cross-version).
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::arrayOpenTokensBC()} method for access.
+     *
+     * @return array <int|string> => <int|string>
+     */
+    private static $arrayOpenTokensBC = [
+        \T_ARRAY               => \T_ARRAY,
+        \T_OPEN_SHORT_ARRAY    => \T_OPEN_SHORT_ARRAY,
+        \T_OPEN_SQUARE_BRACKET => \T_OPEN_SQUARE_BRACKET,
+    ];
+
+    /**
      * DEPRECATED: Tokens which are used to create arrays.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::arrayOpenTokensBC() Related method to retrieve only the "open" tokens
+     *                                                          used for arrays (PHPCS cross-version compatible).
+     * @see \PHPCSUtils\Tokens\Collections::arrayTokensBC()     Related method to retrieve tokens used
+     *                                                          for arrays (PHPCS cross-version compatible).
+     * @see \PHPCSUtils\Tokens\Collections::shortArrayTokens()  Related method to retrieve only tokens used
+     *                                                          for short arrays.
      *
      * @since 1.0.0-alpha1
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::arrayTokens()} or
-     *                          {@see Collections::arrayTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::arrayTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
@@ -83,7 +144,16 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Tokens which are used to create arrays.
+     * DEPRECATED: Tokens which are used to create arrays (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` and `T_CLOSE_SQUARE_BRACKET` to allow for handling
+     * intermittent tokenizer issues related to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::arrayOpenTokensBC()  Related method to retrieve only the "open" tokens
+     *                                                           used for arrays (PHPCS cross-version compatible).
+     * @see \PHPCSUtils\Tokens\Collections::shortArrayTokensBC() Related method to retrieve only tokens used
+     *                                                           for short arrays (PHPCS cross-version compatible).
      *
      * @since 1.0.0-alpha1
      *
@@ -103,6 +173,7 @@ class Collections
      * DEPRECATED: Modifier keywords which can be used for a class declaration.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the T_READONLY token for PHP 8.2 readonly classes.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::classModifierKeywords()} method instead.
      *
@@ -111,12 +182,20 @@ class Collections
     public static $classModifierKeywords = [
         \T_FINAL    => \T_FINAL,
         \T_ABSTRACT => \T_ABSTRACT,
+        \T_READONLY => \T_READONLY,
     ];
 
     /**
      * DEPRECATED: List of tokens which represent "closed" scopes.
      *
+     * I.e. anything declared within that scope - except for other closed scopes - is
+     * outside of the global namespace.
+     *
+     * This list doesn't contain the `T_NAMESPACE` token on purpose as variables declared
+     * within a namespace scope are still global and not limited to that namespace.
+     *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the PHP 8.1 T_ENUM token.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::closedScopes()} method instead.
      *
@@ -127,14 +206,33 @@ class Collections
         \T_ANON_CLASS => \T_ANON_CLASS,
         \T_INTERFACE  => \T_INTERFACE,
         \T_TRAIT      => \T_TRAIT,
+        \T_ENUM       => \T_ENUM,
         \T_FUNCTION   => \T_FUNCTION,
         \T_CLOSURE    => \T_CLOSURE,
+    ];
+
+    /**
+     * Modifier keywords which can be used for constant declarations (in OO structures).
+     *
+     * - PHP 7.1 added class constants visibility support.
+     * - PHP 8.1 added support for final class constants.
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::constantModifierKeywords()} method for access.
+     *
+     * @var array <int|string> => <int|string>
+     */
+    private static $constantModifierKeywords = [
+        \T_PUBLIC    => \T_PUBLIC,
+        \T_PRIVATE   => \T_PRIVATE,
+        \T_PROTECTED => \T_PROTECTED,
+        \T_FINAL     => \T_FINAL,
     ];
 
     /**
      * DEPRECATED: Control structure tokens.
      *
      * @since 1.0.0-alpha2
+     * @since 1.0.0-alpha4 Added the T_MATCH token for PHP 8.0 match expressions.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::controlStructureTokens()} method instead.
      *
@@ -150,6 +248,20 @@ class Collections
         \T_DO      => \T_DO,
         \T_WHILE   => \T_WHILE,
         \T_DECLARE => \T_DECLARE,
+        \T_MATCH   => \T_MATCH,
+    ];
+
+    /**
+     * Tokens which represent a keyword which starts a function declaration.
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::functionDeclarationTokens()} method for access.
+     *
+     * @return array <int|string> => <int|string>
+     */
+    private static $functionDeclarationTokens = [
+        \T_FUNCTION => \T_FUNCTION,
+        \T_CLOSURE  => \T_CLOSURE,
+        \T_FN       => \T_FN,
     ];
 
     /**
@@ -169,10 +281,14 @@ class Collections
     /**
      * DEPRECATED: Tokens which are used to create lists.
      *
+     * @see \PHPCSUtils\Tokens\Collections::listTokensBC()    Related method to retrieve tokens used
+     *                                                        for lists (PHPCS cross-version).
+     * @see \PHPCSUtils\Tokens\Collections::shortListTokens() Related method to retrieve only tokens used
+     *                                                        for short lists.
+     *
      * @since 1.0.0-alpha1
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::listTokens()} or
-     *                          {@see Collections::listTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::listTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
@@ -183,7 +299,14 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Tokens which are used to create lists.
+     * DEPRECATED: Tokens which are used to create lists (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` and `T_CLOSE_SQUARE_BRACKET` to allow for handling
+     * intermittent tokenizer issues related to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::shortListTokensBC() Related method to retrieve only tokens used
+     *                                                          for short lists (cross-version).
      *
      * @since 1.0.0-alpha1
      *
@@ -204,7 +327,8 @@ class Collections
      *
      * @since 1.0.0-alpha3
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see \PHPCSUtils\BackCompat\BCTokens::magicConstants()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see \PHP_CodeSniffer\Util\Tokens::$magicConstants} property
+     *                          or the {@see \PHPCSUtils\BackCompat\BCTokens::magicConstants()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
@@ -235,17 +359,41 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Object operators.
+     * Tokens used for "names", be it namespace, OO, function or constant names.
+     *
+     * Includes the tokens introduced in PHP 8.0 for "Namespaced names as single token".
+     *
+     * Note: the PHP 8.0 namespaced name tokens are backfilled in PHPCS since PHPCS 3.5.7,
+     * but are not used yet (the PHP 8.0 tokenization is "undone" in PHPCS).
+     * As of PHPCS 4.0.0, these tokens _will_ be used and the PHP 8.0 tokenization is respected.
+     *
+     * @link https://wiki.php.net/rfc/namespaced_names_as_token PHP RFC on namespaced names as single token
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::nameTokens()} method for access.
+     *
+     * @return array <int|string> => <int|string>
+     */
+    private static $nameTokens = [
+        \T_STRING               => \T_STRING,
+        \T_NAME_QUALIFIED       => \T_NAME_QUALIFIED,
+        \T_NAME_FULLY_QUALIFIED => \T_NAME_FULLY_QUALIFIED,
+        \T_NAME_RELATIVE        => \T_NAME_RELATIVE,
+    ];
+
+    /**
+     * DEPRECATED: Object operator tokens.
      *
      * @since 1.0.0-alpha3
+     * @since 1.0.0-alpha4 Added the PHP 8.0 T_NULLSAFE_OBJECT_OPERATOR token.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::objectOperators()} method instead.
      *
      * @var array <int> => <int>
      */
     public static $objectOperators = [
-        \T_OBJECT_OPERATOR => \T_OBJECT_OPERATOR,
-        \T_DOUBLE_COLON    => \T_DOUBLE_COLON,
+        \T_DOUBLE_COLON             => \T_DOUBLE_COLON,
+        \T_OBJECT_OPERATOR          => \T_OBJECT_OPERATOR,
+        \T_NULLSAFE_OBJECT_OPERATOR => \T_NULLSAFE_OBJECT_OPERATOR,
     ];
 
     /**
@@ -267,6 +415,7 @@ class Collections
      * DEPRECATED: OO structures which can use the "implements" keyword.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the PHP 8.1 T_ENUM token.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::ooCanImplement()} method instead.
      *
@@ -275,12 +424,17 @@ class Collections
     public static $OOCanImplement = [
         \T_CLASS      => \T_CLASS,
         \T_ANON_CLASS => \T_ANON_CLASS,
+        \T_ENUM       => \T_ENUM,
     ];
 
     /**
      * DEPRECATED: OO scopes in which constants can be declared.
      *
+     * Note: traits can only declare constants since PHP 8.2.
+     *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the PHP 8.1 T_ENUM token.
+     * @since 1.0.0-alpha4 Added the T_TRAIT token for PHP 8.2 constants in traits.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::ooConstantScopes()} method instead.
      *
@@ -290,10 +444,14 @@ class Collections
         \T_CLASS      => \T_CLASS,
         \T_ANON_CLASS => \T_ANON_CLASS,
         \T_INTERFACE  => \T_INTERFACE,
+        \T_ENUM       => \T_ENUM,
+        \T_TRAIT      => \T_TRAIT,
     ];
 
     /**
      * DEPRECATED: Tokens types used for "forwarding" calls within OO structures.
+     *
+     * @link https://www.php.net/language.oop5.paamayim-nekudotayim PHP Manual on OO forwarding calls
      *
      * @since 1.0.0-alpha3
      *
@@ -325,6 +483,8 @@ class Collections
     /**
      * DEPRECATED: OO scopes in which properties can be declared.
      *
+     * Note: interfaces can not declare properties.
+     *
      * @since 1.0.0-alpha1
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::ooPropertyScopes()} method instead.
@@ -341,24 +501,44 @@ class Collections
      * DEPRECATED: Token types which can be encountered in a parameter type declaration.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::parameterTypeTokens()} or
-     *                          {@see Collections::parameterTypeTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::parameterTypeTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
     public static $parameterTypeTokens = [
-        \T_CALLABLE     => \T_CALLABLE,
-        \T_SELF         => \T_SELF,
-        \T_PARENT       => \T_PARENT,
-        \T_STRING       => \T_STRING,
-        \T_NS_SEPARATOR => \T_NS_SEPARATOR,
+        \T_CALLABLE          => \T_CALLABLE,
+        \T_SELF              => \T_SELF,
+        \T_PARENT            => \T_PARENT,
+        \T_FALSE             => \T_FALSE,
+        \T_TRUE              => \T_TRUE,
+        \T_NULL              => \T_NULL,
+        \T_STRING            => \T_STRING,
+        \T_NS_SEPARATOR      => \T_NS_SEPARATOR,
+        \T_TYPE_UNION        => \T_TYPE_UNION,
+        \T_TYPE_INTERSECTION => \T_TYPE_INTERSECTION,
+    ];
+
+    /**
+     * Tokens which open PHP.
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::phpOpenTags()} method for access.
+     *
+     * @return array <int|string> => <int|string>
+     */
+    private static $phpOpenTags = [
+        \T_OPEN_TAG           => \T_OPEN_TAG,
+        \T_OPEN_TAG_WITH_ECHO => \T_OPEN_TAG_WITH_ECHO,
     ];
 
     /**
      * DEPRECATED: Modifier keywords which can be used for a property declaration.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the T_READONLY token for PHP 8.1 readonly properties.
      *
      * @deprecated 1.0.0-alpha4 Use the {@see Collections::propertyModifierKeywords()} method instead.
      *
@@ -370,52 +550,84 @@ class Collections
         \T_PROTECTED => \T_PROTECTED,
         \T_STATIC    => \T_STATIC,
         \T_VAR       => \T_VAR,
+        \T_READONLY  => \T_READONLY,
     ];
 
     /**
      * DEPRECATED: Token types which can be encountered in a property type declaration.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::propertyTypeTokens()} or
-     *                          {@see Collections::propertyTypeTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::propertyTypeTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
     public static $propertyTypeTokens = [
-        \T_CALLABLE     => \T_CALLABLE,
-        \T_SELF         => \T_SELF,
-        \T_PARENT       => \T_PARENT,
-        \T_STRING       => \T_STRING,
-        \T_NS_SEPARATOR => \T_NS_SEPARATOR,
+        \T_CALLABLE          => \T_CALLABLE,
+        \T_SELF              => \T_SELF,
+        \T_PARENT            => \T_PARENT,
+        \T_FALSE             => \T_FALSE,
+        \T_TRUE              => \T_TRUE,
+        \T_NULL              => \T_NULL,
+        \T_STRING            => \T_STRING,
+        \T_NS_SEPARATOR      => \T_NS_SEPARATOR,
+        \T_TYPE_UNION        => \T_TYPE_UNION,
+        \T_TYPE_INTERSECTION => \T_TYPE_INTERSECTION,
     ];
 
     /**
      * DEPRECATED: Token types which can be encountered in a return type declaration.
      *
      * @since 1.0.0-alpha1
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::returnTypeTokens()} or
-     *                          {@see Collections::returnTypeTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::returnTypeTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
     public static $returnTypeTokens = [
-        \T_STRING       => \T_STRING,
-        \T_CALLABLE     => \T_CALLABLE,
-        \T_SELF         => \T_SELF,
-        \T_PARENT       => \T_PARENT,
-        \T_STATIC       => \T_STATIC,
-        \T_NS_SEPARATOR => \T_NS_SEPARATOR,
+        \T_CALLABLE          => \T_CALLABLE,
+        \T_SELF              => \T_SELF,
+        \T_PARENT            => \T_PARENT,
+        \T_STATIC            => \T_STATIC,
+        \T_FALSE             => \T_FALSE,
+        \T_TRUE              => \T_TRUE,
+        \T_NULL              => \T_NULL,
+        \T_STRING            => \T_STRING,
+        \T_NS_SEPARATOR      => \T_NS_SEPARATOR,
+        \T_TYPE_UNION        => \T_TYPE_UNION,
+        \T_TYPE_INTERSECTION => \T_TYPE_INTERSECTION,
+    ];
+
+    /**
+     * Tokens which can open a short array or short list (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` to allow for handling intermittent tokenizer issues related
+     * to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @since 1.0.0-alpha4 Use the {@see Collections::shortArrayListOpenTokensBC()} method for access.
+     *
+     * @return array <int|string> => <int|string>
+     */
+    private static $shortArrayListOpenTokensBC = [
+        \T_OPEN_SHORT_ARRAY    => \T_OPEN_SHORT_ARRAY,
+        \T_OPEN_SQUARE_BRACKET => \T_OPEN_SQUARE_BRACKET,
     ];
 
     /**
      * DEPRECATED: Tokens which are used for short arrays.
      *
+     * @see \PHPCSUtils\Tokens\Collections::arrayTokens() Related method to retrieve all tokens used for arrays.
+     *
      * @since 1.0.0-alpha1
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::shortArrayTokens()} or
-     *                          {@see Collections::shortArrayTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::shortArrayTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
@@ -425,7 +637,14 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Tokens which are used for short arrays.
+     * DEPRECATED: Tokens which are used for short arrays (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` and `T_CLOSE_SQUARE_BRACKET` to allow for handling
+     * intermittent tokenizer issues related to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::arrayTokensBC() Related method to retrieve all tokens used for arrays
+     *                                                      (cross-version).
      *
      * @since 1.0.0-alpha1
      *
@@ -443,10 +662,11 @@ class Collections
     /**
      * DEPRECATED: Tokens which are used for short lists.
      *
+     * @see \PHPCSUtils\Tokens\Collections::listTokens() Related method to retrieve all tokens used for lists.
+     *
      * @since 1.0.0-alpha1
      *
-     * @deprecated 1.0.0-alpha4 Use the {@see Collections::shortListTokens()} or
-     *                          {@see Collections::shortListTokensBC()} method instead.
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::shortListTokens()} method instead.
      *
      * @var array <int|string> => <int|string>
      */
@@ -456,7 +676,14 @@ class Collections
     ];
 
     /**
-     * DEPRECATED: Tokens which are used for short lists.
+     * DEPRECATED: Tokens which are used for short lists (PHPCS cross-version compatible).
+     *
+     * Includes `T_OPEN_SQUARE_BRACKET` and `T_CLOSE_SQUARE_BRACKET` to allow for handling
+     * intermittent tokenizer issues related to the retokenization to `T_OPEN_SHORT_ARRAY`.
+     * Should only be used selectively.
+     *
+     * @see \PHPCSUtils\Tokens\Collections::listTokensBC() Related method to retrieve all tokens used for lists
+     *                                                     (cross-version).
      *
      * @since 1.0.0-alpha1
      *
@@ -488,6 +715,55 @@ class Collections
     ];
 
     /**
+     * Handle calls to (undeclared) methods for token arrays which don't need special handling.
+     *
+     * @since 1.0.0-alpha4
+     *
+     * @param string $name The name of the method which has been called.
+     * @param array  $args Any arguments passed to the method.
+     *                     Unused as none of the methods take arguments.
+     *
+     * @return array <int|string> => <int|string> Token array
+     *
+     * @throws \PHPCSUtils\Exceptions\InvalidTokenArray When an invalid token array is requested.
+     */
+    public static function __callStatic($name, $args)
+    {
+        if (isset(self::${$name})) {
+            return self::${$name};
+        }
+
+        // Unknown token array requested.
+        throw InvalidTokenArray::create($name);
+    }
+
+    /**
+     * Throw a deprecation notice with a standardized deprecation message.
+     *
+     * @since 1.0.0-alpha4
+     *
+     * @param string $method      The name of the method which is deprecated.
+     * @param string $version     The version since which the method is deprecated.
+     * @param string $replacement What to use instead.
+     *
+     * @return void
+     */
+    private static function triggerDeprecation($method, $version, $replacement)
+    {
+        \trigger_error(
+            \sprintf(
+                'The %1$s::%2$s() method is deprecated since PHPCSUtils %3$s.'
+                . ' Use %4$s instead.',
+                __CLASS__,
+                $method,
+                $version,
+                $replacement
+            ),
+            \E_USER_DEPRECATED
+        );
+    }
+
+    /**
      * Tokens for control structures which can use the alternative control structure syntax.
      *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$alternativeControlStructureSyntaxTokens}
@@ -514,127 +790,19 @@ class Collections
     }
 
     /**
-     * Tokens which can open an array.
-     *
-     * PHPCS cross-version compatible.
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function arrayOpenTokensBC()
-    {
-        return [
-            \T_ARRAY               => \T_ARRAY,
-            \T_OPEN_SHORT_ARRAY    => \T_OPEN_SHORT_ARRAY,
-            \T_OPEN_SQUARE_BRACKET => \T_OPEN_SQUARE_BRACKET,
-        ];
-    }
-
-    /**
-     * Tokens which are used to create arrays.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::arrayTokensBC()    Related method to retrieve tokens used
-     *                                                         for arrays (PHPCS cross-version).
-     * @see \PHPCSUtils\Tokens\Collections::shortArrayTokens() Related method to retrieve only tokens used
-     *                                                         for short arrays.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$arrayTokens} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function arrayTokens()
-    {
-        return self::$arrayTokens;
-    }
-
-    /**
-     * Tokens which are used to create arrays.
-     *
-     * List which is backward-compatible with PHPCS < 3.3.0.
-     * Should only be used selectively.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::shortArrayTokensBC() Related method to retrieve only tokens used
-     *                                                           for short arrays (PHPCS cross-version).
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$arrayTokensBC} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function arrayTokensBC()
-    {
-        return self::$arrayTokensBC;
-    }
-
-    /**
-     * Tokens which can represent the arrow function keyword.
-     *
-     * Note: this is a method, not a property as the `T_FN` token for arrow functions may not exist.
-     *
-     * @see \PHPCSUtils\Utils\FunctionDeclarations::isArrowFunction()           Determine whether an arbitrary token
-     *                                                                          is in actual fact an arrow function
-     *                                                                          keyword.
-     * @see \PHPCSUtils\Utils\FunctionDeclarations::getArrowFunctionOpenClose() Get an arrow function's parentheses
-     *                                                                          and scope openers and closers.
+     * DEPRECATED: Tokens which can represent the arrow function keyword.
      *
      * @since 1.0.0-alpha2
+     *
+     * @deprecated 1.0.0-alpha4 Use the `T_FN` token constant instead.
      *
      * @return array <int|string> => <int|string>
      */
     public static function arrowFunctionTokensBC()
     {
-        $tokens = [
-            \T_STRING => \T_STRING,
-        ];
+        self::triggerDeprecation(__FUNCTION__, '1.0.0-alpha4', 'the `T_FN` token');
 
-        if (TokenHelper::tokenExists('T_FN') === true) {
-            // PHP 7.4 or PHPCS 3.5.3+.
-            $tokens[\T_FN] = \T_FN;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Modifier keywords which can be used for a class declaration.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$classModifierKeywords} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function classModifierKeywords()
-    {
-        return self::$classModifierKeywords;
-    }
-
-    /**
-     * List of tokens which represent "closed" scopes.
-     *
-     * I.e. anything declared within that scope - except for other closed scopes - is
-     * outside of the global namespace.
-     *
-     * This list doesn't contain the `T_NAMESPACE` token on purpose as variables declared
-     * within a namespace scope are still global and not limited to that namespace.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$closedScopes} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function closedScopes()
-    {
-        return self::$closedScopes;
-    }
-
-    /**
-     * Control structure tokens.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$controlStructureTokens} property.
-     *
-     * @return array <int> => <int>
-     */
-    public static function controlStructureTokens()
-    {
-        return self::$controlStructureTokens;
+        return [\T_FN => \T_FN];
     }
 
     /**
@@ -649,141 +817,34 @@ class Collections
     public static function functionCallTokens()
     {
         // Function calls and class instantiation.
-        $tokens              = self::nameTokens();
+        $tokens              = self::$nameTokens;
         $tokens[\T_VARIABLE] = \T_VARIABLE;
 
         // Class instantiation only.
         $tokens[\T_ANON_CLASS] = \T_ANON_CLASS;
-        $tokens               += self::ooHierarchyKeywords();
+        $tokens               += self::$OOHierarchyKeywords;
 
         return $tokens;
     }
 
     /**
-     * Tokens which can represent a keyword which starts a function declaration.
-     *
-     * Note: this is a method, not a property as the `T_FN` token for arrow functions may not exist.
-     *
-     * Sister-method to the {@see Collections::functionDeclarationTokensBC()} method.
-     * This method supports PHPCS 3.5.3 and up.
-     * The {@see Collections::functionDeclarationTokensBC()} method supports PHPCS 2.6.0 and up.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::functionDeclarationTokensBC() Related method (PHPCS 2.6.0+).
+     * DEPRECATED: Tokens which represent a keyword which starts a function declaration.
      *
      * @since 1.0.0-alpha3
      *
-     * @return array <int|string> => <int|string>
-     */
-    public static function functionDeclarationTokens()
-    {
-        $tokens = [
-            \T_FUNCTION => \T_FUNCTION,
-            \T_CLOSURE  => \T_CLOSURE,
-        ];
-
-        if (TokenHelper::tokenExists('T_FN') === true) {
-            // PHP 7.4 or PHPCS 3.5.3+.
-            $tokens[\T_FN] = \T_FN;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Tokens which can represent a keyword which starts a function declaration.
-     *
-     * Note: this is a method, not a property as the `T_FN` token for arrow functions may not exist.
-     *
-     * Sister-method to the {@see Collections::functionDeclarationTokens()} method.
-     * The {@see Collections::functionDeclarationTokens()} method supports PHPCS 3.5.3 and up.
-     * This method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - This method accounts for when the `T_FN` token doesn't exist.
-     *
-     * Note: if this method is used, the {@see \PHPCSUtils\Utils\FunctionDeclarations::isArrowFunction()}
-     * method needs to be used on arrow function tokens to verify whether it really is an arrow function
-     * declaration or not.
-     *
-     * It is recommended to use the {@see Collections::functionDeclarationTokens()} method instead of
-     * this method if a standard does not need to support PHPCS < 3.5.3.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::functionDeclarationTokens() Related method (PHPCS 3.5.3+).
-     * @see \PHPCSUtils\Utils\FunctionDeclarations::isArrowFunction()   Arrow function verification.
-     *
-     * @since 1.0.0-alpha3
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::functionDeclarationTokens()} method instead.
      *
      * @return array <int|string> => <int|string>
      */
     public static function functionDeclarationTokensBC()
     {
-        $tokens = [
-            \T_FUNCTION => \T_FUNCTION,
-            \T_CLOSURE  => \T_CLOSURE,
-        ];
+        self::triggerDeprecation(
+            __FUNCTION__,
+            '1.0.0-alpha4',
+            \sprintf('the %s::functionDeclarationTokens() method', __CLASS__)
+        );
 
-        $tokens += self::arrowFunctionTokensBC();
-
-        return $tokens;
-    }
-
-    /**
-     * Increment/decrement operator tokens.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$incrementDecrementOperators} property.
-     *
-     * @return array <int> => <int>
-     */
-    public static function incrementDecrementOperators()
-    {
-        return self::$incrementDecrementOperators;
-    }
-
-    /**
-     * Tokens which are used to create lists.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::listTokensBC()    Related method to retrieve tokens used
-     *                                                        for lists (PHPCS cross-version).
-     * @see \PHPCSUtils\Tokens\Collections::shortListTokens() Related method to retrieve only tokens used
-     *                                                        for short lists.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$listTokens} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function listTokens()
-    {
-        return self::$listTokens;
-    }
-
-    /**
-     * Tokens which are used to create lists.
-     *
-     * List which is backward-compatible with PHPCS < 3.3.0.
-     * Should only be used selectively.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::shortListTokensBC() Related method to retrieve only tokens used
-     *                                                          for short lists (cross-version).
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$listTokensBC} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function listTokensBC()
-    {
-        return self::$listTokensBC;
-    }
-
-    /**
-     * List of tokens which can end a namespace declaration statement.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$namespaceDeclarationClosers} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function namespaceDeclarationClosers()
-    {
-        return self::$namespaceDeclarationClosers;
+        return self::$functionDeclarationTokens;
     }
 
     /**
@@ -805,159 +866,7 @@ class Collections
             \T_NAMESPACE    => \T_NAMESPACE,
         ];
 
-        $tokens += self::nameTokens();
-
-        return $tokens;
-    }
-
-    /**
-     * The tokens used for "names", be it namespace, OO, function or constant names.
-     *
-     * Includes the tokens introduced in PHP 8.0 for "Namespaced names as single token" when available.
-     *
-     * Note: this is a method, not a property as the PHP 8.0 identifier name tokens may not exist.
-     *
-     * @link https://wiki.php.net/rfc/namespaced_names_as_token
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function nameTokens()
-    {
-        $tokens = [
-            \T_STRING => \T_STRING,
-        ];
-
-        /*
-         * PHP >= 8.0 in combination with PHPCS < 3.5.7 and all PHP versions in combination
-         * with PHPCS >= 3.5.7, though when using PHPCS 3.5.7 < 4.0.0, these tokens are
-         * not yet in use, i.e. the PHP 8.0 change is "undone" for PHPCS 3.x.
-         */
-        if (TokenHelper::tokenExists('T_NAME_QUALIFIED') === true) {
-            $tokens[\T_NAME_QUALIFIED] = \T_NAME_QUALIFIED;
-        }
-
-        if (TokenHelper::tokenExists('T_NAME_FULLY_QUALIFIED') === true) {
-            $tokens[\T_NAME_FULLY_QUALIFIED] = \T_NAME_FULLY_QUALIFIED;
-        }
-
-        if (TokenHelper::tokenExists('T_NAME_RELATIVE') === true) {
-            $tokens[\T_NAME_RELATIVE] = \T_NAME_RELATIVE;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Tokens which can represent the nullsafe object operator.
-     *
-     * This method will return the appropriate tokens based on the PHP/PHPCS version used.
-     *
-     * Note: this is a method, not a property as the `T_NULLSAFE_OBJECT_OPERATOR` token may not exist.
-     *
-     * Note: if this method is used, the {@see \PHPCSUtils\Utils\Operators::isNullsafeObjectOperator()}
-     * method needs to be used on potential nullsafe object operator tokens to verify whether it really
-     * is a nullsafe object operator or not.
-     *
-     * @see \PHPCSUtils\Utils\Operators::isNullsafeObjectOperator() Nullsafe object operator detection for
-     *                                                              PHPCS < 3.5.7.
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function nullsafeObjectOperatorBC()
-    {
-        if (TokenHelper::tokenExists('T_NULLSAFE_OBJECT_OPERATOR') === true) {
-            // PHP >= 8.0 / PHPCS >= 3.5.7.
-            return [
-                \T_NULLSAFE_OBJECT_OPERATOR => \T_NULLSAFE_OBJECT_OPERATOR,
-            ];
-        }
-
-        return [
-            \T_INLINE_THEN     => \T_INLINE_THEN,
-            \T_OBJECT_OPERATOR => \T_OBJECT_OPERATOR,
-        ];
-    }
-
-    /**
-     * Object operators.
-     *
-     * Note: this is a method, not a property as the `T_NULLSAFE_OBJECT_OPERATOR` token may not exist.
-     *
-     * Sister-method to the {@see Collections::objectOperatorsBC()} method.
-     * This method supports PHPCS 3.5.7 and up.
-     * The {@see Collections::objectOperatorsBC()} method supports PHPCS 2.6.0 and up.
-     *
-     * This method can also safely be used if the token collection is only used when looking back
-     * via `$phpcsFile->findPrevious()` as in that case, a non-backfilled nullsafe object operator
-     * will still match the "normal" object operator.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::objectOperatorsBC() Related method (PHPCS 2.6.0+).
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$objectOperators} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function objectOperators()
-    {
-        $tokens = [
-            \T_OBJECT_OPERATOR => \T_OBJECT_OPERATOR,
-            \T_DOUBLE_COLON    => \T_DOUBLE_COLON,
-        ];
-
-        if (TokenHelper::tokenExists('T_NULLSAFE_OBJECT_OPERATOR') === true) {
-            // PHP >= 8.0 or PHPCS >= 3.5.7.
-            $tokens[\T_NULLSAFE_OBJECT_OPERATOR] = \T_NULLSAFE_OBJECT_OPERATOR;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Object operators.
-     *
-     * Note: this is a method, not a property as the `T_NULLSAFE_OBJECT_OPERATOR` token may not exist.
-     *
-     * Sister-method to the {@see Collections::objectOperators()} method.
-     * The {@see Collections::objectOperators()} method supports PHPCS 3.5.7 and up.
-     * This method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - This method accounts for tokens which may be encountered when the `T_NULLSAFE_OBJECT_OPERATOR` token
-     *   doesn't exist.
-     *
-     * It is recommended to use the {@see Collections::objectOperators()} method instead of
-     * this method if a standard does not need to support PHPCS < 3.5.7.
-     *
-     * The {@see Collections::objectOperators()} method can also safely be used if the token collection
-     * is only used when looking back via `$phpcsFile->findPrevious()` as in that case, a non-backfilled
-     * nullsafe object operator will still match the "normal" object operator.
-     *
-     * Note: if this method is used, the {@see \PHPCSUtils\Utils\Operators::isNullsafeObjectOperator()}
-     * method needs to be used on potential nullsafe object operator tokens to verify whether it really
-     * is a nullsafe object operator or not.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::objectOperators()          Related method (PHPCS 3.5.7+).
-     * @see \PHPCSUtils\Tokens\Collections::nullsafeObjectOperatorBC() Tokens which can represent a
-     *                                                                 nullsafe object operator.
-     * @see \PHPCSUtils\Utils\Operators::isNullsafeObjectOperator()    Nullsafe object operator detection for
-     *                                                                 PHPCS < 3.5.7.
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function objectOperatorsBC()
-    {
-        $tokens = [
-            \T_OBJECT_OPERATOR => \T_OBJECT_OPERATOR,
-            \T_DOUBLE_COLON    => \T_DOUBLE_COLON,
-        ];
-
-        $tokens += self::nullsafeObjectOperatorBC();
+        $tokens += self::$nameTokens;
 
         return $tokens;
     }
@@ -978,6 +887,7 @@ class Collections
      * OO structures which can use the "implements" keyword.
      *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$OOCanImplement} property.
+     * @since 1.0.0-alpha4 Added the PHP 8.1 T_ENUM token.
      *
      * @return array <int|string> => <int|string>
      */
@@ -989,9 +899,11 @@ class Collections
     /**
      * OO scopes in which constants can be declared.
      *
-     * Note: traits can not declare constants.
+     * Note: traits can only declare constants since PHP 8.2.
      *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$OOConstantScopes} property.
+     * @since 1.0.0-alpha4 Added the PHP 8.1 T_ENUM token.
+     * @since 1.0.0-alpha4 Added the T_TRAIT token for PHP 8.2 constants in traits.
      *
      * @return array <int|string> => <int|string>
      */
@@ -1047,7 +959,7 @@ class Collections
         $tokens[\T_UNSET] = \T_UNSET;
 
         // Array tokens.
-        $tokens += self::arrayOpenTokensBC();
+        $tokens += self::$arrayOpenTokensBC;
 
         return $tokens;
     }
@@ -1055,347 +967,125 @@ class Collections
     /**
      * Token types which can be encountered in a parameter type declaration.
      *
-     * Note: this is a method, not a property as the `T_TYPE_UNION` token for PHP 8.0 union types may not exist.
-     *
-     * Sister-method to the {@see Collections::parameterTypeTokensBC()} method.
-     * This method supports PHPCS 3.3.0 and up.
-     * The {@see Collections::parameterTypeTokensBC()} method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - The {@see Collections::parameterTypeTokensBC()} method will include the `T_ARRAY_HINT` token
-     *   when used with PHPCS 2.x and 3.x.
-     *   This token constant will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use this method instead of the {@see Collections::parameterTypeTokensBC()}
-     * method if a standard does not need to support PHPCS < 3.3.0.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::parameterTypeTokensBC() Related method (cross-version).
-     *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$parameterTypeTokens} property.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
      * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
-     * @since 1.0.0-alpha4 Added the T_TYPE_UNION token for union type support in PHPCS > 3.6.0.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
      * @return array <int|string> => <int|string>
      */
     public static function parameterTypeTokens()
     {
-        $tokens = [
-            \T_CALLABLE   => \T_CALLABLE,
-            \T_SELF       => \T_SELF,
-            \T_PARENT     => \T_PARENT,
-            \T_FALSE      => \T_FALSE,      // Union types only.
-            \T_NULL       => \T_NULL,       // Union types only.
-            \T_BITWISE_OR => \T_BITWISE_OR, // Union types for PHPCS < 3.6.0.
-        ];
-
+        $tokens  = self::$parameterTypeTokens;
         $tokens += self::namespacedNameTokens();
-
-        // PHPCS > 3.6.0: a new token was introduced for the union type separator.
-        if (\defined('T_TYPE_UNION') === true) {
-            $tokens[\T_TYPE_UNION] = \T_TYPE_UNION;
-        }
 
         return $tokens;
     }
 
     /**
-     * Token types which can be encountered in a parameter type declaration (cross-version).
-     *
-     * Sister-method to the {@see Collections::parameterTypeTokens()} method.
-     * The {@see Collections::parameterTypeTokens()} method supports PHPCS 3.3.0 and up.
-     * This method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - This method will include the `T_ARRAY_HINT` token when used with PHPCS 2.x and 3.x.
-     *   This token constant will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use {@see Collections::parameterTypeTokens()} method instead of
-     * this method if a standard does not need to support PHPCS < 3.3.0.
+     * DEPRECATED: Token types which can be encountered in a parameter type declaration (cross-version).
      *
      * @see \PHPCSUtils\Tokens\Collections::parameterTypeTokens() Related method (PHPCS 3.3.0+).
      *
      * @since 1.0.0-alpha3
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
+     *
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::parameterTypeTokens()} method instead.
      *
      * @return array <int|string> => <int|string>
      */
     public static function parameterTypeTokensBC()
     {
-        $tokens = self::parameterTypeTokens();
+        self::triggerDeprecation(
+            __FUNCTION__,
+            '1.0.0-alpha4',
+            \sprintf('the %s::parameterTypeTokens() method', __CLASS__)
+        );
 
-        // PHPCS < 4.0; Needed for support of PHPCS < 3.3.0. As of PHPCS 3.3.0+ the constant is no longer used.
-        if (\defined('T_ARRAY_HINT') === true) {
-            $tokens[\T_ARRAY_HINT] = \T_ARRAY_HINT;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Tokens which open PHP.
-     *
-     * @since 1.0.0-alpha4
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function phpOpenTags()
-    {
-        return [
-            \T_OPEN_TAG           => \T_OPEN_TAG,
-            \T_OPEN_TAG_WITH_ECHO => \T_OPEN_TAG_WITH_ECHO,
-        ];
-    }
-
-    /**
-     * Modifier keywords which can be used for a property declaration.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$propertyModifierKeywords} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function propertyModifierKeywords()
-    {
-        return self::$propertyModifierKeywords;
+        return self::parameterTypeTokens();
     }
 
     /**
      * Token types which can be encountered in a property type declaration.
      *
-     * Note: this is a method, not a property as the `T_TYPE_UNION` token for PHP 8.0 union types may not exist.
-     *
-     * Sister-method to the {@see Collections::propertyTypeTokensBC()} method.
-     * This method supports PHPCS 3.3.0 and up.
-     * The {@see Collections::propertyTypeTokensBC()} method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - The {@see Collections::propertyTypeTokensBC()} method will include the `T_ARRAY_HINT` token
-     *   when used with PHPCS 2.x and 3.x.
-     *   This token constant will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use this method instead of the {@see Collections::propertyTypeTokensBC()}
-     * method if a standard does not need to support PHPCS < 3.3.0.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::propertyTypeTokensBC() Related method (cross-version).
-     *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$propertyTypeTokens} property.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
      * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
-     * @since 1.0.0-alpha4 Added the T_TYPE_UNION token for union type support in PHPCS > 3.6.0.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
      * @return array <int|string> => <int|string>
      */
     public static function propertyTypeTokens()
     {
-        $tokens = [
-            \T_CALLABLE   => \T_CALLABLE,
-            \T_SELF       => \T_SELF,
-            \T_PARENT     => \T_PARENT,
-            \T_FALSE      => \T_FALSE,      // Union types only.
-            \T_NULL       => \T_NULL,       // Union types only.
-            \T_BITWISE_OR => \T_BITWISE_OR, // Union types for PHPCS < 3.6.0.
-        ];
-
+        $tokens  = self::$propertyTypeTokens;
         $tokens += self::namespacedNameTokens();
-
-        // PHPCS > 3.6.0: a new token was introduced for the union type separator.
-        if (\defined('T_TYPE_UNION') === true) {
-            $tokens[\T_TYPE_UNION] = \T_TYPE_UNION;
-        }
 
         return $tokens;
     }
 
     /**
-     * Token types which can be encountered in a property type declaration (cross-version).
-     *
-     * Sister-method to the {@see Collections::propertyTypeTokens()} method.
-     * The {@see Collections::propertyTypeTokens()} method supports PHPCS 3.3.0 and up.
-     * This method supports PHPCS 2.6.0 and up.
-     *
-     * Notable difference:
-     * - This method will include the `T_ARRAY_HINT` token when used with PHPCS 2.x and 3.x.
-     *   This token constant will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use the {@see Collections::propertyTypeTokens()} method instead of
-     * this method if a standard does not need to support PHPCS < 3.3.0.
+     * DEPRECATED: Token types which can be encountered in a property type declaration (cross-version).
      *
      * @see \PHPCSUtils\Tokens\Collections::propertyTypeTokens() Related method (PHPCS 3.3.0+).
      *
      * @since 1.0.0-alpha3
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
+     *
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::propertyTypeTokens()} method instead.
      *
      * @return array <int|string> => <int|string>
      */
     public static function propertyTypeTokensBC()
     {
-        $tokens = self::propertyTypeTokens();
+        self::triggerDeprecation(
+            __FUNCTION__,
+            '1.0.0-alpha4',
+            \sprintf('the %s::propertyTypeTokens() method', __CLASS__)
+        );
 
-        // PHPCS < 4.0; Needed for support of PHPCS < 3.3.0. For PHPCS 3.3.0+ the constant is no longer used.
-        if (\defined('T_ARRAY_HINT') === true) {
-            $tokens[\T_ARRAY_HINT] = \T_ARRAY_HINT;
-        }
-
-        return $tokens;
+        return self::propertyTypeTokens();
     }
 
     /**
      * Token types which can be encountered in a return type declaration.
      *
-     * Note: this is a method, not a property as the `T_TYPE_UNION` token for PHP 8.0 union types may not exist.
-     *
-     * Sister-method to the {@see Collections::returnTypeTokensBC()} method.
-     * This method supports PHPCS 3.3.0 and up.
-     * The {@see Collections::returnTypeTokensBC()} method supports PHPCS 2.6.0 and up.
-     *
-     * Notable differences:
-     * - The {@see Collections::returnTypeTokensBC()} method will include the `T_ARRAY_HINT`
-     *   and the `T_RETURN_TYPE` tokens when used with PHPCS 2.x and 3.x.
-     *   These token constants will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use this method instead of the {@see Collections::returnTypeTokensBC()}
-     * method if a standard does not need to support PHPCS < 3.3.0.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::returnTypeTokensBC() Related method (cross-version).
-     *
      * @since 1.0.0-alpha4 This method replaces the {@see Collections::$returnTypeTokens} property.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
+     * @since 1.0.0-alpha4 Added the T_TYPE_UNION, T_FALSE, T_NULL tokens for PHP 8.0 union type support.
      * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
-     * @since 1.0.0-alpha4 Added the T_TYPE_UNION token for union type support in PHPCS > 3.6.0.
+     * @since 1.0.0-alpha4 Added the T_TYPE_INTERSECTION token for PHP 8.1 intersection type support.
+     * @since 1.0.0-alpha4 Added the T_TRUE token for PHP 8.2 true type support.
      *
      * @return array <int|string> => <int|string>
      */
     public static function returnTypeTokens()
     {
-        $tokens = [
-            \T_CALLABLE   => \T_CALLABLE,
-            \T_FALSE      => \T_FALSE,      // Union types only.
-            \T_NULL       => \T_NULL,       // Union types only.
-            \T_ARRAY      => \T_ARRAY,      // Arrow functions PHPCS < 3.5.4 + union types.
-            \T_BITWISE_OR => \T_BITWISE_OR, // Union types for PHPCS < 3.6.0.
-        ];
-
-        $tokens += self::ooHierarchyKeywords();
+        $tokens  = self::$returnTypeTokens;
+        $tokens += self::$OOHierarchyKeywords;
         $tokens += self::namespacedNameTokens();
-
-        // PHPCS > 3.6.0: a new token was introduced for the union type separator.
-        if (\defined('T_TYPE_UNION') === true) {
-            $tokens[\T_TYPE_UNION] = \T_TYPE_UNION;
-        }
 
         return $tokens;
     }
 
     /**
-     * Token types which can be encountered in a return type declaration (cross-version).
-     *
-     * Sister-method to the {@see Collections::returnTypeTokens()} method.
-     * The {@see Collections::returnTypeTokens()} method supports PHPCS 3.3.0 and up.
-     * This method supports PHPCS 2.6.0 and up.
-     *
-     * Notable differences:
-     * - This method will include the `T_ARRAY_HINT` and the `T_RETURN_TYPE` tokens when
-     *   used with PHPCS 2.x and 3.x.
-     *   These token constants will no longer exist in PHPCS 4.x.
-     *
-     * It is recommended to use the {@see Collections::returnTypeTokens()} method instead of
-     * this method if a standard does not need to support PHPCS < 3.3.0.
+     * DEPRECATED: Token types which can be encountered in a return type declaration (cross-version).
      *
      * @see \PHPCSUtils\Tokens\Collections::returnTypeTokens() Related method (PHPCS 3.3.0+).
      *
      * @since 1.0.0-alpha3
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 union types.
-     * @since 1.0.0-alpha4 Added support for PHP 8.0 identifier name tokens.
+     *
+     * @deprecated 1.0.0-alpha4 Use the {@see Collections::returnTypeTokens()} method instead.
      *
      * @return array <int|string> => <int|string>
      */
     public static function returnTypeTokensBC()
     {
-        $tokens = self::returnTypeTokens();
+        self::triggerDeprecation(
+            __FUNCTION__,
+            '1.0.0-alpha4',
+            \sprintf('the %s::returnTypeTokens() method', __CLASS__)
+        );
 
-        /*
-         * PHPCS < 4.0. Needed for support of PHPCS 2.4.0 < 3.3.0.
-         * For PHPCS 3.3.0+ the constant is no longer used.
-         */
-        if (\defined('T_RETURN_TYPE') === true) {
-            $tokens[\T_RETURN_TYPE] = \T_RETURN_TYPE;
-        }
-
-        /*
-         * PHPCS < 4.0. Needed for support of PHPCS < 2.8.0 / PHPCS < 3.5.3 for arrow functions.
-         * For PHPCS 3.5.3+ the constant is no longer used.
-         */
-        if (\defined('T_ARRAY_HINT') === true) {
-            $tokens[\T_ARRAY_HINT] = \T_ARRAY_HINT;
-        }
-
-        return $tokens;
-    }
-
-    /**
-     * Tokens which are used for short arrays.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::arrayTokens() Related method to retrieve all tokens used for arrays.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$shortArrayTokens} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function shortArrayTokens()
-    {
-        return self::$shortArrayTokens;
-    }
-
-    /**
-     * Tokens which are used for short arrays.
-     *
-     * List which is backward-compatible with PHPCS < 3.3.0.
-     * Should only be used selectively.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::arrayTokensBC() Related method to retrieve all tokens used for arrays
-     *                                                      (cross-version).
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$shortArrayTokensBC} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function shortArrayTokensBC()
-    {
-        return self::$shortArrayTokensBC;
-    }
-
-    /**
-     * Tokens which are used for short lists.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::listTokens() Related method to retrieve all tokens used for lists.
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$shortListTokens} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function shortListTokens()
-    {
-        return self::$shortListTokens;
-    }
-
-    /**
-     * Tokens which are used for short lists.
-     *
-     * List which is backward-compatible with PHPCS < 3.3.0.
-     * Should only be used selectively.
-     *
-     * @see \PHPCSUtils\Tokens\Collections::listTokensBC() Related method to retrieve all tokens used for lists
-     *                                                     (cross-version).
-     *
-     * @since 1.0.0-alpha4 This method replaces the {@see Collections::$shortListTokensBC} property.
-     *
-     * @return array <int|string> => <int|string>
-     */
-    public static function shortListTokensBC()
-    {
-        return self::$shortListTokensBC;
+        return self::returnTypeTokens();
     }
 
     /**

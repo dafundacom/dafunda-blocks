@@ -1053,7 +1053,6 @@ class File
         }
 
         if (empty($data) === false) {
-            if(!is_array($data)) $data = [$data];
             $message = vsprintf($message, $data);
         }
 

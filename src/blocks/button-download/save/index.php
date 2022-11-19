@@ -15,19 +15,29 @@
 		</div>
 
 		<?php
-		$downloadButtonRel = [];
-		if ($addNofollow) array_push($downloadButtonRel, "nofollow");
-		if ($addSponsored) array_push($downloadButtonRel, "sponsored");
-		$downloadButtonRel = join(" ", $downloadButtonRel);
+        $downloadButtonRel = [];
+				if ($addNofollow) {
+				    array_push($downloadButtonRel, "nofollow");
+				}
+				if ($addSponsored) {
+				    array_push($downloadButtonRel, "sponsored");
+				}
+				$downloadButtonRel = join(" ", $downloadButtonRel);
 
-		$downloadButtonClass = [];
-		if ($buttonAlign == "top") array_push($downloadButtonClass, "self-start");
-		else if ($buttonAlign == "bottom") array_push($downloadButtonClass, "self-end");
-		else array_push($downloadButtonClass, "self-center");
+				$downloadButtonClass = [];
+				if ($buttonAlign == "top") {
+				    array_push($downloadButtonClass, "self-start");
+				} elseif ($buttonAlign == "bottom") {
+				    array_push($downloadButtonClass, "self-end");
+				} else {
+				    array_push($downloadButtonClass, "self-center");
+				}
 
-		if ($buttonRounded) array_push($downloadButtonClass, "rounded-lg");
-		$downloadButtonClass = join(" ", $downloadButtonClass);
-		?>
+				if ($buttonRounded) {
+				    array_push($downloadButtonClass, "rounded-lg");
+				}
+				$downloadButtonClass = join(" ", $downloadButtonClass);
+				?>
 
 		<a href="<?= $url ?>" <?= $openInNewTab ? "target='_blank'" : '' ?> <?= $downloadButtonRel != "" ? "rel='$downloadButtonRel'" : "" ?> class="mt-3 md:mt-0 py-2 px-5 mx-auto md:ml-auto w-fit h-fit text-base font-bold <?= $downloadButtonClass ?>" style="background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;" onMouseOver="this.style.cssText=`background-color: <?= $buttonHoverColor ?> !important; color: <?= $buttonTextHoverColor ?> !important;`" onMouseOut="this.style.cssText=`background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;`">
 			Download
