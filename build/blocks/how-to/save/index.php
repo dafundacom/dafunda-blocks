@@ -211,5 +211,5 @@ $ISOTotalTime = generate_iso_duration_code($totalTime);
 
 $clips = "";
 
-require __DIR__ . "/tamplate.php";
+require __DIR__ . "/template.php";
 require __DIR__ . "/schema.php";

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ButtonAddStep } from "../../../components/button_add_step";
 import { Card } from "./components/card";
 import dummyDatas from "./data";
+import { useBlockProps } from "@wordpress/block-editor";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
@@ -53,14 +54,23 @@ export default function Edit(props) {
       setAttributes({ blockID: block.clientId });
     }
     if (listsState.length === 0) setLists([{ ...list_interface }]);
+
+    return () => {
+      wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+    };
   }, []);
 
   useEffect(() => {
     setAttributes({ lists: listsState });
+    if (!listsState.every((list) => list.title == "")) {
+      wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+    } else {
+      wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");
+    }
   }, [listsState]);
 
   return (
-    <>
+    <div className="wp-block" {...useBlockProps()}>
       <InspectorPanel {...props} />
       <div className="wp-block">
         {window.location.host === "localhost:3000" ? (
@@ -114,7 +124,7 @@ export default function Edit(props) {
           }}
         />
       </div>
-    </>
+    </div>
   );
 }
 

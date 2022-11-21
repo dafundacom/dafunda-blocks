@@ -22,6 +22,6 @@ function dbe_how_to_render_callback($attributes, $content, $block_instance)
     extract($attributes);
     ob_start();
     require plugin_dir_path(__FILE__) . './save/index.php';
-    require plugin_dir_path(__FILE__) . './save/schema.php';
+    // require plugin_dir_path(__FILE__) . './save/schema.php';
     return ob_get_clean();
 }

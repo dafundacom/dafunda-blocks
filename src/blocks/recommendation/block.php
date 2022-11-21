@@ -16,6 +16,6 @@ function dbe_recommendation_render_callback($attributes, $content, $block_instan
     extract($attributes);
     ob_start();
     require plugin_dir_path(__FILE__) . './save/index.php';
-    require plugin_dir_path(__FILE__) . './save/schema.php';
+    // require plugin_dir_path(__FILE__) . './save/schema.php';
     return ob_get_clean();
 }
