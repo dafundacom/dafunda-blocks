@@ -348,6 +348,10 @@ export function HowTo(props) {
     }
     // setAttributes(setMissingAttr(attributes));
     // isNeedLocked(section);
+
+    return () => {
+      wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+    };
   }, []);
 
   const clips = section

@@ -126,7 +126,7 @@ export function Card(props) {
           </div>
         )}
 
-        <div className="absolute left-6 bottom-3 flex flex-wrap">
+        <div className="absolute left-6 bottom-3 flex w-full flex-wrap">
           <h4
             className={`m-0 font-semibold ${
               imageurl && imageurl !== "" ? "text-white" : ""
@@ -138,7 +138,7 @@ export function Card(props) {
             tagName="h4"
             keepPlaceholderOnFocus
             placeholder={__("Title")}
-            className={`m-0 font-semibold ${
+            className={`m-0 min-w-[90%] font-semibold ${
               imageurl && imageurl !== "" ? "text-white" : ""
             }`}
             value={title}
