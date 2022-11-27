@@ -7,4 +7,4 @@ if (function_exists("dbe_filterJsonldString") === false) {
 }
 
 require __DIR__ . "/template.php";
-require __DIR__ . "/schema.php";
+// require __DIR__ . "/schema.php";
