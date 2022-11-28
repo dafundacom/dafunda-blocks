@@ -37,7 +37,7 @@
 		<?= $header ?>
 
 		<?php $sectionListStyleTag = $sectionListStyle === "ordered" ? "ul" : "ol"; ?>
-		<<?= $sectionListStyleTag ?> class="pl-0">
+		<<?= $sectionListStyleTag ?> class="pl-0 list-none">
 			<?php if ($useSections) : ?>
 				<?php foreach ($section as $i => $section_) : ?>
 					<li class="howto-section list-none">

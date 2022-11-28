@@ -281,8 +281,12 @@ export function HowTo(props) {
     });
 
     if (!need_block.status) {
+      wp.data.dispatch("core/editor").enablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
     } else {
+      wp.data
+        .dispatch("core/editor")
+        .disablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");
     }
   }, [attributes]);
@@ -350,6 +354,7 @@ export function HowTo(props) {
     // isNeedLocked(section);
 
     return () => {
+      wp.data.dispatch("core/editor").enablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
     };
   }, []);

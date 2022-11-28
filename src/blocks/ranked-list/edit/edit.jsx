@@ -56,6 +56,7 @@ export default function Edit(props) {
     if (listsState.length === 0) setLists([{ ...list_interface }]);
 
     return () => {
+      wp.data.dispatch("core/editor").enablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
     };
   }, []);
@@ -63,8 +64,12 @@ export default function Edit(props) {
   useEffect(() => {
     setAttributes({ lists: listsState });
     if (!listsState.every((list) => list.title == "")) {
+      wp.data.dispatch("core/editor").enablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
     } else {
+      wp.data
+        .dispatch("core/editor")
+        .disablePublishSidebar("requiredValueLock");
       wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");
     }
   }, [listsState]);

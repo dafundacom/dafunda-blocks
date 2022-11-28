@@ -2,12 +2,12 @@
 $schemejson = [
     "@context" => "http://schema.org",
     "@type" => "SoftwareApplication",
-  "name" => str_replace("\'", "'", wp_filter_nohtml_kses($title)),
-    "description" => str_replace(
-        "\'",
-        "'",
-        wp_filter_nohtml_kses($introduction)
-    ),
+//   "name" => str_replace("\'", "'", wp_filter_nohtml_kses($title)),
+    // "description" => str_replace(
+    //     "\'",
+    //     "'",
+    //     wp_filter_nohtml_kses($introduction)
+    // ),
 ];
 
 $schemejson = json_encode(
