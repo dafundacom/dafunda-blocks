@@ -258,7 +258,7 @@
     },
     "reviewPublicationDate": {
       "type": "number",
-      "default": 1669538408
+      "default": 1669726246
     },
     "bookAuthorName": {
       "type": "string",
@@ -294,7 +294,7 @@
     },
     "eventStartDate": {
       "type": "number",
-      "default": 1669624860
+      "default": 1669812660
     },
     "eventEndDate": {
       "type": "number",
@@ -314,7 +314,7 @@
     },
     "videoUploadDate": {
       "type": "number",
-      "default": 1669538408
+      "default": 1669726246
     },
     "videoURL": {
       "type": "string",
