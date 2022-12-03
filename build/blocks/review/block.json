@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "title": "Review (Dafunda Blocks)",
+  "name": "dbe/review",
+  "version": "0.0.1",
+  "keywords": [
+    "dbe",
+    "Dafunda Blocks",
+    "dafunda-blocks",
+    "Review"
+  ],
+  "category": "widgets",
+  "attributes": {
+    "blockID": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "pros": {
+      "type": "array",
+      "default": []
+    },
+    "cons": {
+      "type": "array",
+      "default": []
+    },
+    "reviews": {
+      "type": "array",
+      "default": []
+    },
+    "background_used": {
+      "type": "string",
+      "default": "gradient"
+    },
+    "background_color": {
+      "type": "string",
+      "default": ""
+    },
+    "background_gradient": {
+      "type": "string",
+      "default": "linear-gradient(135deg, #c31432, #240b36)"
+    },
+    "background_image": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "multiple": false
+  },
+  "editorScript": "file:./block.js",
+  "viewScript": "file:./scripts/index.js"
+}
