@@ -1,628 +1,558 @@
-import { RichText, MediaUpload, URLInput } from "@wordpress/block-editor";
-import { Button, Dashicon } from "@wordpress/components";
+/* eslint-disable no-unused-vars */
+import {
+  RichText,
+  MediaUpload,
+  URLInput,
+  useBlockProps,
+} from "@wordpress/block-editor";
+
+import {
+  Button,
+  Dashicon,
+  DropdownMenu,
+  MenuGroup,
+  MenuItem,
+  MenuItemsChoice,
+  RangeControl,
+  ResizableBox,
+} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Component, createRef } from "react";
+import { Fragment } from "@wordpress/element";
+import {
+  more,
+  arrowUp,
+  arrowDown,
+  arrowRight,
+  arrowLeft,
+  trash,
+} from "@wordpress/icons";
+import { Component, createRef, useState, useRef, useEffect } from "react";
 
-import { removeIcon } from "../icon";
+import Check from "../../../icons/check";
+import X_Mark from "../../../icons/x-mark";
+import PlusCircle from "../../../icons/plus-circle";
+import Trash from "../../../icons/trash";
+import EllipsisVertical from "../../../icons/ellipsis-vertical";
 
-export class OldStars extends Component {
-  constructor(props) {
-    super(props);
-  }
+import { ButtonAddStep2 } from "../../../components/button_add_step_2";
+import { InspectorPanel } from "./components/inspector_panel";
 
-  render() {
-    const {
-      value,
-      activeStarColor,
-      limit,
-      id,
-      className,
-      inactiveStarColor,
-      style,
-    } = this.props;
-    return (
-      <div
-        className={className}
-        style={{
-          display: "flex",
-          flexDirection: "flex-row",
-          ...style,
-        }}
-      >
-        {[...Array(limit).keys()].map((i) => (
-          <svg key={i} height="20" width="20" viewBox="0 0 150 150">
-            <defs>
-              <mask id={`review_star_filter-${id}-${i}`}>
-                <rect
-                  height="150"
-                  width={
-                    (value - i > 0 ? (value - i < 1 ? value - i : 1) : 0) * 150
-                  }
-                  y="0"
-                  x="0"
-                  fill="#fff"
-                />
-              </mask>
-            </defs>
+const moveElement = (array, from, to) => {
+  const copy = [...array];
+  const valueToMove = copy.splice(from, 1)[0];
+  copy.splice(to, 0, valueToMove);
+  return copy;
+};
 
-            <path
-              fill={inactiveStarColor}
-              strokeWidth="1.5"
-              d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
-              stroke="#000"
-            />
-            <path
-              className="star"
-              id={`star${i}`}
-              mask={`url(#review_star_filter-${id}-${i})`}
-              fill={activeStarColor}
-              strokeWidth="1.5"
-              d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
-              stroke="#000"
-            />
-          </svg>
-        ))}
-      </div>
-    );
-  }
-}
-
-export class Stars extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayValue: this.props.value,
-      displayColor: this.props.activeStarColor,
-    };
-    this.mouseHover = this.mouseHover.bind(this);
-    this.mouseLeave = this.mouseLeave.bind(this);
-    this.mouseClick = this.mouseClick.bind(this);
-  }
-
-  mouseHover(i) {
-    this.setState({
-      displayValue: i + (this.props.value - i === 1 ? 0.5 : 1),
-      displayColor: this.props.selectedStarColor,
-    });
-  }
-
-  mouseLeave() {
-    this.setState({
-      displayValue: this.props.value,
-      displayColor: this.props.activeStarColor,
-    });
-  }
-
-  mouseClick(i) {
-    const { setValue, value } = this.props;
-    setValue(value === i + 1 ? i + 0.5 : i + 1);
-    this.setState({
-      displayValue: value === i + 1 ? i + 0.5 : i + 1,
-    });
-  }
-
-  // eslint-disable-next-line react/no-deprecated
-  componentWillReceiveProps(newProps) {
-    const { value, activeStarColor } = newProps;
-    if (this.props.onHover || this.state.displayValue !== value) {
-      this.setState({
-        displayValue: value,
-        displayColor: activeStarColor,
-      });
-    } else {
-      this.setState({ displayColor: activeStarColor });
-    }
-  }
-
-  render() {
-    const { displayValue } = this.state;
-    const {
-      limit,
-      id,
-      className,
-      inactiveStarColor,
-      onHover,
-      onClick,
-      style,
-      starOutlineColor,
-    } = this.props;
-    return (
-      <div
-        className={className}
-        style={{
-          display: "flex",
-          flexDirection: "flex-row",
-          ...style,
-        }}
-      >
-        {[...Array(limit).keys()].map((i) => (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            key={i}
-            height="20"
-            width="20"
-            viewBox="0 0 150 150"
-            onMouseOver={() => onHover || this.mouseHover(i)}
-            onMouseOut={() => this.mouseLeave()}
-            onClick={() => onClick || this.mouseClick(i)}
-          >
-            <defs>
-              <mask id={`review_star_filter-${id}-${i}`}>
-                <rect
-                  height="150"
-                  width={
-                    (displayValue - i > 0
-                      ? displayValue - i < 1
-                        ? displayValue - i
-                        : 1
-                      : 0) * 150
-                  }
-                  y="0"
-                  x="0"
-                  fill="#fff"
-                />
-              </mask>
-            </defs>
-
-            <path
-              fill={inactiveStarColor}
-              strokeWidth="2.5"
-              d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
-              stroke={starOutlineColor}
-            />
-            <path
-              className="star"
-              id={`star${i}`}
-              mask={`url(#review_star_filter-${id}-${i})`}
-              fill={this.state.displayColor}
-              strokeWidth="2.5"
-              d="m0.75,56.89914l56.02207,0l17.31126,-56.14914l17.31126,56.14914l56.02206,0l-45.32273,34.70168l17.31215,56.14914l-45.32274,-34.70262l-45.32274,34.70262l17.31215,-56.14914l-45.32274,-34.70168z"
-              stroke={starOutlineColor}
-            />
-          </svg>
-        ))}
-      </div>
-    );
-  }
-}
-
-export default class Edit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      average:
-        this.props.items.map((i) => i.value).reduce((total, v) => total + v) /
-        this.props.items.length,
-      mouseOnHold: false,
-    };
-    this.ctaButton = createRef();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.measureCTAFontSize !== prevProps.measureCTAFontSize) {
-      if (this.props.measureCTAFontSize) {
-        if (this.ctaButton.current) {
-          this.props.setAttributes({
-            callToActionFontSize: parseInt(
-              getComputedStyle(this.ctaButton.current).fontSize.slice(0, -2),
-              10
-            ),
-          });
-        }
-      }
-    }
-  }
-
-  render() {
-    const {
-      isSelected,
-      authorName,
-      setAuthorName,
-      itemName,
-      setItemName,
-      imgID,
-      imgAlt,
-      imgURL,
-      imgPosition,
-      imageEnabled,
-      setImage,
+export default function Edit(props) {
+  const {
+    attributes: {
+      blockID,
+      title,
       description,
-      descriptionEnabled,
-      setDescription,
-      ID,
-      items,
-      enableSummary,
-      summaryTitle,
-      summaryDescription,
-      valueType,
-      starCount,
-      setItems,
-      setSummaryDescription,
-      setSummaryTitle,
-      callToActionText,
-      callToActionURL,
-      callToActionAlignment,
-      setCallToActionText,
-      setCallToActionURL,
-      hasFocus,
-      callToActionBackColor,
-      callToActionBorderColor,
-      callToActionForeColor,
-      inactiveStarColor,
-      activeStarColor,
-      selectedStarColor,
-      starOutlineColor,
-      activePercentBarColor,
-      percentBarColor,
-      setEditable,
-      activeStarIndex,
-      setActiveStarIndex,
-      alignments,
-      enableCTA,
-      imageSize,
-      ctaFontSize,
-    } = this.props;
+      pros,
+      cons,
+      reviews,
+      background_used,
+      background_color,
+      background_gradient,
+      background_image,
+    },
+    setAttributes,
+    block,
+    getBlock,
+    getClientIdsWithDescendants,
+  } = props;
+  const pros_static = [
+    "Struktur plot yang rapi",
+    "Element action",
+    "Konsep anti hero",
+  ];
+  const cons_static = [
+    "Polt mahkota sabbacx",
+    "Inergang sebagai villian utama",
+  ];
 
-    const { titleAlign, authorAlign, descriptionAlign } = alignments;
-    const { average } = this.state;
+  const [reviews_local, setReviewsLocal] = useState(reviews);
+  const reviews_static = [
+    { label: "Story", value: 0 },
+    { label: "Performance", value: 0 },
+    { label: "Direction", value: 0 },
+    { label: "Cinematography", value: 0 },
+    { label: "Scoring", value: 0 },
+  ];
 
-    const newAverage =
-      items.map((i) => i.value).reduce((total, v) => total + v) / items.length;
+  const reviews_default = {
+    label: "",
+    value: 0,
+  };
 
-    if (average !== newAverage) {
-      this.setState({ average: newAverage });
+  const [total_review_percentage, set_total_review_percentage] = useState(0);
+
+  function lockHandle(status) {
+    if (status) {
+      wp.data
+        .dispatch("core/editor")
+        .disablePublishSidebar("requiredValueLock");
+      wp.data.dispatch("core/editor").lockPostSaving("requiredValueLock");
+    } else {
+      wp.data.dispatch("core/editor").enablePublishSidebar("requiredValueLock");
+      wp.data.dispatch("core/editor").unlockPostSaving("requiredValueLock");
+    }
+  }
+
+  useEffect(() => {
+    if (pros.length == 0) {
+      setAttributes({ pros: pros_static });
+    }
+    if (cons.length == 0) {
+      setAttributes({ cons: cons_static });
+    }
+    if (reviews_local.length == 0) {
+      setReviewsLocal(reviews_static);
+    }
+    if (description == "") {
+      setAttributes({
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur dicta cum magni quidem aperiam. Voluptas, ratione velit optio, expedita explicabo iste tempore temporibus consectetur repudiandae autem ut aut quisquam pariatur aperiam non, praesentium dolore quod! Optio laboriosam officiis vero dolorum incidunt autem reprehenderit qui explicabo ipsa, esse similique excepturi aliquid?",
+      });
     }
 
-    const setNewPercentage = (percentageBar, mouseX, i, j) => {
-      const newValue = Math.round(
-        (100 * (mouseX - percentageBar.x)) / percentageBar.width
-      );
-      const newArray = [
-        ...items.slice(0, i),
-        { label: j.label, value: newValue },
-        ...items.slice(i + 1),
-      ];
-      setItems(newArray);
-      setActiveStarIndex(i);
-      this.setState({
-        average:
-          newArray.map((i) => i.value).reduce((total, v) => total + v) /
-          newArray.length,
-      });
+    return () => {
+      lockHandle(false);
     };
+  }, []);
 
-    return (
-      <div className="review_block">
-        <RichText
-          className="review_item_name"
-          placeholder={__("Title of the review")}
-          value={itemName}
-          style={{ textAlign: titleAlign }}
-          onChange={(text) => setItemName(text)}
-          unstableOnFocus={() => setEditable("reviewTitle")}
-        />
-        <RichText
-          placeholder={__("Review Author name")}
-          value={authorName}
-          style={{ textAlign: authorAlign }}
-          onChange={(text) => setAuthorName(text)}
-          unstableOnFocus={() => setEditable("reviewAuthor")}
-        />
-        {(imageEnabled || descriptionEnabled) && (
-          <div
-            className={`review_description_container review_${imgPosition}_image`}
-          >
-            {imageEnabled &&
-              (imgID ? (
-                <div className="review_image_container">
-                  <img
-                    className="review_image"
-                    src={imgURL}
-                    alt={imgAlt}
-                    style={{
-                      maxHeight: `${imageSize}px`,
-                      maxWidth: `${imageSize}px`,
-                    }}
-                  />
-                  {isSelected && (
-                    <Button
-                      className="remove-image"
-                      onClick={() =>
-                        setImage({
-                          id: 0,
-                          url: "",
-                          alt: "",
-                        })
-                      }
+  useEffect(() => {
+    let acumulate_review_percentage = 0;
+    reviews_local.forEach((value) => {
+      acumulate_review_percentage += parseInt(value.value);
+    });
+    set_total_review_percentage(
+      acumulate_review_percentage / reviews_local.length
+    );
+    setAttributes({ reviews: reviews_local });
+    console.log("reviews", reviews);
+  }, [reviews_local]);
+
+  function rangeTrackWidth(width) {
+    if (width >= 84) {
+      width -= 1.5;
+    } else if (width >= 43) {
+      width -= 1;
+    } else if (width >= 6) {
+      width -= 0.5;
+    }
+
+    return width;
+  }
+
+  useEffect(() => {
+    if (
+      title == "" ||
+      pros.length == 0 ||
+      pros.includes("") ||
+      cons.length == 0 ||
+      cons.includes("") ||
+      reviews.length == 0 ||
+      reviews.map((review) => review.label).includes("")
+    ) {
+      lockHandle(true);
+    } else {
+      lockHandle(false);
+    }
+  }, [reviews, pros, cons, title]);
+
+  return (
+    <div {...useBlockProps()}>
+      <InspectorPanel {...props} />
+      <div
+        className="review_block wp-block relative min-h-[500px] w-full overflow-hidden rounded-md !p-4"
+        style={{
+          background:
+            background_used == "color" ? background_color : background_gradient,
+          backgroundColor:
+            background_used == "color" ? background_color : background_gradient,
+        }}
+      >
+        {background_used == "image" && background_image != "" ? (
+          <div className="absolute inset-0 z-0">
+            <img src={background_image} className="w-full" />
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6477941518404237) 7%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 100%)",
+                transform: "scaleY(1.5)",
+              }}
+            ></div>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="relative z-10 mb-4 flex w-full flex-row flex-wrap">
+          <div className="flex-1">
+            {/* <p className="mt-0 mb-2 text-base text-white/60">REVIEW</p> */}
+            <RichText
+              tagName="p"
+              multiline={false}
+              keepPlaceholderOnFocus
+              placeholder={__("Title")}
+              className="mt-0 mb-3 text-3xl font-bold text-white"
+              value={title}
+              onChange={(title) => setAttributes({ title })}
+            />
+
+            <RichText
+              tagName="p"
+              keepPlaceholderOnFocus
+              placeholder={__("Description")}
+              className="mt-0 mb-3 text-base text-white"
+              value={description}
+              onChange={(description) => setAttributes({ description })}
+            />
+          </div>
+          <div className="flex max-h-[162px] w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600">
+            <p className="flex grow items-center text-3xl font-bold text-white">
+              {parseInt(total_review_percentage)}%
+            </p>
+            <div className="flex w-full justify-center bg-lime-500 py-2 text-xs text-white">
+              SCORE
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white">
+          <div className="flex w-full flex-wrap border-b-2 border-slate-100">
+            <div className="basis-6/12 border-r-2 border-slate-100 p-3">
+              <p className="mt-0 mb-3 text-sm font-bold">PROS</p>
+              <ul className="list-none pl-0">
+                {pros.map((pro, index) => (
+                  <li className="flex flex-wrap" key={index}>
+                    <Check className="h-5 w-5 text-lime-500" />
+                    <RichText
+                      tagName="p"
+                      placeholder="Pros title"
+                      multiline={false}
+                      keepPlaceholderOnFocus
+                      className="mt-0 mb-3 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
+                      value={pro}
+                      onChange={(pro) => {
+                        let newData = [...pros];
+                        newData[index] = pro;
+                        setAttributes({ pros: newData });
+                      }}
+                    />
+
+                    <DropdownMenu
+                      icon={<EllipsisVertical className={"h-4 w-4"} />}
+                      label="Select a direction"
                     >
-                      {removeIcon}
-                    </Button>
-                  )}
+                      {({ onClose }) => (
+                        <Fragment>
+                          <MenuGroup>
+                            <MenuItem
+                              icon={arrowUp}
+                              onClick={() => {
+                                if (index > 0) {
+                                  setAttributes({
+                                    pros: [
+                                      ...moveElement(pros, index, index - 1),
+                                    ],
+                                  });
+                                  onClose();
+                                }
+                              }}
+                            >
+                              Move Up
+                            </MenuItem>
+                            <MenuItem
+                              icon={arrowDown}
+                              onClick={() => {
+                                if (index < pros.length - 1) {
+                                  setAttributes({
+                                    pros: [
+                                      ...moveElement(pros, index, index + 1),
+                                    ],
+                                  });
+                                  onClose();
+                                }
+                              }}
+                            >
+                              Move Down
+                            </MenuItem>
+                          </MenuGroup>
+                          <MenuGroup>
+                            <MenuItem
+                              icon={trash}
+                              onClick={() => {
+                                let newData = [...pros];
+                                newData = newData.filter(
+                                  (v, index_new) => index_new != index
+                                );
+                                setAttributes({ pros: newData });
+                                onClose();
+                              }}
+                            >
+                              Remove
+                            </MenuItem>
+                          </MenuGroup>
+                        </Fragment>
+                      )}
+                    </DropdownMenu>
+                  </li>
+                ))}
+              </ul>
+
+              {pros.length == 0 || pros.includes("") ? (
+                <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
+                  <p className="m-0 text-base font-semibold text-red-700">
+                    Anda tidak bisa save jika PROS belum diisi
+                  </p>
                 </div>
               ) : (
-                <div className="review_upload_button">
-                  <MediaUpload
-                    onSelect={(img) => setImage(img)}
-                    type="image"
-                    value={imgID}
-                    render={({ open }) => (
-                      <Button
-                        className="components-button button button-medium"
-                        onClick={open}
+                ""
+              )}
+              <ButtonAddStep2
+                onClick={() => {
+                  setAttributes({ pros: [...pros, ""] });
+                }}
+              />
+            </div>
+            <div className="basis-6/12 p-3">
+              <p className="mt-0 mb-3 text-sm font-bold">CONS</p>
+              <ul className="list-none pl-0">
+                {cons.map((con, index) => (
+                  <li className="flex flex-wrap" key={index}>
+                    <X_Mark className="h-5 w-5 text-red-500" />
+                    <RichText
+                      tagName="p"
+                      placeholder="Cons title"
+                      multiline={false}
+                      keepPlaceholderOnFocus
+                      className="mt-0 mb-3 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
+                      value={con}
+                      onChange={(con) => {
+                        let newData = [...cons];
+                        newData[index] = con;
+                        setAttributes({ cons: newData });
+                      }}
+                    />
+                    <DropdownMenu
+                      icon={<EllipsisVertical className={"h-4 w-4"} />}
+                      label="Select a direction"
+                    >
+                      {({ onClose }) => (
+                        <Fragment>
+                          <MenuGroup>
+                            <MenuItem
+                              icon={arrowUp}
+                              onClick={() => {
+                                if (index > 0) {
+                                  setAttributes({
+                                    cons: [
+                                      ...moveElement(cons, index, index - 1),
+                                    ],
+                                  });
+                                  onClose();
+                                }
+                              }}
+                            >
+                              Move Up
+                            </MenuItem>
+                            <MenuItem
+                              icon={arrowDown}
+                              onClick={() => {
+                                if (index < cons.length - 1) {
+                                  setAttributes({
+                                    cons: [
+                                      ...moveElement(cons, index, index + 1),
+                                    ],
+                                  });
+                                  onClose();
+                                }
+                              }}
+                            >
+                              Move Down
+                            </MenuItem>
+                          </MenuGroup>
+                          <MenuGroup>
+                            <MenuItem
+                              icon={trash}
+                              onClick={() => {
+                                let newData = [...cons];
+                                newData = newData.filter(
+                                  (v, index_new) => index_new != index
+                                );
+                                setAttributes({ cons: newData });
+                                onClose();
+                              }}
+                            >
+                              Remove
+                            </MenuItem>
+                          </MenuGroup>
+                        </Fragment>
+                      )}
+                    </DropdownMenu>
+                  </li>
+                ))}
+              </ul>
+
+              {cons.length == 0 || cons.includes("") ? (
+                <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
+                  <p className="m-0 text-base font-semibold text-red-700">
+                    Anda tidak bisa save jika CONS belum diisi
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+              <ButtonAddStep2
+                onClick={() => {
+                  setAttributes({ cons: [...cons, ""] });
+                }}
+              />
+            </div>
+          </div>
+          <div className="flex w-full flex-wrap p-5">
+            <p className="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
+            <div className="w-full">
+              {reviews_local.map((review, index) => (
+                <div key={index}>
+                  <div className="mb-6 flex flex-col flex-wrap">
+                    <div className="mb-2 flex flex-wrap items-center justify-between">
+                      <RichText
+                        tagName="p"
+                        multiline={false}
+                        keepPlaceholderOnFocus
+                        placeholder="Review title"
+                        className="m-0 flex flex-1 flex-wrap items-center text-sm font-bold focus:outline-none focus:ring focus:ring-slate-300"
+                        value={review.label}
+                        onChange={(value) => {
+                          let newReviews = [...reviews_local];
+                          newReviews[index] = {
+                            label: value,
+                            value: parseInt(review.value),
+                          };
+                          setReviewsLocal(newReviews);
+                        }}
+                      />
+                      <p className="m-0 flex flex-wrap items-center text-sm font-bold">
+                        {review.value}%
+                      </p>
+                      <DropdownMenu
+                        icon={<EllipsisVertical className={"h-4 w-4"} />}
+                        label="Select a direction"
                       >
-                        {__("Upload Image")}
-                      </Button>
-                    )}
-                  />
+                        {({ onClose }) => (
+                          <Fragment>
+                            <MenuGroup>
+                              <MenuItem
+                                icon={arrowUp}
+                                onClick={() => {
+                                  if (index > 0) {
+                                    setReviewsLocal([
+                                      ...moveElement(
+                                        reviews_local,
+                                        index,
+                                        index - 1
+                                      ),
+                                    ]);
+                                    onClose();
+                                  }
+                                }}
+                              >
+                                Move Up
+                              </MenuItem>
+                              <MenuItem
+                                icon={arrowDown}
+                                onClick={() => {
+                                  if (index < reviews_local.length - 1) {
+                                    setReviewsLocal([
+                                      ...moveElement(
+                                        reviews_local,
+                                        index,
+                                        index + 1
+                                      ),
+                                    ]);
+                                    onClose();
+                                  }
+                                }}
+                              >
+                                Move Down
+                              </MenuItem>
+                            </MenuGroup>
+                            <MenuGroup>
+                              <MenuItem
+                                icon={trash}
+                                onClick={() => {
+                                  let newData = [...reviews_local];
+                                  newData = newData.filter(
+                                    (v, index_new) => index_new != index
+                                  );
+                                  setReviewsLocal(newData);
+                                  onClose();
+                                }}
+                              >
+                                Remove
+                              </MenuItem>
+                            </MenuGroup>
+                          </Fragment>
+                        )}
+                      </DropdownMenu>
+                    </div>
+                    <div className="relative flex flex-wrap">
+                      <div
+                        className="track"
+                        style={{
+                          width: `${rangeTrackWidth(parseInt(review.value))}%`,
+                        }}
+                      ></div>
+                      <input
+                        id="range_id"
+                        className="range"
+                        type="range"
+                        name=""
+                        min="0"
+                        max="100"
+                        step="1"
+                        onChange={(event) => {
+                          let newReviews = [...reviews_local];
+                          newReviews[index] = {
+                            label: review.label,
+                            value: parseInt(event.target.value),
+                          };
+                          setReviewsLocal(newReviews);
+                        }}
+                        value={review.value}
+                      />
+                    </div>
+                  </div>
                 </div>
               ))}
-            {descriptionEnabled && (
-              <RichText
-                className="review_description"
-                placeholder={__("Item description")}
-                value={description}
-                onChange={(text) => setDescription(text)}
-                style={{ textAlign: descriptionAlign }}
-                unstableOnFocus={() => setEditable("reviewItemDescription")}
-              />
-            )}
-          </div>
-        )}
-        {items.map((j, i) => (
-          <div
-            className={`review_${
-              valueType === "percent" ? "percentage_" : ""
-            }entry`}
-            key={i}
-          >
-            <RichText
-              key={i}
-              placeholder={__("Feature name")}
-              value={j.label}
-              onChange={(text) =>
-                setItems([
-                  ...items.slice(0, i),
-                  { label: text, value: j.value },
-                  ...items.slice(i + 1),
-                ])
-              }
-              unstableOnFocus={() => {
-                setEditable("");
-                setActiveStarIndex(i);
-              }}
-              onSplit={(label) => label}
-              onReplace={(label) => {
-                setItems([
-                  ...items.slice(0, i),
-                  { label: label[0], value: j.value },
-                  { label: label[1], value: j.value },
-                  ...items.slice(i + 1),
-                ]);
-              }}
-              onMerge={(mergeWithNext) => {
-                if (mergeWithNext) {
-                  if (i < items.length - 1) {
-                    setItems([
-                      ...items.slice(0, i),
-                      {
-                        label: `${items[i].label}${items[i + 1].label}`,
-                        value: j.value,
-                      },
-                      ...items.slice(i + 2),
-                    ]);
-                  }
-                } else {
-                  if (i > 0) {
-                    setItems([
-                      ...items.slice(0, i - 1),
-                      {
-                        label: `${items[i - 1].label}${items[i].label}`,
-                        value: items[i - 1].value,
-                      },
-                      ...items.slice(i + 1),
-                    ]);
-                  }
-                  if (i === items.length - 1) {
-                    setActiveStarIndex(-1);
-                  }
-                }
-              }}
-            />
-            <div
-              key={i}
-              className="review_value"
-              style={{
-                marginLeft: "auto",
-                minWidth: items.length > 1 ? 120 : 100,
-              }}
-            >
-              {items.length > 1 && (
-                <div
-                  className="dashicons dashicons-trash"
-                  onClick={() => {
-                    setEditable("");
-                    const newItems = items
-                      .slice(0, i)
-                      .concat(items.slice(i + 1, items.length));
-                    setItems(newItems);
-                    this.setState({
-                      average:
-                        newItems
-                          .map((i) => i.value)
-                          .reduce((total, v) => total + v) / newItems.length,
-                    });
-                    if (i <= activeStarIndex) {
-                      setActiveStarIndex(activeStarIndex - 1);
-                    }
-                  }}
-                  aria-hidden="true"
-                />
-              )}
-              {valueType === "star" ? (
-                <Stars
-                  id={`${ID}-${i}`}
-                  key={i}
-                  value={j.value}
-                  limit={starCount}
-                  setValue={(newValue) => {
-                    const newArray = [
-                      ...items.slice(0, i),
-                      { label: j.label, value: newValue },
-                      ...items.slice(i + 1),
-                    ];
-                    setItems(newArray);
-                    setActiveStarIndex(i);
-                    this.setState({
-                      average:
-                        newArray
-                          .map((i) => i.value)
-                          .reduce((total, v) => total + v) / newArray.length,
-                    });
-                  }}
-                  inactiveStarColor={inactiveStarColor}
-                  activeStarColor={activeStarColor}
-                  selectedStarColor={selectedStarColor}
-                  starOutlineColor={starOutlineColor}
-                />
+
+              {reviews_local.length == 0 ||
+              reviews_local.map((review) => review.label).includes("") ? (
+                <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
+                  <p className="m-0 text-base font-semibold text-red-700">
+                    Anda tidak bisa save jika REVIEWS belum diisi
+                  </p>
+                </div>
               ) : (
-                <div className="review_percentage">
-                  <svg
-                    className="review_percentage_bar"
-                    viewBox="0 0 100 1"
-                    preserveAspectRatio="none"
-                    height="10"
-                    onClick={(e) =>
-                      setNewPercentage(
-                        e.currentTarget.getBoundingClientRect(),
-                        e.clientX,
-                        i,
-                        j
-                      )
-                    }
-                    // in cases where the user drags across the bar
-                    onMouseDown={() => this.setState({ mouseOnHold: true })}
-                    onMouseUp={() => this.setState({ mouseOnHold: false })}
-                    onMouseMove={(e) => {
-                      if (this.state.mouseOnHold) {
-                        setNewPercentage(
-                          e.currentTarget.getBoundingClientRect(),
-                          e.clientX,
-                          i,
-                          j
-                        );
-                      }
-                    }}
-                  >
-                    <path
-                      className="review_percentage_bar_trail"
-                      d="M 0.5,0.5 L 99.5,0.5"
-                      stroke={percentBarColor || "#d9d9d9"}
-                      strokeWidth="1"
-                    />
-                    <path
-                      className="review_percentage_bar_path"
-                      d="M 0.5,0.5 L 99.5,0.5"
-                      stroke={activePercentBarColor}
-                      strokeWidth="1"
-                      strokeDashoffset={`${100 - j.value}px`}
-                    />
-                  </svg>
-                  <div>{j.value}%</div>
-                </div>
+                ""
               )}
             </div>
-          </div>
-        ))}
-        <div
-          title={__("Insert new review entry")}
-          onClick={() => {
-            setItems([...items, { label: "", value: 0 }]);
-            this.setState({ average: average / (items.length + 1) });
-          }}
-          aria-hidden="true"
-          className="review_add_entry dashicons dashicons-plus-alt"
-        />
-        <div className="review_summary">
-          {enableSummary && (
-            <RichText
-              className="review_summary_title"
-              placeholder={__("Title of the summary goes here")}
-              onChange={(text) => setSummaryTitle(text)}
-              value={summaryTitle}
-              unstableOnFocus={() => setEditable("")}
+
+            <ButtonAddStep2
+              onClick={() => {
+                // setAttributes({ reviews_local: [...reviews_local, reviews_default] });
+                setReviewsLocal([...reviews_local, reviews_default]);
+              }}
             />
-          )}
-          <div className="review_overall_value">
-            {enableSummary && (
-              <RichText
-                placeholder={__("Summary of the review goes here")}
-                onChange={(text) => setSummaryDescription(text)}
-                value={summaryDescription}
-                unstableOnFocus={() => setEditable("")}
-              />
-            )}
-            <div className="review_average">
-              <span className="review_rating">
-                {Math.round(average * 10) / 10}
-                {valueType === "percent" ? "%" : ""}
-              </span>
-              {valueType === "star" && (
-                <Stars
-                  id={`${ID}-average`}
-                  className="review_average_stars"
-                  onHover={() => null}
-                  onClick={() => null}
-                  value={average}
-                  limit={starCount}
-                  inactiveStarColor={inactiveStarColor}
-                  activeStarColor={activeStarColor}
-                  selectedStarColor={selectedStarColor}
-                  starOutlineColor={starOutlineColor}
-                />
-              )}
-            </div>
           </div>
-          <div className="review_cta_panel">
-            <div
-              className="review_cta_main"
-              style={{ justifyContent: callToActionAlignment }}
-            >
-              {enableCTA && (
-                <div // do not merge into RichText child
-                  className="review_cta_btn"
-                  style={{
-                    backgroundColor: callToActionBackColor,
-                    borderColor: callToActionBorderColor,
-                    fontSize: ctaFontSize > 0 ? `${ctaFontSize}px` : null,
-                  }}
-                  ref={this.ctaButton}
-                >
-                  <RichText
-                    style={{ color: callToActionForeColor || "inherit" }}
-                    placeholder={__("Call to action")}
-                    value={callToActionText}
-                    onChange={(text) => setCallToActionText(text)}
-                    unstableOnFocus={() => setEditable("")}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-          {hasFocus && enableCTA && (
-            <div className="review_link_input">
-              <div className="icon-holder">
-                <Dashicon icon="admin-links" />
-              </div>
-              <URLInput
-                autoFocus={false}
-                style={{ width: "200px" }} // inline style used to override gutenberg's default style
-                value={callToActionURL}
-                onChange={(text) => setCallToActionURL(text)}
-              />
-            </div>
-          )}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
