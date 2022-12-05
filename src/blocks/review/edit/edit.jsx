@@ -52,7 +52,7 @@ export default function Edit(props) {
       description,
       pros,
       cons,
-      reviews,
+      breakdowns,
       background_used,
       background_color,
       background_gradient,
@@ -63,31 +63,20 @@ export default function Edit(props) {
     getBlock,
     getClientIdsWithDescendants,
   } = props;
-  const pros_static = [
-    "Struktur plot yang rapi",
-    "Element action",
-    "Konsep anti hero",
-  ];
-  const cons_static = [
-    "Polt mahkota sabbacx",
-    "Inergang sebagai villian utama",
-  ];
 
-  const [reviews_local, setReviewsLocal] = useState(reviews);
-  const reviews_static = [
-    { label: "Story", value: 0 },
-    { label: "Performance", value: 0 },
-    { label: "Direction", value: 0 },
-    { label: "Cinematography", value: 0 },
-    { label: "Scoring", value: 0 },
-  ];
+  const pros_static = [""];
+  const cons_static = [""];
 
-  const reviews_default = {
+  const [breakdowns_local, setBreakdownsLocal] = useState(breakdowns);
+  const breakdowns_static = [{ label: "", value: 0 }];
+
+  const breakdowns_default = {
     label: "",
     value: 0,
   };
 
-  const [total_review_percentage, set_total_review_percentage] = useState(0);
+  const [total_breakdown_percentage, set_total_breakdown_percentage] =
+    useState(0);
 
   function lockHandle(status) {
     if (status) {
@@ -108,14 +97,8 @@ export default function Edit(props) {
     if (cons.length == 0) {
       setAttributes({ cons: cons_static });
     }
-    if (reviews_local.length == 0) {
-      setReviewsLocal(reviews_static);
-    }
-    if (description == "") {
-      setAttributes({
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur dicta cum magni quidem aperiam. Voluptas, ratione velit optio, expedita explicabo iste tempore temporibus consectetur repudiandae autem ut aut quisquam pariatur aperiam non, praesentium dolore quod! Optio laboriosam officiis vero dolorum incidunt autem reprehenderit qui explicabo ipsa, esse similique excepturi aliquid?",
-      });
+    if (breakdowns_local.length == 0) {
+      setBreakdownsLocal(breakdowns_static);
     }
 
     return () => {
@@ -124,16 +107,19 @@ export default function Edit(props) {
   }, []);
 
   useEffect(() => {
-    let acumulate_review_percentage = 0;
-    reviews_local.forEach((value) => {
-      acumulate_review_percentage += parseInt(value.value);
+    let acumulate_breakdown_percentage = 0;
+    breakdowns_local.forEach((value) => {
+      acumulate_breakdown_percentage += parseFloat(value.value);
     });
-    set_total_review_percentage(
-      acumulate_review_percentage / reviews_local.length
+
+    console.log(
+      `pembagian: ${acumulate_breakdown_percentage} / ${breakdowns_local.length}`
     );
-    setAttributes({ reviews: reviews_local });
-    console.log("reviews", reviews);
-  }, [reviews_local]);
+    set_total_breakdown_percentage(
+      acumulate_breakdown_percentage / breakdowns_local.length
+    );
+    setAttributes({ breakdowns: breakdowns_local });
+  }, [breakdowns_local]);
 
   function rangeTrackWidth(width) {
     if (width >= 84) {
@@ -154,14 +140,14 @@ export default function Edit(props) {
       pros.includes("") ||
       cons.length == 0 ||
       cons.includes("") ||
-      reviews.length == 0 ||
-      reviews.map((review) => review.label).includes("")
+      breakdowns.length == 0 ||
+      breakdowns.map((breakdown) => breakdown.label).includes("")
     ) {
       lockHandle(true);
     } else {
       lockHandle(false);
     }
-  }, [reviews, pros, cons, title]);
+  }, [breakdowns, pros, cons, title]);
 
   return (
     <div {...useBlockProps()}>
@@ -214,8 +200,8 @@ export default function Edit(props) {
             />
           </div>
           <div className="flex max-h-[162px] w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600">
-            <p className="flex grow items-center text-3xl font-bold text-white">
-              {parseInt(total_review_percentage)}%
+            <p className="m-0 flex grow items-center py-10 text-3xl font-bold text-white">
+              {parseInt(total_breakdown_percentage)}%
             </p>
             <div className="flex w-full justify-center bg-lime-500 py-2 text-xs text-white">
               SCORE
@@ -418,7 +404,7 @@ export default function Edit(props) {
           <div className="flex w-full flex-wrap p-5">
             <p className="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
             <div className="w-full">
-              {reviews_local.map((review, index) => (
+              {breakdowns_local.map((breakdown, index) => (
                 <div key={index}>
                   <div className="mb-6 flex flex-col flex-wrap">
                     <div className="mb-2 flex flex-wrap items-center justify-between">
@@ -426,20 +412,20 @@ export default function Edit(props) {
                         tagName="p"
                         multiline={false}
                         keepPlaceholderOnFocus
-                        placeholder="Review title"
+                        placeholder="Breakdown title"
                         className="m-0 flex flex-1 flex-wrap items-center text-sm font-bold focus:outline-none focus:ring focus:ring-slate-300"
-                        value={review.label}
+                        value={breakdown.label}
                         onChange={(value) => {
-                          let newReviews = [...reviews_local];
-                          newReviews[index] = {
+                          let newBreakdowns = [...breakdowns_local];
+                          newBreakdowns[index] = {
                             label: value,
-                            value: parseInt(review.value),
+                            value: parseInt(breakdown.value),
                           };
-                          setReviewsLocal(newReviews);
+                          setBreakdownsLocal(newBreakdowns);
                         }}
                       />
                       <p className="m-0 flex flex-wrap items-center text-sm font-bold">
-                        {review.value}%
+                        {breakdown.value}%
                       </p>
                       <DropdownMenu
                         icon={<EllipsisVertical className={"h-4 w-4"} />}
@@ -452,9 +438,9 @@ export default function Edit(props) {
                                 icon={arrowUp}
                                 onClick={() => {
                                   if (index > 0) {
-                                    setReviewsLocal([
+                                    setBreakdownsLocal([
                                       ...moveElement(
-                                        reviews_local,
+                                        breakdowns_local,
                                         index,
                                         index - 1
                                       ),
@@ -468,10 +454,10 @@ export default function Edit(props) {
                               <MenuItem
                                 icon={arrowDown}
                                 onClick={() => {
-                                  if (index < reviews_local.length - 1) {
-                                    setReviewsLocal([
+                                  if (index < breakdowns_local.length - 1) {
+                                    setBreakdownsLocal([
                                       ...moveElement(
-                                        reviews_local,
+                                        breakdowns_local,
                                         index,
                                         index + 1
                                       ),
@@ -487,11 +473,11 @@ export default function Edit(props) {
                               <MenuItem
                                 icon={trash}
                                 onClick={() => {
-                                  let newData = [...reviews_local];
+                                  let newData = [...breakdowns_local];
                                   newData = newData.filter(
                                     (v, index_new) => index_new != index
                                   );
-                                  setReviewsLocal(newData);
+                                  setBreakdownsLocal(newData);
                                   onClose();
                                 }}
                               >
@@ -506,7 +492,9 @@ export default function Edit(props) {
                       <div
                         className="track"
                         style={{
-                          width: `${rangeTrackWidth(parseInt(review.value))}%`,
+                          width: `${rangeTrackWidth(
+                            parseInt(breakdown.value)
+                          )}%`,
                         }}
                       ></div>
                       <input
@@ -518,22 +506,24 @@ export default function Edit(props) {
                         max="100"
                         step="1"
                         onChange={(event) => {
-                          let newReviews = [...reviews_local];
-                          newReviews[index] = {
-                            label: review.label,
+                          let newBreakdowns = [...breakdowns_local];
+                          newBreakdowns[index] = {
+                            label: breakdown.label,
                             value: parseInt(event.target.value),
                           };
-                          setReviewsLocal(newReviews);
+                          setBreakdownsLocal(newBreakdowns);
                         }}
-                        value={review.value}
+                        value={breakdown.value}
                       />
                     </div>
                   </div>
                 </div>
               ))}
 
-              {reviews_local.length == 0 ||
-              reviews_local.map((review) => review.label).includes("") ? (
+              {breakdowns_local.length == 0 ||
+              breakdowns_local
+                .map((breakdown) => breakdown.label)
+                .includes("") ? (
                 <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
                   <p className="m-0 text-base font-semibold text-red-700">
                     Anda tidak bisa save jika REVIEWS belum diisi
@@ -546,8 +536,8 @@ export default function Edit(props) {
 
             <ButtonAddStep2
               onClick={() => {
-                // setAttributes({ reviews_local: [...reviews_local, reviews_default] });
-                setReviewsLocal([...reviews_local, reviews_default]);
+                // setAttributes({ breakdowns_local: [...breakdowns_local, breakdowns_default] });
+                setBreakdownsLocal([...breakdowns_local, breakdowns_default]);
               }}
             />
           </div>

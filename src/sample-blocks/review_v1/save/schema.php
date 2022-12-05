@@ -1,26 +1,29 @@
 <?php if ($enableReviewSchema) : ?>
 <?php
 
-    $parsedItems = isset($parts) ? $parts : $breakdowns;
+    $parsedItems = isset($parts) ? $parts : json_decode($items, true);
+
+    if ($blockID === "") {
+        $blockID = $ID;
+    }
 
     $extractedValues = array_map(function ($item) {
         return $item["value"];
     }, $parsedItems);
 
     $average = round(array_sum($extractedValues) / count($extractedValues), 1);
-
+    
     $offerCode = [
       "@type" => $offerType,
       "priceCurrency" => dbe_filterJsonldString($offerCurrency)
     ];
-
     if ($offerType === "AggregateOffer") {
         $offerCode["lowPrice"] = $offerLowPrice;
         $offerCode["highPrice"] = $offerHighPrice;
         $offerCode["offerCount"] = absint($offerCount);
     } else {
         $offerCode["price"] = $offerPrice;
-        // $offerCode["url"] = esc_url($callToActionURL);
+        $offerCode["url"] = esc_url($callToActionURL);
         if ($offerExpiry > 0) {
             $offerCode["priceValidUntil"] = date("Y-m-d", $offerExpiry);
         }
@@ -32,19 +35,27 @@ $SCHEMEJSON = [
   "description" => dbe_filterJsonldString($description),
   "itemReviewed" => [
     "@type" => $itemSubsubtype ?: $itemSubtype ?: $itemType,
-    "name" => $title,
     "description" => dbe_filterJsonldString($description),
-    "image" => $background_image,
+    // "image" => "http://www.example.com/seafood-restaurant.jpg",
   ]
 ];
-// if ($useSummary) {
-//     $SCHEMEJSON["reviewBody"] = dbe_filterJsonldString($summaryDescription);
-// }
+if ($useSummary) {
+    $SCHEMEJSON["reviewBody"] = dbe_filterJsonldString($summaryDescription);
+}
+// $SCHEMEJSON["description"] = dbe_filterJsonldString($description);
+// $SCHEMEJSON["itemReviewed"] = [
+//   "@type" => $itemSubsubtype ?: $itemSubtype ?: $itemType
+// ];
 
-if ($background_image) {
+if ($itemName) {
+    $SCHEMEJSON["itemReviewed"]["name"] = dbe_filterJsonldString($itemName);
+}
+
+
+if ($imgURL) {
     $SCHEMEJSON["itemReviewed"][$itemSubtype === "VideoObject"
     ? '"thumbnailUrl'
-    : '"image'] = esc_url($background_image) || "";
+    : '"image'] = esc_url($imgURL) || "";
 }
 // $SCHEMEJSON["itemReviewed"]["description"] = dbe_filterJsonldString($description);
 
@@ -52,7 +63,7 @@ switch ($itemType) {
     case 'Book':
         $SCHEMEJSON["itemReviewed"]["author"] =  dbe_filterJsonldString($bookAuthorName);
         $SCHEMEJSON["itemReviewed"]["isbn"] =  dbe_filterJsonldString($isbn);
-        // $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
+        $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
         break;
 
     case 'Course':
@@ -88,7 +99,7 @@ switch ($itemType) {
         ];
         $SCHEMEJSON["itemReviewed"]["sku"] = dbe_filterJsonldString($sku);
         $SCHEMEJSON["itemReviewed"][dbe_filterJsonldString($identifierType)] = dbe_filterJsonldString($identifier);
-        // $SCHEMEJSON["itemReviewed"]["offers"] =  $offerCode;
+        $SCHEMEJSON["itemReviewed"]["offers"] =  $offerCode;
         break;
 
     case 'LocalBusiness':
@@ -98,12 +109,12 @@ switch ($itemType) {
             $SCHEMEJSON["itemReviewed"]["address"] =  dbe_filterJsonldString($address);
             $SCHEMEJSON["itemReviewed"]["telephone"] =  dbe_filterJsonldString($telephone);
             $SCHEMEJSON["itemReviewed"]["priceRange"] =  dbe_filterJsonldString($priceRange);
-            // $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
+            $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
         }
         break;
 
     case 'Movie':
-        // $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
+        $SCHEMEJSON["itemReviewed"]["sameAs"] =  esc_url($itemPage);
         break;
 
     case 'Organization':
@@ -128,10 +139,10 @@ switch ($itemType) {
         break;
 
     case 'MediaObject':
-        // if ($itemSubtype === "VideoObject") {
-        //     $SCHEMEJSON["itemReviewed"]["uploadDate"] =  date("Y-m-d", $videoUploadDate);
-        //     $SCHEMEJSON["itemReviewed"]["contentUrl"] =  esc_url($videoURL);
-        // }
+        if ($itemSubtype === "VideoObject") {
+            $SCHEMEJSON["itemReviewed"]["uploadDate"] =  date("Y-m-d", $videoUploadDate);
+            $SCHEMEJSON["itemReviewed"]["contentUrl"] =  esc_url($videoURL);
+        }
         break;
 
 
@@ -143,14 +154,14 @@ switch ($itemType) {
 $SCHEMEJSON["reviewRating"] = [
   "@type" => "Rating",
   "ratingValue" => $average % 1 === 0 ? 1 :  number_format($average, 1, ".", ""),
-  "bestRating" => "100",
+  "bestRating" => $valueType === "star" ? $starCount : "100",
 ];
 $SCHEMEJSON["author"] = [
   "@type" => "Person",
-  "name" => dbe_filterJsonldString($bookAuthorName)
+  "name" => dbe_filterJsonldString($authorName)
 ];
 $SCHEMEJSON["publisher"] = dbe_filterJsonldString($reviewPublisher);
-$SCHEMEJSON["datePublished"] = date("Y-m-d", $reviewPublicationDate);
+// $SCHEMEJSON["datePublished"] = date("Y-m-d", $publicationDate);
 $SCHEMEJSON["url"] = get_permalink();
 
 $SCHEMEJSON = json_encode(
