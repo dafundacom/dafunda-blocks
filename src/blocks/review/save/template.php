@@ -21,14 +21,15 @@
 
         </div>
         <div class="flex max-h-[162px] w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600">
-            <p class="flex grow items-center text-3xl font-bold text-white m-0">
-                <?php $total_review_percentage = 0;
-    foreach ($reviews as $key => $review) {
-        $total_review_percentage = $total_review_percentage +  $review["value"];
+            <p class="flex grow items-center text-3xl font-bold text-white m-0 py-10">
+                <?php $total_breakdown_percentage = 0;
+    foreach ($breakdowns as $key => $breakdown) {
+        $total_breakdown_percentage = $total_breakdown_percentage +  floatval($breakdown["value"]);
     }
-    $total_review_percentage = $total_review_percentage / count($review);
+    $result_total_breakdown_percentage = intval($total_breakdown_percentage / count($breakdowns));
+    if( $result_total_breakdown_percentage > 100)  $result_total_breakdown_percentage = 100;
     ?>
-                <?= $total_review_percentage ?>%
+                <?= $result_total_breakdown_percentage ?>%
             </p>
             <div class="flex w-full justify-center bg-lime-500 py-2 text-xs text-white">
                 SCORE
@@ -77,36 +78,36 @@
             <p class="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
             <div class="w-full">
 
-                <?php foreach ($reviews as $review) :?>
+                <?php foreach ($breakdowns as $breakdown) :?>
                 <div class="mb-6 flex flex-col flex-wrap">
                     <div class="mb-2 flex flex-wrap items-center justify-between">
                         <p
                             class="m-0 flex flex-1 flex-wrap items-center text-sm font-bold focus:outline-none focus:ring focus:ring-slate-300">
-                            <?= $review["label"] ?>
+                            <?= $breakdown["label"] ?>
                         </p>
 
                         <p class="m-0 flex flex-wrap items-center text-sm font-bold">
-                            <?= $review["value"] ?>%
+                            <?= $breakdown["value"] ?>%
                         </p>
 
                     </div>
                     <div class="relative flex flex-wrap">
                         <?php
-            $review_width = $review["value"];
-                    if ($review_width >= 84) {
-                        $review_width -= 1.5;
-                    } elseif ($review_width >= 43) {
-                        $review_width -= 1;
-                    } elseif ($review_width >= 6) {
-                        $review_width -= 0.5;
+            $breakdown_width = $breakdown["value"];
+                    if ($breakdown_width >= 84) {
+                        $breakdown_width -= 1.5;
+                    } elseif ($breakdown_width >= 43) {
+                        $breakdown_width -= 1;
+                    } elseif ($breakdown_width >= 6) {
+                        $breakdown_width -= 0.5;
                     }
                     ?>
 
                         <div class="track"
-                            style="width:<?= $review_width ?>%">
+                            style="width:<?= $breakdown_width ?>%">
                         </div>
                         <input id="range_id" class="range" type="range" name="" min="0" max="100" step="1"
-                            value="<?= $review["value"] ?>"
+                            value="<?= $breakdown["value"] ?>"
                             disabled />
                     </div>
                 </div>

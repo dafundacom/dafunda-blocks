@@ -1,7 +1,8 @@
 import { __ } from "@wordpress/i18n";
 import slug from "slug";
 import base_config from "../../config.mjs";
-import style_config from "./config_style.mjs"
+import style_attributes from "./attributes/style.mjs"
+import scheme_attributes from "./attributes/scheme.mjs"
 
 const NAME = "Review";
 
@@ -34,11 +35,12 @@ const config = {
             type: "array",
             default: []
         },
-        reviews: {
+        breakdowns: {
             type: "array",
             default: []
         },
-        ...style_config
+        ...style_attributes,
+        ...scheme_attributes,
     },
     supports: {
         html: false,

@@ -32,7 +32,7 @@
       "type": "array",
       "default": []
     },
-    "reviews": {
+    "breakdowns": {
       "type": "array",
       "default": []
     },
@@ -49,6 +49,146 @@
       "default": "linear-gradient(135deg, #c31432, #240b36)"
     },
     "background_image": {
+      "type": "string",
+      "default": ""
+    },
+    "enableReviewSchema": {
+      "type": "boolean",
+      "default": true
+    },
+    "itemType": {
+      "type": "string",
+      "default": "Product"
+    },
+    "itemSubtype": {
+      "type": "string",
+      "default": ""
+    },
+    "itemSubsubtype": {
+      "type": "string",
+      "default": ""
+    },
+    "reviewPublisher": {
+      "type": "string",
+      "default": ""
+    },
+    "reviewPublicationDate": {
+      "type": "number",
+      "default": 1670253449
+    },
+    "offerType": {
+      "type": "string",
+      "default": "Offer"
+    },
+    "offerStatus": {
+      "type": "string",
+      "default": "InStock"
+    },
+    "offerHighPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "offerLowPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "offerCount": {
+      "type": "number",
+      "default": 0
+    },
+    "offerPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "offerCurrency": {
+      "type": "string",
+      "default": "USD"
+    },
+    "offerExpiry": {
+      "type": "number",
+      "default": 0
+    },
+    "brand": {
+      "type": "string",
+      "default": ""
+    },
+    "sku": {
+      "type": "string",
+      "default": ""
+    },
+    "identifier": {
+      "type": "string",
+      "default": ""
+    },
+    "identifierType": {
+      "type": "string",
+      "default": "gtin"
+    },
+    "usePhysicalAddress": {
+      "type": "boolean",
+      "default": true
+    },
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "addressName": {
+      "type": "string",
+      "default": ""
+    },
+    "eventStartDate": {
+      "type": "number",
+      "default": 1670339880
+    },
+    "eventEndDate": {
+      "type": "number",
+      "default": 0
+    },
+    "authorName": {
+      "type": "string",
+      "default": ""
+    },
+    "bookAuthorName": {
+      "type": "string",
+      "default": ""
+    },
+    "isbn": {
+      "type": "string",
+      "default": ""
+    },
+    "cuisines": {
+      "type": "array",
+      "default": []
+    },
+    "phoneNumber": {
+      "type": "string",
+      "default": ""
+    },
+    "priceRange": {
+      "type": "string",
+      "default": ""
+    },
+    "appCategory": {
+      "type": "string",
+      "default": ""
+    },
+    "operatingSystem": {
+      "type": "string",
+      "default": ""
+    },
+    "provider": {
+      "type": "string",
+      "default": ""
+    },
+    "organizer": {
+      "type": "string",
+      "default": ""
+    },
+    "performer": {
+      "type": "string",
+      "default": ""
+    },
+    "eventPage": {
       "type": "string",
       "default": ""
     }

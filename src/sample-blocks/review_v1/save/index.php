@@ -1,6 +1,5 @@
 <?php
 
-
 if (!function_exists("dbe_generatePercentageBar")) {
     function dbe_generatePercentageBar($value, $id, $activeColor, $inactiveColor)
     {
@@ -42,7 +41,6 @@ if (!function_exists("dbe_filterJsonldString")) {
         return str_replace("\'", "'", wp_filter_nohtml_kses($string));
     }
 }
-
 
 require __DIR__ . "/template.php";
 require __DIR__ . "/schema.php";

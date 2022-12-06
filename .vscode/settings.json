@@ -32,9 +32,9 @@
   //   "[javascriptreact]": {
   //     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   //   },
-//   "[javascript]": {
-//     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-//   },
+  //   "[javascript]": {
+  //     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  //   },
   "php-cs-fixer.executablePath": "${extensionPath}\\php-cs-fixer.phar",
   "[php]": {
     "editor.defaultFormatter": "junstyle.php-cs-fixer",

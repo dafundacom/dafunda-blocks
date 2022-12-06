@@ -22,7 +22,6 @@ import {
 
 import { arrowDown } from "@wordpress/icons";
 import { ButtonDeleteImage } from "../../../button-download/edit/components";
-import Scheme from "./panel/scheme";
 
 const { ToggleControl, PanelBody, SelectControl, TabPanel, TextControl } =
   wp.components;
@@ -195,8 +194,6 @@ export const InspectorPanel = (props) => {
           )}
         </div>
       </PanelBody>
-
-      <Scheme {...props} />
     </InspectorControls>
   );
 };
