@@ -1,13 +1,15 @@
 <?php if ($enableReviewSchema) : ?>
 <?php
-
-    $parsedItems = isset($parts) ? $parts : $breakdowns;
-
-    $extractedValues = array_map(function ($item) {
-        return $item["value"];
-    }, $parsedItems);
-
-    $average = round(array_sum($extractedValues) / count($extractedValues), 1);
+    $author_id = get_the_author_meta('ID');
+    $total_breakdown_percentage = 0;
+    foreach ($breakdowns as $key => $breakdown) {
+        $total_breakdown_percentage = $total_breakdown_percentage +  floatval($breakdown["value"]);
+    }
+    $result_total_breakdown_percentage = intval($total_breakdown_percentage / count($breakdowns));
+    if ($result_total_breakdown_percentage > 100) {
+        $result_total_breakdown_percentage = 100;
+    }
+    $average = $result_total_breakdown_percentage;
 
     $offerCode = [
       "@type" => $offerType,
@@ -142,12 +144,14 @@ switch ($itemType) {
 
 $SCHEMEJSON["reviewRating"] = [
   "@type" => "Rating",
-  "ratingValue" => $average % 1 === 0 ? 1 :  number_format($average, 1, ".", ""),
+  "ratingValue" => $average,
   "bestRating" => "100",
 ];
 $SCHEMEJSON["author"] = [
   "@type" => "Person",
-  "name" => dbe_filterJsonldString($bookAuthorName)
+  "name" => get_the_author_meta('display_name', $author_id),
+  "url" => get_author_posts_url($author_id),
+  "email" => get_the_author_meta('user_email', $author_id) ?? "",
 ];
 $SCHEMEJSON["publisher"] = dbe_filterJsonldString($reviewPublisher);
 $SCHEMEJSON["datePublished"] = date("Y-m-d", $reviewPublicationDate);

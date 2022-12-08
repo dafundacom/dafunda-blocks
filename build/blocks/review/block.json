@@ -74,7 +74,7 @@
     },
     "reviewPublicationDate": {
       "type": "number",
-      "default": 1670253449
+      "default": 1670337082
     },
     "offerType": {
       "type": "string",
@@ -138,7 +138,7 @@
     },
     "eventStartDate": {
       "type": "number",
-      "default": 1670339880
+      "default": 1670423520
     },
     "eventEndDate": {
       "type": "number",
