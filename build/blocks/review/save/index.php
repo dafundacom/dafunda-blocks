@@ -43,6 +43,20 @@ if (!function_exists("dbe_filterJsonldString")) {
     }
 }
 
+$total_breakdown_percentage = 0;
+$result_total_breakdown_percentage = 0;
+        
+foreach ($breakdowns as $key => $breakdown) {
+    $total_breakdown_percentage = $total_breakdown_percentage +  floatval($breakdown["value"]);
+}
+
+if (count($breakdowns) > 0 && intval($total_breakdown_percentage) > 0) {
+    $result_total_breakdown_percentage = intval($total_breakdown_percentage / count($breakdowns));
+    if ($result_total_breakdown_percentage > 100) {
+        $result_total_breakdown_percentage = 100;
+    }
+}
+
 
 require __DIR__ . "/template.php";
 require __DIR__ . "/schema.php";

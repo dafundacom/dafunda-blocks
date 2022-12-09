@@ -10,9 +10,9 @@
     <?php endif?>
 
     <div class="relative z-10 mb-4 flex w-full flex-row flex-wrap">
-        <div class="flex-1">
+        <div class="flex-1 order-2 md:order-1">
 
-            <p class="mt-0 mb-3 text-3xl font-bold text-white">
+            <p class="mt-0 mb-3 text-2xl md:text-3xl font-bold text-white">
                 <?= $title ?>
             </p>
             <p class="mt-0 mb-3 text-base text-white">
@@ -20,15 +20,9 @@
             </p>
 
         </div>
-        <div class="flex max-h-[162px] w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600">
-            <p class="flex grow items-center text-3xl font-bold text-white m-0 py-10">
-                <?php $total_breakdown_percentage = 0;
-    foreach ($breakdowns as $key => $breakdown) {
-        $total_breakdown_percentage = $total_breakdown_percentage +  floatval($breakdown["value"]);
-    }
-    $result_total_breakdown_percentage = intval($total_breakdown_percentage / count($breakdowns));
-    if( $result_total_breakdown_percentage > 100)  $result_total_breakdown_percentage = 100;
-    ?>
+        <div
+            class="flex max-h-[162px] w-full md:w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600 order-1 md:order-2 mb-4 md:mb-0">
+            <p class="flex grow items-center text-3xl font-bold text-white m-0 py-4 md:py-10">
                 <?= $result_total_breakdown_percentage ?>%
             </p>
             <div class="flex w-full justify-center bg-lime-500 py-2 text-xs text-white">
@@ -39,7 +33,7 @@
 
     <div class="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white">
         <div class="flex w-full flex-wrap border-b-2 border-slate-100 border-solid">
-            <div class="basis-6/12 border-r-2 border-slate-100 border-solid p-3">
+            <div class=" basis-full md:basis-6/12 border-r-2 border-slate-100 border-solid p-3">
                 <p class="mt-0 mb-3 text-sm font-bold">PROS</p>
                 <ul class="list-none pl-0">
                     <?php foreach ($pros as $pro) : ?>
@@ -56,7 +50,7 @@
                     <?php endforeach?>
                 </ul>
             </div>
-            <div class="basis-6/12 p-3">
+            <div class="basis-full md:basis-6/12 p-3">
                 <p class="mt-0 mb-3 text-sm font-bold">CONS</p>
                 <ul class="list-none pl-0">
                     <?php foreach ($cons as $con) : ?>

@@ -1,15 +1,8 @@
 <?php if ($enableReviewSchema) : ?>
 <?php
     $author_id = get_the_author_meta('ID');
-    $total_breakdown_percentage = 0;
-    foreach ($breakdowns as $key => $breakdown) {
-        $total_breakdown_percentage = $total_breakdown_percentage +  floatval($breakdown["value"]);
-    }
-    $result_total_breakdown_percentage = intval($total_breakdown_percentage / count($breakdowns));
-    if ($result_total_breakdown_percentage > 100) {
-        $result_total_breakdown_percentage = 100;
-    }
-    $average = $result_total_breakdown_percentage;
+
+    $average = strval($result_total_breakdown_percentage);
 
     $offerCode = [
       "@type" => $offerType,
