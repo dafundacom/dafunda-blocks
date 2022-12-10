@@ -1,4 +1,4 @@
-<div class="download-button rounded-lg !border !border-slate-200 border-solid p-3 flex flex-wrap overflow-hidden">
+<div class="download-button rounded-lg border border-slate-200 dark:border-neutral-700 border-solid p-3 flex flex-wrap overflow-hidden">
 		<div class="basis-2/12">
 			<figure class="relative">
 				<img class="w-full aspect-square rounded-lg  object-cover object-center" src="<?= $imageurl ?>" />
@@ -39,7 +39,7 @@
 				$downloadButtonClass = join(" ", $downloadButtonClass);
 				?>
 
-		<a href="<?= $url ?>" <?= $openInNewTab ? "target='_blank'" : '' ?> <?= $downloadButtonRel != "" ? "rel='$downloadButtonRel'" : "" ?> class="mt-3 md:mt-0 py-2 px-5 mx-auto md:ml-auto w-fit h-fit text-base font-bold <?= $downloadButtonClass ?>" style="background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;" onMouseOver="this.style.cssText=`background-color: <?= $buttonHoverColor ?> !important; color: <?= $buttonTextHoverColor ?> !important;`" onMouseOut="this.style.cssText=`background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;`">
+		<a href="<?= $url ?>" <?= $openInNewTab ? "target='_blank'" : '' ?> <?= $downloadButtonRel != "" ? "rel='$downloadButtonRel'" : "" ?> class="py-2 px-5 ml-auto w-fit h-fit text-xs md:text-base font-bold <?= $downloadButtonClass ?>" style="background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;" onMouseOver="this.style.cssText=`background-color: <?= $buttonHoverColor ?> !important; color: <?= $buttonTextHoverColor ?> !important;`" onMouseOut="this.style.cssText=`background-color: <?= $buttonColor ?> !important; color: <?= $buttonTextColor ?> !important;`">
 			Download
 		</a>
 	</div>

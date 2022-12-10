@@ -124,7 +124,9 @@ export default function Edit(props) {
   function rangeTrackWidth(width) {
     if (width >= 84) {
       width -= 1.5;
-    } else if (width >= 43) {
+    } else if (width >= 70) {
+      width -= 1.5;
+    } else if (width >= 33) {
       width -= 1;
     } else if (width >= 6) {
       width -= 0.5;
@@ -488,7 +490,7 @@ export default function Edit(props) {
                         )}
                       </DropdownMenu>
                     </div>
-                    <div className="relative flex flex-wrap">
+                    <div className="costum-slider relative flex flex-wrap">
                       <div
                         className="track"
                         style={{

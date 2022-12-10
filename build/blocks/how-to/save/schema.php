@@ -242,7 +242,3 @@ $SCHEMEJSON =
     PHP_EOL .
     "</script>";
 ?>
-
-<script type="application/ld+json">
-    <?= $schemejson ?>
-</script>

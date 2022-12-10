@@ -31,11 +31,13 @@
         </div>
     </div>
 
-    <div class="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white">
-        <div class="flex w-full flex-wrap border-b-2 border-slate-100 border-solid">
-            <div class=" basis-full md:basis-6/12 border-r-2 border-slate-100 border-solid p-3">
+    <div class="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white dark:bg-neutral-900">
+        <div
+            class="flex w-full flex-wrap border-0 border-b-2 border-slate-100 dark:border-neutral-800 border-solid gap-4 md:gap-0">
+            <div
+                class=" basis-full md:basis-6/12 border-0 border-b-2 md:border-r-2 border-slate-100 dark:border-neutral-800 border-solid p-3">
                 <p class="mt-0 mb-3 text-sm font-bold">PROS</p>
-                <ul class="list-none pl-0">
+                <ul class="list-none pl-0 m-0">
                     <?php foreach ($pros as $pro) : ?>
                     <li class="flex flex-wrap">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -52,7 +54,7 @@
             </div>
             <div class="basis-full md:basis-6/12 p-3">
                 <p class="mt-0 mb-3 text-sm font-bold">CONS</p>
-                <ul class="list-none pl-0">
+                <ul class="list-none pl-0 m-0">
                     <?php foreach ($cons as $con) : ?>
                     <li class="flex flex-wrap">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -85,14 +87,19 @@
                         </p>
 
                     </div>
-                    <div class="relative flex flex-wrap">
+                    <div class="relative flex flex-wrap costum-slider">
                         <?php
             $breakdown_width = $breakdown["value"];
                     if ($breakdown_width >= 84) {
                         $breakdown_width -= 1.5;
-                    } elseif ($breakdown_width >= 43) {
+                    } 
+                    elseif ($breakdown_width >= 70) {
+                        $breakdown_width -= 1.5;
+                    } 
+                    elseif ($breakdown_width >= 33) {
                         $breakdown_width -= 1;
-                    } elseif ($breakdown_width >= 6) {
+                    } 
+                    elseif ($breakdown_width >= 6) {
                         $breakdown_width -= 0.5;
                     }
                     ?>
