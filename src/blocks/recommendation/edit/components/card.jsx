@@ -231,7 +231,7 @@ export function Card(props) {
       </div>
 
       {/* Price */}
-      <div className="flex flex-wrap p-5 pb-0">
+      <div className="flex flex-wrap p-4 pb-0">
         <input
           type="text"
           placeholder="Price Tag"
@@ -250,7 +250,7 @@ export function Card(props) {
       {/* Price END */}
 
       {/* Olshop Link */}
-      <div className="p-5">
+      <div className="p-4">
         <form className="mb-3 flex flex-wrap" onSubmit={addOlshopForm}>
           <input
             type="text"
@@ -331,7 +331,7 @@ export function Card(props) {
         </div>
       </div>
       {/* Olshop Description */}
-      <div className="recomendasi-list-description p-5 pt-0">
+      <div className="recomendasi-list-description p-4 pt-0">
         <RichText
           tagName="p"
           keepPlaceholderOnFocus
@@ -343,7 +343,7 @@ export function Card(props) {
         />
       </div>
 
-      <div className="p-5 pt-0">
+      <div className="p-4 pt-0">
         <input
           className="w-full"
           type="text"

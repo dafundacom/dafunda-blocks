@@ -393,7 +393,7 @@ export function HowTo(props) {
               <input
                 type="url"
                 placeholder={__("Insert video URL")}
-                className="w-full !border !border-slate-200"
+                className="w-full border border-solid border-slate-200"
                 value={videoURLInput}
                 onChange={(e) => setStates({ videoURLInput: e.target.value })}
                 onKeyDown={(e) => {
@@ -1215,7 +1215,7 @@ export function HowTo(props) {
         </div>
 
         <div className="mb-4 grid  grid-cols-1 gap-4 md:grid-cols-3 md:gap-3">
-          <div className="rounded-lg !border !border-slate-200 px-4 py-2">
+          <div className="rounded-lg border border-solid border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Like Count</h6>
             <TextControl
               value={howToLikeCount}
@@ -1223,7 +1223,7 @@ export function HowTo(props) {
               type="number"
             />
           </div>
-          <div className="rounded-lg !border !border-slate-200 px-4 py-2">
+          <div className="rounded-lg border border-solid border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Disike Count</h6>
             <TextControl
               value={howToDisikeCount}
@@ -1233,7 +1233,7 @@ export function HowTo(props) {
               type="number"
             />
           </div>
-          <div className="rounded-lg !border !border-slate-200 px-4 py-2">
+          <div className="rounded-lg border border-solid border-slate-200 px-4 py-2">
             <h6 className="m-0 font-normal normal-case">Vote Total Count</h6>
             <p className="m-0">{howToVoteCount}</p>
           </div>
