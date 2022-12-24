@@ -3,25 +3,33 @@ namespace DBE;
 
 use DBE\Setup;
 
-class Activation {
-
+class Activation
+{
     public static function init()
     {
-        register_activation_hook(DBE_PLUGIN_DIR . "/setup.php", function(){
+        register_activation_hook(DBE_PLUGIN_DIR . "/setup.php", function () {
             // wp_die("Message");
             self::create_log_table();
         });
     }
 
-    public static function create_log_table() {
-		global $wpdb;
-		$prefix = $wpdb->prefix . DBE_PREFIX;
+    public static function create_log_table()
+    {
+        global $wpdb;
+        $prefix = $wpdb->prefix . DBE_PREFIX;
 
-		$charset_collate = "";
-		if ( ! empty($wpdb->collate)) $charset_collate = "COLLATE `{$wpdb->collate}`";
+        $charset_collate = "";
+        if (! empty($wpdb->collate)) {
+            $charset_collate = "COLLATE `{$wpdb->collate}`";
+        }
 
-		$tablename = "{$prefix}_vote_log";
-		$sql = "
+        $tablename = "{$prefix}_vote_log";
+        
+        if ($wpdb->get_var("SHOW TABLES LIKE '$tablename'") != null) {
+            return true;
+        }
+
+        $sql = "
 		CREATE TABLE `{$tablename}` (
 			`id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			`post_id` bigint(20) unsigned NOT NULL,
@@ -32,7 +40,7 @@ class Activation {
 			FOREIGN KEY (`post_id`) REFERENCES `wp_posts` (`ID`) ON DELETE CASCADE
 		) ENGINE=`InnoDB` {$charset_collate};";
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		return maybe_create_table($wpdb->prefix . $tablename, $sql);
-	}
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        return maybe_create_table($wpdb->prefix . $tablename, $sql);
+    }
 }

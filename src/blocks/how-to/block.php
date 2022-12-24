@@ -1,7 +1,10 @@
 <?php
 
 use DBE\Block\HowTo\API;
+use DBE\Activation;
 
+// Check table
+Activation::create_log_table();
 API::init();
 
 function dbe_how_to_block_init()
