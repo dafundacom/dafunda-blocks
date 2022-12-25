@@ -38,15 +38,25 @@
     outline: none;
     border: none;
     width: var(--range-width);
-
+    position: relative;
     cursor: pointer;
-
     height: var(--range-height);
     border-radius: var(--range-radius);
     background-color: var(--clr-1);
     box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     z-index: 10;
+
+    .thumb {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(50%, -50%);
+      box-shadow: 0px 0px 0px 4px rgba(255, 100, 100, 1);
+      cursor: pointer;
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+    }
   }
 
   // .range:hover {
@@ -55,6 +65,7 @@
 
   .range::-webkit-slider-thumb {
     -webkit-appearance: none;
+    opacity: 0;
     width: var(--thumb-size);
     height: var(--thumb-size);
     border-radius: 50%;
@@ -66,6 +77,7 @@
 
   .range::-moz-range-thumb {
     -webkit-appearance: none;
+    opacity: 0;
     width: var(--thumb-size);
     height: var(--thumb-size);
     border-radius: 50%;

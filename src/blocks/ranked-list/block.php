@@ -1,7 +1,10 @@
 <?php
 
 use DBE\Block\RankedList\API;
+use DBE\Activation;
 
+// Check table
+Activation::create_log_table();
 API::init();
 
 add_action('init', function () {

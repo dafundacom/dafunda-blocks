@@ -92,24 +92,21 @@
             $breakdown_width = $breakdown["value"];
                     if ($breakdown_width >= 84) {
                         $breakdown_width -= 1.5;
-                    } 
-                    elseif ($breakdown_width >= 70) {
+                    } elseif ($breakdown_width >= 70) {
                         $breakdown_width -= 1.5;
-                    } 
-                    elseif ($breakdown_width >= 33) {
+                    } elseif ($breakdown_width >= 33) {
                         $breakdown_width -= 1;
-                    } 
-                    elseif ($breakdown_width >= 6) {
+                    } elseif ($breakdown_width >= 6) {
                         $breakdown_width -= 0.5;
                     }
                     ?>
 
                         <div class="track"
                             style="width:<?= $breakdown_width ?>%">
+                            <div class="thumb w-4 h-4 rounded-full bg-white border-[4px] border-red-400 border-solid absolute right-0 top-[50%] translate-x-[50%] translate-y-[-50%] cursor-pointer"></div>
                         </div>
                         <input id="range_id" class="range" type="range" name="" min="0" max="100" step="1"
-                            value="<?= $breakdown["value"] ?>"
-                            disabled />
+                            value="<?= $breakdown["value"] ?>" />
                     </div>
                 </div>
                 <?php endforeach?>
