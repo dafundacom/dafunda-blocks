@@ -29,6 +29,7 @@ class Activation
         //     return true;
         // }
 
+        
         $sql = "
 		CREATE TABLE if not exists `{$tablename}` (
 			`id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
