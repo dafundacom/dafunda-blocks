@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/VIP-Coding-Standards.git",
-                "reference": "037fa4a3c4c6dac8e67b797afa2f04376732df0a"
+                "reference": "b400608b7c207bc7c9d11a3f3b32789e259564de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/037fa4a3c4c6dac8e67b797afa2f04376732df0a",
-                "reference": "037fa4a3c4c6dac8e67b797afa2f04376732df0a",
+                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/b400608b7c207bc7c9d11a3f3b32789e259564de",
+                "reference": "b400608b7c207bc7c9d11a3f3b32789e259564de",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,7 @@
                 "phpcsstandards/phpcsdevtools": "^1.0",
                 "phpunit/phpunit": "^4 || ^5 || ^6 || ^7"
             },
-            "time": "2022-11-04T22:42:43+00:00",
+            "time": "2022-12-21T14:15:41+00:00",
             "default-branch": true,
             "type": "phpcodesniffer-standard",
             "installation-source": "dist",
@@ -267,12 +267,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibilityWP.git",
-                "reference": "b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5"
+                "reference": "cebd8669ee769432dbf00a352af5c7782c4a5618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5",
-                "reference": "b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/cebd8669ee769432dbf00a352af5c7782c4a5618",
+                "reference": "cebd8669ee769432dbf00a352af5c7782c4a5618",
                 "shasum": ""
             },
             "require": {
@@ -286,7 +286,7 @@
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
                 "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
             },
-            "time": "2022-10-24T09:00:36+00:00",
+            "time": "2022-12-08T22:06:25+00:00",
             "default-branch": true,
             "type": "phpcodesniffer-standard",
             "installation-source": "dist",
@@ -326,12 +326,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "ad3207d6a8053d755d166f6184dd22d50ff2d305"
+                "reference": "4062c44c5fb432191aa449534b59aea24541dd83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/ad3207d6a8053d755d166f6184dd22d50ff2d305",
-                "reference": "ad3207d6a8053d755d166f6184dd22d50ff2d305",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/4062c44c5fb432191aa449534b59aea24541dd83",
+                "reference": "4062c44c5fb432191aa449534b59aea24541dd83",
                 "shasum": ""
             },
             "require": {
@@ -347,7 +347,7 @@
                 "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.3",
                 "yoast/phpunit-polyfills": "^1.0.1"
             },
-            "time": "2022-11-12T14:05:05+00:00",
+            "time": "2023-01-04T03:01:33+00:00",
             "default-branch": true,
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -404,12 +404,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sirbrillig/phpcs-variable-analysis.git",
-                "reference": "e619b63dca59bc2ab5406dd260c5743935374460"
+                "reference": "6a0e2ffef96df8397fc1859cd04e73df0a9f1a12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sirbrillig/phpcs-variable-analysis/zipball/e619b63dca59bc2ab5406dd260c5743935374460",
-                "reference": "e619b63dca59bc2ab5406dd260c5743935374460",
+                "url": "https://api.github.com/repos/sirbrillig/phpcs-variable-analysis/zipball/6a0e2ffef96df8397fc1859cd04e73df0a9f1a12",
+                "reference": "6a0e2ffef96df8397fc1859cd04e73df0a9f1a12",
                 "shasum": ""
             },
             "require": {
@@ -424,7 +424,7 @@
                 "sirbrillig/phpcs-import-detection": "^1.1",
                 "vimeo/psalm": "^0.2 || ^0.3 || ^1.1 || ^4.24 || ^5.0@beta"
             },
-            "time": "2022-11-07T17:51:19+00:00",
+            "time": "2022-12-09T23:29:11+00:00",
             "default-branch": true,
             "type": "phpcodesniffer-standard",
             "installation-source": "dist",
@@ -466,12 +466,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "cd5acaa651df870e8a3207926f236400361219e0"
+                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/cd5acaa651df870e8a3207926f236400361219e0",
-                "reference": "cd5acaa651df870e8a3207926f236400361219e0",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
+                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
-            "time": "2022-10-21T05:57:32+00:00",
+            "time": "2022-12-22T21:46:41+00:00",
             "default-branch": true,
             "bin": [
                 "bin/phpcs",
