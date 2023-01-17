@@ -1,0 +1,94 @@
+[
+  {
+    "label": "Game App",
+    "value": "GameApplication"
+  },
+  {
+    "label": "Business App",
+    "value": "BusinessApplication "
+  },
+  {
+    "label": "Multimedia App",
+    "value": "MultimediaApplication"
+  },
+  {
+    "label": "Mobile App",
+    "value": "MobileApplication"
+  },
+  {
+    "label": "Web App",
+    "value": "WebApplication"
+  },
+  {
+    "label": "Social Networking App",
+    "value": "SocialNetworkingApplication"
+  },
+  {
+    "label": "Travel App",
+    "value": "TravelApplication"
+  },
+  {
+    "label": "Shopping App",
+    "value": "ShoppingApplication"
+  },
+  {
+    "label": "Sports App",
+    "value": "SportsApplication"
+  },
+  {
+    "label": "Lifestyle App",
+    "value": "LifestyleApplication"
+  },
+  {
+    "label": "Design App",
+    "value": "DesignApplication "
+  },
+  {
+    "label": "Developer App",
+    "value": "DeveloperApplication"
+  },
+  {
+    "label": "Driver App",
+    "value": "DriverApplication"
+  },
+  {
+    "label": "Educational App",
+    "value": "EducationalApplication"
+  },
+  {
+    "label": "Health App",
+    "value": "HealthApplication"
+  },
+  {
+    "label": "Finance App",
+    "value": "FinanceApplication "
+  },
+  {
+    "label": "Security App",
+    "value": "SecurityApplication"
+  },
+  {
+    "label": "Browser App",
+    "value": "BrowserApplication"
+  },
+  {
+    "label": "Communication App",
+    "value": "CommunicationApplication"
+  },
+  {
+    "label": "Business App",
+    "value": "EntertainmentApplication "
+  },
+  {
+    "label": "Home App",
+    "value": "HomeApplication"
+  },
+  {
+    "label": "Utilities App",
+    "value": "UtilitiesApplication"
+  },
+  {
+    "label": "Reference App",
+    "value": "ReferenceApplication"
+  }
+]

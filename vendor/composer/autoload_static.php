@@ -39,6 +39,7 @@ class ComposerStaticInit88eb2e7f7ae4281f808e6c69e84fd73a
         'DBE\\Activation' => __DIR__ . '/../..' . '/includes/class-activation.php',
         'DBE\\Block' => __DIR__ . '/../..' . '/includes/class-block.php',
         'DBE\\Block\\HowTo\\API' => __DIR__ . '/../..' . '/src/blocks/how-to/class-api.php',
+        'DBE\\Block\\Posts\\API' => __DIR__ . '/../..' . '/src/blocks/posts/class-api.php',
         'DBE\\Block\\RankedList\\API' => __DIR__ . '/../..' . '/src/blocks/ranked-list/class-api.php',
         'DBE\\Blocks' => __DIR__ . '/../..' . '/includes/class-blocks.php',
         'DBE\\Deactivation' => __DIR__ . '/../..' . '/includes/class-deactivation.php',

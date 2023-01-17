@@ -10,6 +10,7 @@ return array(
     'DBE\\Activation' => $baseDir . '/includes/class-activation.php',
     'DBE\\Block' => $baseDir . '/includes/class-block.php',
     'DBE\\Block\\HowTo\\API' => $baseDir . '/src/blocks/how-to/class-api.php',
+    'DBE\\Block\\Posts\\API' => $baseDir . '/src/blocks/posts/class-api.php',
     'DBE\\Block\\RankedList\\API' => $baseDir . '/src/blocks/ranked-list/class-api.php',
     'DBE\\Blocks' => $baseDir . '/includes/class-blocks.php',
     'DBE\\Deactivation' => $baseDir . '/includes/class-deactivation.php',

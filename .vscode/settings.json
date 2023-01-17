@@ -11,7 +11,7 @@
   // "phpsab.standard": "WordPress",
   "phpsab.snifferEnable": true, // disable this if you don't need suggestions
   "phpsab.snifferShowSources": true,
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "off",
   "phpsab.standard": "WordPress",
   "[php]": {
     "breadcrumbs.showConstructors": true,

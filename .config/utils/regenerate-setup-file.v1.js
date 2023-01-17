@@ -3,11 +3,11 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = function (
-  pkg = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf8")
-  )
+    pkg = JSON.parse(
+        fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf8")
+    )
 ) {
-  let str = `<?php
+    let str = `<?php
 /**
  * Plugin Name: ${pkg.title}
  * Plugin URI: ${pkg.homepage}
@@ -24,7 +24,7 @@ module.exports = function (
  * @package dafundacom\\DafundaBlocks
  */`;
 
-  str += `
+    str += `
 
 declare(strict_types=1);
 
@@ -50,6 +50,7 @@ define( 'DBE_ASSET_VERSION', '${pkg.version}-${ranstr(5)}' );
 define( 'DBE_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'DBE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DBE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DBE_PLUGIN_BUILD_URL', plugin_dir_url( __FILE__ ) . "build" );
 define( 'DBE_PLUGIN_FILE', __FILE__ );
 define( 'DBE_PREFIX', '${pkg.prefix}' );
 
@@ -66,9 +67,9 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 }
 
 `;
-  return fs.writeFileSync(
-    path.resolve(process.cwd(), "setup.php"),
-    str,
-    "utf8"
-  );
+    return fs.writeFileSync(
+        path.resolve(process.cwd(), "setup.php"),
+        str,
+        "utf8"
+    );
 };
