@@ -100,7 +100,6 @@
     "lint-staged": "^13.1.0",
     "merge-stream": "^2.0.0",
     "nanoid": "^4.0.0",
-    "node-sass": "^8.0.0",
     "picocolors": "^1.0.0",
     "postcss": "^8.4.20",
     "postcss-import": "^15.1.0",
@@ -127,7 +126,8 @@
   "pnpm": {
     "overrides": {
       "glob-parent@<5.1.2": ">=5.1.2",
-      "scss-tokenizer@<=0.4.2": ">=0.4.3"
+      "scss-tokenizer@<=0.4.2": ">=0.4.3",
+      "inquirer@<=8.0.1": ">=8.0.2"
     }
   },
   "lint-staged": {
