@@ -73,42 +73,15 @@
         <div class="flex w-full flex-wrap p-5">
             <p class="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
             <div class="w-full">
-
                 <?php foreach ($breakdowns as $breakdown) :?>
-                <div class="mb-6 flex flex-col flex-wrap">
-                    <div class="mb-2 flex flex-wrap items-center justify-between">
-                        <p
-                            class="m-0 flex flex-1 flex-wrap items-center text-sm font-bold focus:outline-none focus:ring focus:ring-slate-300">
-                            <?= $breakdown["label"] ?>
-                        </p>
-
-                        <p class="m-0 flex flex-wrap items-center text-sm font-bold">
-                            <?= $breakdown["value"] ?>%
-                        </p>
-
+                  <div class="dafunda-block_review-slider mb-6">
+                    <div class="w-full h-2 rounded bg-white border border-gray-200 relative border-solid">
+                      <div class="bg-red-400 rounded h-full" style="width: <?= $breakdown["value"] ?>%;">
+                      </div>
+                      <div class="absolute w-4 h-4 bg-white rounded-full border-[4px] border-red-400 border-solid top-1/2 -translate-x-1/2 -translate-y-1/2" style="left: <?= $breakdown["value"] ?>%;">
+                      </div>
                     </div>
-                    <div class="relative flex flex-wrap costum-slider">
-                        <?php
-            $breakdown_width = $breakdown["value"];
-                    if ($breakdown_width >= 84) {
-                        $breakdown_width -= 1.5;
-                    } elseif ($breakdown_width >= 70) {
-                        $breakdown_width -= 1.5;
-                    } elseif ($breakdown_width >= 33) {
-                        $breakdown_width -= 1;
-                    } elseif ($breakdown_width >= 6) {
-                        $breakdown_width -= 0.5;
-                    }
-                    ?>
-
-                        <div class="track"
-                            style="width:<?= $breakdown_width ?>%">
-                            <div class="thumb w-4 h-4 rounded-full bg-white border-[4px] border-red-400 border-solid absolute right-0 top-[50%] translate-x-[50%] translate-y-[-50%] cursor-pointer"></div>
-                        </div>
-                        <input id="range_id" class="range" type="range" name="" min="0" max="100" step="1"
-                            value="<?= $breakdown["value"] ?>" />
-                    </div>
-                </div>
+                  </div>
                 <?php endforeach?>
 
             </div>
