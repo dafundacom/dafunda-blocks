@@ -56,7 +56,7 @@ module.exports = (env, { mode }) => {
     config.plugins.push(
       new BrowserSyncPlugin({
         host: "localhost",
-        port: 3000,
+        port: 3005,
         proxy: "http://dbe.test/",
       })
     );

@@ -199,9 +199,9 @@
   "h-2",
   "rounded",
   "border-black/20",
-  "bg-danger",
   "border-[4px]",
   "border-danger",
   "top-1/2",
   "-translate-x-1/2",
-  "-translat
+  "-translate-y-1/2"
+]
