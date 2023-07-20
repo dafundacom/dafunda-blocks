@@ -22,7 +22,7 @@
         </div>
         <div
             class="flex w-full md:w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-success/70 order-1 md:order-2 mb-4 md:mb-0" style="max-height: 162px;">
-            <p class="flex grow items-center text-3xl font-bold text-white !m-0 py-4 md:py-10">
+            <p class="flex grow items-center text-3xl font-bold text-white !mb-0 py-4 md:py-10">
                 <?= $result_total_breakdown_percentage ?>%
             </p>
             <div class="flex w-full justify-center bg-success/90 py-2 text-xs text-white">
