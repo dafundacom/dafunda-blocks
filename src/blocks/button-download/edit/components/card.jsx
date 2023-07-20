@@ -43,7 +43,7 @@ export function Card(props) {
   const [buttonOnHover, setButtonOnHover] = useState(false);
 
   return (
-    <div className="download-button !important flex flex-wrap overflow-hidden rounded-lg border border-slate-200 p-3">
+    <div className="button-download !important flex flex-wrap overflow-hidden rounded-lg border border-slate-200 p-3">
       <ToolbarCard {...props} />
 
       {/* Image */}
@@ -146,7 +146,7 @@ export function Card(props) {
         aria-haspopup="true"
         onMouseEnter={() => setButtonOnHover(true)}
         onMouseLeave={() => setButtonOnHover(false)}
-        className={`mx-auto mt-3 h-fit w-fit py-2 px-5 text-base font-bold text-white md:mt-0 md:ml-auto
+        className={`mx-auto mt-3 h-fit w-fit px-5 py-2 text-base font-bold text-white md:ml-auto md:mt-0
 				${
           buttonAlign == "top"
             ? "self-start"

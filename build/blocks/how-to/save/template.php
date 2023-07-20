@@ -58,7 +58,7 @@
                     <div class="flex flex-wrap">
                         <div class="flex flex-wrap">
                             <div
-                                class="bg-slate-200 dark:bg-neutral-700 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+                                class="bg-slate-200 dark:bg-neutral-700 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full flex-none font-semibold text-2xl md:text-2xl" style="width: 2.2rem; height: fit-content;">
                                 <?= $index + 1 ?>
                             </div>
 
@@ -106,7 +106,7 @@
             <div class="flex flex-wrap">
                 <div class="flex flex-wrap">
                     <div
-                        class="bg-slate-200 dark:bg-neutral-700 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-[fit-content]">
+                        class="bg-slate-200 dark:bg-neutral-700 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full flex-none font-semibold text-2xl md:text-2xl" style="width: 2.2rem; height: fit-content;">
                         <?= $index + 1 ?>
                     </div>
 
@@ -149,7 +149,7 @@
 
 
     <?php if ($resultIntro && $howToYield) : ?>
-    <div class="howto-yield bg-[#16A085] dark:bg-neutral-900 rounded-xl text-white p-5">
+    <div class="howto-yield bg-emerald-500 dark:bg-neutral-900 rounded-xl text-white p-5">
         <div class="w-100 flex flex-wrap justify-center mb-3">
             <<?= $secondLevelTag ?> class="text-white font-bold m-0
                 text-3xl">
@@ -335,7 +335,7 @@ if ($howToReviewPercent >= 65) {
 
             let html = `
 			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8  text-amber-300 text-4xl font-bold leading-none">${howToReviewPercent}%</p>
-			<div class="max-w-[60%]">
+			<div style="max-width: 50%">
 				<p class="m-0 leading-5">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
 				<p class="m-0 howto-review-result__membantu">
 				</p>

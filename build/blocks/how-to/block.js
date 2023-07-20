@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HowTo": () => (/* binding */ HowTo)
+/* harmony export */   HowTo: () => (/* binding */ HowTo)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -1130,7 +1130,7 @@ function HowTo(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HowToSection": () => (/* binding */ HowToSection)
+/* harmony export */   HowToSection: () => (/* binding */ HowToSection)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -1327,7 +1327,7 @@ var HowToSection = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HowToStep": () => (/* binding */ HowToStep)
+/* harmony export */   HowToStep: () => (/* binding */ HowToStep)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -1823,12 +1823,12 @@ var HowToStep = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HowTo": () => (/* reexport safe */ _how_to__WEBPACK_IMPORTED_MODULE_0__.HowTo),
-/* harmony export */   "HowToSection": () => (/* reexport safe */ _how_to_section__WEBPACK_IMPORTED_MODULE_3__.HowToSection),
-/* harmony export */   "HowToStep": () => (/* reexport safe */ _how_to_step__WEBPACK_IMPORTED_MODULE_4__.HowToStep),
-/* harmony export */   "InputUpload": () => (/* reexport safe */ _input_upload__WEBPACK_IMPORTED_MODULE_5__.InputUpload),
-/* harmony export */   "InspectorPanel": () => (/* reexport safe */ _inspector_panel__WEBPACK_IMPORTED_MODULE_1__.InspectorPanel),
-/* harmony export */   "ListWrapper": () => (/* reexport safe */ _list_wrapper__WEBPACK_IMPORTED_MODULE_2__.ListWrapper)
+/* harmony export */   HowTo: () => (/* reexport safe */ _how_to__WEBPACK_IMPORTED_MODULE_0__.HowTo),
+/* harmony export */   HowToSection: () => (/* reexport safe */ _how_to_section__WEBPACK_IMPORTED_MODULE_3__.HowToSection),
+/* harmony export */   HowToStep: () => (/* reexport safe */ _how_to_step__WEBPACK_IMPORTED_MODULE_4__.HowToStep),
+/* harmony export */   InputUpload: () => (/* reexport safe */ _input_upload__WEBPACK_IMPORTED_MODULE_5__.InputUpload),
+/* harmony export */   InspectorPanel: () => (/* reexport safe */ _inspector_panel__WEBPACK_IMPORTED_MODULE_1__.InspectorPanel),
+/* harmony export */   ListWrapper: () => (/* reexport safe */ _list_wrapper__WEBPACK_IMPORTED_MODULE_2__.ListWrapper)
 /* harmony export */ });
 /* harmony import */ var _how_to__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./how_to */ "./src/blocks/how-to/edit/components/how_to.jsx");
 /* harmony import */ var _inspector_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inspector_panel */ "./src/blocks/how-to/edit/components/inspector_panel.jsx");
@@ -1854,7 +1854,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "InputUpload": () => (/* binding */ InputUpload)
+/* harmony export */   InputUpload: () => (/* binding */ InputUpload)
 /* harmony export */ });
 function InputUpload(_ref) {
   var open = _ref.open;
@@ -1883,7 +1883,7 @@ function InputUpload(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "InspectorPanel": () => (/* binding */ InspectorPanel)
+/* harmony export */   InspectorPanel: () => (/* binding */ InspectorPanel)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2247,7 +2247,7 @@ var InspectorPanel = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ListWrapper": () => (/* binding */ ListWrapper)
+/* harmony export */   ListWrapper: () => (/* binding */ ListWrapper)
 /* harmony export */ });
 function ListWrapper(props) {
   var className = props.className,
@@ -2358,7 +2358,7 @@ var icon = /*#__PURE__*/React.createElement("svg", {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ButtonAddStep": () => (/* binding */ ButtonAddStep)
+/* harmony export */   ButtonAddStep: () => (/* binding */ ButtonAddStep)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2401,7 +2401,7 @@ function ButtonAddStep(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ButtonDeleteImage": () => (/* binding */ ButtonDeleteImage)
+/* harmony export */   ButtonDeleteImage: () => (/* binding */ ButtonDeleteImage)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2428,7 +2428,7 @@ function ButtonDeleteImage(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ButtonUpDownDelete": () => (/* binding */ ButtonUpDownDelete)
+/* harmony export */   ButtonUpDownDelete: () => (/* binding */ ButtonUpDownDelete)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -3728,7 +3728,7 @@ config.keywords = [config.prefix, config.title, config.name];
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"dafunda-blocks","title":"Dafunda Blocks","prefix":"dbe","version":"0.1.0-alpha","description":"Dafunda WordPress Block Editor","homepage":"https://github.com/dafundacom/dafunda-blocks","author":{"name":"Dafunda Dev Team","email":"dev@dafunda.io","url":"https://dafunda.io"},"repository":{"type":"git","url":"https://github.com:dafundacom/dafunda-blocks.git"},"license":"MIT","scripts":{"start":"node ./.config/scripts/start","start:sample":"wp-scripts start --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks --config webpack.config.js  & pnpm gulp","build":"node ./.config/scripts/build","build:sample":"wp-scripts build --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks","clean":"rimraf {node_modules, build}","clean:build":"rimraf build","lint:js":"wp-scripts lint-js","lint:style":"wp-scripts lint-style","format:wp":"wp-scripts format","lint:js:fix":"npm run lint:js -- --fix","lint:pkg-json":"wp-scripts lint-pkg-json","test":"wp-scripts test-unit-js","env:start":"wp-env start","env:start:debug":"wp-env start --xdebug","env:stop":"wp-env stop","packages-update":"wp-scripts packages-update","prepare":"husky install","commit":"git-cz","format":"prettier -w .","check":"prettier -c .","prettier":"prettier"},"dependencies":{"react":"^18.2.0","react-dom":"^18.2.0"},"devDependencies":{"@babel/core":"^7.20.12","@babel/eslint-parser":"^7.19.1","@babel/preset-env":"^7.20.2","@babel/preset-react":"^7.18.6","@babel/runtime":"^7.20.7","@commitlint/cli":"^17.4.0","@commitlint/config-conventional":"^17.4.0","@commitlint/cz-commitlint":"^17.4.0","@heroicons/react":"^2.0.13","@prettier/plugin-php":"^0.19.2","@svgr/core":"^6.5.1","@svgr/webpack":"^6.5.1","@tailwindcss/typography":"^0.5.8","@wordpress/block-editor":"^11.1.0","@wordpress/blocks":"^12.1.0","@wordpress/browserslist-config":"^5.7.0","@wordpress/components":"^23.1.0","@wordpress/compose":"^6.1.0","@wordpress/data":"^8.1.0","@wordpress/e2e-test-utils":"^9.1.0","@wordpress/element":"^5.1.0","@wordpress/i18n":"^4.24.0","@wordpress/icons":"^9.15.0","@wordpress/prettier-config":"^2.7.0","@wordpress/rich-text":"^6.1.0","@wordpress/scripts":"^25.1.0","autoprefixer":"^10.4.13","babel-loader":"^9.1.2","babel-plugin-module-resolver":"^4.1.0","browser-sync":"^2.27.11","browser-sync-webpack-plugin":"^2.3.0","commitizen":"^4.2.6","concurrently":"^7.6.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","cssnano":"^5.1.14","esbuild":"^0.16.14","eslint":"^8.31.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","file-loader":"^6.2.0","glob":"^8.0.3","gulp":"^4.0.2","gulp-autoprefixer":"^8.0.0","gulp-concat":"^2.6.1","gulp-postcss":"^9.0.1","gulp-sass":"^5.1.0","gulp-terser":"^2.1.0","husky":"^8.0.3","inquirer":"9.1.4","jest":"^29.3.1","lint-staged":"^13.1.0","merge-stream":"^2.0.0","nanoid":"^4.0.0","picocolors":"^1.0.0","postcss":"^8.4.20","postcss-import":"^15.1.0","postcss-loader":"^7.0.2","postcss-scss":"^4.0.6","prettier":"^2.8.1","prettier-plugin-tailwindcss":"^0.2.1","process":"^0.11.10","puppeteer-core":"^19.4.1","react-icons":"^4.7.1","rimraf":"^3.0.2","sass":"^1.57.1","sass-loader":"^13.2.0","slug":"^8.2.2","svgo-loader":"^3.0.3","tailwindcss":"^3.2.4","terser":"^5.16.1","terser-webpack-plugin":"^5.3.6","typescript":"^4.9.4","url-loader":"^4.1.1","webpack":"^5.75.0","webpack-cli":"^5.0.1"},"pnpm":{"overrides":{"glob-parent@<5.1.2":">=5.1.2","scss-tokenizer@<=0.4.2":">=0.4.3"}},"lint-staged":{"src/**/*.{js,jsx,css}":["pnpm prettier --write"]},"config":{"commitizen":{"path":"@commitlint/cz-commitlint"}}}');
+module.exports = JSON.parse('{"name":"dafunda-blocks","title":"Dafunda Blocks","prefix":"dbe","version":"0.1.0-alpha","description":"Dafunda WordPress Block Editor","homepage":"https://github.com/dafundacom/dafunda-blocks","author":{"name":"Dafunda Dev Team","email":"dev@dafunda.io","url":"https://dafunda.io"},"repository":{"type":"git","url":"https://github.com:dafundacom/dafunda-blocks"},"license":"MIT","scripts":{"start":"node ./config/scripts/start","start:sample":"wp-scripts start --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks --config webpack.config.js  & pnpm gulp","build":"node ./config/scripts/build","build:sample":"wp-scripts build --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks","clean":"rimraf {node_modules, build}","clean:build":"rimraf build","lint:js":"wp-scripts lint-js","lint:style":"wp-scripts lint-style","format:wp":"wp-scripts format","lint:js:fix":"npm run lint:js -- --fix","lint:pkg-json":"wp-scripts lint-pkg-json","test":"wp-scripts test-unit-js","env:start":"wp-env start","env:start:debug":"wp-env start --xdebug","env:stop":"wp-env stop","packages-update":"wp-scripts packages-update","prepare":"husky install","commit":"git-cz","format":"prettier -w .","check":"prettier -c .","prettier":"prettier"},"dependencies":{"react":"^18.2.0","react-dom":"^18.2.0"},"devDependencies":{"@babel/core":"^7.22.9","@babel/eslint-parser":"^7.22.9","@babel/preset-env":"^7.22.9","@babel/preset-react":"^7.22.5","@babel/runtime":"^7.22.6","@commitlint/cli":"^17.6.6","@commitlint/config-conventional":"^17.6.6","@commitlint/cz-commitlint":"^17.5.0","@heroicons/react":"^2.0.18","@prettier/plugin-php":"^0.19.6","@svgr/core":"^6.5.1","@svgr/webpack":"^6.5.1","@tailwindcss/typography":"^0.5.9","@wordpress/block-editor":"^11.8.0","@wordpress/blocks":"^12.14.0","@wordpress/browserslist-config":"^5.20.0","@wordpress/components":"^23.9.0","@wordpress/compose":"^6.14.0","@wordpress/data":"^8.6.0","@wordpress/e2e-test-utils":"^9.5.0","@wordpress/element":"^5.14.0","@wordpress/i18n":"^4.37.0","@wordpress/icons":"^9.28.0","@wordpress/prettier-config":"^2.20.0","@wordpress/rich-text":"^6.14.0","@wordpress/scripts":"^25.5.1","autoprefixer":"^10.4.14","babel-loader":"^9.1.3","babel-plugin-module-resolver":"^4.1.0","browser-sync":"^2.29.3","browser-sync-webpack-plugin":"^2.3.0","commitizen":"^4.3.0","concurrently":"^7.6.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.8.1","cssnano":"^5.1.15","esbuild":"^0.16.17","eslint":"^8.45.0","eslint-config-prettier":"^8.8.0","eslint-plugin-import":"^2.27.5","eslint-plugin-jsx-a11y":"^6.7.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.32.2","file-loader":"^6.2.0","husky":"^8.0.3","inquirer":"^9.2.8","jest":"^29.6.1","lint-staged":"^13.2.3","mini-css-extract-plugin":"^2.7.6","nanoid":"^4.0.2","picocolors":"^1.0.0","postcss":"^8.4.26","postcss-import":"^15.1.0","postcss-loader":"^7.3.3","postcss-scss":"^4.0.6","prettier":"^2.8.8","prettier-plugin-tailwindcss":"^0.2.8","process":"^0.11.10","puppeteer-core":"^19.11.1","react-icons":"^4.10.1","rimraf":"^3.0.2","sass":"^1.63.6","sass-loader":"^13.3.2","slug":"^8.2.2","style-loader":"^3.3.3","svgo-loader":"^3.0.3","tailwindcss":"^3.3.3","tailwindcss-animate":"^1.0.6","terser":"^5.19.1","terser-webpack-plugin":"^5.3.9","typescript":"^4.9.5","url-loader":"^4.1.1","webpack":"^5.88.2","webpack-cli":"^5.1.4"},"pnpm":{"overrides":{"glob-parent@<5.1.2":">=5.1.2","scss-tokenizer@<=0.4.2":">=0.4.3","inquirer@<=8.0.1":">=8.0.2"}},"lint-staged":{"src/**/*.{js,jsx,css}":["pnpm prettier --write"]},"config":{"commitizen":{"path":"@commitlint/cz-commitlint"}}}');
 
 /***/ })
 

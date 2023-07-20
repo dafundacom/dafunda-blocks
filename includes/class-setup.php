@@ -31,7 +31,7 @@ final class Setup
                 $prefix = DBE_PREFIX;
                 wp_register_style(
                     'dbe-block-editor', // Handle.
-                    plugins_url("build/$prefix.blocks.editor.build.css", dirname(__FILE__)),
+                    plugins_url("build/blocks/$prefix.blocks.editor.build.css", dirname(__FILE__)),
                     array( 'wp-edit-blocks' ),
                     DBE_ASSET_VERSION
                 );
@@ -55,7 +55,7 @@ final class Setup
             'wp_enqueue_scripts',
             function () {
             $prefix = DBE_PREFIX;
-            wp_enqueue_style('dbe-block-style-front', plugins_url("/build/$prefix.blocks.style.build.css", dirname(__FILE__)), DBE_ASSET_VERSION, 'all');
+            wp_enqueue_style('dbe-block-style-front', plugins_url("/build/blocks/$prefix.blocks.frontend.build.css", dirname(__FILE__)), DBE_ASSET_VERSION, 'all');
         }
         );
 

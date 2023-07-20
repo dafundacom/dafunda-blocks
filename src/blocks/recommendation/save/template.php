@@ -1,7 +1,7 @@
-<div class="rekomendasi-list " id="ranked-list-<?= $blockID ?>">
-    <ol class="rekomendasi-list p-0">
+<div class="recommendation" id="recommendation-<?= $blockID ?>">
+    <ol class="p-0">
         <?php foreach ($lists as $index => $list) : ?>
-            <li class="rekomendasi-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-neutral-900">
+            <li class="recommendation-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-neutral-900">
                 <!-- Image -->
                 <div class="relative aspect-[16/10] md:aspect-[16/7] object-cover object-center w-full overflow-hidden rounded-t-lg">
                     <figure>

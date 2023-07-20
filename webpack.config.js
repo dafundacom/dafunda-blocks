@@ -10,7 +10,7 @@ module.exports = (env, { mode }) => {
   const is_development = !is_production;
   if (is_production) {
     // eslint-disable-next-line global-require
-    require("./.config/utils/regenerate-setup-file.v1")();
+    require("./config/utils/regenerate-setup-file.v1")();
     const BUILD_PATH = path.resolve(process.cwd(), "build");
     if (fs.existsSync(BUILD_PATH)) {
       fs.rmSync(BUILD_PATH, { recursive: true, force: true });
@@ -20,14 +20,20 @@ module.exports = (env, { mode }) => {
 
   const config = {
     ...defaultConfig,
+    // entry: {
+    //   // "dbe.blocks.editor.build": "./src/scss/editor.scss",
+    //   // "dbe.blocks.frontend.build": "./src/scss/frontend.scss",
+    //   ...defaultConfig.entry,
+    // },
+    entry: defaultConfig.entry(),
     module: {
       ...defaultConfig.module,
       rules: [
+        ...defaultConfig.module.rules,
         {
           test: /\.svg$/,
           use: ["@svgr/webpack", "url-loader"],
         },
-        ...defaultConfig.module.rules,
       ],
     },
     resolve: {
@@ -42,11 +48,13 @@ module.exports = (env, { mode }) => {
     plugins: [...defaultConfig.plugins],
   };
 
+  
+  config.entry["dbe.blocks.editor.build"] = "./src/scss/editor.scss";
+  config.entry["dbe.blocks.frontend.build"] = "./src/scss/frontend.scss";
+  
   if (is_development) {
     config.plugins.push(
       new BrowserSyncPlugin({
-        // browse to http://localhost:3000/ during development,
-        // ./public directory is being served
         host: "localhost",
         port: 3000,
         proxy: "http://dbe.test/",

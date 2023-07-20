@@ -3,10 +3,10 @@
         <?php foreach ($lists as $index => $list) : ?>
         <li class="ranked-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-neutral-900"
             data-index="<?= $index ?>">
-            <div class="relative aspect-[16/7] object-cover object-center w-full overflow-hidden rounded-t-lg">
+            <div class="relative object-cover object-center w-full overflow-hidden rounded-t-lg" style="aspect-ratio: 16/7;">
                 <?php if (isset($list["imageurl"]) && $list["imageurl"] != "") : ?>
                 <figure>
-                    <img class="w-full max-h-[-webkit-fill-available] object-cover object-center"
+                    <img class="w-full object-cover object-center" style="max-height: -webkit-fill-available;"
                         src="<?= $list["imageurl"] ?>" />
                 </figure>
                 <?php else : ?>
@@ -47,7 +47,7 @@
                         <?= count($list["likes"]) ?? 0 ?>
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-7 w-7 inline-block translate-y-[-2px] text-gray-700 dark:text-white "
+                        class="h-7 w-7 inline-block text-gray-700 dark:text-white" style="transform: translateY(-2px);" 
                         viewBox="0 0 20 20" fill="currentColor">
                         <path
                             d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
@@ -58,7 +58,7 @@
                     class="ranked-list-vote-button flex flex-wrap items-start w-fit opacity-50 hover:shadow-none bg-transparent <?= in_array(get_current_user_id(), $list["dislikes"]) ? "opacity-80" : "" ?> <?= in_array(get_current_user_id(), $list["likes"]) ? "opacity-30" : "" ?>"
                     data-action="dislike">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-7 w-7 inline-block translate-y-[2px] text-gray-700 dark:text-white "
+                        class="h-7 w-7 inline-block text-gray-700 dark:text-white" style="transform: translateY(-2px);"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path
                             d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
