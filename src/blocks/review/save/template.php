@@ -75,7 +75,7 @@
             <div class="w-full">
                 <?php foreach ($breakdowns as $breakdown) :?>
                   <div class="dafunda-block_review-slider mb-6">
-                    <div class="w-full h-2 rounded bg-white border border-black/20 relative border-solid">
+                    <div class="w-full h-2 rounded bg-white border dark:border-0 border-black/20 relative border-solid">
                       <div class="rounded h-full" style="width: <?= $breakdown["value"] ?>%; background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
                       </div>
                       <div class="absolute w-4 h-4 bg-white rounded-full border-[4px] border-danger border-solid top-1/2 -translate-x-1/2 -translate-y-1/2" style="left: <?= $breakdown["value"] ?>%;">
