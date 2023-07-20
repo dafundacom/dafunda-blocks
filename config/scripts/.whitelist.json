@@ -176,6 +176,7 @@
   "md:order-2",
   "md:mb-0",
   "grow",
+  "!mb-0",
   "py-4",
   "md:py-10",
   "bg-success/90",
@@ -191,6 +192,7 @@
   "md:basis-6/12",
   "md:border-b-0",
   "md:border-r-2",
+  "!m-0",
   "text-success/70",
   "text-danger",
   "h-2",
@@ -201,5 +203,4 @@
   "border-danger",
   "top-1/2",
   "-translate-x-1/2",
-  "-translate-y-1/2"
-]
+  "-translat
