@@ -12,20 +12,20 @@
     <div class="relative z-10 mb-4 flex w-full flex-row flex-wrap">
         <div class="flex-1 order-2 md:order-1">
 
-            <p class="mt-0 mb-3 text-2xl md:text-3xl font-bold text-white">
+            <p class="mt-0 !mb-3 !text-2xl !md:text-3xl !font-bold !text-white">
                 <?= $title ?>
             </p>
-            <p class="mt-0 mb-3 text-base text-white">
+            <p class="mt-0 !mb-3 !text-base !text-white">
                 <?= $description ?>
             </p>
 
         </div>
         <div
             class="flex w-full md:w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-success/70 order-1 md:order-2 mb-4 md:mb-0" style="max-height: 162px;">
-            <p class="flex grow items-center text-3xl font-bold text-white !mb-0 py-4 md:py-10">
+            <p class="flex grow items-center !text-3xl !font-bold !text-white !mb-0 py-4 md:py-10">
                 <?= $result_total_breakdown_percentage ?>%
             </p>
-            <div class="flex w-full justify-center bg-success/90 py-2 text-xs text-white">
+            <div class="flex w-full justify-center bg-success/90 py-2 !text-xs !text-white">
                 SCORE
             </div>
         </div>
@@ -36,7 +36,7 @@
             class="flex w-full flex-wrap border-0 border-b-2 border-black/10 dark:border-white/10 border-solid gap-4 md:gap-0">
             <div
                 class="basis-full md:basis-6/12 border-0 border-b-2 md:border-b-0 md:border-r-2 border-black/10 dark:border-white/10 border-solid p-3">
-                <p class="mt-0 mb-3 text-sm font-bold">PROS</p>
+                <p class="mt-0 !mb-3 !text-sm !font-bold">PROS</p>
                 <ul class="list-none pl-0 !m-0">
                     <?php foreach ($pros as $pro) : ?>
                     <li class="flex flex-wrap !m-0">
@@ -45,7 +45,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
 
-                        <p class="mt-0 mb-3 flex-1 text-base">
+                        <p class="mt-0 mb-3 flex-1 !text-base">
                             <?= $pro ?>
                         </p>
                     </li>
@@ -53,7 +53,7 @@
                 </ul>
             </div>
             <div class="basis-full md:basis-6/12 p-3">
-                <p class="mt-0 mb-3 text-sm font-bold">CONS</p>
+                <p class="mt-0 !mb-3 !text-sm !font-bold">CONS</p>
                 <ul class="list-none pl-0 !m-0">
                     <?php foreach ($cons as $con) : ?>
                     <li class="flex flex-wrap !m-0">
@@ -62,7 +62,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
 
-                        <p class="mt-0 mb-3 flex-1 text-base">
+                        <p class="mt-0 mb-3 flex-1 !text-base">
                             <?= $con ?>
                         </p>
                     </li>
