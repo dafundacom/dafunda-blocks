@@ -1,4 +1,4 @@
-<div class="review_block wp-block relative w-full overflow-hidden rounded-md p-4 mb-7"
+<div class="dbe-block review wp-block relative w-full overflow-hidden rounded-md p-4 mb-7"
     style="background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
 
     <?php if ($background_used == "image" && $background_image != "") :?>

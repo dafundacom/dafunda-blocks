@@ -1,4 +1,4 @@
-<div class="howto mb-8" id="howto_<?= $blockID ?>"
+<div class="dbe-block how-to mb-8" id="howto_<?= $blockID ?>"
     data-blockID="<?= $blockID ?>" block>
     <<?= $firstLevelTag ?> class="howto__title text-3xl">
         <?= $title ?>

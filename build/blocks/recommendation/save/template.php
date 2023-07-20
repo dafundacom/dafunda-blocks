@@ -1,4 +1,4 @@
-<div class="recommendation" id="recommendation-<?= $blockID ?>">
+<div class="dbe-block recommendation" id="recommendation-<?= $blockID ?>">
     <ol class="p-0">
         <?php foreach ($lists as $index => $list) : ?>
             <li class="recommendation-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-neutral-900">

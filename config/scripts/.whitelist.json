@@ -206,6 +206,7 @@
   "text-danger",
   "h-2",
   "rounded",
+  "dark:border-0",
   "border-black/20",
   "border-[4px]",
   "border-danger",
