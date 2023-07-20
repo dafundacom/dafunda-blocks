@@ -1,0 +1,9 @@
+.review-inspector-control {
+  .block-editor-color-gradient-control__fieldset legend {
+    display: none !important;
+  }
+
+  .components-base-control {
+    @apply m-0;
+  }
+}

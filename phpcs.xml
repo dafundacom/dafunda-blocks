@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards">
+    <rule ref="WordPress" />
+    <arg name="extensions" value="php" />
+    <file>.</file>
+
+    <rule ref="PEAR">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Squiz.Commenting">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.YodaConditions">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.Security.EscapeOutput">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.DB.PreparedSQL">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.DontExtract">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.NamingConventions.ValidVariableName.InterpolatedVariableNotSnakeCase">
+        <severity>0</severity>
+    </rule>
+   <rule ref="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.DateTime.RestrictedFunctions.date_date">
+        <severity>0</severity>
+    </rule>
+
+    <exclude-pattern type="relative">assets/build/*</exclude-pattern>
+    <exclude-pattern type="relative">^logs/*</exclude-pattern>
+    <exclude-pattern>/dist/*</exclude-pattern>
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+    <exclude-pattern>*.min.js</exclude-pattern>
+    <!-- Exclude Vendor directory -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- Exclude Build directory -->
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <!-- Exclude node_modules directory -->
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <!-- Exclude block.asset.php file -->
+    <exclude-pattern>*/**/block.asset.php</exclude-pattern>
+
+</ruleset>

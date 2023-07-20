@@ -1,0 +1,42 @@
+{
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  //   "phpsab.executablePathCBF": "${workspaceRoot}/vendor/bin/phpcbf",
+  //   "phpsab.executablePathCS": "${workspaceRoot}/vendor/bin/phpcs",
+  "editor.linkedEditing": true,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+  // "phpsab.standard": "WordPress",
+  "phpsab.snifferEnable": true, // disable this if you don't need suggestions
+  "phpsab.snifferShowSources": true,
+  "files.autoSave": "afterDelay",
+  "phpsab.standard": "WordPress",
+  "json.schemaDownload.enable": true,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  //   "[javascriptreact]": {
+  //     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  //   },
+  //   "[javascript]": {
+  //     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  //   },
+  "php-cs-fixer.executablePath": "${extensionPath}\\php-cs-fixer.phar",
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer",
+    "editor.formatOnSave": true,
+    "breadcrumbs.showConstructors": true,
+    // "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "php-cs-fixer.rules": "@PSR2",
+  "php-cs-fixer.formatHtml": true
+}
