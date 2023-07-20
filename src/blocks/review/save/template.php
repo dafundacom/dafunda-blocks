@@ -1,4 +1,4 @@
-<div class="review_block wp-block relative w-full overflow-hidden rounded-md p-4"
+<div class="review_block wp-block relative w-full overflow-hidden rounded-md p-4 mb-7"
     style="background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
 
     <?php if ($background_used == "image" && $background_image != "") :?>
@@ -54,9 +54,9 @@
             </div>
             <div class="basis-full md:basis-6/12 p-3">
                 <p class="mt-0 mb-3 text-sm font-bold">CONS</p>
-                <ul class="list-none pl-0 m-0">
+                <ul class="list-none pl-0 !m-0">
                     <?php foreach ($cons as $con) : ?>
-                    <li class="flex flex-wrap">
+                    <li class="flex flex-wrap !m-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="h-5 w-5 text-danger">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
