@@ -8,11 +8,11 @@ const { result } = concurrently(
       name: "script",
       env: { APP_ENV: "development" },
     },
-    {
-      command: "pnpm gulp --watch",
-      name: "style",
-      env: { APP_ENV: "development" },
-    },
+    // {
+    //   command: "pnpm gulp --watch",
+    //   name: "style",
+    //   env: { APP_ENV: "development" },
+    // },
   ],
   {
     prefix: "start",
@@ -21,12 +21,10 @@ const { result } = concurrently(
   }
 );
 
-function success(params) {
+function success() {
   console.log("success");
-  // console.log(params);
 }
-function failure(params) {
+function failure() {
   console.log("failure");
-  // console.log(params);
 }
 result.then(success, failure);

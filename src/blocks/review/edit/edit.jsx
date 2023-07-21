@@ -187,7 +187,7 @@ export default function Edit(props) {
               multiline={false}
               keepPlaceholderOnFocus
               placeholder={__("Title")}
-              className="mt-0 mb-3 text-3xl font-bold text-white"
+              className="mb-3 mt-0 text-3xl font-bold text-white"
               value={title}
               onChange={(title) => setAttributes({ title })}
             />
@@ -196,7 +196,7 @@ export default function Edit(props) {
               tagName="p"
               keepPlaceholderOnFocus
               placeholder={__("Description")}
-              className="mt-0 mb-3 text-base text-white"
+              className="mb-3 mt-0 text-base text-white"
               value={description}
               onChange={(description) => setAttributes({ description })}
             />
@@ -214,7 +214,7 @@ export default function Edit(props) {
         <div className="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white">
           <div className="flex w-full flex-wrap border-b-2 border-slate-100">
             <div className="basis-6/12 border-r-2 border-slate-100 p-3">
-              <p className="mt-0 mb-3 text-sm font-bold">PROS</p>
+              <p className="mb-3 mt-0 text-sm font-bold">PROS</p>
               <ul className="list-none pl-0">
                 {pros.map((pro, index) => (
                   <li className="flex flex-wrap" key={index}>
@@ -224,7 +224,7 @@ export default function Edit(props) {
                       placeholder="Pros title"
                       multiline={false}
                       keepPlaceholderOnFocus
-                      className="mt-0 mb-3 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
+                      className="mb-3 mt-0 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
                       value={pro}
                       onChange={(pro) => {
                         let newData = [...pros];
@@ -309,7 +309,7 @@ export default function Edit(props) {
               />
             </div>
             <div className="basis-6/12 p-3">
-              <p className="mt-0 mb-3 text-sm font-bold">CONS</p>
+              <p className="mb-3 mt-0 text-sm font-bold">CONS</p>
               <ul className="list-none pl-0">
                 {cons.map((con, index) => (
                   <li className="flex flex-wrap" key={index}>
@@ -319,7 +319,7 @@ export default function Edit(props) {
                       placeholder="Cons title"
                       multiline={false}
                       keepPlaceholderOnFocus
-                      className="mt-0 mb-3 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
+                      className="mb-3 mt-0 flex-1 text-base focus:outline-none focus:ring focus:ring-slate-300"
                       value={con}
                       onChange={(con) => {
                         let newData = [...cons];
@@ -404,7 +404,7 @@ export default function Edit(props) {
             </div>
           </div>
           <div className="flex w-full flex-wrap p-5">
-            <p className="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
+            <p className="mb-3 mt-0 text-sm font-bold">REVIEW BREAKDOWN</p>
             <div className="w-full">
               {breakdowns_local.map((breakdown, index) => (
                 <div key={index}>

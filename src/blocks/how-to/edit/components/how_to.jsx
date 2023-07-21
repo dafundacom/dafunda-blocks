@@ -402,7 +402,7 @@ export function HowTo(props) {
                   }
                 }}
               />
-              <div className="absolute top-0 right-0 flex h-full flex-wrap items-center">
+              <div className="absolute right-0 top-0 flex h-full flex-wrap items-center">
                 <button
                   icon="editor-break"
                   label={__("Apply")}
@@ -443,7 +443,7 @@ export function HowTo(props) {
                 >
                   {supplies.map((supply, i) => (
                     <li className="relative mb-8" key={i}>
-                      <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
+                      <div className="howto-step__control-button absolute right-[10px] top-0 grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
                         <button
                           type="button"
                           className="howto-arrow"
@@ -639,7 +639,7 @@ export function HowTo(props) {
                 >
                   {tools.map((tool, i) => (
                     <li className="relative mb-8" key={i}>
-                      <div className="howto-step__control-button absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
+                      <div className="howto-step__control-button absolute right-[10px] top-0 grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1">
                         <button
                           type="button"
                           className="howto-arrow"
@@ -854,7 +854,7 @@ export function HowTo(props) {
         )}
         <RichText
           tagName={secondLevelTag}
-          className="mt-0 mb-1"
+          className="mb-1 mt-0"
           placeholder={__("Duration")}
           keepPlaceholderOnFocus
           value={timeIntro}

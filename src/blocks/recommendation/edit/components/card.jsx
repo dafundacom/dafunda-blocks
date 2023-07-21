@@ -78,7 +78,7 @@ export function Card(props) {
 
   return (
     <li className="rekomendasi-list-card relative mb-6 flex flex-col flex-wrap rounded-lg shadow-lg">
-      <div className="absolute top-0 right-[10px] z-10 grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1 text-2xl">
+      <div className="absolute right-[10px] top-0 z-10 grid translate-y-[-50%] grid-cols-3 gap-2 rounded-lg bg-gray-400 px-2 py-1 text-2xl">
         <button
           className="howto-arrow"
           icon="arrow-up-alt"
@@ -196,7 +196,7 @@ export function Card(props) {
           </div>
         )}
 
-        <div className="absolute left-6 bottom-3 flex flex-wrap">
+        <div className="absolute bottom-3 left-6 flex flex-wrap">
           <h4
             className={`m-0 font-semibold ${
               imageurl && imageurl !== "" ? "text-white" : ""

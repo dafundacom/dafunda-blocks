@@ -13,12 +13,7 @@
   "phpsab.snifferShowSources": true,
   "files.autoSave": "afterDelay",
   "phpsab.standard": "WordPress",
-  "[php]": {
-    "breadcrumbs.showConstructors": true,
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-    // "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-  },
-
+  "json.schemaDownload.enable": true,
   "eslint.format.enable": true,
   "eslint.validate": [
     "javascript",
@@ -38,7 +33,9 @@
   "php-cs-fixer.executablePath": "${extensionPath}\\php-cs-fixer.phar",
   "[php]": {
     "editor.defaultFormatter": "junstyle.php-cs-fixer",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "breadcrumbs.showConstructors": true,
+    // "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
   "php-cs-fixer.rules": "@PSR2",
   "php-cs-fixer.formatHtml": true

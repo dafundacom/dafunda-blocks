@@ -18,7 +18,7 @@ export function ButtonAddStep({ onClick, label }) {
           viewBox="0 0 24 24"
           strokeWidth="2"
           stroke="currentColor"
-          className="ml-[1px] mb-[3px] inline-block h-4 w-4"
+          className="mb-[3px] ml-[1px] inline-block h-4 w-4"
         >
           <path
             strokeLinecap="round"

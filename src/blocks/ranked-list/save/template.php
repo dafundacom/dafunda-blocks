@@ -1,4 +1,4 @@
-<div class="ranked-list " id="ranked-list-<?= $blockID ?>">
+<div class="dbe-block ranked-list " id="ranked-list-<?= $blockID ?>">
     <ol class="ranked-list p-0">
         <?php foreach ($lists as $index => $list) : ?>
         <li class="ranked-list-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-neutral-900"

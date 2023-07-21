@@ -1,6 +1,6 @@
 const concurrently = require("concurrently");
 const path = require("path");
-const { result } = concurrently(
+concurrently(
   [
     {
       command:
@@ -8,11 +8,11 @@ const { result } = concurrently(
       name: "script",
       env: { APP_ENV: "production" },
     },
-    {
-      command: "pnpm gulp build",
-      name: "style",
-      env: { APP_ENV: "production" },
-    },
+    // {
+    //   command: "pnpm gulp build",
+    //   name: "style",
+    //   env: { APP_ENV: "production" },
+    // },
   ],
   {
     prefix: "build",

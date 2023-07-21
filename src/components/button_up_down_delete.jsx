@@ -4,7 +4,7 @@ const { __ } = wp.i18n;
 
 export function ButtonUpDownDelete({ moveUp, moveDown, deleteStep }) {
   return (
-    <div className="absolute top-0 right-[10px] grid translate-y-[-50%] grid-cols-3 overflow-hidden rounded-lg bg-gray-400">
+    <div className="absolute right-[10px] top-0 grid translate-y-[-50%] grid-cols-3 overflow-hidden rounded-lg bg-gray-400">
       <button
         type="button"
         className="bg-gray-400 px-2 py-2 hover:bg-gray-600 hover:text-white"
