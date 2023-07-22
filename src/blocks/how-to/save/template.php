@@ -43,7 +43,7 @@
     <?= $header ?>
 
     <?php $sectionListStyleTag = $sectionListStyle === "ordered" ? "ul" : "ol"; ?>
-    <<?= $sectionListStyleTag ?> class="pl-0 !list-none">
+    <<?= $sectionListStyleTag ?> class="pl-0 !list-none space-y-4 mb-6">
         <?php if ($useSections) : ?>
         <?php foreach ($section as $i => $section_) : ?>
         <li class="how-to-section !list-none border border-border border-solid rounded-md">
@@ -79,7 +79,7 @@
 
                             <?php if ($step["stepPic"]["url"] !== "") : ?>
                             <figure class="w-full">
-                                <img class="how-to-step-image mx-auto rounded-xl overflow-hidden"
+                                <img class="how-to-step-image mx-auto rounded-xl overflow-hidden mb-2"
                                     src="<?= $step["stepPic"]["url"] ?>">
                                 <?php if ($step["stepPic"]["caption"] !== "") : ?>
                                 <center>
@@ -159,7 +159,7 @@
 
         <?php if ($finalImageURL !== "") : ?>
         <figure class="how-to-yield-image-container mt-2 w-full relative">
-            <img class="how-to-yield-image mx-auto rounded-xl overflow-hidden"
+            <img class="how-to-yield-image mx-auto rounded-xl overflow-hidden mb-2"
                 src="<?= $finalImageURL ?>">
 
             <?php if ($finalImageCaption !== "") : ?>
