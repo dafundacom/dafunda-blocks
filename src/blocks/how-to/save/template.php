@@ -75,7 +75,7 @@
                             <?= dbe_convert_to_paragraphs($step["direction"]) ?>
                         </div>
 
-                        <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+                        <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto w-full">
 
                             <?php if ($step["stepPic"]["url"] !== "") : ?>
                             <figure class="w-full">
@@ -123,7 +123,7 @@
                     <?= dbe_convert_to_paragraphs($step["direction"]) ?>
                 </div>
 
-                <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+                <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto w-full">
                     <?php if ($step["stepPic"]["url"] !== "") : ?>
                     <figure class="w-full">
                         <img class="how-to-step-image mx-auto rounded-xl overflow-hidden"
