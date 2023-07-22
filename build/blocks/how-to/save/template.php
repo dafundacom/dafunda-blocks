@@ -46,15 +46,15 @@
     <<?= $sectionListStyleTag ?> class="pl-0 !list-none">
         <?php if ($useSections) : ?>
         <?php foreach ($section as $i => $section_) : ?>
-        <li class="howto-section !list-none border border-border border-solid rounded-md">
+        <li class="how-to-section !list-none border border-border border-solid rounded-md">
             <<?= $secondLevelTag ?>>
                 <?= $section_["sectionName"] ?>
             </<?= $secondLevelTag ?>>
 
-            <ul class="howto-step-display">
+            <ul class="how-to-step-display">
                 <?php foreach ($section_["steps"] as $index => $step) : ?>
                 <li
-                    class="howto-step p-3 mb-4 !list-none border border-border border-solid rounded-md">
+                    class="how-to-step p-3 mb-4 !list-none border border-border border-solid rounded-md">
                     <div class="flex flex-wrap">
                         <div class="flex flex-wrap">
                             <div
@@ -65,7 +65,7 @@
                             <div class="px-2 flex-1 my-2">
                                 <<?= $thirdLevelTag ?>
                                     id="<?= $step["anchor"] ?>"
-                                    class="howto-step__title font-normal text-[1.3rem] md:text-2xl">
+                                    class="how-to-step__title font-normal text-[1.3rem] md:text-2xl">
                                     <?= $step["title"] ?>
                                 </<?= $thirdLevelTag ?>>
                             </div>
@@ -75,11 +75,11 @@
                             <?= dbe_convert_to_paragraphs($step["direction"]) ?>
                         </div>
 
-                        <div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+                        <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
 
                             <?php if ($step["stepPic"]["url"] !== "") : ?>
                             <figure class="w-full">
-                                <img class="howto-step-image mx-auto rounded-xl overflow-hidden"
+                                <img class="how-to-step-image mx-auto rounded-xl overflow-hidden"
                                     src="<?= $step["stepPic"]["url"] ?>">
                                 <?php if ($step["stepPic"]["caption"] !== "") : ?>
                                 <center>
@@ -102,7 +102,7 @@
         <?php else : ?>
         <?php if (isset($section) && count($section) > 0) : ?>
         <?php foreach ($section[0]["steps"] as $index => $step) : ?>
-        <li class="howto-step p-3 mb-4 border border-border border-solid rounded-md">
+        <li class="how-to-step p-3 mb-4 border border-border border-solid rounded-md">
             <div class="flex flex-wrap">
                 <div class="flex flex-wrap">
                     <div
@@ -113,7 +113,7 @@
                     <div class="px-2 flex-1 my-2">
                         <<?= $thirdLevelTag ?>
                             id="<?= $step["anchor"] ?>"
-                            class="howto-step__title font-normal text-[1.3rem] md:text-2xl normal-case">
+                            class="how-to-step__title font-normal text-[1.3rem] md:text-2xl normal-case">
                             <?= $step["title"] ?>
                         </<?= $thirdLevelTag ?>>
                     </div>
@@ -123,10 +123,10 @@
                     <?= dbe_convert_to_paragraphs($step["direction"]) ?>
                 </div>
 
-                <div class="col-span-12 howto-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
+                <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto">
                     <?php if ($step["stepPic"]["url"] !== "") : ?>
                     <figure class="w-full">
-                        <img class="howto-step-image mx-auto rounded-xl overflow-hidden"
+                        <img class="how-to-step-image mx-auto rounded-xl overflow-hidden"
                             src="<?= $step["stepPic"]["url"] ?>">
                         <?php if ($step["stepPic"]["caption"] !== "") : ?>
                         <center>
@@ -149,7 +149,7 @@
 
 
     <?php if ($resultIntro && $howToYield) : ?>
-    <div class="howto-yield bg-success/80 rounded-xl text-white p-5">
+    <div class="how-to-yield bg-success/80 rounded-xl text-white p-5">
         <div class="w-100 flex flex-wrap justify-center mb-3">
             <<?= $secondLevelTag ?> class="text-white font-bold m-0
                 text-3xl">
@@ -158,8 +158,8 @@
         </div>
 
         <?php if ($finalImageURL !== "") : ?>
-        <figure class="howto-yield-image-container mt-2 w-full relative">
-            <img class="howto-yield-image mx-auto rounded-xl overflow-hidden"
+        <figure class="how-to-yield-image-container mt-2 w-full relative">
+            <img class="how-to-yield-image mx-auto rounded-xl overflow-hidden"
                 src="<?= $finalImageURL ?>">
 
             <?php if ($finalImageCaption !== "") : ?>
@@ -197,15 +197,15 @@
             }
         };
 ?>
-    <div class="howto-review mt-4 rounded-lg border-border border-solid md:overflow-hidden p-3 mb-3">
+    <div class="how-to-review mt-4 rounded-lg border-border border-solid md:overflow-hidden p-3 mb-3">
 
         <?php if (! $isVoted()) : ?>
-        <div class="howto-review__vote">
+        <div class="how-to-review__vote">
             <div class="w-full text-center mb-2">
                 Apakah artikel ini membantu mu?
             </div>
             <div class="w-full flex flex-wrap justify-center items-center mb-1">
-                <div class="howto-review__like mr-3 cursor-pointer" data-action="like">
+                <div class="how-to-review__like mr-3 cursor-pointer" data-action="like">
                     <button class="flex items-center py-1 bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#16A085">
                             <path
@@ -213,7 +213,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="howto-review__dislike cursor-pointer" data-action="dislike">
+                <div class="how-to-review__dislike cursor-pointer" data-action="dislike">
                     <button class="flex items-center py-1 bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#C44569">
                             <path
@@ -226,7 +226,7 @@
         <?php endif ?>
 
         <div
-            class="howto-review__thank w-full text-center my-4 text-lg <?= ! $isVoted() ? "hidden" : "" ?>">
+            class="how-to-review__thank w-full text-center my-4 text-lg <?= ! $isVoted() ? "hidden" : "" ?>">
             <p class="m-0">Terimakasih sudah memberi jawaban</p>
         </div>
     </div>
@@ -247,7 +247,7 @@ try {
     $howToReviewPercent = 0;
 }
 // $howToReviewPercent = 60;
-$howToReviewClass = "howto-review-result__good";
+$howToReviewClass = "how-to-review-result__good";
 if ($howToReviewPercent > 100) {
     $howToReviewPercent = 100;
 }
@@ -257,33 +257,33 @@ if ($howToReviewPercent < 0) {
 $howToReviewPercentIcon =
     '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
 if ($howToReviewPercent >= 65) {
-    $howToReviewClass = "howto-review-result__good";
+    $howToReviewClass = "how-to-review-result__good";
 } elseif ($howToReviewPercent >= 50) {
     $howToReviewPercentIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor">
 			<path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" /></svg>';
-    $howToReviewClass = "howto-review-result__medium";
+    $howToReviewClass = "how-to-review-result__medium";
 } else {
     $howToReviewPercentIcon =
         '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
-    $howToReviewClass = "howto-review-result__bad";
+    $howToReviewClass = "how-to-review-result__bad";
 }
 ?>
 
     <div
-        class="wrapper-how-to-review text-white rounded-xl flex flex-wrap items-center px-4 py-3 mb-3 howto-review-result <?= $howToReviewClass ?>">
+        class="wrapper-how-to-review text-white rounded-xl flex flex-wrap items-center px-4 py-3 mb-3 how-to-review-result <?= $howToReviewClass ?>">
     </div>
 
     <script>
         renderHowToReview( <?= $howToReviewPercent ?> )
-        document.querySelectorAll(".howto-review .howto-review__like, .howto-review .howto-review__dislike").forEach((
+        document.querySelectorAll(".how-to-review .how-to-review__like, .how-to-review .how-to-review__dislike").forEach((
             el, i) => {
             el.addEventListener("click", (e) => {
-                e.target.closest(".howto-review__vote").classList.add("hidden")
-                e.target.closest(".howto-review").querySelector(".howto-review__thank").classList
+                e.target.closest(".how-to-review__vote").classList.add("hidden")
+                e.target.closest(".how-to-review").querySelector(".how-to-review__thank").classList
                     .remove("hidden")
                 let body = {
                     post_id: <?= get_the_ID() ?> ,
-                    block_id: e.target.closest(".howto").getAttribute("data-blockID"),
+                    block_id: e.target.closest(".how-to").getAttribute("data-blockID"),
                     block_name: "<?= DBE_PREFIX ?>/how-to",
                     action: el.getAttribute("data-action")
                 }
@@ -321,30 +321,30 @@ if ($howToReviewPercent >= 65) {
                 '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
             let howToReviewClass = ""
             if (howToReviewPercent >= 65) {
-                howToReviewClass = "howto-review-result__good";
+                howToReviewClass = "how-to-review-result__good";
             } else if (howToReviewPercent >= 50) {
                 howToReviewPercentIcon =
                     `<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"> <
 						path d = "M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" / > < /svg>`;
-                howToReviewClass = "howto-review-result__medium";
+                howToReviewClass = "how-to-review-result__medium";
             } else {
                 howToReviewPercentIcon =
                     '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
-                howToReviewClass = "howto-review-result__bad";
+                howToReviewClass = "how-to-review-result__bad";
             }
 
             let html = `
 			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none">${howToReviewPercent}%</p>
 			<div style="max-width: 60%">
 				<p class="m-0 leading-5">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
-				<p class="m-0 howto-review-result__membantu">
+				<p class="m-0 how-to-review-result__membantu">
 				</p>
 			</div>
 			<div class="ml-auto flex items-center">
 				${howToReviewPercentIcon}
 			</div>
 				`
-            let asdqwdcsdv = ["howto-review-result__bad", "howto-review-result__medium", "howto-review-result__good"]
+            let asdqwdcsdv = ["how-to-review-result__bad", "how-to-review-result__medium", "how-to-review-result__good"]
             asdqwdcsdv.forEach(clss => {
                 document.querySelector(".wrapper-how-to-review").classList.remove(clss)
             });
