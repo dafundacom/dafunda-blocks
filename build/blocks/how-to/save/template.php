@@ -102,7 +102,7 @@
         <?php else : ?>
         <?php if (isset($section) && count($section) > 0) : ?>
         <?php foreach ($section[0]["steps"] as $index => $step) : ?>
-        <li class="how-to-step p-3 mb-4 border border-border border-solid rounded-md">
+        <li class="how-to-step !list-none p-3 mb-4 border border-border border-solid rounded-md">
             <div class="flex flex-wrap">
                 <div class="flex flex-wrap">
                     <div
