@@ -1,6 +1,6 @@
-<div class="dbe-block how-to mb-8" id="howto_<?= $blockID ?>"
+<div class="dbe-block how-to mb-8" id="how-to_<?= $blockID ?>"
     data-blockID="<?= $blockID ?>" block>
-    <<?= $firstLevelTag ?> class="howto__title text-3xl">
+    <<?= $firstLevelTag ?> class="how-to__title text-3xl">
         <?= $title ?>
     </<?= $firstLevelTag ?>>
 
@@ -113,7 +113,7 @@
                     <div class="px-2 flex-1 my-2">
                         <<?= $thirdLevelTag ?>
                             id="<?= $step["anchor"] ?>"
-                            class="how-to-step__title font-normal text-[1.3rem] md:text-2xl normal-case">
+                            class="how-to-step__title font-normal text-[1.3rem] md:text-2xl normal-case !my-2">
                             <?= $step["title"] ?>
                         </<?= $thirdLevelTag ?>>
                     </div>

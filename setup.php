@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define( 'DBE_NAME', 'dafunda-blocks' );
 define( 'DBE_VERSION', '0.1.0-alpha' );
-define( 'DBE_ASSET_VERSION', '0.1.0-alpha-X7NiL' );
+define( 'DBE_ASSET_VERSION', '0.1.0-alpha-QIi31' );
 define( 'DBE_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'DBE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DBE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
