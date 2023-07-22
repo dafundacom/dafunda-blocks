@@ -1,5 +1,5 @@
 <div class="dbe-block recommendation" id="recommendation-<?= $blockID ?>">
-    <ol class="p-0">
+    <ol class="p-0 space-y-4">
         <?php foreach ($lists as $index => $list) : ?>
             <li class="recommendation-card flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 bg-card">
                 <!-- Image -->
