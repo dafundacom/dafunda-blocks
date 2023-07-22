@@ -3,7 +3,7 @@
         'name' => 'dafundacom/dafunda-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a030b98bda406aab2e0fe01f7d6406ac1b4ff4b2',
+        'reference' => '5feb3f48d74bc1fe576611c705b850ab6340af07',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'automattic/vipwpcs' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'b400608b7c207bc7c9d11a3f3b32789e259564de',
+            'reference' => 'df070e7c6f6dbe0973a509c9829c6ae163fd735e',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../automattic/vipwpcs',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'dafundacom/dafunda-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a030b98bda406aab2e0fe01f7d6406ac1b4ff4b2',
+            'reference' => '5feb3f48d74bc1fe576611c705b850ab6340af07',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -60,7 +60,7 @@
         'phpcompatibility/phpcompatibility-wp' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cebd8669ee769432dbf00a352af5c7782c4a5618',
+            'reference' => '262f9d81273932315d15d704f69b9d678b939cb3',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcompatibility/phpcompatibility-wp',
             'aliases' => array(
@@ -71,7 +71,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '4062c44c5fb432191aa449534b59aea24541dd83',
+            'reference' => '69465cab9d12454e5e7767b9041af0cd8cd13be7',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -82,7 +82,7 @@
         'sirbrillig/phpcs-variable-analysis' => array(
             'pretty_version' => '2.x-dev',
             'version' => '2.9999999.9999999.9999999-dev',
-            'reference' => '6a0e2ffef96df8397fc1859cd04e73df0a9f1a12',
+            'reference' => '002ae3ab4ca052823c676de4ec7503e96aaf5a35',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../sirbrillig/phpcs-variable-analysis',
             'aliases' => array(),
@@ -91,7 +91,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'add95a74551c3ba8fc99ef7651ad05f553b3fbbf',
+            'reference' => '354b4c5ee114a9d10b72f6d311d5d18152162ad0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(

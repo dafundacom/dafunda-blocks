@@ -379,9 +379,12 @@ class File
                                 if (isset($this->ruleset->sniffCodes[$parts[0]]) === true) {
                                     $listenerCode  = array_shift($parts);
                                     $propertyCode  = array_shift($parts);
-                                    $propertyValue = rtrim(implode(' ', $parts), " */\r\n");
+                                    $settings      = [
+                                        'value' => rtrim(implode(' ', $parts), " */\r\n"),
+                                        'scope' => 'sniff',
+                                    ];
                                     $listenerClass = $this->ruleset->sniffCodes[$listenerCode];
-                                    $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $propertyValue);
+                                    $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $settings);
                                 }
                             }
                         }
@@ -403,9 +406,12 @@ class File
                         $listenerCode = $token['sniffCode'];
                         if (isset($this->ruleset->sniffCodes[$listenerCode]) === true) {
                             $propertyCode  = $token['sniffProperty'];
-                            $propertyValue = $token['sniffPropertyValue'];
+                            $settings      = [
+                                'value' => $token['sniffPropertyValue'],
+                                'scope' => 'sniff',
+                            ];
                             $listenerClass = $this->ruleset->sniffCodes[$listenerCode];
-                            $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $propertyValue);
+                            $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $settings);
                         }
                     }
                 }//end if
@@ -1309,10 +1315,12 @@ class File
      *         'default_equal_token' => integer, // The stack pointer to the equals sign.
      *
      * Parameters declared using PHP 8 constructor property promotion, have these additional array indexes:
-     *         'property_visibility' => string,  // The property visibility as declared.
-     *         'visibility_token'    => integer, // The stack pointer to the visibility modifier token.
-     *         'property_readonly'   => bool,    // TRUE if the readonly keyword was found.
-     *         'readonly_token'      => integer, // The stack pointer to the readonly modifier token.
+     *         'property_visibility' => string,        // The property visibility as declared.
+     *         'visibility_token'    => integer|false, // The stack pointer to the visibility modifier token
+     *                                                 // or FALSE if the visibility is not explicitly declared.
+     *         'property_readonly'   => boolean,       // TRUE if the readonly keyword was found.
+     *         'readonly_token'      => integer,       // The stack pointer to the readonly modifier token.
+     *                                                 // This index will only be set if the property is readonly.
      *
      * @param int $stackPtr The position in the stack of the function token
      *                      to acquire the parameters for.
@@ -1530,15 +1538,20 @@ class File
                 $vars[$paramCount]['type_hint_end_token'] = $typeHintEndToken;
                 $vars[$paramCount]['nullable_type']       = $nullableType;
 
-                if ($visibilityToken !== null) {
-                    $vars[$paramCount]['property_visibility'] = $this->tokens[$visibilityToken]['content'];
-                    $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                if ($visibilityToken !== null || $readonlyToken !== null) {
+                    $vars[$paramCount]['property_visibility'] = 'public';
+                    $vars[$paramCount]['visibility_token']    = false;
                     $vars[$paramCount]['property_readonly']   = false;
-                }
 
-                if ($readonlyToken !== null) {
-                    $vars[$paramCount]['property_readonly'] = true;
-                    $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                    if ($visibilityToken !== null) {
+                        $vars[$paramCount]['property_visibility'] = $this->tokens[$visibilityToken]['content'];
+                        $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                    }
+
+                    if ($readonlyToken !== null) {
+                        $vars[$paramCount]['property_readonly'] = true;
+                        $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                    }
                 }
 
                 if ($this->tokens[$i]['code'] === T_COMMA) {
@@ -1947,6 +1960,7 @@ class File
      *   array(
      *    'is_abstract' => false, // true if the abstract keyword was found.
      *    'is_final'    => false, // true if the final keyword was found.
+     *    'is_readonly' => false, // true if the readonly keyword was found.
      *   );
      * </code>
      *
@@ -1966,6 +1980,7 @@ class File
         $valid = [
             T_FINAL       => T_FINAL,
             T_ABSTRACT    => T_ABSTRACT,
+            T_READONLY    => T_READONLY,
             T_WHITESPACE  => T_WHITESPACE,
             T_COMMENT     => T_COMMENT,
             T_DOC_COMMENT => T_DOC_COMMENT,
@@ -1973,6 +1988,7 @@ class File
 
         $isAbstract = false;
         $isFinal    = false;
+        $isReadonly = false;
 
         for ($i = ($stackPtr - 1); $i > 0; $i--) {
             if (isset($valid[$this->tokens[$i]['code']]) === false) {
@@ -1987,12 +2003,17 @@ class File
             case T_FINAL:
                 $isFinal = true;
                 break;
+
+            case T_READONLY:
+                $isReadonly = true;
+                break;
             }
         }//end for
 
         return [
             'is_abstract' => $isAbstract,
             'is_final'    => $isFinal,
+            'is_readonly' => $isReadonly,
         ];
 
     }//end getClassProperties()

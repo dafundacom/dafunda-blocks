@@ -31,12 +31,12 @@
         </div>
     </div>
 
-    <div class="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white dark:bg-background">
+    <div class="relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white">
         <div
-            class="flex w-full flex-wrap border-0 border-b-2 border-black/10 dark:border-white/10 border-solid gap-4 md:gap-0">
+            class="flex w-full flex-wrap border-0 border-b-2 border-muted-foreground/20 dark:border-muted/10 border-solid gap-4 md:gap-0">
             <div
-                class="basis-full md:basis-6/12 border-0 border-b-2 md:border-b-0 md:border-r-2 border-black/10 dark:border-white/10 border-solid p-3">
-                <p class="mt-0 !mb-3 !text-sm !font-bold">PROS</p>
+                class="basis-full md:basis-6/12 border-0 border-b-2 md:border-b-0 md:border-r-2 border-muted-foreground/20 dark:border-muted/10 border-solid p-3">
+                <p class="mt-0 !mb-3 !text-sm !font-bold !text-black/70">PROS</p>
                 <ul class="list-none pl-0 !m-0">
                     <?php foreach ($pros as $pro) : ?>
                     <li class="flex flex-wrap !m-0">
@@ -45,7 +45,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
 
-                        <p class="mt-0 mb-3 flex-1 !text-base">
+                        <p class="mt-0 mb-3 flex-1 !text-base !text-black/70">
                             <?= $pro ?>
                         </p>
                     </li>
@@ -53,7 +53,7 @@
                 </ul>
             </div>
             <div class="basis-full md:basis-6/12 p-3">
-                <p class="mt-0 !mb-3 !text-sm !font-bold">CONS</p>
+                <p class="mt-0 !mb-3 !text-sm !font-bold !text-black/70">CONS</p>
                 <ul class="list-none pl-0 !m-0">
                     <?php foreach ($cons as $con) : ?>
                     <li class="flex flex-wrap !m-0">
@@ -62,7 +62,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
 
-                        <p class="mt-0 mb-3 flex-1 !text-base">
+                        <p class="mt-0 mb-3 flex-1 !text-base !text-black/70">
                             <?= $con ?>
                         </p>
                     </li>
@@ -71,11 +71,11 @@
             </div>
         </div>
         <div class="flex w-full flex-wrap p-5">
-            <p class="mt-0 mb-3 text-sm font-bold">REVIEW BREAKDOWN</p>
+            <p class="mt-0 mb-3 text-sm font-bold !text-black/70">REVIEW BREAKDOWN</p>
             <div class="w-full">
                 <?php foreach ($breakdowns as $breakdown) :?>
                   <div class="dafunda-block_review-slider mb-6">
-                    <div class="w-full h-2 rounded bg-white border dark:border-0 border-black/20 relative border-solid">
+                    <div class="w-full h-2 rounded bg-white dark:bg-black/10 border dark:border-0 border-muted-foreground/30 relative border-solid">
                       <div class="rounded h-full" style="width: <?= $breakdown["value"] ?>%; background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
                       </div>
                       <div class="absolute w-4 h-4 bg-white rounded-full border-[4px] border-danger border-solid top-1/2 -translate-x-1/2 -translate-y-1/2" style="left: <?= $breakdown["value"] ?>%;">

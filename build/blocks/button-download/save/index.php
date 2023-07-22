@@ -1,4 +1,4 @@
-<div class="dbe-block button-download rounded-lg border border-slate-200 dark:border-neutral-700 border-solid p-3 flex flex-wrap overflow-hidden">
+<div class="dbe-block button-download rounded-lg border border-border border-solid p-3 flex flex-wrap overflow-hidden">
 		<div class="basis-2/12">
 			<figure class="relative">
 				<img class="w-full aspect-square rounded-lg  object-cover object-center" src="<?= $imageurl ?>" />

@@ -48,7 +48,9 @@ use PHPCSUtils\Tokens\Collections;
  *
  * Additionally, this class works round the following tokenizer issues for
  * any affected utility functions:
- * - None at this time.
+ * - `readonly` classes.
+ * - Constructor property promotion with `readonly` without visibility.
+ * - OO methods called `self`, `parent` or `static`.
  *
  * Most functions in this class will have a related twin-function in the relevant
  * class in the `PHPCSUtils\Utils` namespace.
@@ -74,7 +76,7 @@ final class BCFile
      *
      * Changelog for the PHPCS native function:
      * - Introduced in PHPCS 0.0.5.
-     * - The upstream method has received no significant updates since PHPCS 3.7.1.
+     * - PHPCS 3.8.0: OO methods called `self`, `parent` or `static` are now correctly recognized.
      *
      * @see \PHP_CodeSniffer\Files\File::getDeclarationName() Original source.
      * @see \PHPCSUtils\Utils\ObjectDeclarations::getName()   PHPCSUtils native improved version.
@@ -96,7 +98,44 @@ final class BCFile
      */
     public static function getDeclarationName(File $phpcsFile, $stackPtr)
     {
-        return $phpcsFile->getDeclarationName($stackPtr);
+        $tokens    = $phpcsFile->getTokens();
+        $tokenCode = $tokens[$stackPtr]['code'];
+
+        if ($tokenCode === T_ANON_CLASS || $tokenCode === T_CLOSURE) {
+            return null;
+        }
+
+        if ($tokenCode !== T_FUNCTION
+            && $tokenCode !== T_CLASS
+            && $tokenCode !== T_INTERFACE
+            && $tokenCode !== T_TRAIT
+            && $tokenCode !== T_ENUM
+        ) {
+            throw new RuntimeException('Token type "' . $tokens[$stackPtr]['type'] . '" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
+        }
+
+        if ($tokenCode === T_FUNCTION
+            && strtolower($tokens[$stackPtr]['content']) !== 'function'
+        ) {
+            // This is a function declared without the "function" keyword.
+            // So this token is the function name.
+            return $tokens[$stackPtr]['content'];
+        }
+
+        $content = null;
+        for ($i = ($stackPtr + 1); $i < $phpcsFile->numTokens; $i++) {
+            if ($tokens[$i]['code'] === T_STRING
+                // BC: PHPCS < 3.8.0.
+                || $tokens[$i]['code'] === T_SELF
+                || $tokens[$i]['code'] === T_PARENT
+                || $tokens[$i]['code'] === T_STATIC
+            ) {
+                $content = $tokens[$i]['content'];
+                break;
+            }
+        }
+
+        return $content;
     }
 
     /**
@@ -107,25 +146,25 @@ final class BCFile
      * Each parameter is in the following format:
      * ```php
      * 0 => array(
-     *   'name'                => '$var',  // The variable name.
-     *   'token'               => integer, // The stack pointer to the variable name.
-     *   'content'             => string,  // The full content of the variable definition.
-     *   'has_attributes'      => boolean, // Does the parameter have one or more attributes attached ?
-     *   'pass_by_reference'   => boolean, // Is the variable passed by reference?
-     *   'reference_token'     => integer, // The stack pointer to the reference operator
-     *                                     // or FALSE if the param is not passed by reference.
-     *   'variable_length'     => boolean, // Is the param of variable length through use of `...` ?
-     *   'variadic_token'      => integer, // The stack pointer to the ... operator
-     *                                     // or FALSE if the param is not variable length.
-     *   'type_hint'           => string,  // The type hint for the variable.
-     *   'type_hint_token'     => integer, // The stack pointer to the start of the type hint
-     *                                     // or FALSE if there is no type hint.
-     *   'type_hint_end_token' => integer, // The stack pointer to the end of the type hint
-     *                                     // or FALSE if there is no type hint.
-     *   'nullable_type'       => boolean, // TRUE if the var type is preceded by the nullability
-     *                                     // operator.
-     *   'comma_token'         => integer, // The stack pointer to the comma after the param
-     *                                     // or FALSE if this is the last param.
+     *   'name'                => string,        // The variable name.
+     *   'token'               => integer,       // The stack pointer to the variable name.
+     *   'content'             => string,        // The full content of the variable definition.
+     *   'has_attributes'      => boolean,       // Does the parameter have one or more attributes attached ?
+     *   'pass_by_reference'   => boolean,       // Is the variable passed by reference?
+     *   'reference_token'     => integer|false, // The stack pointer to the reference operator
+     *                                           // or FALSE if the param is not passed by reference.
+     *   'variable_length'     => boolean,       // Is the param of variable length through use of `...` ?
+     *   'variadic_token'      => integer|false, // The stack pointer to the ... operator
+     *                                           // or FALSE if the param is not variable length.
+     *   'type_hint'           => string,        // The type hint for the variable.
+     *   'type_hint_token'     => integer|false, // The stack pointer to the start of the type hint
+     *                                           // or FALSE if there is no type hint.
+     *   'type_hint_end_token' => integer|false, // The stack pointer to the end of the type hint
+     *                                           // or FALSE if there is no type hint.
+     *   'nullable_type'       => boolean,       // TRUE if the var type is preceded by the nullability
+     *                                           // operator.
+     *   'comma_token'         => integer|false, // The stack pointer to the comma after the param
+     *                                           // or FALSE if this is the last param.
      * )
      * ```
      *
@@ -138,22 +177,25 @@ final class BCFile
      *
      * Parameters declared using PHP 8 constructor property promotion, have these additional array indexes:
      * ```php
-     *   'property_visibility' => string,  // The property visibility as declared.
-     *   'visibility_token'    => integer, // The stack pointer to the visibility modifier token.
-     *   'property_readonly'   => bool,    // TRUE if the readonly keyword was found.
-     *   'readonly_token'      => integer, // The stack pointer to the readonly modifier token.
+     *   'property_visibility' => string,        // The property visibility as declared.
+     *   'visibility_token'    => integer,|false // The stack pointer to the visibility modifier token.
+     *                                           // or FALSE if the visibility is not explicitly declared.
+     *   'property_readonly'   => bool,          // TRUE if the readonly keyword was found.
+     *   'readonly_token'      => integer,       // The stack pointer to the readonly modifier token.
+     *                                           // This index will only be set if the property is readonly.
      * ```
      *
      * PHPCS cross-version compatible version of the `File::getMethodParameters()` method.
      *
      * Changelog for the PHPCS native function:
      * - Introduced in PHPCS 0.0.5.
-     * - The upstream method has received no significant updates since PHPCS 3.7.1.
+     * - PHPCS 3.8.0: Added support for constructor property promotion with readonly without explicit visibility.
      *
      * @see \PHP_CodeSniffer\Files\File::getMethodParameters()      Original source.
      * @see \PHPCSUtils\Utils\FunctionDeclarations::getParameters() PHPCSUtils native improved version.
      *
      * @since 1.0.0
+     * @since 1.0.6 Sync with PHPCS 3.8.0, support for readonly properties without explicit visibility. PHPCS#3801.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position in the stack of the function token
@@ -379,15 +421,20 @@ final class BCFile
                     $vars[$paramCount]['type_hint_end_token'] = $typeHintEndToken;
                     $vars[$paramCount]['nullable_type']       = $nullableType;
 
-                    if ($visibilityToken !== null) {
-                        $vars[$paramCount]['property_visibility'] = $tokens[$visibilityToken]['content'];
-                        $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                    if ($visibilityToken !== null || $readonlyToken !== null) {
+                        $vars[$paramCount]['property_visibility'] = 'public';
+                        $vars[$paramCount]['visibility_token']    = false;
                         $vars[$paramCount]['property_readonly']   = false;
-                    }
 
-                    if ($readonlyToken !== null) {
-                        $vars[$paramCount]['property_readonly'] = true;
-                        $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        if ($visibilityToken !== null) {
+                            $vars[$paramCount]['property_visibility'] = $tokens[$visibilityToken]['content'];
+                            $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                        }
+
+                        if ($readonlyToken !== null) {
+                            $vars[$paramCount]['property_readonly'] = true;
+                            $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        }
                     }
 
                     if ($tokens[$i]['code'] === T_COMMA) {
@@ -431,19 +478,19 @@ final class BCFile
      * The format of the return value is:
      * ```php
      * array(
-     *   'scope'                 => 'public', // Public, private, or protected
-     *   'scope_specified'       => true,     // TRUE if the scope keyword was found.
-     *   'return_type'           => '',       // The return type of the method.
-     *   'return_type_token'     => integer,  // The stack pointer to the start of the return type
-     *                                        // or FALSE if there is no return type.
-     *   'return_type_end_token' => integer,  // The stack pointer to the end of the return type
-     *                                        // or FALSE if there is no return type.
-     *   'nullable_return_type'  => false,    // TRUE if the return type is preceded by
-     *                                        // the nullability operator.
-     *   'is_abstract'           => false,    // TRUE if the abstract keyword was found.
-     *   'is_final'              => false,    // TRUE if the final keyword was found.
-     *   'is_static'             => false,    // TRUE if the static keyword was found.
-     *   'has_body'              => false,    // TRUE if the method has a body
+     *   'scope'                 => string,        // Public, private, or protected
+     *   'scope_specified'       => boolean,       // TRUE if the scope keyword was found.
+     *   'return_type'           => string,        // The return type of the method.
+     *   'return_type_token'     => integer|false, // The stack pointer to the start of the return type
+     *                                             // or FALSE if there is no return type.
+     *   'return_type_end_token' => integer|false, // The stack pointer to the end of the return type
+     *                                             // or FALSE if there is no return type.
+     *   'nullable_return_type'  => boolean,       // TRUE if the return type is preceded by
+     *                                             // the nullability operator.
+     *   'is_abstract'           => boolean,       // TRUE if the abstract keyword was found.
+     *   'is_final'              => boolean,       // TRUE if the final keyword was found.
+     *   'is_static'             => boolean,       // TRUE if the static keyword was found.
+     *   'has_body'              => boolean,       // TRUE if the method has a body
      * );
      * ```
      *
@@ -478,17 +525,17 @@ final class BCFile
      * The format of the return value is:
      * ```php
      * array(
-     *   'scope'           => string,  // Public, private, or protected.
-     *   'scope_specified' => boolean, // TRUE if the scope was explicitly specified.
-     *   'is_static'       => boolean, // TRUE if the static keyword was found.
-     *   'is_readonly'     => boolean, // TRUE if the readonly keyword was found.
-     *   'type'            => string,  // The type of the var (empty if no type specified).
-     *   'type_token'      => integer, // The stack pointer to the start of the type
-     *                                 // or FALSE if there is no type.
-     *   'type_end_token'  => integer, // The stack pointer to the end of the type
-     *                                 // or FALSE if there is no type.
-     *   'nullable_type'   => boolean, // TRUE if the type is preceded by the
-     *                                 // nullability operator.
+     *   'scope'           => string,        // Public, private, or protected.
+     *   'scope_specified' => boolean,       // TRUE if the scope was explicitly specified.
+     *   'is_static'       => boolean,       // TRUE if the static keyword was found.
+     *   'is_readonly'     => boolean,       // TRUE if the readonly keyword was found.
+     *   'type'            => string,        // The type of the var (empty if no type specified).
+     *   'type_token'      => integer|false, // The stack pointer to the start of the type
+     *                                       // or FALSE if there is no type.
+     *   'type_end_token'  => integer|false, // The stack pointer to the end of the type
+     *                                       // or FALSE if there is no type.
+     *   'nullable_type'   => boolean,       // TRUE if the type is preceded by the
+     *                                       // nullability operator.
      * );
      * ```
      *
@@ -524,8 +571,9 @@ final class BCFile
      * The format of the return value is:
      * ```php
      * array(
-     *   'is_abstract' => false, // TRUE if the abstract keyword was found.
-     *   'is_final'    => false, // TRUE if the final keyword was found.
+     *   'is_abstract' => boolean, // TRUE if the abstract keyword was found.
+     *   'is_final'    => boolean, // TRUE if the final keyword was found.
+     *   'is_readonly' => false, // TRUE if the readonly keyword was found.
      * );
      * ```
      *
@@ -533,12 +581,13 @@ final class BCFile
      *
      * Changelog for the PHPCS native function:
      * - Introduced in PHPCS 1.3.0.
-     * - The upstream method has received no significant updates since PHPCS 3.7.1.
+     * - PHPCS 3.8.0: Added support for PHP 8.2 `readonly` classes.
      *
      * @see \PHP_CodeSniffer\Files\File::getClassProperties()          Original source.
      * @see \PHPCSUtils\Utils\ObjectDeclarations::getClassProperties() PHPCSUtils native improved version.
      *
      * @since 1.0.0
+     * @since 1.0.6 Sync with PHPCS 3.8.0, support for readonly classes. PHPCS#3686.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position in the stack of the `T_CLASS`
@@ -551,7 +600,50 @@ final class BCFile
      */
     public static function getClassProperties(File $phpcsFile, $stackPtr)
     {
-        return $phpcsFile->getClassProperties($stackPtr);
+        $tokens = $phpcsFile->getTokens();
+
+        if ($tokens[$stackPtr]['code'] !== T_CLASS) {
+            throw new RuntimeException('$stackPtr must be of type T_CLASS');
+        }
+
+        $valid = [
+            T_FINAL       => T_FINAL,
+            T_ABSTRACT    => T_ABSTRACT,
+            T_READONLY    => T_READONLY,
+            T_WHITESPACE  => T_WHITESPACE,
+            T_COMMENT     => T_COMMENT,
+            T_DOC_COMMENT => T_DOC_COMMENT,
+        ];
+
+        $isAbstract = false;
+        $isFinal    = false;
+        $isReadonly = false;
+
+        for ($i = ($stackPtr - 1); $i > 0; $i--) {
+            if (isset($valid[$tokens[$i]['code']]) === false) {
+                break;
+            }
+
+            switch ($tokens[$i]['code']) {
+                case T_ABSTRACT:
+                    $isAbstract = true;
+                    break;
+
+                case T_FINAL:
+                    $isFinal = true;
+                    break;
+
+                case T_READONLY:
+                    $isReadonly = true;
+                    break;
+            }
+        }
+
+        return [
+            'is_abstract' => $isAbstract,
+            'is_final'    => $isFinal,
+            'is_readonly' => $isReadonly,
+        ];
     }
 
     /**

@@ -10,6 +10,169 @@ This projects adheres to [Keep a CHANGELOG](https://keepachangelog.com/) and use
 _Nothing yet._
 
 
+## [1.0.8] - 2023-07-17
+
+### Changed
+
+#### PHPCS BackCompat
+
+* `BCFile::getDeclarationName()`: sync with PHPCS 3.8.0 - support for functions called `self`, `parent` or `static` which return by reference. [#494]
+
+#### Other
+
+* Various housekeeping and minor documentation improvements.
+
+### Fixed
+
+#### Fixers
+
+* The [`SpacesFixer`] will no longer throw an (incorrect) exception when the second pointer passed is a comment token and this comment token is the last content in a file. [#493]
+
+[#493]: https://github.com/PHPCSStandards/PHPCSUtils/pull/493
+[#494]: https://github.com/PHPCSStandards/PHPCSUtils/pull/494
+
+
+## [1.0.7] - 2023-07-10
+
+### Changed
+
+#### Other
+
+* Various housekeeping and maintenance updates, including making the test suite compatible with PHPUnit 10.
+
+### Fixed
+
+#### Utils
+
+* The `Arrays::getDoubleArrowPtr()` method could previously get confused over a double arrow in a keyed list used as an array value. [#485]
+
+[#485]: https://github.com/PHPCSStandards/PHPCSUtils/pull/485
+
+
+## [1.0.6] - 2023-05-27
+
+### Changed
+
+#### PHPCS BackCompat
+
+* `BCFile::getClassProperties()`: sync with PHPCS 3.8.0 - support for PHP 8.2 `readonly` classes. [#470]
+* `BCFile::getMethodParameters()`: sync with PHPCS 3.8.0 - support for constructor property promotion with `readonly` properties without explicit visibility. [#472]
+
+#### Utils
+
+* The results of the following methods will now (also) be cached for improved performance when multiple sniffs call these functions for the same token during a PHPCS run. [#464], [#466]
+    - `FunctionDeclarations::getProperties()`
+    - `Variables::getMemberProperties()`
+* Additionally, the results of the `UseStatements::splitImportUseStatement()` method will be cached more often and the cache checked earlier. [#467]
+* The return value of the `ControlStructures::getCaughtExceptions()` method will no longer contain "empty" entries for catch statements without a named exception. It will return an empty array instead. [#474]
+
+#### Other
+
+* Various small housekeeping and maintenance updates.
+
+### Fixed
+
+### Abstract Sniffs
+
+* `AbstractArrayDeclarationSniff`: fixed a potential "Trying to access array offset on value of type bool" PHP notice. [#476]
+* `AbstractArrayDeclarationSniff`: the abstract will no longer trigger potentially available magic `__get()`/`__set()` etc methods. [#477]
+
+[#464]: https://github.com/PHPCSStandards/PHPCSUtils/pull/464
+[#466]: https://github.com/PHPCSStandards/PHPCSUtils/pull/466
+[#467]: https://github.com/PHPCSStandards/PHPCSUtils/pull/467
+[#470]: https://github.com/PHPCSStandards/PHPCSUtils/pull/470
+[#472]: https://github.com/PHPCSStandards/PHPCSUtils/pull/472
+[#474]: https://github.com/PHPCSStandards/PHPCSUtils/pull/474
+[#476]: https://github.com/PHPCSStandards/PHPCSUtils/pull/476
+[#477]: https://github.com/PHPCSStandards/PHPCSUtils/pull/477
+
+
+## [1.0.5] - 2023-04-17
+
+### Fixed
+
+#### Utils
+
+* The `Lists::getAssignments()` method could previously get confused over exotic list keys. Fixed now. [#459]
+
+[#459]: https://github.com/PHPCSStandards/PHPCSUtils/pull/459
+
+
+## [1.0.4] - 2023-04-15
+
+### Changed
+
+#### Other
+
+* Minor documentation improvements.
+
+### Fixed
+
+#### Utils
+
+* The `FunctionDeclarations::getParameters()` method will now correctly handle constructor promoted properties with `readonly`, but without explicit visibility set. [#456]
+
+[#456]: https://github.com/PHPCSStandards/PHPCSUtils/pull/456
+
+
+## [1.0.3] - 2023-04-13
+
+### Changed
+
+#### Other
+
+* Various small housekeeping and maintenance updates.
+
+### Fixed
+
+#### Utils
+
+* The `PassedParameters` class now allows for function calls to global functions called `self()`, `parent()` or `static()`. [#452]
+
+[#452]: https://github.com/PHPCSStandards/PHPCSUtils/pull/452
+
+
+## [1.0.2] - 2023-03-28
+
+### Changed
+
+#### Tokens
+
+* The `Collections::arrayOpenTokensBC()`, `Collections::arrayTokensBC()`, `Collections::listOpenTokensBC()`, `Collections::listTokensBC()`, `Collections::shortArrayListOpenTokensBC()`, `Collections::shortArrayTokensBC()` and `Collections::shortListTokensBC()` token arrays will no longer contain the `T_OPEN_SQUARE_BRACKET` and/or the `T_CLOSE_SQUARE_BRACKET` token constants if PHP_CodeSniffer 3.7.2 or higher is used. [#444]
+    An upstream bugfix makes it unnecessary to check those tokens for being a short array or short list.
+    Sniff which use these token arrays is combination with using the `Arrays`/`Lists` classes, should experience a performance boost on PHPCS 3.7.2+ due to this change.
+
+#### Other
+
+* Minor documentation improvements.
+* Various small housekeeping and maintenance updates.
+
+### Fixed
+
+#### Utils
+
+* The `Lists::isShortList()` method will now correctly recognize a short list nested in a long list as a short list. [#446]
+    Note: this is a parse error in PHP, but the method should still handle this correctly.
+
+[#444]: https://github.com/PHPCSStandards/PHPCSUtils/pull/444
+[#446]: https://github.com/PHPCSStandards/PHPCSUtils/pull/446
+
+
+## [1.0.1] - 2023-01-05
+
+### Changed
+
+#### Other
+
+* Composer: The version requirements for the [Composer PHPCS plugin] have been widened to allow for version 1.0.0. [#428]
+    Please ensure you run `composer update phpcsstandards/phpcsutils --with-dependencies` to benefit from this.
+* Removed the references to pre-1.0.0 QA releases from the docs. [#425]
+* Various small housekeeping and maintenance updates. Thanks [@szepeviktor] for contributing.
+
+[#425]: https://github.com/PHPCSStandards/PHPCSUtils/pull/425
+[#428]: https://github.com/PHPCSStandards/PHPCSUtils/pull/428
+
+
 ## [1.0.0] - 2023-01-04
 
 For the full list of features, please see the changelogs of the alpha/rc releases:
@@ -44,7 +207,7 @@ For the full list of features, please see the changelogs of the alpha/rc release
 
 #### Other
 
-* Various housekeeping and CI maintainance.
+* Various housekeeping and CI maintenance.
 
 ### Removed
 
@@ -245,7 +408,7 @@ Please report any bugs/oversights you encounter!
 * Composer: The package will now identify itself as a static analysis tool. Thanks [@GaryJones]! [#341]
 * Readme/website homepage: the installation instructions have been updated to include information on installing this library and the included [Composer PHPCS plugin] in combination with Composer >= 2.2. [#291], [#292]
 * Various documentation improvements. [#216], [#309], [#394], [#395], [#396], [#398]
-* Various housekeeping and CI maintainance.
+* Various housekeeping and CI maintenance.
     Amongst other things, CI is now run via GitHub Actions ([#239]), the PHPCSUtils native tests now use the [PHPUnit Polyfills] package ([#277]) and the tests are now run against PHP 5.4 - 8.2.
 
 ### Deprecated
@@ -765,6 +928,14 @@ This initial alpha release contains the following utility classes:
 
 
 [Unreleased]:   https://github.com/PHPCSStandards/PHPCSUtils/compare/stable...HEAD
+[1.0.8]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.7...1.0.8
+[1.0.7]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.6...1.0.7
+[1.0.6]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.5...1.0.6
+[1.0.5]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.4...1.0.5
+[1.0.4]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.3...1.0.4
+[1.0.3]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.2...1.0.3
+[1.0.2]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.1...1.0.2
+[1.0.1]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.0...1.0.1
 [1.0.0]:        https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.0-rc1...1.0.0
 [1.0.0-rc1]:    https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.0-alpha4...1.0.0-rc1
 [1.0.0-alpha4]: https://github.com/PHPCSStandards/PHPCSUtils/compare/1.0.0-alpha3...1.0.0-alpha4
@@ -802,4 +973,5 @@ This initial alpha release contains the following utility classes:
 [`UseStatements`]:                 https://phpcsutils.com/phpdoc/classes/PHPCSUtils-Utils-UseStatements.html
 [`Variables`]:                     https://phpcsutils.com/phpdoc/classes/PHPCSUtils-Utils-Variables.html
 
-[@GaryJones]: https://github.com/GaryJones
+[@GaryJones]:   https://github.com/GaryJones
+[@szepeviktor]: https://github.com/szepeviktor

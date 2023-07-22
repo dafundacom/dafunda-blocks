@@ -53,7 +53,13 @@ blocks.forEach((blockName) => {
   classNames = [...classNames, ...uniqueClasses];
 });
 
-const uniqueClasses = removeDuplicates(classNames);
+let uniqueClasses = removeDuplicates(classNames);
+
+uniqueClasses.sort();
+
+uniqueClasses = filterArray(uniqueClasses, ["!", "svg-thumbdown", "svg-thumbup", "wp-block", "dbe-block"]);
+
+
 fs.writeFileSync(
   path.join(process.cwd(), "config/scripts/.whitelist.json"),
   JSON.stringify(uniqueClasses, null, 2)
@@ -63,6 +69,16 @@ fs.writeFileSync(
   path.join(process.cwd(), "config/scripts/.whitelist.txt"),
   uniqueClasses.join(" ")
 );
+
+function filterArray(array, except) {
+  const filteredArray = [];
+  for (const element of array) {
+    if (except.indexOf(element) === -1) {
+      filteredArray.push(element);
+    }
+  }
+  return filteredArray;
+}
 
 function removeDuplicates(arr) {
   const uniqueArray = [];
