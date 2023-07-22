@@ -23,10 +23,10 @@
                 <!-- Image END -->
 
                 <!-- Olshop Link  -->
-                <div class="p-5">
+                <div class="p-5 bg-black/5 dark:bg-white/5">
                     <div class="grid grid-cols-2 gap-3">
                         <?php foreach ($list["olshops"] as $index => $olshop) : ?>
-                            <a href="<?= $olshop["url"] ?>" class="py-2  bg-black/10 dark:bg-black/50 hover:bg-black/20 dark:hover:bg-black/90 flex justify-center items-center rounded-lg font-bold text-sm duration-200" <?= isset($openNewTab) && $openNewTab ? "target='_blank'" : "" ?>>
+                            <a href="<?= $olshop["url"] ?>" class="py-2 bg-black/10 dark:bg-white/5 hover:bg-black/20 dark:hover:bg-black/10 flex justify-center items-center rounded-lg font-bold text-sm duration-200" <?= isset($openNewTab) && $openNewTab ? "target='_blank'" : "" ?>>
                                 <?= file_get_contents(realpath(dirname(__DIR__, 1)) . "/icons/Icon" . $olshop['name'] . ".svg") ?>
                                 &nbsp; <?= $olshop["name"] ?>
                             </a>
@@ -36,13 +36,13 @@
                 <!-- Olshop Link END  -->
 
                 <!-- Description -->
-                <div class="p-5 pt-0">
+                <div class="p-5 pt-0 bg-black/5 dark:bg-white/5">
                     <?= htmlspecialchars_decode(stripslashes($list['description'])) ?>
                 </div>
                 <!-- Description END -->
 
                 <?php if (isset($list['url']) && $list['url'] != "") : ?>
-                    <a href="<?= $list['url'] ?>" class="hover:bg-black/10 dark:!text-danger dark:hover:!text-card  dark:bg-card-foreground rounded-b-md !no-underline !font-bold flex flex-wrap items-center justify-center !text-base text-center w-full !py-3 !m-0" <?= isset($openNewTab) && $openNewTab ? "target='_blank'" : "" ?>>
+                    <a href="<?= $list['url'] ?>" class="bg-black/10 dark:bg-white/10 hover:bg-black/10 dark:!text-primary dark:hover:!text-card dark:hover:bg-white/40 rounded-b-md !no-underline !font-bold flex flex-wrap items-center justify-center !text-base text-center w-full !py-3 !m-0" <?= isset($openNewTab) && $openNewTab ? "target='_blank'" : "" ?>>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                         </svg>
