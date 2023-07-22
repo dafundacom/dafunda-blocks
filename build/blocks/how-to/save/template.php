@@ -197,7 +197,7 @@
             }
         };
 ?>
-    <div class="how-to-review mt-4 rounded-lg border-border border-solid md:overflow-hidden p-3 mb-3">
+    <div class="how-to-review mt-4 rounded-lg border border-border border-solid md:overflow-hidden p-3 mb-3">
 
         <?php if (! $isVoted()) : ?>
         <div class="how-to-review__vote">
