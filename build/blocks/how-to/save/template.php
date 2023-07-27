@@ -1,23 +1,21 @@
-<div class="dbe-block how-to mb-8" id="how-to_<?= $blockID ?>"
-    data-blockID="<?= $blockID ?>" block>
-    <<?= $firstLevelTag ?> class="how-to__title text-3xl">
-        <?= $title ?>
-    </<?= $firstLevelTag ?>>
+<div class="dbe-how-to" id="how-to_<?= $blockID ?>"
+  data-blockID="<?= $blockID ?>" block>
+  <<?= $firstLevelTag ?> class="dbe-how-to__title">
+    <?= $title ?>
+  </<?= $firstLevelTag ?>>
 
-    <p class="m-0 mb-3">
-        <?= dbe_convert_to_paragraphs($introduction) ?>
-    </p>
+  <p class="dbe-how-to__introduction">
+    <?= dbe_convert_to_paragraphs($introduction) ?>
+  </p>
 
-    <div class="flex w-full justify-center mb-4">
-        <?php if ($advancedMode) : ?>
-        <div class="mr-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-            </svg>
-            <p class='inline-block m-0 text-base'>
-                <?= $advancedMode
+  <div class="flex mb-4 w-full justify-center">
+    <?php if ($advancedMode) : ?>
+    <div class="mr-5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="advanced-mode-svg">
+        <!-- SVG code here -->
+      </svg>
+      <p class="cost-display-text">
+        <?= $advancedMode
                             ? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
                                 ? "Gratis"
                                 : $costDisplayText .
@@ -25,212 +23,202 @@
                                 $costDisplay .
                                 "")
                             : "" ?>
-            </p>
-        </div>
-        <?php endif ?>
-        <?php if ($totalTimeDisplay) : ?>
-        <div class="flex items-center text-base">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            &nbsp;
-            <?= $timeDisplay ?>
-        </div>
-        <?php endif ?>
+      </p>
     </div>
-
-    <?= $header ?>
-
-    <?php $sectionListStyleTag = $sectionListStyle === "ordered" ? "ul" : "ol"; ?>
-    <<?= $sectionListStyleTag ?> class="pl-0 !list-none space-y-4 mb-6">
-        <?php if ($useSections) : ?>
-        <?php foreach ($section as $i => $section_) : ?>
-        <li class="how-to-section !list-none border border-border border-solid rounded-md">
-            <<?= $secondLevelTag ?>>
-                <?= $section_["sectionName"] ?>
-            </<?= $secondLevelTag ?>>
-
-            <ul class="how-to-step-display">
-                <?php foreach ($section_["steps"] as $index => $step) : ?>
-                <li
-                    class="how-to-step p-3 mb-4 !list-none border border-border border-solid rounded-md">
-                    <div class="flex flex-wrap">
-                        <div class="flex flex-wrap">
-                            <div
-                                class="bg-foreground/10 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-fit">
-                                <?= $index + 1 ?>
-                            </div>
-
-                            <div class="px-2 flex-1 my-2">
-                                <<?= $thirdLevelTag ?>
-                                    id="<?= $step["anchor"] ?>"
-                                    class="how-to-step__title font-normal text-[1.3rem] md:text-2xl">
-                                    <?= $step["title"] ?>
-                                </<?= $thirdLevelTag ?>>
-                            </div>
-                        </div>
-
-                        <div class="col-span-12 md:col-span-11 w-full mb-3">
-                            <?= dbe_convert_to_paragraphs($step["direction"]) ?>
-                        </div>
-
-                        <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto w-full">
-
-                            <?php if ($step["stepPic"]["url"] !== "") : ?>
-                            <figure class="w-full">
-                                <img class="how-to-step-image mx-auto rounded-xl overflow-hidden mb-2"
-                                    src="<?= $step["stepPic"]["url"] ?>">
-                                <?php if ($step["stepPic"]["caption"] !== "") : ?>
-                                <center>
-                                    <figcaption>
-                                        <em class="text-sm">
-                                            <?= $step["stepPic"]["caption"] ?>
-                                        </em>
-                                    </figcaption>
-                                </center>
-                                <?php endif ?>
-                            </figure>
-                            <?php endif ?>
-                        </div>
-                    </div>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-        </li>
-        <?php endforeach; ?>
-        <?php else : ?>
-        <?php if (isset($section) && count($section) > 0) : ?>
-        <?php foreach ($section[0]["steps"] as $index => $step) : ?>
-        <li class="how-to-step !list-none p-3 mb-4 border border-border border-solid rounded-md">
-            <div class="flex flex-wrap">
-                <div class="flex flex-wrap">
-                    <div
-                        class="bg-foreground/10 flex flex-wrap items-center justify-center my-2 aspect-square  md:col-span-1 rounded-full w-[2.2rem] md:w-[2.2rem] flex-none font-semibold text-2xl md:text-2xl h-fit">
-                        <?= $index + 1 ?>
-                    </div>
-
-                    <div class="px-2 flex-1 my-2">
-                        <<?= $thirdLevelTag ?>
-                            id="<?= $step["anchor"] ?>"
-                            class="how-to-step__title font-normal text-[1.3rem] md:text-2xl normal-case !my-2">
-                            <?= $step["title"] ?>
-                        </<?= $thirdLevelTag ?>>
-                    </div>
-                </div>
-
-                <div class="col-span-12 md:col-span-11 w-full mb-3">
-                    <?= dbe_convert_to_paragraphs($step["direction"]) ?>
-                </div>
-
-                <div class="col-span-12 how-to-step__image max-h-[1000px] md:max-h-[1600px] mx-auto w-full">
-                    <?php if ($step["stepPic"]["url"] !== "") : ?>
-                    <figure class="w-full">
-                        <img class="how-to-step-image mx-auto rounded-xl overflow-hidden mb-2"
-                            src="<?= $step["stepPic"]["url"] ?>">
-                        <?php if ($step["stepPic"]["caption"] !== "") : ?>
-                        <center>
-                            <figcaption>
-                                <em class="text-sm">
-                                    <?= $step["stepPic"]["caption"] ?>
-                                </em>
-                            </figcaption>
-                        </center>
-                        <?php endif ?>
-                    </figure>
-                    <?php endif ?>
-                </div>
-            </div>
-        </li>
-        <?php endforeach; ?>
-        <?php endif; ?>
-        <?php endif; ?>
-    </<?= $sectionListStyleTag ?>>
+    <?php endif ?>
+    <?php if ($totalTimeDisplay) : ?>
+    <div class="flex items-center text-base">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4">
+        <!-- SVG code here -->
+      </svg>
+      &nbsp;
+      <?= $timeDisplay ?>
+    </div>
+    <?php endif ?>
+  </div>
 
 
-    <?php if ($resultIntro && $howToYield) : ?>
-    <div class="how-to-yield bg-success/80 rounded-xl text-white p-5">
-        <div class="w-100 flex flex-wrap justify-center mb-3">
-            <<?= $secondLevelTag ?> class="text-white font-bold m-0
-                text-3xl">
-                <?= $resultIntro ?>
-            </<?= $secondLevelTag ?>>
-        </div>
+  <?= $header ?>
 
-        <?php if ($finalImageURL !== "") : ?>
-        <figure class="how-to-yield-image-container mt-2 w-full relative">
-            <img class="how-to-yield-image mx-auto rounded-xl overflow-hidden mb-2"
-                src="<?= $finalImageURL ?>">
+  <?php $sectionListStyleTag = $sectionListStyle === "ordered" ? "ul" : "ol"; ?>
 
-            <?php if ($finalImageCaption !== "") : ?>
-            <center>
-                <em>
-                    <figcaption class="text-white text-base">
-                        <?= $finalImageCaption ?>
-                    </figcaption>
-                </em>
-            </center>
+
+  <<?= $sectionListStyleTag ?> class="dbe-how-to__section">
+    <?php if ($useSections) : ?>
+    <?php foreach ($section as $i => $section_) : ?>
+    <li class="dbe-how-to__section-item">
+      <<?= $secondLevelTag ?> class="dbe-how-to__section-title">
+        <?= $section_["sectionName"] ?>
+      </<?= $secondLevelTag ?>>
+
+      <ul class="dbe-how-to__step-display">
+        <?php foreach ($section_["steps"] as $index => $step) : ?>
+        <li class="dbe-how-to__step">
+          <div class="dbe-how-to__step-number">
+            <?= $index + 1 ?>
+          </div>
+
+          <div class="dbe-how-to__step-title">
+            <<?= $thirdLevelTag ?>
+              id="<?= $step["anchor"] ?>"
+              class="dbe-how-to__step-title-text">
+              <?= $step["title"] ?>
+            </<?= $thirdLevelTag ?>>
+          </div>
+
+          <div class="dbe-how-to__step-direction">
+            <?= dbe_convert_to_paragraphs($step["direction"]) ?>
+          </div>
+
+          <div class="dbe-how-to__step-image">
+            <?php if ($step["stepPic"]["url"] !== "") : ?>
+            <figure>
+              <img class="dbe-how-to__step-image-item"
+                src="<?= $step["stepPic"]["url"] ?>">
+              <?php if ($step["stepPic"]["caption"] !== "") : ?>
+              <center>
+                <figcaption>
+                  <em class="dbe-how-to__step-image-caption">
+                    <?= $step["stepPic"]["caption"] ?>
+                  </em>
+                </figcaption>
+              </center>
+              <?php endif ?>
+            </figure>
             <?php endif ?>
+          </div>
+        </li>
+        <?php endforeach; ?>
+      </ul>
+    </li>
+    <?php endforeach; ?>
+    <?php else : ?>
+    <?php if (isset($section) && count($section) > 0) : ?>
+    <?php foreach ($section[0]["steps"] as $index => $step) : ?>
+    <li class="dbe-how-to__step">
+      <div class="dbe-how-to__step-number">
+        <?= $index + 1 ?>
+      </div>
+
+      <div class="dbe-how-to__step-title">
+        <<?= $thirdLevelTag ?>
+          id="<?= $step["anchor"] ?>"
+          class="dbe-how-to__step-title-text">
+          <?= $step["title"] ?>
+        </<?= $thirdLevelTag ?>>
+      </div>
+
+      <div class="dbe-how-to__step-direction">
+        <?= dbe_convert_to_paragraphs($step["direction"]) ?>
+      </div>
+
+      <div class="dbe-how-to__step-image">
+        <?php if ($step["stepPic"]["url"] !== "") : ?>
+        <figure>
+          <img class="dbe-how-to__step-image-item"
+            src="<?= $step["stepPic"]["url"] ?>">
+          <?php if ($step["stepPic"]["caption"] !== "") : ?>
+          <center>
+            <figcaption>
+              <em class="dbe-how-to__step-image-caption">
+                <?= $step["stepPic"]["caption"] ?>
+              </em>
+            </figcaption>
+          </center>
+          <?php endif ?>
         </figure>
         <?php endif ?>
-
-        <p class="mb-0 mt-2">
-            <?= $howToYield ?>
-        </p>
-    </div>
+      </div>
+    </li>
+    <?php endforeach; ?>
     <?php endif; ?>
-    <?php
-        $isVoted = function () use ($dbe_device_id) {
-            if (! $dbe_device_id) {
-                return false;
-            }
-            global $wpdb;
-            $table_name = $wpdb->prefix . DBE_PREFIX . "_vote_log";
-            $block_name = DBE_PREFIX . "/how-to";
-            $post_id = get_the_ID();
-            $sql_string = "SELECT * FROM $table_name WHERE post_id = $post_id AND block_name = '$block_name' AND dbe_device_id = '$dbe_device_id'";
-            $result = $wpdb->get_row($sql_string);
-            if ($result == null) {
-                return false;
-            } else {
-                return true;
-            }
-        };
-?>
-    <div class="how-to-review mt-4 rounded-lg border border-border border-solid md:overflow-hidden p-3 mb-3">
+    <?php endif; ?>
+  </<?= $sectionListStyleTag ?>>
 
-        <?php if (! $isVoted()) : ?>
-        <div class="how-to-review__vote">
-            <div class="w-full text-center mb-2">
-                Apakah artikel ini membantu mu?
-            </div>
-            <div class="w-full flex flex-wrap justify-center items-center mb-1">
-                <div class="how-to-review__like mr-3 cursor-pointer" data-action="like">
-                    <button class="flex items-center py-1 bg-transparent">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#16A085">
-                            <path
-                                d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="how-to-review__dislike cursor-pointer" data-action="dislike">
-                    <button class="flex items-center py-1 bg-transparent">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="#C44569">
-                            <path
-                                d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <?php endif ?>
 
-        <div
-            class="how-to-review__thank w-full text-center my-4 text-lg <?= ! $isVoted() ? "hidden" : "" ?>">
-            <p class="m-0">Terimakasih sudah memberi jawaban</p>
-        </div>
+  <?php if ($resultIntro && $howToYield) : ?>
+  <div class="how-to-yield">
+    <div class="how-to-yield-title">
+      <<?= $secondLevelTag ?> class="how-to-yield-title-text">
+        <?= $resultIntro ?>
+      </<?= $secondLevelTag ?>>
     </div>
-    <?php
+
+    <?php if ($finalImageURL !== "") : ?>
+    <figure class="how-to-yield-image-container">
+      <img class="how-to-yield-image" src="<?= $finalImageURL ?>">
+      <?php if ($finalImageCaption !== "") : ?>
+      <center>
+        <em class="how-to-yield-image-caption">
+          <figcaption>
+            <?= $finalImageCaption ?>
+          </figcaption>
+        </em>
+      </center>
+      <?php endif ?>
+    </figure>
+    <?php endif ?>
+
+    <p class="how-to-yield-text">
+      <?= $howToYield ?>
+    </p>
+  </div>
+  <?php endif; ?>
+
+
+  <?php
+$isVoted = function () use ($dbe_device_id) {
+    if (! $dbe_device_id) {
+        return false;
+    }
+    global $wpdb;
+    $table_name = $wpdb->prefix . DBE_PREFIX . "_vote_log";
+    $block_name = DBE_PREFIX . "/how-to";
+    $post_id = get_the_ID();
+    $sql_string = "SELECT * FROM $table_name WHERE post_id = $post_id AND block_name = '$block_name' AND dbe_device_id = '$dbe_device_id'";
+    $result = $wpdb->get_row($sql_string);
+    if ($result == null) {
+        return false;
+    } else {
+        return true;
+    }
+};
+?>
+  <div class="how-to-review mt-4">
+    <?php if (! $isVoted()) : ?>
+    <div class="how-to-review-vote">
+      <div class="how-to-review-vote-question">
+        Apakah artikel ini membantu mu?
+      </div>
+      <div class="how-to-review-vote-buttons">
+        <div class="how-to-review-vote-like" data-action="like">
+          <button class="how-to-review-vote-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="how-to-review-vote-icon" viewBox="0 0 20 20" fill="#16A085">
+              <path
+                d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+            </svg>
+          </button>
+        </div>
+        <div class="how-to-review-vote-dislike" data-action="dislike">
+          <button class="how-to-review-vote-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="how-to-review-vote-icon" viewBox="0 0 20 20" fill="#C44569">
+              <path
+                d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <?php endif ?>
+
+    <div
+      class="how-to-review-thank <?= ! $isVoted() ? "hidden" : "" ?>">
+      <p class="how-to-review-thank-text">Terimakasih sudah memberi jawaban</p>
+    </div>
+  </div>
+
+
+  <?php
 // $howToReviewPercent = intval(($howToRatingValue / 5) * 100);
 if (! isset($howToLikeCount) || gettype($howToLikeCount) != 'integer') {
     $howToLikeCount = 0;
@@ -269,71 +257,72 @@ if ($howToReviewPercent >= 65) {
 }
 ?>
 
-    <div
-        class="wrapper-how-to-review text-white rounded-xl flex flex-wrap items-center px-4 py-3 mb-3 how-to-review-result <?= $howToReviewClass ?>">
-    </div>
+  <div
+    class="wrapper-how-to-review text-white rounded-xl flex flex-wrap items-center px-4 py-3 mb-3 how-to-review-result <?= $howToReviewClass ?>">
+  </div>
 
-    <script>
-        renderHowToReview( <?= $howToReviewPercent ?> )
-        document.querySelectorAll(".how-to-review .how-to-review__like, .how-to-review .how-to-review__dislike").forEach((
-            el, i) => {
-            el.addEventListener("click", (e) => {
-                e.target.closest(".how-to-review__vote").classList.add("hidden")
-                e.target.closest(".how-to-review").querySelector(".how-to-review__thank").classList
-                    .remove("hidden")
-                let body = {
-                    post_id: <?= get_the_ID() ?> ,
-                    block_id: e.target.closest(".how-to").getAttribute("data-blockID"),
-                    block_name: "<?= DBE_PREFIX ?>/how-to",
-                    action: el.getAttribute("data-action")
-                }
-                fetch("<?= site_url("wp-json/" . DBE_PREFIX . "/v1/howto/vote"); ?>", {
-                        method: "POST",
-                        mode: "same-origin",
-                        credentials: "same-origin",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(body)
-                    })
-                    .then(res => res.text())
-                    .then(body => {
-                        try {
-                            return JSON.parse(body);
-                        } catch {
-                            return body
-                        }
-                    })
-                    .then(res => {
-                        renderHowToReview(parseInt((res.howToLikeCount / res.howToVoteCount) * 100))
-                    })
+  <script>
+    renderHowToReview( <?= $howToReviewPercent ?> )
+    document.querySelectorAll(".how-to-review .how-to-review__like, .how-to-review .how-to-review__dislike").forEach((
+      el, i) => {
+      el.addEventListener("click", (e) => {
+        e.target.closest(".how-to-review__vote").classList.add("hidden")
+        e.target.closest(".how-to-review").querySelector(".how-to-review__thank").classList
+          .remove("hidden")
+        let body = {
+          post_id: <?= get_the_ID() ?> ,
+          block_id: e.target.closest(".how-to").getAttribute("data-blockID"),
+          block_name: "<?= DBE_PREFIX ?>/how-to",
+          action: el.getAttribute("data-action")
+        }
+        fetch(
+            "<?= site_url("wp-json/" . DBE_PREFIX . "/v1/howto/vote"); ?>", {
+              method: "POST",
+              mode: "same-origin",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(body)
             })
-        })
+          .then(res => res.text())
+          .then(body => {
+            try {
+              return JSON.parse(body);
+            } catch {
+              return body
+            }
+          })
+          .then(res => {
+            renderHowToReview(parseInt((res.howToLikeCount / res.howToVoteCount) * 100))
+          })
+      })
+    })
 
-        function renderHowToReview(howToReviewPercent) {
-            if (howToReviewPercent > 100) {
-                howToReviewPercent = 100;
-            }
-            if (howToReviewPercent < 0) {
-                howToReviewPercent = 0;
-            }
-            let howToReviewPercentIcon =
-                '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
-            let howToReviewClass = ""
-            if (howToReviewPercent >= 65) {
-                howToReviewClass = "how-to-review-result__good";
-            } else if (howToReviewPercent >= 50) {
-                howToReviewPercentIcon =
-                    `<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"> <
+    function renderHowToReview(howToReviewPercent) {
+      if (howToReviewPercent > 100) {
+        howToReviewPercent = 100;
+      }
+      if (howToReviewPercent < 0) {
+        howToReviewPercent = 0;
+      }
+      let howToReviewPercentIcon =
+        '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
+      let howToReviewClass = ""
+      if (howToReviewPercent >= 65) {
+        howToReviewClass = "how-to-review-result__good";
+      } else if (howToReviewPercent >= 50) {
+        howToReviewPercentIcon =
+          `<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"> <
 						path d = "M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" / > < /svg>`;
-                howToReviewClass = "how-to-review-result__medium";
-            } else {
-                howToReviewPercentIcon =
-                    '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
-                howToReviewClass = "how-to-review-result__bad";
-            }
+        howToReviewClass = "how-to-review-result__medium";
+      } else {
+        howToReviewPercentIcon =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
+        howToReviewClass = "how-to-review-result__bad";
+      }
 
-            let html = `
+      let html = `
 			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none">${howToReviewPercent}%</p>
 			<div style="max-width: 60%">
 				<p class="m-0 leading-5">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
@@ -344,19 +333,19 @@ if ($howToReviewPercent >= 65) {
 				${howToReviewPercentIcon}
 			</div>
 				`
-            let asdqwdcsdv = ["how-to-review-result__bad", "how-to-review-result__medium", "how-to-review-result__good"]
-            asdqwdcsdv.forEach(clss => {
-                document.querySelector(".wrapper-how-to-review").classList.remove(clss)
-            });
+      let asdqwdcsdv = ["how-to-review-result__bad", "how-to-review-result__medium", "how-to-review-result__good"]
+      asdqwdcsdv.forEach(clss => {
+        document.querySelector(".wrapper-how-to-review").classList.remove(clss)
+      });
 
-            let el_whtr = document.querySelector(".wrapper-how-to-review")
+      let el_whtr = document.querySelector(".wrapper-how-to-review")
 
-            if (howToReviewPercent >= 65) el_whtr.style.backgroundColor = "#16A085"
-            else if (howToReviewPercent >= 50) el_whtr.style.backgroundColor = "#F19066"
-            else el_whtr.style.backgroundColor = "#C44569"
+      if (howToReviewPercent >= 65) el_whtr.style.backgroundColor = "#16A085"
+      else if (howToReviewPercent >= 50) el_whtr.style.backgroundColor = "#F19066"
+      else el_whtr.style.backgroundColor = "#C44569"
 
-            // el_whtr.classList.add(howToReviewClass)
-            el_whtr.innerHTML = html;
-        }
-    </script>
+      // el_whtr.classList.add(howToReviewClass)
+      el_whtr.innerHTML = html;
+    }
+  </script>
 </div>

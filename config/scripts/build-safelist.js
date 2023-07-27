@@ -8,13 +8,13 @@ const blocks = fs
   .filter((dirent) => dirent.isDirectory())
   .map((dirent) => dirent.name);
 
-console.log("🚀 ~ file: get-class-whitelist.js:10 ~ blocks:", blocks);
+console.log("🚀 ~ file: get-class-safelist.js:10 ~ blocks:", blocks);
 
 let classNames = [];
 
 blocks.forEach((blockName) => {
   console.log(
-    "🚀 ~ file: get-class-whitelist.js:16 ~ blocks.forEach ~ blockName:",
+    "🚀 ~ file: get-class-safelist.js:16 ~ blocks.forEach ~ blockName:",
     blockName
   );
   let filePath = "";
@@ -57,28 +57,54 @@ let uniqueClasses = removeDuplicates(classNames);
 
 uniqueClasses.sort();
 
-uniqueClasses = filterArray(uniqueClasses, ["!", "svg-thumbdown", "svg-thumbup", "wp-block", "dbe-block"]);
-
+uniqueClasses = filterArray(uniqueClasses, [
+  "!",
+  "svg-thumbdown",
+  "svg-thumbup",
+  "wp-block",
+  "dbe-block",
+  "pros",
+  "pros-cons",
+  "progress",
+  "wrapper-how-to-review",
+  "title",
+  "==",
+  "advanced-mode-svg",
+  "cons",
+  "bar",
+  "cost-display-text",
+  "description",
+  "percentage",
+  "score",
+  "marker",
+]);
 
 fs.writeFileSync(
-  path.join(process.cwd(), "config/scripts/.whitelist.json"),
+  path.join(process.cwd(), "config/scripts/.safelist.json"),
   JSON.stringify(uniqueClasses, null, 2)
 );
 
 fs.writeFileSync(
-  path.join(process.cwd(), "config/scripts/.whitelist.txt"),
+  path.join(process.cwd(), "config/scripts/.safelist.txt"),
   uniqueClasses.join(" ")
 );
 
 function filterArray(array, except) {
-  const filteredArray = [];
-  for (const element of array) {
-    if (except.indexOf(element) === -1) {
-      filteredArray.push(element);
-    }
-  }
+  const exceptSet = new Set(except);
+  const filteredArray = array.filter(element => !startsWithAny(element, exceptSet));
   return filteredArray;
 }
+
+function startsWithAny(str, prefixSet) {
+  for (const prefix of prefixSet) {
+    if (str.startsWith(prefix)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 
 function removeDuplicates(arr) {
   const uniqueArray = [];

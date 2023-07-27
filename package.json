@@ -19,6 +19,7 @@
     "start": "node ./config/scripts/start",
     "start:sample": "wp-scripts start --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks --config webpack.config.js  & pnpm gulp",
     "build": "node ./config/scripts/build",
+    "build:safelist": "node ./config/scripts/build-safelist",
     "build:sample": "wp-scripts build --webpack-copy-php --webpack-src-dir=src/sample-blocks --output-path=build/sample-blocks",
     "clean": "rimraf {node_modules, build}",
     "clean:build": "rimraf build",
