@@ -2,7 +2,7 @@
   @apply text-white rounded-xl flex flex-wrap items-center px-4 py-3 mb-3;
 
   &-card {
-    @apply flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-black/30;
+    @apply flex flex-wrap flex-col relative shadow-lg rounded-lg mb-6 dark:bg-black/30 w-full ml-0;
   }
 
     &-image {
