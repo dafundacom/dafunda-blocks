@@ -118,5 +118,6 @@
     "multiple": false
   },
   "editorScript": "file:./block.js",
-  "viewScript": "file:./scripts/index.js"
+  "viewScript": "file:./scripts/front.js",
+  "style": "file:./styles/front.css"
 }

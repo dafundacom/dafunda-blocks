@@ -149,6 +149,7 @@ final class FunctionDeclarations
      * - More efficient checking whether a function has a body.
      * - Support for PHP 8.0 identifier name tokens in return types, cross-version PHP & PHPCS.
      * - Support for the PHP 8.2 `true` type.
+     * - The results of this function call are cached during a PHPCS run for faster response times.
      *
      * @see \PHP_CodeSniffer\Files\File::getMethodProperties()   Original source.
      * @see \PHPCSUtils\BackCompat\BCFile::getMethodProperties() Cross-version compatible version of the original.
@@ -190,6 +191,10 @@ final class FunctionDeclarations
             || isset(Collections::functionDeclarationTokens()[$tokens[$stackPtr]['code']]) === false
         ) {
             throw new RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or an arrow function');
+        }
+
+        if (Cache::isCached($phpcsFile, __METHOD__, $stackPtr) === true) {
+            return Cache::get($phpcsFile, __METHOD__, $stackPtr);
         }
 
         if ($tokens[$stackPtr]['code'] === \T_FUNCTION) {
@@ -291,7 +296,7 @@ final class FunctionDeclarations
             $returnType = '?' . $returnType;
         }
 
-        return [
+        $returnValue = [
             'scope'                 => $scope,
             'scope_specified'       => $scopeSpecified,
             'return_type'           => $returnType,
@@ -303,6 +308,9 @@ final class FunctionDeclarations
             'is_static'             => $isStatic,
             'has_body'              => $hasBody,
         ];
+
+        Cache::set($phpcsFile, __METHOD__, $stackPtr, $returnValue);
+        return $returnValue;
     }
 
     /**
@@ -314,25 +322,25 @@ final class FunctionDeclarations
      *
      * ```php
      * 0 => array(
-     *   'name'                => string, // The variable name.
-     *   'token'               => int,    // The stack pointer to the variable name.
-     *   'content'             => string, // The full content of the variable definition.
-     *   'has_attributes'      => bool,   // Does the parameter have one or more attributes attached ?
-     *   'pass_by_reference'   => bool,   // Is the variable passed by reference?
-     *   'reference_token'     => int,    // The stack pointer to the reference operator
-     *                                    // or FALSE if the param is not passed by reference.
-     *   'variable_length'     => bool,   // Is the param of variable length through use of `...` ?
-     *   'variadic_token'      => int,    // The stack pointer to the ... operator
-     *                                    // or FALSE if the param is not variable length.
-     *   'type_hint'           => string, // The type hint for the variable.
-     *   'type_hint_token'     => int,    // The stack pointer to the start of the type hint
-     *                                    // or FALSE if there is no type hint.
-     *   'type_hint_end_token' => int,    // The stack pointer to the end of the type hint
-     *                                    // or FALSE if there is no type hint.
-     *   'nullable_type'       => bool,   // TRUE if the var type is preceded by the nullability
-     *                                    // operator.
-     *   'comma_token'         => int,    // The stack pointer to the comma after the param
-     *                                    // or FALSE if this is the last param.
+     *   'name'                => string,    // The variable name.
+     *   'token'               => int,       // The stack pointer to the variable name.
+     *   'content'             => string,    // The full content of the variable definition.
+     *   'has_attributes'      => bool,      // Does the parameter have one or more attributes attached ?
+     *   'pass_by_reference'   => bool,      // Is the variable passed by reference?
+     *   'reference_token'     => int|false, // The stack pointer to the reference operator
+     *                                       // or FALSE if the param is not passed by reference.
+     *   'variable_length'     => bool,      // Is the param of variable length through use of `...` ?
+     *   'variadic_token'      => int|false, // The stack pointer to the ... operator
+     *                                       // or FALSE if the param is not variable length.
+     *   'type_hint'           => string,    // The type hint for the variable.
+     *   'type_hint_token'     => int|false, // The stack pointer to the start of the type hint
+     *                                       // or FALSE if there is no type hint.
+     *   'type_hint_end_token' => int|false, // The stack pointer to the end of the type hint
+     *                                       // or FALSE if there is no type hint.
+     *   'nullable_type'       => bool,      // TRUE if the var type is preceded by the nullability
+     *                                       // operator.
+     *   'comma_token'         => int|false, // The stack pointer to the comma after the param
+     *                                       // or FALSE if this is the last param.
      * )
      * ```
      *
@@ -345,10 +353,12 @@ final class FunctionDeclarations
      *
      * Parameters declared using PHP 8 constructor property promotion, have these additional array indexes:
      * ```php
-     *   'property_visibility' => string, // The property visibility as declared.
-     *   'visibility_token'    => int,    // The stack pointer to the visibility modifier token.
-     *   'property_readonly'   => bool,   // TRUE if the readonly keyword was found.
-     *   'readonly_token'      => int,    // The stack pointer to the readonly modifier token.
+     *   'property_visibility' => string,    // The property visibility as declared.
+     *   'visibility_token'    => int|false, // The stack pointer to the visibility modifier token.
+     *                                       // or FALSE if the visibility is not explicitly declared.
+     *   'property_readonly'   => bool,      // TRUE if the readonly keyword was found.
+     *   'readonly_token'      => int,       // The stack pointer to the readonly modifier token.
+     *                                       // This index will only be set if the property is readonly.
      * ```
      *
      * Main differences with the PHPCS version:
@@ -532,15 +542,20 @@ final class FunctionDeclarations
                     $vars[$paramCount]['type_hint_end_token'] = $typeHintEndToken;
                     $vars[$paramCount]['nullable_type']       = $nullableType;
 
-                    if ($visibilityToken !== null) {
-                        $vars[$paramCount]['property_visibility'] = $tokens[$visibilityToken]['content'];
-                        $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                    if ($visibilityToken !== null || $readonlyToken !== null) {
+                        $vars[$paramCount]['property_visibility'] = 'public';
+                        $vars[$paramCount]['visibility_token']    = false;
                         $vars[$paramCount]['property_readonly']   = false;
-                    }
 
-                    if ($readonlyToken !== null) {
-                        $vars[$paramCount]['property_readonly'] = true;
-                        $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        if ($visibilityToken !== null) {
+                            $vars[$paramCount]['property_visibility'] = $tokens[$visibilityToken]['content'];
+                            $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                        }
+
+                        if ($readonlyToken !== null) {
+                            $vars[$paramCount]['property_readonly'] = true;
+                            $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        }
                     }
 
                     if ($tokens[$i]['code'] === \T_COMMA) {

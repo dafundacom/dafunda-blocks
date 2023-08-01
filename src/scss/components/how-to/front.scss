@@ -1,0 +1,131 @@
+.dbe-how-to {
+  @apply mb-8;
+
+  &__title {
+    @apply text-3xl;
+  }
+
+  .dbe-how-to__introduction {
+    @apply m-0 mb-3;
+  }
+
+  .advanced-mode-svg {
+    @apply inline-block h-4 w-4;
+  }
+
+  & .cost-display-text {
+    @apply m-0 inline-block text-base;
+  }
+
+  .dbe-how-to__section {
+    @apply mb-6 list-none space-y-4 pl-0;
+
+    &-item {
+      @apply list-none rounded-md border border-solid border-border;
+    }
+
+    &-title {
+    }
+
+    &-display {
+    }
+  }
+
+  .dbe-how-to__step {
+    @apply mb-4 list-none rounded-md border border-solid border-border p-3;
+
+    &-number {
+      @apply my-2 flex aspect-square h-fit w-[2.2rem] flex-none flex-wrap items-center justify-center rounded-full bg-foreground/10 text-2xl font-semibold md:col-span-1 md:w-[2.2rem] md:text-2xl;
+    }
+
+    &-title {
+      &-text {
+        @apply text-[1.3rem] font-normal md:text-2xl;
+      }
+    }
+
+    &-direction {
+      @apply col-span-12 mb-3 w-full md:col-span-11;
+    }
+
+    &-image {
+      @apply col-span-12 mx-auto max-h-[1000px] w-full md:max-h-[1600px];
+
+      &-item {
+        @apply mx-auto mb-2 overflow-hidden rounded-xl;
+      }
+
+      &-caption {
+        @apply text-sm;
+      }
+    }
+  }
+
+  .how-to-yield {
+    @apply rounded-xl bg-success/80 p-5 text-white;
+
+    &-title {
+      @apply mb-3 flex w-full flex-wrap justify-center;
+
+      &-text {
+        @apply m-0 text-3xl font-bold text-white;
+      }
+    }
+
+    &-image-container {
+      @apply relative mt-2 w-full;
+    }
+
+    &-image {
+      @apply mx-auto mb-2 overflow-hidden rounded-xl;
+    }
+
+    &-image-caption {
+      @apply text-base text-white;
+    }
+
+    &-text {
+      @apply mb-0 mt-2;
+    }
+  }
+
+  .how-to-review {
+    @apply mb-3 rounded-lg border border-solid border-border p-3 md:overflow-hidden;
+
+    &-vote {
+      @apply mb-2 w-full text-center;
+
+      &-question {
+      }
+
+      &-buttons {
+        @apply mb-1 flex w-full flex-wrap items-center justify-center;
+      }
+
+      &-like,
+      &-dislike {
+        @apply cursor-pointer;
+      }
+
+      &-button {
+        @apply flex items-center bg-transparent py-1;
+      }
+
+      &-icon {
+        @apply h-8 w-8;
+      }
+    }
+
+    &-thank {
+      @apply my-4 w-full text-center text-lg;
+
+      &-text {
+        @apply m-0;
+      }
+    }
+
+    &-thank {
+      @apply hidden;
+    }
+  }
+}

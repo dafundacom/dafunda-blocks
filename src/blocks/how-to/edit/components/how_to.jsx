@@ -1152,7 +1152,7 @@ export function HowTo(props) {
           </div>
 
           {finalImageURL !== "" ? (
-            <figure className="howto-yield-image-container relative mx-auto w-fit">
+            <figure className="howto-yield-image-container relative mx-auto w-full max-w-full">
               <img
                 alt=""
                 className="howto-step-image overflow-hidden rounded-xl"

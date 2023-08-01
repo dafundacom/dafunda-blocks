@@ -413,7 +413,7 @@ export class HowToStep extends Component {
           </div>
           <div className="howto-step__image mx-auto mt-3 max-h-[1000px] w-full md:max-h-[1600px]">
             {stepPic.url !== "" ? (
-              <figure className="relative mx-auto w-fit">
+              <figure className="relative mx-auto w-full max-w-full">
                 <img
                   className="howto-step-image overflow-hidden rounded-xl"
                   src={stepPic.url}

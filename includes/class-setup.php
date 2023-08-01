@@ -33,7 +33,7 @@ final class Setup
                     'dbe-block-editor', // Handle.
                     plugins_url("build/blocks/$prefix.blocks.editor.build.css", dirname(__FILE__)),
                     array( 'wp-edit-blocks' ),
-                    DBE_ASSET_VERSION
+                    filemtime(DBE_PLUGIN_DIR . "build/blocks/$prefix.blocks.editor.build.css")
                 );
             }
         );
@@ -54,9 +54,9 @@ final class Setup
         add_action(
             'wp_enqueue_scripts',
             function () {
-            $prefix = DBE_PREFIX;
-            wp_enqueue_style('dbe-block-style-front', plugins_url("/build/blocks/$prefix.blocks.frontend.build.css", dirname(__FILE__)), DBE_ASSET_VERSION, 'all');
-        }
+                $prefix = DBE_PREFIX;
+                wp_enqueue_style('dbe-block-style-front', plugins_url("/build/blocks/$prefix.blocks.frontend.build.css", dirname(__FILE__)), [], filemtime(DBE_PLUGIN_DIR . "build/blocks/$prefix.blocks.editor.build.css"), 'all');
+            }
         );
 
         return true;
