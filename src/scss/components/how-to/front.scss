@@ -66,11 +66,11 @@
 
     &-title {
       @apply mb-3 flex w-full flex-wrap justify-center;
-
       &-text {
         @apply m-0 text-3xl font-bold text-white;
       }
     }
+
 
     &-image-container {
       @apply relative mt-2 w-full;
@@ -85,7 +85,7 @@
     }
 
     &-text {
-      @apply mb-0 mt-2;
+      @apply mb-0 mt-2 text-white;
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="review <?= $background_used == "color" ? 'bg-color' : 'bg-gradient' ?>" style="background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
+<div class="dbe-block review <?= $background_used == "color" ? 'bg-color' : 'bg-gradient' ?>" style="background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">
     <?php if ($background_used == "image" && $background_image != "") :?>
         <div class="review__image">
             <img src="<?= $background_image ?>" class="w-full" />

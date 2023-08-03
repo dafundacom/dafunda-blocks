@@ -1,4 +1,4 @@
-<div class="dbe-how-to" id="how-to_<?= $blockID ?>"
+<div class="dbe-block dbe-how-to" id="how-to_<?= $blockID ?>"
   data-blockID="<?= $blockID ?>" block>
   <<?= $firstLevelTag ?> class="dbe-how-to__title">
     <?= $title ?>
@@ -323,13 +323,13 @@ if ($howToReviewPercent >= 65) {
       }
 
       let html = `
-			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none">${howToReviewPercent}%</p>
+			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none text-white">${howToReviewPercent}%</p>
 			<div style="max-width: 60%">
-				<p class="m-0 leading-5">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
+				<p class="m-0 leading-5 text-white">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
 				<p class="m-0 how-to-review-result__membantu">
 				</p>
 			</div>
-			<div class="ml-auto flex items-center">
+			<div class="ml-auto flex items-center text-white">
 				${howToReviewPercentIcon}
 			</div>
 				`
