@@ -1,4 +1,4 @@
-<div class="wrapper-how-to-review <?= $howToReviewClass ?>">
+<div class="dbe-block wrapper-how-to-review <?= $howToReviewClass ?>">
   <ol class="ranked-list">
     <?php foreach ($lists as $index => $list) : ?>
     <li class="ranked-list-card" data-index="<?= $index ?>">

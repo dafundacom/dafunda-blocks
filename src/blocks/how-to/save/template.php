@@ -1,4 +1,4 @@
-<div class="dbe-how-to" id="how-to_<?= $blockID ?>"
+<div class="dbe-block how-to" id="how-to_<?= $blockID ?>"
   data-blockID="<?= $blockID ?>" block>
   <<?= $firstLevelTag ?> class="dbe-how-to__title">
     <?= $title ?>
@@ -8,13 +8,15 @@
     <?= dbe_convert_to_paragraphs($introduction) ?>
   </p>
 
-  <div class="flex mb-4 w-full justify-center">
+  <div class="dbe-how-to__additional">
     <?php if ($advancedMode) : ?>
-    <div class="mr-5">
-      <svg xmlns="http://www.w3.org/2000/svg" class="advanced-mode-svg">
-        <!-- SVG code here -->
+    <div class="dbe-how-to__cost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="dbe-how-to__cost-svg" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
       </svg>
-      <p class="cost-display-text">
+      <p class="dbe-how-to__cost-display-text">
         <?= $advancedMode
                             ? (($videoURL === "" ? "" : $videoEmbedCode) . $cost < 1
                                 ? "Gratis"
@@ -27,9 +29,10 @@
     </div>
     <?php endif ?>
     <?php if ($totalTimeDisplay) : ?>
-    <div class="flex items-center text-base">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4">
-        <!-- SVG code here -->
+    <div class="dbe-how-to__time">
+      <svg xmlns="http://www.w3.org/2000/svg" class="dbe-how-to__time-svg" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       &nbsp;
       <?= $timeDisplay ?>
@@ -220,13 +223,13 @@ $isVoted = function () use ($dbe_device_id) {
 
   <?php
 // $howToReviewPercent = intval(($howToRatingValue / 5) * 100);
-if (! isset($howToLikeCount) || gettype($howToLikeCount) != 'integer') {
+if (!isset($howToLikeCount) || gettype($howToLikeCount) != 'integer') {
     $howToLikeCount = 0;
 }
-if (! isset($howToDisikeCount) || gettype($howToDisikeCount) != 'integer') {
+if (!isset($howToDisikeCount) || gettype($howToDisikeCount) != 'integer') {
     $howToDisikeCount = 0;
 }
-if (! isset($howToVoteCount) || gettype($howToVoteCount) != 'integer') {
+if (!isset($howToVoteCount) || gettype($howToVoteCount) != 'integer') {
     $howToVoteCount = 0;
 }
 try {
@@ -243,16 +246,16 @@ if ($howToReviewPercent < 0) {
     $howToReviewPercent = 0;
 }
 $howToReviewPercentIcon =
-    '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbup h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
+    '<svg xmlns="http://www.w3.org/2000/svg" class="how-to-review-result__good-svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" /></svg>';
 if ($howToReviewPercent >= 65) {
     $howToReviewClass = "how-to-review-result__good";
 } elseif ($howToReviewPercent >= 50) {
-    $howToReviewPercentIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10 rotate-[-13.41deg]" viewBox="0 0 20 20" fill="currentColor">
+    $howToReviewPercentIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="how-to-review-result__medium-svg" viewBox="0 0 20 20" fill="currentColor">
 			<path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" /></svg>';
     $howToReviewClass = "how-to-review-result__medium";
 } else {
     $howToReviewPercentIcon =
-        '<svg xmlns="http://www.w3.org/2000/svg" class="svg-thumbdown h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
+        '<svg xmlns="http://www.w3.org/2000/svg" class="how-to-review-result__bad-svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" style="transform: scale(0.6) translate(1px, 13px)" /><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" style="transform: scale(0.6) translate(8px, 0px)" /></svg>';
     $howToReviewClass = "how-to-review-result__bad";
 }
 ?>
@@ -263,41 +266,43 @@ if ($howToReviewPercent >= 65) {
 
   <script>
     renderHowToReview( <?= $howToReviewPercent ?> )
-    document.querySelectorAll(".how-to-review .how-to-review__like, .how-to-review .how-to-review__dislike").forEach((
-      el, i) => {
-      el.addEventListener("click", (e) => {
-        e.target.closest(".how-to-review__vote").classList.add("hidden")
-        e.target.closest(".how-to-review").querySelector(".how-to-review__thank").classList
-          .remove("hidden")
-        let body = {
-          post_id: <?= get_the_ID() ?> ,
-          block_id: e.target.closest(".how-to").getAttribute("data-blockID"),
-          block_name: "<?= DBE_PREFIX ?>/how-to",
-          action: el.getAttribute("data-action")
-        }
-        fetch(
-            "<?= site_url("wp-json/" . DBE_PREFIX . "/v1/howto/vote"); ?>", {
-              method: "POST",
-              mode: "same-origin",
-              credentials: "same-origin",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(body)
+    document.querySelectorAll(".how-to-review .how-to-review-vote-like, .how-to-review .how-to-review-vote-dislike")
+      .forEach((
+        el, i) => {
+        el.addEventListener("click", (e) => {
+          e.target.closest(".how-to-review-vote").classList.add("hidden")
+          e.target.closest(".how-to-review").querySelector(".how-to-review-thank").classList
+            .remove("hidden")
+          e.target.closest(".how-to-review").querySelector(".how-to-review-thank").style.display = "block"
+          let body = {
+            post_id: <?= get_the_ID() ?> ,
+            block_id: e.target.closest(".how-to").getAttribute("data-blockID"),
+            block_name: "<?= DBE_PREFIX ?>/how-to",
+            action: el.getAttribute("data-action")
+          }
+          fetch(
+              "<?= site_url("wp-json/" . DBE_PREFIX . "/v1/howto/vote"); ?>", {
+                method: "POST",
+                mode: "same-origin",
+                credentials: "same-origin",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              })
+            .then(res => res.text())
+            .then(body => {
+              try {
+                return JSON.parse(body);
+              } catch {
+                return body
+              }
             })
-          .then(res => res.text())
-          .then(body => {
-            try {
-              return JSON.parse(body);
-            } catch {
-              return body
-            }
-          })
-          .then(res => {
-            renderHowToReview(parseInt((res.howToLikeCount / res.howToVoteCount) * 100))
-          })
+            .then(res => {
+              renderHowToReview(parseInt((res.howToLikeCount / res.howToVoteCount) * 100))
+            })
+        })
       })
-    })
 
     function renderHowToReview(howToReviewPercent) {
       if (howToReviewPercent > 100) {
@@ -323,13 +328,13 @@ if ($howToReviewPercent >= 65) {
       }
 
       let html = `
-			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none">${howToReviewPercent}%</p>
+			<p class="my-auto ml-0 mr-[10px] md:ml-3 md:mr-8 text-4xl font-bold leading-none text-white">${howToReviewPercent}%</p>
 			<div style="max-width: 60%">
-				<p class="m-0 leading-5">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
+				<p class="m-0 leading-5 text-white">Orang menganggap tutorial ini ${howToReviewPercent >= 65 ? "sangat " : " "} membantu</p>
 				<p class="m-0 how-to-review-result__membantu">
 				</p>
 			</div>
-			<div class="ml-auto flex items-center">
+			<div class="ml-auto flex items-center text-white">
 				${howToReviewPercentIcon}
 			</div>
 				`
