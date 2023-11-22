@@ -1,37 +1,24 @@
-/* eslint-disable no-unused-vars */
 import {
   RichText,
-  MediaUpload,
-  URLInput,
   useBlockProps,
 } from "@wordpress/block-editor";
 
 import {
-  Button,
-  Dashicon,
   DropdownMenu,
   MenuGroup,
   MenuItem,
-  MenuItemsChoice,
-  RangeControl,
-  ResizableBox,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";
 import {
-  more,
   arrowUp,
   arrowDown,
-  arrowRight,
-  arrowLeft,
   trash,
 } from "@wordpress/icons";
-import { Component, createRef, useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Check from "../../../icons/check";
 import X_Mark from "../../../icons/x-mark";
-import PlusCircle from "../../../icons/plus-circle";
-import Trash from "../../../icons/trash";
 import EllipsisVertical from "../../../icons/ellipsis-vertical";
 
 import { ButtonAddStep2 } from "../../../components/button_add_step_2";
@@ -47,7 +34,6 @@ const moveElement = (array, from, to) => {
 export default function Edit(props) {
   const {
     attributes: {
-      blockID,
       title,
       description,
       pros,
@@ -59,9 +45,6 @@ export default function Edit(props) {
       background_image,
     },
     setAttributes,
-    block,
-    getBlock,
-    getClientIdsWithDescendants,
   } = props;
 
   const pros_static = [""];
@@ -420,7 +403,7 @@ export default function Edit(props) {
                         onChange={(value) => {
                           let newBreakdowns = [...breakdowns_local];
                           newBreakdowns[index] = {
-                            label: value,
+                            label: value.label,
                             value: parseInt(breakdown.value),
                           };
                           setBreakdownsLocal(newBreakdowns);
@@ -477,7 +460,7 @@ export default function Edit(props) {
                                 onClick={() => {
                                   let newData = [...breakdowns_local];
                                   newData = newData.filter(
-                                    (v, index_new) => index_new != index
+                                    (_v, index_new) => index_new != index
                                   );
                                   setBreakdownsLocal(newData);
                                   onClose();
@@ -538,7 +521,6 @@ export default function Edit(props) {
 
             <ButtonAddStep2
               onClick={() => {
-                // setAttributes({ breakdowns_local: [...breakdowns_local, breakdowns_default] });
                 setBreakdownsLocal([...breakdowns_local, breakdowns_default]);
               }}
             />
