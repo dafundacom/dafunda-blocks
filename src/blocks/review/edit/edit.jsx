@@ -95,9 +95,6 @@ export default function Edit(props) {
       acumulate_breakdown_percentage += parseFloat(value.value);
     });
 
-    console.log(
-      `pembagian: ${acumulate_breakdown_percentage} / ${breakdowns_local.length}`
-    );
     set_total_breakdown_percentage(
       acumulate_breakdown_percentage / breakdowns_local.length
     );
@@ -393,17 +390,14 @@ export default function Edit(props) {
                 <div key={index}>
                   <div className="mb-6 flex flex-col flex-wrap">
                     <div className="mb-2 flex flex-wrap items-center justify-between">
-                      <RichText
-                        tagName="p"
-                        multiline={false}
-                        keepPlaceholderOnFocus
+                      <input
                         placeholder="Breakdown title"
                         className="m-0 flex flex-1 flex-wrap items-center text-sm font-bold focus:outline-none focus:ring focus:ring-slate-300"
                         value={breakdown.label}
-                        onChange={(value) => {
+                        onChange={(event) => {
                           let newBreakdowns = [...breakdowns_local];
                           newBreakdowns[index] = {
-                            label: value.label,
+                            label: event.target.value,
                             value: parseInt(breakdown.value),
                           };
                           setBreakdownsLocal(newBreakdowns);
@@ -506,9 +500,9 @@ export default function Edit(props) {
               ))}
 
               {breakdowns_local.length == 0 ||
-              breakdowns_local
-                .map((breakdown) => breakdown.label)
-                .includes("") ? (
+                breakdowns_local
+                  .map((breakdown) => breakdown.label)
+                  .includes("") ? (
                 <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
                   <p className="m-0 text-base font-semibold text-red-700">
                     Anda tidak bisa save jika REVIEWS belum diisi
