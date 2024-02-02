@@ -20,7 +20,7 @@
   transform: scaleY(1.5);
 }
 .review__content {
-  @apply relative z-10 mb-4 flex w-full flex-row flex-wrap;
+  @apply relative z-[2] mb-4 flex w-full flex-row flex-wrap;
 }
 .review__content .flex-1 {
   @apply order-2 md:order-1;
@@ -42,7 +42,7 @@
   @apply flex w-full justify-center bg-success/90 py-2 text-xs text-white;
 }
 .review__details {
-  @apply relative z-10 flex w-full flex-wrap overflow-hidden rounded-md bg-white;
+  @apply relative z-[2] flex w-full flex-wrap overflow-hidden rounded-md bg-white;
 }
 .review__details .pros-cons {
   @apply flex w-full flex-wrap gap-4 border-0 border-b-2 border-solid border-muted-foreground/20 dark:border-muted/10 md:gap-0;
