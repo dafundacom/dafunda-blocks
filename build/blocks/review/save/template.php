@@ -9,7 +9,7 @@
   <?php endif?>
 
   <div class="review__content">
-    <div class="flex-1 order-2 md:order-1">
+    <div class="flex-1 order-2 md:order-1 md:mr-3">
       <p class="title">
         <?= $title ?>
       </p>
