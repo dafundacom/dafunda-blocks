@@ -1,20 +1,9 @@
-import {
-  RichText,
-  useBlockProps,
-} from "@wordpress/block-editor";
+import { RichText, useBlockProps } from "@wordpress/block-editor";
 
-import {
-  DropdownMenu,
-  MenuGroup,
-  MenuItem,
-} from "@wordpress/components";
+import { DropdownMenu, MenuGroup, MenuItem } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";
-import {
-  arrowUp,
-  arrowDown,
-  trash,
-} from "@wordpress/icons";
+import { arrowUp, arrowDown, trash } from "@wordpress/icons";
 import { useState, useEffect } from "react";
 
 import Check from "../../../icons/check";
@@ -182,7 +171,7 @@ export default function Edit(props) {
             />
           </div>
           <div className="flex max-h-[162px] w-28 flex-col flex-wrap items-center overflow-hidden rounded-md bg-lime-600">
-            <p className="m-0 flex grow items-center py-10 text-3xl font-bold text-white">
+            <p className="!m-0 flex grow items-center py-10 text-3xl font-bold text-white">
               {parseInt(total_breakdown_percentage)}%
             </p>
             <div className="flex w-full justify-center bg-lime-500 py-2 text-xs text-white">
@@ -403,7 +392,7 @@ export default function Edit(props) {
                           setBreakdownsLocal(newBreakdowns);
                         }}
                       />
-                      <p className="m-0 flex flex-wrap items-center text-sm font-bold">
+                      <p className="!m-0 flex flex-wrap items-center text-sm font-bold">
                         {breakdown.value}%
                       </p>
                       <DropdownMenu
@@ -500,9 +489,9 @@ export default function Edit(props) {
               ))}
 
               {breakdowns_local.length == 0 ||
-                breakdowns_local
-                  .map((breakdown) => breakdown.label)
-                  .includes("") ? (
+              breakdowns_local
+                .map((breakdown) => breakdown.label)
+                .includes("") ? (
                 <div className="mb-4 flex h-14 w-full flex-wrap items-center justify-center rounded-md border border-dashed border-red-700 px-4">
                   <p className="m-0 text-base font-semibold text-red-700">
                     Anda tidak bisa save jika REVIEWS belum diisi
