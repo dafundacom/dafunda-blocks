@@ -68,8 +68,11 @@
       <div class="w-full">
         <?php foreach ($breakdowns as $breakdown) :?>
         <div class="review-breakdown__slider">
+          <div class="flex justify-between items-center">
           <p class="review-breakdown__title">
             <?= $breakdown["label"] ?></p>
+          <p class="review-breakdown__value"><?= $breakdown["value"] ?>%</p>
+          </div>
           <div class="bar ">
             <div class="progress"
               style="width: <?= $breakdown["value"] ?>%; background: <?= $background_used == "color" ? $background_color : $background_gradient?>;">

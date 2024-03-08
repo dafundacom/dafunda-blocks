@@ -29,14 +29,14 @@
   @apply mb-3 mt-0 text-2xl font-bold text-white md:text-3xl;
 }
 .review__content .flex-1 .description {
-  @apply mb-3 mt-0 text-base text-white;
+  @apply mb-3 mt-0 text-sm text-white;
 }
 .review__content .score {
   @apply order-1 mb-4 flex w-full flex-col flex-wrap items-center overflow-hidden rounded-md bg-success/70 md:order-2 md:mb-0 md:w-28;
   max-height: 162px;
 }
 .review__content .score .percentage {
-  @apply mb-0 flex grow items-center py-4 text-3xl font-bold text-white md:py-10;
+  @apply mb-0 flex grow items-center py-2 text-4xl font-black text-white md:py-4;
 }
 .review__content .score .label {
   @apply flex w-full justify-center bg-success/90 py-2 text-xs text-white;
@@ -81,6 +81,9 @@
 }
 .review__details .review-breakdown__title {
   @apply mb-2 text-sm text-black/70;
+}
+.review__details .review-breakdown .review-breakdown__value {
+  @apply text-sm;
 }
 .review__details .review-breakdown .review-breakdown__slider {
   @apply mb-6;
